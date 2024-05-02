@@ -1,0 +1,39 @@
+@startuml sistemaDeViandas
+:Colaborador: as colaborador
+:Persona Humana: as personaHumana
+:Persona Jurídica: as personaJuridica
+:Administrativo: as administrativo
+
+left to right direction
+package "Sistema para la Mejora del Acceso Alimentario en Contextos de Vulnerabilidad Socioeconómica" {
+    usecase "Registrar" as casoRegistrar
+
+    usecase "Modificar colaborador" as casoModificarColaborador
+    usecase "Dar de baja colaborador" as casoDarDeBajaColaborador
+
+    usecase "Donar dinero" as casoDonarDinero
+    usecase "Donar vianda" as casoDonarVianda
+    usecase "Distribuir viandas" as casoDistribuirViandas
+
+    usecase "Hacerse cargo de una heladera" as casoHacerseCargoDeUnaHeladera
+
+    usecase "Dar de alta heladera" as casoDarDeAltaHeladera
+    usecase "Modificar heladera" as casoModificarHeladera
+    usecase "Dar de baja heladera" as casoDarDeBajaHeladera
+    usecase "Dar de alta persona en situación vulnerable" as casoDarDeAltaPersonaEnSituacionVulnerable
+}
+
+colaborador                  --> casoRegistrar
+colaborador                  --> casoModificarColaborador
+colaborador                  --> casoDarDeBajaColaborador
+colaborador                  --> casoDonarDinero
+personaJuridica             --|> colaborador
+personaHumana               --|> colaborador
+personaHumana                --> casoDonarVianda
+personaHumana                --> casoDistribuirViandas
+personaJuridica              --> casoHacerseCargoDeUnaHeladera
+administrativo               --> casoDarDeAltaHeladera
+administrativo               --> casoModificarHeladera
+administrativo               --> casoDarDeBajaHeladera
+administrativo               --> casoDarDeAltaPersonaEnSituacionVulnerable
+@enduml

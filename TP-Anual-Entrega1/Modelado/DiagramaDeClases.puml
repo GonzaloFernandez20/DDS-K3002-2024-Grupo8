@@ -1,0 +1,196 @@
+@startuml DiagramaDeClases
+
+' --------------------- COLABORADORES ----------------------
+
+class Usuario{
+    - username : string
+    - password : string
+    - colaborador : Colaborador
+    + registrarse(username, password) : void
+    + eliminarCuenta() : void
+}
+
+Usuario ..> Validador
+Usuario --> Colaborador
+
+class Validador{
+    - listaDeContraseñas : File
+    + validarRegistro(password) : Bool
+    - encontrarPalabra(password) : Bool
+    - cumpleCantCaracteres(password) : Bool
+}
+
+abstract class Colaborador{
+    - medioDeContacto : [MediosDeContacto]
+    - direccion : Direccion
+    - contribucionesRealizadas : [Contribucion]
+    + sumarContribucion(contribucion) : void
+}
+Contribucion -- Colaborador
+class PersonaHumana extends Colaborador{
+    - nombre : string
+    - apellido : string
+    - fechaDeNacimiento : Fecha
+}
+class PersonaJuridica extends Colaborador{
+    - razonSocial : string
+    - tipo : Tipo
+    - rubro : string
+}
+
+PersonaJuridica --> Tipo
+enum Tipo{
+    - gubernamental
+    - ong 
+    - empresa
+    - institucion
+}
+
+' --------------------- MEDIOS DE CONTACTO ----------------------
+Colaborador o--"1..*" MediosDeContacto 
+interface MediosDeContacto{
+    + notificar()
+}
+
+class CorreoElectronico implements MediosDeContacto{
+    + notificar()
+}
+class WhatsApp implements MediosDeContacto{
+    + notificar()
+}
+class Telefono implements MediosDeContacto{
+    + notificar()
+}
+
+' -------------------------- GESTOR -------------------------
+class GestorDeContribuciones{
+    - contribucionActual : Contribucion
+    - colaboradorActual : Colaborador
+    + realizarContribucion(): void
+}
+GestorDeContribuciones --> Contribucion
+GestorDeContribuciones --> Colaborador
+
+' --------------------- CONTRIBUCIONES ----------------------
+
+interface Contribucion{
+    + efectuar() : void
+
+}
+
+abstract class ContribucionExcluyente implements Contribucion{
+    - colaborador : Colaborador
+    + efectuar():void
+    + {abstract} validar():void
+    + {abstract} contribucion():void
+}
+
+abstract class ContribucionHumana extends ContribucionExcluyente{
+    + validar():void
+}
+abstract class ContribucionJuridica extends ContribucionExcluyente{
+    + validar():void
+}
+
+class DonacionDeDinero implements Contribucion{
+    - fechaDeDonacion : Fecha
+    - monto : int
+    - frecuencia : string
+    + efectuar():void
+}
+
+donacionDeVianda o--"1..*" Vianda : incluye
+donacionDeVianda --> Heladera
+class donacionDeVianda extends ContribucionHumana{
+    - viandas : [Vianda]
+    - heladera : Heladera
+    + agregarViandaADonacion(vianda):void
+    + contribucion(): void
+}
+
+DistribucionDeVianda --> Heladera : origen
+DistribucionDeVianda --> Heladera : destino
+DistribucionDeVianda ..> Vianda : distribuye
+class DistribucionDeVianda extends ContribucionHumana{
+    - heladeraDeOrigen : Heladera
+    - heladeraDestino : Heladera
+    - cantDeViandas : int
+    - motivo : MotivoDeDistribucion
+    - fechaDeDistribucion : Fecha
+    + contribucion(): void
+}
+
+DistribucionDeVianda --> MotivoDeDistribucion
+enum MotivoDeDistribucion{
+    - desperfectoHeladera
+    - faltaDeViandas
+}
+
+HacerseCargoDeHeladera --> Heladera : a cargo
+class HacerseCargoDeHeladera extends ContribucionJuridica{
+    - heladeraACargo : Heladera
+     + contribucion(): void
+}
+
+' --------------------- HELADERA ----------------------
+Heladera o--"1..*" Vianda : contiene
+class Heladera{
+    - capacidadViandas : int
+    - viandasEnStock : [Vianda]
+    - puestaEnFuncionamiento : Fecha
+    - puntoEstrategico : PuntoEstrategico
+    + recibirViandas(viandas) : void
+    + retirarViandas(cantidadARetirar): [Vianda]
+}
+
+Heladera --> PuntoEstrategico
+
+class PuntoEstrategico{
+    - latitud : double 
+    - longitud : double 
+    - direccion : Direccion
+    - ciudad : string
+    - nombre : string
+}
+
+' --------------------- VIANDA ----------------------
+Vianda --> PersonaHumana
+Vianda --> Heladera : pertenece
+
+class Vianda{
+    - tipoDeComida : string
+    - fechaDeCaducidad : Fecha
+    - fechaDeDonacion : Fecha
+    - colaborador : PersonaHumana
+    - heladera : Heladera
+    - calorias : Float
+    - peso : Float
+    - entregada : Bool
+
+    + trasladar(heladera) : void
+}
+' --------------------- VULNERABLES ----------------------
+class PersonaSituacionVulnerable{
+    - nombre : String 
+    - fechaDeNacimiento : Fecha
+    - fechaDeRegistro : Fecha
+    - poseeDomicilio : Bool
+    - domicilio : Direccion
+    - documento : Documento
+    - menoresACargo : Bool
+    - cantMenores : int
+}
+PersonaSituacionVulnerable --> Documento
+class Documento{
+    - tipo TipoDeDocumento
+    - numero : double
+}
+Documento --> TipoDeDocumento
+enum TipoDeDocumento{
+    - LC
+    - LE
+    - CI
+    - DNI
+    - PASAPORTE
+}
+@enduml
