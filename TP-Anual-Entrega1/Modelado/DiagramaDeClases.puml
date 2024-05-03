@@ -24,7 +24,7 @@ abstract class Colaborador{
     - mediosDeContacto : [MedioDeContacto]
     - direccion : Direccion
     - contribucionesRealizadas : [Contribucion]
-    + sumarContribucion(contribucion) : void
+    + sumarContribucion(Contribucion) : void
 }
 Contribucion -- Colaborador
 class PersonaHumana extends Colaborador{
