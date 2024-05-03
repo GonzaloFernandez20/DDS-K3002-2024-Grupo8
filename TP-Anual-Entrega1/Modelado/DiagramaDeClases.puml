@@ -94,7 +94,7 @@ abstract class ContribucionJuridica extends ContribucionExcluyente{
 
 class DonacionDeDinero implements Contribucion{
     - fechaDeDonacion : Fecha
-    - monto : int
+    - monto : float
     - frecuencia : string
     + efectuar():void
 }
