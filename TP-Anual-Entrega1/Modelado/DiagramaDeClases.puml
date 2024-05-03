@@ -77,7 +77,7 @@ interface Contribucion{
     + efectuar() : void
 
 }
-
+ContribucionExcluyente --> Colaborador
 abstract class ContribucionExcluyente implements Contribucion{
     - colaborador : Colaborador
     + efectuar():void
