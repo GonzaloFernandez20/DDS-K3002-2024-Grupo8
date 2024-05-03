@@ -182,7 +182,7 @@ class PersonaSituacionVulnerable{
 }
 PersonaSituacionVulnerable --> Documento
 class Documento{
-    - tipo TipoDeDocumento
+    - tipo : TipoDeDocumento
     - numero : double
 }
 Documento --> TipoDeDocumento
