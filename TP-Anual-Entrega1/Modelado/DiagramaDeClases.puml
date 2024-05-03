@@ -21,7 +21,7 @@ class Validador{
 }
 
 abstract class Colaborador{
-    - medioDeContacto : [MediosDeContacto]
+    - mediosDeContacto : [MedioDeContacto]
     - direccion : Direccion
     - contribucionesRealizadas : [Contribucion]
     + sumarContribucion(contribucion) : void
@@ -47,18 +47,18 @@ enum Tipo{
 }
 
 ' --------------------- MEDIOS DE CONTACTO ----------------------
-Colaborador o--"1..*" MediosDeContacto 
-interface MediosDeContacto{
+Colaborador o--"1..*" MedioDeContacto 
+interface MedioDeContacto{
     + notificar()
 }
 
-class CorreoElectronico implements MediosDeContacto{
+class CorreoElectronico implements MedioDeContacto{
     + notificar()
 }
-class WhatsApp implements MediosDeContacto{
+class WhatsApp implements MedioDeContacto{
     + notificar()
 }
-class Telefono implements MediosDeContacto{
+class Telefono implements MedioDeContacto{
     + notificar()
 }
 
