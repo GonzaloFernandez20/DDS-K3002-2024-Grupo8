@@ -42,6 +42,7 @@ class PersonaJuridica extends Colaborador{
 }
 
 PersonaJuridica --> Tipo
+
 enum Tipo{
     - gubernamental
     - ong 
@@ -50,6 +51,7 @@ enum Tipo{
 }
 
 ' --------------------- MEDIOS DE CONTACTO ----------------------
+
 Colaborador o--"1..*" MedioDeContacto 
 interface MedioDeContacto{
     + notificar()
@@ -58,9 +60,11 @@ interface MedioDeContacto{
 class CorreoElectronico implements MedioDeContacto{
     + notificar()
 }
+
 class WhatsApp implements MedioDeContacto{
     + notificar()
 }
+
 class Telefono implements MedioDeContacto{
     + notificar()
 }
