@@ -1,0 +1,17 @@
+@startuml DiagramaDeClases
+
+class Pokemon{
+    - id : int
+    - name : string
+    - image : string
+    - moves : [Move]
+}
+
+class Move{
+    - name : string
+    - learned_by_pokemon : [Pokemon]
+}
+
+Pokemon - Move
+
+@enduml
