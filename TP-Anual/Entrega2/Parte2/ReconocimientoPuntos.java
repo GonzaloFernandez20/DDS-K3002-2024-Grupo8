@@ -1,14 +1,13 @@
 package TPAnual;
 
-public class ReconocimientoPuntos {
-    CoeficientesPuntos coeficientes;
-    private float contabilizar(Contribucion contribuciones[]) {}
-}
+import java.util.List;
 
-class CoeficientesPuntos {
-    Float pesosDonados;
-    int viandasDistribuidas;
-    Float viandasDonadas;
-    int tarjetasRepartidas;
-    int heladerasActivas;
+public class ReconocimientoPuntos {
+    public double contabilizar(List<Contribucion> contribuciones) {
+        double puntos = 0;
+        for (int i = 0; i < contribuciones.size(); i++) {
+            puntos += contribuciones.get(i).puntosQueSumaColaborador();
+        }
+        return puntos;
+    }
 }

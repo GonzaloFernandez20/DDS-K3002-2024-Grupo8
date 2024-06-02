@@ -1,8 +1,12 @@
 package TPAnual;
 
-interface Contribucion {
-    public void efectuar();
-}
+import java.util.Date;
+import java.util.List;
+import java.util.Collection;
+import java.util.stream.*;
+
+import vianda.Vianda;
+import heladera.Heladera;
 
 class GestorDeContribuciones{
     /*     comentario:
@@ -18,75 +22,134 @@ class GestorDeContribuciones{
     }
 
     private void realizarContribucion(){
-        //contribucion.efectuar();
-        //colaborador.sumarContribucion(contribucion);
+        contribucionActual.contribuir();
+        colaboradorActual.sumarContribucion(contribucionActual);
     }
 }
 
-abstract class ContribucionExcluyente implements Contribucion{
-    
-    Colaborador colaborador; //Decidimos por diseño que como las excluyentes validan el colab este sea un atributo que tienen que usar para chequear permisos
+public abstract class Contribucion {
+    protected Colaborador colaborador;
+    protected Date fechaDeDonacion;
 
-    public void efectuar(){
-        validar();
-        contribucion();
-    }
-
-    public abstract void validar();
-    public abstract void contribucion();
+    public abstract void contribuir();
+    public double puntosQueSumaColaborador();
 }
 
-abstract class ContribucionHumana extends ContribucionExcluyente{
+class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
+    private List<Vinculacion> tarjetaRepartida;
+
     @Override
-    public void validar() {
-        
+    public void contribuir() {
+        // Implementación
     }
+    public void darDeAlta(Persona persona) {
+        // Implementación
+    }
+
+    public void entregarTarjeta(Persona persona) {
+        // Implementación
+    }
+
 }
 
-abstract class ContribucionJuridica extends ContribucionExcluyente{
+class DonacionDeDinero extends Contribucion {
+    Date fechaDeDonacion;
+    double coeficiente = 0.5;
+    private float monto;
+    private Frecuencia frecuencia;
+
     @Override
-    public void validar() {
-        
+    public void contribuir() {
+        // Implementacion
+        // Implementacion con la cuenta bancaria/efectivo/tarjerta?????
+        // Agragar al diagrama
+        DineroDonado.agregar(monto);
+    }
+
+    public double puntosQueSumaColaborador() {
+        return monto * coeficiente;
     }
 }
 
-class DonacionDeDinero implements Contribucion{
-    Fecha fechaDeDonacion;
-    int monto;
-    String frecuencia;
+class DineroDonado{//de instanciación única
+    //falta en el diagrama
+    float totalDeDinero;
+    agregar(float monto){
+        totalDeDinero += monto;
+    }
+}
 
-    public void efectuar(){
+class DonacionDeVianda extends Contribucion {
+    private List<Vianda> viandasDonadas;
+    private Heladera heladera;
+    double coeficiente = 1.5;
+
+    public void agregarViandaADonacion(Vianda vianda) {
+        viandasDonadas.add(vianda);
+    }
+
+    @Override
+    public void contribuir() {
+        heladera.recibirViandas(viandasDonadas);
+    }
+
+    public double puntosQueSumaColaborador() {
+        return viandasDonadas.size() * coeficiente;
+    }
+}
+
+class DistribucionDeVianda extends Contribucion {
+    private Heladera heladeraDeOrigen;
+    private Heladera heladeraDestino;
+    private int cantDeViandas;
+    private MotivoDeDistribucion motivo;
+    Date fechaDeDistribucion;
+    double coeficiente = 1;
+
+    @Override
+    public void contribuir() {
+        List <Vianda> viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
+        heladeraDestino.recibirViandas(viandas.forEach(vianda -> vianda.trasladar(heladeraDestino)));
+    }
+
+    public double puntosQueSumaColaborador() {
+        return cantDeViandas * coeficiente;
+    }
+}
+
+class HacerseCargoDeHeladera extends Contribucion {
+    private Heladera heladeraACargo;
+    double coeficiente = 0.5;
+
+    @Override
+    public void contribuir() {
+        heladeraACargo.setColaborador(colaborador);
+    }
+
+    public double puntosQueSumaColaborador() {
+        // no por ahora
+    }
+}
+
+class OfertaDeProductos implements Contribucion {
+    String nombreOferta;
+    Rubro rubro;
+    double puntosNecesarios;
+    String imagen;
+    Producto producto;
+
+    public void contribuir(){
         //
     }
-}
 
-class donacionDeVianda extends ContribucionHumana{
-    Vianda viandas[];
-    Heladera heladera;
-
-    @Override
-    public void contribucion() {
-        //heladera.recibirViandas(vianditas);
-    }
-    
-    private void agregarViandaADonacion(Vianda vianda){
-        //viandas.add(vianda);
+    public double puntosQueSumaColaborador() {
+        // hay q ver
     }
 }
 
-class DistribucionDeVianda extends ContribucionHumana{
-    Heladera heladeraDeOrigen;
-    Heladera heladeraDestino;
-    int cantDeViandas;
-    MotivoDeDistribucion motivo;
-    Fecha fechaDeDistribucion;
-
-    @Override
-    public void contribucion() {
-        // viandasRetiradas = heladeraOrigen.retirarViandas(cantViandas);
-        // heladeraDestino.recibirViandas(viandasRetiradas) 
-        // foreach viandaRetiradas :: heladera = heladera destino
-    }
+class Producto {
+    String nombreProducto;
+    int stock;
 }
 
 enum MotivoDeDistribucion{
@@ -94,12 +157,23 @@ enum MotivoDeDistribucion{
     faltaDeViandas
 }
 
-class HacerseCargoDeHeladera extends ContribucionJuridica{
+enum Rubro {
+    GASTRONOMIA,
+    ELECTRONICA,
+    ARTICULOS_PARA_EL_HOGAR
+}
 
-    Heladera heladeraACargo;
+class Imagen {
+    private String nombre;
+    private String resolucion;
+    private String epigrafe;
+}
 
-    @Override
-    public void contribucion() {
-       heladeraACargo = new Heladera();
-    }
+enum Frecuencia {
+    UNICAMENTE,
+    DIARIAMENTE,
+    SEMANALMENTE,
+    MENSUALMENTE,
+    ANUALMENTE,
+    PERSONALIZADO
 }

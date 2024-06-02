@@ -18,6 +18,10 @@ public class Heladera {
         viandasEnStock.addAll(viandas);
     }
 
+    public void setColaborador(PersonaJuridica colaborador) {
+        colaboradorACargo = colaborador;
+    }
+
     public List<Vianda> retirarViandas(int cantidadARetirar) {
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();

@@ -1,24 +1,30 @@
 package TPAnual;
 
+import java.util.Date;
 import java.util.List;
 
 public class Colaborador {
     private List<MedioDeContacto> mediosDeContacto;
     private Direccion direccion;
     private List<Contribucion> contribucionesRealizadas;
-    private Float puntos;
+    private double puntos;
+    private ReconocimientoPuntos reconocimientoPuntos;
 
-    private void sumarContribucion(Contribucion contribucion){
+    public void sumarContribucion(Contribucion contribucion){
         contribucionesRealizadas.add(contribucion);
-    }origin
-    private void calcularPuntos() {}
-    private void intercambiarPuntos() {}
+    }
+    private void calcularPuntos() {
+        puntos = reconocimientoPuntos.contabilizar(contribucionesRealizadas);
+    }
+    private void intercambiarPuntos() {
+
+    }
 }
     
 class PersonaHumana extends Colaborador{
         String nombre;
         String apellido;
-        Fecha fechaDeNacimiento;
+        Date fechaDeNacimiento;
         Direccion direccion;
 }
 
