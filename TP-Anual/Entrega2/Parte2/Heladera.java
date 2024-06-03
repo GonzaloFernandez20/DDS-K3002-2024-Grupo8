@@ -1,6 +1,7 @@
 package TPAnual;
 
 import java.util.*;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,8 +65,8 @@ class Modelo {
     Float maximaTemperatura;
     Float minimaTemperatura;
 
-    public Float getTemperaturaMinima() { return minimaTemperatura;}
-    public Float getTemperaturaMaxima() { return maximaTemperatura;}
+    public Float getTemperaturaMinima() { return minimaTemperatura; }
+    public Float getTemperaturaMaxima() { return maximaTemperatura; }
 }
 
 class PuntoEstrategico{
@@ -129,3 +130,30 @@ class AvisoIntentoDeRobo {
     }
 }
 
+class Vianda {
+    private String tipoDeComida;
+    private Date fechaDeCaducidad;
+    private Date fechaDeDonacion;
+    private PersonaHumana colaborador;
+    private Heladera heladera;
+    private Float calorias;
+    private Float peso;
+    private EstadoVianda estado;
+
+    public void trasladar(Heladera heladeraNueva){
+        heladera = heladeraNueva;
+        List<Vianda> vianda = new ArrayList<>();
+        vianda.add(this);
+        heladera.recibirViandas(vianda);
+    }
+
+    public void serEntregada() {
+        estado = EstadoVianda.entregada;
+    }
+}
+
+enum EstadoVianda {
+    entregada,
+    noEntregada,
+    vencida
+}

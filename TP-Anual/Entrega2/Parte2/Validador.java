@@ -48,3 +48,23 @@ public class Validador {
         return contrasenia.length() > 8 && contrasenia.length() < 64;
     }
 }
+
+class Usuario{
+    private String userName;
+    private String password;
+
+    public void setUserName(String userName){ this.userName = userName; }
+
+    public void setPassword(String password){ this.password = password; }
+
+    public Usuario(String userName, String password){
+        if (userName == null || password == null) {
+            throw new IllegalArgumentException("Datos incorrectos");
+        }
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public String contrasenia(){ return password; }
+    public String nombreDeUsuario(){ return userName; }
+}

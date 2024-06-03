@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Collection;
 import java.util.stream.*;
 
-import vianda.Vianda;
-import heladera.Heladera;
-
 class GestorDeContribuciones{
     /*     comentario:
                     Este recibe ya instanciada una contribucion y se encarga de efectuar();
@@ -32,7 +29,7 @@ public abstract class Contribucion {
     protected Date fechaDeDonacion;
 
     public abstract void contribuir();
-    public double puntosQueSumaColaborador();
+    public double puntosQueSumaColaborador() { return 0; };
 }
 
 class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
@@ -143,13 +140,19 @@ class OfertaDeProductos implements Contribucion {
     }
 
     public double puntosQueSumaColaborador() {
-        // hay q ver
+        return 0;
     }
+
+    public double getPuntosNecesarios() { return puntosNecesarios; }
+
+    public void disminuirStock() { producto.disminuirStock(); }
 }
 
 class Producto {
     String nombreProducto;
     int stock;
+
+    public void disminuirStock() { stock--; }
 }
 
 enum MotivoDeDistribucion{
