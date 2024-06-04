@@ -7,12 +7,12 @@ import java.util.TimerTask;
 
 public class Heladera {
     PersonaJuridica colaboradorACargo;
-    EstadoHeladera estado = EstadoHeladera.activa;
-    Modelo modelo;
+    EstadoHeladera estado;
+    private final Modelo modelo;
     Float ultimaTemperaturaRegistrada;
     List<Vianda> viandasEnStock;
     private PuntoEstrategico puntoEstrategico;
-    private int capacidadDeViandas;
+    private final int capacidadDeViandas;
     private Date puestaEnFuncionamiento;
 
     public void recibirViandas(List<Vianda> viandas) {
@@ -22,6 +22,10 @@ public class Heladera {
     public void setColaborador(PersonaJuridica colaborador) {
         colaboradorACargo = colaborador;
     }
+
+    public void setPuntoEstrategico(PuntoEstrategico puntoEstrategico) { this.puntoEstrategico = puntoEstrategico; }
+
+    public void setPuestaEnFuncionamiento(Date puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
 
     public List<Vianda> retirarViandas(int cantidadARetirar) {
         Vianda vianda;
@@ -88,9 +92,9 @@ public class Heladera {
         return puestaEnFuncionamiento;
     }
 
-    public Heladera(PersonaJuridica colaboradorACargo, EstadoHeladera estado, Modelo modelo, Float ultimaTemperaturaRegistrada, List<Vianda> viandasEnStock, PuntoEstrategico puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
+    public Heladera(PersonaJuridica colaboradorACargo, Modelo modelo, Float ultimaTemperaturaRegistrada, List<Vianda> viandasEnStock, PuntoEstrategico puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
-        this.estado = estado;
+        this.estado = EstadoHeladera.activa;
         this.modelo = modelo;
         this.ultimaTemperaturaRegistrada = ultimaTemperaturaRegistrada;
         this.viandasEnStock = viandasEnStock;
@@ -98,8 +102,6 @@ public class Heladera {
         this.capacidadDeViandas = capacidadDeViandas;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
     }
-
-
 }
 
 enum EstadoHeladera {
@@ -155,6 +157,7 @@ class PuntoEstrategico{
 class PuntoEnElMapa {
     double latitud;
     double longitud;
+
     public PuntoEnElMapa(double latitud, double longitud){
         this.latitud = latitud;
         this.longitud = longitud;

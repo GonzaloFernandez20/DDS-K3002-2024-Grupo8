@@ -37,6 +37,7 @@ public abstract class Contribucion {
     public double puntosQueSumaColaborador() { return 0; };
 }
 
+/*
 class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
     //Esto habría que volver a modelarlo porque no veo cómo sería implementado de ésta manera
     private List<Vinculacion> tarjetasRepartidas;
@@ -57,9 +58,9 @@ class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
     }
 
 }
+*/
 
 class DonacionDeDinero extends Contribucion {
-    Date fechaDeDonacion;
     double coeficiente = 0.5;
     private float monto;
     private Frecuencia frecuencia;
@@ -68,20 +69,13 @@ class DonacionDeDinero extends Contribucion {
     public void contribuir() {
         // Implementacion
         // Implementacion con la cuenta bancaria/efectivo/tarjerta?????
-        // Agragar al diagrama
-        DineroDonado.agregar(monto);
+        // Agregar al diagrama
+
+        //Iria el dinero a una clase Sistema
     }
 
     public double puntosQueSumaColaborador() {
         return monto * coeficiente;
-    }
-}
-
-class DineroDonado{//de instanciación única
-    //falta en el diagrama
-    float totalDeDinero;
-    public void agregar(float monto){
-        this.totalDeDinero += monto;
     }
 }
 
@@ -115,7 +109,8 @@ class DistribucionDeVianda extends Contribucion {
     @Override
     public void contribuir() {
         List <Vianda> viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
-        heladeraDestino.recibirViandas(viandas.forEach(vianda -> vianda.trasladar(heladeraDestino)));
+        viandas.forEach(vianda -> vianda.trasladar(heladeraDestino));
+        heladeraDestino.recibirViandas(viandas);
     }
 
     public double puntosQueSumaColaborador() {
@@ -129,11 +124,7 @@ class HacerseCargoDeHeladera extends Contribucion {
 
     @Override
     public void contribuir() {
-        heladeraACargo.setColaborador(colaborador);//poe ahí hace falta un cast
-    }
-
-    public double puntosQueSumaColaborador() {
-        // no por ahora
+        heladeraACargo.setColaborador((PersonaJuridica) colaborador);
     }
 }
 
@@ -141,6 +132,9 @@ class OfertaDeProductos extends Contribucion {
     String nombreOferta;
     Rubro rubro;
     double puntosNecesarios;
+    String imagen;
+    Producto producto;
+    Sistema sistema;
 
     public String getNombreOferta() {
         return nombreOferta;
@@ -166,15 +160,8 @@ class OfertaDeProductos extends Contribucion {
         this.producto = producto;
     }
 
-    String imagen;
-    Producto producto;
-
     public void contribuir(){
-        //
-    }
-
-    public double puntosQueSumaColaborador() {
-        return 0;
+        sistema.agregarOferta(this);
     }
 
     public double getPuntosNecesarios() { return puntosNecesarios; }
@@ -199,7 +186,6 @@ class Producto {
         this.stock = stock;
     }
 
-
     public void disminuirStock() { stock--; }
 }
 
@@ -216,6 +202,8 @@ enum Rubro {
 
 class Imagen {
     private String nombre;
+    private String resolucion;
+    private String epigrafe;
 
     public Imagen(String nombre, String resolucion, String epigrafe) {
         this.nombre = nombre;
@@ -234,9 +222,6 @@ class Imagen {
     public String getEpigrafe() {
         return epigrafe;
     }
-
-    private String resolucion;
-    private String epigrafe;
 }
 
 enum Frecuencia {

@@ -27,11 +27,14 @@ public class CargaMasiva {
                     String apellido = partes[3];
                     String mail = partes[4];
                     String fecha = partes[5];
-                    //Hay que pasar a tipo de dato Fecha
+                    //Hay que pasar a tipo de dato Date
                     String tipoDonacion = partes[6];
                     String cantidad = partes[7];
 
-                    Colaborador colaborador = new Colaborador(nombre, apellido, mail);
+                    PersonaHumana colaborador = new PersonaHumana(nombre, apellido, null, null);
+                    MedioDeContacto medioMail = new CorreoElectronico(mail);
+                    colaborador.agregarMedioDeContacto(medioMail);
+
                     switch (tipoDonacion) {
                         case "DINERO":
                             DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, fecha, cantidad, null);

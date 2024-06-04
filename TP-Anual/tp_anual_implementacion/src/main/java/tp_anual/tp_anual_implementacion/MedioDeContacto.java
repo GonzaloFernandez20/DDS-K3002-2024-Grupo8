@@ -25,5 +25,7 @@ class CorreoElectronico implements MedioDeContacto{
     //@Override
     public void notificar() {}
 
+    public CorreoElectronico(String identificacion) { this.identificacion = identificacion; }
+
     public String getIdentificacion() { return identificacion; }
 }

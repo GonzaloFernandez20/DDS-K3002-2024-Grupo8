@@ -13,6 +13,7 @@ public class PersonaSituacionVulnerable {
     Documento documento;
     int cantMenores;
     Vinculacion vinculacion;
+
     public PersonaSituacionVulnerable(String unNombre,LocalDateTime fecha,
                                       EstadoDeVivienda estado, Direccion unDomicilio,
                                       Documento unDcumento, int menores){
@@ -96,16 +97,17 @@ class AccesoAHeladeras {
     String id;
     int cantUsosRestantesPorDia;
     List <UsoXTarjeta> usos;
+
     public AccesoAHeladeras(PersonaSituacionVulnerable persona, String id){
         this.personaSituacionVulnerable = persona;
         this.id = id;
-        this.cantUsosRestantesPorDia = 4+ persona.getCantMenores();
+        this.cantUsosRestantesPorDia = this.getCantUsosPorDia();
     }
 
     public int getCantUsosPorDia() {
         //Cada tarjeta sólo podrá ser utilizada cuatro veces en el mismo día,
         // y a su vez dos veces más por cada menor que tenga a cargo
-        return 4+ personaSituacionVulnerable.getCantMenores();
+        return 4 + personaSituacionVulnerable.getCantMenores() * 2; //hardcodeado por el enunciado
     }
 
     public int getCantUsosRestantesPorDia() {
@@ -119,6 +121,7 @@ class AccesoAHeladeras {
     public PersonaSituacionVulnerable getPersonaSituacionVulnerable() {
         return personaSituacionVulnerable;
     }
+
     public void usar(Vianda vianda, Heladera heladera){
         if(Objects.equals(this.ultimoAcceso(),this.hoy())){
             if(cantUsosRestantesPorDia == 0){
@@ -128,29 +131,31 @@ class AccesoAHeladeras {
                         vianda,
                         LocalDateTime.now()));
                 heladera.sacarVianda(vianda);
-                cantUsosRestantesPorDia -= 1;
+                cantUsosRestantesPorDia--;
             }
         }
         else {
             this.reiniciarCantidadDeUsos();
         }
     }
+
     public void reiniciarCantidadDeUsos(){
-        this.cantUsosRestantesPorDia = 4+ personaSituacionVulnerable.getCantMenores();
+        this.cantUsosRestantesPorDia = this.getCantUsosPorDia();
     }
+
     public String ultimoAcceso(){
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String ultimoAcceso = this.ultimoUso().format(myFormatObj);
-        return ultimoAcceso;
+        return this.ultimoUso().format(myFormatObj);
     }
+
     public String hoy(){
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime hoy = LocalDateTime.now();
-        String fechaDeHoy = this.ultimoUso().format(myFormatObj);
-        return fechaDeHoy;
+        return this.ultimoUso().format(myFormatObj);
     }
+
     public LocalDateTime ultimoUso(){
-        UsoXTarjeta usoXTarjeta = usos.get(usos.size()-1);//este agarra el último colocado o el último de la lista?
+        UsoXTarjeta usoXTarjeta = usos.getLast();//este agarra el último colocado o el último de la lista?
         return usoXTarjeta.getFecha();
     }
 }
