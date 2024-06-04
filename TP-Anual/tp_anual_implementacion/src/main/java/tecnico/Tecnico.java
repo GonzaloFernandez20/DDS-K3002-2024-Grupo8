@@ -1,4 +1,7 @@
-package tp_anual.tp_anual_implementacion;
+package tecnico;
+
+import medios_de_contacto.MedioDeContacto;
+import documentacion.Documento;
 
 public class Tecnico {
     String nombre;

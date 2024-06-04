@@ -1,17 +1,23 @@
-package tp_anual.tp_anual_implementacion;
+package carga_masiva;
 
-import tp_anual.tp_anual_implementacion.Contribucion;
-import tp_anual.tp_anual_implementacion.Colaborador;
+import colaborador.Colaborador;
+import colaborador.PersonaHumana;
+import sistema.Sistema;
+import medios_de_contacto.MedioDeContacto;
+import medios_de_contacto.CorreoElectronico;
+import contribucion.DonacionDeDinero;
+import contribucion.DonacionDeVianda;
+import contribucion.DistribucionDeVianda;
+import contribucion.RegistroDePersonasEnSituacionVulnerable;
 
 import com.opencsv.exceptions.CsvValidationException;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+import java.time.LocalDate;
 
 public class CargaMasiva {
-    List<Colaborador> colaboradoresCargados;
-
     public void migrar() {
         String archivo = getClass().getClassLoader().getResource("CSV.csv").getPath();
         //El archivo debe estar en la carpeta resources
@@ -27,7 +33,8 @@ public class CargaMasiva {
                     String apellido = partes[3];
                     String mail = partes[4];
                     String fecha = partes[5];
-                    //Hay que pasar a tipo de dato Date
+                    String[] fechaPorPartes = fecha.split("/");
+                    LocalDate fechaContribucion = LocalDate.of(Integer.parseInt(fechaPorPartes[2]), Integer.parseInt(fechaPorPartes[1]), Integer.parseInt(fechaPorPartes[0]));
                     String tipoDonacion = partes[6];
                     String cantidad = partes[7];
 
@@ -37,24 +44,25 @@ public class CargaMasiva {
 
                     switch (tipoDonacion) {
                         case "DINERO":
-                            DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, fecha, cantidad, null);
+                            DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, fechaContribucion, Integer.parseInt(cantidad), null);
                             colaborador.sumarContribucion(contribucionDinero);
                             break;
                         case "DONACION_VIANDAS":
-                            DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, fecha, null, null);
+                            DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, fechaContribucion, null, null);
                             colaborador.sumarContribucion(contribucionDonarVianda);
                             break;
                         case "REDISTRIBUCION_VIANDAS":
-                            DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, fecha, null, null, cantidad, null);
+                            DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, fechaContribucion, null, null, Integer.parseInt(cantidad), null);
                             colaborador.sumarContribucion(contribucionDistribuirVianda);
                             break;
                         case "ENTREGA_TARJETAS":
-                            RegistroDePersonasEnSituacionVulnerable contribucionRegistro = new RegistroDePersonasEnSituacionVulnerable(colaborador, fecha, null);
+                            RegistroDePersonasEnSituacionVulnerable contribucionRegistro = new RegistroDePersonasEnSituacionVulnerable(colaborador, fechaContribucion, null);
                             colaborador.sumarContribucion(contribucionRegistro);
                             break;
                     }
 
                     if(!this.corroborarColaboradorYaCargadoSegunMail(mail)) {
+                        List<Colaborador> colaboradoresCargados = Sistema.getInstancia().getColaboradores();
                         colaboradoresCargados.add(colaborador);
                     }
                 }
@@ -68,6 +76,7 @@ public class CargaMasiva {
     }
 
     private Boolean corroborarColaboradorYaCargadoSegunMail(String mail) {
+        List<Colaborador> colaboradoresCargados = Sistema.getInstancia().getColaboradores();
         return colaboradoresCargados.stream().anyMatch(
                 colaborador -> colaborador.getMediosDeContacto().stream().anyMatch(medio -> medio.getIdentificacion().equals(mail))
         );

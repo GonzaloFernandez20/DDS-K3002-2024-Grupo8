@@ -1,4 +1,4 @@
-package tp_anual.tp_anual_implementacion;
+package seguridad;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,7 +6,7 @@ import java.io.FileReader;
 
 public class Validador {
     
-    static File listaDeConstrasenias = new File("TPAnual/10KPasswords.txt");
+    static File listaDeConstrasenias = new File("seguridad/10KPasswords.txt");
     
     public static Boolean validarRegistro(String contrasenia){
         return cumpleCantCaracteres(contrasenia) && !encontrarPalabra(contrasenia);  

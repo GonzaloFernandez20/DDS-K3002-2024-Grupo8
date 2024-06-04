@@ -1,4 +1,9 @@
-package tp_anual.tp_anual_implementacion;
+package colaborador;
+
+import contribucion.Contribucion;
+import contribucion.OfertaDeProductos;
+import heladera.Direccion;
+import medios_de_contacto.MedioDeContacto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,51 +46,4 @@ public class Colaborador {
             // Tirar una Excepcion
         }
     }
-}
-    
-class PersonaHumana extends Colaborador{
-    String nombre;
-    String apellido;
-    Date fechaDeNacimiento;
-
-    public PersonaHumana(String nombre, String apellido, Date fechaDeNacimiento, Direccion direccion) {
-        super(direccion);
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaDeNacimiento = fechaDeNacimiento;
-    }
-
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public void setApellido(String apellido) { this.apellido = apellido; }
-}
-
-class PersonaJuridica extends Colaborador{
-    String razonSocial;
-    TipoOrganizacion tipoDeOrganizacion;
-    String rubro;
-
-    public PersonaJuridica(String razonSocial, TipoOrganizacion tipoDeOrganizacion, String rubro, Direccion direccion) {
-        super(direccion);
-        this.razonSocial = razonSocial;
-        this.tipoDeOrganizacion = tipoDeOrganizacion;
-        this.rubro = rubro;
-    }
-
-    public void setRazonSocial(String razonSocial) { this.razonSocial = razonSocial; }
-
-    public void setTipoDeOrganizacion(TipoOrganizacion tipoDeOrganizacion) { this.tipoDeOrganizacion = tipoDeOrganizacion; }
-
-    public void setRubro(String rubro) { this.rubro = rubro; }
-
-    void serNotificado() {
-        // no hay suficiente informacion sobre como se comporta PersonaJuridica al
-        // recibir la notificacion
-    }
-}
-
-enum TipoOrganizacion {
-    gubernamental,
-    ong,
-    empresa,
-    institucion
 }

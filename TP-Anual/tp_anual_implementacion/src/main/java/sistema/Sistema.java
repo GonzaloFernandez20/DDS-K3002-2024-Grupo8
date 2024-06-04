@@ -1,12 +1,31 @@
-package tp_anual.tp_anual_implementacion;
+package sistema;
+
+import colaborador.Colaborador;
+import contribucion.OfertaDeProductos;
+import heladera.Heladera;
+import tecnico.Tecnico;
 
 import java.util.List;
 
-public class Sistema {
+public final class Sistema {
+    private static Sistema instancia = null;
     List<Colaborador> colaboradores;
     List<Heladera> heladeras;
     List<Tecnico> tecnicos;
     List<OfertaDeProductos> ofertas;
+    static int contadorDeVinculaciones = 0;
+    float monto;
+
+    public List<Colaborador> getColaboradores() { return colaboradores; }
+
+    public int getContadorDeVinculaciones() { return contadorDeVinculaciones; }
+
+    public static Sistema getInstancia() {
+        if(instancia == null) {
+            instancia = new Sistema();
+        }
+        return instancia;
+    }
 
     public void darDeAltaColaborador(Colaborador colaborador) { colaboradores.add(colaborador); }
 
@@ -20,9 +39,7 @@ public class Sistema {
 
     public void darDeBajaTecnico(Tecnico tecnico) { tecnicos.remove(tecnico); }
 
-    public List<PuntoEnElMapa> recomendarPuntosDeColocacionDeHeladeras(PuntoEnElMapa punto, int radio) {
-        // Usar la API
-    }
-
     public void agregarOferta(OfertaDeProductos oferta) { ofertas.add(oferta); }
+
+    public void agregarMonto(float monto) { this.monto += monto; }
 }

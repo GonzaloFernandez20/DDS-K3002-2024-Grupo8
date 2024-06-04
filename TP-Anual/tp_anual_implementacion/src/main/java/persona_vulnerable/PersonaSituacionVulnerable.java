@@ -1,28 +1,37 @@
-package tp_anual.tp_anual_implementacion;
+package persona_vulnerable;
 
+import colaborador.Colaborador;
+import colaborador.PersonaHumana;
+import documentacion.Documento;
+import heladera.Direccion;
+import heladera.Heladera;
+import heladera.Vianda;
+import sistema.Sistema;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
 public class PersonaSituacionVulnerable {
     String nombre;
-    LocalDateTime fechaDeNacimiento;
+    LocalDate fechaDeNacimiento;
     EstadoDeVivienda estadoDeVivienda;
     Direccion domicilio;
     Documento documento;
     int cantMenores;
     Vinculacion vinculacion;
 
-    public PersonaSituacionVulnerable(String unNombre,LocalDateTime fecha,
+    public PersonaSituacionVulnerable(String unNombre,LocalDate fecha,
                                       EstadoDeVivienda estado, Direccion unDomicilio,
-                                      Documento unDcumento, int menores){
+                                      Documento unDocumento, int menores){
         this.nombre = unNombre;
         this.estadoDeVivienda = estado;
         this.fechaDeNacimiento = fecha;
         this.cantMenores = menores;
         this.domicilio = unDomicilio;
-        this.documento = unDcumento;
+        this.documento = unDocumento;
     }
 
     public void setCantMenores(int cantMenores) {
@@ -44,7 +53,7 @@ public class PersonaSituacionVulnerable {
         return cantMenores;
     }
 
-    public LocalDateTime getFechaDeNacimiento() {
+    public LocalDate getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
@@ -66,41 +75,16 @@ enum EstadoDeVivienda {
     situacionDeCalle
 }
 
-class Vinculacion {
-    PersonaHumana colaboradorQueRegistro;
-    PersonaSituacionVulnerable personaSituacionVulnerable;
-    LocalDateTime fechaRegistro;
-    AccesoAHeladeras tarjetaEntregada;
-
-    public Vinculacion(Colaborador colaborador, PersonaSituacionVulnerable persona, LocalDateTime fecha) {
-        colaboradorQueRegistro = (PersonaHumana) colaborador;//revisar este cast
-        personaSituacionVulnerable = persona;
-        fechaRegistro = fecha;
-        this.vincular(persona);
-        //tarjetaEntregada = accesoAHeladeras; charlar si la vinculación incluye dar la tarjeta
-    }
-    public void vincular(PersonaSituacionVulnerable persona){
-        persona.setVinculacion(this);
-    }
-
-    public void setTarjetaEntregada(AccesoAHeladeras tarjetaEntregada) {
-        //no se si cualquiera tendría que acceder a este método
-        this.tarjetaEntregada = tarjetaEntregada;
-    }
-    public AccesoAHeladeras getTarjetaEntregada() {
-        return tarjetaEntregada;
-    }
-}
-
 class AccesoAHeladeras {
     PersonaSituacionVulnerable personaSituacionVulnerable;
     String id;
     int cantUsosRestantesPorDia;
     List <UsoXTarjeta> usos;
 
-    public AccesoAHeladeras(PersonaSituacionVulnerable persona, String id){
+    public AccesoAHeladeras(PersonaSituacionVulnerable persona){
         this.personaSituacionVulnerable = persona;
-        this.id = id;
+        Sistema sistema = new Sistema();
+        this.id = String.valueOf(sistema.getInstancia().getContadorDeVinculaciones());
         this.cantUsosRestantesPorDia = this.getCantUsosPorDia();
     }
 
@@ -125,7 +109,7 @@ class AccesoAHeladeras {
     public void usar(Vianda vianda, Heladera heladera){
         if(Objects.equals(this.ultimoAcceso(),this.hoy())){
             if(cantUsosRestantesPorDia == 0){
-                //ERROR / EXCEPTION ver mas tarde
+                //ERROR / EXCEPTION
             }else {
                 usos.add(new UsoXTarjeta(heladera,
                         vianda,
@@ -155,7 +139,7 @@ class AccesoAHeladeras {
     }
 
     public LocalDateTime ultimoUso(){
-        UsoXTarjeta usoXTarjeta = usos.getLast();//este agarra el último colocado o el último de la lista?
+        UsoXTarjeta usoXTarjeta = usos.getLast();
         return usoXTarjeta.getFecha();
     }
 }
@@ -178,53 +162,4 @@ class UsoXTarjeta {
     public LocalDateTime getFecha() {
         return fecha;
     }
-}
-
-class Documento{
-    TipoDeDocumento tipo;
-    int numero;
-    Sexo sexo;
-    public Documento(TipoDeDocumento tipo, int numero, Sexo sexo){
-        this.setNumero(numero);
-        this.setSexo(sexo);
-        this.setTipo(tipo);
-    }
-    //no se si vale cambiar el número de documento y el sexo y etc, pero los setters publicos están
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
-
-    public void setTipo(TipoDeDocumento tipo) {
-        this.tipo = tipo;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public TipoDeDocumento getTipo() {
-        return tipo;
-    }
-}
-
-enum TipoDeDocumento{
-    LC,
-    LE,
-    CI,
-    DNI,
-    PASAPORTE
-}
-
-enum Sexo {
-    FEMENINO,
-    MASCULINO,
-    OTRA
 }

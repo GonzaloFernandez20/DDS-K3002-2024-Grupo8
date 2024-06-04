@@ -1,4 +1,7 @@
-package tp_anual.tp_anual_implementacion;
+package heladera;
+
+import colaborador.PersonaHumana;
+import colaborador.PersonaJuridica;
 
 import java.util.*;
 import java.util.Date;
@@ -31,7 +34,7 @@ public class Heladera {
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();
         for (int i = 0; i < cantidadARetirar; i++) {
-            vianda = viandasEnStock.get(0);
+            vianda = viandasEnStock.getFirst();
             vianda.serEntregada();
             viandasARetirar.add(vianda);
             viandasEnStock.remove(vianda);
@@ -154,39 +157,6 @@ class PuntoEstrategico{
     }
 }
 
-class PuntoEnElMapa {
-    double latitud;
-    double longitud;
-
-    public PuntoEnElMapa(double latitud, double longitud){
-        this.latitud = latitud;
-        this.longitud = longitud;
-    }
-    public double getLatitud() {
-        return latitud;
-    }
-
-    public double getLongitud() {
-        return longitud;
-    }
-}
-
-class Direccion{
-    String calle;
-    int altura;
-    int codPostal;
-    String unidadFuncional;
-}
-
-class RecomendacionPuntoDeColocacion {
-    PuntoEnElMapa punto;
-    double radio;
-
-/*    List<PuntoEnElMapa> consultarPuntosDeColocacion() {
-        // lo delegamos a la API
-    }*/
-}
-
 class SensoreoDeTemperatura {
     Float temperaturaRegistrada;
     Heladera heladera;
@@ -222,75 +192,4 @@ class AvisoIntentoDeRobo {
     void notificar() {
         colaboradorACargo.serNotificado();
     }
-}
-
-class Vianda {
-    private String tipoDeComida;
-    private Date fechaDeCaducidad;
-    private Date fechaDeDonacion;
-    private PersonaHumana colaborador;
-    private Heladera heladera;
-    private Float calorias;
-    private Float peso;
-    private EstadoVianda estado;
-
-    public void trasladar(Heladera heladeraNueva){
-        heladera = heladeraNueva;
-        List<Vianda> vianda = new ArrayList<>();
-        vianda.add(this);
-        heladera.recibirViandas(vianda);
-    }
-
-    public void serEntregada() {
-        estado = EstadoVianda.entregada;
-    }
-
-    public String getTipoDeComida() {
-        return tipoDeComida;
-    }
-
-    public Date getFechaDeCaducidad() {
-        return fechaDeCaducidad;
-    }
-
-    public Date getFechaDeDonacion() {
-        return fechaDeDonacion;
-    }
-
-    public PersonaHumana getColaborador() {
-        return colaborador;
-    }
-
-    public Heladera getHeladera() {
-        return heladera;
-    }
-
-    public Float getCalorias() {
-        return calorias;
-    }
-
-    public Float getPeso() {
-        return peso;
-    }
-
-    public EstadoVianda getEstado() {
-        return estado;
-    }
-
-    public Vianda(String tipoDeComida, Date fechaDeCaducidad, Date fechaDeDonacion, PersonaHumana colaborador, Heladera heladera, Float calorias, Float peso, EstadoVianda estado) {
-        this.tipoDeComida = tipoDeComida;
-        this.fechaDeCaducidad = fechaDeCaducidad;
-        this.fechaDeDonacion = fechaDeDonacion;
-        this.colaborador = colaborador;
-        this.heladera = heladera;
-        this.calorias = calorias;
-        this.peso = peso;
-        this.estado = estado;
-    }
-}
-
-enum EstadoVianda {
-    entregada,
-    noEntregada,
-    vencida
 }
