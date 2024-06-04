@@ -1,16 +1,23 @@
 package tp_anual.tp_anual_implementacion;
 
+
 import java.util.Date;
 import java.util.List;
+import java.time.format.DateTimeFormatter; // Import the DateTimeFormatter class
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.stream.*;
 
 class GestorDeContribuciones{
     /*     comentario:
                     Este recibe ya instanciada una contribucion y se encarga de efectuar();
                     Se decide que al igual que un colaborador, su instanciacion depende de un form. */
-    private Contribucion contribucionActual;
-    private Colaborador colaboradorActual;
+    //estos atributos deberían ser pétreos porque la asociación entre colaborador y contribución no puede cambiar
+    private final Contribucion contribucionActual;
+    private final Colaborador colaboradorActual;
 
     //Inyector de dependencias ->constructor
+    //no va porque se llenan los campos al instanciarse
     public GestorDeContribuciones(Contribucion contribucion, Colaborador colaborador){
         this.contribucionActual = contribucion;
         this.colaboradorActual = colaborador;
@@ -31,18 +38,22 @@ public abstract class Contribucion {
 }
 
 class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
-    private List<Vinculacion> tarjetaRepartida;
+    //Esto habría que volver a modelarlo porque no veo cómo sería implementado de ésta manera
+    private List<Vinculacion> tarjetasRepartidas;
 
     @Override
     public void contribuir() {
-        // Implementación
+        // No entiendo cómo implementaríamos esto me parece que nos falta una clase porque contribuir no tiene argumentos
     }
-    public void darDeAlta(Persona persona) {
-        // Implementación
+    public void darDeAlta(PersonaSituacionVulnerable persona, AccesoAHeladeras accesoAHeladeras) {
+        //NO ESTA BIEN IMPLEMENTADO
+//        Vinculacion nuevaVinculacion = new Vinculacion(this.colaborador, persona, LocalDateTime.now(), accesoAHeladeras);
+        Vinculacion nuevaVinculacion = new Vinculacion(this.colaborador, persona, LocalDateTime.now());
+        tarjetasRepartidas.add(nuevaVinculacion);
     }
 
-    public void entregarTarjeta(Persona persona) {
-        // Implementación
+    public void entregarTarjeta() {
+        //
     }
 
 }
@@ -70,7 +81,7 @@ class DineroDonado{//de instanciación única
     //falta en el diagrama
     float totalDeDinero;
     public void agregar(float monto){
-        totalDeDinero += monto;
+        this.totalDeDinero += monto;
     }
 }
 
@@ -118,7 +129,7 @@ class HacerseCargoDeHeladera extends Contribucion {
 
     @Override
     public void contribuir() {
-        heladeraACargo.setColaborador(colaborador);
+        heladeraACargo.setColaborador(colaborador);//poe ahí hace falta un cast
     }
 
     public double puntosQueSumaColaborador() {
@@ -130,6 +141,31 @@ class OfertaDeProductos extends Contribucion {
     String nombreOferta;
     Rubro rubro;
     double puntosNecesarios;
+
+    public String getNombreOferta() {
+        return nombreOferta;
+    }
+
+    public Rubro getRubro() {
+        return rubro;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public OfertaDeProductos(String nombreOferta, Rubro rubro, double puntosNecesarios, String imagen, Producto producto) {
+        this.nombreOferta = nombreOferta;
+        this.rubro = rubro;
+        this.puntosNecesarios = puntosNecesarios;
+        this.imagen = imagen;
+        this.producto = producto;
+    }
+
     String imagen;
     Producto producto;
 
@@ -150,6 +186,20 @@ class Producto {
     String nombreProducto;
     int stock;
 
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public Producto(String nombreProducto, int stock) {
+        this.nombreProducto = nombreProducto;
+        this.stock = stock;
+    }
+
+
     public void disminuirStock() { stock--; }
 }
 
@@ -166,6 +216,25 @@ enum Rubro {
 
 class Imagen {
     private String nombre;
+
+    public Imagen(String nombre, String resolucion, String epigrafe) {
+        this.nombre = nombre;
+        this.resolucion = resolucion;
+        this.epigrafe = epigrafe;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getResolucion() {
+        return resolucion;
+    }
+
+    public String getEpigrafe() {
+        return epigrafe;
+    }
+
     private String resolucion;
     private String epigrafe;
 }
