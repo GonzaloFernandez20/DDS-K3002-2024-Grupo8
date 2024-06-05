@@ -1,17 +1,8 @@
 package contribucion;
 
-import colaborador.Colaborador;
-import colaborador.PersonaJuridica;
-import heladera.Heladera;
-import heladera.Vianda;
-import persona_vulnerable.PersonaSituacionVulnerable;
-import persona_vulnerable.Vinculacion;
-import sistema.Sistema;
-
-import java.util.Date;
-import java.util.List;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+
+import colaborador.Colaborador;
 
 class GestorDeContribuciones{
     /*     comentario:
@@ -46,22 +37,6 @@ public abstract class Contribucion {
     public Contribucion(Colaborador colaborador, LocalDate fechaDeDonacion) {
         this.colaborador = colaborador;
         this.fechaDeDonacion = fechaDeDonacion;
-    }
-}
-
-class HacerseCargoDeHeladera extends Contribucion {
-    private Heladera heladeraACargo;
-    double coeficiente;
-
-    public HacerseCargoDeHeladera(Colaborador colaborador, LocalDate fechaDeDonacion, Heladera heladeraACargo) {
-        super(colaborador, fechaDeDonacion);
-        this.heladeraACargo = heladeraACargo;
-        this.coeficiente = 0.5;
-    }
-
-    @Override
-    public void contribuir() {
-        heladeraACargo.setColaborador((PersonaJuridica) colaborador);
     }
 }
 
