@@ -24,7 +24,7 @@ public class Vianda {
     }
 
     public void serEntregada() {
-        estado = EstadoVianda.entregada;
+        this.estado = EstadoVianda.entregada;
     }
 
     public String getTipoDeComida() {
