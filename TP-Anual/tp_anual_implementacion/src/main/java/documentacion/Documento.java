@@ -11,29 +11,14 @@ public class Documento{
         this.setTipo(tipo);
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+    public void setNumero(int numero) { this.numero = numero; }
+    public int getNumero() { return numero; }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
+    public void setSexo(Sexo sexo) { this.sexo = sexo; }
+    public Sexo getSexo() { return sexo; }
 
-    public void setTipo(TipoDeDocumento tipo) {
-        this.tipo = tipo;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public TipoDeDocumento getTipo() {
-        return tipo;
-    }
+    public void setTipo(TipoDeDocumento tipo) { this.tipo = tipo; }
+    public TipoDeDocumento getTipo() { return tipo;}    
 }
 
 enum TipoDeDocumento{
