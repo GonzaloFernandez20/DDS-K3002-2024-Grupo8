@@ -18,18 +18,25 @@ public class Heladera {
     private final int capacidadDeViandas;
     private Date puestaEnFuncionamiento;
 
-    public void recibirViandas(List<Vianda> viandas) {
-        viandasEnStock.addAll(viandas);
-    }
-
-    public void setColaborador(PersonaJuridica colaborador) {
-        colaboradorACargo = colaborador;
-    }
+    public void setColaborador(PersonaJuridica colaborador) { this.colaboradorACargo = colaborador; }
+    public PersonaJuridica getColaboradorACargo() { return colaboradorACargo; }
 
     public void setPuntoEstrategico(PuntoEstrategico puntoEstrategico) { this.puntoEstrategico = puntoEstrategico; }
+    public PuntoEstrategico getPuntoEstrategico() { return puntoEstrategico; }
 
     public void setPuestaEnFuncionamiento(Date puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
+    public Date getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
 
+    public EstadoHeladera getEstado() { return estado; }
+
+    public Modelo getModelo() { return modelo; }
+
+    public List<Vianda> getViandasEnStock() { return viandasEnStock; }
+
+    public int getCapacidadDeViandas() { return capacidadDeViandas; }
+
+    public void recibirViandas(List<Vianda> viandas) { this.viandasEnStock.addAll(viandas); }
+    
     public List<Vianda> retirarViandas(int cantidadARetirar) {
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();
@@ -42,58 +49,21 @@ public class Heladera {
         return viandasARetirar;
     }
 
-    public void sacarVianda(Vianda vianda) {
-        viandasEnStock.remove(vianda);
-    }
+    public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); }
 
-    public void setUltimaTemperaturaRegistrada(Float temperatura) {
-        ultimaTemperaturaRegistrada = temperatura;
-    }
+    public void setUltimaTemperaturaRegistrada(Float temperatura) { this.ultimaTemperaturaRegistrada = temperatura; }
+    public Float getUltimaTemperaturaRegistrada() { return ultimaTemperaturaRegistrada; }
 
     public void controlarUltimaTemperatura() {
         Float temperaturaMinima = modelo.getTemperaturaMinima();
         Float temperaturaMaxima = modelo.getTemperaturaMaxima();
+        
         if(ultimaTemperaturaRegistrada < temperaturaMinima || ultimaTemperaturaRegistrada > temperaturaMaxima) {
             estado = EstadoHeladera.inactiva;
         }
     }
 
-    public void recibirAviso(AvisoIntentoDeRobo aviso) {
-        aviso.notificar();
-    }
-
-
-    public PersonaJuridica getColaboradorACargo() {
-        return colaboradorACargo;
-    }
-
-    public EstadoHeladera getEstado() {
-        return estado;
-    }
-
-    public Modelo getModelo() {
-        return modelo;
-    }
-
-    public Float getUltimaTemperaturaRegistrada() {
-        return ultimaTemperaturaRegistrada;
-    }
-
-    public List<Vianda> getViandasEnStock() {
-        return viandasEnStock;
-    }
-
-    public PuntoEstrategico getPuntoEstrategico() {
-        return puntoEstrategico;
-    }
-
-    public int getCapacidadDeViandas() {
-        return capacidadDeViandas;
-    }
-
-    public Date getPuestaEnFuncionamiento() {
-        return puestaEnFuncionamiento;
-    }
+    public void recibirAviso(AvisoIntentoDeRobo aviso) { aviso.notificar(); }
 
     public Heladera(PersonaJuridica colaboradorACargo, Modelo modelo, Float ultimaTemperaturaRegistrada, List<Vianda> viandasEnStock, PuntoEstrategico puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
@@ -126,35 +96,21 @@ class PuntoEstrategico{
     String ciudad;
     String nombre;
 
-    public PuntoEstrategico(PuntoEnElMapa punto,
-                            Direccion direccion,
-                            String ciudad,
-                            String nombre){
+    public PuntoEstrategico(PuntoEnElMapa punto, Direccion direccion, String ciudad, String nombre){
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.punto = punto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getNombre() { return nombre; }
+    
+    public Direccion getDireccion() { return direccion; }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public PuntoEnElMapa getPunto() { return punto; }
 
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    public PuntoEnElMapa getPunto() {
-        return punto;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
+    public String getCiudad() { return ciudad; }
 }
 
 class SensoreoDeTemperatura {
