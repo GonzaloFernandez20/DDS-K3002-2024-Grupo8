@@ -35,6 +35,9 @@ public class Heladera {
 
     public int getCapacidadDeViandas() { return capacidadDeViandas; }
 
+    public void setUltimaTemperaturaRegistrada(Float temperatura) { this.ultimaTemperaturaRegistrada = temperatura; }
+    public Float getUltimaTemperaturaRegistrada() { return ultimaTemperaturaRegistrada; }
+
     public void recibirViandas(List<Vianda> viandas) { this.viandasEnStock.addAll(viandas); }
     
     public List<Vianda> retirarViandas(int cantidadARetirar) {
@@ -50,9 +53,6 @@ public class Heladera {
     }
 
     public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); }
-
-    public void setUltimaTemperaturaRegistrada(Float temperatura) { this.ultimaTemperaturaRegistrada = temperatura; }
-    public Float getUltimaTemperaturaRegistrada() { return ultimaTemperaturaRegistrada; }
 
     public void controlarUltimaTemperatura() {
         Float temperaturaMinima = modelo.getTemperaturaMinima();
