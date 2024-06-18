@@ -1,0 +1,18 @@
+@startuml suscripciones
+class Colaborador {
+    - suscripcion : suscripcion
+    + suscribirse(heladeras) : void 
+}
+
+abstract class Suscripcion {
+    - colaboradores : Colaborador
+    + notificar() : void 
+}
+
+class SuscripcionNViandas {}
+
+
+class 
+
+borador -- SuscritCol
+@enduml

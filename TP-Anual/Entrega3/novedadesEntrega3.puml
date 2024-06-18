@@ -1,0 +1,57 @@
+@startuml entrega3
+
+class Colaborador {
+    - accesoColaboradorDistribuirVianda : accesoColaboradorColaborador 
+}
+
+class AccesoAHeladeras {
+    
+}
+
+abstract class AccesoColaborador extends AccesoAHeladeras {
+    ' si la accion no fue registrada, debe mostrar un error'
+    - inicioDeOperacion : Date
+    - registros : [RegistroAperturaHeladera]
+    'preguntar'
+    + notificarQueSeAcaboElTiempo() : void 
+    + registrarMovimiento() : void
+    + corroborarExpiracion(LocalDate) : bool 
+    'paso demasiado tiempo desde que se inicio la operacion?'
+
+}
+
+class Heladera {
+    - validacionApertura : ValidacionApertura
+    - registros : [RegistroAperturaHeladera] // preguntar
+    - solicitudes : no se
+    + abrir() : void 
+    ' tiene que validar y sumar a registros o solic'
+}
+
+class ValidacionApertura {
+    - accesosColaboradores : [AccesoColaborador]
+    + validarAccesoColaborador(AccesoColaborador accesoColaborador) : void 
+    ' accesoColaborador esta en accesosColaboradores y accesoColaborador.corroborarExpiracion()
+}
+
+class RegistroAperturaHeladera {
+    'que informacion debe guardar el registro? heladera, fecha? colaborador?'
+    - heladera : Heladera
+    - fecha : LocalDate
+}
+
+class distribucionDeVianda {
+    heladeraDeOrigen : Heladera
+    heladeraDeDestino : Heladera
+    cantViandas
+    motivo 
+    contribuir() 
+    puntosQueSumaColab() 
+    accesoColaborador : AccesoColaborador
+     ' null al principio'
+    + registrarMovimiento(self): void
+     'accesoColaborador.registrarMovimiento() and sistema.avisar(heladeraOrigen, heladeraDestino)'
+} 
+' lo mismo con doncionDeVianda'
+
+@enduml
