@@ -4,7 +4,6 @@ import colaborador.Colaborador;
 import heladera.Heladera;
 import heladera.Vianda;
 
-import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 

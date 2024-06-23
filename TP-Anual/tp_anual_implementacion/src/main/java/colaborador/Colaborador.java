@@ -6,7 +6,6 @@ import heladera.Direccion;
 import medios_de_contacto.MedioDeContacto;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Colaborador {

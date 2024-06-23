@@ -3,7 +3,6 @@ package contribucion;
 import colaborador.Colaborador;
 import sistema.Sistema;
 
-import java.util.Date;
 import java.time.LocalDate;
 
 public class DonacionDeDinero extends Contribucion {

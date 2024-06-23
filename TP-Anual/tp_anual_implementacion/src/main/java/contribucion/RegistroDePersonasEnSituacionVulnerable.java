@@ -4,8 +4,6 @@ import colaborador.Colaborador;
 import persona_vulnerable.PersonaSituacionVulnerable;
 import persona_vulnerable.Vinculacion;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 
