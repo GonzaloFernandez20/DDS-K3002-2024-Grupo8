@@ -1,18 +1,81 @@
 @startuml suscripciones
-class Colaborador {
-    - suscripcion : suscripcion
-    + suscribirse(heladeras) : void 
+'- Quedan únicamente n viandas disponibles en la heladera, siendo n un número que el 
+' colaborador puede setear. Un colaborador distribuidor puede llevar N viandas 
+' a la heladera que esté más llena.
+
+'Heladera tiene disponibilidad de 10 viandas
+'Tiene 3 en la heladera
+'n = 3
+'N = 2
+
+'En caso de acudir a realizar algunas de estas tareas, el colaborador 
+'deberá registrar una distribución de viandas como una forma de contribución. 
+'Vamos a asumir que los distribuidores son responsables para llevar a cabo dicha
+'tarea con criterio. También, una vez registrada esta colaboración se debe
+'actualizar el stock de cada heladera.
+
+'Distribucion != Redistribucion
+
+'heladera tiene colaboradores en orden de n 
+'heladera notifica a claseINtermedia
+'claseIntermedia filtra segun el n 
+
+class Heladera {
+    - suscripcionNViandas : SuscripcionNViandas
+ 
+    + recibirVianda(Vianda vianda) : void
+    + sacarVianda(Vianda vianda) : void
+    + avisarClaseIntermedia() : void 
+}
+Heladera -- ClaseIntermedia
+
+class Suscripcion {
+    - heladera : Heladera
+    - suscriptores : [Suscriptor]
+    
+    + notificar() : void
+}
+Suscripcion --"*" Suscriptor
+
+class Suscriptor {
+    - colaborador : Colaborador
+    - n : Int
+}
+Suscriptor -- Colaborador
+
+class Colaborador{
+    - suscripcion : [Suscripcion]
+
+    + 
 }
 
-abstract class Suscripcion {
-    - colaboradores : Colaborador
-    + notificar() : void 
+class SuscripcionNViandas extends Suscripcion {
+    - heladera : Heladera
+    - suscriptores : [Suscriptor]
+
+    + sumarSuscriptor(colaborador, n) : void -> nuevoSuscriptor = new Suscriptor(colaborador, n)
+                                             -> suscriptores.add(nuevoSuscriptor)
+    + notificar() : void -> 
 }
 
-class SuscripcionNViandas {}
-
-
-class 
-
-borador -- SuscritCol
+class suscriptor1{
+    suscripciones : [suscripcion]
+}
+class suscriptor2{
+    suscripciones : [suscripcion]
+}
+class suscripcion1{
+    suscriptores : [suscriptor]
+}
+class suscripcion2{
+    suscriptores : [suscriptor]
+}
+class suscripcion3{
+    suscriptores : [suscriptor]
+}
+suscripcion1 -- suscriptor1
+suscripcion2 -- suscriptor1
+suscripcion3 -- suscriptor1
+suscripcion2 -- suscriptor2
+suscripcion3 -- suscriptor2
 @enduml

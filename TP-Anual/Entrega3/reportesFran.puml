@@ -1,0 +1,109 @@
+@startuml reportes
+class ReporteSemanalHeladera{
+    -fecha : LocalTimeDate
+    -heladera : Heladera
+    -reporteDeFallas : ReporteDeFallas
+    -reporteDeColocacionDeViandas : ReporteMovimientoDeViandas
+    -reporteDeRetiroDeViandas : ReporteDeRetiroDeViandas
+    +setFechaActual():void
+    +reportarRetiro(Int) : void
+    +reportarColocacion(Int) : void
+    +reportarFalla() : void
+}
+
+class ReporteSemanalColaboradores {
+    - fecha : LocalTimeDate
+    - viandasPorColaboradores : [ReporteViandasPorColaborador]
+    + buscarColaboradorEnLista(colaborador, cantidadViandas) : void 
+    + visualizarLista() : void 
+    + resetearNuevaSemana() : void 
+}
+
+class ReporteViandasPorColaborador {
+    - colaborador : Colaborador 
+    - cantViandas : Int 
+    + reportar(cantidadViandas) : void 
+}
+
+enum tipoDeMovimiento{
+    retiro
+    colocacion
+}
+
+class ReportesXHeladera{
+    -heladera : Heladera
+    -reporteActual : Reporte
+    -reportes : [Reporte]
+    +renovarReporteActual():void
+'        reporteActual.setFechaActual()'
+'        sumar a reportes reporteVigente'
+'        asignar un new Reporte() al atributo reporteActual'
+    +addReporte(Reporte) : void
+}
+
+class ReportesDeTodasLasHeladeras{
+    -reportes : [ReporteXHeladera]
+    +iniciarReportePorInicioDeSemanaNueva() : void
+    'terminó la semana'
+    'se le dice a todos los reportes renovarReporteActual'
+}
+
+class ReporteDeFallas{
+    -cantidadDeFallas : Int
+    +reportar(){cantidadDeFallas++} : void
+}
+
+class ReporteDeViandasPorColaborador{
+    -colaboradoresXviandas : [ColaboradorXVianda]
+    'Cantidad de Viandas por colaborador'
+'Enunciado poco claro, viandas por colab en heladera ahora o retiradas?'
+'Esa cantidad aumenta o disminuye de acuerdo a los movimientos?'
+'Se podría suponer que cuando se colabora donando viandas se suma el colaborador'
+'con su vianda a el reporte, que quede un menjunje de clasecitas colabXvianda no es problema'
+'xq como DECISIÖN DE DISEÑO podemos plantear que no va a haber 10.000 colaboraciones por semana'
+'como para justificar un mayor ordenamiento de los datos'
+}
+
+class ColaboradorXVianda{
+    -colaborador : Colaborador
+    -vianda : Vianda
+}
+
+class ReporteDeRetiroDeViandas {
+    - retiros : Int
+    - reportar() : void
+}
+
+class ReporteDeColocacionDeViandas {
+    - colocaciones : Int
+    - reportar() : void
+}
+
+class ReportesDeViandasDeTodosLosColaboradores{
+    -colaboradoresXviandas : [ColaboradorXViandas]
+    -viandasDonadas : Int
+    +reportar() : void
+}
+class ReportesColaboradoresYViandas{
+    -reporteActual : ReportesDeViandasDeTodosLosColaboradores
+    -reportes : [ReportesDeViandasDeTodosLosColaboradores]
+    +renovarReporteActual():void
+}
+class ColaboradorXViandas{
+    -colaborador : Colaborador
+    -vianda : Vianda
+}
+ReporteSemanalHeladera -- Heladera
+ReporteSemanalHeladera "*"-- ReportesXHeladera
+ReporteSemanalHeladera -- tipoDeMovimiento
+ReporteSemanalHeladera -- ReporteDeFallas
+ReporteSemanalHeladera -- ReporteDeMovimientoDeViandas
+ReporteSemanalHeladera -- ReporteDeViandasPorColaborador
+ReporteSemanalHeladera -- ReportesDeTodasLasHeladeras
+ColaboradorXVianda "*"-- ReporteDeViandasPorColaborador
+Colaborador -- ColaboradorXVianda
+ColaboradorXVianda -- Vianda
+ReporteDeMovimientoDeViandas -- tipoDeMovimiento
+ReportesDeViandasDeTodosLosColaboradores *-- ReportesColaboradoresYViandas
+ReportesDeViandasDeTodosLosColaboradores -- ColaboradorXViandas
+@enduml
