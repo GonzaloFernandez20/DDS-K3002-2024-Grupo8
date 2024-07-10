@@ -1,7 +1,10 @@
 package carga_masiva;
 
 import colaborador.Colaborador;
-import colaborador.PersonaHumana;
+import persona.PersonaHumana;
+import documentacion.Documento;
+import documentacion.TipoDeDocumento;
+import localizacion.Direccion;
 import sistema.Sistema;
 import medios_de_contacto.MedioDeContacto;
 import medios_de_contacto.CorreoElectronico;
@@ -14,13 +17,21 @@ import com.opencsv.exceptions.CsvValidationException;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 
+import static documentacion.TipoDeDocumento.*;
+
 public class CargaMasiva {
+    private String archivo;
+
+    public CargaMasiva(String archivo) {
+        // Estaria bueno atajar si el archivo no es .csv o no existe
+        this.archivo = archivo;
+    }
+
     public void migrar() {
-        String archivo = getClass().getClassLoader().getResource("CSV.csv").getPath();
-        //El archivo debe estar en la carpeta resources
         try (CSVReader reader = new CSVReader(new FileReader(archivo))) {
             String[] linea;
             while ((linea = reader.readNext()) != null) {
@@ -29,6 +40,8 @@ public class CargaMasiva {
 
                     String[] partes = campo.split(";");
 
+                    String tipoDocString = partes[0];
+                    String doc = partes[1];
                     String nombre = partes[2];
                     String apellido = partes[3];
                     String mail = partes[4];
@@ -38,9 +51,18 @@ public class CargaMasiva {
                     String tipoDonacion = partes[6];
                     String cantidad = partes[7];
 
-                    PersonaHumana colaborador = new PersonaHumana(nombre, apellido, null, null);
-                    MedioDeContacto medioMail = new CorreoElectronico(mail);
-                    colaborador.agregarMedioDeContacto(medioMail);
+                    TipoDeDocumento tipoDoc = this.castearTipoDoc(tipoDocString);
+
+                    MedioDeContacto mailMedio = new MedioDeContacto(mail);
+                    Documento documento = new Documento(tipoDoc, doc, null);
+                    // Tomando como constructor:
+                    // PersonaHumana(Direccion direccion, String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento)
+                    //PersonaHumana persona = new PersonaHumana(null, nombre, apellido, null, documento);
+                    PersonaHumana persona = new PersonaHumana(nombre, apellido, null,documento,null);
+                    // Tomando como constructor:
+                    // Colaborador(Persona persona)
+                    Colaborador colaborador = new Colaborador(persona);
+                    colaborador.agregarMedioDeContacto(mailMedio);
 
                     switch (tipoDonacion) {
                         case "DINERO":
@@ -61,10 +83,7 @@ public class CargaMasiva {
                             break;
                     }
 
-                    if(!this.corroborarColaboradorYaCargadoSegunMail(mail)) {
-                        List<Colaborador> colaboradoresCargados = Sistema.getInstancia().getColaboradores();
-                        colaboradoresCargados.add(colaborador);
-                    }
+                    Sistema.getInstancia().actualizarSegunCargaMasiva(colaborador);
                 }
                 System.out.println();
             }
@@ -75,11 +94,17 @@ public class CargaMasiva {
         }
     }
 
-    private Boolean corroborarColaboradorYaCargadoSegunMail(String mail) {
-        List<Colaborador> colaboradoresCargados = Sistema.getInstancia().getColaboradores();
-        return colaboradoresCargados.stream().anyMatch(
-                colaborador -> colaborador.getMediosDeContacto().stream().anyMatch(medio -> medio.getIdentificacion().equals(mail))
-        );
+    public TipoDeDocumento castearTipoDoc(String tipoDoc) {
+        switch (tipoDoc) {
+            case "LC":
+                return LC;
+            case "LE":
+                return LE;
+            case "DNI":
+                return DNI;
+            default:
+                return null;
+        }
     }
 }
 

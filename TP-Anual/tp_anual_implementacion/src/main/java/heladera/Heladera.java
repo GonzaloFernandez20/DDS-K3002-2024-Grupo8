@@ -1,28 +1,29 @@
 package heladera;
 
-import colaborador.PersonaHumana;
-import colaborador.PersonaJuridica;
-
+import colaborador.Colaborador;
+import localizacion.Direccion;
+import localizacion.PuntoEnElMapa;
+import localizacion.Ubicacion;
 import java.util.*;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Heladera {
-    PersonaJuridica colaboradorACargo;
+    Colaborador colaboradorACargo;
     EstadoHeladera estado;
     private final Modelo modelo;
     Float ultimaTemperaturaRegistrada;
     List<Vianda> viandasEnStock;
-    private PuntoEstrategico puntoEstrategico;
+    private Ubicacion puntoEstrategico;
     private final int capacidadDeViandas;
     private Date puestaEnFuncionamiento;
 
-    public void setColaborador(PersonaJuridica colaborador) { this.colaboradorACargo = colaborador; }
-    public PersonaJuridica getColaboradorACargo() { return colaboradorACargo; }
+    public void setColaborador(Colaborador colaborador) { this.colaboradorACargo = colaborador; }
+    public Colaborador getColaboradorACargo() { return colaboradorACargo; }
 
-    public void setPuntoEstrategico(PuntoEstrategico puntoEstrategico) { this.puntoEstrategico = puntoEstrategico; }
-    public PuntoEstrategico getPuntoEstrategico() { return puntoEstrategico; }
+    public void setUbicacion(Ubicacion puntoEstrategico) { this.puntoEstrategico = puntoEstrategico; }
+    public Ubicacion getUbicacion() { return puntoEstrategico; }
 
     public void setPuestaEnFuncionamiento(Date puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
     public Date getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
@@ -44,7 +45,7 @@ public class Heladera {
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();
         for (int i = 0; i < cantidadARetirar; i++) {
-            vianda = viandasEnStock.getFirst();
+            vianda = viandasEnStock.get(0);
             vianda.serEntregada();
             viandasARetirar.add(vianda);
             viandasEnStock.remove(vianda);
@@ -65,7 +66,7 @@ public class Heladera {
 
     public void recibirAviso(AvisoIntentoDeRobo aviso) { aviso.notificar(); }
 
-    public Heladera(PersonaJuridica colaboradorACargo, Modelo modelo, Float ultimaTemperaturaRegistrada, List<Vianda> viandasEnStock, PuntoEstrategico puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
+    public Heladera(Colaborador colaboradorACargo, Modelo modelo, Float ultimaTemperaturaRegistrada, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
         this.estado = EstadoHeladera.activa;
         this.modelo = modelo;
@@ -88,29 +89,6 @@ class Modelo {
 
     public Float getTemperaturaMinima() { return minimaTemperatura; }
     public Float getTemperaturaMaxima() { return maximaTemperatura; }
-}
-
-class PuntoEstrategico{
-    PuntoEnElMapa punto;
-    Direccion direccion;
-    String ciudad;
-    String nombre;
-
-    public PuntoEstrategico(PuntoEnElMapa punto, Direccion direccion, String ciudad, String nombre){
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.ciudad = ciudad;
-        this.punto = punto;
-    }
-
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public String getNombre() { return nombre; }
-    
-    public Direccion getDireccion() { return direccion; }
-
-    public PuntoEnElMapa getPunto() { return punto; }
-
-    public String getCiudad() { return ciudad; }
 }
 
 class SensoreoDeTemperatura {
@@ -139,9 +117,9 @@ class SensoreoDeMovimiento {
 }
 
 class AvisoIntentoDeRobo {
-    PersonaJuridica colaboradorACargo;
+    Colaborador colaboradorACargo;
 
-    public AvisoIntentoDeRobo(PersonaJuridica colaboradorACargo) {
+    public AvisoIntentoDeRobo(Colaborador colaboradorACargo) {
         this.colaboradorACargo = colaboradorACargo;
     }
 

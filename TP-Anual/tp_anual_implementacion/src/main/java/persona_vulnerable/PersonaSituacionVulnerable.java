@@ -1,37 +1,31 @@
 package persona_vulnerable;
 
 import colaborador.Colaborador;
-import colaborador.PersonaHumana;
+import persona.Persona;
+import persona.PersonaHumana;
 import documentacion.Documento;
-import heladera.Direccion;
+import localizacion.Direccion;
 import heladera.Heladera;
 import heladera.Vianda;
 import sistema.Sistema;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
 public class PersonaSituacionVulnerable {
-    String nombre;
-    LocalDate fechaDeNacimiento;
     EstadoDeVivienda estadoDeVivienda;
-    Direccion domicilio;
-    Documento documento;
     int cantMenores;
     Vinculacion vinculacion;
+    PersonaHumana persona;
 
-    public PersonaSituacionVulnerable(String unNombre,LocalDate fecha,
-                                      EstadoDeVivienda estado, Direccion unDomicilio,
-                                      Documento unDocumento, int menores){
-        this.nombre = unNombre;
+    public PersonaSituacionVulnerable(PersonaHumana persona, EstadoDeVivienda estado, int menores){
         this.estadoDeVivienda = estado;
-        this.fechaDeNacimiento = fecha;
         this.cantMenores = menores;
-        this.domicilio = unDomicilio;
-        this.documento = unDocumento;
+        this.persona = persona;
     }
 
     public void setCantMenores(int cantMenores) {
@@ -42,7 +36,7 @@ public class PersonaSituacionVulnerable {
     }
 
     public Direccion getDomicilio() {
-        return domicilio;
+        return persona.getDireccion();
     }
 
     public EstadoDeVivienda getEstadoDeVivienda() {
@@ -53,26 +47,21 @@ public class PersonaSituacionVulnerable {
         return cantMenores;
     }
 
-    public LocalDate getFechaDeNacimiento() {
-        return fechaDeNacimiento;
+    public Date getFechaDeNacimiento() {
+        return persona.getFechaDeNacimiento();
     }
 
     public Documento getDocumento() {
-        return documento;
+        return persona.getDocumento();
     }
 
     public String getNombre() {
-        return nombre;
+        return persona.getNombre();
     }
 
     public Vinculacion getVinculacion() {
         return vinculacion;
     }
-}
-
-enum EstadoDeVivienda {
-    poseeDomicilio,
-    situacionDeCalle
 }
 
 class AccesoAHeladeras {
@@ -139,7 +128,7 @@ class AccesoAHeladeras {
     }
 
     public LocalDateTime ultimoUso(){
-        UsoXTarjeta usoXTarjeta = usos.getLast();
+        UsoXTarjeta usoXTarjeta = usos.get(usos.size()-1);//el getLast no funcionaba para List
         return usoXTarjeta.getFecha();
     }
 }

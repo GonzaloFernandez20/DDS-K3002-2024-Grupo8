@@ -1,4 +1,4 @@
-package heladera;
+package localizacion;
 
 public class PuntoEnElMapa {
     double latitud;

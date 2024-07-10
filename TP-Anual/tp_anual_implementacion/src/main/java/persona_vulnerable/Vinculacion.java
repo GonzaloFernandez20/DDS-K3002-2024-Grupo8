@@ -1,18 +1,17 @@
 package persona_vulnerable;
 
 import colaborador.Colaborador;
-import colaborador.PersonaHumana;
 
 import java.time.LocalDate;
 
 public class Vinculacion {
-    PersonaHumana colaboradorQueRegistro;
+    Colaborador colaboradorQueRegistro;
     PersonaSituacionVulnerable personaSituacionVulnerable;
     LocalDate fechaRegistro;
     AccesoAHeladeras tarjetaEntregada;
 
     public Vinculacion(Colaborador colaborador, PersonaSituacionVulnerable personaSituacionVulnerable, LocalDate fecha) {
-        colaboradorQueRegistro = (PersonaHumana) colaborador;
+        colaboradorQueRegistro = colaborador;
         fechaRegistro = fecha;
         this.vincular(personaSituacionVulnerable);
         tarjetaEntregada = new AccesoAHeladeras(personaSituacionVulnerable);

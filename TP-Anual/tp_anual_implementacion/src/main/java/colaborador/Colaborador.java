@@ -2,27 +2,49 @@ package colaborador;
 
 import contribucion.Contribucion;
 import contribucion.OfertaDeProductos;
-import heladera.Direccion;
+import documentacion.Documento;
+import localizacion.Direccion;
 import medios_de_contacto.MedioDeContacto;
-
+import persona.Persona;
+import persona.PersonaHumana;
+import persona.PersonaJuridica;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Colaborador {
     private List<MedioDeContacto> mediosDeContacto;
-    private Direccion direccion;
     private List<Contribucion> contribucionesRealizadas;
     private double puntos;
+    private Persona persona;
 
-    public Colaborador(Direccion direccion) {
-        this.direccion = direccion;
+    public Colaborador(Persona persona){
         this.mediosDeContacto = new ArrayList<>();
         this.contribucionesRealizadas = new ArrayList<>();
         this.puntos = 0;
+        this.persona = persona;
     }
-    
-    public void setDireccion(Direccion direccion) { this.direccion = direccion; }
-    public Direccion getDireccion() { return direccion; }
+    public List<Contribucion> getContribucionesRealizadas() { return contribucionesRealizadas; }
+
+    public Boolean tieneMail(MedioDeContacto mail) {
+        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(mail));
+    }
+
+    public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
+        return this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
+    }
+//es responsabilidad de la carga masiva
+    public void actualizarConCargaMasiva(Colaborador colaborador) {
+        if(!tieneMail(colaborador.getMediosDeContacto().get(0))) {
+            mediosDeContacto.add(colaborador.getMediosDeContacto().get(0));
+        }
+        if(!tieneDocumentoSegunNumeroYTipo(colaborador.getPersona().getDocumento())) {
+            persona.setDocumento(colaborador.getPersona().getDocumento());
+        }
+
+        colaborador.sumarContribucion(colaborador.getContribucionesRealizadas().get(0));
+    }
+    public void setDireccion(Direccion direccion) { this.persona.setDireccion(direccion); }
+    public Direccion getDireccion() { return persona.getDireccion();}
 
     public double getPuntos() { return puntos; }
 
@@ -44,5 +66,14 @@ public class Colaborador {
         } else {
             // Tirar una Excepcion
         }
+    }
+
+    public void serNotificado() {
+        // no hay suficiente informacion sobre como se comporta PersonaJuridica al
+        // recibir la notificacion
+    }
+
+    public Persona getPersona() {
+        return persona;
     }
 }

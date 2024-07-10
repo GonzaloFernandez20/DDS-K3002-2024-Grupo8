@@ -3,6 +3,7 @@ package contribucion;
 import colaborador.Colaborador;
 import heladera.Heladera;
 import heladera.Vianda;
+import persona.PersonaHumana;
 
 import java.util.List;
 import java.time.LocalDate;
@@ -24,10 +25,15 @@ public class DistribucionDeVianda extends Contribucion {
     }
 
     @Override
-    public void contribuir() {
-        List<Vianda> viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
-        viandas.forEach(vianda -> vianda.trasladar(heladeraDestino));
-        heladeraDestino.recibirViandas(viandas);
+    public void procesarContribucion() {
+        if(colaborador.getPersona() instanceof PersonaHumana) {
+            List<Vianda> viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
+            viandas.forEach(vianda -> vianda.trasladar(heladeraDestino));
+            heladeraDestino.recibirViandas(viandas);
+        }
+        else{
+            //colaboracion inválida no es persona humana
+        }
     }
 
     public double puntosQueSumaColaborador() {

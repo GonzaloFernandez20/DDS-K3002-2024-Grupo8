@@ -19,7 +19,7 @@ class GestorDeContribuciones{
     }
 
     private void realizarContribucion(){
-        contribucionActual.contribuir();
+        contribucionActual.procesarContribucion();
         colaboradorActual.sumarContribucion(contribucionActual);
     }
 }
@@ -28,7 +28,7 @@ public abstract class Contribucion {
     protected Colaborador colaborador;
     protected LocalDate fechaDeDonacion;
 
-    public abstract void contribuir();
+    public abstract void procesarContribucion();
 
     public double puntosQueSumaColaborador() {
         return 0;

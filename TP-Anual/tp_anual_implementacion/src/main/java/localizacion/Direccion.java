@@ -1,6 +1,6 @@
-package heladera;
+package localizacion;
 
-public class Direccion{
+public class Direccion {
     String calle;
     int altura;
     int codPostal;

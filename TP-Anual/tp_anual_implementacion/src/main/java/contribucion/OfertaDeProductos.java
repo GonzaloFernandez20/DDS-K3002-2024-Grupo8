@@ -1,6 +1,8 @@
 package contribucion;
 
 import colaborador.Colaborador;
+import persona.PersonaHumana;
+import persona.PersonaJuridica;
 import sistema.Sistema;
 
 import java.time.LocalDate;
@@ -37,8 +39,12 @@ public class OfertaDeProductos extends Contribucion {
         this.producto = producto;
     }
 
-    public void contribuir(){
-        Sistema.getInstancia().agregarOferta(this);
+    public void procesarContribucion(){
+        if(colaborador.getPersona() instanceof PersonaJuridica) {
+            Sistema.getInstancia().agregarOferta(this);
+        }else {
+            //contribucion invalida no es persona juridica
+        }
     }
 
     public double getPuntosNecesarios() { return puntosNecesarios; }

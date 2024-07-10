@@ -1,9 +1,13 @@
 package contribucion;
-
+import persona.PersonaHumana;
+import validadorDeColaboraciones.CriterioDeAceptacion;
+import validadorDeColaboraciones.ValidadorDeColaboraciones;
+import validadorDeColaboraciones.EsPersonaHumana;
 import colaborador.Colaborador;
 import heladera.Heladera;
 import heladera.Vianda;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -24,8 +28,14 @@ public class DonacionDeVianda extends Contribucion {
     }
 
     @Override
-    public void contribuir() {
+    public void procesarContribucion() {
+        if(colaborador.getPersona() instanceof PersonaHumana){
         heladera.recibirViandas(viandasDonadas);
+        }
+        else{
+                //colaboracion inválida hacer algo
+            //colaborador no es persona humana
+        }
     }
 
     public double puntosQueSumaColaborador() {

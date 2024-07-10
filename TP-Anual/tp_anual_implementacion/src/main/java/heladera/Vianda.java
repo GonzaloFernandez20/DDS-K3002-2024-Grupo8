@@ -1,6 +1,6 @@
 package heladera;
 
-import colaborador.PersonaHumana;
+import persona.PersonaHumana;
 
 import java.util.ArrayList;
 import java.time.LocalDate;

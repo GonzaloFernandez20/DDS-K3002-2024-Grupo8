@@ -6,9 +6,10 @@ import java.time.LocalDate;
 import API.APIRequester;
 import API.ResponseRecomendacion;
 import colaborador.Colaborador;
-import colaborador.PersonaJuridica;
 import heladera.Heladera;
-import heladera.PuntoEnElMapa;
+import localizacion.PuntoEnElMapa;
+import persona.PersonaHumana;
+import persona.PersonaJuridica;
 import sistema.Sistema;
 
 public class HacerseCargoDeHeladera extends Contribucion{
@@ -23,9 +24,13 @@ public class HacerseCargoDeHeladera extends Contribucion{
     }
 
     @Override
-    public void contribuir() {
-        heladeraACargo.setColaborador((PersonaJuridica) colaborador);
-        Sistema.getInstancia().darDeAltaHeladera(heladeraACargo);
+    public void procesarContribucion() {
+        if(colaborador.getPersona() instanceof PersonaJuridica) {
+            heladeraACargo.setColaborador((Colaborador) colaborador);
+            Sistema.getInstancia().darDeAltaHeladera(heladeraACargo);
+        }else{
+            //contribucion invalida no es persona jurídica
+        }
     }
 
     // VALORES DE EJEMPLO DE LA MOCK API:
@@ -42,7 +47,7 @@ public class HacerseCargoDeHeladera extends Contribucion{
         
         // TE DEVUELVE LOS PUNTOS RECOMENDADOS PARA QUE VOS ELIJAS...
         if (puntos != null && puntos.getPosiblesPuntosDeColocacion() != null) {
-			for (PuntoEnElMapa punto : puntos.getPosiblesPuntosDeColocacion()) {
+			for (PuntoEnElMapa punto : puntos.getPosiblesPuntosDeColocacion()) {//que hace este for???????
 				System.out.println(" " + punto.getLatitud());
 				System.out.println(punto.getLongitud());
 			}

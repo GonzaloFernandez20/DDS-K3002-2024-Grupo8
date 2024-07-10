@@ -18,7 +18,7 @@ public class DonacionDeDinero extends Contribucion {
     }
 
     @Override
-    public void contribuir() {
+    public void procesarContribucion() {
         Sistema.getInstancia().agregarMonto(monto);
     }
 
