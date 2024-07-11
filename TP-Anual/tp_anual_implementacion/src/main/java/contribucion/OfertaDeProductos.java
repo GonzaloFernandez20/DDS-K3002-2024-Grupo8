@@ -1,7 +1,6 @@
 package contribucion;
 
 import colaborador.Colaborador;
-import persona.PersonaHumana;
 import persona.PersonaJuridica;
 import sistema.Sistema;
 

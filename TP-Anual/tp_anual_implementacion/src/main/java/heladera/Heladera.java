@@ -1,8 +1,6 @@
 package heladera;
 
 import colaborador.Colaborador;
-import localizacion.Direccion;
-import localizacion.PuntoEnElMapa;
 import localizacion.Ubicacion;
 import java.util.*;
 import java.util.Date;

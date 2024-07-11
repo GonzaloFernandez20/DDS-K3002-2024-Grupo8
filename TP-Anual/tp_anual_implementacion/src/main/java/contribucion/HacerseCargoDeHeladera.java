@@ -8,7 +8,6 @@ import API.ResponseRecomendacion;
 import colaborador.Colaborador;
 import heladera.Heladera;
 import localizacion.PuntoEnElMapa;
-import persona.PersonaHumana;
 import persona.PersonaJuridica;
 import sistema.Sistema;
 
@@ -47,7 +46,7 @@ public class HacerseCargoDeHeladera extends Contribucion{
         
         // TE DEVUELVE LOS PUNTOS RECOMENDADOS PARA QUE VOS ELIJAS...
         if (puntos != null && puntos.getPosiblesPuntosDeColocacion() != null) {
-			for (PuntoEnElMapa punto : puntos.getPosiblesPuntosDeColocacion()) {//que hace este for???????
+			for (PuntoEnElMapa punto : puntos.getPosiblesPuntosDeColocacion()) {
 				System.out.println(" " + punto.getLatitud());
 				System.out.println(punto.getLongitud());
 			}

@@ -2,7 +2,7 @@ package API;
 
 import java.util.List;
 
-import heladera.PuntoEnElMapa;
+import localizacion.*;
 
 public class ResponseRecomendacion {
    
