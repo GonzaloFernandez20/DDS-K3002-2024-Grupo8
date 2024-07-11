@@ -3,6 +3,7 @@ package contribucion;
 import java.time.LocalDate;
 
 import colaborador.Colaborador;
+import nuestras_excepciones.ColaboracionInvalida;
 
 class GestorDeContribuciones{
     /*     comentario:
@@ -19,8 +20,15 @@ class GestorDeContribuciones{
     }
 
     private void realizarContribucion(){
-        contribucionActual.procesarContribucion();
-        colaboradorActual.sumarContribucion(contribucionActual);
+        try {
+            contribucionActual.procesarContribucion();
+            colaboradorActual.sumarContribucion(contribucionActual);
+        }
+        catch (ColaboracionInvalida e){
+            e.printStackTrace();
+            System.out.print("CONTRIBUCION ABORTADA");
+            System.out.print(contribucionActual);
+        }
     }
 }
 
@@ -28,7 +36,7 @@ public abstract class Contribucion {
     protected Colaborador colaborador;
     protected LocalDate fechaDeDonacion;
 
-    public abstract void procesarContribucion();
+    public abstract void procesarContribucion() throws ColaboracionInvalida;
 
     public double puntosQueSumaColaborador() {
         return 0;

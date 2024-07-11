@@ -1,10 +1,12 @@
 package contribucion;
 
 import colaborador.Colaborador;
+import persona.PersonaHumana;
 import persona_vulnerable.PersonaSituacionVulnerable;
 
 import java.time.LocalDate;
 import java.util.List;
+import nuestras_excepciones.ColaboracionInvalida;
 
 public class RegistroDeMultiplesPersonasEnSituacionVulnerable extends Contribucion{
     private List<PersonaSituacionVulnerable> personasEnSituacionVulnerableARegistrar;
@@ -17,9 +19,21 @@ public class RegistroDeMultiplesPersonasEnSituacionVulnerable extends Contribuci
         personasEnSituacionVulnerableARegistrar.add(persona);
     }
     @Override
-    public void procesarContribucion() {
-        personasEnSituacionVulnerableARegistrar.forEach(personaEnSituacionVulnerable ->{
-        RegistroDePersonaEnSituacionVulnerable registro = new RegistroDePersonaEnSituacionVulnerable(colaborador,fechaDeDonacion,personaEnSituacionVulnerable);
-        registro.procesarContribucion();});
+    public void procesarContribucion() throws ColaboracionInvalida{
+        if(colaborador.getPersona() instanceof PersonaHumana && colaborador.getPersona().getDireccion() != null)
+        {
+            personasEnSituacionVulnerableARegistrar.forEach(personaEnSituacionVulnerable ->
+            {
+                RegistroDePersonaEnSituacionVulnerable registro = new RegistroDePersonaEnSituacionVulnerable(colaborador, fechaDeDonacion, personaEnSituacionVulnerable);
+                try {
+                    registro.procesarContribucion();
+                } catch (ColaboracionInvalida e) {
+                    throw new RuntimeException(e);
+                }
+            }   );
+        }
+         else{
+             throw new ColaboracionInvalida("El colaborador que registre a múltiples vulnerables debe ser una persona HUMANA con DIRECCION");
+        }
     }
 }

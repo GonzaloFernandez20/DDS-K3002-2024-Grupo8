@@ -4,6 +4,7 @@ import colaborador.Colaborador;
 import heladera.Heladera;
 import heladera.Vianda;
 import persona.PersonaHumana;
+import nuestras_excepciones.ColaboracionInvalida;
 
 import java.util.List;
 import java.time.LocalDate;
@@ -25,7 +26,7 @@ public class DistribucionDeVianda extends Contribucion {
     }
 
     @Override
-    public void procesarContribucion() {
+    public void procesarContribucion() throws ColaboracionInvalida{
         if(colaborador.getPersona() instanceof PersonaHumana) {
             List<Vianda> viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
             viandas.forEach(vianda -> vianda.trasladar(heladeraDestino));
@@ -33,6 +34,7 @@ public class DistribucionDeVianda extends Contribucion {
         }
         else{
             //colaboracion inválida no es persona humana
+            throw new ColaboracionInvalida("Para distribuir viandas debés ser una persona HUMANA");
         }
     }
 

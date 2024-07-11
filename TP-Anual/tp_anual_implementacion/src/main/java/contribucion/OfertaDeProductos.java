@@ -3,6 +3,7 @@ package contribucion;
 import colaborador.Colaborador;
 import persona.PersonaJuridica;
 import sistema.Sistema;
+import nuestras_excepciones.ColaboracionInvalida;
 
 import java.time.LocalDate;
 
@@ -38,11 +39,12 @@ public class OfertaDeProductos extends Contribucion {
         this.producto = producto;
     }
 
-    public void procesarContribucion(){
+    public void procesarContribucion() throws ColaboracionInvalida{
         if(colaborador.getPersona() instanceof PersonaJuridica) {
             Sistema.getInstancia().agregarOferta(this);
         }else {
             //contribucion invalida no es persona juridica
+            throw new ColaboracionInvalida("Para ofrecer productos debés se una persona JURIDICA");
         }
     }
 
