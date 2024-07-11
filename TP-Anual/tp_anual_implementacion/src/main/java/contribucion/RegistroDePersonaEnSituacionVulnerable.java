@@ -10,23 +10,19 @@ import persona_vulnerable.Vinculacion;
 import java.util.List;
 import java.time.LocalDate;
 
-public class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
-    private List<Vinculacion> tarjetasRepartidas;
+public class RegistroDePersonaEnSituacionVulnerable extends Contribucion {
+    private Vinculacion tarjetaRepartidas;
+    private PersonaSituacionVulnerable personaARegistrar;
 
-    public RegistroDePersonasEnSituacionVulnerable(Colaborador colaborador, LocalDate fechaDeDonacion, List<Vinculacion> tarjetasRepartidas) {
+    public RegistroDePersonaEnSituacionVulnerable(Colaborador colaborador, LocalDate fechaDeDonacion,PersonaSituacionVulnerable personaARegistrar) {
         super(colaborador, fechaDeDonacion);
-        this.tarjetasRepartidas = tarjetasRepartidas;
-    }
-    public PersonaSituacionVulnerable pedirDatosPersonaARegistrar(){
-        PersonaHumana persona = new PersonaHumana("Francisco","Perez",null,null,null);
-        PersonaSituacionVulnerable personaDePrueba = new PersonaSituacionVulnerable(persona, EstadoDeVivienda.poseeDomicilio,2);
-        return personaDePrueba;
+        this.tarjetaRepartidas = null;
+        this.personaARegistrar = personaARegistrar;
     }
     @Override
     public void procesarContribucion() {
         if(colaborador.getPersona() instanceof PersonaHumana) {
-            PersonaSituacionVulnerable persona = this.pedirDatosPersonaARegistrar();
-            this.darDeAlta(persona);
+            this.darDeAlta(personaARegistrar);
         }
         else{
             //contribucion invalida, no es persona humana
@@ -39,6 +35,6 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
     }
 
     public void entregarTarjeta(Vinculacion nuevaVinculacion) {
-        tarjetasRepartidas.add(nuevaVinculacion);
+        tarjetaRepartidas = nuevaVinculacion;
     }
 }
