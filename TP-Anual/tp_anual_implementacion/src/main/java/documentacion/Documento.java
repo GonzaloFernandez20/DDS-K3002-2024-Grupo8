@@ -20,14 +20,12 @@ public class Documento{
     public void setTipo(TipoDeDocumento tipo) { this.tipo = tipo; }
     public TipoDeDocumento getTipo() { return tipo;}
 
-    // CAMBIA
     public Boolean esDocumentoSegunNumeroYTipo(Documento documento){
         return documento.getTipo().equals(this.getTipo()) && documento.getNumero().equals(this.getNumero());
     }
-    // CAMBIA
 }
 
-enum Sexo {
+public enum Sexo {
     FEMENINO,
     MASCULINO,
     OTRA

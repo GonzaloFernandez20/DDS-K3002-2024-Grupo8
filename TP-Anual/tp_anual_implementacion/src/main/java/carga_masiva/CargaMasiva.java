@@ -64,26 +64,46 @@ public class CargaMasiva {
                     // Colaborador(Persona persona)
                     Colaborador colaborador = new Colaborador(persona);
                     colaborador.agregarMedioDeContacto(mailMedio);
-
-                    switch (tipoDonacion) {
-                        case "DINERO":
-                            DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, fechaContribucion, Integer.parseInt(cantidad), null);
-                            colaborador.sumarContribucion(contribucionDinero);
-                            break;
-                        case "DONACION_VIANDAS":
-                            DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, fechaContribucion, null, null);
-                            colaborador.sumarContribucion(contribucionDonarVianda);
-                            break;
-                        case "REDISTRIBUCION_VIANDAS":
-                            DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, fechaContribucion, null, null, Integer.parseInt(cantidad), null);
-                            colaborador.sumarContribucion(contribucionDistribuirVianda);
-                            break;
-                        case "ENTREGA_TARJETAS":
-                            RegistroDePersonaEnSituacionVulnerable contribucionRegistro = new RegistroDePersonaEnSituacionVulnerable(colaborador, fechaContribucion, null);
-                            colaborador.sumarContribucion(contribucionRegistro);
-                            break;
+                    if(Sistema.getInstancia().existeColaborador(colaborador)){
+                        Colaborador colaboradorExistente = Sistema.getInstancia().buscarColaborador(colaborador);
+                        switch (tipoDonacion) {
+                            case "DINERO":
+                                DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaboradorExistente, fechaContribucion, Integer.parseInt(cantidad), null);
+                                colaboradorExistente.sumarContribucion(contribucionDinero);
+                                break;
+                            case "DONACION_VIANDAS":
+                                DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaboradorExistente, fechaContribucion, null, null);
+                                colaboradorExistente.sumarContribucion(contribucionDonarVianda);
+                                break;
+                            case "REDISTRIBUCION_VIANDAS":
+                                DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaboradorExistente, fechaContribucion, null, null, Integer.parseInt(cantidad), null);
+                                colaboradorExistente.sumarContribucion(contribucionDistribuirVianda);
+                                break;
+                            case "ENTREGA_TARJETAS":
+                                RegistroDePersonaEnSituacionVulnerable contribucionRegistro = new RegistroDePersonaEnSituacionVulnerable(colaboradorExistente, fechaContribucion, null);
+                                colaboradorExistente.sumarContribucion(contribucionRegistro);
+                                break;
+                        }
+                    }else {
+                        switch (tipoDonacion) {
+                            case "DINERO":
+                                DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, fechaContribucion, Integer.parseInt(cantidad), null);
+                                colaborador.sumarContribucion(contribucionDinero);
+                                break;
+                            case "DONACION_VIANDAS":
+                                DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, fechaContribucion, null, null);
+                                colaborador.sumarContribucion(contribucionDonarVianda);
+                                break;
+                            case "REDISTRIBUCION_VIANDAS":
+                                DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, fechaContribucion, null, null, Integer.parseInt(cantidad), null);
+                                colaborador.sumarContribucion(contribucionDistribuirVianda);
+                                break;
+                            case "ENTREGA_TARJETAS":
+                                RegistroDePersonaEnSituacionVulnerable contribucionRegistro = new RegistroDePersonaEnSituacionVulnerable(colaborador, fechaContribucion, null);
+                                colaborador.sumarContribucion(contribucionRegistro);
+                                break;
+                        }
                     }
-
                     Sistema.getInstancia().actualizarSegunCargaMasiva(colaborador);
                 }
                 System.out.println();

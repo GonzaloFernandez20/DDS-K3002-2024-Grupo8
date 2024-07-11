@@ -32,6 +32,9 @@ public class Colaborador {
     public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
         return this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
     }
+    public Documento getDocumento(){
+        return persona.getDocumento();
+    }
 //es responsabilidad de la carga masiva
     public void actualizarConCargaMasiva(Colaborador colaborador) {
         if(!tieneMail(colaborador.getMediosDeContacto().get(0))) {
