@@ -9,6 +9,7 @@ import persona.Persona;
 import persona.PersonaHumana;
 import persona.PersonaJuridica;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Colaborador {
@@ -25,13 +26,22 @@ public class Colaborador {
     }
     public List<Contribucion> getContribucionesRealizadas() { return contribucionesRealizadas; }
 
-    public Boolean tieneMail(MedioDeContacto mail) {
-        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(mail));
+    public Boolean tieneMedioDeContacto(MedioDeContacto medioDeContacto) {
+        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(medioDeContacto));
     }
 
     public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
-        return this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
+        return this.getPersona().getDocumento() != null && this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
     }
+
+    public void setDocumento(Documento documento) {
+        if(documento != null) {
+            if(!persona.getDocumento().equals(documento)) {
+                persona.setDocumento(documento);
+            }
+        } else throw new RuntimeException("El documento es null");
+    }
+
     public Documento getDocumento(){
         return persona.getDocumento();
     }
@@ -43,7 +53,11 @@ public class Colaborador {
 
     public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
 
-    public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) { mediosDeContacto.add(medioDeContacto); }
+    public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) {
+        if(medioDeContacto != null)
+            mediosDeContacto.add(medioDeContacto);
+        else throw new RuntimeException("El medio de contacto es null");
+    }
 
     public void sacarMedioDeContacto(MedioDeContacto medioDeContacto) { mediosDeContacto.remove(medioDeContacto); }
 

@@ -3,6 +3,7 @@ import documentacion.Documento;
 import localizacion.Direccion;
 public abstract class Persona {
     public  Direccion direccion;
+    public Documento documento;
 
     public Persona() {
         this.direccion = null;
@@ -20,7 +21,5 @@ public abstract class Persona {
         return null;
     }
 
-    public void setDocumento(Documento documento) {
-
-    }
+    public void setDocumento(Documento documento) { this.documento = documento; }
 }

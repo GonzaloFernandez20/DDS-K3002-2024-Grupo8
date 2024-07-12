@@ -7,15 +7,16 @@ import heladera.Heladera;
 import medios_de_contacto.MedioDeContacto;
 import tecnico.Tecnico;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public final class Sistema {
     private static Sistema instancia = null;
-    List<Colaborador> colaboradores;
-    List<Heladera> heladeras;
-    List<Tecnico> tecnicos;
-    List<OfertaDeProductos> ofertas;
+    List<Colaborador> colaboradores = new ArrayList<>();;
+    List<Heladera> heladeras = new ArrayList<>();
+    List<Tecnico> tecnicos = new ArrayList<>();
+    List<OfertaDeProductos> ofertas = new ArrayList<>();
     static int contadorDeVinculaciones = 0;
     float monto;
 
@@ -27,6 +28,8 @@ public final class Sistema {
         return contadorDeVinculaciones;
     }
 
+    public float getMonto() { return monto; }
+
     public static Sistema getInstancia() {
         if (instancia == null) {
             instancia = new Sistema();
@@ -34,11 +37,23 @@ public final class Sistema {
         return instancia;
     }
 
-    public void actualizarSegunCargaMasiva(Colaborador colaborador) {
+    public void actualizarPorCargaMasiva(Colaborador colaborador) {
         MedioDeContacto unMail = colaborador.getMediosDeContacto().get(0);
         Documento documento = colaborador.getPersona().getDocumento();
-        if(this.existeColaborador(colaborador)){
-           Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
+
+        Boolean estaEnElSistema = false;
+
+        if(this.existeColaborador(colaborador)) {
+            Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
+            if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().get(0))) {
+                colaboradorHallado.setDocumento(documento);
+                colaboradorHallado.agregarMedioDeContacto(unMail);
+            }
+            if(colaboradorHallado.getPersona().getDocumento() == null) {
+                colaboradorHallado.getPersona().setDocumento(colaborador.getPersona().getDocumento());
+            }
+        } else {
+            colaboradores.add(colaborador);
         }
     }
 
@@ -75,18 +90,20 @@ public final class Sistema {
     }
 
     public boolean existeColaborador(Colaborador colaborador) {
-        return Objects.nonNull(this.buscarColaborador(colaborador));
+        return this.buscarColaborador(colaborador) != null;
     }
 
-    public Colaborador buscarColaborador(Colaborador colaborador) {
-        //return colaboradores.stream().findFirst(unColaborador ->unColaborador.tieneMail(colaborador.getMediosDeContacto().get(0)) || unColaborador.tieneDocumentoSegunNumeroYTipo(colaborador.getDocumento()));
-        Colaborador colaboradorHallado = null;
+    public Colaborador buscarColaborador(Colaborador colaboradorBuscado) {
         for (int i = 0; i < colaboradores.size(); i++) {
-            if (colaboradores.get(i).tieneMail(colaborador.getMediosDeContacto().get(0)) ||
-                    colaboradores.get(i).tieneDocumentoSegunNumeroYTipo(colaborador.getDocumento())) {
-                colaboradorHallado =  colaboradores.get(i);
+            if(colaboradores.get(i).getDocumento() != null && colaboradorBuscado.tieneDocumentoSegunNumeroYTipo(colaboradores.get(i).getDocumento())) {
+                return colaboradores.get(i);
+            }
+
+            if(!colaboradores.get(i).getMediosDeContacto().isEmpty() && colaboradorBuscado.tieneMedioDeContacto(colaboradores.get(i).getMediosDeContacto().getFirst())) {
+                return colaboradores.get(i);
             }
         }
-        return colaboradorHallado;
+
+        return null;
     }
 }
