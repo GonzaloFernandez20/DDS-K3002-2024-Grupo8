@@ -1,23 +1,32 @@
 package seguridad;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
-import java. lang. Boolean;
-import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.List;
 
+public class Validador { // -> Deberia ser una clase singleton y laburar con 1 en todo el sistema
+    private static Validador instancia = null;
+    private static List<Criterio> LISTA_CRITERIOS; // -> Lista estática y constante de objetos Criterio
 
-public class Validador {
-    String contrasenia;
-    static List<Criterio> criterios;
-
-    public Validador(String contrasenia, List<Criterio> criterios) {
-        this.contrasenia = contrasenia;
-        Validador.criterios = criterios;
+    private Validador(){ // Constructor
+        instanciarCriteriosDeValidacion();
     }
 
-    public boolean validarRegistro(List<Criterio> criterios, String contrasenia) {
-        return criterios.stream().allMatch(criterio -> criterio.generarCriterio(contrasenia));
+    public static Validador getInstancia() {
+        if (instancia == null) {
+            instancia = new Validador();
+        }
+        return instancia;
+    }
+    // ----------------------------------------------------------------
+    public boolean validarConstrasenia (String contrasenia) {
+        return LISTA_CRITERIOS.stream().allMatch(criterio -> criterio.criterioSeguridad(contrasenia));
+    }
+
+    // <-------------- FUNCIONES AUXILIARES -------------->
+    private void instanciarCriteriosDeValidacion(){
+        LISTA_CRITERIOS = Arrays.asList(
+            new CumpleConElLargo(),
+            new EsContraseniaFuerte()
+        );
     }
 }
