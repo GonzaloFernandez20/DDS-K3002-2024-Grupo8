@@ -14,8 +14,8 @@ import nuestras_excepciones.ColaboracionInvalida;
 
 public class HacerseCargoDeHeladera extends Contribucion{
 
-    private Heladera heladeraACargo;
-    double coeficiente;
+    private final Heladera heladeraACargo;
+    double coeficiente; // Necesitas esto?
 
     public HacerseCargoDeHeladera(Colaborador colaborador, LocalDate fechaDeDonacion, Heladera heladeraACargo) {
         super(colaborador, fechaDeDonacion);

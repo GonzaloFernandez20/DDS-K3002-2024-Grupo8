@@ -1,34 +1,28 @@
 package seguridad;
 
-import seguridad.Criterio;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class EsContraseniaFuerte extends Criterio{
     static File listaDeConstrasenias = new File("src/main/java/seguridad/10KPasswords.txt");
 
     @Override
-    public boolean generarCriterio(String contrasenia) {
+    public boolean criterioSeguridad(String contrasenia) {
         boolean esFuerte = true;
-        BufferedReader bufferDeLectura;
 
-        try {
-
+        try(BufferedReader bufferDeLectura = new BufferedReader(new FileReader(listaDeConstrasenias))) {
+                // Bloque "try-with-resources" para asegurar que el buffer se cierre automaticamente despues de su uso.
             if (listaDeConstrasenias.exists()) {
-                bufferDeLectura = new BufferedReader(new FileReader(listaDeConstrasenias));
 
                 String lineaLeida;
 
                 while((lineaLeida = bufferDeLectura.readLine()) != null) {
 
-
-                    String[] palabras = lineaLeida.split(" "); //Separa todas las palabras en el espacio
-
-                    for(int i = 0 ; i < palabras.length ; i++) {
-
-                        if (palabras[i].equals(contrasenia)) {
+                    String[] palabras = lineaLeida.split(" "); // -> Separa todas las palabras en el espacio
+                    for (String palabra : palabras) {
+                        if (palabra.equals(contrasenia)) {
                             esFuerte = false;
                             break;
                         }
@@ -37,8 +31,8 @@ public class EsContraseniaFuerte extends Criterio{
             }else {
                 throw new IllegalAccessError("No existe el archivo.");
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException("Error al cargar la lista de contraseñas comunes.", e);
         }
         return esFuerte;
     }
