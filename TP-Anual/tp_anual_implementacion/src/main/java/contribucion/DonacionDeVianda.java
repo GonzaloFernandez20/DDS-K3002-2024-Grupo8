@@ -10,13 +10,11 @@ import java.time.LocalDate;
 public class DonacionDeVianda extends Contribucion {
     private List<Vianda> viandasDonadas;
     private Heladera heladera;
-    double coeficiente;
 
     public DonacionDeVianda(Colaborador colaborador, LocalDate fechaDeDonacion, List<Vianda> viandasDonadas, Heladera heladera) {
         super(colaborador, fechaDeDonacion);
         this.viandasDonadas = viandasDonadas;
         this.heladera = heladera;
-        this.coeficiente = 1.5;
     }
 
     public void agregarViandaADonacion(Vianda vianda) {
@@ -28,7 +26,8 @@ public class DonacionDeVianda extends Contribucion {
         heladera.recibirViandas(viandasDonadas);
     }
 
+    @Override
     public double puntosQueSumaColaborador() {
-        return viandasDonadas.size() * coeficiente;
+        return viandasDonadas.size() * 1.5;
     }
 }

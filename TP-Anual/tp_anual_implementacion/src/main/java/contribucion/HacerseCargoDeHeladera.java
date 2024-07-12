@@ -14,18 +14,20 @@ import sistema.Sistema;
 public class HacerseCargoDeHeladera extends Contribucion{
 
     private final Heladera heladeraACargo;
-    double coeficiente; // Necesitas esto?
 
     public HacerseCargoDeHeladera(Colaborador colaborador, LocalDate fechaDeDonacion, Heladera heladeraACargo) {
         super(colaborador, fechaDeDonacion);
         this.heladeraACargo = heladeraACargo;
-        this.coeficiente = 0.5;
     }
 
     @Override
     public void procesarLaContribucion() {
         heladeraACargo.setColaborador((PersonaJuridica) colaborador);
         Sistema.getInstancia().darDeAltaHeladera(heladeraACargo);
+    }
+    @Override
+    public double puntosQueSumaColaborador() {
+        return 5;
     }
 
     // VALORES DE EJEMPLO DE LA MOCK API:
