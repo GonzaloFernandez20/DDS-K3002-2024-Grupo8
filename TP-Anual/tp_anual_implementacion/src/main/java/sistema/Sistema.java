@@ -30,6 +30,8 @@ public final class Sistema {
 
     public float getMonto() { return monto; }
 
+    public List<OfertaDeProductos> getOfertas() { return ofertas; }
+    
     public static Sistema getInstancia() {
         if (instancia == null) {
             instancia = new Sistema();
