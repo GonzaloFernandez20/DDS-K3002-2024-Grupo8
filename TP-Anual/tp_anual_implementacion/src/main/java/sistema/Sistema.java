@@ -40,12 +40,14 @@ public final class Sistema {
     public void actualizarPorCargaMasiva(Colaborador colaborador) {
         MedioDeContacto unMail = colaborador.getMediosDeContacto().get(0);
         Documento documento = colaborador.getPersona().getDocumento();
+
         Boolean estaEnElSistema = false;
 
         if(this.existeColaborador(colaborador)) {
             Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
             if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().get(0))) {
-                colaboradorHallado.agregarMedioDeContacto(colaborador.getMediosDeContacto().getFirst());
+                colaboradorHallado.setDocumento(documento);
+                colaboradorHallado.agregarMedioDeContacto(unMail);
             }
             if(colaboradorHallado.getPersona().getDocumento() == null) {
                 colaboradorHallado.getPersona().setDocumento(colaborador.getPersona().getDocumento());

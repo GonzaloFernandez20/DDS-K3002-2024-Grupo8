@@ -9,6 +9,7 @@ import persona.Persona;
 import persona.PersonaHumana;
 import persona.PersonaJuridica;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Colaborador {
@@ -33,19 +34,16 @@ public class Colaborador {
         return this.getPersona().getDocumento() != null && this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
     }
 
-    public Documento getDocumento(){
-        return persona.getDocumento();
+    public void setDocumento(Documento documento) {
+        if(documento != null) {
+            if(!persona.getDocumento().equals(documento)) {
+                persona.setDocumento(documento);
+            }
+        } else throw new RuntimeException("El documento es null");
     }
 
-    public void actualizarConCargaMasiva(Colaborador colaborador) {
-        if(!tieneMedioDeContacto(colaborador.getMediosDeContacto().get(0))) {
-            mediosDeContacto.add(colaborador.getMediosDeContacto().get(0));
-        }
-        if(!tieneDocumentoSegunNumeroYTipo(colaborador.getPersona().getDocumento())) {
-            persona.setDocumento(colaborador.getPersona().getDocumento());
-        }
-
-        colaborador.sumarContribucion(colaborador.getContribucionesRealizadas().get(0));
+    public Documento getDocumento(){
+        return persona.getDocumento();
     }
 
     public void setDireccion(Direccion direccion) { this.persona.setDireccion(direccion); }
@@ -55,7 +53,11 @@ public class Colaborador {
 
     public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
 
-    public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) { mediosDeContacto.add(medioDeContacto); }
+    public void agregarMedioDeContacto(MedioDeContacto medioDeContacto) {
+        if(medioDeContacto != null)
+            mediosDeContacto.add(medioDeContacto);
+        else throw new RuntimeException("El medio de contacto es null");
+    }
 
     public void sacarMedioDeContacto(MedioDeContacto medioDeContacto) { mediosDeContacto.remove(medioDeContacto); }
 

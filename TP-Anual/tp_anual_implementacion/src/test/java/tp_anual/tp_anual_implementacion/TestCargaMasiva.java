@@ -14,6 +14,7 @@ import sistema.Sistema;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static documentacion.Sexo.MASCULINO;
 import static documentacion.TipoDeDocumento.DNI;
@@ -32,6 +33,7 @@ class TestsCargaMasiva {
     CorreoElectronico mail2;
     Persona persona2;
     Colaborador colaborador2;
+    Documento documentoPrueba;
 
     @BeforeEach
     void setUp() {
@@ -42,17 +44,20 @@ class TestsCargaMasiva {
         colaborador2 = new Colaborador(persona2);
         sistema.darDeAltaColaborador(colaborador2);
 
-        cargaMasiva = new CargaMasiva(getClass().getClassLoader().getResource("CSVCorrecto.csv").getPath());
+        cargaMasiva = new CargaMasiva(Objects.requireNonNull(getClass().getClassLoader().getResource("CSVCorrecto.csv")).getPath());
         cargaMasiva.migrar();
 
         documento1 = new Documento(DNI, "40555555", null);
         persona1 = new PersonaHumana("Ana", "Días", null, documento1, null);
         colaborador1 = new Colaborador(persona1);
+        // sistema.darDeAltaColaborador(colaborador1);
+        documentoPrueba = new Documento(DNI, "12345678", null);
     }
 
     @Test
     void ValidacionesPresenciaEnElSistema() {
+        // setUp();
         assertTrue(sistema.existeColaborador(colaborador1), "El colaborador de la primera linea del CSV existe.");
-        assertTrue(colaborador2.tieneDocumentoSegunNumeroYTipo(new Documento(DNI, "12345678", null)), "Un colaborador existente en el sistema tiene datos nuvos gracias a la migracion.");
+        assertTrue(colaborador2.tieneDocumentoSegunNumeroYTipo(documentoPrueba), "Un colaborador existente en el sistema tiene datos nuevos gracias a la migracion.");
     }
 }

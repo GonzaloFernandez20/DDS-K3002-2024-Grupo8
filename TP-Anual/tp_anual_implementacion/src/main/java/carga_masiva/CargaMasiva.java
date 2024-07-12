@@ -52,7 +52,7 @@ public class CargaMasiva {
                     String cantidad = partes[7];
 
                     TipoDeDocumento tipoDoc = this.castearTipoDoc(tipoDocString);
-
+// hay que ver que los datos que vienen del archivo cumplan ciertas condiciones y q no haya atributos nulos
                     MedioDeContacto mailMedio = new MedioDeContacto(mail);
                     Documento documento = new Documento(tipoDoc, doc, null);
                     PersonaHumana persona = new PersonaHumana(nombre, apellido, null,documento,null);
