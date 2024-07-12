@@ -23,9 +23,3 @@ public class PersonaJuridica extends Persona {
 
 }
 
-enum TipoOrganizacion {
-    gubernamental,
-    ong,
-    empresa,
-    institucion
-}

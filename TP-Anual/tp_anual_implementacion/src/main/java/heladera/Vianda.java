@@ -1,5 +1,6 @@
 package heladera;
 
+import colaborador.Colaborador;
 import persona.PersonaHumana;
 
 import java.util.ArrayList;
@@ -10,10 +11,10 @@ public class Vianda {
     private String tipoDeComida;
     private LocalDate fechaDeCaducidad;
     private LocalDate fechaDeDonacion;
-    private PersonaHumana colaborador;
+    private Colaborador colaborador;
     private Heladera heladera;
-    private Float calorias;
-    private Float peso;
+    private String calorias;
+    private String peso;
     private EstadoVianda estado;
 
     public void trasladar(Heladera heladeraNueva){
@@ -39,7 +40,7 @@ public class Vianda {
         return fechaDeDonacion;
     }
 
-    public PersonaHumana getColaborador() {
+    public Colaborador getColaborador() {
         return colaborador;
     }
 
@@ -47,11 +48,11 @@ public class Vianda {
         return heladera;
     }
 
-    public Float getCalorias() {
+    public String getCalorias() {
         return calorias;
     }
 
-    public Float getPeso() {
+    public String getPeso() {
         return peso;
     }
 
@@ -59,7 +60,7 @@ public class Vianda {
         return estado;
     }
 
-    public Vianda(String tipoDeComida, LocalDate fechaDeCaducidad, LocalDate fechaDeDonacion, PersonaHumana colaborador, Heladera heladera, Float calorias, Float peso, EstadoVianda estado) {
+    public Vianda(String tipoDeComida, LocalDate fechaDeCaducidad, LocalDate fechaDeDonacion, Colaborador colaborador, Heladera heladera, String calorias, String peso, EstadoVianda estado) {
         this.tipoDeComida = tipoDeComida;
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.fechaDeDonacion = fechaDeDonacion;
@@ -71,8 +72,3 @@ public class Vianda {
     }
 }
 
-enum EstadoVianda {
-    entregada,
-    noEntregada,
-    vencida
-}

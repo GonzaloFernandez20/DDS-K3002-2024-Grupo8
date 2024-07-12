@@ -37,20 +37,8 @@ public final class Sistema {
     public void actualizarSegunCargaMasiva(Colaborador colaborador) {
         MedioDeContacto unMail = colaborador.getMediosDeContacto().get(0);
         Documento documento = colaborador.getPersona().getDocumento();
-        Boolean estaEnElSistema = false;
-
-        // Estaria bueno tener una lista de personas, en caso que ya exista la PersonaHumana del Colaborador nuevo
-        // Por ejemplo: Tenemos dentro del sistema un tecnico que antes de la carga masiva era colaborador,
-        // por lo que ya existe en el sistema
-        for (int i = 0; i < colaboradores.size(); i++) {
-            if (colaboradores.get(i).tieneMail(unMail) || colaboradores.get(i).tieneDocumentoSegunNumeroYTipo(documento)) {
-                colaboradores.get(i).actualizarConCargaMasiva(colaborador);
-                estaEnElSistema = true;
-            }
-        }
-
-        if (!estaEnElSistema) {
-            colaboradores.add(colaborador);
+        if(this.existeColaborador(colaborador)){
+           Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
         }
     }
 

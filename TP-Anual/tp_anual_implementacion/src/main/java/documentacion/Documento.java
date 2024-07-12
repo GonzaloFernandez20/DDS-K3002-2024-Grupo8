@@ -25,8 +25,3 @@ public class Documento{
     }
 }
 
-public enum Sexo {
-    FEMENINO,
-    MASCULINO,
-    OTRA
-}

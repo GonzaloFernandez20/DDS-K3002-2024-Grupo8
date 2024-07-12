@@ -35,17 +35,7 @@ public class Colaborador {
     public Documento getDocumento(){
         return persona.getDocumento();
     }
-//es responsabilidad de la carga masiva
-    public void actualizarConCargaMasiva(Colaborador colaborador) {
-        if(!tieneMail(colaborador.getMediosDeContacto().get(0))) {
-            mediosDeContacto.add(colaborador.getMediosDeContacto().get(0));
-        }
-        if(!tieneDocumentoSegunNumeroYTipo(colaborador.getPersona().getDocumento())) {
-            persona.setDocumento(colaborador.getPersona().getDocumento());
-        }
 
-        colaborador.sumarContribucion(colaborador.getContribucionesRealizadas().get(0));
-    }
     public void setDireccion(Direccion direccion) { this.persona.setDireccion(direccion); }
     public Direccion getDireccion() { return persona.getDireccion();}
 
