@@ -25,19 +25,20 @@ public class Colaborador {
     }
     public List<Contribucion> getContribucionesRealizadas() { return contribucionesRealizadas; }
 
-    public Boolean tieneMail(MedioDeContacto mail) {
-        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(mail));
+    public Boolean tieneMedioDeContacto(MedioDeContacto medioDeContacto) {
+        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(medioDeContacto));
     }
 
     public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
-        return this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
+        return this.getPersona().getDocumento() != null && this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
     }
+
     public Documento getDocumento(){
         return persona.getDocumento();
     }
-//es responsabilidad de la carga masiva
+
     public void actualizarConCargaMasiva(Colaborador colaborador) {
-        if(!tieneMail(colaborador.getMediosDeContacto().get(0))) {
+        if(!tieneMedioDeContacto(colaborador.getMediosDeContacto().get(0))) {
             mediosDeContacto.add(colaborador.getMediosDeContacto().get(0));
         }
         if(!tieneDocumentoSegunNumeroYTipo(colaborador.getPersona().getDocumento())) {
@@ -46,6 +47,7 @@ public class Colaborador {
 
         colaborador.sumarContribucion(colaborador.getContribucionesRealizadas().get(0));
     }
+
     public void setDireccion(Direccion direccion) { this.persona.setDireccion(direccion); }
     public Direccion getDireccion() { return persona.getDireccion();}
 

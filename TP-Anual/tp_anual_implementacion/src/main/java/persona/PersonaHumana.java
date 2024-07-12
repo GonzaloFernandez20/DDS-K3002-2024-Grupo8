@@ -10,8 +10,8 @@ public class PersonaHumana extends Persona {
     String nombre;
     String apellido;
     Date fechaDeNacimiento;
-
     Documento documento;
+
     public PersonaHumana(String nombre, String apellido, Date fechaDeNacimiento,Documento documento, Direccion direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -43,11 +43,11 @@ public class PersonaHumana extends Persona {
     public void setFechaDeNacimiento(Date fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
-    @Override
+
     public Documento getDocumento() {
         return documento;
     }
-    @Override
+
     public void setDocumento(Documento documento) {
         this.documento = documento;
     }

@@ -21,12 +21,6 @@ public class Documento{
     public TipoDeDocumento getTipo() { return tipo;}
 
     public Boolean esDocumentoSegunNumeroYTipo(Documento documento){
-        return documento.getTipo().equals(this.getTipo()) && documento.getNumero().equals(this.getNumero());
+        return documento != null && this.getTipo().equals(documento.getTipo()) && this.getNumero().equals(documento.getNumero());
     }
-}
-
-public enum Sexo {
-    FEMENINO,
-    MASCULINO,
-    OTRA
 }
