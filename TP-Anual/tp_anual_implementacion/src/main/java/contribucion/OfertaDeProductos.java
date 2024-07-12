@@ -37,7 +37,8 @@ public class OfertaDeProductos extends Contribucion {
         this.producto = producto;
     }
 
-    public void contribuir(){
+    @Override
+    public void procesarLaContribucion(){
         Sistema.getInstancia().agregarOferta(this);
     }
 

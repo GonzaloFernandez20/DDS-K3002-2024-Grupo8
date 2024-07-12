@@ -19,7 +19,7 @@ public class Validador { // -> Deberia ser una clase singleton y laburar con 1 e
     }
     // ----------------------------------------------------------------
     public boolean validarConstrasenia (String contrasenia) {
-        return LISTA_CRITERIOS.stream().allMatch(criterio -> criterio.criterioSeguridad(contrasenia));
+        return LISTA_CRITERIOS.stream().allMatch(criterio -> criterio.aplicarCriterioSeguridad(contrasenia));
     }
 
     // <-------------- FUNCIONES AUXILIARES -------------->

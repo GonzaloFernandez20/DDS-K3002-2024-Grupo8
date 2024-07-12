@@ -1,7 +1,7 @@
 package seguridad;
 
 public abstract class Criterio {
-    public boolean criterioSeguridad(String contrasenia) {
+    public boolean aplicarCriterioSeguridad(String contrasenia) {
         return true;
     }
 }

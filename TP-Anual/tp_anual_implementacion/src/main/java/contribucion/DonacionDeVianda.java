@@ -24,7 +24,7 @@ public class DonacionDeVianda extends Contribucion {
     }
 
     @Override
-    public void contribuir() {
+    public void procesarLaContribucion() {
         heladera.recibirViandas(viandasDonadas);
     }
 

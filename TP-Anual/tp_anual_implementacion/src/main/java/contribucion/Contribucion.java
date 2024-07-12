@@ -3,24 +3,25 @@ package contribucion;
 import java.time.LocalDate;
 
 import colaborador.Colaborador;
+import seguridad.Validador;
 
 class GestorDeContribuciones{
     /*     comentario:
                     Este recibe ya instanciada una contribucion y se encarga de efectuar();
                     Se decide que al igual que un colaborador, su instanciacion depende de un form. */
-    //estos atributos deberían ser pétreos porque la asociación entre colaborador y contribución no puede cambiar
-    private final Contribucion contribucionActual;
-    private final Colaborador colaboradorActual;
+    private static GestorDeContribuciones instancia = null;
 
-    //Inyector de dependencias ->constructor
-    public GestorDeContribuciones(Contribucion contribucion, Colaborador colaborador){
-        this.contribucionActual = contribucion;
-        this.colaboradorActual = colaborador;
+    private GestorDeContribuciones(){ }
+    public static GestorDeContribuciones getInstancia() {
+        if (instancia == null) {
+            instancia = new GestorDeContribuciones();
+        }
+        return instancia;
     }
 
-    private void realizarContribucion(){
-        contribucionActual.contribuir();
-        colaboradorActual.sumarContribucion(contribucionActual);
+    private void realizarContribucion(Contribucion contribucion, Colaborador colaborador){
+        contribucion.procesarLaContribucion();
+        colaborador.sumarContribucion(contribucion);
     }
 }
 
@@ -28,11 +29,9 @@ public abstract class Contribucion {
     protected Colaborador colaborador;
     protected LocalDate fechaDeDonacion;
 
-    public abstract void contribuir();
+    public abstract void procesarLaContribucion();
 
-    public double puntosQueSumaColaborador() {
-        return 0;
-    }
+    public abstract double puntosQueSumaColaborador();
 
     public Contribucion(Colaborador colaborador, LocalDate fechaDeDonacion) {
         this.colaborador = colaborador;

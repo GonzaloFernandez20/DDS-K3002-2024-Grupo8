@@ -12,7 +12,6 @@ public class DistribucionDeVianda extends Contribucion {
     private Heladera heladeraDestino;
     private int cantDeViandas;
     private MotivoDeDistribucion motivo;
-    double coeficiente;
 
     public DistribucionDeVianda(Colaborador colaborador, LocalDate fechaDeDonacion, Heladera heladeraDeOrigen, Heladera heladeraDestino, int cantDeViandas, MotivoDeDistribucion motivo) {
         super(colaborador, fechaDeDonacion);
@@ -20,17 +19,17 @@ public class DistribucionDeVianda extends Contribucion {
         this.heladeraDeOrigen = heladeraDeOrigen;
         this.cantDeViandas = cantDeViandas;
         this.motivo = motivo;
-        this.coeficiente = 1;
     }
 
     @Override
-    public void contribuir() {
+    public void procesarLaContribucion() {
         List<Vianda> viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
         viandas.forEach(vianda -> vianda.trasladar(heladeraDestino));
         heladeraDestino.recibirViandas(viandas);
     }
 
+    @Override
     public double puntosQueSumaColaborador() {
-        return cantDeViandas * coeficiente;
+        return cantDeViandas;
     }
 }

@@ -16,7 +16,7 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
     }
 
     @Override
-    public void contribuir() {
+    public void procesarLaContribucion() {
 
     }
 

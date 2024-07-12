@@ -9,7 +9,7 @@ public class EsContraseniaFuerte extends Criterio{
     static File listaDeConstrasenias = new File("src/main/java/seguridad/10KPasswords.txt");
 
     @Override
-    public boolean criterioSeguridad(String contrasenia) {
+    public boolean aplicarCriterioSeguridad(String contrasenia) {
         boolean esFuerte = true;
 
         try(BufferedReader bufferDeLectura = new BufferedReader(new FileReader(listaDeConstrasenias))) {

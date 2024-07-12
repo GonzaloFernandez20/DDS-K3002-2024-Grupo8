@@ -23,7 +23,7 @@ public class HacerseCargoDeHeladera extends Contribucion{
     }
 
     @Override
-    public void contribuir() {
+    public void procesarLaContribucion() {
         heladeraACargo.setColaborador((PersonaJuridica) colaborador);
         Sistema.getInstancia().darDeAltaHeladera(heladeraACargo);
     }
