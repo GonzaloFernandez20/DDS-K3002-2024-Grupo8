@@ -15,7 +15,7 @@ public class RegistroDeMultiplesPersonasEnSituacionVulnerable extends Contribuci
         super(colaborador,fechaDeContribucion);
         this.personasEnSituacionVulnerableARegistrar = personasEnSituacionVulnerableARegistrar;
     }
-    public void sumarPersonasEnSituacionVulnerableARegistrar(PersonaSituacionVulnerable persona) {
+    public void sumarPersonaEnSituacionVulnerableARegistrar(PersonaSituacionVulnerable persona) {
         personasEnSituacionVulnerableARegistrar.add(persona);
     }
     @Override

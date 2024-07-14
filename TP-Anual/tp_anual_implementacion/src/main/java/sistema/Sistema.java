@@ -99,7 +99,7 @@ public final class Sistema {
                 return colaboradores.get(i);
             }
 
-            if(!colaboradores.get(i).getMediosDeContacto().isEmpty() && colaboradorBuscado.tieneMedioDeContacto(colaboradores.get(i).getMediosDeContacto().getFirst())) {
+            if(!colaboradores.get(i).getMediosDeContacto().isEmpty() && colaboradorBuscado.tieneMedioDeContacto(colaboradores.get(i).getMediosDeContacto().get(0))) {
                 return colaboradores.get(i);
             }
         }
