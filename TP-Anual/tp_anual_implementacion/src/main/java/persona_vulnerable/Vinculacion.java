@@ -15,7 +15,7 @@ public class Vinculacion {
         fechaRegistro = fecha;
         this.vincular(personaSituacionVulnerable);
         tarjetaEntregada = new AccesoAHeladeras(personaSituacionVulnerable);
-        personaSituacionVulnerable = personaSituacionVulnerable;
+        this.personaSituacionVulnerable = personaSituacionVulnerable;
     }
 
     public Colaborador getColaboradorQueRegistro() {

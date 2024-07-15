@@ -30,10 +30,10 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
     public void procesarContribucion() throws ColaboracionInvalida{
         if(colaborador.getPersona().getDireccion() != null)
         {
-            personasEnSituacionVulnerableARegistrar.forEach(this::generarRegistro);
+            personasEnSituacionVulnerableARegistrar.forEach(personaVulnerable -> this.generarRegistro(personaVulnerable));
         }
          else{
-             throw new ColaboracionInvalida("El colaborador que registre a múltiples vulnerables debe tener     DIRECCION");
+             throw new ColaboracionInvalida("El colaborador que registre a múltiples vulnerables debe tener DIRECCION");
         }
     }
     public void generarRegistro(PersonaSituacionVulnerable personaSituacionVulnerable) {

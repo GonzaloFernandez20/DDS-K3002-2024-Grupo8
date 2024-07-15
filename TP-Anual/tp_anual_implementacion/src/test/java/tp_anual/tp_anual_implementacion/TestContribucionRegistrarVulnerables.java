@@ -84,6 +84,7 @@ public class TestContribucionRegistrarVulnerables{
         persona2 = new PersonaHumana("Sofia",    "Cachero", null, null, null);
         persona3 = new PersonaHumana("Abril",    "Vallecillo", null, null, null);
         persona4 = new PersonaHumana("Melina",   "Bugallo", null, null, null);
+
         vulnerable0 = new PersonaSituacionVulnerable(persona0, EstadoDeVivienda.situacionDeCalle,  0);
         vulnerable1 = new PersonaSituacionVulnerable(persona1, EstadoDeVivienda.situacionDeCalle,  1);
         vulnerable2 = new PersonaSituacionVulnerable(persona2, EstadoDeVivienda.situacionDeCalle,  2);
@@ -107,11 +108,11 @@ public class TestContribucionRegistrarVulnerables{
         contribucion0 = new RegistroDePersonasEnSituacionVulnerable(colaborador0, LocalDate.of(2024,7,14), vulnerablesARegistrar);
         contribucion1 = new RegistroDePersonasEnSituacionVulnerable(colaborador1, LocalDate.of(2024,7,14), vulnerablesARegistrar);
 
-        vinculacion0 = new Vinculacion(colaborador0,vulnerable0, LocalDate.of(2024,7,14));
-        vinculacion1 = new Vinculacion(colaborador0,vulnerable1, LocalDate.of(2024,7,15));
-        vinculacion2 = new Vinculacion(colaborador0,vulnerable2, LocalDate.of(2024,7,16));
-        vinculacion3 = new Vinculacion(colaborador0,vulnerable3, LocalDate.of(2024,7,17));
-        vinculacion4 = new Vinculacion(colaborador0,vulnerable4, LocalDate.of(2024,7,18));
+        vinculacion0 = new Vinculacion(colaborador0,vulnerable0, LocalDate.now());
+        vinculacion1 = new Vinculacion(colaborador0,vulnerable1, LocalDate.now());
+        vinculacion2 = new Vinculacion(colaborador0,vulnerable2, LocalDate.now());
+        vinculacion3 = new Vinculacion(colaborador0,vulnerable3, LocalDate.now());
+        vinculacion4 = new Vinculacion(colaborador0,vulnerable4, LocalDate.now());
 
         vinculacionesEsperadas.add(vinculacion0);
         vinculacionesEsperadas.add(vinculacion1);
@@ -136,5 +137,11 @@ public class TestContribucionRegistrarVulnerables{
         //No me deja usar un ForEach con el MatchAny adentro así que tuve que armar el choclo este
         }
         assertTrue(rtaAnterior,"Las vinculaciones dan como esperamos que den");
+    }
+    @Test
+    void elColaboradorNoTieneDireccion(){
+        Throwable ex = assertThrows(ColaboracionInvalida.class,() -> contribucion1.procesarContribucion());
+        assertEquals(ex.getMessage(),
+                "El colaborador que registre a múltiples vulnerables debe tener DIRECCION");
     }
 }
