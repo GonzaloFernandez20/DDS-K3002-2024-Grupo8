@@ -1,6 +1,7 @@
 package heladera;
 
 import colaborador.Colaborador;
+import nuestras_excepciones.ViandaRechazada;
 import persona.PersonaHumana;
 
 import java.util.ArrayList;
@@ -17,7 +18,11 @@ public class Vianda {
     private String peso;
     private EstadoVianda estado;
 
-    public void trasladar(Heladera heladeraNueva){
+    public void setEstado(EstadoVianda estado) {
+        this.estado = estado;
+    }
+
+    public void trasladar(Heladera heladeraNueva) throws ViandaRechazada {
         heladera = heladeraNueva;
         List<Vianda> vianda = new ArrayList<>();
         vianda.add(this);
@@ -57,6 +62,7 @@ public class Vianda {
     }
 
     public EstadoVianda getEstado() {
+        if(this.fechaDeCaducidad.isBefore(LocalDate.now())){this.setEstado(EstadoVianda.vencida);}
         return estado;
     }
 

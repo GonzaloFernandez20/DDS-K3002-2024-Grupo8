@@ -11,8 +11,7 @@ import medios_de_contacto.CorreoElectronico;
 import contribucion.DonacionDeDinero;
 import contribucion.DonacionDeVianda;
 import contribucion.DistribucionDeVianda;
-import contribucion.RegistroDePersonaEnSituacionVulnerable;
-import contribucion.RegistroDeMultiplesPersonasEnSituacionVulnerable;
+import contribucion.RegistroDePersonasEnSituacionVulnerable;
 
 import com.opencsv.exceptions.CsvValidationException;
 import com.opencsv.CSVReader;
@@ -91,7 +90,7 @@ public class CargaMasiva {
                 colaborador.sumarContribucion(contribucionDistribuirVianda);
                 break;
             case "ENTREGA_TARJETAS":
-                RegistroDePersonaEnSituacionVulnerable contribucionRegistro = new RegistroDePersonaEnSituacionVulnerable(colaborador, fechaContribucion, null);
+                RegistroDePersonasEnSituacionVulnerable contribucionRegistro = new RegistroDePersonasEnSituacionVulnerable(colaborador, fechaContribucion, null);
                 colaborador.sumarContribucion(contribucionRegistro);
                 break;
         }

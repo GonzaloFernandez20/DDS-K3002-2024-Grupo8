@@ -2,6 +2,8 @@ package heladera;
 
 import colaborador.Colaborador;
 import localizacion.Ubicacion;
+import nuestras_excepciones.FallaHeladera;
+import nuestras_excepciones.ViandaRechazada;
 import java.util.*;
 import java.util.Date;
 import java.util.Timer;
@@ -37,9 +39,17 @@ public class Heladera {
     public void setUltimaTemperaturaRegistrada(Float temperatura) { this.ultimaTemperaturaRegistrada = temperatura; }
     public Float getUltimaTemperaturaRegistrada() { return ultimaTemperaturaRegistrada; }
 
-    public void recibirViandas(List<Vianda> viandas) { this.viandasEnStock.addAll(viandas); }
+    public void recibirViandas(List<Vianda> viandas) throws ViandaRechazada {
+        if(viandasEnStock.size() + viandas.size() <= capacidadDeViandas){
+            this.viandasEnStock.addAll(viandas);
+        }
+        else {
+            throw new ViandaRechazada("La heladera está llena");
+        }
+    }
     
-    public List<Vianda> retirarViandas(int cantidadARetirar) {
+    public List<Vianda> retirarViandas(int cantidadARetirar) throws FallaHeladera {
+        if(cantidadARetirar < viandasEnStock.size()){
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();
         for (int i = 0; i < cantidadARetirar; i++) {
@@ -49,6 +59,10 @@ public class Heladera {
             viandasEnStock.remove(vianda);
         }
         return viandasARetirar;
+        }
+        else {
+            throw new FallaHeladera("Se quisieron retirar mas viandas que las que había en la heladera");
+        }
     }
 
     public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); }

@@ -39,13 +39,8 @@ public class OfertaDeProductos extends Contribucion {
         this.producto = producto;
     }
 
-    public void procesarContribucion() throws ColaboracionInvalida{
-        if(colaborador.getPersona() instanceof PersonaJuridica) {
+    public void procesarContribucion(){
             Sistema.getInstancia().agregarOferta(this);
-        }else {
-            //contribucion invalida no es persona juridica
-            throw new ColaboracionInvalida("Para ofrecer productos debés se una persona JURIDICA");
-        }
     }
 
     public double getPuntosNecesarios() { return puntosNecesarios; }

@@ -1,4 +1,5 @@
 package contribucion;
+import nuestras_excepciones.ViandaRechazada;
 import persona.PersonaHumana;
 
 import colaborador.Colaborador;
@@ -26,15 +27,14 @@ public class DonacionDeVianda extends Contribucion {
     }
 
     @Override
-    public void procesarContribucion() throws ColaboracionInvalida{
-        if(colaborador.getPersona() instanceof PersonaHumana){
-        heladera.recibirViandas(viandasDonadas);
-        }
-        else{
-                //colaboracion inválida hacer algo
-            //colaborador no es persona humana
-            throw new ColaboracionInvalida("Para donar una vianda debés ser una persona HUMANA");
-        }
+    public void procesarContribucion(){
+            try {
+                heladera.recibirViandas(viandasDonadas);
+            } catch (ViandaRechazada e) {
+                //QUE HACEMOS ACA
+                throw new RuntimeException(e);
+            }
+
     }
 
     public double puntosQueSumaColaborador() {

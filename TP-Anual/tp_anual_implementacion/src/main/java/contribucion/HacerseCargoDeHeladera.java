@@ -24,14 +24,9 @@ public class HacerseCargoDeHeladera extends Contribucion{
     }
 
     @Override
-    public void procesarContribucion() throws ColaboracionInvalida{
-        if(colaborador.getPersona() instanceof PersonaJuridica) {
+    public void procesarContribucion(){
             heladeraACargo.setColaborador((Colaborador) colaborador);
             Sistema.getInstancia().darDeAltaHeladera(heladeraACargo);
-        }else{
-            //contribucion invalida no es persona jurídica
-            throw new ColaboracionInvalida("Para hacerse cargo de una heladera debes ser una persons JURIDICA");
-        }
     }
 
     // VALORES DE EJEMPLO DE LA MOCK API:

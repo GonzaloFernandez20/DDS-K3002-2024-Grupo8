@@ -15,6 +15,19 @@ public class Vinculacion {
         fechaRegistro = fecha;
         this.vincular(personaSituacionVulnerable);
         tarjetaEntregada = new AccesoAHeladeras(personaSituacionVulnerable);
+        personaSituacionVulnerable = personaSituacionVulnerable;
+    }
+
+    public Colaborador getColaboradorQueRegistro() {
+        return colaboradorQueRegistro;
+    }
+
+    public PersonaSituacionVulnerable getPersonaSituacionVulnerable() {
+        return personaSituacionVulnerable;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
     }
 
     public void vincular(PersonaSituacionVulnerable persona){
