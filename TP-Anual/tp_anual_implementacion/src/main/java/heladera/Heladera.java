@@ -2,8 +2,6 @@ package heladera;
 
 import colaborador.Colaborador;
 import localizacion.Ubicacion;
-import nuestras_excepciones.FallaHeladera;
-import nuestras_excepciones.ViandaRechazada;
 import java.util.*;
 import java.util.Date;
 import java.util.Timer;
@@ -39,17 +37,9 @@ public class Heladera {
     public void setUltimaTemperaturaRegistrada(Float temperatura) { this.ultimaTemperaturaRegistrada = temperatura; }
     public Float getUltimaTemperaturaRegistrada() { return ultimaTemperaturaRegistrada; }
 
-    public void recibirViandas(List<Vianda> viandas) throws ViandaRechazada {
-        if(viandasEnStock.size() + viandas.size() <= capacidadDeViandas){
-            this.viandasEnStock.addAll(viandas);
-        }
-        else {
-            throw new ViandaRechazada("La heladera está llena");
-        }
-    }
+    public void recibirViandas(List<Vianda> viandas) { this.viandasEnStock.addAll(viandas); }
     
-    public List<Vianda> retirarViandas(int cantidadARetirar) throws FallaHeladera {
-        if(cantidadARetirar < viandasEnStock.size()){
+    public List<Vianda> retirarViandas(int cantidadARetirar) {
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();
         for (int i = 0; i < cantidadARetirar; i++) {
@@ -59,17 +49,13 @@ public class Heladera {
             viandasEnStock.remove(vianda);
         }
         return viandasARetirar;
-        }
-        else {
-            throw new FallaHeladera("Se quisieron retirar mas viandas que las que había en la heladera");
-        }
     }
 
     public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); }
 
     public void controlarUltimaTemperatura() {
-        Float temperaturaMinima = modelo.getMinimaTemperatura();
-        Float temperaturaMaxima = modelo.getMaximaTemperatura();
+        Float temperaturaMinima = modelo.getTemperaturaMinima();
+        Float temperaturaMaxima = modelo.getTemperaturaMaxima();
         
         if(ultimaTemperaturaRegistrada < temperaturaMinima || ultimaTemperaturaRegistrada > temperaturaMaxima) {
             estado = EstadoHeladera.inactiva;
@@ -78,10 +64,11 @@ public class Heladera {
 
     public void recibirAviso(AvisoIntentoDeRobo aviso) { aviso.notificar(); }
 
-    public Heladera(Colaborador colaboradorACargo, Modelo modelo, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
+    public Heladera(Colaborador colaboradorACargo, Modelo modelo, Float ultimaTemperaturaRegistrada, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
         this.estado = EstadoHeladera.activa;
         this.modelo = modelo;
+        this.ultimaTemperaturaRegistrada = ultimaTemperaturaRegistrada;
         this.viandasEnStock = viandasEnStock;
         this.puntoEstrategico = puntoEstrategico;
         this.capacidadDeViandas = capacidadDeViandas;
@@ -89,3 +76,52 @@ public class Heladera {
     }
 }
 
+enum EstadoHeladera {
+    activa,
+    inactiva
+}
+
+class Modelo {
+    Float maximaTemperatura;
+    Float minimaTemperatura;
+
+    public Float getTemperaturaMinima() { return minimaTemperatura; }
+    public Float getTemperaturaMaxima() { return maximaTemperatura; }
+}
+
+class SensoreoDeTemperatura {
+    Float temperaturaRegistrada;
+    Heladera heladera;
+
+    void avisoDeTemperaturaActualizada() {
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                heladera.setUltimaTemperaturaRegistrada(temperaturaRegistrada);
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, 300000);
+    }
+}
+
+class SensoreoDeMovimiento {
+    AvisoIntentoDeRobo aviso;
+    Heladera heladera;
+
+    void enviarAlerta() {
+        heladera.recibirAviso(aviso);
+    }
+}
+
+class AvisoIntentoDeRobo {
+    Colaborador colaboradorACargo;
+
+    public AvisoIntentoDeRobo(Colaborador colaboradorACargo) {
+        this.colaboradorACargo = colaboradorACargo;
+    }
+
+    void notificar() {
+        colaboradorACargo.serNotificado();
+    }
+}
