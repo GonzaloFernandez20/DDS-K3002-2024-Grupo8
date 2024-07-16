@@ -108,4 +108,16 @@ public final class Sistema {
 
         return null;
     }
+
+    public void recibirTemperatura(Float temperatura, Heladera heladera) {
+        // Lógica para manejar la temperatura recibida
+        // que hacemos cuando recibe la info de la heladera???
+        System.out.println("Temperatura recibida en el sistema: " + temperatura);
+        // Aquí puedes agregar lógica adicional para manejar la temperatura
+    }
+
+    public void serAlertado(Heladera heladera, TipoAlerta tipoAlerta) {
+        // el sistema deberá dar aviso al técnico correspondiente (es decir al que se encuentre más cercano a
+        //la heladera en cuestión)
+    }
 }
