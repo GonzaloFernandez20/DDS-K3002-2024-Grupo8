@@ -2,10 +2,16 @@ package heladera;
 
 import colaborador.Colaborador;
 import localizacion.Ubicacion;
+import nuestras_excepciones.FallaHeladera;
+import nuestras_excepciones.ViandaRechazada;
+import sistema.Sistema;
+
 import java.util.*;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static sistema.TipoAlerta.TEMPERATURA;
 
 public class Heladera {
     Colaborador colaboradorACargo;
@@ -16,12 +22,18 @@ public class Heladera {
     private Ubicacion puntoEstrategico;
     private final int capacidadDeViandas;
     private Date puestaEnFuncionamiento;
+    private Sistema sistema;
+
+    private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
+    private static final int BROKER_PORT = 12345; // Puerto del broker
 
     public void setColaborador(Colaborador colaborador) { this.colaboradorACargo = colaborador; }
     public Colaborador getColaboradorACargo() { return colaboradorACargo; }
 
     public void setUbicacion(Ubicacion puntoEstrategico) { this.puntoEstrategico = puntoEstrategico; }
     public Ubicacion getUbicacion() { return puntoEstrategico; }
+
+    public void setSistema(Sistema sistema) { this.sistema = sistema; }
 
     public void setPuestaEnFuncionamiento(Date puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
     public Date getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
@@ -34,94 +46,62 @@ public class Heladera {
 
     public int getCapacidadDeViandas() { return capacidadDeViandas; }
 
-    public void setUltimaTemperaturaRegistrada(Float temperatura) { this.ultimaTemperaturaRegistrada = temperatura; }
+    public void setUltimaTemperaturaRegistrada(Float temperatura) {
+        this.ultimaTemperaturaRegistrada = temperatura;
+        controlarUltimaTemperatura();
+        if (sistema != null) {
+            sistema.recibirTemperatura(temperatura, this); // Envía la temperatura al sistema
+        }
+    }
+
     public Float getUltimaTemperaturaRegistrada() { return ultimaTemperaturaRegistrada; }
 
-    public void recibirViandas(List<Vianda> viandas) { this.viandasEnStock.addAll(viandas); }
+    public void recibirViandas(List<Vianda> viandas) throws ViandaRechazada {
+        if(viandasEnStock.size() + viandas.size() <= capacidadDeViandas){
+            this.viandasEnStock.addAll(viandas);
+        }
+        else {
+            throw new ViandaRechazada("La heladera está llena");
+        }
+    }
     
-    public List<Vianda> retirarViandas(int cantidadARetirar) {
+    public List<Vianda> retirarViandas(int cantidadARetirar) throws FallaHeladera {
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();
-        for (int i = 0; i < cantidadARetirar; i++) {
+        for (int i = 0; i < cantidadARetirar && !viandasEnStock.isEmpty(); i++) {
             vianda = viandasEnStock.get(0);
             vianda.serEntregada();
             viandasARetirar.add(vianda);
             viandasEnStock.remove(vianda);
         }
         return viandasARetirar;
-    }
+        }
 
     public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); }
 
     public void controlarUltimaTemperatura() {
-        Float temperaturaMinima = modelo.getTemperaturaMinima();
-        Float temperaturaMaxima = modelo.getTemperaturaMaxima();
-        
-        if(ultimaTemperaturaRegistrada < temperaturaMinima || ultimaTemperaturaRegistrada > temperaturaMaxima) {
-            estado = EstadoHeladera.inactiva;
+        if (ultimaTemperaturaRegistrada != null) {
+            Float temperaturaMinima = modelo.getTemperaturaMinima();
+            Float temperaturaMaxima = modelo.getTemperaturaMaxima();
+
+            if (ultimaTemperaturaRegistrada < temperaturaMinima || ultimaTemperaturaRegistrada > temperaturaMaxima) {
+                estado = EstadoHeladera.inactiva;
+                sistema.serAlertado(this, TEMPERATURA);
+            } else {
+                estado = EstadoHeladera.activa;
+            }
         }
     }
 
     public void recibirAviso(AvisoIntentoDeRobo aviso) { aviso.notificar(); }
 
-    public Heladera(Colaborador colaboradorACargo, Modelo modelo, Float ultimaTemperaturaRegistrada, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
+    public Heladera(Colaborador colaboradorACargo, Modelo modelo, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
         this.estado = EstadoHeladera.activa;
         this.modelo = modelo;
-        this.ultimaTemperaturaRegistrada = ultimaTemperaturaRegistrada;
         this.viandasEnStock = viandasEnStock;
         this.puntoEstrategico = puntoEstrategico;
         this.capacidadDeViandas = capacidadDeViandas;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
-    }
-}
-
-enum EstadoHeladera {
-    activa,
-    inactiva
-}
-
-class Modelo {
-    Float maximaTemperatura;
-    Float minimaTemperatura;
-
-    public Float getTemperaturaMinima() { return minimaTemperatura; }
-    public Float getTemperaturaMaxima() { return maximaTemperatura; }
-}
-
-class SensoreoDeTemperatura {
-    Float temperaturaRegistrada;
-    Heladera heladera;
-
-    void avisoDeTemperaturaActualizada() {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                heladera.setUltimaTemperaturaRegistrada(temperaturaRegistrada);
-            }
-        };
-        timer.scheduleAtFixedRate(task, 0, 300000);
-    }
-}
-
-class SensoreoDeMovimiento {
-    AvisoIntentoDeRobo aviso;
-    Heladera heladera;
-
-    void enviarAlerta() {
-        heladera.recibirAviso(aviso);
-    }
-}
-
-class AvisoIntentoDeRobo {
-    Colaborador colaboradorACargo;
-
-    public AvisoIntentoDeRobo(Colaborador colaboradorACargo) {
-        this.colaboradorACargo = colaboradorACargo;
-    }
-
-    void notificar() {
-        colaboradorACargo.serNotificado();
     }
 }
