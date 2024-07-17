@@ -4,12 +4,17 @@ import colaborador.Colaborador;
 import contribucion.OfertaDeProductos;
 import documentacion.Documento;
 import heladera.Heladera;
+import incidentes.GestorDeIncidentes;
+import incidentes.Incidente;
+import localizacion.Area;
+import localizacion.Ubicacion;
 import medios_de_contacto.MedioDeContacto;
 import tecnico.Tecnico;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class Sistema {
     private static Sistema instancia = null;
@@ -17,6 +22,7 @@ public final class Sistema {
     List<Heladera> heladeras = new ArrayList<>();
     List<Tecnico> tecnicos = new ArrayList<>();
     List<OfertaDeProductos> ofertas = new ArrayList<>();
+    List<Incidente> incidentes = new ArrayList<>();
     static int contadorDeVinculaciones = 0;
     float monto;
 
@@ -117,7 +123,26 @@ public final class Sistema {
     }
 
     public void serAlertado(Heladera heladera, TipoAlerta tipoAlerta) {
-        // el sistema deberá dar aviso al técnico correspondiente (es decir al que se encuentre más cercano a
+    // el sistema deberá dar aviso al técnico correspondiente (es decir al que se encuentre más cercano a
         //la heladera en cuestión)
+    }
+
+    public Tecnico darTecnicoMasCercano(Ubicacion ubicacion) {
+        Tecnico tecnicoHallado = tecnicos.stream().filter(tecnico -> tecnico.estaCercaDe(ubicacion)).toList().get(0);
+        if(tecnicoHallado == null){
+            //vamos agrandando el radio hasta que encontramos a alguien
+            while(tecnicoHallado == null){
+                Integer radio = 0;
+                Area areaAux = new Area(ubicacion,radio);
+                tecnicoHallado = tecnicos.stream().filter(tecnico -> tecnico.coincideConElArea(areaAux)).toList().get(0);
+                radio++;
+            }
+        }
+        return tecnicoHallado;
+    }
+    public void sumarIncidente(Incidente incidente){
+        GestorDeIncidentes gestorDeIncidentes = GestorDeIncidentes.getInstancia();
+        gestorDeIncidentes.recibirReporte(incidente);
+        incidentes.add(incidente);
     }
 }

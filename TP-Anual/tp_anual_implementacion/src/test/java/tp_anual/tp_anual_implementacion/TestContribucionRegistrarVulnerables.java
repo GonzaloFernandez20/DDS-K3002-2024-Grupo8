@@ -134,7 +134,7 @@ public class TestContribucionRegistrarVulnerables{
         for(int i = 0; i< vinculacionesEsperadas.size();i++){
             Vinculacion vinculacionAux1 = vinculacionesEsperadas.get(i);
             rtaAnterior = rtaAnterior && contribucion0.getTarjetasRepartidas().stream().anyMatch(vinculacionAux2 -> this.vinculacionesDeIgualesAtributos(vinculacionAux1,vinculacionAux2));
-        //No me deja usar un ForEach con el MatchAny adentro así que tuve que armar el choclo este
+        //No me deja usar un MatchAll con el MatchAny adentro así que tuve que armar el choclo este
         }
         assertTrue(rtaAnterior,"Las vinculaciones dan como esperamos que den");
     }

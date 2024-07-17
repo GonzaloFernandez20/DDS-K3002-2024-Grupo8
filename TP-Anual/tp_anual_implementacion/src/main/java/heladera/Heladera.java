@@ -14,8 +14,8 @@ import java.util.TimerTask;
 import static sistema.TipoAlerta.TEMPERATURA;
 
 public class Heladera {
-    Colaborador colaboradorACargo;
-    EstadoHeladera estado;
+    private Colaborador colaboradorACargo;
+    private EstadoHeladera estado;
     private final Modelo modelo;
     Float ultimaTemperaturaRegistrada;
     List<Vianda> viandasEnStock;
@@ -103,5 +103,9 @@ public class Heladera {
         this.puntoEstrategico = puntoEstrategico;
         this.capacidadDeViandas = capacidadDeViandas;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
+    }
+
+    public void setEstado(EstadoHeladera estado) {
+        this.estado = estado;
     }
 }
