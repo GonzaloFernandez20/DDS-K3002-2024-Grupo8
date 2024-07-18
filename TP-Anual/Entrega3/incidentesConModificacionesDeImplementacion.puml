@@ -1,0 +1,133 @@
+@startuml incidentes
+abstract class Incidente{
+    -reporteIncidente : ReporteIncidente
+    - visitas : [VisitaPorIncidente]
+    'Cambia el estadoDelIncidente a solucionado y activa a la heladera'
+    +avisarAlTecnico() : void
+    'Lo pongo para no olvidarnos de que hay que hacerlo'
+    +registrarVisita() : void
+    ' vi
+    'Lo pongo para no olvidarnos de que hay que hacerlo'
+    +hacerNotificarAHeladera(this) : void 
+    + reportar() : void 
+    ' gestorIncidentes.recibirReporte(this) y esto hace incidentesActivos.add(incidente)
+    ' heladera cambia a inactiva y reporteIncidente.reportar()
+}
+
+class GestorDeIncidentes {
+    - incidentesNoSolucionados
+    - incidentesSolucionados
+    +notificarTecnico(Incidente) : void
+    + recibirReporte(incidente) : void 
+    ' darTecnicoSegunRadio radio) devuelve un tecnico
+    ' crea una visitaPorIncidente y hace solucionar()
+}
+
+class GestorDeTecnicos {
+    - tecnicos
+    - darTecnicoSegunRadio(radio)
+    ' devuelve un tecnico
+}
+
+class Sistema {
+    - incidentes : [Incidente]
+    - tecnicos : [Tecnicos]
+    + darTecnicoMasCercano(Ubicacion) : Tecnico
+}
+
+enum TipoDeIncidente{
+    TemperaturaAlta
+    TemperaturaBaja
+    Fraude
+    FallaDeConexion
+    FallaTecnica
+}
+
+class Alerta extends Incidente{
+    + override reportar() : void
+}
+
+class SensorTemperatura extends Alerta {}
+class SensorMovimiento extends Alerta {}
+
+class FallaTecnica extends Incidente{
+    - colaboradorInformante : Colaborador
+    - situacionEncontrada : Informe
+    + reportar() : void
+}
+
+class Tecnico{
+    - areaDeCoubertura : Area
+    + coincideConElArea(Area) : bool
+    + estaCercaDe(Ubicacion) : bool
+    + atenderUn(Incidente, Informe) : void 
+}
+
+enum EstadoDelIncidente{
+    solucionado
+    noSolucionado
+}
+
+' las visitas deben quedar en el sistema
+class VisitaPorIncidente{
+    - tecnico : Tecnico 
+    - fecha : LocalDateTime
+    - incidente : Incidente
+    - informeSobreVisita : Informe
+    - estadoVisita : EstadoDelIncidente 
+    + informeSobreIncidente(Incidente) : Informe
+    + solucionar() : void
+    ' tecnico.visitarPor(this)
+}
+
+class Informe {
+    - descripcion : String
+    - foto : Imagen
+}
+
+class ReporteIncidente {
+    -momentoDelSuceso : LocalDateTime
+    -heladera : Heladera
+    -tipoDeIncidente : TipoDeIncidente
+    -estado : EstadoDelIncidente
+    + reportar(): void
+    +solucionar() : void
+}
+
+class Heladera {
+    -estado : Estado
+    +modificarEstado(Estado) : void
+'tiene sentido que un técnico conozca al incidente'
+    }
+
+enum Estado {
+    activa
+    inactiva
+    etc...
+}
+class Ubicacion{}
+class Area{
+    -ubicacion : Ubicacion
+    -radio : Int
+    +areaContiene(Ubicacion) : bool
+    +seSolapaCon(Area) : bool
+
+}
+Ubicacion -- Area
+Area -- Tecnico
+Heladera -- Estado
+Heladera -- ReporteIncidente
+TipoDeIncidente -- ReporteIncidente
+FallaTecnica --> Colaborador
+Informe -- FallaTecnica
+Tecnico --"*" VisitaPorIncidente
+VisitaPorIncidente -- Incidente
+Informe -- VisitaPorIncidente
+ReporteIncidente -- EstadoDelIncidente
+Informe -- Imagen
+GestorDeIncidentes -- Incidente 
+GestorDeTecnicos -- Tecnico 
+Sistema -- GestorDeIncidentes
+Sistema -- GestorDeTecnicos
+ReporteIncidente -- Incidente
+@enduml
