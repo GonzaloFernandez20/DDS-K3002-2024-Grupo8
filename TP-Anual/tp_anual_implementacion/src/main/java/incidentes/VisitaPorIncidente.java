@@ -11,6 +11,11 @@ public class VisitaPorIncidente {
     private Informe informe;
     private EstadoDelIncidente estadoDeLaVisita;//posiblemente innecesario
 
+    public boolean visitaSolucionaElIncidente(){
+        return this.getEstadoDeLaVisita() == EstadoDelIncidente.SOLUCIONADO;
+    }
+
+//MÉTODOS QUE CARECEN DE LÓGICA
     public VisitaPorIncidente(Tecnico tecnico, LocalDate fecha, Incidente incidente, Informe informe, EstadoDelIncidente estadoDelIncidente) {
         this.tecnico = tecnico;
         this.fecha = fecha;
@@ -58,7 +63,5 @@ public class VisitaPorIncidente {
     public void setEstadoDeLaVisita(EstadoDelIncidente estadoDelIncidente) {
         this.estadoDeLaVisita = estadoDelIncidente;
     }
-    public boolean visitaSolucionaElIncidente(){
-        return this.getEstadoDeLaVisita() == EstadoDelIncidente.SOLUCIONADO;
-    }
+
 }

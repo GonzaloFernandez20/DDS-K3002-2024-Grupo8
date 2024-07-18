@@ -17,6 +17,7 @@ abstract class Incidente{
 class GestorDeIncidentes {
     - incidentesNoSolucionados
     - incidentesSolucionados
+    +notificarTecnico(Incidente) : void
     + recibirReporte(incidente) : void 
     ' darTecnicoSegunRadio radio) devuelve un tecnico
     ' crea una visitaPorIncidente y hace solucionar()
@@ -29,7 +30,9 @@ class GestorDeTecnicos {
 }
 
 class Sistema {
-    - incidentes 
+    - incidentes : [Incidente]
+    - tecnicos : [Tecnicos]
+    + darTecnicoMasCercano(Ubicacion) : Tecnico
 }
 
 enum TipoDeIncidente{
@@ -54,6 +57,9 @@ class FallaTecnica extends Incidente{
 }
 
 class Tecnico{
+    - areaDeCoubertura : Area
+    + coincideConElArea(Area) : bool
+    + estaCercaDe(Ubicacion) : bool
     + visitarPor(visitaPorIncidente) : void 
 }
 
@@ -85,34 +91,43 @@ class ReporteIncidente {
     -tipoDeIncidente : TipoDeIncidente
     -estado : EstadoDelIncidente
     + reportar(): void
+    +solucionar() : void
 }
 
 class Heladera {
     -estado : Estado
     +modificarEstado(Estado) : void
 'tiene sentido que un técnico conozca al incidente'
-    +notificarTecnico(Incidente) : void
-}
+    }
 
 enum Estado {
     activa
     inactiva
     etc...
 }
+class Ubicacion{}
+class Area{
+    -ubicacion : Ubicacion
+    -radio : Int
+    +areaContiene(Ubicacion) : bool
+    +seSolapaCon(Area) : bool
 
+}
+Ubicacion -- Area
+Area -- Tecnico
 Heladera -- Estado
-Heladera -- Incidente
-TipoDeIncidente -- Incidente
+Heladera -- ReporteIncidente
+TipoDeIncidente -- ReporteIncidente
 FallaTecnica --> Colaborador
 Informe -- FallaTecnica
 Tecnico --"*" VisitaPorIncidente
 VisitaPorIncidente -- Incidente
 Informe -- VisitaPorIncidente
-Incidente -- EstadoDelIncidente
+ReporteIncidente -- EstadoDelIncidente
 Informe -- Imagen
-Informe -- EstadoDelIncidente
 GestorDeIncidentes -- Incidente 
 GestorDeTecnicos -- Tecnico 
 Sistema -- GestorDeIncidentes
 Sistema -- GestorDeTecnicos
+ReporteIncidente -- Incidente
 @enduml

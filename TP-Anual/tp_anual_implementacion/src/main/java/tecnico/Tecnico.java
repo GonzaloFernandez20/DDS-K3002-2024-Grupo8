@@ -65,6 +65,10 @@ public class Tecnico {
     public boolean coincideConElArea(Area area){
         return areaCobertura.seSolapaCon(area);
     }
+    public void notificarDeIncidente(Incidente incidente){
+        incidentesPendientes.add(incidente);
+        //notificar via mail tmb o qsy
+    }
     public void atenderUnIncidente(Informe informe, EstadoDelIncidente estadoDelIncidente){
         Incidente incidenteAAtender =  incidentesPendientes.get(0);
         VisitaPorIncidente visita = new VisitaPorIncidente(this, LocalDate.now(),incidenteAAtender,informe,estadoDelIncidente);

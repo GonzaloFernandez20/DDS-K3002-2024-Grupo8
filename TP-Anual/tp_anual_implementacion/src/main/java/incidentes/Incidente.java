@@ -9,15 +9,13 @@ import java.util.List;
 public abstract class Incidente {
     private ReporteIncidente reporteIncidente;
     private List<VisitaPorIncidente> visitasPorIncidente;
-    private EstadoDelIncidente estadoDelIncidente;
-    private Heladera heladera;
 
     public Heladera getHeladera() {
-        return heladera;
+        return reporteIncidente.getHeladera();
     }
 
-    public void setHeladera(Heladera heladera) {
-        this.heladera = heladera;
+    public TipoDeIncidente getTipoDeIncidente(){
+        return reporteIncidente.getTipoDeIncidente();
     }
 
     public void setVisitaPorIncidente(List<VisitaPorIncidente> visitasPorIncidente) {
@@ -25,17 +23,16 @@ public abstract class Incidente {
     }
 
     public EstadoDelIncidente getEstadoDelIncidente() {
-        return estadoDelIncidente;
+        return reporteIncidente.getEstadoDelIncidente();
     }
 
     public void setEstadoDelIncidente(EstadoDelIncidente estadoDelIncidente) {
-        this.estadoDelIncidente = estadoDelIncidente;
+        reporteIncidente.setEstadoDelIncidente(estadoDelIncidente);
     }
 
-    public Incidente(ReporteIncidente reporteIncidente, EstadoDelIncidente estadoDelIncidente, Heladera heladera) {
+    public Incidente(ReporteIncidente reporteIncidente) {
         this.reporteIncidente = reporteIncidente;
-        this.estadoDelIncidente = estadoDelIncidente;
-        this.heladera = heladera;
+        this.hacerNotificarAHeladera();
     }
 
     //Me parece que es responsabilidad del gestor de incidentes
@@ -44,20 +41,17 @@ public abstract class Incidente {
     public void reportar(){
         Sistema sistema = Sistema.getInstancia();
         sistema.sumarIncidente(this);
-        heladera.setEstado(EstadoHeladera.inactiva);
+        reporteIncidente.reportar();
     }
     public void hacerNotificarAHeladera(){
         //NO ENTIENDO QUE HACE
+        //tiene que ver con la parte de los reportes que dice "Cantidad de Fallas por Heladera"
+        //cada vez que hay una falla hay que sumarlo al reporte semanal (distinto del reporte que tiene que ver con el incidente)
     }
     public void solucionar(){
-        this.setEstadoDelIncidente(EstadoDelIncidente.SOLUCIONADO);
-        heladera.setEstado(EstadoHeladera.activa);
+        reporteIncidente.solucionar();
         GestorDeIncidentes gestorDeIncidentes = GestorDeIncidentes.getInstancia();
-    gestorDeIncidentes.pasarIncidenteASolucionado(this);
-    }
-
-    public Incidente(ReporteIncidente reporteIncidente) {
-        this.reporteIncidente = reporteIncidente;
+        gestorDeIncidentes.pasarIncidenteASolucionado(this);
     }
 
     public List<VisitaPorIncidente> getVisitaPorIncidente() {

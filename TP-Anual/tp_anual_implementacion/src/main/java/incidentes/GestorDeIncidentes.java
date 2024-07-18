@@ -20,6 +20,8 @@ public final class GestorDeIncidentes {
     public void avisarAlTecnicoPorIncidente(Incidente incidente){
         Sistema sistema = Sistema.getInstancia();
         Tecnico tecnicoMasCercano = sistema.darTecnicoMasCercano(incidente.getHeladera().getUbicacion());
+        tecnicoMasCercano.notificarDeIncidente(incidente);
+
     }
     public void pasarIncidenteASolucionado(Incidente incidenteRecibido){
         //No sé por qué tira un error cuando hgo esto

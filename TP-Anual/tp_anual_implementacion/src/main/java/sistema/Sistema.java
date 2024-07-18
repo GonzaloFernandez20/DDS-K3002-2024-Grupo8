@@ -9,6 +9,7 @@ import incidentes.Incidente;
 import localizacion.Area;
 import localizacion.Ubicacion;
 import medios_de_contacto.MedioDeContacto;
+import tecnico.GestorDeTecnicos;
 import tecnico.Tecnico;
 
 import java.util.ArrayList;
@@ -74,7 +75,9 @@ public final class Sistema {
     }
 
     public void darDeAltaTecnico(Tecnico tecnico) {
+
         tecnicos.add(tecnico);
+        GestorDeTecnicos.getInstancia().darDeAltaTecnico(tecnico);
     }
 
     public void darDeBajaColaborador(Colaborador colaborador) {
@@ -86,6 +89,7 @@ public final class Sistema {
     }
 
     public void darDeBajaTecnico(Tecnico tecnico) {
+        GestorDeTecnicos.getInstancia().darDeBajaTecnico(tecnico);
         tecnicos.remove(tecnico);
     }
 
@@ -128,18 +132,9 @@ public final class Sistema {
     }
 
     public Tecnico darTecnicoMasCercano(Ubicacion ubicacion) {
-        Tecnico tecnicoHallado = tecnicos.stream().filter(tecnico -> tecnico.estaCercaDe(ubicacion)).toList().get(0);
-        if(tecnicoHallado == null){
-            //vamos agrandando el radio hasta que encontramos a alguien
-            while(tecnicoHallado == null){
-                Integer radio = 0;
-                Area areaAux = new Area(ubicacion,radio);
-                tecnicoHallado = tecnicos.stream().filter(tecnico -> tecnico.coincideConElArea(areaAux)).toList().get(0);
-                radio++;
-            }
-        }
-        return tecnicoHallado;
+        return GestorDeTecnicos.getInstancia().darTecnicoMasCercano(ubicacion);
     }
+
     public void sumarIncidente(Incidente incidente){
         GestorDeIncidentes gestorDeIncidentes = GestorDeIncidentes.getInstancia();
         gestorDeIncidentes.recibirReporte(incidente);

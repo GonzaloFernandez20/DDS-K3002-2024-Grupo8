@@ -3,8 +3,8 @@ package incidentes;
 import colaborador.Colaborador;
 
 public class FallaTecnica {
-    Colaborador colaboradorInformante;
-    Informe informe;
+    private Colaborador colaboradorInformante;
+    private Informe informe;
 
     public FallaTecnica(Colaborador colaboradorInformante, Informe informe) {
         super();
