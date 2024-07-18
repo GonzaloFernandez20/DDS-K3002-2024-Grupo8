@@ -60,7 +60,7 @@ class Tecnico{
     - areaDeCoubertura : Area
     + coincideConElArea(Area) : bool
     + estaCercaDe(Ubicacion) : bool
-    + visitarPor(visitaPorIncidente) : void 
+    + atenderUn(Incidente, Informe) : void 
 }
 
 enum EstadoDelIncidente{
