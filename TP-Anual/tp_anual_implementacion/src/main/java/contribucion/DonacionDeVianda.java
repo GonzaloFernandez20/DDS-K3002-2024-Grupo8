@@ -7,6 +7,7 @@ import heladera.Heladera;
 import heladera.Vianda;
 import nuestras_excepciones.ColaboracionInvalida;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -17,7 +18,11 @@ public class DonacionDeVianda extends Contribucion {
 
     public DonacionDeVianda(Colaborador colaborador, LocalDate fechaDeDonacion, List<Vianda> viandasDonadas, Heladera heladera) {
         super(colaborador, fechaDeDonacion);
-        this.viandasDonadas = viandasDonadas;
+        if(viandasDonadas != null) {
+            this.viandasDonadas = viandasDonadas;
+        } else {
+            this.viandasDonadas = new ArrayList<>();
+        }
         this.heladera = heladera;
         this.coeficiente = 1.5;
     }

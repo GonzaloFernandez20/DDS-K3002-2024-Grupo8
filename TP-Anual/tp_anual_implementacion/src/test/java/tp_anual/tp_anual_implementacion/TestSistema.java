@@ -12,9 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import persona.Persona;
 import persona.PersonaHumana;
 import sistema.Sistema;
+import java.time.LocalDate;
 
 import java.util.ArrayList;
 
+import static documentacion.Sexo.FEMENINO;
 import static documentacion.Sexo.MASCULINO;
 import static documentacion.TipoDeDocumento.DNI;
 import static documentacion.TipoDeDocumento.LC;
@@ -33,6 +35,13 @@ class TestsSistema {
     Persona persona2;
     Colaborador colaborador2;
     CorreoElectronico mail2;
+
+    Documento documento3;
+    Persona persona3;
+    Colaborador colaborador3;
+    Documento documento3Mock;
+    Persona persona3Mock;
+    Colaborador colaborador3Mock;
 
     Sistema sistema;
 
@@ -54,6 +63,15 @@ class TestsSistema {
         // colaborador1.agregarMedioDeContacto(new MedioDeContacto("jajaja@gmail.com"));
         colaborador2.agregarMedioDeContacto(mail2);
         // Sistema.getInstancia().darDeAltaColaborador(colaborador2);
+
+        documento3 = new Documento(DNI, "40555555", FEMENINO);
+        persona3 = new PersonaHumana("Ana", "Días", LocalDate.of(1999, 9, 01), documento3, direccion2);
+        colaborador3 = new Colaborador(persona3);
+        sistema.darDeAltaColaborador(colaborador3);
+
+        documento3Mock = new Documento(DNI, "40555555", null);
+        persona3Mock = new PersonaHumana("Ana", "Días", null, documento3Mock, null);
+        colaborador3Mock = new Colaborador(persona3Mock);
     }
 
     @Test
@@ -66,11 +84,12 @@ class TestsSistema {
     void ValidacionesBusquedaDeColaborador() {
         assertSame(sistema.buscarColaborador(colaborador1), colaborador1);
         assertNull(sistema.buscarColaborador(colaborador2), "No encuentra el colaborador en el sistema.");
+        assertSame(sistema.buscarColaborador(colaborador3Mock), colaborador3);
     }
 
     @Test
     void ValidacionMonto() {
         sistema.agregarMonto(1550);
-        assertSame(sistema.getMonto(), 1550);
+        assertSame(sistema.getMonto(), 1550.0);
     }
 }

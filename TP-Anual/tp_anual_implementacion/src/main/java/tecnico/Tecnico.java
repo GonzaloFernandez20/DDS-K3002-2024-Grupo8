@@ -47,9 +47,7 @@ public class Tecnico {
         return persona.getApellido();
     }
 
-    public Date getFechaDeNacimiento() {
-        return persona.getFechaDeNacimiento();
-    }
+    public LocalDate getFechaDeNacimiento() { return persona.getFechaDeNacimiento(); }
 
     public String getCuil() {
         return cuil;

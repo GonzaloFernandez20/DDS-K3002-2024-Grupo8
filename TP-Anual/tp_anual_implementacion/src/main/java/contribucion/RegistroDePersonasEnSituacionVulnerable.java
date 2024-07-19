@@ -21,26 +21,33 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
 
     public RegistroDePersonasEnSituacionVulnerable(Colaborador colaborador, LocalDate fechaDeContribucion, List<PersonaSituacionVulnerable> personasEnSituacionVulnerableARegistrar) {
         super(colaborador,fechaDeContribucion);
-        this.personasEnSituacionVulnerableARegistrar = personasEnSituacionVulnerableARegistrar;
+        if(personasEnSituacionVulnerableARegistrar != null) {
+            this.personasEnSituacionVulnerableARegistrar = personasEnSituacionVulnerableARegistrar;
+        } else {
+            this.personasEnSituacionVulnerableARegistrar = new ArrayList<>();
+        }
     }
+
     public void sumarPersonaEnSituacionVulnerableARegistrar(PersonaSituacionVulnerable persona) {
         personasEnSituacionVulnerableARegistrar.add(persona);
     }
+
     @Override
     public void procesarContribucion() throws ColaboracionInvalida{
-        if(colaborador.getPersona().getDireccion() != null)
-        {
+        if(colaborador.getPersona().getDireccion() != null) {
             personasEnSituacionVulnerableARegistrar.forEach(personaVulnerable -> this.generarRegistro(personaVulnerable));
         }
          else{
              throw new ColaboracionInvalida("El colaborador que registre a múltiples vulnerables debe tener DIRECCION");
         }
     }
+
     public void generarRegistro(PersonaSituacionVulnerable personaSituacionVulnerable) {
         Vinculacion vinculacion = new Vinculacion(colaborador, personaSituacionVulnerable, LocalDate.now());
         entregarTarjeta(vinculacion);
         //FALTA AGREGAR LA VINCULACION A LA LISTA DE VINCULACIONES DEL SISTEMA
     }
+
     public void entregarTarjeta(Vinculacion nuevaVinculacion) {
         tarjetasRepartidas.add(nuevaVinculacion);
     }

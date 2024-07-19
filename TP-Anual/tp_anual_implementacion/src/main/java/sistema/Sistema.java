@@ -9,13 +9,16 @@ import incidentes.Incidente;
 import localizacion.Area;
 import localizacion.Ubicacion;
 import medios_de_contacto.MedioDeContacto;
+import persona.PersonaHumana;
 import tecnico.GestorDeTecnicos;
 import tecnico.Tecnico;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class Sistema {
     private static Sistema instancia = null;
@@ -49,8 +52,6 @@ public final class Sistema {
     public void actualizarPorCargaMasiva(Colaborador colaborador) {
         MedioDeContacto unMail = colaborador.getMediosDeContacto().get(0);
         Documento documento = colaborador.getPersona().getDocumento();
-
-        Boolean estaEnElSistema = false;
 
         if(this.existeColaborador(colaborador)) {
             Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
@@ -106,17 +107,11 @@ public final class Sistema {
     }
 
     public Colaborador buscarColaborador(Colaborador colaboradorBuscado) {
-        for (int i = 0; i < colaboradores.size(); i++) {
-            if(colaboradores.get(i).getDocumento() != null && colaboradorBuscado.tieneDocumentoSegunNumeroYTipo(colaboradores.get(i).getDocumento())) {
-                return colaboradores.get(i);
-            }
+        Optional<Colaborador> colaboradorEncontrado = this.getColaboradores().stream().filter(
+                colaborador -> (colaborador.getDocumento() != null && colaborador.tieneDocumentoSegunNumeroYTipo(colaboradorBuscado.getDocumento()) ||
+                (!colaborador.getMediosDeContacto().isEmpty() && !colaboradorBuscado.getMediosDeContacto().isEmpty() && colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().get(0))))).findFirst();
 
-            if(!colaboradores.get(i).getMediosDeContacto().isEmpty() && colaboradorBuscado.tieneMedioDeContacto(colaboradores.get(i).getMediosDeContacto().get(0))) {
-                return colaboradores.get(i);
-            }
-        }
-
-        return null;
+        return colaboradorEncontrado.orElse(null);
     }
 
     public void recibirTemperatura(Float temperatura, Heladera heladera) {

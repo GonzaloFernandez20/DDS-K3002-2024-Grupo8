@@ -3,21 +3,21 @@ package persona;
 import colaborador.Colaborador;
 import localizacion.Direccion;
 import documentacion.Documento;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PersonaHumana extends Persona {
     String nombre;
     String apellido;
-    Date fechaDeNacimiento;
-    Documento documento;
+    LocalDate fechaDeNacimiento;
 
-    public PersonaHumana(String nombre, String apellido, Date fechaDeNacimiento,Documento documento, Direccion direccion) {
+    public PersonaHumana(String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento, Direccion direccion) {
+        super(direccion, documento);
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaDeNacimiento = fechaDeNacimiento;
-        this.documento = documento;
-        this.direccion = direccion;
     }
 
     public void setNombre(String nombre) {
@@ -36,11 +36,11 @@ public class PersonaHumana extends Persona {
         return apellido;
     }
 
-    public Date getFechaDeNacimiento() {
+    public LocalDate getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+    public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 

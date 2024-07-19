@@ -1,6 +1,7 @@
 package carga_masiva;
 
 import colaborador.Colaborador;
+import org.jetbrains.annotations.NotNull;
 import persona.PersonaHumana;
 import documentacion.Documento;
 import documentacion.TipoDeDocumento;
@@ -15,29 +16,39 @@ import contribucion.RegistroDePersonasEnSituacionVulnerable;
 
 import com.opencsv.exceptions.CsvValidationException;
 import com.opencsv.CSVReader;
+import org.apache.commons.validator.routines.EmailValidator;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import static documentacion.TipoDeDocumento.*;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class CargaMasiva {
     private String archivo;
 
     public CargaMasiva(String archivo) {
-        this.archivo = archivo;
+        if(archivo.endsWith(".csv")) {
+            this.archivo = archivo;
+        } else throw new RuntimeException("El archivo ingresado no es del tipo correcto.");
     }
 
     public void migrar() {
         try (CSVReader reader = new CSVReader(new FileReader(archivo))) {
             String[] linea;
             while ((linea = reader.readNext()) != null) {
-                for (int i = 1; i < linea.length; i++) {
+                for (int i = 0; i < linea.length; i++) {
                     String campo = linea[i];
 
                     String[] partes = campo.split(";");
+
+                    if(!this.sonCeldasValidas(partes)) {
+                        throw new RuntimeException("El CSV contiene celdas que no cumplen con lo estipulado.");
+                    }
 
                     String tipoDocString = partes[0];
                     String doc = partes[1];
@@ -51,7 +62,6 @@ public class CargaMasiva {
                     String cantidad = partes[7];
 
                     TipoDeDocumento tipoDoc = this.castearTipoDoc(tipoDocString);
-// hay que ver que los datos que vienen del archivo cumplan ciertas condiciones y q no haya atributos nulos
                     MedioDeContacto mailMedio = new MedioDeContacto(mail);
                     Documento documento = new Documento(tipoDoc, doc, null);
                     PersonaHumana persona = new PersonaHumana(nombre, apellido, null,documento,null);
@@ -69,9 +79,9 @@ public class CargaMasiva {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error al abrir el archivo: " + e.getMessage());
         } catch (CsvValidationException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error de validación CSV: " + e.getMessage());
         }
     }
 
@@ -96,7 +106,7 @@ public class CargaMasiva {
         }
     }
 
-    public TipoDeDocumento castearTipoDoc(String tipoDoc) {
+    public TipoDeDocumento castearTipoDoc(@NotNull String tipoDoc) {
         switch (tipoDoc) {
             case "LC":
                 return LC;
@@ -106,6 +116,27 @@ public class CargaMasiva {
                 return DNI;
             default:
                 return null;
+        }
+    }
+
+    public Boolean sonCeldasValidas(String[] partes) {
+        return this.castearTipoDoc(partes[0]) != null &&
+                partes[1].length() <= 10 || isNumeric(partes[1]) &&
+                partes[2].length() <= 50 &&
+                partes[3].length() <= 50 &&
+                partes[4].length() <= 50 && EmailValidator.getInstance().isValid(partes[4]) &&
+                partes[5].length() <=10 && this.esFechaValidaConFormato(partes[5], "dd/mm/yyyy") &&
+                partes[6].equals("DINERO") || partes[6].equals("DONACION_VIANDAS") || partes[6].equals("REDISTRIBUCION_VIANDAS") || partes[6].equals("ENTREGA_TARJETAS") &&
+                partes[7].length() <= 7 && isNumeric(partes[7]);
+    }
+
+    public Boolean esFechaValidaConFormato(String fecha, String formato) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(formato);
+        try {
+            LocalDate.parse(fecha, dateFormatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 }

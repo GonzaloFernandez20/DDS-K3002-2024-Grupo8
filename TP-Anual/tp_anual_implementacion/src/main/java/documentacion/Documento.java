@@ -21,7 +21,11 @@ public class Documento{
     public TipoDeDocumento getTipo() { return tipo;}
 
     public Boolean esDocumentoSegunNumeroYTipo(Documento documento){
-        return documento.getTipo().equals(this.getTipo()) && documento.getNumero().equals(this.getNumero());
+        if(documento != null && documento.getTipo() != null && documento.getNumero() != null) {
+            return documento.getTipo().equals(this.getTipo()) && documento.getNumero().equals(this.getNumero());
+        } else {
+            return false;
+        }
     }
 }
 

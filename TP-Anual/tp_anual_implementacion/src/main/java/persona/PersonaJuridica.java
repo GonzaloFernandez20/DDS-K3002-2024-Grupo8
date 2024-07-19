@@ -9,7 +9,7 @@ public class PersonaJuridica extends Persona {
     String rubro;
 
     public PersonaJuridica(String razonSocial, TipoOrganizacion tipoDeOrganizacion, String rubro, Direccion direccion) {
-        this.direccion = direccion;
+        super(direccion, null);
         this.razonSocial = razonSocial;
         this.tipoDeOrganizacion = tipoDeOrganizacion;
         this.rubro = rubro;
@@ -20,6 +20,5 @@ public class PersonaJuridica extends Persona {
     public void setTipoDeOrganizacion(TipoOrganizacion tipoDeOrganizacion) { this.tipoDeOrganizacion = tipoDeOrganizacion; }
 
     public void setRubro(String rubro) { this.rubro = rubro; }
-
 }
 

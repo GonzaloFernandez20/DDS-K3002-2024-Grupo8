@@ -31,7 +31,11 @@ public class Colaborador {
     }
 
     public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
-        return this.getPersona().getDocumento() != null && this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
+        if(this.getPersona().getDocumento() == null){
+            return false;
+        } else {
+            return this.getPersona().getDocumento().esDocumentoSegunNumeroYTipo(documento);
+        }
     }
 
     public void setDocumento(Documento documento) {

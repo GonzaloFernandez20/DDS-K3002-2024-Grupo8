@@ -47,9 +47,7 @@ public class PersonaSituacionVulnerable {
         return cantMenores;
     }
 
-    public Date getFechaDeNacimiento() {
-        return persona.getFechaDeNacimiento();
-    }
+    public LocalDate getFechaDeNacimiento() { return persona.getFechaDeNacimiento(); }
 
     public Documento getDocumento() {
         return persona.getDocumento();
