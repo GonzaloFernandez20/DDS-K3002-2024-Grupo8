@@ -16,6 +16,7 @@ public class DonacionDeDinero extends Contribucion {
         this.frecuencia = frecuencia;
         this.coeficiente = 0.5;
     }
+    public boolean requieroAcceso() { return false;}
 
     @Override
     public void procesarContribucion() {

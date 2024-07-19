@@ -1,6 +1,7 @@
 package heladera;
 
 import colaborador.Colaborador;
+import colaborador.RegistroAperturaHeladera;
 import localizacion.Ubicacion;
 import nuestras_excepciones.FallaHeladera;
 import nuestras_excepciones.ViandaRechazada;
@@ -107,5 +108,9 @@ public class Heladera {
 
     public void setEstado(EstadoHeladera estado) {
         this.estado = estado;
+    }
+
+    public void permitirAcceso(RegistroAperturaHeladera registro) {
+        registro.notificarQueSeAcaboElTiempo();
     }
 }

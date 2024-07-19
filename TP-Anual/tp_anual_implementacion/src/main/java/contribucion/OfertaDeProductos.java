@@ -26,6 +26,8 @@ public class OfertaDeProductos extends Contribucion {
         return imagen;
     }
 
+    public boolean requieroAcceso() { return false;}
+
     public Producto getProducto() {
         return producto;
     }

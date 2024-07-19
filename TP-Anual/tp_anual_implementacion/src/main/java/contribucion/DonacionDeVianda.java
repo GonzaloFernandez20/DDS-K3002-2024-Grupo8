@@ -27,6 +27,11 @@ public class DonacionDeVianda extends Contribucion {
         this.coeficiente = 1.5;
     }
 
+    public Heladera getHeladera() {return heladera;}
+
+    @Override
+    public boolean requieroAcceso() { return true;}
+
     public void agregarViandaADonacion(Vianda vianda) {
         viandasDonadas.add(vianda);
     }
