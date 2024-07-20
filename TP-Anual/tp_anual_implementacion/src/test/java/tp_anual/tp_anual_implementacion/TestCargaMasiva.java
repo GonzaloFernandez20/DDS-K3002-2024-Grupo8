@@ -24,8 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static documentacion.Sexo.FEMENINO;
 import static documentacion.Sexo.MASCULINO;
 import static documentacion.TipoDeDocumento.DNI;
+import static documentacion.TipoDeDocumento.LE;
+import static documentacion.TipoDeDocumento.LC;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -35,11 +38,11 @@ class TestsCargaMasiva {
     CargaMasiva cargaMasiva;
 
     Documento documento1;
-    Persona persona1;
+    PersonaHumana persona1;
     Colaborador colaborador1;
 
     CorreoElectronico mail2;
-    Persona persona2;
+    PersonaHumana persona2;
     Colaborador colaborador2;
     Documento documentoPrueba;
 
@@ -59,7 +62,7 @@ class TestsCargaMasiva {
         documento1 = new Documento(DNI, "40555555", null);
         persona1 = new PersonaHumana("Ana", "Días", null, documento1, null);
         colaborador1 = new Colaborador(persona1);
-        // sistema.darDeAltaColaborador(colaborador1);
+
         documentoPrueba = new Documento(DNI, "12345678", null);
     }
 
@@ -68,7 +71,9 @@ class TestsCargaMasiva {
         // setUp();
         assertTrue(sistema.existeColaborador(colaborador1), "El colaborador de la primera linea del CSV existe.");
         assertTrue(sistema.existeColaborador(colaborador2), "El colaborador de la segunda linea del CSV existe");
-        assertTrue(colaborador2.tieneDocumentoSegunNumeroYTipo(documentoPrueba), "Un colaborador existente en el sistema tiene datos nuevos gracias a la migracion.");
+        assertTrue(sistema.buscarColaborador(colaborador2).tieneDocumentoSegunNumeroYTipo(documentoPrueba), "Un colaborador existente en el sistema tiene datos nuevos gracias a la migracion.");
+        List<Colaborador> colaboradores = sistema.getColaboradores();
+        assertSame(sistema.getColaboradores().size(), 4, "El sistema tiene la cantidad de colaboradores del CSV");
     }
 
     @Test
@@ -87,5 +92,20 @@ class TestsCargaMasiva {
         } catch (CsvValidationException e) {
             System.err.println("Error de validación CSV: " + e.getMessage());
         }
+    }
+
+    @Test
+    void ValidacionesCasteoTipoDeDocumento() {
+        assertSame(cargaMasiva.castearTipoDoc("DNI"), DNI, "Castea correctamente al DNI");
+        assertSame(cargaMasiva.castearTipoDoc("LC"), LC, "Castea correctamente a la LC");
+        assertSame(cargaMasiva.castearTipoDoc("LE"), LE, "Castea correctamente a la LE");
+        assertNull(cargaMasiva.castearTipoDoc(" DNI"), "No identifica un tipo de documento incorrecto");
+    }
+
+    @Test
+    void ValidacionEsFechaValidaConFormato() {
+        assertTrue(cargaMasiva.esFechaValida("14/06/2000"), "El formato de fecha es valido");
+        assertFalse(cargaMasiva.esFechaValida("30/30/10"), "El formato de fecha es invalido");
+        assertFalse(cargaMasiva.esFechaValida("20-09-2020"), "El formato de fecha es invalido");
     }
 }

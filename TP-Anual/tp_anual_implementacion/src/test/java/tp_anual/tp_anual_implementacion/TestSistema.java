@@ -2,6 +2,7 @@ package tp_anual.tp_anual_implementacion;
 
 
 import colaborador.Colaborador;
+import contribucion.DonacionDeDinero;
 import documentacion.Documento;
 import localizacion.Direccion;
 import medios_de_contacto.CorreoElectronico;
@@ -27,21 +28,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestsSistema {
     Documento documento1;
     Direccion direccion1;
-    Persona     persona1;
+    PersonaHumana     persona1;
     Colaborador colaborador1;
 
     Documento documento2;
     Direccion direccion2;
-    Persona persona2;
+    PersonaHumana persona2;
     Colaborador colaborador2;
     CorreoElectronico mail2;
 
     Documento documento3;
-    Persona persona3;
+    PersonaHumana persona3;
     Colaborador colaborador3;
     Documento documento3Mock;
     Persona persona3Mock;
     Colaborador colaborador3Mock;
+
+    CorreoElectronico mail4;
+    PersonaHumana persona4;
+    Colaborador colaborador4;
+    DonacionDeDinero contribucionDinero;
 
     Sistema sistema;
 
@@ -60,9 +66,7 @@ class TestsSistema {
         persona2 = new PersonaHumana("María", "Sarmiento", null, null, direccion2);
         colaborador2 = new Colaborador(persona2);
         mail2 = new CorreoElectronico("masarmiento@gmail.com.ar");
-        // colaborador1.agregarMedioDeContacto(new MedioDeContacto("jajaja@gmail.com"));
         colaborador2.agregarMedioDeContacto(mail2);
-        // Sistema.getInstancia().darDeAltaColaborador(colaborador2);
 
         documento3 = new Documento(DNI, "40555555", FEMENINO);
         persona3 = new PersonaHumana("Ana", "Días", LocalDate.of(1999, 9, 01), documento3, direccion2);
@@ -72,6 +76,14 @@ class TestsSistema {
         documento3Mock = new Documento(DNI, "40555555", null);
         persona3Mock = new PersonaHumana("Ana", "Días", null, documento3Mock, null);
         colaborador3Mock = new Colaborador(persona3Mock);
+
+        mail4 = new CorreoElectronico("carlitosgonzalez@yahoo.com");
+        persona4 = new PersonaHumana("Carlos", "González", null, null, null);
+        colaborador4 = new Colaborador(persona4);
+        colaborador4.agregarMedioDeContacto(mail4);
+        sistema.darDeAltaColaborador(colaborador4);
+        contribucionDinero = new DonacionDeDinero(colaborador4, LocalDate.of(2021, 9, 10), 1, null);
+        colaborador4.sumarContribucion(contribucionDinero);
     }
 
     @Test
@@ -85,11 +97,20 @@ class TestsSistema {
         assertSame(sistema.buscarColaborador(colaborador1), colaborador1);
         assertNull(sistema.buscarColaborador(colaborador2), "No encuentra el colaborador en el sistema.");
         assertSame(sistema.buscarColaborador(colaborador3Mock), colaborador3);
+        assertSame(sistema.buscarColaborador(colaborador3), sistema.buscarColaborador(colaborador3Mock));
     }
 
     @Test
     void ValidacionMonto() {
         sistema.agregarMonto(1550);
-        assertSame(sistema.getMonto(), 1550.0);
+        assertTrue(sistema.getMonto() == 1550.0, "El monto agregado es el esperado");
+    }
+
+    @Test
+    void ValidacionActualizarPorCargaMasiva() {
+        sistema.actualizarPorCargaMasiva(colaborador3Mock);
+        assertSame(sistema.buscarColaborador(colaborador3Mock), sistema.buscarColaborador(colaborador3), "El colaborador es encontrado y sus datos son actualizados");
+        sistema.actualizarPorCargaMasiva(colaborador4);
+        assertTrue(sistema.existeColaborador(colaborador4), "Se da de alta al colaborador actualizado por carga masiva.");
     }
 }

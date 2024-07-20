@@ -27,7 +27,7 @@ public class Colaborador {
     public List<Contribucion> getContribucionesRealizadas() { return contribucionesRealizadas; }
 
     public Boolean tieneMedioDeContacto(MedioDeContacto medioDeContacto) {
-        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(medioDeContacto));
+        return mediosDeContacto.stream().anyMatch(medio -> medio.getIdentificacion().equals(medioDeContacto.getIdentificacion()));
     }
 
     public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {

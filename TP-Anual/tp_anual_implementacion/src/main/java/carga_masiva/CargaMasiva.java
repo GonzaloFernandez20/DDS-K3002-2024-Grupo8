@@ -19,13 +19,16 @@ import com.opencsv.CSVReader;
 import org.apache.commons.validator.routines.EmailValidator;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static documentacion.TipoDeDocumento.*;
+import static documentacion.TipoDeDocumento.DNI;
+import static documentacion.TipoDeDocumento.LC;
+import static documentacion.TipoDeDocumento.LE;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class CargaMasiva {
@@ -68,14 +71,8 @@ public class CargaMasiva {
                     Colaborador colaborador = new Colaborador(persona);
                     colaborador.agregarMedioDeContacto(mailMedio);
 
-                    if(Sistema.getInstancia().existeColaborador(colaborador)){
-                        Colaborador colaboradorExistente = Sistema.getInstancia().buscarColaborador(colaborador);
-                        agregarContribucionPorTipo(tipoDonacion, colaboradorExistente, fechaContribucion, Integer.parseInt(cantidad));
-                        Sistema.getInstancia().actualizarPorCargaMasiva(colaboradorExistente);
-                    }else {
-                        Sistema.getInstancia().darDeAltaColaborador(colaborador);
-                        agregarContribucionPorTipo(tipoDonacion, colaborador, fechaContribucion, Integer.parseInt(cantidad));
-                    }
+                    this.agregarContribucionPorTipo(tipoDonacion, colaborador, fechaContribucion, Integer.parseInt(cantidad));
+                    Sistema.getInstancia().actualizarPorCargaMasiva(colaborador);
                 }
             }
         } catch (IOException e) {
@@ -106,14 +103,14 @@ public class CargaMasiva {
         }
     }
 
-    public TipoDeDocumento castearTipoDoc(@NotNull String tipoDoc) {
+    public TipoDeDocumento castearTipoDoc(String tipoDoc) {
         switch (tipoDoc) {
             case "LC":
-                return LC;
+                return TipoDeDocumento.LC;
             case "LE":
-                return LE;
+                return TipoDeDocumento.LE;
             case "DNI":
-                return DNI;
+                return TipoDeDocumento.DNI;
             default:
                 return null;
         }
@@ -125,17 +122,17 @@ public class CargaMasiva {
                 partes[2].length() <= 50 &&
                 partes[3].length() <= 50 &&
                 partes[4].length() <= 50 && EmailValidator.getInstance().isValid(partes[4]) &&
-                partes[5].length() <=10 && this.esFechaValidaConFormato(partes[5], "dd/mm/yyyy") &&
+                partes[5].length() <=10 && this.esFechaValida(partes[5]) &&
                 partes[6].equals("DINERO") || partes[6].equals("DONACION_VIANDAS") || partes[6].equals("REDISTRIBUCION_VIANDAS") || partes[6].equals("ENTREGA_TARJETAS") &&
                 partes[7].length() <= 7 && isNumeric(partes[7]);
     }
 
-    public Boolean esFechaValidaConFormato(String fecha, String formato) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(formato);
+    public Boolean esFechaValida(String fecha) {
         try {
-            LocalDate.parse(fecha, dateFormatter);
+            String[] fechaPorPartes = fecha.split("/");
+            LocalDate.of(Integer.parseInt(fechaPorPartes[2]), Integer.parseInt(fechaPorPartes[1]), Integer.parseInt(fechaPorPartes[0]));
             return true;
-        } catch (DateTimeParseException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeException e) {
             return false;
         }
     }

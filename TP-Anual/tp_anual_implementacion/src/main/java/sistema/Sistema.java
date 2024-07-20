@@ -13,10 +13,7 @@ import persona.PersonaHumana;
 import tecnico.GestorDeTecnicos;
 import tecnico.Tecnico;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -50,20 +47,29 @@ public final class Sistema {
     }
 
     public void actualizarPorCargaMasiva(Colaborador colaborador) {
-        MedioDeContacto unMail = colaborador.getMediosDeContacto().get(0);
+        MedioDeContacto unMail;
+        try {
+            unMail = colaborador.getMediosDeContacto().getFirst();
+        } catch(NoSuchElementException e) {
+            unMail = null;
+        }
         Documento documento = colaborador.getPersona().getDocumento();
 
         if(this.existeColaborador(colaborador)) {
             Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
             if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().get(0))) {
-                colaboradorHallado.setDocumento(documento);
                 colaboradorHallado.agregarMedioDeContacto(unMail);
             }
             if(colaboradorHallado.getPersona().getDocumento() == null) {
                 colaboradorHallado.getPersona().setDocumento(colaborador.getPersona().getDocumento());
             }
+            try {
+                colaboradorHallado.sumarContribucion(colaborador.getContribucionesRealizadas().getFirst());
+            } catch (NoSuchElementException e) {
+                System.err.println("No tiene contribuciones hechas previamente.");
+            }
         } else {
-            colaboradores.add(colaborador);
+            this.darDeAltaColaborador(colaborador);
         }
     }
 
@@ -108,10 +114,16 @@ public final class Sistema {
 
     public Colaborador buscarColaborador(Colaborador colaboradorBuscado) {
         Optional<Colaborador> colaboradorEncontrado = this.getColaboradores().stream().filter(
-                colaborador -> (colaborador.getDocumento() != null && colaborador.tieneDocumentoSegunNumeroYTipo(colaboradorBuscado.getDocumento()) ||
-                (!colaborador.getMediosDeContacto().isEmpty() && !colaboradorBuscado.getMediosDeContacto().isEmpty() && colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().get(0))))).findFirst();
+                colaborador -> colaborador.tieneDocumentoSegunNumeroYTipo(colaboradorBuscado.getDocumento()) ||
+                        this.tieneMedioDeContacto(colaborador, colaboradorBuscado)).findFirst();
 
         return colaboradorEncontrado.orElse(null);
+    }
+
+    public boolean tieneMedioDeContacto(Colaborador colaborador, Colaborador colaboradorBuscado) {
+        return !colaborador.getMediosDeContacto().isEmpty() &&
+                !colaboradorBuscado.getMediosDeContacto().isEmpty() &&
+                colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().get(0));
     }
 
     public void recibirTemperatura(Float temperatura, Heladera heladera) {
