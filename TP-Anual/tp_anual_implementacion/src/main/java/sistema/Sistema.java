@@ -1,6 +1,7 @@
 package sistema;
 
 import colaborador.Colaborador;
+import colaborador.RegistroAperturaHeladera;
 import contribucion.OfertaDeProductos;
 import documentacion.Documento;
 import heladera.Heladera;
@@ -146,5 +147,10 @@ public final class Sistema {
         GestorDeIncidentes gestorDeIncidentes = GestorDeIncidentes.getInstancia();
         gestorDeIncidentes.recibirReporte(incidente);
         incidentes.add(incidente);
+    }
+
+    public void registrarMovimiento(RegistroAperturaHeladera registro) {
+        Heladera heladera = registro.getHeladera();
+        heladera.permitirAcceso(registro);
     }
 }

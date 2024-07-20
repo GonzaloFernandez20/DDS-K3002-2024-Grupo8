@@ -28,6 +28,11 @@ public class DistribucionDeVianda extends Contribucion {
     }
 
     @Override
+    public boolean requieroAcceso() { return true;}
+
+    public Heladera getHeladera() {return heladeraDeOrigen;}
+
+    @Override
     public void procesarContribucion(){
             List<Vianda> viandas;
             try {

@@ -20,5 +20,9 @@ public abstract class Contribucion {
         this.colaborador = colaborador;
         this.fechaDeDonacion = fechaDeDonacion;
     }
+
+    public boolean requieroAcceso() {return false;}
+
+    public abstract Object getHeladera();
 }
 

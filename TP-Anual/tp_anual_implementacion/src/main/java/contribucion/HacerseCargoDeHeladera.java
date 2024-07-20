@@ -23,6 +23,8 @@ public class HacerseCargoDeHeladera extends Contribucion{
         this.coeficiente = 0.5;
     }
 
+    public boolean requieroAcceso() { return false;}
+
     @Override
     public void procesarContribucion(){
             heladeraACargo.setColaborador((Colaborador) colaborador);

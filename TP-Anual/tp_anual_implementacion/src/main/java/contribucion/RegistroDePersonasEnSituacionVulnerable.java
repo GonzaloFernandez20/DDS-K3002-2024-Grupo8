@@ -28,6 +28,8 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
         }
     }
 
+    public boolean requieroAcceso() { return false;}
+
     public void sumarPersonaEnSituacionVulnerableARegistrar(PersonaSituacionVulnerable persona) {
         personasEnSituacionVulnerableARegistrar.add(persona);
     }

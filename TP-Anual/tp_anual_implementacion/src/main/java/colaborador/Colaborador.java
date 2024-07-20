@@ -8,6 +8,8 @@ import medios_de_contacto.MedioDeContacto;
 import persona.Persona;
 import persona.PersonaHumana;
 import persona.PersonaJuridica;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Colaborador {
     private List<Contribucion> contribucionesRealizadas;
     private double puntos;
     private Persona persona;
+    private Permiso permiso;
 
     public Colaborador(Persona persona){
         this.mediosDeContacto = new ArrayList<>();
@@ -66,8 +69,22 @@ public class Colaborador {
     public void sacarMedioDeContacto(MedioDeContacto medioDeContacto) { mediosDeContacto.remove(medioDeContacto); }
 
     public void sumarContribucion(Contribucion contribucion){
-        contribucionesRealizadas.add(contribucion);
-        puntos += contribucion.puntosQueSumaColaborador();
+        if(contribucion.requieroAcceso()) {
+            RegistroAperturaHeladera registro = new RegistroAperturaHeladera(contribucion, LocalDate.now(), contribucion.getHeladera());
+            if(permiso != null) {
+                permiso.registrar(registro);
+                permiso.sumarRegistro(registro);
+                contribucionesRealizadas.add(contribucion);
+                puntos += contribucion.puntosQueSumaColaborador();
+            } else {
+                // error "El usuario carece de permisos para realizar dicha operacion
+                // solicitar permiso y/o direccion si no la dio antes
+                permiso.sumarSolicitud(registro);
+            }
+        }else {
+            contribucionesRealizadas.add(contribucion);
+            puntos += contribucion.puntosQueSumaColaborador();
+        }
     }
 
     private void intercambiarPuntos(OfertaDeProductos ofertaSeleccionada) {
