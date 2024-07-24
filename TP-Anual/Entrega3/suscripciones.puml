@@ -1,0 +1,47 @@
+@startuml suscripciones
+class Heladera {
+    - gestorDeSuscripciones
+
+    + quedanNViandas() : void 
+}
+
+class GestorDeSuscripciones {
+    - suscripciones 
+
+    + notificarAnteNViandas()
+}
+
+class Suscripcion {
+    - heladera : Heladera
+    - suscriptor : Colaborador 
+    - mensaje : String 
+    
+    + sumarSuscriptor() : void 
+    + notificar() : void
+}
+
+class SuscripcionPocasViandasDisponibles extends Suscripcion {
+    - cantidadViandasDisponibles : Int
+    
+    + override notificar() : void
+}
+
+class SuscripcionMuchasViandasDisponibles extends Suscripcion {
+    - cantidadViandasDisponibles : Int
+
+    + override notificar() : void
+}
+
+clas SuscripcionDesperfectoHeladera extends Suscripcion {
+    + override notificar() : void
+}
+
+class Colaborador{
+    - suscripciones : [Suscripcion]
+
+    + suscribirmeA(heladera, self) : void
+    + serNotificado() : void
+    + atenderNotificacion() : void 
+}
+
+@enduml
