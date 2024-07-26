@@ -19,11 +19,26 @@ public class RegistroAperturaHeladera {
         this.tiempoMaximo = 3;
     }
 
+    public RegistroAperturaHeladera(Contribucion contribucion, LocalDate inicioDeOperacion, Integer tiempoMaximo, Heladera heladera) {
+        this.contribucion = contribucion;
+        this.inicioDeOperacion = inicioDeOperacion;
+        this.tiempoMaximo = tiempoMaximo;
+        this.heladera = heladera;
+    }
+
     public void notificarQueSeAcaboElTiempo() {
         // es un observer
     }
 
     public Heladera getHeladera() {
         return heladera;
+    }
+
+    public Integer getTiempoMaximo() {
+        return tiempoMaximo;
+    }
+
+    public void setTiempoMaximo(Integer tiempoMaximo) {
+        this.tiempoMaximo = tiempoMaximo;
     }
 }

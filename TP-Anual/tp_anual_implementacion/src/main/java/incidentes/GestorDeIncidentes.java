@@ -21,8 +21,8 @@ public final class GestorDeIncidentes {
         Sistema sistema = Sistema.getInstancia();
         Tecnico tecnicoMasCercano = sistema.darTecnicoMasCercano(incidente.getHeladera().getUbicacion());
         tecnicoMasCercano.notificarDeIncidente(incidente);
-
     }
+
     public void pasarIncidenteASolucionado(Incidente incidenteRecibido){
         //No sé por qué tira un error cuando hgo esto
         //Incidente incidenteAux = incidentesNoSolucionados.stream().findFirst(unIncidente -> unIncidente.equals(incidenteRecibido));

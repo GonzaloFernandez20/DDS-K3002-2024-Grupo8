@@ -7,16 +7,12 @@ import documentacion.Documento;
 import heladera.Heladera;
 import incidentes.GestorDeIncidentes;
 import incidentes.Incidente;
-import localizacion.Area;
 import localizacion.Ubicacion;
 import medios_de_contacto.MedioDeContacto;
-import persona.PersonaHumana;
 import tecnico.GestorDeTecnicos;
 import tecnico.Tecnico;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public final class Sistema {
     private static Sistema instancia = null;
@@ -134,8 +130,7 @@ public final class Sistema {
     }
 
     public void serAlertado(Heladera heladera, TipoAlerta tipoAlerta) {
-    // el sistema deberá dar aviso al técnico correspondiente (es decir al que se encuentre más cercano a
-        //la heladera en cuestión)
+        // this.darTecnicoMasCercano() VER UBICACION
     }
 
     public Tecnico darTecnicoMasCercano(Ubicacion ubicacion) {
@@ -151,5 +146,10 @@ public final class Sistema {
     public void registrarMovimiento(RegistroAperturaHeladera registro) {
         Heladera heladera = registro.getHeladera();
         heladera.permitirAcceso(registro);
+    }
+
+    public List<Heladera> recomendarHeladeras(Colaborador colaborador) {
+        // ver como hacerlo
+        return null;
     }
 }

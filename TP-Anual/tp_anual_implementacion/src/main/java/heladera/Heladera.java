@@ -6,6 +6,7 @@ import localizacion.Ubicacion;
 import nuestras_excepciones.FallaHeladera;
 import nuestras_excepciones.ViandaRechazada;
 import sistema.Sistema;
+import suscripcion.GestorDeSuscripciones;
 
 import java.util.*;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class Heladera {
     private final int capacidadDeViandas;
     private Date puestaEnFuncionamiento;
     private Sistema sistema;
+    private GestorDeSuscripciones gestorDeSuscripciones;
 
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
     private static final int BROKER_PORT = 12345; // Puerto del broker
@@ -35,6 +37,8 @@ public class Heladera {
     public Ubicacion getUbicacion() { return puntoEstrategico; }
 
     public void setSistema(Sistema sistema) { this.sistema = sistema; }
+
+    public void setGestorDeSuscripciones(GestorDeSuscripciones gestorDeSuscripciones) { this.gestorDeSuscripciones = gestorDeSuscripciones; }
 
     public void setPuestaEnFuncionamiento(Date puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
     public Date getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
@@ -60,6 +64,7 @@ public class Heladera {
     public void recibirViandas(List<Vianda> viandas) throws ViandaRechazada {
         if(viandasEnStock.size() + viandas.size() <= capacidadDeViandas){
             this.viandasEnStock.addAll(viandas);
+            gestorDeSuscripciones.serNotificadoAnte(this.viandasEnStock.size(), this);
         }
         else {
             throw new ViandaRechazada("La heladera está llena");
@@ -96,7 +101,7 @@ public class Heladera {
 
     public void recibirAviso(AvisoIntentoDeRobo aviso) { aviso.notificar(); }
 
-    public Heladera(Colaborador colaboradorACargo, Modelo modelo, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento) {
+    public Heladera(Colaborador colaboradorACargo, Modelo modelo, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento, GestorDeSuscripciones gestorDeSuscripciones) {
         this.colaboradorACargo = colaboradorACargo;
         this.estado = EstadoHeladera.activa;
         this.modelo = modelo;

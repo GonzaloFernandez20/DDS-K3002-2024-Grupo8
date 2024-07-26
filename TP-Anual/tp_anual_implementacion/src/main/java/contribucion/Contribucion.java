@@ -3,6 +3,7 @@ package contribucion;
 import java.time.LocalDate;
 
 import colaborador.Colaborador;
+import heladera.Heladera;
 import nuestras_excepciones.ColaboracionInvalida;
 import nuestras_excepciones.FallaHeladera;
 
@@ -23,6 +24,6 @@ public abstract class Contribucion {
 
     public boolean requieroAcceso() { return false;}
 
-    public abstract Object getHeladera();
+    public abstract Heladera getHeladera();
 }
 
