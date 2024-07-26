@@ -53,4 +53,6 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
     public void entregarTarjeta(Vinculacion nuevaVinculacion) {
         tarjetasRepartidas.add(nuevaVinculacion);
     }
+
+    public Object getHeladera() { return null; }
 }

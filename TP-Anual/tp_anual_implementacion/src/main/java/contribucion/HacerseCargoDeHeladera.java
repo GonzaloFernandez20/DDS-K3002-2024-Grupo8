@@ -53,4 +53,7 @@ public class HacerseCargoDeHeladera extends Contribucion{
 			System.out.println("La lista de puntos recomendados es nula o vacía.");
 		}
     }
+
+    @Override
+    public Object getHeladera() { return heladeraACargo; }
 }

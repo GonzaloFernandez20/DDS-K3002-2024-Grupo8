@@ -1,5 +1,7 @@
 package documentacion;
 
+import javax.swing.text.Document;
+
 public class Documento{
     TipoDeDocumento tipo;
     String numero;
@@ -21,11 +23,15 @@ public class Documento{
     public TipoDeDocumento getTipo() { return tipo;}
 
     public Boolean esDocumentoSegunNumeroYTipo(Documento documento){
-        if(documento != null && documento.getTipo() != null && documento.getNumero() != null) {
-            return documento.getTipo().equals(this.getTipo()) && documento.getNumero().equals(this.getNumero());
+        if(this.contieneNumeroYTipo() && documento != null && documento.contieneNumeroYTipo()) {
+            return this.getTipo().equals(documento.getTipo()) && this.getNumero().equals(documento.getNumero());
         } else {
             return false;
         }
+    }
+
+    public Boolean contieneNumeroYTipo() {
+        return this.getTipo() != null && this.getNumero() != null;
     }
 }
 

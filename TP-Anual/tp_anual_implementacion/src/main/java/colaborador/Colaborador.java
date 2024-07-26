@@ -3,6 +3,7 @@ package colaborador;
 import contribucion.Contribucion;
 import contribucion.OfertaDeProductos;
 import documentacion.Documento;
+import heladera.Heladera;
 import localizacion.Direccion;
 import medios_de_contacto.MedioDeContacto;
 import persona.Persona;
@@ -70,11 +71,11 @@ public class Colaborador {
 
     public void sumarContribucion(Contribucion contribucion){
         if(contribucion.requieroAcceso()) {
-            RegistroAperturaHeladera registro = new RegistroAperturaHeladera(contribucion, LocalDate.now(), contribucion.getHeladera());
+            RegistroAperturaHeladera registro = new RegistroAperturaHeladera(contribucion, LocalDate.now(), (Heladera) contribucion.getHeladera());
             if(permiso != null) {
                 permiso.registrar(registro);
                 permiso.sumarRegistro(registro);
-                contribucionesRealizadas.add(contribucion);
+                agregarContribucionEnLista(contribucion);
                 puntos += contribucion.puntosQueSumaColaborador();
             } else {
                 // error "El usuario carece de permisos para realizar dicha operacion
@@ -82,9 +83,13 @@ public class Colaborador {
                 permiso.sumarSolicitud(registro);
             }
         }else {
-            contribucionesRealizadas.add(contribucion);
+            agregarContribucionEnLista(contribucion);
             puntos += contribucion.puntosQueSumaColaborador();
         }
+    }
+
+    public void agregarContribucionEnLista(Contribucion contribucion){
+        contribucionesRealizadas.add(contribucion);
     }
 
     private void intercambiarPuntos(OfertaDeProductos ofertaSeleccionada) {

@@ -17,6 +17,8 @@ import contribucion.RegistroDePersonasEnSituacionVulnerable;
 import com.opencsv.exceptions.CsvValidationException;
 import com.opencsv.CSVReader;
 import org.apache.commons.validator.routines.EmailValidator;
+
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -64,6 +66,8 @@ public class CargaMasiva {
                     String tipoDonacion = partes[6];
                     String cantidad = partes[7];
 
+                    System.out.println("Procesando colaborador: " + nombre + " " + apellido + " con documento: " + tipoDocString + " " + doc + " y mail: " + mail);
+
                     TipoDeDocumento tipoDoc = this.castearTipoDoc(tipoDocString);
                     MedioDeContacto mailMedio = new MedioDeContacto(mail);
                     Documento documento = new Documento(tipoDoc, doc, null);
@@ -73,8 +77,16 @@ public class CargaMasiva {
 
                     this.agregarContribucionPorTipo(tipoDonacion, colaborador, fechaContribucion, Integer.parseInt(cantidad));
                     Sistema.getInstancia().actualizarPorCargaMasiva(colaborador);
+
+                    if (Sistema.getInstancia().existeColaborador(colaborador)) {
+                        System.out.println("Colaborador agregado exitosamente: " + nombre + " " + apellido);
+                    } else {
+                        System.out.println("Error al agregar colaborador: " + nombre + " " + apellido);
+                    }
                 }
             }
+        } catch(FileNotFoundException e) {
+            System.err.println("Error al no encontrar el archivo: " + e.getMessage());
         } catch (IOException e) {
             System.err.println("Error al abrir el archivo: " + e.getMessage());
         } catch (CsvValidationException e) {
@@ -86,19 +98,19 @@ public class CargaMasiva {
         switch (tipoDonacion) {
             case "DINERO":
                 DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, fechaContribucion, cantidad, null);
-                colaborador.sumarContribucion(contribucionDinero);
+                colaborador.agregarContribucionEnLista(contribucionDinero);
                 break;
             case "DONACION_VIANDAS":
                 DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, fechaContribucion, null, null);
-                colaborador.sumarContribucion(contribucionDonarVianda);
+                colaborador.agregarContribucionEnLista(contribucionDonarVianda);
                 break;
             case "REDISTRIBUCION_VIANDAS":
                 DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, fechaContribucion, null, null, cantidad, null);
-                colaborador.sumarContribucion(contribucionDistribuirVianda);
+                colaborador.agregarContribucionEnLista(contribucionDistribuirVianda);
                 break;
             case "ENTREGA_TARJETAS":
                 RegistroDePersonasEnSituacionVulnerable contribucionRegistro = new RegistroDePersonasEnSituacionVulnerable(colaborador, fechaContribucion, null);
-                colaborador.sumarContribucion(contribucionRegistro);
+                colaborador.agregarContribucionEnLista(contribucionRegistro);
                 break;
         }
     }

@@ -26,4 +26,7 @@ public class DonacionDeDinero extends Contribucion {
     public double puntosQueSumaColaborador() {
         return monto * coeficiente;
     }
+
+    @Override
+    public Object getHeladera() { return null; }
 }

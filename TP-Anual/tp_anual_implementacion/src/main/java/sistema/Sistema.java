@@ -62,10 +62,10 @@ public final class Sistema {
                 colaboradorHallado.agregarMedioDeContacto(unMail);
             }
             if(colaboradorHallado.getPersona().getDocumento() == null) {
-                colaboradorHallado.getPersona().setDocumento(colaborador.getPersona().getDocumento());
+                colaboradorHallado.getPersona().setDocumento(documento);
             }
             try {
-                colaboradorHallado.sumarContribucion(colaborador.getContribucionesRealizadas().getFirst());
+                colaboradorHallado.agregarContribucionEnLista(colaborador.getContribucionesRealizadas().getFirst());
             } catch (NoSuchElementException e) {
                 System.err.println("No tiene contribuciones hechas previamente.");
             }
@@ -114,11 +114,10 @@ public final class Sistema {
     }
 
     public Colaborador buscarColaborador(Colaborador colaboradorBuscado) {
-        Optional<Colaborador> colaboradorEncontrado = this.getColaboradores().stream().filter(
-                colaborador -> colaborador.tieneDocumentoSegunNumeroYTipo(colaboradorBuscado.getDocumento()) ||
-                        this.tieneMedioDeContacto(colaborador, colaboradorBuscado)).findFirst();
+            Optional<Colaborador> colaboradorEncontrado = this.getColaboradores().stream().filter(
+                    colaborador -> (this.tieneMedioDeContacto(colaborador, colaboradorBuscado) || colaborador.tieneDocumentoSegunNumeroYTipo(colaboradorBuscado.getDocumento()))).findFirst();
 
-        return colaboradorEncontrado.orElse(null);
+            return colaboradorEncontrado.orElse(null);
     }
 
     public boolean tieneMedioDeContacto(Colaborador colaborador, Colaborador colaboradorBuscado) {

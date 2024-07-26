@@ -48,4 +48,6 @@ public class OfertaDeProductos extends Contribucion {
     public double getPuntosNecesarios() { return puntosNecesarios; }
 
     public void disminuirStock() { producto.disminuirStock(); }
+
+    public Object getHeladera() { return  null; }
 }
