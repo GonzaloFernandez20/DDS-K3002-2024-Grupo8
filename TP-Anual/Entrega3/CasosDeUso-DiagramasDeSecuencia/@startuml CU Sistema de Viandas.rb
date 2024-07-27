@@ -1,0 +1,76 @@
+@startuml sistemaDeViandas
+:Colaborador: as colaborador
+:Colaborador Humano: as colaboradorHumano
+:Colaborador Jurídico: as colaboradorJuridico
+:Administrativo: as administrativo
+:Técnico: as tecnico
+
+left to right direction
+package "Sistema para la Mejora del Acceso Alimentario en Contextos de Vulnerabilidad Socioeconómica" {
+    usecase "Registrar Persona Vulnerable" as casoRegistrar
+
+    usecase "Modificar colaborador" as casoModificarColaborador
+    usecase "Dar de baja colaborador" as casoDarDeBajaColaborador
+
+    usecase "Donar dinero" as casoDonarDinero
+    usecase "Donar vianda" as casoDonarVianda
+    usecase "Distribuir viandas" as casoDistribuirViandas
+
+    usecase "Hacerse cargo de una heladera" as casoHacerseCargoDeUnaHeladera
+
+    usecase "Dar de alta heladera" as casoDarDeAltaHeladera
+    usecase "Intercambiar puntos" as casoIntercambiarPuntos
+    usecase "Modificar heladera" as casoModificarHeladera
+    usecase "Dar de baja heladera" as casoDarDeBajaHeladera
+    usecase "Ofertar productos" as casoOfertarProductos
+    usecase "Dar de alta persona en situación vulnerable" as casoDarDeAltaPersonaEnSituacionVulnerable
+
+    usecase "Dar de alta técnico" as casoDarDeAltaTecnico
+    usecase "Dar de baja técnico" as casoDarDeBajaTecnico
+    usecase "Modificar técnico" as casoModificarTecnico
+    usecase "Realizar carga masiva" as casoCargaMasiva
+
+    usecase "Registrar visita" as casoRegistrarVisita
+    usecase "Vincular tarjeta" as casoVincularTarjeta
+    
+    usecase "Acceso a heladeras" as casoAccesoHeladeras
+    usecase "Suscribirse a heladeras" as casoSuscribirseHeladeras
+    usecase "Manejar notificaciones" as casoNotificaciones
+    usecase "Reportar incidente" as casoReportarIncidente
+    usecase "Manejar incidente" as casoManejarIncidente
+}
+
+colaborador                  --> casoRegistrar
+colaborador                  --> casoModificarColaborador
+colaborador                  --> casoDarDeBajaColaborador
+colaborador                  --> casoIntercambiarPuntos
+
+colaboradorJuridico          --|> colaborador
+colaboradorHumano            --|> colaborador
+
+colaboradorHumano            --> casoDonarDinero
+colaboradorHumano            --> casoDonarVianda
+colaboradorHumano            --> casoDistribuirViandas
+colaboradorHumano            --> casoDarDeAltaPersonaEnSituacionVulnerable
+
+casoDarDeAltaPersonaEnSituacionVulnerable ..> casoVincularTarjeta : <<include>>
+
+colaboradorJuridico          --> casoOfertarProductos
+colaboradorJuridico          --> casoHacerseCargoDeUnaHeladera
+colaboradorJuridico          --> casoDarDeAltaHeladera
+colaboradorJuridico          --> casoModificarHeladera
+colaboradorJuridico          --> casoDarDeBajaHeladera
+
+administrativo               --> casoDarDeAltaTecnico
+administrativo               --> casoDarDeBajaTecnico
+administrativo               --> casoModificarTecnico
+administrativo               --> casoCargaMasiva
+
+tecnico                      --> casoRegistrarVisita
+
+colaborador                  --> casoAccesoHeladeras
+colaborador                  --> casoSuscribirseHeladeras
+colaborador                  --> casoNotificaciones
+colaborador                  --> casoReportarIncidente
+tecnico                      --> casoManejarIncidente
+@enduml
