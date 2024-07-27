@@ -5,8 +5,6 @@ import heladera.Heladera;
 import heladera.Vianda;
 import nuestras_excepciones.FallaHeladera;
 import nuestras_excepciones.ViandaRechazada;
-import persona.PersonaHumana;
-import nuestras_excepciones.ColaboracionInvalida;
 
 import java.util.List;
 import java.time.LocalDate;

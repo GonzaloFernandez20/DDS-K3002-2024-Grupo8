@@ -1,13 +1,6 @@
 package persona;
-import contribucion.DistribucionDeVianda;
-import contribucion.MotivoDeDistribucion;
 import documentacion.Documento;
-import heladera.Heladera;
 import localizacion.Direccion;
-import suscripcion.GestorDeSuscripciones;
-import suscripcion.TipoSuscripcion;
-
-import java.time.LocalDate;
 
 public abstract class Persona {
     public Direccion direccion;

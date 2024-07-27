@@ -1,7 +1,9 @@
-package suscripcion;
+package sistema;
 
 import colaborador.Colaborador;
 import heladera.Heladera;
+import suscripcion.Suscripcion;
+import suscripcion.TipoSuscripcion;
 
 import java.util.List;
 

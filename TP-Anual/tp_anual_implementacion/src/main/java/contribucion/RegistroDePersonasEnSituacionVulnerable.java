@@ -1,7 +1,6 @@
 package contribucion;
 
 import colaborador.Colaborador;
-import persona.PersonaHumana;
 import persona_vulnerable.PersonaSituacionVulnerable;
 import persona_vulnerable.Vinculacion;
 

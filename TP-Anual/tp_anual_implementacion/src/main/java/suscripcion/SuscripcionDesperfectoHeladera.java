@@ -39,6 +39,5 @@ public class SuscripcionDesperfectoHeladera extends TipoSuscripcion{
             DistribucionDeVianda distribucionDeVianda = new DistribucionDeVianda(colaborador, LocalDate.now(), heladeraQueNotifico, heladeraAElegir, viandasADistribuir, MotivoDeDistribucion.desperfectoHeladera);
             return distribucionDeVianda;
         }
-
     }
 }

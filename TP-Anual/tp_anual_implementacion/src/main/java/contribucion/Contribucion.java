@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import colaborador.Colaborador;
 import heladera.Heladera;
 import nuestras_excepciones.ColaboracionInvalida;
-import nuestras_excepciones.FallaHeladera;
 
 public abstract class Contribucion {
     protected Colaborador colaborador;

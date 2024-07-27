@@ -2,9 +2,8 @@ package incidentes;
 
 import heladera.EstadoHeladera;
 import heladera.Heladera;
-import org.apache.commons.lang3.ObjectUtils;
-import sistema.Sistema;
-import suscripcion.GestorDeSuscripciones;
+import sistema.GestorDeSuscripciones;
+import sistema.ReporteDeTodasLasHeladeras;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +15,7 @@ public class ReporteIncidente {
     private TipoDeIncidente tipoDeIncidente;
     private EstadoDelIncidente estadoDelIncidente;
     private GestorDeSuscripciones gestorDeSuscripciones;
+    private ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras;
 
     public ReporteIncidente(Heladera heladera, TipoDeIncidente tipoDeIncidente, EstadoDelIncidente estadoDelIncidente) {
         this.momentoDelReporte = LocalDateTime.now();
@@ -27,10 +27,14 @@ public class ReporteIncidente {
     public void setGestorDeSuscripciones(GestorDeSuscripciones gestorDeSuscripciones) {
         this.gestorDeSuscripciones = gestorDeSuscripciones;
     }
+    public void setReporteDeTodasLasHeladeras(ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras) {
+        this.reporteDeTodasLasHeladeras = reporteDeTodasLasHeladeras;
+    }
 
     public void reportar(){
         heladera.setEstado(EstadoHeladera.inactiva);
         gestorDeSuscripciones.serNotificadoAnte(NULL, this.heladera);
+        reporteDeTodasLasHeladeras.recibirReporte(heladera, NULL);
     }
     public void solucionar(){
         this.setEstadoDelIncidente(EstadoDelIncidente.SOLUCIONADO);

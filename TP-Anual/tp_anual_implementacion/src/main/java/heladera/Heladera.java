@@ -5,15 +5,15 @@ import colaborador.RegistroAperturaHeladera;
 import localizacion.Ubicacion;
 import nuestras_excepciones.FallaHeladera;
 import nuestras_excepciones.ViandaRechazada;
+import sistema.ReporteDeTodasLasHeladeras;
 import sistema.Sistema;
-import suscripcion.GestorDeSuscripciones;
+import sistema.GestorDeSuscripciones;
 
 import java.util.*;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import static sistema.TipoAlerta.TEMPERATURA;
+import static heladera.TipoAlerta.TEMPERATURA;
+import static java.sql.JDBCType.NULL;
 
 public class Heladera {
     private Colaborador colaboradorACargo;
@@ -26,6 +26,9 @@ public class Heladera {
     private Date puestaEnFuncionamiento;
     private Sistema sistema;
     private GestorDeSuscripciones gestorDeSuscripciones;
+    private ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras;
+
+    public void setReporteDeTodasLasHeladeras(ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras) { this.reporteDeTodasLasHeladeras = reporteDeTodasLasHeladeras; }
 
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
     private static final int BROKER_PORT = 12345; // Puerto del broker
@@ -65,6 +68,7 @@ public class Heladera {
         if(viandasEnStock.size() + viandas.size() <= capacidadDeViandas){
             this.viandasEnStock.addAll(viandas);
             gestorDeSuscripciones.serNotificadoAnte(this.viandasEnStock.size(), this);
+            reporteDeTodasLasHeladeras.recibirReporteHeladeras(this, viandasEnStock.size());
         }
         else {
             throw new ViandaRechazada("La heladera está llena");
@@ -118,4 +122,6 @@ public class Heladera {
     public void permitirAcceso(RegistroAperturaHeladera registro) {
         registro.notificarQueSeAcaboElTiempo();
     }
+
+
 }

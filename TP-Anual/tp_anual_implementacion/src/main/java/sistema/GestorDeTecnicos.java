@@ -1,8 +1,8 @@
-package tecnico;
+package sistema;
 
 import localizacion.Area;
 import localizacion.Ubicacion;
-import sistema.Sistema;
+import tecnico.Tecnico;
 
 import java.util.ArrayList;
 import java.util.List;

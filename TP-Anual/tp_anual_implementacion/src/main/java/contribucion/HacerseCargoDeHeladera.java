@@ -8,9 +8,7 @@ import API.ResponseRecomendacion;
 import colaborador.Colaborador;
 import heladera.Heladera;
 import localizacion.PuntoEnElMapa;
-import persona.PersonaJuridica;
 import sistema.Sistema;
-import nuestras_excepciones.ColaboracionInvalida;
 
 public class HacerseCargoDeHeladera extends Contribucion{
 

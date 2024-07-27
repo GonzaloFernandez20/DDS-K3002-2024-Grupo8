@@ -1,16 +1,9 @@
 package persona;
 
-import colaborador.Colaborador;
-import heladera.Heladera;
 import localizacion.Direccion;
 import documentacion.Documento;
-import org.springframework.cglib.core.Local;
-import suscripcion.GestorDeSuscripciones;
-import suscripcion.Suscripcion;
-import suscripcion.TipoSuscripcion;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class PersonaHumana extends Persona {
     String nombre;

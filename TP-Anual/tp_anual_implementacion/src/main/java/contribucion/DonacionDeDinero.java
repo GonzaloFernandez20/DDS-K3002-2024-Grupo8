@@ -1,6 +1,7 @@
 package contribucion;
 
 import colaborador.Colaborador;
+import heladera.Heladera;
 import sistema.Sistema;
 
 import java.time.LocalDate;
@@ -28,5 +29,5 @@ public class DonacionDeDinero extends Contribucion {
     }
 
     @Override
-    public Object getHeladera() { return null; }
+    public Heladera getHeladera() { return null; }
 }

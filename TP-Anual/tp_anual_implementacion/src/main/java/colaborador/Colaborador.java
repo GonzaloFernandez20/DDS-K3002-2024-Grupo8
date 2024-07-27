@@ -8,7 +8,7 @@ import localizacion.Direccion;
 import medios_de_contacto.MedioDeContacto;
 import nuestras_excepciones.ColaboracionInvalida;
 import persona.Persona;
-import suscripcion.GestorDeSuscripciones;
+import sistema.GestorDeSuscripciones;
 import suscripcion.SuscripcionDesperfectoHeladera;
 import suscripcion.TipoSuscripcion;
 
@@ -134,9 +134,6 @@ public class Colaborador {
         gestorDeSuscripciones.getInstancia().suscribirA(this, n, tipoSuscripcion, heladera);
     }
 
-    public Heladera elegirHeladeraDestino(Heladera heladera) {
-        return heladera;
-    }
     // ver como se le pregunta al colab si quiere acudir
     public Boolean deseoAcudir() {return true;}
 

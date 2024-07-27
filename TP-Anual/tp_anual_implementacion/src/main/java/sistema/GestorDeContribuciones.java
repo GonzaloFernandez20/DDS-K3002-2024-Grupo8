@@ -1,6 +1,7 @@
-package contribucion;
+package sistema;
 
 import colaborador.Colaborador;
+import contribucion.Contribucion;
 import nuestras_excepciones.ColaboracionInvalida;
 
 public class GestorDeContribuciones{

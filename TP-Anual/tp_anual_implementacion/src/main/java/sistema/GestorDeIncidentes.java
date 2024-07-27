@@ -1,12 +1,11 @@
-package incidentes;
+package sistema;
 
 
-import sistema.Sistema;
+import incidentes.EstadoDelIncidente;
+import incidentes.Incidente;
 import tecnico.Tecnico;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.ArrayList;
 
 public final class GestorDeIncidentes {
     public List<Incidente> incidentesNoSolucionados;

@@ -1,6 +1,7 @@
 package suscripcion;
 
 import colaborador.Colaborador;
+import contribucion.Contribucion;
 import heladera.Heladera;
 import java.util.List;
 
@@ -29,5 +30,9 @@ public class Suscripcion {
 
     public void notificar(Integer cantidadViandas){
         tipoSuscripcion.notificar(suscriptor, cantidadViandas, heladera);
+    }
+
+    public Contribucion crearContribucionDe(Colaborador colaborador, Heladera heladeraQueNotifico, Integer viandasADistribuir){
+        return tipoSuscripcion.crearContribucionDe(colaborador, heladeraQueNotifico, viandasADistribuir);
     }
 }

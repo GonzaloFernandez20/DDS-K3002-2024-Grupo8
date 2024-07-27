@@ -1,9 +1,7 @@
 package contribucion;
 
 import colaborador.Colaborador;
-import persona.PersonaJuridica;
 import sistema.Sistema;
-import nuestras_excepciones.ColaboracionInvalida;
 
 import java.time.LocalDate;
 

@@ -1,7 +1,7 @@
 package incidentes;
 
-import heladera.EstadoHeladera;
 import heladera.Heladera;
+import sistema.GestorDeIncidentes;
 import sistema.Sistema;
 
 import java.util.List;

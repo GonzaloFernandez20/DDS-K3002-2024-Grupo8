@@ -6,6 +6,7 @@ import colaborador.Colaborador;
 import heladera.Heladera;
 import heladera.Vianda;
 import nuestras_excepciones.ColaboracionInvalida;
+import sistema.ReporteDeTodasLasHeladeras;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,11 @@ public class DonacionDeVianda extends Contribucion {
     private List<Vianda> viandasDonadas;
     private Heladera heladera;
     double coeficiente;
+    private ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras;
+
+    private void setReporteDeTodasLasHeladeras(ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras) {
+        this.reporteDeTodasLasHeladeras = reporteDeTodasLasHeladeras;
+    }
 
     public DonacionDeVianda(Colaborador colaborador, LocalDate fechaDeDonacion, List<Vianda> viandasDonadas, Heladera heladera) {
         super(colaborador, fechaDeDonacion);
@@ -40,6 +46,7 @@ public class DonacionDeVianda extends Contribucion {
     public void procesarContribucion(){
             try {
                 heladera.recibirViandas(viandasDonadas);
+                reporteDeTodasLasHeladeras.recibirReporteHeladeras(heladera, viandasDonadas.size());
             } catch (ViandaRechazada e) {
                 //QUE HACEMOS ACA
                 throw new RuntimeException(e);

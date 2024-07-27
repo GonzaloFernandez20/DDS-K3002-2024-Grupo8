@@ -5,11 +5,10 @@ import colaborador.RegistroAperturaHeladera;
 import contribucion.OfertaDeProductos;
 import documentacion.Documento;
 import heladera.Heladera;
-import incidentes.GestorDeIncidentes;
+import heladera.TipoAlerta;
 import incidentes.Incidente;
 import localizacion.Ubicacion;
 import medios_de_contacto.MedioDeContacto;
-import tecnico.GestorDeTecnicos;
 import tecnico.Tecnico;
 
 import java.util.*;
