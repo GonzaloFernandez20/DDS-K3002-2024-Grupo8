@@ -1,6 +1,8 @@
 package contribucion;
 
 import colaborador.Colaborador;
+import heladera.Heladera;
+import persona_vulnerable.AccesoAHeladeras;
 import persona_vulnerable.PersonaSituacionVulnerable;
 import persona_vulnerable.Vinculacion;
 
@@ -10,28 +12,12 @@ import java.util.List;
 import nuestras_excepciones.ColaboracionInvalida;
 
 public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
-    private List<PersonaSituacionVulnerable> personasEnSituacionVulnerableARegistrar;
-    private List<Vinculacion> tarjetasRepartidas = new ArrayList<Vinculacion>();
-    private PersonaSituacionVulnerable personaARegistrar;
 
-    public List<Vinculacion> getTarjetasRepartidas() {
-        return tarjetasRepartidas;
-    }
+    private List<PersonaSituacionVulnerable> personasEnSituacionVulnerableARegistrar; // ---------- Volaria
+    private PersonaSituacionVulnerable personaARegistrar; // ---------- Volaria
 
-    public RegistroDePersonasEnSituacionVulnerable(Colaborador colaborador, LocalDate fechaDeContribucion, List<PersonaSituacionVulnerable> personasEnSituacionVulnerableARegistrar) {
-        super(colaborador,fechaDeContribucion);
-        if(personasEnSituacionVulnerableARegistrar != null) {
-            this.personasEnSituacionVulnerableARegistrar = personasEnSituacionVulnerableARegistrar;
-        } else {
-            this.personasEnSituacionVulnerableARegistrar = new ArrayList<>();
-        }
-    }
-
-    public boolean requieroAcceso() { return false;}
-
-    public void sumarPersonaEnSituacionVulnerableARegistrar(PersonaSituacionVulnerable persona) {
-        personasEnSituacionVulnerableARegistrar.add(persona);
-    }
+    private List<Vinculacion> tarjetasRepartidas = new ArrayList<>(); // El tipo de dato lo infiere si ya esta definido en la declaracion de la variable
+    private int cantidadSolicitada;
 
     @Override
     public void procesarContribucion() throws ColaboracionInvalida{
@@ -43,8 +29,31 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
         }
     }
 
-    public void generarRegistro(PersonaSituacionVulnerable personaSituacionVulnerable) {
-        Vinculacion vinculacion = new Vinculacion(colaborador, personaSituacionVulnerable, LocalDate.now());
+    @Override
+    public double puntosQueSumaColaborador(){ return 0; }
+
+    public void RegistrarVinculacion(Vinculacion nuevaVinculacion){ //TODO
+    }
+
+    // ------------------------------------------
+
+    public RegistroDePersonasEnSituacionVulnerable(Colaborador colaborador, LocalDate fechaDeContribucion, List<PersonaSituacionVulnerable> personasEnSituacionVulnerableARegistrar) {
+        super(colaborador,fechaDeContribucion);
+        if(personasEnSituacionVulnerableARegistrar != null) {
+            this.personasEnSituacionVulnerableARegistrar = personasEnSituacionVulnerableARegistrar;
+        } else {
+            this.personasEnSituacionVulnerableARegistrar = new ArrayList<>();
+        }
+    }
+
+
+    public void sumarPersonaEnSituacionVulnerableARegistrar(PersonaSituacionVulnerable persona) {
+        personasEnSituacionVulnerableARegistrar.add(persona);
+    }
+
+
+    public void generarRegistro(PersonaSituacionVulnerable personaSituacionVulnerable, AccesoAHeladeras acceso) {
+        Vinculacion vinculacion = new Vinculacion(colaborador, personaSituacionVulnerable, acceso);
         entregarTarjeta(vinculacion);
         //FALTA AGREGAR LA VINCULACION A LA LISTA DE VINCULACIONES DEL SISTEMA
     }
@@ -52,6 +61,9 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
     public void entregarTarjeta(Vinculacion nuevaVinculacion) {
         tarjetasRepartidas.add(nuevaVinculacion);
     }
-
-    public Object getHeladera() { return null; }
+    @Override
+    public Heladera getHeladera() { return null; }
+    public boolean requieroAcceso() { return false;}
+    //public Object getHeladera() { return null; }
+    public List<Vinculacion> getTarjetasRepartidas() { return tarjetasRepartidas; }
 }

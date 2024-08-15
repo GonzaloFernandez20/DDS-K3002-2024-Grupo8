@@ -10,11 +10,11 @@ public class Vinculacion {
     LocalDate fechaRegistro;
     AccesoAHeladeras tarjetaEntregada;
 
-    public Vinculacion(Colaborador colaborador, PersonaSituacionVulnerable personaSituacionVulnerable, LocalDate fecha) {
+    public Vinculacion(Colaborador colaborador, PersonaSituacionVulnerable personaSituacionVulnerable, AccesoAHeladeras acceso) {
         colaboradorQueRegistro = colaborador;
-        fechaRegistro = fecha;
+        fechaRegistro = LocalDate.now();
         this.vincular(personaSituacionVulnerable);
-        tarjetaEntregada = new AccesoAHeladeras(personaSituacionVulnerable);
+        tarjetaEntregada = acceso;
         this.personaSituacionVulnerable = personaSituacionVulnerable;
     }
 

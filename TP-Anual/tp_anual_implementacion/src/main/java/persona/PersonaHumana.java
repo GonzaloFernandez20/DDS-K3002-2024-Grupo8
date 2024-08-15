@@ -9,9 +9,10 @@ public class PersonaHumana extends Persona {
     String nombre;
     String apellido;
     LocalDate fechaDeNacimiento;
+    Documento documento;
 
     public PersonaHumana(String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento, Direccion direccion) {
-        super(direccion, documento);
+        super(direccion);
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaDeNacimiento = fechaDeNacimiento;

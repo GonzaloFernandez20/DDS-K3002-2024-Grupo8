@@ -15,7 +15,7 @@ import java.util.*;
 
 public final class Sistema {
     private static Sistema instancia = null;
-    List<Colaborador> colaboradores = new ArrayList<>();;
+    List<Colaborador> colaboradores = new ArrayList<>();
     List<Heladera> heladeras = new ArrayList<>();
     List<Tecnico> tecnicos = new ArrayList<>();
     List<OfertaDeProductos> ofertas = new ArrayList<>();
@@ -53,7 +53,7 @@ public final class Sistema {
 
         if(this.existeColaborador(colaborador)) {
             Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
-            if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().get(0))) {
+            if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().getFirst())) {
                 colaboradorHallado.agregarMedioDeContacto(unMail);
             }
             if(colaboradorHallado.getPersona().getDocumento() == null) {
@@ -75,6 +75,7 @@ public final class Sistema {
 
     public void darDeAltaHeladera(Heladera heladera) {
         heladeras.add(heladera);
+
     }
 
     public void darDeAltaTecnico(Tecnico tecnico) {
@@ -118,7 +119,7 @@ public final class Sistema {
     public boolean tieneMedioDeContacto(Colaborador colaborador, Colaborador colaboradorBuscado) {
         return !colaborador.getMediosDeContacto().isEmpty() &&
                 !colaboradorBuscado.getMediosDeContacto().isEmpty() &&
-                colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().get(0));
+                colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().getFirst());
     }
 
     public void recibirTemperatura(Float temperatura, Heladera heladera) {

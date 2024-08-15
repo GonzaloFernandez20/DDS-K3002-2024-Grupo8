@@ -23,7 +23,7 @@ public class Colaborador {
     private double puntos;
     private Persona persona;
     private Permiso permiso;
-    private Integer tiempoMaximo;
+    //private Integer tiempoMaximo;
     GestorDeSuscripciones gestorDeSuscripciones;
 
     public Colaborador(Persona persona){
@@ -32,6 +32,7 @@ public class Colaborador {
         this.puntos = 0;
         this.persona = persona;
     }
+    public Direccion obtenerDireccion() { return persona.getDireccion(); }
 
     public void setGestorDeSuscripciones(GestorDeSuscripciones gestorDeSuscripciones) {this.gestorDeSuscripciones = gestorDeSuscripciones;}
 
@@ -62,7 +63,6 @@ public class Colaborador {
     }
 
     public void setDireccion(Direccion direccion) { this.persona.setDireccion(direccion); }
-    public Direccion getDireccion() { return persona.getDireccion();}
 
     public double getPuntos() { return puntos; }
 

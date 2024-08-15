@@ -1,4 +1,4 @@
-@startuml sistemaDeViandas
+@startuml SistemaDeViandas
 :Colaborador: as colaborador
 :Colaborador Humano: as colaboradorHumano
 :Colaborador Jurídico: as colaboradorJuridico

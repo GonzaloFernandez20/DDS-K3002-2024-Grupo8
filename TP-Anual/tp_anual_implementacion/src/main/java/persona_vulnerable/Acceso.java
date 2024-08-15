@@ -2,14 +2,13 @@ package persona_vulnerable;
 
 import heladera.Heladera;
 import heladera.Vianda;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
-
-public class UsoXTarjeta {
+public class Acceso {
     Heladera heladera;
     Vianda vianda;
-    LocalDateTime fecha;
-    public UsoXTarjeta(Heladera heladera,Vianda vianda,LocalDateTime fecha){
+    LocalDate fecha;
+    public Acceso(Heladera heladera, Vianda vianda, LocalDate fecha){
         this.heladera = heladera;
         this.fecha = fecha;
         this.vianda = vianda;
@@ -20,7 +19,7 @@ public class UsoXTarjeta {
     public Vianda getVianda() {
         return vianda;
     }
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 }

@@ -1,7 +1,9 @@
 package heladera;
 
 public enum EstadoVianda {
-    entregada,
-    noEntregada,
-    vencida
+    ENTREGADA,
+    NO_ENTREGADA,
+    VENCIDA,
+    RETIRADA,
+    EN_TRASLADO
 }

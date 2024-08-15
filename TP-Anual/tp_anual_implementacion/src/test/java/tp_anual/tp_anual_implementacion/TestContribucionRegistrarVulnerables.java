@@ -1,23 +1,12 @@
 package tp_anual.tp_anual_implementacion;
 import colaborador.Colaborador;
 import contribucion.RegistroDePersonasEnSituacionVulnerable;
-import documentacion.Documento;
-import heladera.EstadoVianda;
-import heladera.Heladera;
-import heladera.Modelo;
-import heladera.Vianda;
 import nuestras_excepciones.ColaboracionInvalida;
-import nuestras_excepciones.FallaHeladera;
 import localizacion.Direccion;
-import nuestras_excepciones.ViandaRechazada;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.springframework.boot.test.context.SpringBootTest;
-import persona.Persona;
 import persona.PersonaHumana;
-import persona.PersonaJuridica;
-import persona.TipoOrganizacion;
 import persona_vulnerable.AccesoAHeladeras;
 import persona_vulnerable.EstadoDeVivienda;
 import persona_vulnerable.PersonaSituacionVulnerable;
@@ -25,9 +14,7 @@ import persona_vulnerable.Vinculacion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest

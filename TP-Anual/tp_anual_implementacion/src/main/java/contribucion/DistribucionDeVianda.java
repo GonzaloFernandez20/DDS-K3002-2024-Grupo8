@@ -10,25 +10,24 @@ import java.util.List;
 import java.time.LocalDate;
 
 public class DistribucionDeVianda extends Contribucion {
-    private Heladera heladeraDeOrigen;
-    private Heladera heladeraDestino;
-    private int cantDeViandas;
-    private MotivoDeDistribucion motivo;
-    double coeficiente;
 
-    public DistribucionDeVianda(Colaborador colaborador, LocalDate fechaDeDonacion, Heladera heladeraDeOrigen, Heladera heladeraDestino, int cantDeViandas, MotivoDeDistribucion motivo) {
+    private final Heladera heladeraDeOrigen;
+    private final Heladera heladeraDestino;
+    private final int cantDeViandas;
+    private final MotivoDeDistribucion motivo;
+
+    public DistribucionDeVianda(Colaborador colaborador,
+                                LocalDate fechaDeDonacion,
+                                Heladera heladeraDeOrigen,
+                                Heladera heladeraDestino,
+                                int cantDeViandas,
+                                MotivoDeDistribucion motivo) {
         super(colaborador, fechaDeDonacion);
         this.heladeraDestino = heladeraDestino;
         this.heladeraDeOrigen = heladeraDeOrigen;
         this.cantDeViandas = cantDeViandas;
         this.motivo = motivo;
-        this.coeficiente = 1;
     }
-
-    @Override
-    public boolean requieroAcceso() { return true;}
-
-    public Heladera getHeladera() {return heladeraDeOrigen;}
 
     @Override
     public void procesarContribucion(){
@@ -48,6 +47,11 @@ public class DistribucionDeVianda extends Contribucion {
     }
 
     public double puntosQueSumaColaborador() {
+        double coeficiente = 1;
         return cantDeViandas * coeficiente;
     }
+
+    @Override
+    public boolean requieroAcceso() { return true;}
+    public Heladera getHeladera() {return heladeraDeOrigen;}
 }

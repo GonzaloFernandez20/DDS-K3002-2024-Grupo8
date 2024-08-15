@@ -1,79 +1,56 @@
 package persona_vulnerable;
-
 import heladera.Heladera;
 import heladera.Vianda;
-import sistema.Sistema;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class AccesoAHeladeras {
     PersonaSituacionVulnerable personaSituacionVulnerable;
-    String id;
+    String codigoTarjeta;
     int cantUsosRestantesPorDia;
-    List <UsoXTarjeta> usos;
+    List <Acceso> historicoDeAccesosAHeladera;
+    LocalDate fechaUltimoUso;
 
-    public AccesoAHeladeras(PersonaSituacionVulnerable persona){
+    public AccesoAHeladeras(PersonaSituacionVulnerable persona, String codigoTarjeta){
         this.personaSituacionVulnerable = persona;
-        Sistema sistema = new Sistema();
-        this.id = String.valueOf(sistema.getInstancia().getContadorDeVinculaciones());
-        this.cantUsosRestantesPorDia = this.getCantUsosPorDia();
+        this.codigoTarjeta = codigoTarjeta;
+        this.reiniciarUsosPermitidos();
+        //this.codigoTarjeta = String.valueOf(Sistema.getInstancia().getContadorDeVinculaciones()); // --> Revisar
+        this.historicoDeAccesosAHeladera = new ArrayList<>();
     }
 
-    public int getCantUsosPorDia() {
-        //Cada tarjeta sólo podrá ser utilizada cuatro veces en el mismo día,
-        // y a su vez dos veces más por cada menor que tenga a cargo
-        return 4 + personaSituacionVulnerable.getCantMenores() * 2; //hardcodeado por el enunciado
+    public boolean validarUsoDisponible(){
+        consultarUltimoAcceso();
+        return cantUsosRestantesPorDia > 0;
+
+        // --> TODO: Manejo de error en caso de que no tenga historicoDeAccesosAHeladera disponibles
+        // --> TODO: Si La heladera estuviera vacia, no deberia restar un uso de la tarjeta
     }
 
-    public int getCantUsosRestantesPorDia() {
-        return cantUsosRestantesPorDia;
+    public void registrarAcceso(Vianda vianda, Heladera heladera){
+        historicoDeAccesosAHeladera.add(new Acceso(heladera,
+                vianda,
+                LocalDate.now()));
+        heladera.sacarVianda(vianda);
+        cantUsosRestantesPorDia --;
     }
 
-    public String getId() {
-        return id;
+    private void reiniciarUsosPermitidos() {
+        cantUsosRestantesPorDia = 4 + personaSituacionVulnerable.getCantMenores() * 2;
     }
 
-    public PersonaSituacionVulnerable getPersonaSituacionVulnerable() {
-        return personaSituacionVulnerable;
-    }
+    private void consultarUltimoAcceso(){
+        LocalDate fechaDeHoy = LocalDate.now();
 
-    public void usar(Vianda vianda, Heladera heladera){
-        if(Objects.equals(this.ultimoAcceso(),this.hoy())){
-            if(cantUsosRestantesPorDia == 0){
-                //ERROR / EXCEPTION
-            }else {
-                usos.add(new UsoXTarjeta(heladera,
-                        vianda,
-                        LocalDateTime.now()));
-                heladera.sacarVianda(vianda);
-                cantUsosRestantesPorDia--;
-            }
-        }
-        else {
-            this.reiniciarCantidadDeUsos();
+        if (fechaUltimoUso.isBefore(fechaDeHoy)){
+            reiniciarUsosPermitidos();
+            fechaUltimoUso = fechaDeHoy;
         }
     }
 
-    public void reiniciarCantidadDeUsos(){
-        this.cantUsosRestantesPorDia = this.getCantUsosPorDia();
-    }
-
-    public String ultimoAcceso(){
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return this.ultimoUso().format(myFormatObj);
-    }
-
-    public String hoy(){
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDateTime hoy = LocalDateTime.now();
-        return this.ultimoUso().format(myFormatObj);
-    }
-
-    public LocalDateTime ultimoUso(){
-        UsoXTarjeta usoXTarjeta = usos.get(usos.size()-1);//el getLast no funcionaba para List
-        return usoXTarjeta.getFecha();
-    }
+    public int getCantUsosRestantesPorDia() { return cantUsosRestantesPorDia; }
+    public String getCodigoTarjeta() { return codigoTarjeta; }
+    public PersonaSituacionVulnerable getPersonaSituacionVulnerable() { return personaSituacionVulnerable; }
 }

@@ -7,7 +7,7 @@ import sistema.Sistema;
 import java.time.LocalDate;
 
 public class DonacionDeDinero extends Contribucion {
-    double coeficiente;
+    double coeficiente = 0.5;
     private float monto;
     private Frecuencia frecuencia;
 
@@ -15,18 +15,12 @@ public class DonacionDeDinero extends Contribucion {
         super(colaborador, fechaDeDonacion);
         this.monto = monto;
         this.frecuencia = frecuencia;
-        this.coeficiente = 0.5;
     }
-    public boolean requieroAcceso() { return false;}
 
     @Override
-    public void procesarContribucion() {
-        Sistema.getInstancia().agregarMonto(monto);
-    }
-
-    public double puntosQueSumaColaborador() {
-        return monto * coeficiente;
-    }
+    public void procesarContribucion() { Sistema.getInstancia().agregarMonto(monto); }
+    public double puntosQueSumaColaborador() { return monto * coeficiente; }
+    public boolean requieroAcceso() { return false;}
 
     @Override
     public Heladera getHeladera() { return null; }
