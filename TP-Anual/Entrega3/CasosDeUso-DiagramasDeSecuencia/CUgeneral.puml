@@ -7,13 +7,16 @@
 
 left to right direction
 package "Sistema para la Mejora del Acceso Alimentario en Contextos de Vulnerabilidad Socioeconómica" {
+    usecase "Elegir contribución" as casoElegirContribucion
+    usecase "Visualizar mapa de heladeras" as casoVisualizarMapa
     usecase "Registrar Persona Vulnerable" as casoRegistrar
 
-    usecase "Modificar colaborador" as casoModificarColaborador
-    usecase "Dar de baja colaborador" as casoDarDeBajaColaborador
+    usecase "Modificar datos personales" as casoModificarColaborador
+    usecase "Darse de baja" as casoDarseDeBaja
+    usecase "Registrarse" as casoRegistrarse
 
     usecase "Donar dinero" as casoDonarDinero
-    usecase "Donar vianda" as casoDonarVianda
+    usecase "Donar viandas" as casoDonarViandas
     usecase "Distribuir viandas" as casoDistribuirViandas
 
     usecase "Hacerse cargo de una heladera" as casoHacerseCargoDeUnaHeladera
@@ -42,16 +45,17 @@ package "Sistema para la Mejora del Acceso Alimentario en Contextos de Vulnerabi
 
 colaborador                  --> casoRegistrar
 colaborador                  --> casoModificarColaborador
-colaborador                  --> casoDarDeBajaColaborador
+colaborador                  --> casoDarseDeBaja
+colaborador                  --> casoRegistrarse
 colaborador                  --> casoIntercambiarPuntos
+colaborador                  --> casoVisualizarMapa
 
 colaboradorJuridico          --|> colaborador
 colaboradorHumano            --|> colaborador
 
-colaboradorHumano            --> casoDonarDinero
-colaboradorHumano            --> casoDonarVianda
-colaboradorHumano            --> casoDistribuirViandas
 colaboradorHumano            --> casoDarDeAltaPersonaEnSituacionVulnerable
+colaboradorHumano            --> casoDonarViandas
+colaboradorHumano            --> casoDistribuirViandas
 
 casoDarDeAltaPersonaEnSituacionVulnerable ..> casoVincularTarjeta : <<include>>
 
@@ -68,9 +72,20 @@ administrativo               --> casoCargaMasiva
 
 tecnico                      --> casoRegistrarVisita
 
+colaborador                  --> casoDonarDinero
 colaborador                  --> casoAccesoHeladeras
 colaborador                  --> casoSuscribirseHeladeras
 colaborador                  --> casoNotificaciones
 colaborador                  --> casoReportarIncidente
 tecnico                      --> casoManejarIncidente
+
+casoDarDeAltaPersonaEnSituacionVulnerable ..> casoElegirContribucion : <<include>>
+casoDonarDinero ..> casoElegirContribucion : <<include>>
+casoDonarViandas ..> casoElegirContribucion : <<include>>
+casoDistribuirViandas ..> casoElegirContribucion : <<include>>
+casoOfertarProductos ..> casoElegirContribucion : <<include>>
+casoHacerseCargoDeUnaHeladera ..> casoElegirContribucion : <<include>>
+casoElegirContribucion ..> casoRegistrarse : <<extend>>
+casoDonarViandas ..> casoVisualizarMapa : <<extend>>
+casoDistribuirViandas ..> casoVisualizarMapa : <<extend>>
 @enduml
