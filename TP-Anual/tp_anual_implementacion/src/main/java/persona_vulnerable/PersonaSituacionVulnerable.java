@@ -1,5 +1,6 @@
 package persona_vulnerable;
 
+import Accesos_a_heladeras.Vinculacion;
 import persona.Persona;
 import persona.PersonaHumana;
 import documentacion.Documento;
@@ -8,23 +9,26 @@ import localizacion.Direccion;
 import java.time.LocalDate;
 
 public class PersonaSituacionVulnerable extends PersonaHumana {
-    EstadoDeVivienda estadoDeVivienda;
-    int cantMenores;
-    Vinculacion vinculacion;
-    PersonaHumana persona;
+    private EstadoDeVivienda estadoDeVivienda;
+    private int cantMenores;
+    private Vinculacion vinculacion;
+    private PersonaHumana persona;
 
-    public PersonaSituacionVulnerable(Persona persona,
-                                      String nombre,
-                                      String apellido,
+    public PersonaSituacionVulnerable(String nombre, String apellido,
                                       LocalDate fechaDeNacimiento,
                                       Documento documento,
                                       Direccion direccion,
-                                      EstadoDeVivienda estado,
-                                      int menoresAcargo){
+                                      EstadoDeVivienda estadoDeVivienda,
+                                      int cantMenores,
+                                      Vinculacion vinculacion,
+                                      PersonaHumana persona) {
         super(nombre, apellido, fechaDeNacimiento, documento, direccion);
-        this.estadoDeVivienda = estado;
-        this.cantMenores = menoresAcargo;
+        this.estadoDeVivienda = estadoDeVivienda;
+        this.cantMenores = cantMenores;
+        this.vinculacion = vinculacion;
+        this.persona = persona;
     }
+
 
     // ---- Getters y Setters
     public void setCantMenores(int cantMenores) {

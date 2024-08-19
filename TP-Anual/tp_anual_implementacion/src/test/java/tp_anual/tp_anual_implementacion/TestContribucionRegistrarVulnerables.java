@@ -72,11 +72,11 @@ public class TestContribucionRegistrarVulnerables{
         persona3 = new PersonaHumana("Abril",    "Vallecillo", null, null, null);
         persona4 = new PersonaHumana("Melina",   "Bugallo", null, null, null);
 
-        vulnerable0 = new PersonaSituacionVulnerable(persona0, EstadoDeVivienda.situacionDeCalle,  0);
-        vulnerable1 = new PersonaSituacionVulnerable(persona1, EstadoDeVivienda.situacionDeCalle,  1);
-        vulnerable2 = new PersonaSituacionVulnerable(persona2, EstadoDeVivienda.situacionDeCalle,  2);
-        vulnerable3 = new PersonaSituacionVulnerable(persona3, EstadoDeVivienda.situacionDeCalle,  3);
-        vulnerable4 = new PersonaSituacionVulnerable(persona4, EstadoDeVivienda.situacionDeCalle,  4);
+        vulnerable0 = new PersonaSituacionVulnerable(persona0, EstadoDeVivienda.SITUACION_DE_CALLE,  0);
+        vulnerable1 = new PersonaSituacionVulnerable(persona1, EstadoDeVivienda.SITUACION_DE_CALLE,  1);
+        vulnerable2 = new PersonaSituacionVulnerable(persona2, EstadoDeVivienda.SITUACION_DE_CALLE,  2);
+        vulnerable3 = new PersonaSituacionVulnerable(persona3, EstadoDeVivienda.SITUACION_DE_CALLE,  3);
+        vulnerable4 = new PersonaSituacionVulnerable(persona4, EstadoDeVivienda.SITUACION_DE_CALLE,  4);
 
         vulnerablesARegistrar.add(vulnerable0);
         vulnerablesARegistrar.add(vulnerable1);

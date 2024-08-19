@@ -1,6 +1,6 @@
 package persona_vulnerable;
 
 public enum EstadoDeVivienda {
-    poseeDomicilio,
-    situacionDeCalle
+    POSEE_DOMICILIO,
+    SITUACION_DE_CALLE
 }
