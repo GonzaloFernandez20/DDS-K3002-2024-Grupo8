@@ -1,7 +1,6 @@
 package sistema;
 
 import colaborador.Colaborador;
-import colaborador.RegistroAperturaHeladera;
 import contribucion.OfertaDeProductos;
 import documentacion.Documento;
 import heladera.Heladera;

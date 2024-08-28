@@ -1,6 +1,7 @@
 package heladera;
 
 public enum EstadoHeladera {
-    activa,
-    inactiva
+    ACTIVA,
+    INACTIVA,
+    PENDIENTE
 }

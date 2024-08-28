@@ -111,11 +111,8 @@ public class TestContribucionRegistrarVulnerables{
     }
     @Test
     void registrarVulnerables(){
-        try {//NO TIENE QUE SALTAR LA EXCEPCION
-            contribucion0.procesarContribucion();
-        } catch (ColaboracionInvalida e) {
-            throw new RuntimeException(e);
-        }
+        //NO TIENE QUE SALTAR LA EXCEPCION
+        contribucion0.procesarContribucion();
 
         boolean rtaAnterior = true;
         for(int i = 0; i< vinculacionesEsperadas.size();i++){

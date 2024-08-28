@@ -4,14 +4,14 @@ import heladera.Heladera;
 import java.time.LocalDateTime;
 
 public class Acceso {
-    private Heladera heladera;
-    private MotivoApertura motivo;
-    private LocalDateTime fecha;
+    private final Heladera heladera;
+    private final MotivoApertura motivo;
+    private final LocalDateTime fecha;
 
 
-    public Acceso(Heladera heladera, MotivoApertura motivo, LocalDateTime fecha) {
+    public Acceso(Heladera heladera, MotivoApertura motivo) {
         this.heladera = heladera;
         this.motivo = motivo;
-        this.fecha = fecha;
+        this.fecha = LocalDateTime.now();
     }
 }

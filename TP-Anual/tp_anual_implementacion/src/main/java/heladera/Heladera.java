@@ -1,95 +1,76 @@
 package heladera;
 
 import colaborador.Colaborador;
-import colaborador.RegistroAperturaHeladera;
 import localizacion.Ubicacion;
 import nuestras_excepciones.FallaHeladera;
-import nuestras_excepciones.ViandaRechazada;
-import sistema.ReporteDeTodasLasHeladeras;
-import sistema.Sistema;
-import sistema.GestorDeSuscripciones;
+import suscripcion.NotificadorDeSuscriptos;
 
+import java.time.LocalDate;
 import java.util.*;
-import java.util.Date;
 
-import static heladera.TipoAlerta.TEMPERATURA;
-import static java.sql.JDBCType.NULL;
 
 public class Heladera {
-    private Colaborador colaboradorACargo;
-    private EstadoHeladera estado;
-    private final Modelo modelo;
-    Float ultimaTemperaturaRegistrada;
-    List<Vianda> viandasEnStock;
-    private Ubicacion puntoEstrategico;
+    private final Colaborador colaboradorACargo;
+    private final Ubicacion ubicacion;
     private final int capacidadDeViandas;
-    private Date puestaEnFuncionamiento;
-    private Sistema sistema;
-    private GestorDeSuscripciones gestorDeSuscripciones;
-    private ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras;
+    private LocalDate puestaEnFuncionamiento;
+    private List<Vianda> viandasEnStock;
+    private Modelo modelo;
+    private EstadoHeladera estado;
+    private final NotificadorDeSuscriptos notificadorDeSuscriptos;
 
-    public void setReporteDeTodasLasHeladeras(ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras) { this.reporteDeTodasLasHeladeras = reporteDeTodasLasHeladeras; }
-
+    // BROKER ------------------------------------------
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
     private static final int BROKER_PORT = 12345; // Puerto del broker
+    // ------------------------------------------------
 
-    public void setColaborador(Colaborador colaborador) { this.colaboradorACargo = colaborador; }
-    public Colaborador getColaboradorACargo() { return colaboradorACargo; }
-
-    public void setUbicacion(Ubicacion puntoEstrategico) { this.puntoEstrategico = puntoEstrategico; }
-    public Ubicacion getUbicacion() { return puntoEstrategico; }
-
-    public void setSistema(Sistema sistema) { this.sistema = sistema; }
-
-    public void setGestorDeSuscripciones(GestorDeSuscripciones gestorDeSuscripciones) { this.gestorDeSuscripciones = gestorDeSuscripciones; }
-
-    public void setPuestaEnFuncionamiento(Date puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
-    public Date getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
-
-    public EstadoHeladera getEstado() { return estado; }
-
-    public Modelo getModelo() { return modelo; }
-
-    public List<Vianda> getViandasEnStock() { return viandasEnStock; }
-
-    public int getCapacidadDeViandas() { return capacidadDeViandas; }
-
-    public void setUltimaTemperaturaRegistrada(Float temperatura) {
-        this.ultimaTemperaturaRegistrada = temperatura;
-        controlarUltimaTemperatura();
-        if (sistema != null) {
-            sistema.recibirTemperatura(temperatura, this); // Envía la temperatura al sistema
-        }
+    public Heladera(Colaborador colaboradorACargo,
+                    Ubicacion ubicacion,
+                    int capacidadDeViandas,
+                    Modelo modelo,
+                    EstadoHeladera estado,
+                    NotificadorDeSuscriptos notificadorDeSuscriptos) {
+        this.colaboradorACargo = colaboradorACargo;
+        this.ubicacion = ubicacion;
+        this.capacidadDeViandas = capacidadDeViandas;
+        this.viandasEnStock = new ArrayList<>();
+        this.modelo = modelo;
+        this.estado = estado;
+        this.notificadorDeSuscriptos = notificadorDeSuscriptos;
     }
 
-    public Float getUltimaTemperaturaRegistrada() { return ultimaTemperaturaRegistrada; }
-
-    public void recibirViandas(List<Vianda> viandas) throws ViandaRechazada {
+    // ------------------------------------------------
+    public void recibirViandas(List<Vianda> viandas) {
         if(viandasEnStock.size() + viandas.size() <= capacidadDeViandas){
             this.viandasEnStock.addAll(viandas);
-            gestorDeSuscripciones.serNotificadoAnte(this.viandasEnStock.size(), this);
-            reporteDeTodasLasHeladeras.recibirReporteHeladeras(this, viandasEnStock.size());
-        }
-        else {
-            throw new ViandaRechazada("La heladera está llena");
         }
     }
-    
+
     public List<Vianda> retirarViandas(int cantidadARetirar) throws FallaHeladera {
         Vianda vianda;
         List<Vianda> viandasARetirar = new ArrayList<>();
         for (int i = 0; i < cantidadARetirar && !viandasEnStock.isEmpty(); i++) {
             vianda = viandasEnStock.get(0);
-            vianda.serEntregada();
+            //vianda.serEntregada();
             viandasARetirar.add(vianda);
             viandasEnStock.remove(vianda);
         }
         return viandasARetirar;
         }
 
-    public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); }
+    // ---- Getters y Setters
+    public Colaborador getColaboradorACargo() { return colaboradorACargo; }
+    public Ubicacion getUbicacion() { return ubicacion; }
+    public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
+    public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
+    public Modelo getModelo() { return modelo; }
+    public void setModelo(Modelo modelo) { this.modelo = modelo; }
+    public EstadoHeladera getEstado() { return estado; }
+    public NotificadorDeSuscriptos getNotificadorDeSuscriptos() { return notificadorDeSuscriptos; }
+}
 
-    public void controlarUltimaTemperatura() {
+//public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); } -> TODO: Verificar si trae problemas devolver una lista de 1 elemento
+/*    public void controlarUltimaTemperatura() {
         if (ultimaTemperaturaRegistrada != null) {
             Float temperaturaMinima = modelo.getTemperaturaMinima();
             Float temperaturaMaxima = modelo.getTemperaturaMaxima();
@@ -101,27 +82,4 @@ public class Heladera {
                 estado = EstadoHeladera.activa;
             }
         }
-    }
-
-    public void recibirAviso(AvisoIntentoDeRobo aviso) { aviso.notificar(); }
-
-    public Heladera(Colaborador colaboradorACargo, Modelo modelo, List<Vianda> viandasEnStock, Ubicacion puntoEstrategico, int capacidadDeViandas, Date puestaEnFuncionamiento, GestorDeSuscripciones gestorDeSuscripciones) {
-        this.colaboradorACargo = colaboradorACargo;
-        this.estado = EstadoHeladera.activa;
-        this.modelo = modelo;
-        this.viandasEnStock = viandasEnStock;
-        this.puntoEstrategico = puntoEstrategico;
-        this.capacidadDeViandas = capacidadDeViandas;
-        this.puestaEnFuncionamiento = puestaEnFuncionamiento;
-    }
-
-    public void setEstado(EstadoHeladera estado) {
-        this.estado = estado;
-    }
-
-    public void permitirAcceso(RegistroAperturaHeladera registro) {
-        registro.notificarQueSeAcaboElTiempo();
-    }
-
-
-}
+    }*/

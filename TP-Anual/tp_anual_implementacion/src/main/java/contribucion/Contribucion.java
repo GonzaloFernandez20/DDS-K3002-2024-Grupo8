@@ -4,13 +4,12 @@ import java.time.LocalDate;
 
 import colaborador.Colaborador;
 import heladera.Heladera;
-import nuestras_excepciones.ColaboracionInvalida;
 
 public abstract class Contribucion {
     protected Colaborador colaborador;
     protected LocalDate fechaDeDonacion;
 
-    public abstract void procesarContribucion() throws ColaboracionInvalida;
+    public abstract void procesarContribucion();
 
     public double puntosQueSumaColaborador() {
         return 0;

@@ -3,7 +3,6 @@ package tp_anual.tp_anual_implementacion;
 import colaborador.Colaborador;
 import contribucion.OfertaDeProductos;
 import contribucion.Producto;
-import documentacion.Documento;
 import localizacion.Direccion;
 import medios_de_contacto.CorreoElectronico;
 import nuestras_excepciones.ColaboracionInvalida;
@@ -18,7 +17,6 @@ import sistema.Sistema;
 import java.time.LocalDate;
 
 import static contribucion.Rubro.GASTRONOMIA;
-import static documentacion.TipoDeDocumento.DNI;
 import static org.junit.jupiter.api.Assertions.*;
 import static persona.TipoOrganizacion.empresa;
 

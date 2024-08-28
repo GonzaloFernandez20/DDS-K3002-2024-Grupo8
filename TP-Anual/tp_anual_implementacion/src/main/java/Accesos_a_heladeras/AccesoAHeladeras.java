@@ -13,6 +13,5 @@ public abstract class AccesoAHeladeras {
         this.codigoTarjeta = codigoTarjeta;
     }
 
-    public abstract void registrarAcceso(Heladera heladera);
-    public abstract Boolean autorizarApertura();
+    public abstract Boolean aperturaAutorizada(Heladera heladera);
 }

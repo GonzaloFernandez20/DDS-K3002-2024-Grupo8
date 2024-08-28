@@ -18,7 +18,7 @@ public class DonacionDeVianda extends Contribucion {
     private ReporteDeTodasLasHeladeras reporteDeTodasLasHeladeras;
 
     @Override
-    public void procesarContribucion(){
+    public void procesarContribucion() {
             try {
                 heladera.recibirViandas(viandasDonadas);
                 reporteDeTodasLasHeladeras.recibirReporteHeladeras(heladera, viandasDonadas.size());

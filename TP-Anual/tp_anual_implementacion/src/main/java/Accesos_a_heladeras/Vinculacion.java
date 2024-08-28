@@ -5,7 +5,6 @@ import heladera.Heladera;
 import persona_vulnerable.PersonaSituacionVulnerable;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import static Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 
@@ -31,19 +30,14 @@ public class Vinculacion extends AccesoAHeladeras{
         this.fechaUltimoUso = fechaUltimoUso;
     }
 
-
-    @Override
     public void registrarAcceso(Heladera heladera) {
-        // Instancio un nuevo acceso a esa heladera
-        // Lo agrego a la lista historicoAccesos...
-        historicoDeAccesosHeladera.add(new Acceso(heladera,
-                RETIRAR_VIANDA,
-                LocalDateTime.now()));
+        Acceso nuevoAcceso = new Acceso(heladera, RETIRAR_VIANDA);
+        historicoDeAccesosHeladera.add(nuevoAcceso);
         cantUsosRestantesPorDia --;
     }
 
     @Override
-    public Boolean autorizarApertura() {   // Chequear si tiene usos disponibles ...
+    public Boolean aperturaAutorizada(Heladera heladera) {   // Chequear si tiene usos disponibles ...
         consultarUltimoAcceso();
         return cantUsosRestantesPorDia > 0;
 

@@ -39,7 +39,7 @@ public class OfertaDeProductos extends Contribucion {
         this.producto = producto;
     }
 
-    public void procesarContribucion(){
+    public void procesarContribucion() {
             Sistema.getInstancia().agregarOferta(this);
     }
 

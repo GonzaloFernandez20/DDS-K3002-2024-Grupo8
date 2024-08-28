@@ -3,7 +3,6 @@ package Accesos_a_heladeras;
 import contribucion.Contribucion;
 import heladera.Heladera;
 
-import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,29 +10,38 @@ public class SolicitudDeApertura {
     private Contribucion contribucion;
     private Heladera heladera;
     private MotivoApertura motivo;
-    private LocalDateTime vencimiento;
+    private Boolean vencida;
+    private final Timer timer;
 
-    public SolicitudDeApertura(Contribucion contribucion, Heladera heladera, MotivoApertura motivo, LocalDateTime vencimiento) {
+    public SolicitudDeApertura(Contribucion contribucion, Heladera heladera, MotivoApertura motivo) {
         this.contribucion = contribucion;
         this.heladera = heladera;
         this.motivo = motivo;
-        this.vencimiento = vencimiento;
+        this.vencida = false;
+        timer = new Timer();
+        iniciarTimer();
     }
 
-    public void notificarQueSeAcaboElTiempo(){
-        /*// Pasadas las 3 horas
-        Timer timer = new Timer();
+    public boolean esValida(Heladera heladera){
+        return this.heladera.equals(heladera) && !vencida;
+    }
+
+    public void iniciarTimer(){
 
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
-                // Eliminar aquella solicitud de apertura del colaborador en una heladera
+                vencida = true;
                 timer.cancel();  // Cancelar el timer después de que se ejecute la tarea
+                // notificar q se acabo el tiempo
             }
         };
-        timer.schedule(tarea, 5000);*/
+        timer.schedule(tarea, 10800000); // 3 horitas
     }
 
+    public void cancelarTimer(){
+        this.timer.cancel();
+    }
 
     // ----------> Getters y Setters
     public Contribucion getContribucion() {
@@ -54,10 +62,5 @@ public class SolicitudDeApertura {
     public void setMotivo(MotivoApertura motivo) {
         this.motivo = motivo;
     }
-    public LocalDateTime getVencimiento() {
-        return vencimiento;
-    }
-    public void setVencimiento(LocalDateTime vencimiento) {
-        this.vencimiento = vencimiento;
-    }
+
 }

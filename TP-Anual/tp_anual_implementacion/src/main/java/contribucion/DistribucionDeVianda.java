@@ -30,7 +30,7 @@ public class DistribucionDeVianda extends Contribucion {
     }
 
     @Override
-    public void procesarContribucion(){
+    public void procesarContribucion() {
             List<Vianda> viandas;
             try {
                 viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
