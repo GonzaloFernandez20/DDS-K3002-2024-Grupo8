@@ -14,7 +14,7 @@ class central extends sucursal{
 }
 
 class empleado{
-    -nombre : string
+    -nombreDelPunto : string
     -id : string
 }
 
@@ -25,7 +25,7 @@ class cartero extends empleado{
 }
 
 class cliente{
-    -nombre : string
+    -nombreDelPunto : string
     -direccion : string
     -codigoPostal : string
     -localidad : string

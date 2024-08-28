@@ -1,25 +1,23 @@
 package localizacion;
 
 public class Ubicacion {
-    PuntoEnElMapa punto;
-    Direccion direccion;
-    String ciudad;
-    String nombre;
+    private PuntoEnElMapa punto;
+    private Direccion direccion;
+    private String ciudad;
+    private String nombreDelPunto;
 
     public Ubicacion(PuntoEnElMapa punto, Direccion direccion, String ciudad, String nombre){
-        this.nombre = nombre;
+        this.nombreDelPunto = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.punto = punto;
     }
 
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public String getNombre() { return nombre; }
-    
+    // ----------> Getters y Setters
+    public void setNombreDelPunto(String nombreDelPunto) { this.nombreDelPunto = nombreDelPunto; }
+    public String getNombreDelPunto() { return nombreDelPunto; }
     public Direccion getDireccion() { return direccion; }
-
     public PuntoEnElMapa getPunto() { return punto; }
-
     public String getCiudad() { return ciudad; }
 }
 

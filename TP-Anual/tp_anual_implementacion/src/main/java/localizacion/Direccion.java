@@ -13,34 +13,28 @@ public class Direccion {
         this.unidadFuncional = unidadFuncional;
     }
 
+    // ----------> Getters y Setters
     public String getCalle() {
         return calle;
     }
-
     public void setCalle(String calle) {
         this.calle = calle;
     }
-
     public String getAltura() {
         return altura;
     }
-
     public void setAltura(String altura) {
         this.altura = altura;
     }
-
     public String getCodPostal() {
         return codPostal;
     }
-
     public void setCodPostal(String codPostal) {
         this.codPostal = codPostal;
     }
-
     public String getUnidadFuncional() {
         return unidadFuncional;
     }
-
     public void setUnidadFuncional(String unidadFuncional) {
         this.unidadFuncional = unidadFuncional;
     }
