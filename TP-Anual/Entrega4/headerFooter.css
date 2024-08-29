@@ -1,0 +1,108 @@
+/* General styles */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin: 0;
+  padding: 0;
+  min-height: 100%; 
+  display: flex; 
+  flex-direction: column;
+}
+
+body,html{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Header styles */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header img {
+  width: 50px;
+  height: auto;
+}
+
+main{
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #50bfa0;
+}
+
+/* Button styles */
+.header-buttons {
+  display: flex;
+}
+
+.header-buttons button {
+  margin-left: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #50bfa0;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.header-buttons button:hover {
+  background-color: hsl(163, 34%, 33%);
+}
+
+/* Footer styles */
+footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+  bottom: 0;
+  width: 100%;
+}
+
+footer .social-icons {
+  display: flex;
+  list-style: none;
+}
+
+footer .social-icons li {
+  margin-right: 15px;
+}
+
+footer .social-icons li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+footer .social-icons li a:hover {
+  color: #008cba;
+}
