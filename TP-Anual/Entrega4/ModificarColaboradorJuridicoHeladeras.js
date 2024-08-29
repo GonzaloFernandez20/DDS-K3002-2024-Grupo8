@@ -116,19 +116,35 @@ function eliminarHeladera(numeroDeHeladera) {
 
 document.getElementById('mod-heladera').addEventListener('submit', function(event) {
     event.preventDefault();    
-    
-    if(confirm('¿Está seguro que le quiere realizar estos cambios a la heladera ' + document.getElementById('mod-heladera-title').innerText + '?')) {
-        let nombreDelPunto = document.getElementById('mod-heladera-title').innerText;
-        let nuevaCiudad = document.getElementById('nuevaCiudadHeladera').value;
-        let nuevaDireccion = document.getElementById('nuevaDireccionHeladera').value;
-        let nuevoModelo = document.getElementById('nuevoModeloHeladera').value;
-        let nuevaCapacidad = document.getElementById('nuevaCapacidadHeladera').value;
 
-        let heladeraElegida = heladerasDeUnUsuario.find(heladera => heladera.nombreDelPunto == nombreDelPunto);
+    let nombreDelPunto = document.getElementById('mod-heladera-title').innerText;
+    let nuevaCiudad = document.getElementById('nuevaCiudadHeladera').value;
+    let nuevaDireccion = document.getElementById('nuevaDireccionHeladera').value;
+
+    if(nuevaCiudad != "" && nuevaDireccion == "") {
+        document.getElementById('nuevaDireccionHeladera').setAttribute('required', 'required');
+        return;
+    }
+
+    if(!confirm('¿Está seguro que le quiere realizar estos cambios a la heladera ' + nombreDelPunto + '?')) {
+        return;
+    }
+
+    let nuevoModelo = document.getElementById('nuevoModeloHeladera').value;
+    let nuevaCapacidad = document.getElementById('nuevaCapacidadHeladera').value;
+
+    let heladeraElegida = heladerasDeUnUsuario.find(heladera => heladera.nombreDelPunto == nombreDelPunto);
+
+    if(nuevaCiudad != ""){
         heladeraElegida.ciudad = nuevaCiudad;
+    }
+    if(nuevaDireccion != ""){
         heladeraElegida.direccion = nuevaDireccion;
+    }
+    if(nuevoModelo != ""){
         heladeraElegida.modelo = nuevoModelo;
-        heladeraElegida.capacidad = nuevaCapacidad;
+    }
+    heladeraElegida.capacidad = nuevaCapacidad;
         
         // Si hubo una alerta en una heladera, se mantiene la información que estaba antes en esa heladera
         /*
@@ -141,8 +157,7 @@ document.getElementById('mod-heladera').addEventListener('submit', function(even
         }
         */
 
-        iniciarPantalla();
-    }
+    iniciarPantalla();
 })
 
 function heladeraQueTengaEseNombre(nombreDelPunto, index, heladeras) {

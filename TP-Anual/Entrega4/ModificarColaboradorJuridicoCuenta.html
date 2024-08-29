@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Mi Cuenta - Heladeras</title>
+    <title>Mi Cuenta - Mi Cuenta</title>
 
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -52,34 +52,34 @@
         <div class="sidenav flex-column flex-shrink-0 p-3">
             <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
             <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
+            <ul class="nav nav-pills flex-column mb-auto nav-chosen">
                 <span class="fs-5">Usuario</span>
                 <li class="nav-item">
                     <image height="20px" width="20px" src="img/home-icon.svg"/>
-                    <a href="ModificarColaboradorJuridicoCuenta.html" class="nav-link">
+                    <a href="#info-personal" class="nav-link">
                         Información Personal
                     </a>
                 </li>
                 <li class="nav-item">
                     <image height="20px" width="20px" src="img/contact-icon.svg"/>
-                    <a href="ModificarColaboradorJuridicoCuenta.html" class="nav-link">
+                    <a href="#contacto" class="nav-link">
                     Contacto
                     </a>
                 </li>
             </ul>
-            <ul class="nav nav-pills flex-column mb-auto nav-chosen">
+            <ul class="nav nav-pills flex-column mb-auto">
                 <span class="fs-5">Heladeras</span>
                 <li class="nav-item">
                     <svg height="20px" width="20px">
                         <image height="20px" width="5px" x="7.5px" y="0" href="img/alert-icon.svg"/>
                     </svg>
-                    <a href="#alertas" class="nav-link">
+                    <a href="ModificarColaboradorJuridicoHeladeras.html" class="nav-link">
                         Alertas
                     </a>
                 </li>
                 <li class="nav-item">
                     <image height="20px" width="20px" src="img/list-icon.svg"/>
-                    <a href="#listado" class="nav-link">
+                    <a href="ModificarColaboradorJuridicoHeladeras.html" class="nav-link">
                         Listado de Heladeras
                     </a>
                 </li>
@@ -88,60 +88,47 @@
 
         <div class="container main">
             <h1>Mi Cuenta</h1>
-            <h2>Heladeras Asociadas</h2>
-            <div id="box-alertas">
-                <h3 id="alertas">Alertas</h3>
-                <p class="fs-5" id="non-warning-message">¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
-                <div id="warnings">
-                    <table class="table-warnings">
-                        <thead>
-                            <tr>
-                                <th>Nombre del Punto</th>
-                                <th>Ciudad</th>
-                                <th>Dirección</th>
-                                <th>Tipo de Alerta</th>
-                                <th>Fecha del Incidente</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody id="heladeras-warnings">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <h3 id="listado">Listado</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre del Punto</th>
-                        <th>Ciudad</th>
-                        <th>Dirección</th>
-                        <th>Modelo</th>
-                        <th>Capacidad (en viandas)</th>
-                        <th>Fecha de Puesta en Funcionamiento</th>
-                        <th>Modificar</th>
-                        <th>Dar de baja</th>
-                    </tr>
-                </thead>
-                <tbody id="user-heladeras">
-                </tbody>
-            </table>
-            <form id="mod-heladera">
-                <h3>Heladera a modificar:</h3>
-                <h3 id="mod-heladera-title"></h3>
+            <h2>Usuario</h2>
+
+            <form id="mod-cuenta">
                 <div class="form-cuenta">
-                    <label for="nuevaCiudadHeladera">Ciudad:</label>
-                    <input type="text" id="nuevaCiudadHeladera"><br>
-                    <label for="nuevaDireccionHeladera">Dirección:</label>
-                    <input type="text" id="nuevaDireccionHeladera"><br>
-                    <label for="nuevoModeloHeladera">Modelo de la heladera:</label>
-                    <input type="text" id="nuevoModeloHeladera"><br>
-                    <label for="nuevaCapacidadHeladera">Capacidad de viandas:</label>
-                    <input type="number" id="nuevaCapacidadHeladera" min="1" required>
+                    <h3 id="info-personal">Información Personal</h3>
+                    <label for="nuevoNombre">Cambiar nombre de usuario:</label>
+                    <input type="text" id="nuevoNombre"><br>
+                    <label for="nuevaContrasenia">Cambiar contraseña:</label>
+                    <input type="password" id="nuevaContrasenia"><br>
+                    <label for="nuevaRazonSocial">Cambiar razón social:</label>
+                    <input type="text" id="nuevaRazonSocial"><br>
+                    <label for="nuevoTipoOrg">Cambiar tipo de organización: </label>
+                    <select id="nuevoTipoOrg">
+                        <option value="">--Seleccione--</option>
+                        <option value="gubernamental">Gubernamental</option>
+                        <option value="ong">ONG</option>
+                        <option value="empresa">Empresa</option>
+                        <option value="institucion">Institución</option>
+                    </select>
+                    <label for="nuevoRubro">Rubro:</label>
+                    <input type="text" id="nuevoRubro"><br>
+
+                    <h3 id="contacto">Contacto</h3>
+                    <label for="nuevaDireccion">Cambiar dirección:</label>
+                    <input type="text" id="nuevaDireccion"><br>
+                    <!--TO DO: Mostrar medios de contacto-->
+                    <label>Agregar medio de contacto:</label>
+                    <select id="tipoNuevoMedioDeContacto">
+                        <option value="">--Seleccione--</option>
+                        <option value="telegram">Telegram</option>
+                        <option value="mail">Mail</option>
+                        <option value="whatsapp">WhatsApp</option>
+                    </select><br>
+                    <!--TO DO: Hacer que el input del medio de contacto esté desactivado hasta 
+                    que se seleccione un tipo-->
+                    <input type="text" id="nuevoMedioDeContacto"><br>
                 </div>
                 <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
                 <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
             </form>
+            <button id="btn-dar-de-baja" class="btn-mod baja">Dar de baja</button>
         </div>
     </main>
 
@@ -156,6 +143,7 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-    <script src="ModificarColaboradorJuridicoHeladeras.js"></script>
+    <script src="ModificarColaboradorUsuario.js"></script>
+    <script src="ModificarColaboradorJuridicoCuenta.js"></script>
 </body>
 </html>
