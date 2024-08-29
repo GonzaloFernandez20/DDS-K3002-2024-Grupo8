@@ -5,6 +5,7 @@ import persona.PersonaHumana;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class GestorDeAccesosAHeladeras {
@@ -25,9 +26,13 @@ public class GestorDeAccesosAHeladeras {
         return instancia;
     }
     // ------------------------------------------------
-
-    public void autorizarApertura(String codigoDeTarjeta, Heladera heladera){
-
+    public boolean autorizarApertura(String codigoDeTarjeta, Heladera heladera){
+        Optional <AccesoAHeladeras> acceso = tarjetasRegistradas.stream()
+                                                                .filter(unAcceso -> codigoDeTarjeta.equals(unAcceso.getCodigoTarjeta()))
+                                                                .findFirst();
+        if (acceso.isPresent()){
+            return acceso.get().aperturaAutorizada(heladera); // Chequea si tiene un permiso hecho
+        }else return false; // Si devuelve false es porque la tarjeta no esta registrada en el sistema, no autorizo que abra la heladera
     }
 
     public void generarSolicitud(PersonaHumana destinatario, int cantidadDeTarjetas){

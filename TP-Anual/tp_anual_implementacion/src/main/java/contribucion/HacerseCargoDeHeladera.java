@@ -24,7 +24,7 @@ public class HacerseCargoDeHeladera extends Contribucion{
     public boolean requieroAcceso() { return false;}
 
     @Override
-    public void procesarContribucion() {
+    public void procesarLaContribucion() {
             heladeraACargo.setColaborador((Colaborador) colaborador);
             Sistema.getInstancia().darDeAltaHeladera(heladeraACargo);
     }

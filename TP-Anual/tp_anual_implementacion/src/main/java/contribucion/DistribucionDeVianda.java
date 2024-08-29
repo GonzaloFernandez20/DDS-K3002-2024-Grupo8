@@ -2,7 +2,6 @@ package contribucion;
 
 import colaborador.Colaborador;
 import heladera.Heladera;
-import heladera.Vianda;
 import nuestras_excepciones.FallaHeladera;
 import nuestras_excepciones.ViandaRechazada;
 
@@ -30,7 +29,7 @@ public class DistribucionDeVianda extends Contribucion {
     }
 
     @Override
-    public void procesarContribucion() {
+    public void procesarLaContribucion() {
             List<Vianda> viandas;
             try {
                 viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);

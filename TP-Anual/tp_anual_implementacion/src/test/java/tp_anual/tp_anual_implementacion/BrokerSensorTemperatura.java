@@ -4,7 +4,7 @@ import colaborador.Colaborador;
 import heladera.Heladera;
 import heladera.Modelo;
 import heladera.SensoreoDeTemperatura;
-import heladera.Vianda;
+import contribucion.Vianda;
 import localizacion.Direccion;
 import persona.Persona;
 import persona.PersonaJuridica;

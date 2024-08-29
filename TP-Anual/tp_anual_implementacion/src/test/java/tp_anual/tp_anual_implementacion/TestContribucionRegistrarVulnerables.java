@@ -112,7 +112,7 @@ public class TestContribucionRegistrarVulnerables{
     @Test
     void registrarVulnerables(){
         //NO TIENE QUE SALTAR LA EXCEPCION
-        contribucion0.procesarContribucion();
+        contribucion0.procesarLaContribucion();
 
         boolean rtaAnterior = true;
         for(int i = 0; i< vinculacionesEsperadas.size();i++){
@@ -124,7 +124,7 @@ public class TestContribucionRegistrarVulnerables{
     }
     @Test
     void elColaboradorNoTieneDireccion(){
-        Throwable ex = assertThrows(ColaboracionInvalida.class,() -> contribucion1.procesarContribucion());
+        Throwable ex = assertThrows(ColaboracionInvalida.class,() -> contribucion1.procesarLaContribucion());
         assertEquals(ex.getMessage(),
                 "El colaborador que registre a múltiples vulnerables debe tener DIRECCION");
     }

@@ -20,7 +20,7 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
     private int cantidadSolicitada;
 
     @Override
-    public void procesarContribucion() {
+    public void procesarLaContribucion() {
         if(colaborador.getPersona().getDireccion() != null) {
             personasEnSituacionVulnerableARegistrar.forEach(personaVulnerable -> this.generarRegistro(personaVulnerable));
         }

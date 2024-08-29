@@ -58,12 +58,12 @@ class testsOfertaDeProductos {
         oferta1 = new OfertaDeProductos(colaborador1, LocalDate.of(2024, 6, 20), "Súper Cacerola", GASTRONOMIA, 100, "cacerola.jpg", producto1);
         oferta2 = new OfertaDeProductos(colaborador2, LocalDate.of(2024, 5, 8), "Cacerola-3000", GASTRONOMIA, 50, "cacerola.jpg", producto1);
 
-        oferta2.procesarContribucion();
+        oferta2.procesarLaContribucion();
     }
 
     @Test
     void ValidacionesProcesarContribucion() throws ColaboracionInvalida {
-        assertThrows(ColaboracionInvalida.class, () -> { oferta1.procesarContribucion(); }, "Para ofrecer productos debés se una persona JURIDICA");
+        assertThrows(ColaboracionInvalida.class, () -> { oferta1.procesarLaContribucion(); }, "Para ofrecer productos debés se una persona JURIDICA");
         assertTrue(sistema.getOfertas().contains(oferta2), "El sistema  posee la nueva oferta");
     }
 }

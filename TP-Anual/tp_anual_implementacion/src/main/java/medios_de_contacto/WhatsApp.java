@@ -1,6 +1,13 @@
-class WhatsApp extends MedioDeContacto{
-    //@Override
-    public WhatsApp(String identificacion) { super(identificacion); }
+package medios_de_contacto;
 
-    public void notificar() {}
+class WhatsApp implements MedioDeContacto{
+
+    private String nroDeTelefono;
+
+    public WhatsApp(String nroDeTelefono) {
+        this.nroDeTelefono = nroDeTelefono;
+    }
+
+    @Override
+    public void notificar(String mensaje) {}
 }

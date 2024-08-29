@@ -18,7 +18,7 @@ public class DonacionDeDinero extends Contribucion {
     }
 
     @Override
-    public void procesarContribucion() { Sistema.getInstancia().agregarMonto(monto); }
+    public void procesarLaContribucion() { Sistema.getInstancia().agregarMonto(monto); }
     public double puntosQueSumaColaborador() { return monto * coeficiente; }
     public boolean requieroAcceso() { return false;}
 

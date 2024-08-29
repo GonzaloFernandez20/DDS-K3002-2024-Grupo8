@@ -3,25 +3,12 @@ package contribucion;
 import java.time.LocalDate;
 
 import colaborador.Colaborador;
-import heladera.Heladera;
 
 public abstract class Contribucion {
     protected Colaborador colaborador;
-    protected LocalDate fechaDeDonacion;
+    protected LocalDate fechaDeContribucion;
 
-    public abstract void procesarContribucion();
-
-    public double puntosQueSumaColaborador() {
-        return 0;
-    }
-
-    public Contribucion(Colaborador colaborador, LocalDate fechaDeDonacion) {
-        this.colaborador = colaborador;
-        this.fechaDeDonacion = fechaDeDonacion;
-    }
-
-    public boolean requieroAcceso() { return false;}
-
-    public abstract Heladera getHeladera();
+    public abstract void procesarLaContribucion();
+    public abstract double puntosQueSumaColaborador();
 }
 

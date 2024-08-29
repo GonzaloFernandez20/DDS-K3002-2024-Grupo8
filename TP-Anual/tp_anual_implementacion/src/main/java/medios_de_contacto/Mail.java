@@ -1,6 +1,14 @@
 package medios_de_contacto;
 
 public class Mail implements MedioDeContacto{
-    public CorreoElectronico(String identificacion) { super(identificacion); }
-    public void notificar() {}
+
+    private String correo;
+
+    public Mail(String correo) {
+        this.correo = correo;
+    }
+
+
+    @Override
+    public void notificar(String mensaje) {}
 }

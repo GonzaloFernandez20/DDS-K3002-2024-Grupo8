@@ -2,56 +2,49 @@ package Accesos_a_heladeras;
 
 import colaborador.Colaborador;
 import heladera.Heladera;
-import nuestras_excepciones.ColaboracionInvalida;
-import sistema.GestorDeContribuciones;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class AccesoDeColaborador extends AccesoAHeladeras{
     private final Colaborador colaborador;
-    private List<SolicitudDeApertura> solicitudesDeApertura;
+    private final List<PermisoDeApertura> permisosDeApertura;
 
-    public AccesoDeColaborador(List<Acceso> historicoDeAccesosHeladera,
-                               String codigoTarjeta,
-                               Colaborador colaborador,
-                               List<SolicitudDeApertura> solicitudesDeApertura) {
-        super(historicoDeAccesosHeladera, codigoTarjeta);
+    public AccesoDeColaborador(String codigoTarjeta,
+                               Colaborador colaborador) {
+        this.codigoTarjeta = codigoTarjeta;
         this.colaborador = colaborador;
-        this.solicitudesDeApertura = solicitudesDeApertura;
+        this.permisosDeApertura = new ArrayList<>();
+        this.historicoDeAccesosHeladera = new ArrayList<>();
     }
     // ----------------------------------------------------------
-
-    private void registrarAcceso(SolicitudDeApertura solicitud) {
-        Acceso nuevoAcceso = new Acceso(solicitud.getHeladera(),
-                                        solicitud.getMotivo());
-        historicoDeAccesosHeladera.add(nuevoAcceso);
-        retirarSolicitud(solicitud);
-    }
-
     @Override
-    public Boolean aperturaAutorizada(Heladera heladera) { // -> Buscar que haya hecha una solicitud y no este vencida
-        Optional<SolicitudDeApertura> solicitud = solicitudesDeApertura.stream()
-                                                  .filter(solicitudDeApertura -> solicitudDeApertura.esValida(heladera))
+    public Boolean aperturaAutorizada(Heladera heladera) { // -> Buscar que haya hecha un permiso en esa heladera y que no este vencido.
+        Optional<PermisoDeApertura> permiso = permisosDeApertura.stream()
+                                                  .filter(permisoDeApertura -> permisoDeApertura.esValida(heladera))
                                                   .findFirst();
-        if (solicitud.isPresent()){
-            SolicitudDeApertura solicitudEncontrada = solicitud.get();
-            registrarAcceso(solicitudEncontrada);
-            solicitudEncontrada.cancelarTimer();
-            // -> Se efectua la donacion...
-            GestorDeContribuciones.realizarContribucion(
-                    solicitudEncontrada.getContribucion(),
-                    this.colaborador);
-
+        if (permiso.isPresent()){
+            PermisoDeApertura permisoEncontrado = permiso.get();
+            permisoEncontrado.cancelarTimer();
+            registrarAcceso(permisoEncontrado);
             return true;
         } else return false;
     }
 
-    public void agregarSolicitud(SolicitudDeApertura solicitud){
-        solicitudesDeApertura.add(solicitud);
-        solicitud.iniciarTimer();
+    private void registrarAcceso(PermisoDeApertura permiso) {
+        Apertura nuevaApertura = new Apertura(permiso.getHeladera(),
+                                              permiso.getMotivo() );
+        historicoDeAccesosHeladera.add(nuevaApertura);
+        permiso.getContribucion().procesarLaContribucion();
+        retirarPermiso(permiso);
     }
-    public void retirarSolicitud(SolicitudDeApertura solicitud){
-        solicitudesDeApertura.remove(solicitud); // Elimina la primera aparicion del objeto.
+
+    public void agregarPermiso(PermisoDeApertura permiso){
+        permisosDeApertura.add(permiso);
+        permiso.iniciarTimer();
+    }
+    public void retirarPermiso(PermisoDeApertura permiso){
+        permisosDeApertura.remove(permiso); // Elimina la primera aparicion del objeto.
     }
 }

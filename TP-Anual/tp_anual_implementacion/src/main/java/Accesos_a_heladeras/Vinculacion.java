@@ -15,7 +15,7 @@ public class Vinculacion extends AccesoAHeladeras{
     private int cantUsosRestantesPorDia;
     private LocalDate fechaUltimoUso;
 
-    public Vinculacion(List<Acceso> historicoDeAccesosHeladera,
+    public Vinculacion(List<Apertura> historicoDeAccesosHeladera,
                        String codigoTarjeta,
                        PersonaSituacionVulnerable personaSituacionVulnerable,
                        Colaborador colaboradorQueRegistro,
@@ -31,8 +31,8 @@ public class Vinculacion extends AccesoAHeladeras{
     }
 
     public void registrarAcceso(Heladera heladera) {
-        Acceso nuevoAcceso = new Acceso(heladera, RETIRAR_VIANDA);
-        historicoDeAccesosHeladera.add(nuevoAcceso);
+        Apertura nuevoApertura = new Apertura(heladera, RETIRAR_VIANDA);
+        historicoDeAccesosHeladera.add(nuevoApertura);
         cantUsosRestantesPorDia --;
     }
 

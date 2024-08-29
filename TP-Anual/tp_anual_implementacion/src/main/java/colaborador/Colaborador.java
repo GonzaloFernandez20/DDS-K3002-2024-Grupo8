@@ -4,31 +4,23 @@ import Accesos_a_heladeras.AccesoDeColaborador;
 import contribucion.Contribucion;
 import contribucion.OfertaDeProductos;
 import documentacion.Documento;
-import heladera.Heladera;
 import localizacion.Direccion;
 import medios_de_contacto.MedioDeContacto;
-import nuestras_excepciones.ColaboracionInvalida;
 import org.jetbrains.annotations.NotNull;
-import persona.Persona;
 import persona.PersonaHumana;
-import suscripcion.SuscripcionDesperfectoHeladera;
-import suscripcion.TipoSuscripcion;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Colaborador {
     private final PersonaHumana persona;
-    private List<MedioDeContacto> mediosDeContacto;
-    private List<String> mensajesRecibidos;
-    private List<Contribucion> historialDeContribuciones;
+    private final List<MedioDeContacto> mediosDeContacto;
+    private final List<String> mensajesRecibidos;
+    private final List<Contribucion> historialDeContribuciones;
     private AccesoDeColaborador tarjeta;
     private double puntos;
 
     // ------------------------------------------------
-
     public Colaborador(PersonaHumana persona,
                        List<MedioDeContacto> mediosDeContacto) {
         this.persona = persona;
@@ -40,33 +32,17 @@ public class Colaborador {
     // ------------------------------------------------
 
     public void registrarContribucion(Contribucion contribucion){
-/*        if(contribucion.requieroAcceso()) {
-            RegistroAperturaHeladera registro = new RegistroAperturaHeladera(contribucion, LocalDate.now(), 3, (Heladera) contribucion.getHeladera());
-            if(permiso != null) {
-                permiso.registrar(registro);
-                permiso.sumarRegistro(registro);
-                this.realizarContribucion(contribucion);
-                agregarContribucionEnLista(contribucion);
-                puntos += contribucion.puntosQueSumaColaborador();
-            } else {
-                // error "El usuario carece de permisos para realizar dicha operacion
-                // solicitar permiso y/o direccion si no la dio antes
-                permiso.sumarSolicitud(registro);
-            }
-        }else {
-            agregarContribucionEnLista(contribucion);
-            puntos += contribucion.puntosQueSumaColaborador();
-        }*/
+        historialDeContribuciones.add(contribucion);
+        //puntos += contribucion.puntosQueSumaColaborador();
     }
 
-    public void notificar() {
-        // no hay suficiente informacion sobre como se comporta PersonaJuridica al
-        // recibir la notificacion
+    public void notificar(String mensaje) {
+        mensajesRecibidos.add(mensaje);
+
+        for (MedioDeContacto medio : mediosDeContacto){
+            medio.notificar(mensaje);
+        }
     }
-
-/*
-
-*/
 
     private void intercambiarPuntos(OfertaDeProductos ofertaSeleccionada) {
         if(ofertaSeleccionada.getPuntosNecesarios() < puntos) {
@@ -77,10 +53,8 @@ public class Colaborador {
         }
     }
 
-
-
     public Boolean tieneMedioDeContacto(MedioDeContacto medioDeContacto) {
-        return mediosDeContacto.stream().anyMatch(medio -> medio.getIdentificacion().equals(medioDeContacto.getIdentificacion()));
+        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(medioDeContacto));
     }
 
     public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
@@ -139,16 +113,4 @@ public class Colaborador {
         // con que criterio elige??
         return null;
     }
-
-    public void serNotificadoPorSuscripcion(Heladera heladeraQueNotifico, Integer n, TipoSuscripcion tipoSuscripcion) {
-        Integer viandasADistribuir;
-        if(this.deseoAcudir()) {
-            if(tipoSuscripcion.getClass().equals(SuscripcionDesperfectoHeladera.class)) {
-                viandasADistribuir = (heladeraQueNotifico.getViandasEnStock()).size();
-            } else {
-                viandasADistribuir = this.quieroMoverCantViandas();
-            }
-            Contribucion contribucion = tipoSuscripcion.crearContribucionDe(this, heladeraQueNotifico, viandasADistribuir);
-            this.sumarContribucion(contribucion);
-        }
-    }*/
+*/

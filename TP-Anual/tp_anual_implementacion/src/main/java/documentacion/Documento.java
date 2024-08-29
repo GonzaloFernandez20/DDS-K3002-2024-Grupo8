@@ -1,7 +1,5 @@
 package documentacion;
 
-import javax.swing.text.Document;
-
 public class Documento{
     TipoDeDocumento tipo;
     String numero;
@@ -12,15 +10,6 @@ public class Documento{
         this.setSexo(sexo);
         this.setTipo(tipo);
     }
-
-    public void setNumero(String numero) { this.numero = numero; }
-    public String getNumero() { return numero; }
-
-    public void setSexo(Sexo sexo) { this.sexo = sexo; }
-    public Sexo getSexo() { return sexo; }
-
-    public void setTipo(TipoDeDocumento tipo) { this.tipo = tipo; }
-    public TipoDeDocumento getTipo() { return tipo;}
 
     public Boolean esDocumentoSegunNumeroYTipo(Documento documento){
         if(this.contieneNumeroYTipo() && documento != null && documento.contieneNumeroYTipo()) {
@@ -33,5 +22,14 @@ public class Documento{
     public Boolean contieneNumeroYTipo() {
         return this.getTipo() != null && this.getNumero() != null;
     }
+    // TODO: Revisar porque esto no esta en el DC
+
+    // ----------> Getters y Setters
+    public void setNumero(String numero) { this.numero = numero; }
+    public String getNumero() { return numero; }
+    public void setSexo(Sexo sexo) { this.sexo = sexo; }
+    public Sexo getSexo() { return sexo; }
+    public void setTipo(TipoDeDocumento tipo) { this.tipo = tipo; }
+    public TipoDeDocumento getTipo() { return tipo;}
 }
 

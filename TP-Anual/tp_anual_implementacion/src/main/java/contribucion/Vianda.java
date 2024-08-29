@@ -1,8 +1,9 @@
-package heladera;
+package contribucion;
 
 import colaborador.Colaborador;
+import heladera.Heladera;
 import nuestras_excepciones.ViandaRechazada;
-import persona.PersonaHumana;
+import org.springframework.lang.Nullable;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -20,21 +21,19 @@ public class Vianda {
 
     public Vianda(String tipoDeComida,
                   LocalDate fechaDeCaducidad,
-                  LocalDate fechaDeDonacion,
                   Colaborador colaborador,
                   Heladera heladera,
-                  String calorias,
-                  String peso,
-                  EstadoVianda estado) {
+                  @Nullable String calorias,
+                  @Nullable String peso) {
 
         this.tipoDeComida = tipoDeComida;
         this.fechaDeCaducidad = fechaDeCaducidad;
-        this.fechaDeDonacion = fechaDeDonacion;
+        this.fechaDeDonacion = LocalDate.now();
         this.colaborador = colaborador;
         this.heladera = heladera;
         this.calorias = calorias;
         this.peso = peso;
-        this.estado = estado;
+        this.estado = EstadoVianda.NO_ENTREGADA;
     }
 
     public void trasladar(Heladera heladeraNueva) throws ViandaRechazada {
@@ -45,7 +44,7 @@ public class Vianda {
     }
 
     public EstadoVianda getEstado() {
-        if(this.fechaDeCaducidad.isBefore(LocalDate.now())){this.setEstadoVianda(EstadoVianda.VENCIDA);}
+        if(this.fechaDeCaducidad.isBefore(LocalDate.now())){ this.estado = EstadoVianda.VENCIDA; }
         return estado;
     }
 

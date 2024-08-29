@@ -1,7 +1,13 @@
+package medios_de_contacto;
 
-class Telefono extends MedioDeContacto{
-    //@Override
-    public Telefono(String identificacion) { super(identificacion); }
+public class Telegram implements MedioDeContacto{
 
-    public void notificar() {}
+    private String nroDeTelefono;
+
+    public Telegram(String nroDeTelefono) {
+        this.nroDeTelefono = nroDeTelefono;
+    }
+
+    @Override
+    public void notificar(String mensaje) {}
 }

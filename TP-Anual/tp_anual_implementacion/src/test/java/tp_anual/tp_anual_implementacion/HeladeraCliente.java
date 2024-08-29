@@ -3,14 +3,13 @@ package tp_anual.tp_anual_implementacion;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import colaborador.Colaborador;
 import heladera.Modelo;
 import heladera.Heladera;
-import heladera.Vianda;
+import contribucion.Vianda;
 import localizacion.Direccion;
 import persona.Persona;
 import persona.PersonaJuridica;

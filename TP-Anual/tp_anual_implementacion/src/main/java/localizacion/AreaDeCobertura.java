@@ -13,7 +13,7 @@ public class AreaDeCobertura {
         //FUNCION QUE DETERMINE EN FUNCION DEL PUNTO EN EL MAPA DE LA UBICACION SI CAE DENTRO DEL AREA
         return true;
     }
-    public boolean seSolapaCon(Area otroArea){
+    public boolean seSolapaCon(AreaDeCobertura otroArea){
         //FUNCION MATEMATICA A IMPLEMENTAR
         return true;
     }

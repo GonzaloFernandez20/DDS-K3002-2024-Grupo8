@@ -1,4 +1,4 @@
-package heladera;
+package contribucion;
 
 public enum EstadoVianda {
     ENTREGADA,

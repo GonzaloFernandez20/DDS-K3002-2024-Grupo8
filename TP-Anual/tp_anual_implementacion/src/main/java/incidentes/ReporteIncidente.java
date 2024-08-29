@@ -2,7 +2,6 @@ package incidentes;
 
 import heladera.EstadoHeladera;
 import heladera.Heladera;
-import sistema.GestorDeSuscripciones;
 import sistema.ReporteDeTodasLasHeladeras;
 
 import java.time.LocalDateTime;

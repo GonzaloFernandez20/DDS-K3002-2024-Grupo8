@@ -6,14 +6,14 @@ import heladera.Heladera;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SolicitudDeApertura {
+public class PermisoDeApertura {
     private Contribucion contribucion;
     private Heladera heladera;
     private MotivoApertura motivo;
     private Boolean vencida;
     private final Timer timer;
 
-    public SolicitudDeApertura(Contribucion contribucion, Heladera heladera, MotivoApertura motivo) {
+    public PermisoDeApertura(Contribucion contribucion, Heladera heladera, MotivoApertura motivo) {
         this.contribucion = contribucion;
         this.heladera = heladera;
         this.motivo = motivo;

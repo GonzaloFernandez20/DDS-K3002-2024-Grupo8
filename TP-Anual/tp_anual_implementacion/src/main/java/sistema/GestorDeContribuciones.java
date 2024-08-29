@@ -8,7 +8,7 @@ public class GestorDeContribuciones{
 
     public static void realizarContribucion(@NotNull Contribucion contribucionActual,
                                             @NotNull Colaborador colaborador) {
-        contribucionActual.procesarContribucion();
+        contribucionActual.procesarLaContribucion();
         colaborador.registrarContribucion(contribucionActual);
     }
 

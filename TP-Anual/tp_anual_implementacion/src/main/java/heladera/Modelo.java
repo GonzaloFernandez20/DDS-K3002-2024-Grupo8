@@ -1,27 +1,24 @@
 package heladera;
 
 public class Modelo {
-    Float temperaturaMaxima;
-    Float temperaturaMinima;
+    float temperaturaMaxima;
+    float temperaturaMinima;
 
-    public Float getTemperaturaMaxima() {
+
+    public Modelo(float temperaturaMaxima, float temperaturaMinima) {
+        this.temperaturaMaxima = temperaturaMaxima;
+        this.temperaturaMinima = temperaturaMinima;
+    }
+
+    public boolean controlarTemperatura(float temperatura){
+        return temperatura >= temperaturaMinima && temperatura <= temperaturaMinima;
+    }
+
+    // ---- Getters y Setters
+    public float getTemperaturaMaxima() {
         return temperaturaMaxima;
     }
-
-    public void setTemperaturaMaxima(Float temperaturaMaxima) {
-        this.temperaturaMaxima = temperaturaMaxima;
-    }
-
-    public Float getTemperaturaMinima() {
-        return temperaturaMinima;
-    }
-
-    public void setTemperaturaMinima(Float temperaturaMinima) {
-        this.temperaturaMinima = temperaturaMinima;
-    }
-
-    public Modelo(Float temperaturaMaxima, Float temperaturaMinima) {
-        this.temperaturaMaxima = temperaturaMaxima;
-        this.temperaturaMinima = temperaturaMinima;
-    }
+    public float getTemperaturaMinima() { return temperaturaMinima; }
+    public void setTemperaturaMaxima(float temperaturaMaxima) { this.temperaturaMaxima = temperaturaMaxima; }
+    public void setTemperaturaMinima(float temperaturaMinima) { this.temperaturaMinima = temperaturaMinima; }
 }
