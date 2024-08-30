@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donar Dinero</title>
+    <title>Hacerse cargo de una heladera</title>
     <link href="headerFooter.css" rel="stylesheet">
     <link rel="stylesheet" href="colaboraciones.css">
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -44,60 +44,58 @@
         </div>
     </header>
 
-    <div class="containerConFoto">
-
-        <div class="container">
-            <h2>Donación de Dinero</h2>
+    <main class="container">
+        <div class="row">
+            <h2>Hacerse cargo de una heladera</h2>
             
-            <form id="donacionDineroForm">
-    
-                <div class="input-group">
-                    <label for="montoADonar">Monto a Donar</label>
-                    <input type="number" min="10" step="10" id="montoADonar" placeholder="Ingrese Monto a Donar (Pesos Argentinos)" >
-                    <div class="error-message" id="montoError"></div>
-                </div>
-    
-                <div class="input-group">
-                    <label for="fechaDonacion">Fecha de Donación</label>
-                    <input type="date" id="fechaDonacion" >
-                    <div class="error-message" id="fechaDonacionError"></div>
-                </div>
- 
-                <div class="input-group">
-                    <label for="frecuenciaDonacion">Frecuencia de Donación</label>
-                    <select id="frecuenciaDonacion" >
-                        <option value="">Seleccione Frecuencia de Donación</option>
-                        <option value="diariamente">Diariamente</option>
-                        <option value="mensualmente">Mensualmente</option>
-                        <option value="unicaVez">Única Vez</option>
-                    </select>
-                    <div class="error-message" id="frecuenciaDonacionError"></div>
-                </div>
+            <div class="col-6">
+                <form id="form-hacerse-cargo-heladera">
 
-                <div class="input-group">
-                    <label for="Metodo de Pago">Método de Pago</label>
-                    <select id="metodoDePago" >
-                        <option value="">Seleccione Método de Pago</option>
-                        <option value="tarjetaCredito">Tarjeta de Crédito</option>
-                        <option value="tarjetaDebito">Tarjeta de Débito</option>
-                        <option value="billeteraVirtual">Billetera Virtual</option>
-                    </select>
-                    <div class="error-message" id="metodoDePagoError"></div>
-                </div>
+                    <div class="input-group">
+                        <label for="ciudadHeladera">Ciudad</label>
+                        <input type="text" id="ciudadHeladera" placeholder="Ingrese la ciudad de la heladera" required>
+                    </div>
+        
+                    <div class="input-group">
+                        <label for="direccionHeladera">Dirección</label>
+                        <input type="text" id="direccionHeladera" placeholder="Ingrese la dirección de la heladera" required>
+                        <a href="#">Solicitar puntos de recomendación</a>
+                    </div>
+    
+                    <div class="input-group">
+                        <label for="nombrePuntoHeladera">Nombre del punto</label>
+                        <input type="text" id="nombrePuntoHeladera" placeholder="Ingrese el nombre del punto en que estará la heladera" required>
+                    </div>
 
-                <button type="submit">Donar Dinero</button>
-                
-            </form>
-            
+                    <div class="input-group">
+                        <label for="modeloHeladera">Modelo de heladera</label>
+                        <input type="text" id="modeloHeladera" placeholder="Ingrese el modelo de la heladera" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="capacidadHeladera">Capacidad de la heladera en viandas</label>
+                        <input type="number" min="1" id="capacidadHeladera" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="fechaFuncionamientoHeladera">Fecha de puesta en funcionamiento</label>
+                        <input type="date" id="fechaFuncionamientoHeladera" placeholder="dd/mm/aaaa" required>
+                    </div>
+
+                    <button type="submit">Hacerse cargo de esta heladera</button>
+                </form>
+            </div>
+            <div class="col-6">
+                <!--TO DO: Buscar imagen para hacerse cargo de una heladera-->
+                <img 
+                    src = "Recursos/donarDineroImagen.png"
+                    alt = "Imagen de un corazón siendo donado a una caja con un símbolo de dinero en ella";
+                    class="imagenContribucion"
+                >
+            </div>
         </div>
 
-        <img 
-            src = "Recursos/donarDineroImagen.png"
-            alt = "Imagen de un corazón siendo donado a una caja con un símbolo de dinero en ella";
-            class="imagenContribucion"
-        >
-
-    </div>
+    </main>
 
     <footer>
         <div class="footer-logo">
@@ -110,9 +108,6 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-
-    <script src="DonarDinero.js"></script>
-
 </body>
 
 </html>

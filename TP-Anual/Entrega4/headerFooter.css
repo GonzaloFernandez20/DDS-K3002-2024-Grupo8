@@ -106,3 +106,11 @@ footer .social-icons li a {
 footer .social-icons li a:hover {
   color: #008cba;
 }
+
+.bi{
+  fill: #50bfa0;
+}
+
+.bi:hover{
+  fill: hsl(163, 34%, 33%);
+}

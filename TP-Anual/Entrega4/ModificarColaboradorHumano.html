@@ -53,7 +53,6 @@
       
     <main class="container">
         <div class="row">
-        <!--.col-6 .col-md-4-->
             <div class="col-2">
                 <div class="sidenav flex-column flex-shrink-0 p-3">
                     <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
@@ -73,27 +72,9 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav nav-pills flex-column mb-auto">
-                        <span class="fs-5">Heladeras</span>
-                        <li class="nav-item">
-                            <svg height="20px" width="20px">
-                                <image height="20px" width="5px" x="7.5px" y="0" href="img/alert-icon.svg"/>
-                            </svg>
-                            <a href="ModificarColaboradorJuridicoHeladeras.html" class="nav-link">
-                                Alertas
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <image height="20px" width="20px" src="img/list-icon.svg"/>
-                            <a href="ModificarColaboradorJuridicoHeladeras.html" class="nav-link">
-                                Listado de Heladeras
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
 
-        <!--class="container main .col-md-8"-->
             <div class="col-10">
                 <div class="main">
                     <h1>Mi Cuenta</h1>
@@ -102,26 +83,14 @@
                     <form id="mod-cuenta">
                         <div class="form-cuenta">
                             <h3 id="info-personal">Información Personal</h3>
-                            <label for="nuevoNombre">Cambiar nombre de usuario:</label>
-                            <input type="text" id="nuevoNombre" placeholder="Ingrese un nuevo nombre de usuario"><br>
-                            <label for="nuevaContrasenia">Cambiar contraseña:</label>
-                            <input type="password" id="nuevaContrasenia" placeholder="Ingrese una nueva contraseña"><br>
-                            <label for="nuevaRazonSocial">Cambiar razón social:</label>
-                            <input type="text" id="nuevaRazonSocial" placeholder="Ingrese su nueva razón social"><br>
-                            <label for="nuevoTipoOrg">Cambiar tipo de organización: </label>
-                            <select id="nuevoTipoOrg">
-                                <option value="">--Seleccione--</option>
-                                <option value="gubernamental">Gubernamental</option>
-                                <option value="ong">ONG</option>
-                                <option value="empresa">Empresa</option>
-                                <option value="institucion">Institución</option>
-                            </select>
-                            <label for="nuevoRubro">Rubro:</label>
-                            <input type="text" id="nuevoRubro" placeholder="Ingrese su nuevo rubro"><br>
+                            <label for="nuevoNombreHumano">Cambiar nombre de usuario:</label>
+                            <input type="text" id="nuevoNombreHumano" placeholder="Ingrese un nuevo nombre de usuario"><br>
+                            <label for="nuevaContraseniaHumana">Cambiar contraseña:</label>
+                            <input type="password" id="nuevaContraseniaHumana" placeholder="Ingrese una nueva contraseña"><br>
 
                             <h3 id="contacto">Contacto</h3>
-                            <label for="nuevaDireccion">Cambiar dirección:</label>
-                            <input type="text" id="nuevaDireccion" placeholder="Ingrese una nueva dirección"><br>
+                            <label for="nuevaDireccionHumana">Cambiar dirección:</label>
+                            <input type="text" id="nuevaDireccionHumana" placeholder="Ingrese una nueva dirección"><br>
                             <label>Medios de Contacto:</label>
                             <!--TO DO: Usar Vue para todo esto-->
                             <div class="tags-medios-de-contacto">
@@ -139,7 +108,7 @@
                                 </span>
                             </div>
                             <label>Agregar medio de contacto:</label>
-                            <select id="tipoNuevoMedioDeContacto">
+                            <select id="tipoNuevoMedioDeContactoHumano">
                                 <option value="">--Seleccione--</option>
                                 <option value="telegram">Telegram</option>
                                 <option value="mail">Mail</option>
@@ -147,7 +116,7 @@
                             </select><br>
                             <!--TO DO: Hacer que el input del medio de contacto esté desactivado hasta 
                             que se seleccione un tipo-->
-                            <input type="text" id="nuevoMedioDeContacto" placeholder="Ingrese su número/mail"><br>
+                            <input disabled type="text" id="nuevoMedioDeContactoHumano" placeholder="Ingrese su número/mail"><br>
                         </div>
                         <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
                         <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
@@ -170,6 +139,6 @@
         </ul>
     </footer>
     <script src="ModificarColaboradorUsuario.js"></script>
-    <script src="ModificarColaboradorJuridicoCuenta.js"></script>
+    <!--<script src="ModificarColaboradorHumano.js"></script>-->
 </body>
 </html>

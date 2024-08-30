@@ -96,6 +96,8 @@ function agregarHeladerasAlListadoGeneral() {
 function modificarHeladera(numeroDeHeladera) {
     let heladeraAModificar = heladerasDeUnUsuario[numeroDeHeladera];
 
+    limpiarInputHeladera();
+
     document.getElementById('mod-heladera-title').innerHTML = heladeraAModificar.nombreDelPunto;
     document.getElementById('nuevaCiudadHeladera').placeholder = heladeraAModificar.ciudad;
     document.getElementById('nuevaDireccionHeladera').placeholder = heladeraAModificar.direccion;
@@ -103,6 +105,13 @@ function modificarHeladera(numeroDeHeladera) {
     document.getElementById('nuevaCapacidadHeladera').placeholder = heladeraAModificar.capacidad;
 
     document.getElementById('mod-heladera').style.display = "block";
+}
+
+function limpiarInputHeladera() {
+    document.getElementById('nuevaCiudadHeladera').value = "";
+    document.getElementById('nuevaDireccionHeladera').value = "";
+    document.getElementById('nuevoModeloHeladera').value = "";
+    document.getElementById('nuevaCapacidadHeladera').value = 1;
 }
 
 function eliminarHeladera(numeroDeHeladera) {
