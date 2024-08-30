@@ -12,7 +12,7 @@ public class PersonaSituacionVulnerable extends PersonaHumana {
     private EstadoDeVivienda estadoDeVivienda;
     private int cantMenores;
     private Vinculacion vinculacion;
-    private PersonaHumana persona;
+    private final PersonaHumana persona;
 
     public PersonaSituacionVulnerable(String nombre, String apellido,
                                       LocalDate fechaDeNacimiento,

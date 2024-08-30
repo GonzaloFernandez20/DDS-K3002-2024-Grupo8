@@ -5,52 +5,45 @@ import heladera.Heladera;
 import nuestras_excepciones.FallaHeladera;
 import nuestras_excepciones.ViandaRechazada;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 
-public class DistribucionDeVianda extends Contribucion {
+public class DistribucionDeVianda extends ContribucionConApertura {
 
     private final Heladera heladeraDeOrigen;
-    private final Heladera heladeraDestino;
-    private final int cantDeViandas;
     private final MotivoDeDistribucion motivo;
 
     public DistribucionDeVianda(Colaborador colaborador,
-                                LocalDate fechaDeDonacion,
                                 Heladera heladeraDeOrigen,
                                 Heladera heladeraDestino,
-                                int cantDeViandas,
                                 MotivoDeDistribucion motivo) {
-        super(colaborador, fechaDeDonacion);
+        this.colaborador = colaborador;
         this.heladeraDestino = heladeraDestino;
         this.heladeraDeOrigen = heladeraDeOrigen;
-        this.cantDeViandas = cantDeViandas;
         this.motivo = motivo;
+        this.viandasIngresadas = new ArrayList<>();
+        this.fechaDeContribucion = LocalDate.now();
     }
 
     @Override
     public void procesarLaContribucion() {
-            List<Vianda> viandas;
-            try {
-                viandas = heladeraDeOrigen.retirarViandas(cantDeViandas);
-            }catch (FallaHeladera e){
-                throw new RuntimeException(e);
-            }
-            viandas.forEach(vianda -> {
-                try {
-                    vianda.trasladar(heladeraDestino);
-                } catch (ViandaRechazada e) {
-                    throw new RuntimeException(e);
-                }
-            });
+        if (viandasIngresadas.isEmpty()){
+            // TODO: RETIRAR VIANDAS DE LA HELADERA ORIGEN
+            // DECIRLE A LA HELADERA QUE RETIRE LAS VIANDAS
+            // ASIGNAR ESAS VIANDAS A LA LISTA DE LA CONTRIBUCION
+            // CON CADA VIANDA:
+                // TRASLADAR
+                // SETEAR ESTADO A "EN TRASLADO"
+        }else{
+            super.procesarLaContribucion();
+        }
     }
 
     public double puntosQueSumaColaborador() {
         double coeficiente = 1;
-        return cantDeViandas * coeficiente;
+        return viandasIngresadas.size() * coeficiente;
     }
 
-    @Override
-    public boolean requieroAcceso() { return true;}
     public Heladera getHeladera() {return heladeraDeOrigen;}
 }

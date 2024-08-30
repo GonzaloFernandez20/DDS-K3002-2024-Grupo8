@@ -22,27 +22,26 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     @Override
     public Boolean aperturaAutorizada(Heladera heladera) { // -> Buscar que haya hecha un permiso en esa heladera y que no este vencido.
         Optional<PermisoDeApertura> permiso = permisosDeApertura.stream()
-                                                  .filter(permisoDeApertura -> permisoDeApertura.esValida(heladera))
-                                                  .findFirst();
+                                                                .filter(permisoDeApertura -> permisoDeApertura.esValida(heladera))
+                                                                .findFirst();
         if (permiso.isPresent()){
             PermisoDeApertura permisoEncontrado = permiso.get();
-            permisoEncontrado.cancelarTimer();
             registrarAcceso(permisoEncontrado);
             return true;
         } else return false;
     }
 
     private void registrarAcceso(PermisoDeApertura permiso) {
-        Apertura nuevaApertura = new Apertura(permiso.getHeladera(),
-                                              permiso.getMotivo() );
-        historicoDeAccesosHeladera.add(nuevaApertura);
         permiso.getContribucion().procesarLaContribucion();
+        Apertura nuevaApertura = new Apertura(permiso.getHeladera(),
+                                              permiso.getMotivo(),
+                                              permiso.getContribucion().getViandasIngresadas());
+        historicoDeAccesosHeladera.add(nuevaApertura);
         retirarPermiso(permiso);
     }
 
     public void agregarPermiso(PermisoDeApertura permiso){
         permisosDeApertura.add(permiso);
-        permiso.iniciarTimer();
     }
     public void retirarPermiso(PermisoDeApertura permiso){
         permisosDeApertura.remove(permiso); // Elimina la primera aparicion del objeto.
