@@ -101,6 +101,10 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     const fechaNacimiento = document.getElementById('fechaNacimiento');
     const direccion = document.getElementById('direccion');
     const medioContacto = document.getElementById('medioContacto');
+    const emailCaja = document.getElementById('emailCaja');
+    const telefonoCaja = document.getElementById('telefonoCaja');
+    const email = document.getElementById('emailIngresado');
+    const telefono = document.getElementById('telefonoIngresado');
 
     if (!nombre.value) {
         hasError = true;
@@ -145,9 +149,54 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     } else {
         document.getElementById('medioContactoError').innerText = '';
         medioContacto.classList.remove('error');
+    }    
+
+    if (medioContacto.value == "email"){
+        if (!email.value) {
+            hasError = true;
+            document.getElementById('emailError').innerText = 'Debe introducir un Email valido';
+            emailCaja.classList.add('error');
+        } else {
+            document.getElementById('emailError').innerText = '';
+            emailCaja.classList.remove('error');
+        }
+    }
+
+    if (medioContacto.value == "telefono"){
+        if (!telefono.value) {
+            hasError = true;
+            document.getElementById('telefonoError').innerText = 'Debe introducir un Telefono valido';
+            telefonoCaja.classList.add('error');
+        } else {
+            document.getElementById('telefonoError').innerText = '';
+            telefonoCaja.classList.remove('error');
+        }
     }
 
     if (!hasError) {
         alert('Formulario de colaborador Humano enviado correctamente');
+    }
+});
+
+medioContacto.addEventListener('change', function(e) {
+    const medioContacto = document.getElementById('medioContacto');
+    const emailCaja = document.getElementById('emailCaja');
+    const telefonoCaja = document.getElementById('telefonoCaja');
+
+    e.preventDefault();
+
+    if (medioContacto.value == "email"){
+        emailCaja.style.display = 'inline';
+        telefonoCaja.style.display = 'none';
+    }
+
+    else if (medioContacto.value == "telefono"){
+        telefonoCaja.style.display = 'inline';
+        emailCaja.style.display = 'none';
+    }
+
+    else {
+        emailCaja.style.display = 'none';
+        telefonoCaja.style.display = 'none';
     }
 });

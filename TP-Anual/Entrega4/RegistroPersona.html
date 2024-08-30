@@ -30,7 +30,7 @@
                     <label for="tipoColaborador">Colaborador</label>
                     <select id="tipoColaborador" name="tipoColaborador">
                         <option value="">Seleccione tipo de colaborador</option>
-                        <option value="juridico">Jurídico</option>
+                        <option value="juridico">Juridico</option>
                         <option value="humano">Humano</option>
                     </select>
                     <div class="error-message" id="tipoColaboradorError"></div>
@@ -111,7 +111,21 @@
                         <option value="telefono">Teléfono</option>
                         <option value="postal">Correo Postal</option>
                     </select>
+
                     <div class="error-message" id="medioContactoError"></div>
+
+                    <div class="input-group" id="emailCaja" style="display: none;">
+                        <label for="emailIngreso">Ingresar Email</label>
+                        <input type="text" name="emailIngreso" placeholder="Ingresar Email" id="emailIngresado">
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="input-group" id="telefonoCaja" style="display: none;">
+                        <label for="telefonoIngreso">Ingresar Telefono</label>
+                        <input type="text" pattern="^[0-9]*$" name="telefonoIngreso" placeholder="Ingresar Telefono" id="telefonoIngresado">
+                        <div class="error-message" id="telefonoError"></div>
+                    </div>
+
                 </div>
 
                 <button type="submit">Ingresar</button>
