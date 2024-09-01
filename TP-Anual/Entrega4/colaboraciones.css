@@ -156,3 +156,14 @@ h2 {
     width: 450px;
     height: 500px;
 }
+
+.container-img{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.aviso-opcion{
+    text-align: left;
+    margin-top: 1%;
+}

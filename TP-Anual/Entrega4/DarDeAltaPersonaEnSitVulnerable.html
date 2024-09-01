@@ -48,9 +48,14 @@
         <div class="row">
             <h2>Dar de alta a una persona en situación vulnerable</h2>
             
-            <div class="col-6">
+            <div class="col-md-6">
                 <form id="form-dar-de-alta-persona-en-sit-vulnerable">
 
+                    <div class="input-group">
+                        <label for="tarjetaPersonaVul">Código de tarjeta entregada</label>
+                        <input type="text" id="tarjetaPersonaVul" placeholder="Ingrese el código de tarjeta entregada" required>
+                    </div>
+                    
                     <div class="input-group">
                         <label for="nombrePersonaVul">Nombre</label>
                         <input type="text" id="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
@@ -103,18 +108,19 @@
 
                     <div class="input-group">
                         <label for="cantidadMenoresPersonaVul">Cantidad de menores que tiene a cargo la persona</label>
-                        <input type="number" min="0" id="cantidadMenoresPersonaVul">
+                        <input type="number" min="0" id="cantidadMenoresPersonaVul" placeholder="Ingrese la cantidad de menores que tiene a cargo la persona">
                     </div>
 
                     <button type="submit">Dar de alta</button>
-                    <span class="fs-6">* el campo es opcional</span>
+                    <p class="fs-6 aviso-opcion">* el campo es opcional</p>
                 </form>
             </div>
-            <div class="col-6">
-                <!--TO DO: Buscar imagen para hacerse cargo de una heladera-->
+
+            <!--style="display: flex; align-items: center; justify-content: center;"-->
+            <div class="col-md-6 container-img">
                 <img 
-                    src = "Recursos/donarDineroImagen.png"
-                    alt = "Imagen de un corazón siendo donado a una caja con un símbolo de dinero en ella";
+                    src = "img/darDeAltaImagen.jpg"
+                    alt = "Imagen de una mano agarrando una tarjeta";
                     class="imagenContribucion"
                 >
             </div>

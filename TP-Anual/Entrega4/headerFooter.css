@@ -58,6 +58,7 @@ main{
 /* Button styles */
 .header-buttons {
   display: flex;
+  /*display: block;*/
 }
 
 .header-buttons button {

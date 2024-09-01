@@ -53,7 +53,7 @@
       
     <main class="container">
         <div class="row">
-            <div class="col-2">
+            <div class="col-md-2">
                 <div class="sidenav flex-column flex-shrink-0 p-3">
                     <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
                     <hr>
@@ -75,22 +75,22 @@
                 </div>
             </div>
 
-            <div class="col-10">
+            <div class="col-md-10">
                 <div class="main">
                     <h1>Mi Cuenta</h1>
                     <h2>Usuario</h2>
 
-                    <form id="mod-cuenta">
+                    <form id="mod-cuenta-humano" class="mod-cuenta">
                         <div class="form-cuenta">
                             <h3 id="info-personal">Información Personal</h3>
                             <label for="nuevoNombreHumano">Cambiar nombre de usuario:</label>
-                            <input type="text" id="nuevoNombreHumano" placeholder="Ingrese un nuevo nombre de usuario"><br>
+                            <input type="text" id="nuevoNombreHumano" class="mod-cuenta-nombre" placeholder="Ingrese un nuevo nombre de usuario"><br>
                             <label for="nuevaContraseniaHumana">Cambiar contraseña:</label>
-                            <input type="password" id="nuevaContraseniaHumana" placeholder="Ingrese una nueva contraseña"><br>
+                            <input type="password" id="nuevaContraseniaHumana" class="mod-cuenta-contrasenia" placeholder="Ingrese una nueva contraseña"><br>
 
                             <h3 id="contacto">Contacto</h3>
                             <label for="nuevaDireccionHumana">Cambiar dirección:</label>
-                            <input type="text" id="nuevaDireccionHumana" placeholder="Ingrese una nueva dirección"><br>
+                            <input type="text" id="nuevaDireccionHumana" class="mod-cuenta-direccion" placeholder="Ingrese una nueva dirección"><br>
                             <label>Medios de Contacto:</label>
                             <!--TO DO: Usar Vue para todo esto-->
                             <div class="tags-medios-de-contacto">
@@ -108,15 +108,14 @@
                                 </span>
                             </div>
                             <label>Agregar medio de contacto:</label>
-                            <select id="tipoNuevoMedioDeContactoHumano">
+                            <select id="tipoNuevoMedioDeContactoHumano" class="mod-cuenta-tipo-medio" onclick="habilitarInputIdentificacion('humano')">
                                 <option value="">--Seleccione--</option>
                                 <option value="telegram">Telegram</option>
                                 <option value="mail">Mail</option>
                                 <option value="whatsapp">WhatsApp</option>
                             </select><br>
-                            <!--TO DO: Hacer que el input del medio de contacto esté desactivado hasta 
-                            que se seleccione un tipo-->
-                            <input disabled type="text" id="nuevoMedioDeContactoHumano" placeholder="Ingrese su número/mail"><br>
+                            <!--Con Vue cambiarle el tipo de ingreso de dato-->
+                            <input disabled type="text" id="nuevoMedioDeContactoHumano" class="mod-cuenta-medio" placeholder="Ingrese su número/mail"><br>
                         </div>
                         <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
                         <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
@@ -139,6 +138,6 @@
         </ul>
     </footer>
     <script src="ModificarColaboradorUsuario.js"></script>
-    <!--<script src="ModificarColaboradorHumano.js"></script>-->
+    <script src="ModificarColaboradorHumano.js"></script>
 </body>
 </html>

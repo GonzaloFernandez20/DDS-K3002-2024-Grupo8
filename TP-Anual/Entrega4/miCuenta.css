@@ -64,7 +64,7 @@ h3{
     gap: 10px;
 }
 
-#nuevoMedioDeContactoHumano:disabled{
+.mod-cuenta-medio:disabled{
     background: #cecece;
     border: 1px solid #afafaf
 }
