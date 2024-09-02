@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Mi Cuenta - Usuario</title>
+    <title>Mi Cuenta - Suscripciones</title>
 
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -57,32 +57,32 @@
                 <div class="sidenav flex-column flex-shrink-0 p-3">
                     <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
                     <hr>
-                    <ul class="nav nav-pills flex-column mb-auto nav-chosen">
+                    <ul class="nav nav-pills flex-column mb-auto">
                         <span class="fs-5">Usuario</span>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/home-icon.svg"/>
-                            <a href="#info-personal" class="nav-link">
+                            <a href="ModificarColaboradorHumano.html" class="nav-link">
                                 Información Personal
                             </a>
                         </li>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/contact-icon.svg"/>
-                            <a href="#contacto" class="nav-link">
+                            <a href="ModificarColaboradorHumano.html" class="nav-link">
                             Contacto
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav nav-pills flex-column mb-auto">
+                    <ul class="nav nav-pills flex-column mb-auto nav-chosen">
                         <span class="fs-5">Suscripciones</span>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/list-icon.svg"/>
-                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                            <a href="#listado-suscripciones" class="nav-link">
                                 Listado de suscripciones
                             </a>
                         </li>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/notifications-icon.svg"/>
-                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                            <a href="#suscribir" class="nav-link">
                             Suscribirme
                             </a>
                         </li>
@@ -93,49 +93,21 @@
             <div class="col-md-10">
                 <div class="main">
                     <h1>Mi Cuenta</h1>
-                    <h2>Usuario</h2>
-
-                    <form id="mod-cuenta-humano" class="mod-cuenta">
-                        <div class="form-cuenta">
-                            <h3 id="info-personal">Información Personal</h3>
-                            <label for="nuevoNombreHumano">Cambiar nombre de usuario:</label>
-                            <input type="text" id="nuevoNombreHumano" class="mod-cuenta-nombre" placeholder="Ingrese un nuevo nombre de usuario"><br>
-                            <label for="nuevaContraseniaHumana">Cambiar contraseña:</label>
-                            <input type="password" id="nuevaContraseniaHumana" class="mod-cuenta-contrasenia" placeholder="Ingrese una nueva contraseña"><br>
-
-                            <h3 id="contacto">Contacto</h3>
-                            <label for="nuevaDireccionHumana">Cambiar dirección:</label>
-                            <input type="text" id="nuevaDireccionHumana" class="mod-cuenta-direccion" placeholder="Ingrese una nueva dirección"><br>
-                            <label>Medios de Contacto:</label>
-                            <!--TO DO: Usar Vue para todo esto-->
-                            <div class="tags-medios-de-contacto">
-                                <span class="badge d-flex p-2 rounded-pill">
-                                    <span class="px-1">WhatsApp: 9 11 2323-4444</span>
-                                    <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
-                                </span>
-                                <span class="badge d-flex p-2 rounded-pill">
-                                    <span class="px-1">Telegram: 9 54 2020-9999</span>
-                                    <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
-                                </span>
-                                <span class="badge d-flex p-2 rounded-pill">
-                                    <span class="px-1">Mail: pepito@gmail.com</span>
-                                    <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
-                                </span>
-                            </div>
-                            <label>Agregar medio de contacto:</label>
-                            <select id="tipoNuevoMedioDeContactoHumano" class="mod-cuenta-tipo-medio" onclick="habilitarInputIdentificacion('humano')">
-                                <option value="">--Seleccione--</option>
-                                <option value="telegram">Telegram</option>
-                                <option value="mail">Mail</option>
-                                <option value="whatsapp">WhatsApp</option>
-                            </select><br>
-                            <!--Con Vue cambiarle el tipo de ingreso de dato-->
-                            <input disabled type="text" id="nuevoMedioDeContactoHumano" class="mod-cuenta-medio" placeholder="Ingrese su número/mail"><br>
-                        </div>
-                        <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
-                        <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
-                    </form>
-                    <button id="btn-dar-de-baja" class="btn-mod baja">Dar de baja</button>
+                    <h2>Suscripciones</h2>
+                    <h3 id="listado-suscripciones">Listado de suscripciones</h3>
+                    <table class="table-subscriptions">
+                        <thead>
+                            <tr>
+                                <th>Nombre del Punto</th>
+                                <th>Avisar cuando</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-subscriptions">
+                        </tbody>
+                    </table>
+                    <h3 id="suscribir">Suscribirme</h3>
+                    <button id="btn-suscribir">Quiero suscribirme a una heladera</button>
+                    <!--onclick="showSubscriptionModal"-->
                 </div>
             </div>
         </div>
