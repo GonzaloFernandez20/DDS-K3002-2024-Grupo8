@@ -36,11 +36,8 @@ public class Vianda {
         this.estado = EstadoVianda.NO_ENTREGADA;
     }
 
-    public void trasladar(Heladera heladeraNueva) throws ViandaRechazada {
+    public void trasladar(Heladera heladeraNueva) {
         heladera = heladeraNueva;
-        List<Vianda> vianda = new ArrayList<>();
-        vianda.add(this);
-        heladera.recibirViandas(vianda);
     }
 
     public EstadoVianda getEstado() {

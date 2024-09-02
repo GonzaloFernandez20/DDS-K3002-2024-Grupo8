@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class GestorDeAccesosAHeladeras {
     private static GestorDeAccesosAHeladeras instancia;
-    private List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
-    private List<AccesoAHeladeras> tarjetasRegistradas;
+    private final List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
+    private final List<AccesoAHeladeras> tarjetasRegistradas;
 
     // ------------------------------------------------
     private GestorDeAccesosAHeladeras() {
@@ -38,7 +37,6 @@ public class GestorDeAccesosAHeladeras {
     public void generarSolicitud(PersonaHumana destinatario, int cantidadDeTarjetas){
         tarjetasPendientesDeEntrega.add(new SolicitudTarjeta(destinatario, cantidadDeTarjetas)); }
 
-    public void eliminarSolicitud(SolicitudTarjeta solicitud){
-        tarjetasPendientesDeEntrega.remove(solicitud); }
+    public void eliminarSolicitud(SolicitudTarjeta solicitud){ tarjetasPendientesDeEntrega.remove(solicitud); }
 }
 

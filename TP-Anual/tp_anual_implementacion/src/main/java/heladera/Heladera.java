@@ -3,7 +3,6 @@ package heladera;
 import colaborador.Colaborador;
 import contribucion.Vianda;
 import localizacion.Ubicacion;
-import nuestras_excepciones.FallaHeladera;
 import suscripcion.NotificadorDeSuscriptos;
 
 import java.time.LocalDate;
@@ -46,15 +45,16 @@ public class Heladera {
         huboCambioDeStock();
     }
 
-    public List<Vianda> retirarViandas(int cantidadARetirar) throws FallaHeladera {
-        Vianda vianda;
+    public List<Vianda> retirarViandas(int cantidadARetirar) {
+        Vianda viandaActual;
         List<Vianda> viandasARetirar = new ArrayList<>();
 
         for (int i = 0; i < cantidadARetirar && !viandasEnStock.isEmpty(); i++) {
-            vianda = viandasEnStock.get(0);
-            viandasARetirar.add(vianda);
-            viandasEnStock.remove(vianda);
+            viandaActual = viandasEnStock.getFirst();
+            viandasARetirar.add(viandaActual);
+            viandasEnStock.remove(viandaActual);
         }
+        huboCambioDeStock();
         return viandasARetirar;
     }
 

@@ -2,39 +2,39 @@ package contribucion;
 
 import colaborador.Colaborador;
 import heladera.Heladera;
-import nuestras_excepciones.FallaHeladera;
-import nuestras_excepciones.ViandaRechazada;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
 
 public class DistribucionDeVianda extends ContribucionConApertura {
 
     private final Heladera heladeraDeOrigen;
     private final MotivoDeDistribucion motivo;
+    private final int cantidadDeViandas;
 
     public DistribucionDeVianda(Colaborador colaborador,
                                 Heladera heladeraDeOrigen,
                                 Heladera heladeraDestino,
-                                MotivoDeDistribucion motivo) {
+                                MotivoDeDistribucion motivo,
+                                int cantidadDeViandas) {
         this.colaborador = colaborador;
         this.heladeraDestino = heladeraDestino;
         this.heladeraDeOrigen = heladeraDeOrigen;
         this.motivo = motivo;
-        this.viandasIngresadas = new ArrayList<>();
+        this.cantidadDeViandas = cantidadDeViandas;
+        this.viandas = new ArrayList<>();
         this.fechaDeContribucion = LocalDate.now();
     }
 
     @Override
     public void procesarLaContribucion() {
-        if (viandasIngresadas.isEmpty()){
-            // TODO: RETIRAR VIANDAS DE LA HELADERA ORIGEN
-            // DECIRLE A LA HELADERA QUE RETIRE LAS VIANDAS
-            // ASIGNAR ESAS VIANDAS A LA LISTA DE LA CONTRIBUCION
-            // CON CADA VIANDA:
-                // TRASLADAR
-                // SETEAR ESTADO A "EN TRASLADO"
+        if (viandas.isEmpty()){
+            this.viandas = heladeraDeOrigen.retirarViandas(cantidadDeViandas);
+
+            for (Vianda vianda : viandas){
+                vianda.setEstadoVianda(EstadoVianda.EN_TRASLADO);
+                vianda.trasladar(heladeraDestino);
+            }
         }else{
             super.procesarLaContribucion();
         }
@@ -42,8 +42,8 @@ public class DistribucionDeVianda extends ContribucionConApertura {
 
     public double puntosQueSumaColaborador() {
         double coeficiente = 1;
-        return viandasIngresadas.size() * coeficiente;
+        return viandas.size() * coeficiente;
     }
 
-    public Heladera getHeladera() {return heladeraDeOrigen;}
+    public Heladera getHeladera() { return heladeraDeOrigen; }
 }

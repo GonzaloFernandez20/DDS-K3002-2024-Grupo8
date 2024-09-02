@@ -9,6 +9,6 @@ public abstract class AccesoAHeladeras {
     protected String codigoTarjeta;
     protected List <Apertura> historicoDeAccesosHeladera;
 
-    public abstract Boolean aperturaAutorizada(Heladera heladera);
+    public abstract boolean aperturaAutorizada(Heladera heladera);
     public String getCodigoTarjeta() { return codigoTarjeta; }
 }

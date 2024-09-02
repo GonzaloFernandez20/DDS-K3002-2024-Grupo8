@@ -20,7 +20,7 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     }
     // ----------------------------------------------------------
     @Override
-    public Boolean aperturaAutorizada(Heladera heladera) { // -> Buscar que haya hecha un permiso en esa heladera y que no este vencido.
+    public boolean aperturaAutorizada(Heladera heladera) { // -> Buscar que haya hecha un permiso en esa heladera y que no este vencido.
         Optional<PermisoDeApertura> permiso = permisosDeApertura.stream()
                                                                 .filter(permisoDeApertura -> permisoDeApertura.esValida(heladera))
                                                                 .findFirst();
@@ -35,7 +35,7 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
         permiso.getContribucion().procesarLaContribucion();
         Apertura nuevaApertura = new Apertura(permiso.getHeladera(),
                                               permiso.getMotivo(),
-                                              permiso.getContribucion().getViandasIngresadas());
+                                              permiso.getContribucion().getViandas());
         historicoDeAccesosHeladera.add(nuevaApertura);
         retirarPermiso(permiso);
     }
