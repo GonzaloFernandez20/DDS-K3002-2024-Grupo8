@@ -200,6 +200,17 @@ table{
     border-color: hsl(163, 34%, 33%);
 }
 
+.subscribe{
+    color:#ffffff;
+    background-color: #50bfa0;
+    border-color: #ffffff;
+}
+
+.subscribe:hover{
+    color: #e6e6e6;
+    background-color: hsl(163, 34%, 33%);;
+}
+
 .form-cuenta label{
     font-weight: bold;
     color: #333;
@@ -207,7 +218,7 @@ table{
     margin-bottom: 3px;
 }
 
-.form-cuenta input, .form-cuenta select{
+input, select{
     width: 280px;
     padding: 12px 6px 12px 6px;
     margin: 5px 0;
