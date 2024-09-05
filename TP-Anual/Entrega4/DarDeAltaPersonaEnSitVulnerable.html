@@ -7,7 +7,6 @@
     <title>Dar de alta persona en situación vulnerable</title>
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS-Colaboraciones.css">
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,114 +24,105 @@
     </svg>
 
     <header>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="logo col-md-3 justify-content-center text-md-left">
-                    <p>Acá va el logo</p>
-                </div>
+        <div class="logo">
+            <p>Acá va el logo</p>
+        </div>
 
-                <nav class="col-md-6 text-center">
-                    <ul class="nav-links justify-content-center">
-                        <li><a href="Home.html">Home</a></li>
-                        <li><a href="Colaborar.html">Colaborar</a></li>
-                        <li><a href="Nosotros.html">Nosotros</a></li>
-                        <li><a href="Mapa.html">Mapa</a></li>
-                    </ul>
-                </nav>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Colaborar.html">Colaborar</a></li>
+                <li><a href="Nosotros.html">Nosotros</a></li>
+                <li><a href="Mapa.html">Mapa</a></li>
+            </ul>
+        </nav>
 
-                <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                    <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                    <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
-                </div>
-            </div>
+        <div class="header-buttons">
+          <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
+          <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
         </div>
     </header>
 
+    <div class="containerConFoto">
+        <div class="container">
+            <h2>Dar de alta persona en situación vulnerable</h2>
 
-    <main class="container">
-        <div class="container-colab">
-            <div class="row">
-                <h2>Dar de alta a una persona en situación vulnerable</h2>
+            <form id="form-dar-de-alta-persona-en-sit-vulnerable">
+    
+                <div class="input-group">
+                    <label for="tarjetaPersonaVul">Código de tarjeta entregada</label>
+                    <input type="text" id="tarjetaPersonaVul" placeholder="Ingrese el código de tarjeta entregada" required>
+                </div>
                 
-                <div class="col-md-6">
-                    <form id="form-dar-de-alta-persona-en-sit-vulnerable">
-    
-                        <div class="input-group">
-                            <label for="tarjetaPersonaVul">Código de tarjeta entregada</label>
-                            <input type="text" id="tarjetaPersonaVul" placeholder="Ingrese el código de tarjeta entregada" required>
-                        </div>
-                        
-                        <div class="input-group">
-                            <label for="nombrePersonaVul">Nombre</label>
-                            <input type="text" id="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
-                        </div>
-            
-                        <div class="input-group">
-                            <label for="fechaNacimientoPersonaVul">Fecha de nacimiento de la persona</label>
-                            <input type="date" id="fechaNacimientoPersonaVul" placeholder="dd/mm/aaaa" required>
-                        </div>
-        
-                        <div class="input-group">
-                            <label for="sitViviendaPersonaVul">Situación de vivienda de la persona</label>
-                            <select id="sitViviendaPersonaVul" required>
-                                <option>--Seleccione--</option>
-                                <option>Posee domicilio</option>
-                                <option>Situación de calle</option>
-                            </select>
-                        </div>
-    
-                        <div class="input-group">
-                            <label for="domicilioPersonaVul">Domicilio *</label>
-                            <input type="text" id="domicilioPersonaVul" placeholder="Ingrese el domicilio de la persona">
-                        </div>
-    
-                        <div class="input-group">
-                            <label for="tipoDocPersonaVul">Tipo de documento de la persona*</label>
-                            <select id="tipoDocPersonaVul">
-                                <option>--Seleccione--</option>
-                                <option>LC</option>
-                                <option>LE</option>
-                                <option>CI</option>
-                                <option>DNI</option>
-                                <option>Pasaporte</option>
-                            </select>
-                        </div>
-    
-                        <div class="input-group">
-                            <label for="numeroDocPersonaVul">Número de documento de la persona *</label>
-                            <input type="text" id="numeroDocPersonaVul" placeholder="Ingrese el número de documento de la persona">
-                        </div>
-    
-                        <div class="input-group">
-                            <label for="tieneMenoresPersonaVul">¿La persona tiene menores a cargo?</label>
-                            <select id="tieneMenoresPersonaVul">
-                                <option>--Seleccione--</option>
-                                <option>Sí</option>
-                                <option>No</option>
-                            </select>
-                        </div>
-    
-                        <div class="input-group">
-                            <label for="cantidadMenoresPersonaVul">Cantidad de menores que tiene a cargo la persona</label>
-                            <input type="number" min="0" id="cantidadMenoresPersonaVul" placeholder="Ingrese la cantidad de menores que tiene a cargo la persona">
-                        </div>
-    
-                        <button type="submit">Dar de alta</button>
-                        <p class="fs-6 aviso-opcion">* el campo es opcional</p>
-                    </form>
+                <div class="input-group">
+                    <label for="nombrePersonaVul">Nombre</label>
+                    <input type="text" id="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
                 </div>
     
-                <!--style="display: flex; align-items: center; justify-content: center;"-->
-                <div class="col-md-6 container-img">
-                    <img 
-                        src = "img/darDeAltaImagen.jpg"
-                        alt = "Imagen de una mano agarrando una tarjeta";
-                        class="imagenContribucion"
-                    >
+                <div class="input-group">
+                    <label for="fechaNacimientoPersonaVul">Fecha de nacimiento de la persona</label>
+                    <input type="date" id="fechaNacimientoPersonaVul" placeholder="dd/mm/aaaa" required>
                 </div>
-            </div>
+
+                <div class="input-group">
+                    <label for="sitViviendaPersonaVul">Situación de vivienda de la persona</label>
+                    <select id="sitViviendaPersonaVul" required>
+                        <option>--Seleccione--</option>
+                        <option>Posee domicilio</option>
+                        <option>Situación de calle</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="domicilioPersonaVul">Domicilio *</label>
+                    <input type="text" id="domicilioPersonaVul" placeholder="Ingrese el domicilio de la persona">
+                </div>
+
+                <div class="input-group">
+                    <label for="tipoDocPersonaVul">Tipo de documento de la persona*</label>
+                    <select id="tipoDocPersonaVul">
+                        <option>--Seleccione--</option>
+                        <option>LC</option>
+                        <option>LE</option>
+                        <option>CI</option>
+                        <option>DNI</option>
+                        <option>Pasaporte</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="numeroDocPersonaVul">Número de documento de la persona *</label>
+                    <input type="text" id="numeroDocPersonaVul" placeholder="Ingrese el número de documento de la persona">
+                </div>
+
+                <div class="input-group">
+                    <label for="tieneMenoresPersonaVul">¿La persona tiene menores a cargo?</label>
+                    <select id="tieneMenoresPersonaVul">
+                        <option>--Seleccione--</option>
+                        <option>Sí</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="cantidadMenoresPersonaVul">Cantidad de menores que tiene a cargo la persona</label>
+                    <input type="number" min="0" id="cantidadMenoresPersonaVul" placeholder="Ingrese la cantidad de menores que tiene a cargo la persona">
+                </div>
+
+                <button type="submit">Dar de alta</button>
+                <p class="fs-6 aviso-opcion">* el campo es opcional</p>
+            </form>
         </div>
-    </main>
+
+        <!--style="display: flex; align-items: center; justify-content: center;"-->
+        <div class="col-md-6 container-img">
+            <img 
+                src = "img/darDeAltaImagen.jpg"
+                alt = "Imagen de una mano agarrando una tarjeta";
+                class="imagenContribucion"
+            >
+        </div>
+    </div>
 
     <footer>
         <div class="footer-logo">
@@ -146,5 +136,3 @@
         </ul>
     </footer>
 </body>
-
-</html>
