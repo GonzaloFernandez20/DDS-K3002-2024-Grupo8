@@ -50,15 +50,28 @@
             <form id="form-donar-heladera">
 
                 <div class="input-group">
-                    <label for="tipoDeVianda">Tipo de vianda</label>
+                    <label for="tipoDeVianda">Tipo de vianda (*)</label>
                     <input type="text" id="tipoDeVianda" placeholder="Ingrese el tipo de vianda" required>
                 </div>
     
                 <div class="input-group">
-                    <label for="tiempoDeCaducidad">Tiempo de caducidad de la vianda</label>
-                    <input type="text" id="tiempoDeCaducidad" placeholder="Ingrese el tiempo de caducidade la vianda" required>
+                    <label for="fechaCaducidad">Fecha de Caducidad (*)</label>
+                    <input type="date" id="fechaCaducidad" >
+                    <div class="error-message" id="fechaCaducidadError"></div>
                 </div>
-    
+
+                <div class="input-group">
+                    <label for="fechaDonacion">Fecha de Donación (*)</label>
+                    <input type="date" id="fechaDonacion" >
+                    <div class="error-message" id="fechaDonacionError"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="heladera">Donar en la Heladera (*)</label>
+                    <select id="heladera" name="heladera">
+                    </select>
+                </div>
+
                 <div class="input-group">
                     <label for="peso">Peso de la vianda</label>
                     <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" required>
@@ -70,13 +83,15 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="heladera">Donar en la Heladera</label>
-                    <select id="heladera" name="heladera">
+                    <label for="estado">Estado de la vianda (*)</label>
+                    <select id="estado" name="estado">
+                        <option value="">Seleccione un estado</option>
+                        <option value="entregada">Entregada</option>
+                        <option value="noEntregada">No entregada</option>
                     </select>
-
-                    <button type="submit">Donar Vianda</button>
                 </div>
 
+                <button type="submit">Donar Vianda</button>
             </form>
              
         </div>

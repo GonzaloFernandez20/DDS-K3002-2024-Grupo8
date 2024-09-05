@@ -47,32 +47,46 @@
             <form id="extraFormJuridico">
 
                 <div class="input-group">
-                    <label for="razonSocial">Razón Social</label>
+                    <label for="razonSocial">Razón Social (*)</label>
                     <input type="text" id="razonSocial" name="razonSocial" placeholder="Ingrese su razón social">
                     <div class="error-message" id="razonSocialError"></div>
                 </div>
 
                 <div class="input-group">
-                    <label for="rubro">Rubro</label>
+                    <label for="rubro">Rubro (*)</label>
                     <input type="text" id="rubro" name="rubro" placeholder="Ingrese su rubro">
                     <div class="error-message" id="rubroError"></div>
                 </div>
 
                 <div class="input-group">
-                    <label for="tipoOrganizacion">Tipo de Organización</label>
+                    <label for="tipoOrganizacion">Tipo de Organización (*)</label>
                     <select id="tipoOrganizacion" name="tipoOrganizacion">
                         <option value="">Seleccione tipo de organización</option>
-                        <option value="privada">Privada</option>
-                        <option value="publica">Pública</option>
+                        <option value="gubernamental">Gubernamental</option>
+                        <option value="empresa">Empresa</option>
                         <option value="ong">ONG</option>
+                        <option value="institución">Institución</option>
                     </select>
                     <div class="error-message" id="tipoOrganizacionError"></div>
                 </div>
 
+                <div class="input-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Calle y altura">
+                    <div class="error-message" id="direccionError"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="medioContacto">Medio de Contacto (*)</label>
+                    <select id="medioContacto" name="medioContacto">
+                        <option value="">Seleccione medio de contacto</option>
+                        <option value="email">Email</option>
+                        <option value="telefono">Teléfono Fijo</option>
+                        <option value="telefono">Teléfono Celular</option>
+                        <option value="postal">Correo Postal</option>
+                    </select>
                 <button type="submit">Ingresar</button>
-
             </form>
-
         </div>
 
         <!-- Formulario adicional para Colaborador Humano -->

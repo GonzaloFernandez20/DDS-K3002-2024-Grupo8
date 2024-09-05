@@ -48,24 +48,21 @@
             <h2>Dar de alta persona en situación vulnerable</h2>
 
             <form id="form-dar-de-alta-persona-en-sit-vulnerable">
-    
+
                 <div class="input-group">
-                    <label for="tarjetaPersonaVul">Código de tarjeta entregada</label>
-                    <input type="text" id="tarjetaPersonaVul" placeholder="Ingrese el código de tarjeta entregada" required>
+                    <label for="nombrePersonaVul">Nombre (*)</label>
+                    <input type="text" id="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
                 </div>
                 
                 <div class="input-group">
-                    <label for="nombrePersonaVul">Nombre</label>
-                    <input type="text" id="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
-                </div>
-    
-                <div class="input-group">
-                    <label for="fechaNacimientoPersonaVul">Fecha de nacimiento de la persona</label>
+                    <label for="fechaNacimientoPersonaVul">Fecha de nacimiento de la persona (*)</label>
                     <input type="date" id="fechaNacimientoPersonaVul" placeholder="dd/mm/aaaa" required>
                 </div>
 
+                <!-- Consideramos que la fecha de registo es en el momento que la cargamos-->
+                 
                 <div class="input-group">
-                    <label for="sitViviendaPersonaVul">Situación de vivienda de la persona</label>
+                    <label for="sitViviendaPersonaVul">Situación de vivienda de la persona (*)</label>
                     <select id="sitViviendaPersonaVul" required>
                         <option>--Seleccione--</option>
                         <option>Posee domicilio</option>
@@ -74,12 +71,12 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="domicilioPersonaVul">Domicilio *</label>
+                    <label for="domicilioPersonaVul">Domicilio </label>
                     <input type="text" id="domicilioPersonaVul" placeholder="Ingrese el domicilio de la persona">
                 </div>
 
                 <div class="input-group">
-                    <label for="tipoDocPersonaVul">Tipo de documento de la persona*</label>
+                    <label for="tipoDocPersonaVul">Tipo de documento de la persona</label>
                     <select id="tipoDocPersonaVul">
                         <option>--Seleccione--</option>
                         <option>LC</option>
@@ -91,7 +88,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="numeroDocPersonaVul">Número de documento de la persona *</label>
+                    <label for="numeroDocPersonaVul">Número de documento de la persona</label>
                     <input type="text" id="numeroDocPersonaVul" placeholder="Ingrese el número de documento de la persona">
                 </div>
 
@@ -109,8 +106,13 @@
                     <input type="number" min="0" id="cantidadMenoresPersonaVul" placeholder="Ingrese la cantidad de menores que tiene a cargo la persona">
                 </div>
 
+                <div class="input-group">
+                    <label for="tarjetaPersonaVul">Código de tarjeta entregada</label>
+                    <input type="text" id="tarjetaPersonaVul" placeholder="Ingrese el código de tarjeta entregada" required>
+                </div>
+
                 <button type="submit">Dar de alta</button>
-                <p class="fs-6 aviso-opcion">* el campo es opcional</p>
+
             </form>
         </div>
 
@@ -136,3 +138,5 @@
         </ul>
     </footer>
 </body>
+<script src="JS-DarDeAltaPersonaEnSitVulnerable.js"></script>
+</html>

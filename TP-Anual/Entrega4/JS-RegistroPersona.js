@@ -58,6 +58,12 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     const razonSocial = document.getElementById('razonSocial');
     const rubro = document.getElementById('rubro');
     const tipoOrganizacion = document.getElementById('tipoOrganizacion');
+    const direccion = document.getElementById('direccion');
+    const medioContacto = document.getElementById('medioContacto');
+    const emailCaja = document.getElementById('emailCaja');
+    const telefonoCaja = document.getElementById('telefonoCaja');
+    const email = document.getElementById('emailIngresado');
+    const telefono = document.getElementById('telefonoIngresado');
 
     if (!razonSocial.value) {
         hasError = true;
@@ -84,6 +90,28 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     } else {
         document.getElementById('tipoOrganizacionError').innerText = '';
         tipoOrganizacion.classList.remove('error');
+    }
+
+    if (medioContacto.value == "email"){
+        if (!email.value) {
+            hasError = true;
+            document.getElementById('emailError').innerText = 'Debe introducir un Email valido';
+            emailCaja.classList.add('error');
+        } else {
+            document.getElementById('emailError').innerText = '';
+            emailCaja.classList.remove('error');
+        }
+    }
+
+    if (medioContacto.value == "telefono"){
+        if (!telefono.value) {
+            hasError = true;
+            document.getElementById('telefonoError').innerText = 'Debe introducir un Telefono valido';
+            telefonoCaja.classList.add('error');
+        } else {
+            document.getElementById('telefonoError').innerText = '';
+            telefonoCaja.classList.remove('error');
+        }
     }
 
     if (!hasError) {
