@@ -1,19 +1,17 @@
 package reportes;
 
-import heladera.Heladera;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
+public class ReporteSemanal {
+    private LocalDate fechaDeCreacion;
 
-public abstract class ReporteSemanal {
-    private LocalDateTime fecha;
-
-    public LocalDateTime getFecha() {
-        return fecha;
+    public ReporteSemanal(LocalDate fechaDeCreacion) {
+        this.fechaDeCreacion = LocalDate.now();
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public LocalDate getFechaDeCreacion() {
+        return fechaDeCreacion;
     }
 
-    public abstract void reportar(int cantidadViandas);
+    public void completarReporte(){}
 }

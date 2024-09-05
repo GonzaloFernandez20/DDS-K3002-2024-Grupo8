@@ -9,6 +9,7 @@ import medios_de_contacto.MedioDeContacto;
 import org.jetbrains.annotations.NotNull;
 import persona.PersonaHumana;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class Colaborador {
     private AccesoDeColaborador tarjeta;
     private double puntos;
 
+    public Integer cantidadDeDonacionesDeViandaEntre(LocalDate fechaInicio, LocalDate fechaFin){
+        if(tarjeta == null){return 0;}
+        else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
+    }
     // ------------------------------------------------
     public Colaborador(PersonaHumana persona,
                        List<MedioDeContacto> mediosDeContacto) {

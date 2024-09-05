@@ -1,5 +1,8 @@
 package incidentes;
 
-public class Alerta {
+public class Alerta extends Incidente{
 
+    public Alerta(ReporteIncidente reporteIncidente) {
+        super(reporteIncidente);
+    }
 }

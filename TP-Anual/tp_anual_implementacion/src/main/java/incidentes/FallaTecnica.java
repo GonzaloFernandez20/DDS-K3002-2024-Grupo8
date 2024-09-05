@@ -2,12 +2,12 @@ package incidentes;
 
 import colaborador.Colaborador;
 
-public class FallaTecnica {
+public class FallaTecnica extends Incidente{
     private Colaborador colaboradorInformante;
     private Informe informe;
 
-    public FallaTecnica(Colaborador colaboradorInformante, Informe informe) {
-        super();
+    public FallaTecnica(Colaborador colaboradorInformante, Informe informe,ReporteIncidente reporteIncidente) {
+        super(reporteIncidente);
         this.colaboradorInformante = colaboradorInformante;
         this.informe = informe;
     }
