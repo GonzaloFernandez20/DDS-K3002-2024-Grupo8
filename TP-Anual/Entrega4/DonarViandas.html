@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distribuir Viandas</title>
+    <title>Donar Viandas</title>
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS-Colaboraciones.css">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,87 +25,93 @@
     </svg>
 
     <header>
-        <div class="logo">
-            <p>Acá va el logo</p>
-        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="logo col-md-3 justify-content-center text-md-left">
+                    <p>Acá va el logo</p>
+                </div>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Colaborar.html">Colaborar</a></li>
-                <li><a href="Nosotros.html">Nosotros</a></li>
-                <li><a href="Mapa.html">Mapa</a></li>
-            </ul>
-        </nav>
+                <nav class="col-md-6 text-center">
+                    <ul class="nav-links justify-content-center">
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Colaborar.html">Colaborar</a></li>
+                        <li><a href="Nosotros.html">Nosotros</a></li>
+                        <li><a href="Mapa.html">Mapa</a></li>
+                    </ul>
+                </nav>
 
-        <div class="header-buttons">
-          <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-          <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                <div class="header-buttons col-md-3 justify-content-center text-md-right">
+                    <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
+                    <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <div class="containerConFoto">
-        <div class="container">
-            <h2>Donacion de Vianda</h2>
+    <main class="container">
+        <div class="container-colab">
+            <div class="row">
+                <h2>Donacion de Vianda</h2>
 
-            <form id="form-donar-heladera">
+                <div class="col-md-6">
+                    <form id="form-donar-heladera">
 
-                <div class="input-group">
-                    <label for="tipoDeVianda">Tipo de vianda (*)</label>
-                    <input type="text" id="tipoDeVianda" placeholder="Ingrese el tipo de vianda" required>
-                </div>
-    
-                <div class="input-group">
-                    <label for="fechaCaducidad">Fecha de Caducidad (*)</label>
-                    <input type="date" id="fechaCaducidad" >
-                    <div class="error-message" id="fechaCaducidadError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="fechaDonacion">Fecha de Donación (*)</label>
-                    <input type="date" id="fechaDonacion" >
-                    <div class="error-message" id="fechaDonacionError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="heladera">Donar en la Heladera (*)</label>
-                    <select id="heladera" name="heladera">
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label for="peso">Peso de la vianda</label>
-                    <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="calorias">Calorias de la vianda</label>
-                    <input type="text" id="calorias" placeholder="Ingrese la cantidad de calorias de la vianda" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="estado">Estado de la vianda (*)</label>
-                    <select id="estado" name="estado">
-                        <option value="">Seleccione un estado</option>
-                        <option value="entregada">Entregada</option>
-                        <option value="noEntregada">No entregada</option>
-                    </select>
-                </div>
-
-                <button type="submit">Donar Vianda</button>
-            </form>
-             
-        </div>
+                        <div class="input-group">
+                            <label for="tipoDeVianda">Tipo de vianda (*)</label>
+                            <input type="text" id="tipoDeVianda" placeholder="Ingrese el tipo de vianda" required>
+                        </div>
             
-            <div class="col-md-6 container-img">
-                <img 
-                src = ""
-                alt = "";
-                class="imagenContribucion"
-                >
-            </div>
+                        <div class="input-group">
+                            <label for="fechaCaducidad">Fecha de Caducidad (*)</label>
+                            <input type="date" id="fechaCaducidad" >
+                            <div class="error-message" id="fechaCaducidadError"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="fechaDonacion">Fecha de Donación (*)</label>
+                            <input type="date" id="fechaDonacion" >
+                            <div class="error-message" id="fechaDonacionError"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="heladera">Donar en la Heladera (*)</label>
+                            <select id="heladera" name="heladera">
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="peso">Peso de la vianda</label>
+                            <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="calorias">Calorias de la vianda</label>
+                            <input type="text" id="calorias" placeholder="Ingrese la cantidad de calorias de la vianda" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="estado">Estado de la vianda (*)</label>
+                            <select id="estado" name="estado">
+                                <option value="">Seleccione un estado</option>
+                                <option value="entregada">Entregada</option>
+                                <option value="noEntregada">No entregada</option>
+                            </select>
+                        </div>
+
+                        <button type="submit">Donar Vianda</button>
+                    </form>
+                </div>
+                         
+                <div class="col-md-6 container-img">
+                    <img 
+                    src = ""
+                    alt = "";
+                    class="imagenContribucion"
+                    >
+                </div>
+            </div>  
         </div>
-    </div>
+    </main>
 
     <footer>
         <div class="footer-logo">

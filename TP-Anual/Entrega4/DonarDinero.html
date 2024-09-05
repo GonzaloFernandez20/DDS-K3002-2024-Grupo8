@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donacion de Dinero</title>
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS-Colaboraciones.css">
 </head>
@@ -24,82 +25,89 @@
     </svg>
 
     <header>
-        <div class="logo">
-            <p>Acá va el logo</p>
-        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="logo col-md-3 justify-content-center text-md-left">
+                    <p>Acá va el logo</p>
+                </div>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Colaborar.html">Colaborar</a></li>
-                <li><a href="Nosotros.html">Nosotros</a></li>
-                <li><a href="Mapa.html">Mapa</a></li>
-            </ul>
-        </nav>
+                <nav class="col-md-6 text-center">
+                    <ul class="nav-links justify-content-center">
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Colaborar.html">Colaborar</a></li>
+                        <li><a href="Nosotros.html">Nosotros</a></li>
+                        <li><a href="Mapa.html">Mapa</a></li>
+                    </ul>
+                </nav>
 
-        <div class="header-buttons">
-          <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-          <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                <div class="header-buttons col-md-3 justify-content-center text-md-right">
+                    <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
+                    <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <div class="containerConFoto">
-        <div class="container">
-            <h2>Donación de Dinero</h2>
+    <main class="container">
+        <div class="container-colab">
+            <div class="row">
+                <h2>Donación de Dinero</h2>
 
-            <form id="donacionDineroForm">
-        
-                <div class="input-group">
-                    <label for="montoADonar">Monto a Donar (*)</label>
-                    <input type="number" min="10" step="10" id="montoADonar" placeholder="Ingrese Monto a Donar (Pesos Argentinos)" >
-                    <div class="error-message" id="montoError"></div>
-                </div>
-    
-                <div class="input-group">
-                    <label for="fechaDonacion">Fecha de Donación (*)</label>
-                    <input type="date" id="fechaDonacion" >
-                    <div class="error-message" id="fechaDonacionError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="frecuenciaDonacion">Frecuencia de Donación (*)</label>
-                    <select id="frecuenciaDonacion" >
-                        <option value="">Seleccione Frecuencia de Donación</option>
-                        <option value="unicaVez">Única Vez</option>
-                        <option value="diariamente">Diariamente</option>
-                        <option value="semanal">Semanal</option>
-                        <option value="mensualmente">Mensualmente</option>
-                        <option value="anual">Anual</option>
-                        <option value="personalizada">Personalizada</option>
-                    </select>
-                    <div class="error-message" id="frecuenciaDonacionError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="Metodo de Pago">Método de Pago (*)</label>
-                    <select id="metodoDePago" >
-                        <option value="">Seleccione Método de Pago</option>
-                        <option value="tarjetaCredito">Tarjeta de Crédito</option>
-                        <option value="tarjetaDebito">Tarjeta de Débito</option>
-                        <option value="billeteraVirtual">Billetera Virtual</option>
-                    </select>
-                    <div class="error-message" id="metodoDePagoError"></div>
-                </div>
-
-                <button type="submit">Donar Dinero</button>
+                <div class="col-md-6">
+                    <form id="donacionDineroForm">
                 
-            </form>
-        </div>
+                        <div class="input-group">
+                            <label for="montoADonar">Monto a Donar (*)</label>
+                            <input type="number" min="10" step="10" id="montoADonar" placeholder="Ingrese Monto a Donar (Pesos Argentinos)" >
+                            <div class="error-message" id="montoError"></div>
+                        </div>
             
-            <div class="col-md-6 container-img">
-                <img 
-                src = "Recursos/donarDineroImagen.png"
-                alt = "Imagen de un corazón siendo donado a una caja con un símbolo de dinero en ella";
-                class="imagenContribucion"
-                >
+                        <div class="input-group">
+                            <label for="fechaDonacion">Fecha de Donación (*)</label>
+                            <input type="date" id="fechaDonacion" >
+                            <div class="error-message" id="fechaDonacionError"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="frecuenciaDonacion">Frecuencia de Donación (*)</label>
+                            <select id="frecuenciaDonacion" >
+                                <option value="">Seleccione Frecuencia de Donación</option>
+                                <option value="unicaVez">Única Vez</option>
+                                <option value="diariamente">Diariamente</option>
+                                <option value="semanal">Semanal</option>
+                                <option value="mensualmente">Mensualmente</option>
+                                <option value="anual">Anual</option>
+                                <option value="personalizada">Personalizada</option>
+                            </select>
+                            <div class="error-message" id="frecuenciaDonacionError"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="Metodo de Pago">Método de Pago (*)</label>
+                            <select id="metodoDePago" >
+                                <option value="">Seleccione Método de Pago</option>
+                                <option value="tarjetaCredito">Tarjeta de Crédito</option>
+                                <option value="tarjetaDebito">Tarjeta de Débito</option>
+                                <option value="billeteraVirtual">Billetera Virtual</option>
+                            </select>
+                            <div class="error-message" id="metodoDePagoError"></div>
+                        </div>
+
+                        <button type="submit">Donar Dinero</button>
+                        
+                    </form>
+                </div>
+                
+                <div class="col-md-6 container-img">
+                    <img 
+                    src = "Recursos/donarDineroImagen.png"
+                    alt = "Imagen de un corazón siendo donado a una caja con un símbolo de dinero en ella";
+                    class="imagenContribucion"
+                    >
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <footer>
         <div class="footer-logo">

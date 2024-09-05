@@ -7,6 +7,7 @@
     <title>Distribuir Viandas</title>
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS-Colaboraciones.css">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,83 +25,90 @@
     </svg>
 
     <header>
-        <div class="logo">
-            <p>Acá va el logo</p>
-        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="logo col-md-3 justify-content-center text-md-left">
+                    <p>Acá va el logo</p>
+                </div>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Colaborar.html">Colaborar</a></li>
-                <li><a href="Nosotros.html">Nosotros</a></li>
-                <li><a href="Mapa.html">Mapa</a></li>
-            </ul>
-        </nav>
+                <nav class="col-md-6 text-center">
+                    <ul class="nav-links justify-content-center">
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Colaborar.html">Colaborar</a></li>
+                        <li><a href="Nosotros.html">Nosotros</a></li>
+                        <li><a href="Mapa.html">Mapa</a></li>
+                    </ul>
+                </nav>
 
-        <div class="header-buttons">
-          <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-          <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                <div class="header-buttons col-md-3 justify-content-center text-md-right">
+                    <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
+                    <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <div class="containerConFoto">
-
-        <div class="container">
-            <h2>Distribucion de Viandas</h2>
-            
-            <form id="distribucionViandaForm">
-
-                <div class="input-group">
-                    <label for="heladeraOrigen">Heladera Origen (*)</label>
-                    <select id="heladeraOrigen" >
-                        <option value="">Seleccione Heladera de Origen</option>
-                        <option value="IDHeladera1">Heladera 1</option>
-                        <option value="IDHeladera2">Heladera 2</option>
-                        <option value="IDHeladera3">Heladera 3</option>
-                    </select>
-                    <div class="error-message" id="heladeraOrigenError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="heladeraDestino">Heladera Destino (*)</label>
-                    <select id="heladeraDestino" >
-                        <option value="">Seleccione Heladera de Destino</option>
-                        <option value="IDHeladera1">Heladera 1</option>
-                        <option value="IDHeladera2">Heladera 2</option>
-                        <option value="IDHeladera3">Heladera 3</option>
-                    </select>
-                    <div class="error-message" id="heladeraDestinoError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="cantidadViandas">Viandas a Distribuir (*)</label>
-                    <input type="number" min="1" step="1" id="cantidadViandas" placeholder="Ingrese Cantidad de Viandas a Distribuir" >
-                    <div class="error-message" id="cantidadViandasError"></div>
-                </div>
-    
-                <div class="input-group">
-                    <label for="motivoDistribucion">Motivo de Distribucion (*)</label>
-                    <select id="motivoDistribucion" >
-                        <option value="">Seleccione el Motivo de Distribucion</option>
-                        <option value="desperfecto">Desperfecto en Heladera</option>
-                        <option value="faltanViandas">Falta de Viandas en otra Heladera</option>
-                    </select>
-                    <div class="error-message" id="motivoDistribucionError"></div>
-                </div>
-
-                <button type="submit">Realizar Distribucion</button>
+    <main class="container">
+        <div class="container-colab">
+            <div class="row">
+                <h2>Distribucion de Viandas</h2>
                 
-            </form>
+                <div class="col-md-6">
+                    <form id="distribucionViandaForm">
+
+                        <div class="input-group">
+                            <label for="heladeraOrigen">Heladera Origen (*)</label>
+                            <select id="heladeraOrigen" >
+                                <option value="">Seleccione Heladera de Origen</option>
+                                <option value="IDHeladera1">Heladera 1</option>
+                                <option value="IDHeladera2">Heladera 2</option>
+                                <option value="IDHeladera3">Heladera 3</option>
+                            </select>
+                            <div class="error-message" id="heladeraOrigenError"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="heladeraDestino">Heladera Destino (*)</label>
+                            <select id="heladeraDestino" >
+                                <option value="">Seleccione Heladera de Destino</option>
+                                <option value="IDHeladera1">Heladera 1</option>
+                                <option value="IDHeladera2">Heladera 2</option>
+                                <option value="IDHeladera3">Heladera 3</option>
+                            </select>
+                            <div class="error-message" id="heladeraDestinoError"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="cantidadViandas">Viandas a Distribuir (*)</label>
+                            <input type="number" min="1" step="1" id="cantidadViandas" placeholder="Ingrese Cantidad de Viandas a Distribuir" >
+                            <div class="error-message" id="cantidadViandasError"></div>
+                        </div>
             
+                        <div class="input-group">
+                            <label for="motivoDistribucion">Motivo de Distribucion (*)</label>
+                            <select id="motivoDistribucion" >
+                                <option value="">Seleccione el Motivo de Distribucion</option>
+                                <option value="desperfecto">Desperfecto en Heladera</option>
+                                <option value="faltanViandas">Falta de Viandas en otra Heladera</option>
+                            </select>
+                            <div class="error-message" id="motivoDistribucionError"></div>
+                        </div>
+
+                        <button type="submit">Realizar Distribucion</button>
+                        
+                    </form>
+                </div>
+            
+                <div class="col-md-6">
+                    <img 
+                        src = "Recursos/distribuirViandaImagen.png"
+                        alt = "Imagen de viandas siendo envueltas por flechas circulares";
+                        class="imagenContribucion"
+                    >
+                </div>
+            </div>
         </div>
-
-        <img 
-            src = "Recursos/distribuirViandaImagen.png"
-            alt = "Imagen de viandas siendo envueltas por flechas circulares";
-            class="imagenContribucion"
-        >
-
-    </div>
+    </main>
 
     <footer>
         <div class="footer-logo">
