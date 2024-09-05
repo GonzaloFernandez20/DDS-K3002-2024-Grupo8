@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="sesion.css">
+    <link rel="stylesheet" href="CSS-Sesion.css">
 </head>
 
 <body>
@@ -80,13 +80,13 @@
             <form id="extraFormHumano">
 
                 <div class="input-group">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre">Nombre (*)</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
                     <div class="error-message" id="nombreError"></div>
                 </div>
 
                 <div class="input-group">
-                    <label for="apellido">Apellido</label>
+                    <label for="apellido">Apellido (*)</label>
                     <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido">
                     <div class="error-message" id="apellidoError"></div>
                 </div>
@@ -104,11 +104,12 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="medioContacto">Medio de Contacto</label>
+                    <label for="medioContacto">Medio de Contacto (*)</label>
                     <select id="medioContacto" name="medioContacto">
                         <option value="">Seleccione medio de contacto</option>
                         <option value="email">Email</option>
-                        <option value="telefono">Teléfono</option>
+                        <option value="telefono">Teléfono Fijo</option>
+                        <option value="telefono">Teléfono Celular</option>
                         <option value="postal">Correo Postal</option>
                     </select>
 
@@ -128,7 +129,7 @@
 
                 </div>
 
-                <button type="submit">Ingresar</button>
+                <a href="Home.html"><button type="button">Ingresar</button></a>
 
             </form>
 

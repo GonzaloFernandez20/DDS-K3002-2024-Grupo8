@@ -34,8 +34,7 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         tipoColaborador.classList.remove('error');
     }
 
-    if (!hasError) {
-        // Mostrar la pestaña correspondiente al tipo de colaborador seleccionado
+    if (!hasError) {// Mostrar la pestaña correspondiente al tipo de colaborador seleccionado
         const extraFormContainerJuridico = document.getElementById('extraFormContainerJuridico');
         const extraFormContainerHumano = document.getElementById('extraFormContainerHumano');
         
@@ -50,6 +49,7 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
     }
 });
 
+// JURIDICO
 document.getElementById('extraFormContainerJuridico').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -91,6 +91,7 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     }
 });
 
+// HUMANO
 document.getElementById('extraFormContainerHumano').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -122,24 +123,6 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     } else {
         document.getElementById('apellidoError').innerText = '';
         apellido.classList.remove('error');
-    }
-
-    if (!fechaNacimiento.value) {
-        hasError = true;
-        document.getElementById('fechaNacimientoError').innerText = 'La fecha de nacimiento es requerida';
-        fechaNacimiento.classList.add('error');
-    } else {
-        document.getElementById('fechaNacimientoError').innerText = '';
-        fechaNacimiento.classList.remove('error');
-    }
-
-    if (!direccion.value) {
-        hasError = true;
-        document.getElementById('direccionError').innerText = 'La dirección es requerida';
-        direccion.classList.add('error');
-    } else {
-        document.getElementById('direccionError').innerText = '';
-        direccion.classList.remove('error');
     }
 
     if (!medioContacto.value) {

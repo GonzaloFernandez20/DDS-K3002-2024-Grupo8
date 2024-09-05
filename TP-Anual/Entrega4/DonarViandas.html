@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donar Dinero</title>
+    <title>Hacerse cargo de una heladera</title>
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS-Colaboraciones.css">
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,63 +48,51 @@
         </div>
     </header>
 
-    <main class="container container-colab"> 
-        <div class="containerConFoto row">
-                <h2>Donación de Dinero</h2>
-                
-                <div class="col-md-6">
-                    <form id="donacionDineroForm">
-        
-                        <div class="input-group">
-                            <label for="montoADonar">Monto a Donar (*)</label>
-                            <input type="number" min="10" step="10" id="montoADonar" placeholder="Ingrese Monto a Donar (Pesos Argentinos)" >
-                            <div class="error-message" id="montoError"></div>
-                        </div>
+    <main class="container container-colab">
+        <div class="row">
+            <h2>Donacion de Vianda</h2>
             
-                        <div class="input-group">
-                            <label for="fechaDonacion">Fecha de Donación (*)</label>
-                            <input type="date" id="fechaDonacion" >
-                            <div class="error-message" id="fechaDonacionError"></div>
-                        </div>
-        
-                        <div class="input-group">
-                            <label for="frecuenciaDonacion">Frecuencia de Donación (*)</label>
-                            <select id="frecuenciaDonacion" >
-                                <option value="">Seleccione Frecuencia de Donación</option>
-                                <option value="unicaVez">Única Vez</option>
-                                <option value="diariamente">Diariamente</option>
-                                <option value="semanal">Semanal</option>
-                                <option value="mensualmente">Mensualmente</option>
-                                <option value="anual">Anual</option>
-                                <option value="personalizada">Personalizada</option>
-                            </select>
-                            <div class="error-message" id="frecuenciaDonacionError"></div>
-                        </div>
-    
-                        <div class="input-group">
-                            <label for="Metodo de Pago">Método de Pago (*)</label>
-                            <select id="metodoDePago" >
-                                <option value="">Seleccione Método de Pago</option>
-                                <option value="tarjetaCredito">Tarjeta de Crédito</option>
-                                <option value="tarjetaDebito">Tarjeta de Débito</option>
-                                <option value="billeteraVirtual">Billetera Virtual</option>
-                            </select>
-                            <div class="error-message" id="metodoDePagoError"></div>
-                        </div>
-    
-                        <button type="submit">Donar Dinero</button>
-                        
-                    </form>
-                </div>
+            <div class="col-md-6">
+                <form id="form-donar-heladera">
 
-                <div class="col-md-6">
-                    <img 
-                        src = "Recursos/donarDineroImagen.png"
-                        alt = "Imagen de un corazón siendo donado a una caja con un símbolo de dinero en ella";
-                        class="imagenContribucion"
-                    >
-                </div>
+                    <div class="input-group">
+                        <label for="tipoDeVianda">Tipo de vianda</label>
+                        <input type="text" id="tipoDeVianda" placeholder="Ingrese el tipo de vianda" required>
+                    </div>
+        
+                    <div class="input-group">
+                        <label for="tiempoDeCaducidad">Tiempo de caducidad de la vianda</label>
+                        <input type="text" id="tiempoDeCaducidad" placeholder="Ingrese el tiempo de caducidade la vianda" required>
+                    </div>
+    
+                    <div class="input-group">
+                        <label for="peso">Peso de la vianda</label>
+                        <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="calorias">Calorias de la vianda</label>
+                        <input type="text" id="calorias" placeholder="Ingrese la cantidad de calorias de la vianda" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="heladera">Donar en la Heladera</label>
+                        <select id="heladera" name="heladera">
+                        </select>
+
+                    <button type="submit">Donar Vianda</button>
+                </form>
+            </div>
+            
+            <div class="col-md-6 container-img">
+                <img 
+                    src = ""
+                    alt = "";
+                    class="imagenContribucion"
+                >
+            </div>
         </div>
+
     </main>
 
     <footer>
@@ -118,9 +106,6 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-
-    <script src="DonarDinero.js"></script>
-
 </body>
 
 </html>
