@@ -51,31 +51,31 @@
     
 
         <main class="container col-md-6" id="container-reportar">
-            <h1 id="title-reportar">Reportar Falla Técnica</h1>                
+            <h1 id="title-reportar">Reportar Falla Técnica</h1>   
+
             <form id="form-reportar-falla">
                 <div class="input-group">
-                    <label for="fechaFalla">Fecha de descubrimiento del incidente</label><br>
+                    <label for="fechaFalla">Fecha de descubrimiento del incidente (*)</label><br>
                     <input type="datetime-local" id="fechaFalla" placeholder="DD/MM/AAAA __:__" required>
                 </div>
             
                 <div class="input-group">
                     <!--Estaría bueno que sea un select, ya que conocemos todas nuestras heladeras-->
-                    <label for="nombrePuntoFalla">Nombre del punto en que ocurrió la falla</label><br>
+                    <label for="nombrePuntoFalla">Nombre del punto en que ocurrió la falla (*)</label><br>
                     <input type="text" id="nombrePuntoFalla" placeholder="Ingrese el punto en el que ocurrió la falla" required>
                 </div>
         
                 <div class="input-group">
-                    <label for="descripcionFalla">Descripción de la falla*</label><br>
+                    <label for="descripcionFalla">Descripción de la falla</label><br>
                     <input type="text" id="descripcionFalla" placeholder="Ingrese una descripción de la falla hallada">
                 </div>
     
                 <div class="input-group">
-                    <label for="fotoFalla">Foto de la falla*</label><br>
+                    <label for="fotoFalla">Foto de la falla</label><br>
                     <input type="file" id="fotoFalla">
                 </div>
     
                 <button type="submit" id="btn-reportar">Reportar falla</button>
-                <p class="fs-6 aviso-opcion">* el campo es opcional</p>
             </form>
         </main>
 
@@ -90,7 +90,6 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
-        <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
         <script src="JS-ReportarFallaTecnica.js"></script>
     </body>
 </html>
