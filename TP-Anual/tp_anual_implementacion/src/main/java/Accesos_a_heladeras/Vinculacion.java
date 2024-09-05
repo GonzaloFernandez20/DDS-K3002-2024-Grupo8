@@ -1,10 +1,13 @@
 package Accesos_a_heladeras;
 
 import colaborador.Colaborador;
+import contribucion.EstadoVianda;
+import contribucion.Vianda;
 import heladera.Heladera;
 import persona_vulnerable.PersonaSituacionVulnerable;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import static Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 
@@ -15,78 +18,47 @@ public class Vinculacion extends AccesoAHeladeras{
     private int cantUsosRestantesPorDia;
     private LocalDate fechaUltimoUso;
 
-    public Vinculacion(List<Apertura> historicoDeAccesosHeladera,
-                       String codigoTarjeta,
+    public Vinculacion(String codigoTarjeta,
                        PersonaSituacionVulnerable personaSituacionVulnerable,
-                       Colaborador colaboradorQueRegistro,
-                       int cantUsosRestantesPorDia,
-                       LocalDate fechaRegistro,
-                       LocalDate fechaUltimoUso) {
-        super(historicoDeAccesosHeladera, codigoTarjeta);
+                       Colaborador colaboradorQueRegistro) {
+        this.codigoTarjeta = codigoTarjeta;
         this.personaSituacionVulnerable = personaSituacionVulnerable;
         this.colaboradorQueRegistro = colaboradorQueRegistro;
-        this.cantUsosRestantesPorDia = cantUsosRestantesPorDia;
-        this.fechaRegistro = fechaRegistro;
-        this.fechaUltimoUso = fechaUltimoUso;
-    }
-
-    public void registrarAcceso(Heladera heladera) {
-        Apertura nuevoApertura = new Apertura(heladera, RETIRAR_VIANDA);
-        historicoDeAccesosHeladera.add(nuevoApertura);
-        cantUsosRestantesPorDia --;
+        reiniciarUsosPermitidos();
+        this.fechaRegistro = LocalDate.now();
+        this.fechaUltimoUso = LocalDate.now();
+        this.historicoDeAccesosHeladera = new ArrayList<>();
     }
 
     @Override
-    public Boolean aperturaAutorizada(Heladera heladera) {   // Chequear si tiene usos disponibles ...
+    public boolean aperturaAutorizada(Heladera heladera) {
         consultarUltimoAcceso();
-        return cantUsosRestantesPorDia > 0;
+        if(cantUsosRestantesPorDia > 0) {
+            registrarAcceso(heladera);
+            return true;
+        } else return false;
+    }
 
-        // --> TODO: Manejo de error en caso de que no tenga historicoDeAccesosAHeladera disponibles
-        // --> TODO: Si La heladera estuviera vacia, no deberia restar un uso de la tarjeta
+    private void registrarAcceso(Heladera heladera) {
+        List <Vianda> viandaRetirada = heladera.retirarViandas(1);
+        viandaRetirada.getFirst().setEstadoVianda(EstadoVianda.RETIRADA);
+        Apertura nuevoApertura = new Apertura(heladera, RETIRAR_VIANDA, viandaRetirada);
+        historicoDeAccesosHeladera.add(nuevoApertura);
+        cantUsosRestantesPorDia--;
+    }
+
+
+    private void consultarUltimoAcceso() {
+        LocalDate fechaDeHoy = LocalDate.now();
+        if (fechaUltimoUso.isBefore(fechaDeHoy)){
+            reiniciarUsosPermitidos();
+            fechaUltimoUso = fechaDeHoy;
+        }
     }
 
     private void reiniciarUsosPermitidos(){
         cantUsosRestantesPorDia = 4 + personaSituacionVulnerable.getCantMenores() * 2;
     }
 
-    private void consultarUltimoAcceso(){
-        LocalDate fechaDeHoy = LocalDate.now();
-
-        if (fechaUltimoUso.isBefore(fechaDeHoy)){
-            reiniciarUsosPermitidos();
-            fechaUltimoUso = fechaDeHoy;
-        }
-    }
     // ----------> Getters y Setters
-
-    public PersonaSituacionVulnerable getPersonaSituacionVulnerable() {
-        return personaSituacionVulnerable;
-    }
-    public void setPersonaSituacionVulnerable(PersonaSituacionVulnerable personaSituacionVulnerable) {
-        this.personaSituacionVulnerable = personaSituacionVulnerable;
-    }
-    public Colaborador getColaboradorQueRegistro() {
-        return colaboradorQueRegistro;
-    }
-    public void setColaboradorQueRegistro(Colaborador colaboradorQueRegistro) {
-        this.colaboradorQueRegistro = colaboradorQueRegistro;
-    }
-    public LocalDate getFechaRegistro() {
-        return fechaRegistro;
-    }
-    public void setFechaRegistro(LocalDate fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-    public int getCantUsosRestantesPorDia() {
-        return cantUsosRestantesPorDia;
-    }
-    public void setCantUsosRestantesPorDia(int cantUsosRestantesPorDia) {
-        this.cantUsosRestantesPorDia = cantUsosRestantesPorDia;
-    }
-    public LocalDate getFechaUltimoUso() {
-        return fechaUltimoUso;
-    }
-    public void setFechaUltimoUso(LocalDate fechaUltimoUso) {
-        this.fechaUltimoUso = fechaUltimoUso;
-    }
 }

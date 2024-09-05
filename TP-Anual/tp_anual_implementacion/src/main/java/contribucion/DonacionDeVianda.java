@@ -4,7 +4,6 @@ import colaborador.Colaborador;
 import heladera.Heladera;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
 
 public class DonacionDeVianda extends ContribucionConApertura {
@@ -13,17 +12,17 @@ public class DonacionDeVianda extends ContribucionConApertura {
         this.colaborador = colaborador;
         this.fechaDeContribucion = LocalDate.now();
         this.heladeraDestino = heladera;
-        this.viandasIngresadas = new ArrayList<>();
+        this.viandas = new ArrayList<>();
     }
 
     @Override
     public double puntosQueSumaColaborador() {
         double coeficiente = 1.5;
-        return viandasIngresadas.size() * coeficiente;
+        return viandas.size() * coeficiente;
     }
 
     public void agregarViandaADonacion(Vianda vianda) {
-        viandasIngresadas.add(vianda);
+        viandas.add(vianda);
     }
 
     // -----------------------------------

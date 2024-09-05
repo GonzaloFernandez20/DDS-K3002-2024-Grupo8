@@ -9,7 +9,7 @@ public class PermisoDeApertura {
     private ContribucionConApertura contribucion;
     private Heladera heladera;
     private MotivoApertura motivo;
-    private Boolean estaVencida;
+    private boolean estaVencida;
     private final LocalDateTime horaEnQueVence;
 
     public PermisoDeApertura(ContribucionConApertura contribucion, Heladera heladera, MotivoApertura motivo) {
@@ -33,20 +33,10 @@ public class PermisoDeApertura {
     public ContribucionConApertura getContribucion() {
         return contribucion;
     }
-    public void setContribucion(ContribucionConApertura contribucion) {
-        this.contribucion = contribucion;
-    }
     public Heladera getHeladera() {
         return heladera;
-    }
-    public void setHeladera(Heladera heladera) {
-        this.heladera = heladera;
     }
     public MotivoApertura getMotivo() {
         return motivo;
     }
-    public void setMotivo(MotivoApertura motivo) {
-        this.motivo = motivo;
-    }
-
 }
