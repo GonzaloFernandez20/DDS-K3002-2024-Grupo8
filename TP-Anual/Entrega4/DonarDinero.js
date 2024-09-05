@@ -49,7 +49,6 @@ formularioDonacion.addEventListener('submit', function(e) {
     if (!hasError) {
 
         alert('Donacion enviada exitosamente');
+        formularioDonacion.reset();
     }
-
-    formularioDonacion.reset();
 });
