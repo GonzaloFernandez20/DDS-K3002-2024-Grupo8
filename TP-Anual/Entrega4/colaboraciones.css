@@ -1,13 +1,13 @@
-.container {
+.container-colab {
     background-color: #ffffff;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 350px;
+    /*width: 350px;*/
 }
 
-.container h2 {
+.container-colab h2 {
     margin-bottom: 25px;
     color: #333;
     font-size: 24px;
@@ -16,7 +16,7 @@
     padding-bottom: 10px;
 }
 
-.container button {
+.container-colab button {
     background-color: #50bfa0;
     color: white;
     padding: 12px;
@@ -29,7 +29,7 @@
     transition: background-color 0.3s;
 }
 
-.container button:hover {
+.container-colab button:hover {
     background-color: #45a890;
 }
 
