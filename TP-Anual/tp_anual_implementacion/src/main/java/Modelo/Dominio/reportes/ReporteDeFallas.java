@@ -1,10 +1,21 @@
 package Modelo.Dominio.reportes;
 
-public class ReporteDeFallas extends ReporteSemanalPorHeladera{
-    private Integer cantidadFallas;
+import heladera.Heladera;
 
+import java.time.LocalDate;
+import java.util.List;
+
+public class ReporteDeFallas extends ReporteSemanal{
+    private List<FallasPorHeladera> fallasPorHeladera;
+
+    public ReporteDeFallas(LocalDate fechaDeCreacion) {
+        super(fechaDeCreacion);
+    }
     @Override
-    public void reportar(Integer cantidadViandas) {
-        cantidadFallas++;
+    public void completarReporte(){
+        //NECESITO TENER DEFINIDA LA ESTRUCTURA DEL PAQUETE INCIDENTE ANTES DE AVANZAR
+    }
+    public void sumarFallasPorheladera(FallasPorHeladera unaFallaPorHeladera){
+        fallasPorHeladera.add(unaFallaPorHeladera);
     }
 }

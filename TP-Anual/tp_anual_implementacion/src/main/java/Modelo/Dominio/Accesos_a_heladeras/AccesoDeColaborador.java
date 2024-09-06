@@ -3,6 +3,7 @@ package Modelo.Dominio.Accesos_a_heladeras;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,9 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     private final Colaborador colaborador;
     private final List<PermisoDeApertura> permisosDeApertura;
 
+    public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
+        return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
+    }
     public AccesoDeColaborador(String codigoTarjeta,
                                Colaborador colaborador) {
         this.codigoTarjeta = codigoTarjeta;

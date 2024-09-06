@@ -1,17 +1,17 @@
-package Modelo.Dominio.reportes;
+package reportes;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-public abstract class ReporteSemanal {
-    private LocalDateTime fecha;
+public class ReporteSemanal {
+    private LocalDate fechaDeCreacion;
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public ReporteSemanal(LocalDate fechaDeCreacion) {
+        this.fechaDeCreacion = LocalDate.now();
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public LocalDate getFechaDeCreacion() {
+        return fechaDeCreacion;
     }
 
-    public abstract void reportar(int cantidadViandas);
+    public void completarReporte(){}
 }

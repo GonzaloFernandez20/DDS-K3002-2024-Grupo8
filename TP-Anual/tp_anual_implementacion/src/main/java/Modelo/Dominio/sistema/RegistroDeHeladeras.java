@@ -16,6 +16,10 @@ public class RegistroDeHeladeras {
         heladeras = new ArrayList<>();
     }
 
+    public List<Heladera> getHeladeras() {
+        return heladeras;
+    }
+
     public static RegistroDeHeladeras getInstancia() {
         if (instancia == null) {
             instancia = new RegistroDeHeladeras();
