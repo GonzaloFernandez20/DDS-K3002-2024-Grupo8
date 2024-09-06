@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import seguridad.Validador;
+import Modelo.seguridad.Validador;
 
 @SpringBootTest
 class ValidadorTests {

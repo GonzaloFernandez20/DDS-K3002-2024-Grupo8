@@ -6,16 +6,16 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import colaborador.Colaborador;
-import heladera.Modelo;
-import heladera.Heladera;
-import contribucion.Vianda;
-import localizacion.Direccion;
-import persona.Persona;
-import persona.PersonaJuridica;
-import sistema.Sistema;
+import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.heladera.Modelo;
+import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.contribucion.Vianda;
+import Modelo.Dominio.localizacion.Direccion;
+import Modelo.Dominio.persona.Persona;
+import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.sistema.Sistema;
 
-import static persona.TipoOrganizacion.ong;
+import static Modelo.Dominio.persona.TipoOrganizacion.ong;
 
 public class HeladeraCliente {
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker

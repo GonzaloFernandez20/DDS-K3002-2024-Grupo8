@@ -1,24 +1,24 @@
 package tp_anual.tp_anual_implementacion;
 
-import colaborador.Colaborador;
-import contribucion.OfertaDeProductos;
-import contribucion.Producto;
-import localizacion.Direccion;
+import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.OfertaDeProductos;
+import Modelo.Dominio.contribucion.Producto;
+import Modelo.Dominio.localizacion.Direccion;
 import medios_de_contacto.CorreoElectronico;
 import nuestras_excepciones.ColaboracionInvalida;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import persona.Persona;
-import persona.PersonaHumana;
-import persona.PersonaJuridica;
-import sistema.Sistema;
+import Modelo.Dominio.persona.Persona;
+import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.sistema.Sistema;
 
 import java.time.LocalDate;
 
-import static contribucion.Rubro.GASTRONOMIA;
+import static Modelo.Dominio.contribucion.Rubro.GASTRONOMIA;
 import static org.junit.jupiter.api.Assertions.*;
-import static persona.TipoOrganizacion.empresa;
+import static Modelo.Dominio.persona.TipoOrganizacion.empresa;
 
 @SpringBootTest
 class testsOfertaDeProductos {

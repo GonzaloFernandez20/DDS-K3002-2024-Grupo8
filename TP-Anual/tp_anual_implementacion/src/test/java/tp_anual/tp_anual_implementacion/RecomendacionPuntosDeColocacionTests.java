@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
 
-import contribucion.HacerseCargoDeHeladera;
+import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 
 @SpringBootTest
 class RecomendacionPuntosDeColocacionTests {

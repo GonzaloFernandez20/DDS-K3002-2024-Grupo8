@@ -1,26 +1,23 @@
 package tp_anual.tp_anual_implementacion;
 
 
-import colaborador.Colaborador;
-import contribucion.DonacionDeDinero;
-import documentacion.Documento;
-import localizacion.Direccion;
+import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.DonacionDeDinero;
+import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.localizacion.Direccion;
 import medios_de_contacto.CorreoElectronico;
-import medios_de_contacto.MedioDeContacto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import persona.Persona;
-import persona.PersonaHumana;
-import sistema.Sistema;
+import Modelo.Dominio.persona.Persona;
+import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.sistema.Sistema;
 import java.time.LocalDate;
 
-import java.util.ArrayList;
-
-import static documentacion.Sexo.FEMENINO;
-import static documentacion.Sexo.MASCULINO;
-import static documentacion.TipoDeDocumento.DNI;
-import static documentacion.TipoDeDocumento.LC;
+import static Modelo.Dominio.documentacion.Sexo.FEMENINO;
+import static Modelo.Dominio.documentacion.Sexo.MASCULINO;
+import static Modelo.Dominio.documentacion.TipoDeDocumento.DNI;
+import static Modelo.Dominio.documentacion.TipoDeDocumento.LC;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 

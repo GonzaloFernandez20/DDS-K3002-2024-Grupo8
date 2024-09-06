@@ -1,15 +1,15 @@
 package tp_anual.tp_anual_implementacion;
-import colaborador.Colaborador;
-import contribucion.RegistroDePersonasEnSituacionVulnerable;
+import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.RegistroDePersonasEnSituacionVulnerable;
 import nuestras_excepciones.ColaboracionInvalida;
-import localizacion.Direccion;
+import Modelo.Dominio.localizacion.Direccion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import persona.PersonaHumana;
+import Modelo.Dominio.persona.PersonaHumana;
 import persona_vulnerable.AccesoAHeladeras;
-import persona_vulnerable.EstadoDeVivienda;
-import persona_vulnerable.PersonaSituacionVulnerable;
+import Modelo.Dominio.persona_vulnerable.EstadoDeVivienda;
+import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
 import persona_vulnerable.Vinculacion;
 
 import java.time.LocalDate;

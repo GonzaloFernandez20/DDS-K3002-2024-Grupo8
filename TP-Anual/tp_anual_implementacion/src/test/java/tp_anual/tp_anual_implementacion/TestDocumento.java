@@ -1,12 +1,12 @@
 package tp_anual.tp_anual_implementacion;
 
-import documentacion.Documento;
+import Modelo.Dominio.documentacion.Documento;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static documentacion.Sexo.FEMENINO;
-import static documentacion.TipoDeDocumento.DNI;
+import static Modelo.Dominio.documentacion.Sexo.FEMENINO;
+import static Modelo.Dominio.documentacion.TipoDeDocumento.DNI;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 

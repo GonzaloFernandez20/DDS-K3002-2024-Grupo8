@@ -1,20 +1,20 @@
 package tp_anual.tp_anual_implementacion;
 
-import colaborador.Colaborador;
-import documentacion.Documento;
-import contribucion.EstadoVianda;
-import heladera.Heladera;
-import heladera.Modelo;
-import contribucion.Vianda;
+import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.contribucion.EstadoVianda;
+import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.heladera.Modelo;
+import Modelo.Dominio.contribucion.Vianda;
 import nuestras_excepciones.FallaHeladera;
-import localizacion.Direccion;
+import Modelo.Dominio.localizacion.Direccion;
 import nuestras_excepciones.ViandaRechazada;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import persona.PersonaHumana;
-import persona.PersonaJuridica;
-import persona.TipoOrganizacion;
+import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.persona.TipoOrganizacion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

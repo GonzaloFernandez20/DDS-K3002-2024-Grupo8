@@ -1,34 +1,25 @@
 package tp_anual.tp_anual_implementacion;
 
-import carga_masiva.CargaMasiva;
-import colaborador.Colaborador;
+import Modelo.carga_masiva.CargaMasiva;
+import Modelo.Dominio.colaborador.Colaborador;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import documentacion.Documento;
-import documentacion.TipoDeDocumento;
-import localizacion.Direccion;
+import Modelo.Dominio.documentacion.Documento;
 import medios_de_contacto.CorreoElectronico;
-import medios_de_contacto.MedioDeContacto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import persona.Persona;
-import persona.PersonaHumana;
-import sistema.Sistema;
+import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.sistema.Sistema;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-import static documentacion.Sexo.FEMENINO;
-import static documentacion.Sexo.MASCULINO;
-import static documentacion.TipoDeDocumento.DNI;
-import static documentacion.TipoDeDocumento.LE;
-import static documentacion.TipoDeDocumento.LC;
+import static Modelo.Dominio.documentacion.TipoDeDocumento.DNI;
+import static Modelo.Dominio.documentacion.TipoDeDocumento.LE;
+import static Modelo.Dominio.documentacion.TipoDeDocumento.LC;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
