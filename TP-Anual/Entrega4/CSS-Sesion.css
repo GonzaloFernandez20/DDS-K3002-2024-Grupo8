@@ -160,3 +160,16 @@ button:hover {
 .hipervinculo{
     font-size: 15px;
 }
+
+.input-checkbox {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-checkbox label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+

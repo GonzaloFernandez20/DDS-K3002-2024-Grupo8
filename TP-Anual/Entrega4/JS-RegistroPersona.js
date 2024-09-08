@@ -58,12 +58,13 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     const razonSocial = document.getElementById('razonSocial');
     const rubro = document.getElementById('rubro');
     const tipoOrganizacion = document.getElementById('tipoOrganizacion');
-    const direccion = document.getElementById('direccion');
-    const medioContacto = document.getElementById('medioContacto');
+    const direccion = document.getElementById('direccion'); 
     const emailCaja = document.getElementById('emailCaja');
     const telefonoCaja = document.getElementById('telefonoCaja');
+    const correoCaja = document.getElementById('correoCaja');
     const email = document.getElementById('emailIngresado');
     const telefono = document.getElementById('telefonoIngresado');
+    const correo = document.getElementById('correoIngresado');
 
     if (!razonSocial.value) {
         hasError = true;
@@ -116,6 +117,7 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
 
     if (!hasError) {
         alert('Formulario de colaborador Juridico enviado correctamente');
+        location.href="InicioDeSesion.html";
     }
 });
 
@@ -186,28 +188,42 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
 
     if (!hasError) {
         alert('Formulario de colaborador Humano enviado correctamente');
+        location.href="InicioDeSesion.html";
     }
 });
 
-medioContacto.addEventListener('change', function(e) {
-    const medioContacto = document.getElementById('medioContacto');
+var checkboxEmail = document.getElementById("medioContactoEmail");
+checkboxEmail.addEventListener('change', function(e) {
     const emailCaja = document.getElementById('emailCaja');
-    const telefonoCaja = document.getElementById('telefonoCaja');
 
-    e.preventDefault();
-
-    if (medioContacto.value == "email"){
+    if (this.checked){
         emailCaja.style.display = 'inline';
-        telefonoCaja.style.display = 'none';
     }
+    else{
+        emailCaja.style.display = 'none';
+    }
+});
 
-    else if (medioContacto.value == "telefono"){
+var checkboxTelefono = document.getElementById("medioContactoTelefono");
+checkboxTelefono.addEventListener('change', function(e) {
+    const telefonoCaja = document.getElementById('telefonoCaja');
+    
+    if (this.checked){
         telefonoCaja.style.display = 'inline';
-        emailCaja.style.display = 'none';
     }
-
-    else {
-        emailCaja.style.display = 'none';
+    else{
         telefonoCaja.style.display = 'none';
+    }
+});
+
+var checkboxCorreo = document.getElementById("medioContactoCorreo");
+checkboxCorreo.addEventListener('change', function(e) {
+    const correoCaja = document.getElementById('correoCaja');
+    
+    if (this.checked){
+        correoCaja.style.display = 'inline';
+    }
+    else{
+        correoCaja.style.display = 'none';
     }
 });

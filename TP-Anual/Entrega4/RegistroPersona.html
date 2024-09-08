@@ -10,6 +10,7 @@
 
 <body>
     <div class="main-container">
+        <!-- Formulario principal -->
         <div class="container">
             <h2>REGISTRO</h2>
             <form id="registroForm">
@@ -39,117 +40,131 @@
                 <button type="submit">Registrar</button>
 
             </form>
-
         </div>
-        
-        <!-- Formulario adicional para Colaborador Juridico -->
-        <div class="container" id="extraFormContainerJuridico" style="display: none;">
-            <form id="extraFormJuridico">
+    </div>
 
-                <div class="input-group">
-                    <label for="razonSocial">Razón Social (*)</label>
-                    <input type="text" id="razonSocial" name="razonSocial" placeholder="Ingrese su razón social">
-                    <div class="error-message" id="razonSocialError"></div>
+    <!-- Formulario adicional para Colaborador Juridico -->
+    <div class="container" id="extraFormContainerJuridico" style="display: none;">
+        <form id="extraFormJuridico">
+            <div class="input-group">
+                <label for="razonSocial">Razón Social (*)</label>
+                <input type="text" id="razonSocial" name="razonSocial" placeholder="Ingrese su razón social">
+                <div class="error-message" id="razonSocialError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="rubro">Rubro (*)</label>
+                <input type="text" id="rubro" name="rubro" placeholder="Ingrese su rubro">
+                <div class="error-message" id="rubroError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="tipoOrganizacion">Tipo de Organización (*)</label>
+                <select id="tipoOrganizacion" name="tipoOrganizacion">
+                    <option value="">Seleccione tipo de organización</option>
+                    <option value="gubernamental">Gubernamental</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="ong">ONG</option>
+                    <option value="institución">Institución</option>
+                </select>
+                <div class="error-message" id="tipoOrganizacionError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="direccion">Dirección de Empresa</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Calle y altura">
+                <div class="error-message" id="direccionError"></div>
+            </div>
+
+            <div class="input-checkbox">
+                <label for="medioContacto">Medio de Contacto (*)</label>
+                <input type="checkbox" id="medioContactoEmail" value="email">Email<br>
+                <input type="checkbox" id="medioContactoTelefono" value="telefono">Telefono<br>
+                <input type="checkbox" id="medioContactoCorreo" value="postal">Correo Postal<br>
+
+                <div class="input-group" id="emailCaja" style="display: none;">
+                    <label for="emailIngreso">Ingresar Email</label>
+                    <input type="text" name="emailIngreso" placeholder="Ingresar Email" id="emailIngresado">
+                    <div class="error-message" id="emailError"></div>
                 </div>
 
-                <div class="input-group">
-                    <label for="rubro">Rubro (*)</label>
-                    <input type="text" id="rubro" name="rubro" placeholder="Ingrese su rubro">
-                    <div class="error-message" id="rubroError"></div>
+                <div class="input-group" id="telefonoCaja" style="display: none;">
+                    <label for="telefonoIngreso">Ingresar Telefono</label>
+                    <input type="text" pattern="^[0-9]*$" name="telefonoIngreso" placeholder="Ingresar Telefono" id="telefonoIngresado">
+                    <div class="error-message" id="telefonoError"></div>
                 </div>
 
-                <div class="input-group">
-                    <label for="tipoOrganizacion">Tipo de Organización (*)</label>
-                    <select id="tipoOrganizacion" name="tipoOrganizacion">
-                        <option value="">Seleccione tipo de organización</option>
-                        <option value="gubernamental">Gubernamental</option>
-                        <option value="empresa">Empresa</option>
-                        <option value="ong">ONG</option>
-                        <option value="institución">Institución</option>
-                    </select>
-                    <div class="error-message" id="tipoOrganizacionError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion" name="direccion" placeholder="Calle y altura">
+                <div class="input-group" id="correoCaja" style="display: none;">
+                    <label for="direccionIngreso">Ingresar Direccion de Contacto</label>
+                    <input type="text" name="direccionCaja" placeholder="Ingresar Direccion" id="correoIngresado">
                     <div class="error-message" id="direccionError"></div>
                 </div>
+            </div>
 
-                <div class="input-group">
-                    <label for="medioContacto">Medio de Contacto (*)</label>
-                    <select id="medioContacto" name="medioContacto">
-                        <option value="">Seleccione medio de contacto</option>
-                        <option value="email">Email</option>
-                        <option value="telefono">Teléfono Fijo</option>
-                        <option value="telefono">Teléfono Celular</option>
-                        <option value="postal">Correo Postal</option>
-                    </select>
-                <button type="submit">Ingresar</button>
-            </form>
-        </div>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
 
-        <!-- Formulario adicional para Colaborador Humano -->
-        <div class="container" id="extraFormContainerHumano" style="display: none;">
-            <form id="extraFormHumano">
+    <!-- Formulario adicional para Colaborador Humano -->
+    <div class="container" id="extraFormContainerHumano" style="display: none;">
+        <form id="extraFormHumano">
 
-                <div class="input-group">
-                    <label for="nombre">Nombre (*)</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
-                    <div class="error-message" id="nombreError"></div>
+            <div class="input-group">
+                <label for="nombre">Nombre (*)</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+                <div class="error-message" id="nombreError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="apellido">Apellido (*)</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido">
+                <div class="error-message" id="apellidoError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+                <div class="error-message" id="fechaNacimientoError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Calle y altura">
+                <div class="error-message" id="direccionError"></div>
+            </div>
+
+            <div class="input-checkbox">
+                <label for="medioContacto">Medio de Contacto (*)</label>
+                <input type="checkbox" id="medioContactoEmail" value="email">Email<br>
+                <input type="checkbox" id="medioContactoTelefono" value="telefono">Telefono<br>
+                <input type="checkbox" id="medioContactoCorreo" value="postal">Correo Postal<br>
+
+                <div class="input-group" id="emailCaja" style="display: none;">
+                    <label for="emailIngreso">Ingresar Email</label>
+                    <input type="text" name="emailIngreso" placeholder="Ingresar Email" id="emailIngresado">
+                    <div class="error-message" id="emailError"></div>
                 </div>
 
-                <div class="input-group">
-                    <label for="apellido">Apellido (*)</label>
-                    <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido">
-                    <div class="error-message" id="apellidoError"></div>
+                <div class="input-group" id="telefonoCaja" style="display: none;">
+                    <label for="telefonoIngreso">Ingresar Telefono</label>
+                    <input type="text" pattern="^[0-9]*$" name="telefonoIngreso" placeholder="Ingresar Telefono" id="telefonoIngresado">
+                    <div class="error-message" id="telefonoError"></div>
                 </div>
 
-                <div class="input-group">
-                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                    <input type="date" id="fechaNacimiento" name="fechaNacimiento">
-                    <div class="error-message" id="fechaNacimientoError"></div>
-                </div>
-
-                <div class="input-group">
-                    <label for="direccion">Dirección</label>
-                    <input type="text" id="direccion" name="direccion" placeholder="Calle y altura">
+                <div class="input-group" id="correoCaja" style="display: none;">
+                    <label for="direccionIngreso">Ingresar Direccion de Contacto</label>
+                    <input type="text" name="direccionCaja" placeholder="Ingresar Direccion" id="correoIngresado">
                     <div class="error-message" id="direccionError"></div>
                 </div>
+            </div>
 
-                <div class="input-group">
-                    <label for="medioContacto">Medio de Contacto (*)</label>
-                    <select id="medioContacto" name="medioContacto">
-                        <option value="">Seleccione medio de contacto</option>
-                        <option value="email">Email</option>
-                        <option value="telefono">Teléfono Fijo</option>
-                        <option value="telefono">Teléfono Celular</option>
-                        <option value="postal">Correo Postal</option>
-                    </select>
+            <button type="button">Ingresar</button></a>
 
-                    <div class="error-message" id="medioContactoError"></div>
-
-                    <div class="input-group" id="emailCaja" style="display: none;">
-                        <label for="emailIngreso">Ingresar Email</label>
-                        <input type="text" name="emailIngreso" placeholder="Ingresar Email" id="emailIngresado">
-                        <div class="error-message" id="emailError"></div>
-                    </div>
-
-                    <div class="input-group" id="telefonoCaja" style="display: none;">
-                        <label for="telefonoIngreso">Ingresar Telefono</label>
-                        <input type="text" pattern="^[0-9]*$" name="telefonoIngreso" placeholder="Ingresar Telefono" id="telefonoIngresado">
-                        <div class="error-message" id="telefonoError"></div>
-                    </div>
-
-                </div>
-
-                <a href="Home.html"><button type="button">Ingresar</button></a>
-
-            </form>
-
-        </div>
+        </form>
 
     </div>
+
+
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="JS-RegistroPersona.js"></script>
 </body>
