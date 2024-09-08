@@ -58,13 +58,16 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     const razonSocial = document.getElementById('razonSocial');
     const rubro = document.getElementById('rubro');
     const tipoOrganizacion = document.getElementById('tipoOrganizacion');
-    const direccion = document.getElementById('direccion'); 
-    const emailCaja = document.getElementById('emailCaja');
-    const telefonoCaja = document.getElementById('telefonoCaja');
-    const correoCaja = document.getElementById('correoCaja');
-    const email = document.getElementById('emailIngresado');
-    const telefono = document.getElementById('telefonoIngresado');
-    const correo = document.getElementById('correoIngresado');
+    const direccionJ = document.getElementById('direccionJ'); 
+
+    const emailCaja = document.getElementById('emailCajaJ');
+    const email = document.getElementById('emailIngresadoJ');
+
+    const telefonoCaja = document.getElementById('telefonoCajaJ');
+    const telefono = document.getElementById('telefonoIngresadoJ');
+
+    const correoCaja = document.getElementById('correoCajaJ');
+    const correo = document.getElementById('correoIngresadoJ');
 
     if (!razonSocial.value) {
         hasError = true;
@@ -93,26 +96,45 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
         tipoOrganizacion.classList.remove('error');
     }
 
-    if (medioContacto.value == "email"){
+    if (checkboxEmailJ.checked){
         if (!email.value) {
             hasError = true;
-            document.getElementById('emailError').innerText = 'Debe introducir un Email valido';
+            document.getElementById('emailErrorJ').innerText = 'Debe introducir un Email valido';
             emailCaja.classList.add('error');
         } else {
-            document.getElementById('emailError').innerText = '';
+            document.getElementById('emailErrorJ').innerText = '';
             emailCaja.classList.remove('error');
         }
     }
 
-    if (medioContacto.value == "telefono"){
+    if (checkboxTelefonoJ.checked){
         if (!telefono.value) {
             hasError = true;
-            document.getElementById('telefonoError').innerText = 'Debe introducir un Telefono valido';
+            document.getElementById('telefonoErrorJ').innerText = 'Debe introducir un Telefono valido';
             telefonoCaja.classList.add('error');
         } else {
-            document.getElementById('telefonoError').innerText = '';
+            document.getElementById('telefonoErrorJ').innerText = '';
             telefonoCaja.classList.remove('error');
         }
+    }
+
+    if (checkboxCorreoJ.checked){
+        if (!correo.value) {
+            hasError = true;
+            document.getElementById('correoErrorJ').innerText = 'Debe introducir una Direccion valida';
+            correoCaja.classList.add('error');
+        } else {
+            document.getElementById('correoErrorJ').innerText = '';
+            correoCaja.classList.remove('error');
+        }
+    }
+
+    if(!(checkboxCorreoJ.checked || checkboxEmailJ.checked || checkboxTelefonoJ.checked)){
+        hasError = true;
+        document.getElementById('contactoErrorJ').innerText = 'Debe seleccionar al menos un Medio de Contacto';
+    }
+    else {
+        document.getElementById('contactoErrorJ').innerText = '';
     }
 
     if (!hasError) {
@@ -130,12 +152,16 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     const nombre = document.getElementById('nombre');
     const apellido = document.getElementById('apellido');
     const fechaNacimiento = document.getElementById('fechaNacimiento');
-    const direccion = document.getElementById('direccion');
-    const medioContacto = document.getElementById('medioContacto');
-    const emailCaja = document.getElementById('emailCaja');
-    const telefonoCaja = document.getElementById('telefonoCaja');
-    const email = document.getElementById('emailIngresado');
-    const telefono = document.getElementById('telefonoIngresado');
+    const direccionH = document.getElementById('direccionH');
+
+    const emailCaja = document.getElementById('emailCajaH');
+    const email = document.getElementById('emailIngresadoH');
+
+    const telefonoCaja = document.getElementById('telefonoCajaH');
+    const telefono = document.getElementById('telefonoIngresadoH');
+
+    const correoCaja = document.getElementById('correoCajaH');
+    const correo = document.getElementById('correoIngresadoH');
 
     if (!nombre.value) {
         hasError = true;
@@ -153,37 +179,47 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     } else {
         document.getElementById('apellidoError').innerText = '';
         apellido.classList.remove('error');
-    }
+    }  
 
-    if (!medioContacto.value) {
-        hasError = true;
-        document.getElementById('medioContactoError').innerText = 'Debe seleccionar un medio de contacto';
-        medioContacto.classList.add('error');
-    } else {
-        document.getElementById('medioContactoError').innerText = '';
-        medioContacto.classList.remove('error');
-    }    
-
-    if (medioContacto.value == "email"){
+    if (checkboxEmailH.checked){
         if (!email.value) {
             hasError = true;
-            document.getElementById('emailError').innerText = 'Debe introducir un Email valido';
+            document.getElementById('emailErrorH').innerText = 'Debe introducir un Email valido';
             emailCaja.classList.add('error');
         } else {
-            document.getElementById('emailError').innerText = '';
+            document.getElementById('emailErrorH').innerText = '';
             emailCaja.classList.remove('error');
         }
     }
 
-    if (medioContacto.value == "telefono"){
+    if (checkboxTelefonoH.checked){
         if (!telefono.value) {
             hasError = true;
-            document.getElementById('telefonoError').innerText = 'Debe introducir un Telefono valido';
+            document.getElementById('telefonoErrorH').innerText = 'Debe introducir un Telefono valido';
             telefonoCaja.classList.add('error');
         } else {
-            document.getElementById('telefonoError').innerText = '';
+            document.getElementById('telefonoErrorH').innerText = '';
             telefonoCaja.classList.remove('error');
         }
+    }
+
+    if (checkboxCorreoH.checked){
+        if (!correo.value) {
+            hasError = true;
+            document.getElementById('correoErrorH').innerText = 'Debe introducir una Direccion valida';
+            correoCaja.classList.add('error');
+        } else {
+            document.getElementById('correoErrorH').innerText = '';
+            correoCaja.classList.remove('error');
+        }
+    }
+
+    if(!(checkboxCorreoH.checked || checkboxEmailH.checked || checkboxTelefonoH.checked)){
+        hasError = true;
+        document.getElementById('contactoErrorH').innerText = 'Debe seleccionar al menos un Medio de Contacto';
+    }
+    else {
+        document.getElementById('contactoErrorH').innerText = '';
     }
 
     if (!hasError) {
@@ -192,9 +228,9 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     }
 });
 
-var checkboxEmail = document.getElementById("medioContactoEmail");
-checkboxEmail.addEventListener('change', function(e) {
-    const emailCaja = document.getElementById('emailCaja');
+var checkboxEmailJ = document.getElementById("medioContactoEmailJ");
+checkboxEmailJ.addEventListener('change', function(e) {
+    const emailCaja = document.getElementById('emailCajaJ');
 
     if (this.checked){
         emailCaja.style.display = 'inline';
@@ -204,9 +240,21 @@ checkboxEmail.addEventListener('change', function(e) {
     }
 });
 
-var checkboxTelefono = document.getElementById("medioContactoTelefono");
-checkboxTelefono.addEventListener('change', function(e) {
-    const telefonoCaja = document.getElementById('telefonoCaja');
+var checkboxEmailH = document.getElementById("medioContactoEmailH");
+checkboxEmailH.addEventListener('change', function(e) {
+    const emailCaja = document.getElementById('emailCajaH');
+
+    if (this.checked){
+        emailCaja.style.display = 'inline';
+    }
+    else{
+        emailCaja.style.display = 'none';
+    }
+});
+
+var checkboxTelefonoJ = document.getElementById("medioContactoTelefonoJ");
+checkboxTelefonoJ.addEventListener('change', function(e) {
+    const telefonoCaja = document.getElementById('telefonoCajaJ');
     
     if (this.checked){
         telefonoCaja.style.display = 'inline';
@@ -216,9 +264,33 @@ checkboxTelefono.addEventListener('change', function(e) {
     }
 });
 
-var checkboxCorreo = document.getElementById("medioContactoCorreo");
-checkboxCorreo.addEventListener('change', function(e) {
-    const correoCaja = document.getElementById('correoCaja');
+var checkboxTelefonoH = document.getElementById("medioContactoTelefonoH");
+checkboxTelefonoH.addEventListener('change', function(e) {
+    const telefonoCaja = document.getElementById('telefonoCajaH');
+    
+    if (this.checked){
+        telefonoCaja.style.display = 'inline';
+    }
+    else{
+        telefonoCaja.style.display = 'none';
+    }
+});
+
+var checkboxCorreoJ = document.getElementById("medioContactoCorreoJ");
+checkboxCorreoJ.addEventListener('change', function(e) {
+    const correoCaja = document.getElementById('correoCajaJ');
+    
+    if (this.checked){
+        correoCaja.style.display = 'inline';
+    }
+    else{
+        correoCaja.style.display = 'none';
+    }
+});
+
+var checkboxCorreoH = document.getElementById("medioContactoCorreoH");
+checkboxCorreoH.addEventListener('change', function(e) {
+    const correoCaja = document.getElementById('correoCajaH');
     
     if (this.checked){
         correoCaja.style.display = 'inline';

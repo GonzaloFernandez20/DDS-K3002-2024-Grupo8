@@ -1,43 +1,38 @@
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
     event.preventDefault(); 
 
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const usernameError = document.getElementById('usernameError');
-    const passwordError = document.getElementById('passwordError');
+    const usuario = document.getElementById('usuario');
+    const contrasena = document.getElementById('contrasena');
 
-    usernameError.textContent = '';
-    passwordError.textContent = '';
-    document.getElementById('username').classList.remove('error');
-    document.getElementById('password').classList.remove('error');
+    let hasError = false;
 
-    let isValid = true;
-
-    if (username.toLowerCase() === 'admin') {
-        usernameError.textContent = 'El nombre de usuario "admin" no está permitido.';
-        document.getElementById('username').classList.add('error');
-        isValid = false;
+    if (!usuario.value) {
+        hasError = true;
+        document.getElementById('usuarioError').innerText = 'El usuario es requerido';
+        usuario.classList.add('error');
+    } else {
+        document.getElementById('usuarioError').innerText = '';
+        usuario.classList.remove('error');
     }
 
-    if (username === '') {
-        usernameError.textContent = 'Por favor, ingrese un nombre de usuario.';
-        document.getElementById('username').classList.add('error');
-        isValid = false;
+    if (!contrasena.value) {
+        hasError = true;
+        document.getElementById('contrasenaError').innerText = 'La contraseña es requerida';
+        contrasena.classList.add('error');
+    } else {
+        document.getElementById('contrasenaError').innerText = '';
+        contrasena.classList.remove('error');
     }
 
-    if (password === '1234' || password.toLowerCase() === 'admin') {
-        passwordError.textContent = 'La contraseña no puede ser "1234" o "admin".';
-        document.getElementById('password').classList.add('error');
-        isValid = false;
+    if (!hasError) {
+        alert('Inicio de Sesion Exitoso');
+        if (usuario.value == "admin" && contrasena.value == "admin") {
+            location.href="Administrador.html";    
+        } 
+        else {
+            location.href="Home.html";    
+        }
     }
-
-    if (password === '') {
-        passwordError.textContent = 'Por favor, ingrese una contraseña.';
-        document.getElementById('password').classList.add('error');
-        isValid = false;
-    }
-
-    if (isValid) { alert('Registro exitoso!'); }
 });
 
 document.getElementById('username').addEventListener('input', function() {

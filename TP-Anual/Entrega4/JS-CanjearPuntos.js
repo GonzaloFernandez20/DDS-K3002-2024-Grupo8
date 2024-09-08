@@ -27,12 +27,16 @@ var containerCanjeo = new Vue({
     },
     methods: {
         conseguirProducto(productoId) {
-            if(confirm("¿Está seguro que quiere cambiar los puntos por este producto?")) {
-                //ESTO LO HACEMOS EN BACK
-                this.puntos -= this.productos[productoId].puntosNecesarios;
-                                //
-                console.log("Cambió " + productos[productoId].puntosNecesarios + " por el producto " + productos[productoId].nombreProducto);
-            };
+            // Verificar si el usuario tiene suficientes puntos antes de restarlos
+            if(this.puntos >= this.productos[productoId].puntosNecesarios) {
+                if(confirm("¿Está seguro que quiere cambiar los puntos por este producto?")) {
+                    // Aquí ya sabemos que los puntos son suficientes, así que restamos
+                    this.puntos -= this.productos[productoId].puntosNecesarios;
+                    alert("Cambió " + productos[productoId].puntosNecesarios + " por el producto " + productos[productoId].nombreProducto);
+                }
+            } else {
+                alert("No tienes suficientes puntos para canjear este producto.");
+            }
         }
-    }
-})
+    }    
+});

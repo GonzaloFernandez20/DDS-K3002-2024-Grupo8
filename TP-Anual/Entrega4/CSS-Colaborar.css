@@ -16,6 +16,8 @@ h1{
 
 h2{
     color: #50bfa0;
+    text-align: center;
+    text-decoration: underline;
 }
 
 h3{
@@ -166,8 +168,9 @@ table{
     border-radius: 10px;
     padding: 10px 25px;
     transition-duration: 0.4s;
-    text-align: center;
+    text-align: left;
     margin: 20px 25px 5px 0px;
+
 }
 
 .btn-mod:hover{
@@ -189,7 +192,6 @@ table{
 .colaborar{
     color: #ffffff;
     background-color: #50bfa0;
-    display: flex;
     margin-left: 100px;
     padding: 8px 12px;
     border: none;
@@ -216,6 +218,13 @@ table{
     color: hsl(163, 34%, 33%);
     border-color: hsl(163, 34%, 33%);
 }
+
+.form-cuenta {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .form-cuenta label{
     font-weight: bold;
     color: #333;
@@ -231,7 +240,7 @@ table{
     box-sizing: border-box;
     transition: border-color 0.4s;
     text-align: center;
-    margin: 0 auto;
+    margin: 10px;
 }
 
 #warnings{

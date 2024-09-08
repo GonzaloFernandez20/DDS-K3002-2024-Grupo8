@@ -8,15 +8,18 @@ html {
 }
 
 h1{
-    color: #50bfa0;
+    color: #ffffff;
     text-align: center;
     padding-top: 2%;
     padding-bottom: 1%;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;  
 }
 
-h2{
+.titulos {
     color: #50bfa0;
     text-align: center;
+    -webkit-text-stroke-width: 0px;
 }
 
 h3{
