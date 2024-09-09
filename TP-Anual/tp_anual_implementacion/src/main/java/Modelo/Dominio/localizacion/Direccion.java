@@ -12,6 +12,9 @@ public class Direccion {
         this.codPostal = codPostal;
         this.unidadFuncional = unidadFuncional;
     }
+    public String toString(){
+        return calle+" "+altura;
+    }
 
     // ----------> Getters y Setters
     public String getCalle() {

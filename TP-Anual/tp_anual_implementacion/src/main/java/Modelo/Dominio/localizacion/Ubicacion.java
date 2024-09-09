@@ -16,7 +16,7 @@ public class Ubicacion {
     // ----------> Getters y Setters
     public void setNombreDelPunto(String nombreDelPunto) { this.nombreDelPunto = nombreDelPunto; }
     public String getNombreDelPunto() { return nombreDelPunto; }
-    public Direccion getDireccion() { return direccion; }
+    public String getDireccion() { return direccion.toString(); }
     public PuntoEnElMapa getPunto() { return punto; }
     public String getCiudad() { return ciudad; }
 }

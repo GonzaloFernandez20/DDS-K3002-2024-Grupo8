@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BuilderDonacionDeViandas {
 
-    public static DonacionDeVianda crearDonacionAPartirDe(DonacionDeViandaDTO donacionDeViandaDTO {
+    public static DonacionDeVianda crearDonacionAPartirDe(DonacionDeViandaDTO donacionDeViandaDTO) {
         DonacionDeVianda nuevaDonacion = new DonacionDeVianda(
                 donacionDeViandaDTO.getColaborador(),
                 donacionDeViandaDTO.getHeladera(),

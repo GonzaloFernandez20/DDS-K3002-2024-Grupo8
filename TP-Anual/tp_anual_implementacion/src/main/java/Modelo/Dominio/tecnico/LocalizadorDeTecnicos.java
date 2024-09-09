@@ -1,5 +1,7 @@
 package Modelo.Dominio.tecnico;
 
+import Modelo.Dominio.localizacion.PuntoEnElMapa;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class LocalizadorDeTecnicos {
         return instancia;
     }
 
-
+    public Tecnico obtenerTecnicoMasCercano(PuntoEnElMapa punto){
+        //TODO
+        return null;
+    }
 
 }
