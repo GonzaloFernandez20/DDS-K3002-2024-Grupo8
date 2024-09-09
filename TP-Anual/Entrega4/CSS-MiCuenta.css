@@ -1,7 +1,3 @@
-.container{
-    max-width: 100%;
-}
-
 h1{
     color: #50bfa0;
     text-align: center;
@@ -206,7 +202,7 @@ table{
     background-color: hsl(163, 34%, 33%);;
 }
 
-.form-cuenta label{
+.form-cuenta label, .reportes-container p{
     font-weight: bold;
     color: #333;
     display: block;
@@ -229,4 +225,13 @@ input, select{
 
 #mod-heladera{
     display: none;
+}
+
+.reportes-container {
+    padding-bottom: 20px;
+}
+
+.reportes-container embed {
+    width: 95%;
+    height: 400px;
 }

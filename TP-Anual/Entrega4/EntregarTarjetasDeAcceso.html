@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Pedir tarjetas para entregar</title>
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS-Colaboraciones.css">
@@ -25,22 +25,27 @@
     </svg>
 
     <header>
-        <div class="logo">
-            <p>Acá va el logo</p>
-        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="logo col-md-3 justify-content-center text-md-left">
+                    <p>Acá va el logo</p>
+                </div>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Colaborar.html">Colaborar</a></li>
-                <li><a href="Nosotros.html">Nosotros</a></li>
-                <li><a href="Mapa.html">Mapa</a></li>
-            </ul>
-        </nav>
+                <nav class="col-md-6 text-center">
+                    <ul class="nav-links justify-content-center">
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Colaborar.html">Colaborar</a></li>
+                        <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                        <li><a href="Nosotros.html">Nosotros</a></li>
+                        <li><a href="Mapa.html">Mapa</a></li>
+                    </ul>
+                </nav>
 
-        <div class="header-buttons">
-          <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-          <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                <div class="header-buttons col-md-3 justify-content-center text-md-right">
+                    <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
+                    <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -52,7 +57,7 @@
                 <div class="col-md-6">
                     <form id="entregarTarjetasForm">
                         <div class="input-group">
-                            <label for="cantidadViandas">Cantidad de tarjetas a solicitar</label>
+                            <label for="cant-tarjetas">Cantidad de tarjetas a solicitar</label>
                             <input type="number" min="1" step="1" id="cant-tarjetas" placeholder="Ingrese Cantidad de Tarjetas a solicitar" >
                             <div class="error-message" id="tarjetas-error"></div>
                         </div>
@@ -73,12 +78,14 @@
     </main>
 
     <footer>
-        <p>Site name</p>
+        <div class="footer-logo">
+            <p>Acá va el logo</p>
+            <span>&copy; 2024 Company, Inc</span>
+        </div>
         <ul class="social-icons">
-            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+            <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+            <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
 

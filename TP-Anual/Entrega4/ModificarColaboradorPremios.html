@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Mi Cuenta - Heladeras</title>
+    <title>Mi Cuenta - Mis Puntos</title>
 
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -71,74 +71,70 @@
         </div>
     </header>
 
-    <main>
+    <main class="container">
         <div class="row">
-        <div class="col-md-2">
-        <div class="sidenav flex-column flex-shrink-0 p-3">
-            <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <span class="fs-5">Usuario</span>
-                <li class="nav-item">
-                    <image height="20px" width="20px" src="img/home-icon.svg"/>
-                    <a href="ModificarColaboradorJuridicoCuenta.html" class="nav-link">
-                        Información Personal
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <image height="20px" width="20px" src="img/contact-icon.svg"/>
-                    <a href="ModificarColaboradorJuridicoCuenta.html" class="nav-link">
-                    Contacto
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <span class="fs-5">Suscripciones</span>
-                <li class="nav-item">
-                    <image height="20px" width="20px" src="img/list-icon.svg"/>
-                    <a href="#listado" class="nav-link">
-                        Listado de Suscripciones
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <svg height="20px" width="20px">
-                        <image height="20px" width="5px" x="7.5px" y="0" href="img/suscribirme.png"/>
-                    </svg>
-                    <a href="#alertas" class="nav-link">
-                        Suscribirme
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav nav-pills flex-column mb-auto nav-chosen">
-                <span class="fs-5">Mis puntos</span>
-                <li class="nav-item">
-                    <image height="20px" width="20px" src="img/puntos.png"/>
-                    <a href="#listado" class="nav-link">
-                        Puntos actuales
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <svg height="20px" width="20px">
-                        <image height="20px" width="5px" x="7.5px" y="0" href="img/premios.png"/>
-                    </svg>
-                    <a href="#alertas" class="nav-link">
-                        Premios
-                    </a>
-                </li>
-            </ul>
-        </div>
-        </div>
+            <div class="col-md-2">
+                <div class="sidenav flex-column flex-shrink-0 p-3">
+                    <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <span class="fs-5">Usuario</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/home-icon.svg"/>
+                            <a href="ModificarColaboradorHumano.html" class="nav-link">
+                                Información Personal
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/contact-icon.svg"/>
+                            <a href="ModificarColaboradorHumano.html" class="nav-link">
+                            Contacto
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <span class="fs-5">Suscripciones</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/list-icon.svg"/>
+                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                                Listado de suscripciones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/notifications-icon.svg"/>
+                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                            Suscribirme
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills flex-column mb-auto nav-chosen">
+                        <span class="fs-5">Mis puntos</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/puntos.png"/>
+                            <a href="#puntos-actuales" class="nav-link">
+                                Puntos actuales
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/premios.png"/>
+                            <a href="#premios" class="nav-link">
+                                Premios
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-        <div class="col-md-10">
-        <div class="container main">
-            <h1>Mi Cuenta</h1>
-            <h2>Mis puntos</h2>
-            <div id="stars" class="stars-container"></div> <!-- Elemento donde se mostrarán los puntos -->
-            <h2>Premios</h2>
-            <a href="PremiosDisponibles.html"><button type="button" class="boton">Ver Premios disponibles</button></a>
+            <div class="col-md-10">
+                <div class="container main">
+                    <h1>Mi Cuenta</h1>
+                    <h2 id="puntos-actuales">Mis puntos</h2>
+                    <div id="stars" class="stars-container"></div> <!-- Elemento donde se mostrarán los puntos -->
+                    <h2 id="premios">Premios</h2>
+                    <a href="CanjearPuntos.html"><button type="button" class="boton">Ver Premios disponibles</button></a>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </main>
 
     <footer>
