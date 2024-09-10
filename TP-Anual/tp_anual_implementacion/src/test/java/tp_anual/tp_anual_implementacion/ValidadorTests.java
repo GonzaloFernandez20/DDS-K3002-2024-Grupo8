@@ -21,14 +21,12 @@ class ValidadorTests {
     @Test
     void testFortalezaContraseña() {
         setUp();
-
         assertFalse(validador.validarConstrasenia("1234"), "No cumple criterio: Contrasenia insegura");
         assertTrue(validador.validarConstrasenia("Riquelme10"), "Cumple criterio: Contrasenia segura");
     }
     @Test
     void testLongitudMinima(){
         setUp();
-
         assertFalse(validador.validarConstrasenia("3k94d6"), "No cumple criterio: demasiado corta");
         assertFalse(validador.validarConstrasenia("j5is75nk4jwbch4ihd98bdajncxiabfbqcnacbn3h4chbqiuea4n5g83ng58ngun3g"), "No cumple criterio: demasiado larga");
         assertTrue(validador.validarConstrasenia("j5is75nk4"), "Cumple criterio: Contrasenia segura");

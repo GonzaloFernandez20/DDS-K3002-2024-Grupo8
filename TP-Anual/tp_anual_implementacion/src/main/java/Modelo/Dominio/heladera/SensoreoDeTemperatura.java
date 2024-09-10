@@ -1,5 +1,8 @@
 package Modelo.Dominio.heladera;
 
+import Modelo.Dominio.incidentes.GestorDeIncidentes;
+import Modelo.Dominio.incidentes.TipoAlerta;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,13 +13,43 @@ import java.util.TimerTask;
 
 public class SensoreoDeTemperatura {
     private Heladera heladera;
+    private Timer timerDeConexion;
+    private float ultimaTemperaturaRegistrada;
+
+    //------------------ BROKER -----------------
     private static final int PORT = 12345; // Puerto para la comunicación
+    //-------------------------------------------
 
     public SensoreoDeTemperatura(Heladera heladera) {
         this.heladera = heladera;
+        timerDeConexion = new Timer();
     }
 
-    public void iniciar() {
+    public void actualizarTemperatura(float temperatura) {
+        timerDeConexion.cancel();
+        this.ultimaTemperaturaRegistrada = temperatura;
+        if (!heladera.getModelo().controlarTemperatura(temperatura)){
+            GestorDeIncidentes.reportarAlerta(heladera, TipoAlerta.TEMPERATURA);
+        }else{
+            iniciarTimer();
+        }
+    }
+
+    // Método que programa una tarea para que se ejecute cada 5 segundos
+    public void iniciarTimer() {
+        TimerTask tarea = new TimerTask() {
+            @Override
+            public void run() {
+                GestorDeIncidentes.reportarAlerta(heladera, TipoAlerta.FALLA_DE_CONEXION);
+            }
+        };
+
+        // Programar la tarea para que se ejecute cada 5 segundos (5000 milisegundos)
+        timerDeConexion.scheduleAtFixedRate(tarea, 0, 5000);
+    }
+
+
+    public void iniciar() { // TODO: Check Broker
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Broker SensoreoDeTemperatura iniciado, esperando conexión...");
 
@@ -36,8 +69,7 @@ public class SensoreoDeTemperatura {
                         try {
                             out.writeFloat(temperatura);
                             out.flush();
-                            heladera.setUltimaTemperaturaRegistrada(temperatura); // Actualiza la temperatura en la heladera
-                            heladera.controlarUltimaTemperatura(); // Controla el estado de la heladera
+                            heladera.getModelo().controlarTemperatura(temperatura); // Controla el estado de la heladera
                             System.out.println("Temperatura enviada al cliente: " + temperatura);
                         } catch (IOException e) {
                             e.printStackTrace();

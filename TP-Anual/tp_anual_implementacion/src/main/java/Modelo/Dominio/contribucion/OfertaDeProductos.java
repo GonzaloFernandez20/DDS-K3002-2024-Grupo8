@@ -31,7 +31,6 @@ public class OfertaDeProductos extends Contribucion {
     }
 
     public OfertaDeProductos(Colaborador colaborador, LocalDate fechaDeDonacion, String nombreOferta, Rubro rubro, double puntosNecesarios, String imagen, Producto producto) {
-        super(colaborador, fechaDeDonacion);
         this.nombreOferta = nombreOferta;
         this.rubro = rubro;
         this.puntosNecesarios = puntosNecesarios;
@@ -41,6 +40,11 @@ public class OfertaDeProductos extends Contribucion {
 
     public void procesarLaContribucion() {
             Sistema.getInstancia().agregarOferta(this);
+    }
+
+    @Override
+    public double puntosQueSumaColaborador() {
+        return 0;
     }
 
     public double getPuntosNecesarios() { return puntosNecesarios; }

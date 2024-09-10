@@ -1,9 +1,10 @@
-package reportes;
+package Modelo.Dominio.reportes;
 
-import Accesos_a_heladeras.Aperturas;
-import heladera.Heladera;
-import sistema.RegistroDeHeladeras;
-import sistema.Sistema;
+
+
+import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.sistema.RegistroDeHeladeras;
+import Repositorios.RepositorioAperturas;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,8 +21,8 @@ public class ReporteDeViandasPorHeladera extends ReporteSemanal{
         heladerasConocidas.forEach(heladera -> {
             ViandasPorHeladera viandasPorHeladera =
                     new ViandasPorHeladera(heladera,
-                            Aperturas.getInstancia().cantidadDeDepositosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()),
-                            Aperturas.getInstancia().cantidadDeRetirosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()));
+                            RepositorioAperturas.getInstancia().cantidadDeDepositosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()),
+                            RepositorioAperturas.getInstancia().cantidadDeRetirosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()));
             this.sumarViandasPorHeladera(viandasPorHeladera);
         });
     }

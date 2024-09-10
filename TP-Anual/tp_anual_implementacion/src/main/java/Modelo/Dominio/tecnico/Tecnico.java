@@ -3,7 +3,6 @@ package Modelo.Dominio.tecnico;
 import Modelo.Dominio.incidentes.EstadoDelIncidente;
 import Modelo.Dominio.incidentes.Incidente;
 import Modelo.Dominio.localizacion.AreaDeCobertura;
-import localizacion.Area;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.documentacion.Documento;

@@ -1,7 +1,7 @@
-package reportes;
+package Modelo.Dominio.reportes;
 
-import colaborador.Colaborador;
-import sistema.Sistema;
+import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.sistema.Sistema;
 
 import java.time.LocalDate;
 import java.util.List;

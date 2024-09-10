@@ -1,15 +1,15 @@
 package Modelo.Dominio.contribucion;
 
+import Modelo.Dominio.Accesos_a_heladeras.AccesoAHeladeras;
+import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import persona_vulnerable.AccesoAHeladeras;
 import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
-import persona_vulnerable.Vinculacion;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import nuestras_excepciones.ColaboracionInvalida;
 
 public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
 
@@ -23,9 +23,6 @@ public class RegistroDePersonasEnSituacionVulnerable extends Contribucion{
     public void procesarLaContribucion() {
         if(colaborador.getPersona().getDireccion() != null) {
             personasEnSituacionVulnerableARegistrar.forEach(personaVulnerable -> this.generarRegistro(personaVulnerable));
-        }
-         else{
-             throw new ColaboracionInvalida("El colaborador que registre a múltiples vulnerables debe tener DIRECCION");
         }
     }
 

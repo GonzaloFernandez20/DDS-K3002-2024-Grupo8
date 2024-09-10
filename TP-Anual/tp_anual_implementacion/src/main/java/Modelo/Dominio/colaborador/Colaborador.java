@@ -64,11 +64,13 @@ public class Colaborador {
     }
 
     public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
-        if(this.persona.getDocumento() == null){
+        //TODO: Revisar
+/*      if(this.persona.getDocumento() == null){
             return false;
         } else {
             return this.persona.getDocumento().esDocumentoSegunNumeroYTipo(documento);
-        }
+        }*/
+        return true;
     }
 
     public Direccion obtenerDireccion() { return persona.getDireccion(); }

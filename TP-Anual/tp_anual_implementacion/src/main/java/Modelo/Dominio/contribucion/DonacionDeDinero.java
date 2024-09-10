@@ -1,6 +1,7 @@
 package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.sistema.RegistroDeRecaudacion;
 import Modelo.Dominio.sistema.Sistema;
 
 import java.time.LocalDate;
@@ -18,7 +19,7 @@ public class DonacionDeDinero extends Contribucion {
 
     @Override
     public void procesarLaContribucion() {
-        Sistema.getInstancia().agregarMonto(monto);
+        RegistroDeRecaudacion.getInstancia().recibirDinero(monto);
         colaborador.registrarContribucion(this);
     }
     @Override

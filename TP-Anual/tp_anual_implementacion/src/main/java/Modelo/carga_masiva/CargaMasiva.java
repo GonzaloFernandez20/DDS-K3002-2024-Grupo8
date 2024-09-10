@@ -6,7 +6,6 @@ import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.sistema.Sistema;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import medios_de_contacto.CorreoElectronico;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
 import Modelo.Dominio.contribucion.DonacionDeVianda;
 import Modelo.Dominio.contribucion.DistribucionDeVianda;

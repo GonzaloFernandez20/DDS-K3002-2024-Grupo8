@@ -1,4 +1,4 @@
-package reportes;
+package Modelo.Dominio.reportes;
 
 import java.time.LocalDate;
 

@@ -4,7 +4,6 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeProductos;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.heladera.TipoAlerta;
 import Modelo.Dominio.incidentes.Incidente;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
@@ -14,26 +13,11 @@ import java.util.*;
 
 public final class Sistema {
     private static Sistema instancia = null;
-    List<Colaborador> colaboradores = new ArrayList<>();
-    List<Heladera> heladeras = new ArrayList<>();
-    List<Tecnico> tecnicos = new ArrayList<>();
-    List<OfertaDeProductos> ofertas = new ArrayList<>();
-    List<Incidente> incidentes = new ArrayList<>();
-    static int contadorDeVinculaciones = 0;
-    float monto;
+    private List<Colaborador> colaboradores = new ArrayList<>();
+    private List<Heladera> heladeras = new ArrayList<>();
+    private List<OfertaDeProductos> ofertas = new ArrayList<>();
+    private List<Incidente> incidentes = new ArrayList<>();
 
-    public List<Colaborador> getColaboradores() {
-        return colaboradores;
-    }
-
-    public int getContadorDeVinculaciones() {
-        return contadorDeVinculaciones;
-    }
-
-    public float getMonto() { return monto; }
-
-    public List<OfertaDeProductos> getOfertas() { return ofertas; }
-    
     public static Sistema getInstancia() {
         if (instancia == null) {
             instancia = new Sistema();
@@ -48,18 +32,18 @@ public final class Sistema {
         } catch(NoSuchElementException e) {
             unMail = null;
         }
-        Documento documento = colaborador.getPersona().getDocumento();
+        //Documento documento = colaborador.getPersona().getDocumento();
 
         if(this.existeColaborador(colaborador)) {
             Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
             if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().getFirst())) {
                 colaboradorHallado.agregarMedioDeContacto(unMail);
             }
-            if(colaboradorHallado.getPersona().getDocumento() == null) {
+/*            if(colaboradorHallado.getPersona().getDocumento() == null) {
                 colaboradorHallado.getPersona().setDocumento(documento);
-            }
+            }*/
             try {
-                colaboradorHallado.agregarContribucionEnLista(colaborador.getContribucionesRealizadas().getFirst());
+                //colaboradorHallado.agregarContribucionEnLista(colaborador.getContribucionesRealizadas().getFirst());
             } catch (NoSuchElementException e) {
                 System.err.println("No tiene contribuciones hechas previamente.");
             }
@@ -77,11 +61,6 @@ public final class Sistema {
 
     }
 
-    public void darDeAltaTecnico(Tecnico tecnico) {
-
-        tecnicos.add(tecnico);
-        GestorDeTecnicos.getInstancia().darDeAltaTecnico(tecnico);
-    }
 
     public void darDeBajaColaborador(Colaborador colaborador) {
         colaboradores.remove(colaborador);
@@ -91,17 +70,8 @@ public final class Sistema {
         heladeras.remove(heladera);
     }
 
-    public void darDeBajaTecnico(Tecnico tecnico) {
-        GestorDeTecnicos.getInstancia().darDeBajaTecnico(tecnico);
-        tecnicos.remove(tecnico);
-    }
-
     public void agregarOferta(OfertaDeProductos oferta) {
         ofertas.add(oferta);
-    }
-
-    public void agregarMonto(float monto) {
-        this.monto += monto;
     }
 
     public boolean existeColaborador(Colaborador colaborador) {
@@ -109,10 +79,11 @@ public final class Sistema {
     }
 
     public Colaborador buscarColaborador(Colaborador colaboradorBuscado) {
-            Optional<Colaborador> colaboradorEncontrado = this.getColaboradores().stream().filter(
-                    colaborador -> (this.tieneMedioDeContacto(colaborador, colaboradorBuscado) || colaborador.tieneDocumentoSegunNumeroYTipo(colaboradorBuscado.getDocumento()))).findFirst();
+            //Optional<Colaborador> colaboradorEncontrado = this.getColaboradores().stream().filter(
+                    //colaborador -> (this.tieneMedioDeContacto(colaborador, colaboradorBuscado) || colaborador.tieneDocumentoSegunNumeroYTipo(colaboradorBuscado.getDocumento()))).findFirst();
 
-            return colaboradorEncontrado.orElse(null);
+            //return colaboradorEncontrado.orElse(null);
+        return null;
     }
 
     public boolean tieneMedioDeContacto(Colaborador colaborador, Colaborador colaboradorBuscado) {
@@ -121,34 +92,10 @@ public final class Sistema {
                 colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().getFirst());
     }
 
-    public void recibirTemperatura(Float temperatura, Heladera heladera) {
-        // Lógica para manejar la temperatura recibida
-        // que hacemos cuando recibe la info de la heladera???
-        System.out.println("Temperatura recibida en el sistema: " + temperatura);
-        // Aquí puedes agregar lógica adicional para manejar la temperatura
-    }
 
-    public void serAlertado(Heladera heladera, TipoAlerta tipoAlerta) {
-        // this.darTecnicoMasCercano() VER UBICACION
+    public List<Colaborador> getColaboradores() {
+        return colaboradores;
     }
+    public List<OfertaDeProductos> getOfertas() { return ofertas; }
 
-    public Tecnico darTecnicoMasCercano(Ubicacion ubicacion) {
-        return GestorDeTecnicos.getInstancia().darTecnicoMasCercano(ubicacion);
-    }
-
-    public void sumarIncidente(Incidente incidente){
-        GestorDeIncidentes gestorDeIncidentes = GestorDeIncidentes.getInstancia();
-        gestorDeIncidentes.recibirReporte(incidente);
-        incidentes.add(incidente);
-    }
-
-    public void registrarMovimiento(RegistroAperturaHeladera registro) {
-        Heladera heladera = registro.getHeladera();
-        heladera.permitirAcceso(registro);
-    }
-
-    public List<Heladera> recomendarHeladeras(Colaborador colaborador) {
-        // ver como hacerlo
-        return null;
-    }
 }

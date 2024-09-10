@@ -1,21 +1,22 @@
-package Accesos_a_heladeras;
+package Repositorios;
 
-import heladera.Heladera;
-import org.springframework.cglib.core.Local;
+import Modelo.Dominio.Accesos_a_heladeras.Apertura;
+import Modelo.Dominio.heladera.Heladera;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static Accesos_a_heladeras.MotivoApertura.INGRESAR_VIANDAS_DONADAS;
-import static Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
+import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.INGRESAR_VIANDAS_DONADAS;
+import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 
-public class Aperturas {
+
+public class RepositorioAperturas {
     private List<Apertura> aperturas = null;
-    private static Aperturas instancia;
+    private static RepositorioAperturas instancia;
 
-    public static Aperturas getInstancia() {
+    public static RepositorioAperturas getInstancia() {
         if(instancia == null) {
-            instancia = new Aperturas();
+            instancia = new RepositorioAperturas();
         }
         return instancia;
     }

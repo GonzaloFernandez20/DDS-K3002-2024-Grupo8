@@ -1,6 +1,6 @@
-package reportes;
+package Modelo.Dominio.reportes;
 
-import colaborador.Colaborador;
+import Modelo.Dominio.colaborador.Colaborador;
 
 public class ViandasPorColaborador{
     private Colaborador colaborador;

@@ -1,7 +1,5 @@
-package reportes;
+package Modelo.Dominio.reportes;
 
-import heladera.Heladera;
-import sistema.Sistema;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -1,10 +1,16 @@
 package Modelo.Dominio.heladera;
 
+import Modelo.Dominio.incidentes.GestorDeIncidentes;
+import Modelo.Dominio.incidentes.TipoAlerta;
+
 public class SensoreoDeMovimiento {
-    AvisoIntentoDeRobo aviso;
     Heladera heladera;
 
+    public SensoreoDeMovimiento(Heladera heladera) {
+        this.heladera = heladera;
+    }
+
     void enviarAlerta() {
-        heladera.recibirAviso(aviso);
+        GestorDeIncidentes.reportarAlerta(heladera, TipoAlerta.FRAUDE);
     }
 }

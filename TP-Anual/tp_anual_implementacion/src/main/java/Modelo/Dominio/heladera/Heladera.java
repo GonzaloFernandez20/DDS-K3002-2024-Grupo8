@@ -83,6 +83,7 @@ public class Heladera {
     public Modelo getModelo() { return modelo; }
     public void setModelo(Modelo modelo) { this.modelo = modelo; }
     public EstadoHeladera getEstado() { return estado; }
+    public void setEstado(EstadoHeladera estado) { this.estado = estado; }
     public NotificadorDeSuscriptos getNotificadorDeSuscriptos() { return notificadorDeSuscriptos; }
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }

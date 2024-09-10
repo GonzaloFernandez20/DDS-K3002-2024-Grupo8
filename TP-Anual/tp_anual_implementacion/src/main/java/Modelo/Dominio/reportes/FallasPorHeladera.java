@@ -1,6 +1,6 @@
-package reportes;
+package Modelo.Dominio.reportes;
 
-import heladera.Heladera;
+import Modelo.Dominio.heladera.Heladera;
 
 public class FallasPorHeladera {
     private Heladera heladera;

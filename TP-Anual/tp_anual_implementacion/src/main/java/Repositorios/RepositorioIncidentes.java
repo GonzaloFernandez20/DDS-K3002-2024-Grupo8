@@ -1,15 +1,18 @@
 package Repositorios;
 
+import Modelo.Dominio.incidentes.FallaTecnica;
+import Modelo.Dominio.incidentes.Incidente;
+
 import java.util.List;
 
-public class IncidentesPeristencia {
-    private static IncidentesPeristencia instancia;
+public class RepositorioIncidentes {
+    private static RepositorioIncidentes instancia;
     private List<Incidente> incidentes = null;
 
 
-    public static IncidentesPeristencia getInstancia(){
+    public static RepositorioIncidentes getInstancia(){
         if(instancia == null){
-            instancia = new IncidentesPeristencia();
+            instancia = new RepositorioIncidentes();
         }
         return instancia;
     }
