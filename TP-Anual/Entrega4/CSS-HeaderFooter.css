@@ -124,3 +124,15 @@ footer .social-icons li a:hover {
 .bi:hover{
   fill: hsl(163, 34%, 33%);
 }
+
+.referirAColaboracion p{
+  margin-top: 10px;
+}
+
+.referirAColaboracion a{
+  color: #1c8e7c;
+}
+
+.referirAColaboracion a:hover{
+  color: #167264;
+}
