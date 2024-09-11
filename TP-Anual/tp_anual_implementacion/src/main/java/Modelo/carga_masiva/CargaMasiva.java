@@ -1,6 +1,7 @@
 package Modelo.carga_masiva;
 
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
@@ -20,11 +21,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class CargaMasiva {
-    private String archivo;
+    private final String archivo;
 
     public CargaMasiva(String archivo) {
         if(archivo.endsWith(".csv")) {
@@ -59,11 +62,12 @@ public class CargaMasiva {
                     System.out.println("Procesando colaborador: " + nombre + " " + apellido + " con documento: " + tipoDocString + " " + doc + " y mail: " + mail);
 
                     TipoDeDocumento tipoDoc = this.castearTipoDoc(tipoDocString);
-                    MedioDeContacto mailMedio = new MedioDeContacto(mail);
+                    List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+                    Mail mailMedio = new Mail(mail);
+                    mediosDeContacto.add(mailMedio);
                     Documento documento = new Documento(tipoDoc, doc, null);
                     PersonaHumana persona = new PersonaHumana(nombre, apellido, null,documento,null);
-                    Colaborador colaborador = new Colaborador(persona);
-                    colaborador.agregarMedioDeContacto(mailMedio);
+                    Colaborador colaborador = new Colaborador(persona,mediosDeContacto);
 
                     this.agregarContribucionPorTipo(tipoDonacion, colaborador, fechaContribucion, Integer.parseInt(cantidad));
                     Sistema.getInstancia().actualizarPorCargaMasiva(colaborador);
@@ -87,20 +91,20 @@ public class CargaMasiva {
     public void agregarContribucionPorTipo(String tipoDonacion, Colaborador colaborador, LocalDate fechaContribucion, int cantidad) {
         switch (tipoDonacion) {
             case "DINERO":
-                DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, fechaContribucion, cantidad, null);
-                colaborador.agregarContribucionEnLista(contribucionDinero);
+                DonacionDeDinero contribucionDinero = new DonacionDeDinero(colaborador, cantidad, null, fechaContribucion);
+                colaborador.registrarContribucion(contribucionDinero);
                 break;
             case "DONACION_VIANDAS":
-                DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, fechaContribucion, null, null);
-                colaborador.agregarContribucionEnLista(contribucionDonarVianda);
+                DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, null, null, fechaContribucion);
+                colaborador.registrarContribucion(contribucionDonarVianda);
                 break;
             case "REDISTRIBUCION_VIANDAS":
-                DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, fechaContribucion, null, null, cantidad, null);
-                colaborador.agregarContribucionEnLista(contribucionDistribuirVianda);
+                DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, null, null, null, null, fechaContribucion);
+                colaborador.registrarContribucion(contribucionDistribuirVianda);
                 break;
             case "ENTREGA_TARJETAS":
-                RegistroDePersonasEnSituacionVulnerable contribucionRegistro = new RegistroDePersonasEnSituacionVulnerable(colaborador, fechaContribucion, null);
-                colaborador.agregarContribucionEnLista(contribucionRegistro);
+                RegistroDePersonasEnSituacionVulnerable contribucionRegistro = new RegistroDePersonasEnSituacionVulnerable(colaborador, null, fechaContribucion);
+                colaborador.registrarContribucion(contribucionRegistro);
                 break;
         }
     }

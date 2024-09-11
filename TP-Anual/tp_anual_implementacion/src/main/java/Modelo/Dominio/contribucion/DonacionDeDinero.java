@@ -10,11 +10,11 @@ public class DonacionDeDinero extends Contribucion {
     private final float monto;
     private Frecuencia frecuencia;
 
-    public DonacionDeDinero(Colaborador colaborador, float monto, Frecuencia frecuencia) {
+    public DonacionDeDinero(Colaborador colaborador, float monto, Frecuencia frecuencia, LocalDate fechaDeContribucion) {
         this.colaborador = colaborador;
         this.monto = monto;
         this.frecuencia = frecuencia;
-        this.fechaDeContribucion = LocalDate.now();
+        this.fechaDeContribucion = fechaDeContribucion;
     }
 
     @Override

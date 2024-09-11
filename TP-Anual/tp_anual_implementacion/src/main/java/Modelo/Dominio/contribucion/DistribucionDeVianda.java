@@ -2,6 +2,8 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import org.springframework.cglib.core.Local;
+
 
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -9,21 +11,24 @@ import java.time.LocalDate;
 public class DistribucionDeVianda extends ContribucionConApertura {
 
     private final Heladera heladeraDeOrigen;
+
+
     private final MotivoDeDistribucion motivoDeDistribucion;
-    private final int cantidadDeViandas;
+    private final Integer cantidadDeViandas;
 
     public DistribucionDeVianda(Colaborador colaborador,
                                 Heladera heladeraDeOrigen,
                                 Heladera heladeraDestino,
                                 MotivoDeDistribucion motivoDeDistribucion,
-                                int cantidadDeViandas) {
+                                Integer cantidadDeViandas,
+                                LocalDate fechaDeContribucion) {
         this.colaborador = colaborador;
         this.heladeraDestino = heladeraDestino;
         this.heladeraDeOrigen = heladeraDeOrigen;
         this.motivoDeDistribucion = motivoDeDistribucion;
         this.cantidadDeViandas = cantidadDeViandas;
         this.viandas = new ArrayList<>();
-        this.fechaDeContribucion = LocalDate.now();
+        this.fechaDeContribucion = fechaDeContribucion;
     }
 
     @Override
@@ -48,4 +53,5 @@ public class DistribucionDeVianda extends ContribucionConApertura {
     // ---- Getters y Setters
     public Heladera getHeladeraOrigen() { return heladeraDeOrigen; }
     public Colaborador getColaborador() { return colaborador; }
+    public MotivoDeDistribucion getMotivoDeDistribucion() {return motivoDeDistribucion;}
 }

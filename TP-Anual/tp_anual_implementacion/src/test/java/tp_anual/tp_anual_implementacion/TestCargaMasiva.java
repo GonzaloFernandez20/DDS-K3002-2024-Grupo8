@@ -1,11 +1,12 @@
 package tp_anual.tp_anual_implementacion;
 
+import Modelo.Dominio.medios_de_contacto.Mail;
+import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.carga_masiva.CargaMasiva;
 import Modelo.Dominio.colaborador.Colaborador;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import Modelo.Dominio.documentacion.Documento;
-import medios_de_contacto.CorreoElectronico;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,8 @@ import Modelo.Dominio.sistema.Sistema;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static Modelo.Dominio.documentacion.TipoDeDocumento.DNI;
@@ -28,7 +31,8 @@ class TestsCargaMasiva {
     Sistema sistema;
     CargaMasiva cargaMasiva;
 
-    CorreoElectronico mail2;
+    Mail mail2;
+    List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
     PersonaHumana persona2;
     Colaborador colaborador2;
     Documento documentoPrueba;
@@ -37,10 +41,10 @@ class TestsCargaMasiva {
     void setUp() {
         sistema = Sistema.getInstancia();
 
-        mail2 = new CorreoElectronico("carlitosgonzalez@yahoo.com");
+        mail2 = new Mail("carlitosgonzalez@yahoo.com");
+        mediosDeContacto.add(mail2);
         persona2 = new PersonaHumana("Carlos", "González", null, null, null);
-        colaborador2 = new Colaborador(persona2);
-        colaborador2.agregarMedioDeContacto(mail2);
+        colaborador2 = new Colaborador(persona2,mediosDeContacto);
         sistema.darDeAltaColaborador(colaborador2);
 
         documentoPrueba = new Documento(DNI, "12345678", null);

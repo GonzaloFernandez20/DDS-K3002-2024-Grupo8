@@ -5,6 +5,7 @@ import DTOs.ViandaDTO;
 import Modelo.Dominio.contribucion.DonacionDeVianda;
 import Modelo.Dominio.contribucion.Vianda;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,8 @@ public class BuilderDonacionDeViandas {
         DonacionDeVianda nuevaDonacion = new DonacionDeVianda(
                 donacionDeViandaDTO.getColaborador(),
                 donacionDeViandaDTO.getHeladera(),
-                crearListaViandas(donacionDeViandaDTO.getViandasDTO()) );
+                crearListaViandas(donacionDeViandaDTO.getViandasDTO()),
+                LocalDate.now());
         return nuevaDonacion;
     }
 

@@ -9,10 +9,10 @@ import java.time.LocalDate;
 public class RegistroDePersonasEnSituacionVulnerable extends Contribucion {
     private Vinculacion tarjetaEntregada;
 
-    public RegistroDePersonasEnSituacionVulnerable(Vinculacion tarjetaEntregada, Colaborador colaborador) {
+    public RegistroDePersonasEnSituacionVulnerable(Colaborador colaborador, Vinculacion tarjetaEntregada, LocalDate fechaDeContribucion) {
         this.tarjetaEntregada = tarjetaEntregada;
         this.colaborador = colaborador;
-        this.fechaDeContribucion = LocalDate.now();
+        this.fechaDeContribucion = fechaDeContribucion;
     }
 
     @Override

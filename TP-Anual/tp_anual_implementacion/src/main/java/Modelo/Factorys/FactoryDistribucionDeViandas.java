@@ -3,6 +3,8 @@ package Modelo.Factorys;
 import DTOs.DistribucionDeViandaDTO;
 import Modelo.Dominio.contribucion.DistribucionDeVianda;
 
+import java.time.LocalDate;
+
 public class FactoryDistribucionDeViandas {
 
     public static DistribucionDeVianda crearDistribucionAPartirDe(DistribucionDeViandaDTO distribucionDeViandaDTO){
@@ -10,7 +12,8 @@ public class FactoryDistribucionDeViandas {
                                                                           distribucionDeViandaDTO.getHeladeraDeOrigen(),
                                                                           distribucionDeViandaDTO.getHeladeraDestino(),
                                                                           distribucionDeViandaDTO.getMotivoDeDistribucion(),
-                                                                          distribucionDeViandaDTO.getCantidadDeViandas() );
+                                                                          distribucionDeViandaDTO.getCantidadDeViandas(),
+                                                                          LocalDate.now());
         return nuevaDistribucion;
     }
 }

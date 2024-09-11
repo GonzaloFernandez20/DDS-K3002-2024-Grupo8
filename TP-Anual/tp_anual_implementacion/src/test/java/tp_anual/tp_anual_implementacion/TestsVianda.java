@@ -85,8 +85,8 @@ public class TestsVianda {
     }
     @Test
     void ValidacionDeVencimientos(){
-        assertEquals(EstadoVianda.vencida,viandaVencida.getEstado(),"La vianda está vencida");
-        assertEquals(EstadoVianda.entregada,vianda1.getEstado(),"La vianda no está vencida");
+        assertEquals(EstadoVianda.VENCIDA,viandaVencida.getEstado(),"La vianda está vencida");
+        assertEquals(EstadoVianda.ENTREGADA,vianda1.getEstado(),"La vianda no está vencida");
     }
 
 

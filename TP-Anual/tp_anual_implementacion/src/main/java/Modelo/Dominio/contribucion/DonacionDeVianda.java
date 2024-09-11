@@ -8,9 +8,9 @@ import java.util.List;
 
 public class DonacionDeVianda extends ContribucionConApertura {
 
-    public DonacionDeVianda(Colaborador colaborador, Heladera heladera, List <Vianda> viandas) {
+    public DonacionDeVianda(Colaborador colaborador, Heladera heladera, List <Vianda> viandas, LocalDate fechaDeContribucion) {
         this.colaborador = colaborador;
-        this.fechaDeContribucion = LocalDate.now();
+        this.fechaDeContribucion = fechaDeContribucion;
         this.heladeraDestino = heladera;
         this.viandas = viandas;
     }
