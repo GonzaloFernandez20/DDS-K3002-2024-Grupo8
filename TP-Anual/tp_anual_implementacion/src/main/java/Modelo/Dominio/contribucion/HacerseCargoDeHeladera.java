@@ -3,28 +3,27 @@ package Modelo.Dominio.contribucion;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import Modelo.Dominio.sistema.RegistroDeHeladeras;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
-import Modelo.Dominio.sistema.Sistema;
 
 public class HacerseCargoDeHeladera extends Contribucion{
 
     private final Heladera heladeraACargo;
 
-    public HacerseCargoDeHeladera(Colaborador colaborador, LocalDate fechaDeDonacion, Heladera heladeraACargo) {
-        super(colaborador, fechaDeDonacion);
+    public HacerseCargoDeHeladera(Colaborador colaborador, Heladera heladeraACargo) {
+        this.colaborador = colaborador;
+        this.fechaDeContribucion = LocalDate.now();
         this.heladeraACargo = heladeraACargo;
     }
 
-    public boolean requieroAcceso() { return false;}
-
     @Override
     public void procesarLaContribucion() {
-            heladeraACargo.setColaborador((Colaborador) colaborador);
-            Sistema.getInstancia().darDeAltaHeladera(heladeraACargo);
+        colaborador.registrarContribucion(this);
+        RegistroDeHeladeras.getInstancia().darDeAltaHeladera(heladeraACargo);
     }
 
     @Override
@@ -54,7 +53,4 @@ public class HacerseCargoDeHeladera extends Contribucion{
 			System.out.println("La lista de puntos recomendados es nula o vacía.");
 		}
     }
-
-/*    @Override
-    public Object getHeladeraOrigen() { return heladeraACargo; }*/
 }

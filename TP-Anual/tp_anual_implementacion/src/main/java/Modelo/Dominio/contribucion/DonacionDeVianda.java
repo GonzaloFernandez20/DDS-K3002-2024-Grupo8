@@ -14,6 +14,9 @@ public class DonacionDeVianda extends ContribucionConApertura {
         this.heladeraDestino = heladera;
         this.viandas = viandas;
     }
+    public void agregarViandaADonacion(Vianda vianda) {
+        viandas.add(vianda);
+    }
 
     @Override
     public double puntosQueSumaColaborador() {
@@ -21,11 +24,8 @@ public class DonacionDeVianda extends ContribucionConApertura {
         return viandas.size() * coeficiente;
     }
 
-    public void agregarViandaADonacion(Vianda vianda) {
-        viandas.add(vianda);
-    }
 
-    // -----------------------------------
+    // ---- Getters y Setters
     public Colaborador getColaborador() {return colaborador;}
 
 }

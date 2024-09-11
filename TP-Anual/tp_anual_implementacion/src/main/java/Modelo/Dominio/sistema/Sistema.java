@@ -1,13 +1,10 @@
 package Modelo.Dominio.sistema;
 
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.OfertaDeProductos;
-import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.Incidente;
-import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.tecnico.Tecnico;
 
 import java.util.*;
 
@@ -15,7 +12,7 @@ public final class Sistema {
     private static Sistema instancia = null;
     private List<Colaborador> colaboradores = new ArrayList<>();
     private List<Heladera> heladeras = new ArrayList<>();
-    private List<OfertaDeProductos> ofertas = new ArrayList<>();
+    private List<OfertaDeUnProducto> ofertas = new ArrayList<>();
     private List<Incidente> incidentes = new ArrayList<>();
 
     public static Sistema getInstancia() {
@@ -70,7 +67,7 @@ public final class Sistema {
         heladeras.remove(heladera);
     }
 
-    public void agregarOferta(OfertaDeProductos oferta) {
+    public void agregarOferta(OfertaDeUnProducto oferta) {
         ofertas.add(oferta);
     }
 
@@ -96,6 +93,6 @@ public final class Sistema {
     public List<Colaborador> getColaboradores() {
         return colaboradores;
     }
-    public List<OfertaDeProductos> getOfertas() { return ofertas; }
+    public List<OfertaDeUnProducto> getOfertas() { return ofertas; }
 
 }

@@ -2,7 +2,7 @@ package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.contribucion.Contribucion;
-import Modelo.Dominio.contribucion.OfertaDeProductos;
+import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
@@ -19,27 +19,20 @@ public class Colaborador {
     private final List<String> mensajesRecibidos;
     private final List<Contribucion> historialDeContribuciones;
     private AccesoDeColaborador tarjeta;
-    private double puntos;
+    private double puntosAcumulados;
 
-    public Integer cantidadDeDonacionesDeViandaEntre(LocalDate fechaInicio, LocalDate fechaFin){
-        if(tarjeta == null){return 0;}
-        else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
-    }
-    // ------------------------------------------------
-    public Colaborador(Persona persona,
-                       List<MedioDeContacto> mediosDeContacto) {
+    public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
         this.persona = persona;
         this.mediosDeContacto = mediosDeContacto;
         this.mensajesRecibidos = new ArrayList<>();
         this.historialDeContribuciones = new ArrayList<>();
         this.tarjeta = null;
-        this.puntos = 0;
+        this.puntosAcumulados = 0;
     }
-    // ------------------------------------------------
 
     public void registrarContribucion(Contribucion contribucion){
         historialDeContribuciones.add(contribucion);
-        //puntos += contribucion.puntosQueSumaColaborador();
+        puntosAcumulados += contribucion.puntosQueSumaColaborador();
     }
 
     public void notificar(String mensaje) {
@@ -50,13 +43,8 @@ public class Colaborador {
         }
     }
 
-    private void intercambiarPuntos(OfertaDeProductos ofertaSeleccionada) {
-        if(ofertaSeleccionada.getPuntosNecesarios() < puntos) {
-            puntos -= ofertaSeleccionada.getPuntosNecesarios();
-            ofertaSeleccionada.disminuirStock();
-        } else {
-            // Tirar una Excepcion
-        }
+    public void canjearPuntos(double puntosCanjeados) {
+        puntosAcumulados -= puntosCanjeados;
     }
 
     public Boolean tieneMedioDeContacto(MedioDeContacto medioDeContacto) {
@@ -73,54 +61,21 @@ public class Colaborador {
         return true;
     }
 
-    public Direccion obtenerDireccion() { return persona.getDireccion(); }
     public void sacarMedioDeContacto(@NotNull MedioDeContacto medioDeContacto) { mediosDeContacto.remove(medioDeContacto); }
     public void agregarMedioDeContacto(@NotNull MedioDeContacto nuevoMedio) { mediosDeContacto.add(nuevoMedio);}
 
-    // ---- Getters y Setters
+    // Hecho de forma provisoria para reportes
+    public Integer cantidadDeDonacionesDeViandaEntre(LocalDate fechaInicio, LocalDate fechaFin){
+        if(tarjeta == null){return 0;}
+        else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
+    }
 
+
+    // ---- Getters y Setters
     public Direccion getDireccion() { return persona.getDireccion(); }
-    public double getPuntos() { return puntos; }
+    public double getPuntosAcumulados() { return puntosAcumulados; }
     public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
 
 }
-
-/*
-    public void agregarContribucionEnLista(Contribucion contribucion){
-        contribucionesRealizadas.add(contribucion);
-            this.realizarContribucion(contribucion);
-    }
-
-    private void realizarContribucion(Contribucion contribucion) {
-        contribucionesRealizadas.add(contribucion);
-        try {
-            contribucion.procesarContribucion();
-        } catch (ColaboracionInvalida e) {
-            throw new RuntimeException(e);
-        }
-        puntos += contribucion.puntosQueSumaColaborador();
-    }
-
-    // ver como se le pregunta al colab si quiere acudir
-    public Boolean deseoAcudir() {return true;}
-
-    public Integer quieroMoverCantViandas() {
-        Random random = new Random();
-
-        // Generamos un número aleatorio entre 1 y 5
-        int randomNumber = random.nextInt(5) + 1;
-        return randomNumber;
-    }
-
-    public Heladera heladeraAElegir() {
-        // no sabemos con que criterios la elige
-        return null;
-    }
-
-    public Heladera aceptarUnaHeladeraDe(List<Heladera> heladeras) {
-        // con que criterio elige??
-        return null;
-    }
-*/

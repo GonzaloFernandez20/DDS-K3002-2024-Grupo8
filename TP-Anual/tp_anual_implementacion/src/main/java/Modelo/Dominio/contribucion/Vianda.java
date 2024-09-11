@@ -42,7 +42,7 @@ public class Vianda {
         return estado;
     }
 
-    // Getters y Setters
+    // ---- Getters y Setters
     public void setEstadoVianda(EstadoVianda estado) { this.estado = estado; }
     public String getTipoDeComida() {
         return tipoDeComida;

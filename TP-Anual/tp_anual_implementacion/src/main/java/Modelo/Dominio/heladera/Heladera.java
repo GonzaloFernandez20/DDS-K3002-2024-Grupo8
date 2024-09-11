@@ -17,7 +17,7 @@ public class Heladera {
     private List<Vianda> viandasEnStock;
     private Modelo modelo;
     private EstadoHeladera estado;
-    private final NotificadorDeSuscriptos notificadorDeSuscriptos;
+    private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     // BROKER ------------------------------------------
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
@@ -28,15 +28,14 @@ public class Heladera {
                     Ubicacion ubicacion,
                     int capacidadDeViandas,
                     Modelo modelo,
-                    EstadoHeladera estado,
-                    NotificadorDeSuscriptos notificadorDeSuscriptos) {
+                    LocalDate puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
         this.ubicacion = ubicacion;
         this.capacidadDeViandas = capacidadDeViandas;
         this.viandasEnStock = new ArrayList<>();
         this.modelo = modelo;
-        this.estado = estado;
-        this.notificadorDeSuscriptos = notificadorDeSuscriptos;
+        this.estado = EstadoHeladera.ACTIVA;
+        this.puestaEnFuncionamiento = puestaEnFuncionamiento;
     }
 
     // ------------------------------------------------
@@ -87,6 +86,7 @@ public class Heladera {
     public NotificadorDeSuscriptos getNotificadorDeSuscriptos() { return notificadorDeSuscriptos; }
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }
+    public void setNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { this.notificadorDeSuscriptos = notificadorDeSuscriptos; }
 }
 
 //public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); } -> TODO: Verificar si trae problemas devolver una lista de 1 elemento

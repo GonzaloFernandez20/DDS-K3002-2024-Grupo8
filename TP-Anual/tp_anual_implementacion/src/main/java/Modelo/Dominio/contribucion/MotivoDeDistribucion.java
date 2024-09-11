@@ -1,6 +1,6 @@
 package Modelo.Dominio.contribucion;
 
 public enum MotivoDeDistribucion{
-    desperfectoHeladera,
-    faltaDeViandas
+    DESPERFECTO_HELADERA,
+    FALTA_DE_VIANDAS
 }

@@ -6,11 +6,12 @@ public class Ubicacion {
     private String ciudad;
     private String nombreDelPunto;
 
-    public Ubicacion(PuntoEnElMapa punto, Direccion direccion, String ciudad, String nombre){
+    public Ubicacion(Direccion direccion, String ciudad, String nombre){
         this.nombreDelPunto = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
-        this.punto = punto;
+        // Necesario consultar una API para que dada una direccion se obtengan latitud y longitud y
+        // con eso instanciar el punto en el mapa
     }
 
     // ----------> Getters y Setters

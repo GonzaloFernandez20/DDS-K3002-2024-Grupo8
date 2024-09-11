@@ -12,7 +12,7 @@ class RecomendacionPuntosDeColocacionTests {
     private double latitud;
     private double longitud;
     private int radio;
-    HacerseCargoDeHeladera contribucion = new HacerseCargoDeHeladera(null, null, null);
+    HacerseCargoDeHeladera contribucion = new HacerseCargoDeHeladera(null, null);
 
     @BeforeEach
     void setUp1() {

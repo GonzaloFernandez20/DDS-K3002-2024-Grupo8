@@ -17,6 +17,7 @@ public abstract class ContribucionConApertura extends Contribucion{
         colaborador.registrarContribucion(this);
     }
 
+    // ---- Getters y Setters
     public List<Vianda> getViandas() { return viandas; }
     public Heladera getHeladeraDestino() { return heladeraDestino; }
 

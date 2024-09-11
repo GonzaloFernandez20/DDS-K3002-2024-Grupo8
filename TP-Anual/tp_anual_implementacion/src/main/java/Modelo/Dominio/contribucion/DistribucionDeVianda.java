@@ -45,7 +45,7 @@ public class DistribucionDeVianda extends ContribucionConApertura {
         return viandas.size() * coeficiente;
     }
 
+    // ---- Getters y Setters
     public Heladera getHeladeraOrigen() { return heladeraDeOrigen; }
-
     public Colaborador getColaborador() { return colaborador; }
 }

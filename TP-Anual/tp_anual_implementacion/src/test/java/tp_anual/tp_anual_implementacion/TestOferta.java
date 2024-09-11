@@ -1,7 +1,7 @@
 package tp_anual.tp_anual_implementacion;
 
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.OfertaDeProductos;
+import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.contribucion.Producto;
 import Modelo.Dominio.localizacion.Direccion;
 import medios_de_contacto.CorreoElectronico;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static Modelo.Dominio.persona.TipoOrganizacion.empresa;
 
 @SpringBootTest
-class testsOfertaDeProductos {
+class testsOfertaDeUnProducto {
 
     Sistema sistema;
 
@@ -33,8 +33,8 @@ class testsOfertaDeProductos {
     Persona persona2;
     Colaborador colaborador2;
 
-    OfertaDeProductos oferta1;
-    OfertaDeProductos oferta2;
+    OfertaDeUnProducto oferta1;
+    OfertaDeUnProducto oferta2;
 
     Producto producto1;
 
@@ -55,8 +55,8 @@ class testsOfertaDeProductos {
 
         producto1 = new Producto("Cacerola", 100);
 
-        oferta1 = new OfertaDeProductos(colaborador1, LocalDate.of(2024, 6, 20), "Súper Cacerola", GASTRONOMIA, 100, "cacerola.jpg", producto1);
-        oferta2 = new OfertaDeProductos(colaborador2, LocalDate.of(2024, 5, 8), "Cacerola-3000", GASTRONOMIA, 50, "cacerola.jpg", producto1);
+        oferta1 = new OfertaDeUnProducto(colaborador1, LocalDate.of(2024, 6, 20), "Súper Cacerola", GASTRONOMIA, 100, "cacerola.jpg", producto1);
+        oferta2 = new OfertaDeUnProducto(colaborador2, LocalDate.of(2024, 5, 8), "Cacerola-3000", GASTRONOMIA, 50, "cacerola.jpg", producto1);
 
         oferta2.procesarLaContribucion();
     }

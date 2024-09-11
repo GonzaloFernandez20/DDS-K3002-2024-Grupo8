@@ -17,5 +17,6 @@ public class Producto {
         this.stock = stock;
     }
 
-    public void disminuirStock() { stock--; }
+    public void disminuirStock() { this.stock--; }
+    public boolean tengoStock() { return stock > 0; }
 }

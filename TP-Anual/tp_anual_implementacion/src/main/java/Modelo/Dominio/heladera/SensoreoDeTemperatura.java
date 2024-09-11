@@ -14,19 +14,16 @@ import java.util.TimerTask;
 public class SensoreoDeTemperatura {
     private Heladera heladera;
     private Timer timerDeConexion;
+    private TimerTask tareaActual;
     private float ultimaTemperaturaRegistrada;
-
-    //------------------ BROKER -----------------
-    private static final int PORT = 12345; // Puerto para la comunicación
-    //-------------------------------------------
 
     public SensoreoDeTemperatura(Heladera heladera) {
         this.heladera = heladera;
         timerDeConexion = new Timer();
+        tareaActual = null;
     }
 
     public void actualizarTemperatura(float temperatura) {
-        timerDeConexion.cancel();
         this.ultimaTemperaturaRegistrada = temperatura;
         if (!heladera.getModelo().controlarTemperatura(temperatura)){
             GestorDeIncidentes.reportarAlerta(heladera, TipoAlerta.TEMPERATURA);
@@ -35,21 +32,24 @@ public class SensoreoDeTemperatura {
         }
     }
 
-    // Método que programa una tarea para que se ejecute cada 5 segundos
     public void iniciarTimer() {
-        TimerTask tarea = new TimerTask() {
+        // Cuando la tarea todavia no se asigno, esta en valor null, entonces no cancela un timer no asignado (se asigna al recibir una nueva temperatura).
+        if (tareaActual != null) { tareaActual.cancel(); }
+
+        tareaActual = new TimerTask() {
             @Override
             public void run() {
                 GestorDeIncidentes.reportarAlerta(heladera, TipoAlerta.FALLA_DE_CONEXION);
             }
         };
 
-        // Programar la tarea para que se ejecute cada 5 segundos (5000 milisegundos)
-        timerDeConexion.scheduleAtFixedRate(tarea, 0, 5000);
+        timerDeConexion.scheduleAtFixedRate(tareaActual, 0, 300000); // Que se ejecute cada 5 minutos
     }
+}
 
 
-    public void iniciar() { // TODO: Check Broker
+
+   /* public void iniciar() { // TODO: Check Broker
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Broker SensoreoDeTemperatura iniciado, esperando conexión...");
 
@@ -95,8 +95,8 @@ public class SensoreoDeTemperatura {
     private float generarTemperaturaAleatoria() {
         Random random = new Random();
         return 2.0f + (8.0f - 2.0f) * random.nextFloat(); // Genera una temperatura entre 2 y 8 grados
-    }
-}
+    }*/
+
 
 // donde lo vayamos a probar
 /*

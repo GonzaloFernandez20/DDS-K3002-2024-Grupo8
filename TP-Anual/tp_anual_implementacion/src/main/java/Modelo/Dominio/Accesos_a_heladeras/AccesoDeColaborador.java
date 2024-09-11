@@ -12,9 +12,6 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     private final Colaborador colaborador;
     private final List<PermisoDeApertura> permisosDeApertura;
 
-    public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
-        return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
-    }
     public AccesoDeColaborador(String codigoTarjeta,
                                Colaborador colaborador) {
         this.codigoTarjeta = codigoTarjeta;
@@ -49,5 +46,10 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     }
     public void retirarPermiso(PermisoDeApertura permiso){
         permisosDeApertura.remove(permiso); // Elimina la primera aparicion del objeto.
+    }
+
+    // Hecho de forma provisoria para reportes
+    public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
+        return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
     }
 }

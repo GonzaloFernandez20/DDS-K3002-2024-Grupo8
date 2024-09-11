@@ -4,13 +4,11 @@ public class Direccion {
     String calle;
     String altura;
     String codPostal;
-    String unidadFuncional;
 
-    public Direccion(String calle, String altura, String codPostal, String unidadFuncional) {
+    public Direccion(String calle, String altura, String codPostal) {
         this.calle = calle;
         this.altura = altura;
         this.codPostal = codPostal;
-        this.unidadFuncional = unidadFuncional;
     }
     public String toString(){
         return calle+" "+altura;
@@ -34,11 +32,5 @@ public class Direccion {
     }
     public void setCodPostal(String codPostal) {
         this.codPostal = codPostal;
-    }
-    public String getUnidadFuncional() {
-        return unidadFuncional;
-    }
-    public void setUnidadFuncional(String unidadFuncional) {
-        this.unidadFuncional = unidadFuncional;
     }
 }

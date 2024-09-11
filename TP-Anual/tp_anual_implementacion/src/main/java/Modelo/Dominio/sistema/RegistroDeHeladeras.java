@@ -64,4 +64,6 @@ public class RegistroDeHeladeras {
         return sqrt( pow(diferenciaX, 2) + pow(diferenciaY, 2) );
     }
 
+    public void darDeAltaHeladera(Heladera heladera){ heladeras.add(heladera); }
+    public void darDeBajaHeladera(Heladera heladera){ heladeras.remove(heladera); }
 }
