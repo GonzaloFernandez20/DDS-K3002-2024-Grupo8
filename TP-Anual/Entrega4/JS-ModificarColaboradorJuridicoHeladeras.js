@@ -1,8 +1,6 @@
 class warningHeladera {
-    constructor(nombreDelPunto, ciudad, direccion, tipoDeAlerta, fechaDelIncidente, estado) {
+    constructor(nombreDelPunto, tipoDeAlerta, fechaDelIncidente, estado) {
         this.nombreDelPunto = nombreDelPunto;
-        this.ciudad = ciudad;
-        this.direccion = direccion;
         this.tipoDeAlerta = tipoDeAlerta;
         this.fechaDelIncidente = fechaDelIncidente;
         this.estado = estado;
@@ -20,43 +18,63 @@ class heladera{
     }
 }
 
-let warningHeladeraDeUsuario = [new warningHeladera("Las Violetas", "CABA", "Medrano 5", "Temperatura baja", "23/04/2023", "Resuelto")];
+let warningHeladeraDeUsuario = [new warningHeladera("Las Violetas", "Temperatura baja", "23/04/2023", "Resuelto"), new warningHeladera("Las Violetas", "Temperatura alta", "25/04/2023", "No resuelto"), new warningHeladera("Campus", "Mucho movimiento", "25/08/2024", "No resuelto")];
 let heladerasDeUnUsuario = [new heladera("Las Violetas", "CABA", "Medrano 5", "SuperFrio3000", "30", "01/01/2020"), new heladera("Campus", "CABA", "Mozart 2300", "ColdX", "15", "06/07/2008")];
 
 function iniciarPantalla() {
     document.getElementById('mod-heladera').style.display = "none";
-    agregarHeladerasConAlerta();
+    agregarOpcionesParaElegirUnaHeladera();
     agregarHeladerasAlListadoGeneral();
 }
 
-function agregarHeladerasConAlerta() {
+function agregarOpcionesParaElegirUnaHeladera() {
+    document.getElementById('elegir-heladera').innerHTML = "";
+    let selectElegirHeladera;
+    
+    let nombresDePuntos = new Set(warningHeladeraDeUsuario.map(warning => warning.nombreDelPunto));
+
+    nombresDePuntos.forEach(nombre => {
+        `${nombre}`
+        
+        selectElegirHeladera +=
+        `<option>${nombre}</option>`
+    });
+
+    document.getElementById('elegir-heladera').innerHTML = selectElegirHeladera;
+
+    document.getElementById('non-warning-message').style.display = "none";
+    document.getElementById('warnings').style.display = "block";
+}
+
+document.getElementById('elegir-heladera').addEventListener('click', function() {
+    let nombreHeladeraSeleccionada = document.getElementById('elegir-heladera').value;
+    agregarAlertasDeHeladera(nombreHeladeraSeleccionada);
+});
+
+function agregarAlertasDeHeladera(nombreDelPunto) {
     let agregarFilaWarning= document.getElementById('heladeras-warnings').innerHTML;
+
+    document.getElementById('heladera-elegida').innerText = `Heladera seleccionada: ${nombreDelPunto}`;
 
     agregarFilaWarning = '';
 
-    for(let i=0; i < warningHeladeraDeUsuario.length; i++) {
-        let nombreDelPunto = warningHeladeraDeUsuario[i].nombreDelPunto;
-        let ciudad = warningHeladeraDeUsuario[i].ciudad;
-        let direccion = warningHeladeraDeUsuario[i].direccion;
-        let tipoDeAlerta = warningHeladeraDeUsuario[i].tipoDeAlerta;
-        let fechaDelIncidente = warningHeladeraDeUsuario[i].fechaDelIncidente;
-        let estado = warningHeladeraDeUsuario[i].estado;
-        `${nombreDelPunto} ${ciudad} ${direccion} ${tipoDeAlerta} ${fechaDelIncidente} ${estado}`;
+    let warningsDeUnaHeladera = warningHeladeraDeUsuario.filter(warning => warning.nombreDelPunto == nombreDelPunto);
+
+    for(let i=0; i < warningsDeUnaHeladera.length; i++) {
+        let tipoDeAlerta = warningsDeUnaHeladera[i].tipoDeAlerta;
+        let fechaDelIncidente = warningsDeUnaHeladera[i].fechaDelIncidente;
+        let estado = warningsDeUnaHeladera[i].estado;
+        `${fechaDelIncidente} ${tipoDeAlerta} ${estado}`;
         
         agregarFilaWarning +=
         `<tr>
-            <td>${nombreDelPunto}</td>
-            <td>${ciudad}</td>
-            <td>${direccion}</td>
-            <td>${tipoDeAlerta}</td>
             <td>${fechaDelIncidente}</td>
+            <td>${tipoDeAlerta}</td>
             <td>${estado}</td>
         </tr>`
     }
 
     document.getElementById('heladeras-warnings').innerHTML = agregarFilaWarning;
-    document.getElementById('non-warning-message').style.display = "none";
-    document.getElementById('warnings').style.display = "block";
 }
 
 function agregarHeladerasAlListadoGeneral() {

@@ -117,14 +117,15 @@
                             <h3 id="alertas">Alertas</h3>
                             <p class="fs-5" id="non-warning-message">¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
                             <div id="warnings">
+                                <p class="fs-5">Elija el nombre del punto al que quiere consultar entre las heladeras que presentaron alertas:</p> 
+                                <select id="elegir-heladera">
+                                </select>
+                                <p class="fs-5" id="heladera-elegida"></p> 
                                 <table class="table-warnings">
                                     <thead>
                                         <tr>
-                                            <th>Nombre del Punto</th>
-                                            <th>Ciudad</th>
-                                            <th>Dirección</th>
-                                            <th>Tipo de Alerta</th>
                                             <th>Fecha del Incidente</th>
+                                            <th>Tipo de Alerta</th>
                                             <th>Estado</th>
                                         </tr>
                                     </thead>
@@ -189,7 +190,7 @@
             </ul>
         </footer>
         <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="JS-ModificarColaboradorJuridicoHeladeras.js"></script>
         <script src="JS-ModificarColaboradorUsuario.js"></script>
+        <script src="JS-ModificarColaboradorJuridicoHeladeras.js"></script>
     </body>
 </html>
