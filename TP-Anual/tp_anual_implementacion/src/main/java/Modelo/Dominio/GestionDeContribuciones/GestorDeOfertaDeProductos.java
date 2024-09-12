@@ -3,7 +3,7 @@ package Modelo.Dominio.GestionDeContribuciones;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 
-public class GestorDeCanjeDeProductos {
+public class GestorDeOfertaDeProductos {
     private Colaborador colaborador;
     private OfertaDeUnProducto ofertaDeUnProducto;
 

@@ -7,6 +7,7 @@ import org.springframework.cglib.core.Local;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.List;
 
 public class DistribucionDeVianda extends ContribucionConApertura {
 
@@ -44,6 +45,16 @@ public class DistribucionDeVianda extends ContribucionConApertura {
             super.procesarLaContribucion();
         }
     }
+
+    @Override
+    public void manejarRechazoViandas() {
+        int cantidadQueEntra = heladeraDestino.espacioDisponible();
+        List<Vianda> viandasIngresadas = viandas.subList(0, cantidadQueEntra);
+        heladeraDestino.recibirViandas(viandasIngresadas);
+        for (Vianda vianda : viandasIngresadas){vianda.setEstadoVianda(EstadoVianda.ENTREGADA);}
+
+    }
+
     @Override
     public double puntosQueSumaColaborador() {
         double coeficiente = 1;

@@ -62,11 +62,6 @@ public class TestHeladera {
         vianda2.setEstadoVianda(EstadoVianda.ENTREGADA);
         vianda3 = new Vianda("Milanesa",LocalDate.of(2030,12,2), colaboradorDonanteViejo,null,"1000","400");
         vianda3.setEstadoVianda(EstadoVianda.ENTREGADA);
-
-/*        //NO TIENEN QUE SALTAR LAS EXCEPCIONES ACÄ
-        try{vianda1.trasladar(heladera1);}catch (ViandaRechazada e){throw new RuntimeException(e);}
-        try{vianda2.trasladar(heladera2);}catch (ViandaRechazada e){throw new RuntimeException(e);}
-        try{vianda3.trasladar(heladera2);}catch (ViandaRechazada e){throw new RuntimeException(e);}*/
     }
 /*    @Test
     void heladeraLlena(){
@@ -78,5 +73,4 @@ public class TestHeladera {
         Throwable exception = assertThrows(FallaHeladera.class, () -> heladera2.retirarViandas(100));
         assertEquals("Se quisieron retirar mas viandas que las que había en la heladera",exception.getMessage());
     }*/
-
 }

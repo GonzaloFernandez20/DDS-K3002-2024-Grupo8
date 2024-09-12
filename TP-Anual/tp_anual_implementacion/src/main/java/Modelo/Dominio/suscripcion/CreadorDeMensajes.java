@@ -22,13 +22,17 @@ public class CreadorDeMensajes { // Como es una clase solo de comportamiento, no
 
     private static String sugerirHeladeras(Heladera heladera){
         List <Heladera> heladeras = RegistroDeHeladeras.getInstancia().sugerirHeladerasDestino(heladera);
+        if(!heladeras.isEmpty()){
         StringBuilder heladerasSugeridas = new StringBuilder(", heladeras sugeridas para redistribuir las viandas: \n");
-
-        for (Heladera sugerencia : heladeras){
-            heladerasSugeridas.append(String.format("\tHeladera: %s (%s)\n", sugerencia.getUbicacion().getNombreDelPunto(),
-                    sugerencia.getUbicacion().getDireccion()));
-        }
+            for (Heladera sugerencia : heladeras){
+                heladerasSugeridas.append(String.format("\tHeladera: %s (%s)\n", sugerencia.getUbicacion().getNombreDelPunto(),
+                        sugerencia.getUbicacion().getDireccion()));
+            }
         return heladerasSugeridas.toString();
+        }
+        else{
+            return "No hay heladeras disponibles para redistribucion.";
+        }
     }
     // Ejemplo: "En la heladera Medrano (Medrano 981) se produjo una falla, heladeras sugeridas para redistribuir las viandas: "
     //               Heladera: nombre (direccion)
