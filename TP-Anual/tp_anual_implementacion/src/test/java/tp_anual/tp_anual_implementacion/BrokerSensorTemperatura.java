@@ -15,7 +15,7 @@ import java.util.List;
 import static Modelo.Dominio.persona.TipoOrganizacion.ong;
 
 public class BrokerSensorTemperatura {
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         Direccion direccion = new Direccion("Rivadavia", "100", "1111", "Local");
         Persona persona = new PersonaJuridica("SRL", ong, "Muebles", direccion);
         Colaborador colaborador = new Colaborador(persona);
@@ -27,5 +27,5 @@ public class BrokerSensorTemperatura {
         SensoreoDeTemperatura sensoreoDeTemperatura = new SensoreoDeTemperatura(heladera);
         // Inicia el broker
         sensoreoDeTemperatura.iniciar();
-    }
+    }*/
 }

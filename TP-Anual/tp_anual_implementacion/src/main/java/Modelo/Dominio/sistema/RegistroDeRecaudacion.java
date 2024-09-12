@@ -18,4 +18,6 @@ public class RegistroDeRecaudacion {
     public void recibirDinero(float dinero) {
         fondoRecaudado += dinero;
     }
+    public float getFondoRecaudado() { return fondoRecaudado; }
+
 }

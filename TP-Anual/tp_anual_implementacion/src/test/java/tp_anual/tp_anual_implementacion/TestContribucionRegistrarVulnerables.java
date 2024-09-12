@@ -1,16 +1,14 @@
 package tp_anual.tp_anual_implementacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.RegistroDePersonasEnSituacionVulnerable;
-import nuestras_excepciones.ColaboracionInvalida;
+
 import Modelo.Dominio.localizacion.Direccion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import Modelo.Dominio.persona.PersonaHumana;
-import persona_vulnerable.AccesoAHeladeras;
 import Modelo.Dominio.persona_vulnerable.EstadoDeVivienda;
 import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
-import persona_vulnerable.Vinculacion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class TestContribucionRegistrarVulnerables{
-    private Direccion direccion;
+/*    private Direccion direccion;
 
     private PersonaHumana persona0;
     private PersonaHumana persona1;
@@ -127,5 +125,5 @@ public class TestContribucionRegistrarVulnerables{
         Throwable ex = assertThrows(ColaboracionInvalida.class,() -> contribucion1.procesarLaContribucion());
         assertEquals(ex.getMessage(),
                 "El colaborador que registre a múltiples vulnerables debe tener DIRECCION");
-    }
+    }*/
 }

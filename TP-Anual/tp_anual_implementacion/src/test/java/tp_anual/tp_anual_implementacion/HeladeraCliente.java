@@ -18,7 +18,7 @@ import Modelo.Dominio.sistema.Sistema;
 import static Modelo.Dominio.persona.TipoOrganizacion.ong;
 
 public class HeladeraCliente {
-    private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
+/*    private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
     private static final int BROKER_PORT = 12345; // Puerto del broker
 
     public static void main(String[] args) {
@@ -47,5 +47,5 @@ public class HeladeraCliente {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

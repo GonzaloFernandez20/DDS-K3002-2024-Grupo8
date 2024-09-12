@@ -26,7 +26,7 @@ import static Modelo.Dominio.documentacion.TipoDeDocumento.LC;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class TestsCargaMasiva {
+public class TestCargaMasiva {
 
     Sistema sistema;
     CargaMasiva cargaMasiva;

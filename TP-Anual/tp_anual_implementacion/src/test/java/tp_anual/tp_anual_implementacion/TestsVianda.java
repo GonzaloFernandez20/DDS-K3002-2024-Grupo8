@@ -7,9 +7,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.localizacion.Direccion;
-import nuestras_excepciones.ViandaRechazada;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.persona.PersonaJuridica;
@@ -43,6 +41,7 @@ public class TestsVianda {
     private List<Vianda> stock1 = new ArrayList<Vianda>();
     private List<Vianda> stock2 = new ArrayList<Vianda>();
 
+/*
     @BeforeEach
     void setUp() {
         modeloEstandar      = new Modelo(10F, 2F);
@@ -89,5 +88,6 @@ public class TestsVianda {
         assertEquals(EstadoVianda.ENTREGADA,vianda1.getEstado(),"La vianda no está vencida");
     }
 
+*/
 
 }

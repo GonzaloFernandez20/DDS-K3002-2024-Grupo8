@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class EsContraseniaFuerte extends Criterio{
-    static File listaDeConstrasenias = new File("src/main/java/seguridad/10KPasswords.txt");
+    static File listaDeConstrasenias = new File("src/main/java/Modelo/seguridad/10KPasswords.txt");
 
     @Override
     public boolean criterioSeguridad(String contrasenia) {
