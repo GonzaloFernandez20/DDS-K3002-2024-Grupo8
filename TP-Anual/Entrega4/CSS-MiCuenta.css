@@ -242,7 +242,7 @@ input, select{
 
 .reportar-falla{
     border: 1px solid #50bfa0;
-    border-radius: 5px;
+    border-radius: 25px;
     padding: 20px;
     margin: 20px;
     width: fit-content;
@@ -251,4 +251,5 @@ input, select{
     right: 0px;
     bottom: 0px;
     background-color: #ffffffff;
+    display: block;
 }
