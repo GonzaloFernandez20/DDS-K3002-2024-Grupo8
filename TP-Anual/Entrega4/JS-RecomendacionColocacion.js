@@ -25,7 +25,7 @@ function initMap() {
   const inputRadio = document.createElement("input");
 
   inputRadio.type = "number";
-  inputRadio.placeholder = "Ingresar Radio de Busqueda (m)";
+  inputRadio.placeholder = "Ingresar Radio de Búsqueda (m)";
 
   const submitButton = document.createElement("input");
 
@@ -49,7 +49,7 @@ function initMap() {
 
   instructionsElement.id = "instructions";
   instructionsElement.innerHTML =
-    "<strong>Instrucciones</strong>: Ingresa un Punto de Referencia, un Radio, y te recomendamos un posible Punto de Colocacion de Heladeras";
+    "<strong>Instrucciones</strong>: Ingresa un Punto de Referencia, un Radio, y te recomendamos un posible Punto de Colocación de Heladeras";
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputRadio);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
@@ -89,7 +89,7 @@ function geocode(request) {
         marker.setPosition(results[0].geometry.location);
         marker.setMap(map);
         
-        var titulo = "<h4>Posible Punto de Colocacion</h4>";
+        var titulo = "<h4>Posible Punto de Colocación</h4>";
         infoWindow.setContent(titulo + results[0].formatted_address);
 
         infoWindow.open({anchor: marker});
