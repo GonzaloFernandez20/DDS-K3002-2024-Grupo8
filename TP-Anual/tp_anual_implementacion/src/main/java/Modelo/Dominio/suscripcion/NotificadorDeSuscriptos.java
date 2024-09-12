@@ -28,8 +28,10 @@ public class NotificadorDeSuscriptos {
 
     public void notificar(String evento){ // A cada colaborador suscripto a ese evento, se le envia un mensaje
         String mensaje = CreadorDeMensajes.crearMensaje(evento, heladera);
-        for (Colaborador suscripto : suscriptos.get(evento)){
-            suscripto.notificar(mensaje);
+        if(suscriptos.containsKey(evento)){
+            for (Colaborador suscripto : suscriptos.get(evento)){
+                suscripto.notificar(mensaje);
+            }
         }
     }
 }

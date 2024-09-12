@@ -19,7 +19,13 @@ public class GestorDeSuscripciones {
         public void registrarSuscripcion(Heladera heladera,
                                          Colaborador colaborador,
                                          String evento) {
+        heladera.getNotificadorDeSuscriptos().suscribir(evento,colaborador);
+        }
 
+        public void efectuarDesuscripcion(Heladera heladera,
+                                         Colaborador colaborador,
+                                         String evento) {
+            heladera.getNotificadorDeSuscriptos().desuscribir(evento,colaborador);
         }
 
 }

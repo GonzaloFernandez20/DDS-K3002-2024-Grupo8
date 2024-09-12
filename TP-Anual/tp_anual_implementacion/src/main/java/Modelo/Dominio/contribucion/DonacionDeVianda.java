@@ -24,6 +24,14 @@ public class DonacionDeVianda extends ContribucionConApertura {
         return viandas.size() * coeficiente;
     }
 
+    @Override
+    public void manejarRechazoViandas() {
+        int cantidadQueEntra = heladeraDestino.espacioDisponible();
+        viandas = viandas.subList(0, cantidadQueEntra);
+        heladeraDestino.recibirViandas(viandas);
+        for (Vianda vianda : viandas){vianda.setEstadoVianda(EstadoVianda.ENTREGADA);}
+    }
+
 
     // ---- Getters y Setters
     public Colaborador getColaborador() {return colaborador;}

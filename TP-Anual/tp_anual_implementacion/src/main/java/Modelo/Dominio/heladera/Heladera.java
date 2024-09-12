@@ -4,6 +4,7 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
+import Modelo.Excepciones.ExcepecionViandasRechazadas;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -13,8 +14,8 @@ public class Heladera {
     private final Colaborador colaboradorACargo;
     private final Ubicacion ubicacion;
     private final int capacidadDeViandas;
-    private LocalDate puestaEnFuncionamiento;
-    private List<Vianda> viandasEnStock;
+    private final LocalDate puestaEnFuncionamiento;
+    private final List<Vianda> viandasEnStock;
     private Modelo modelo;
     private EstadoHeladera estado;
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
@@ -39,9 +40,14 @@ public class Heladera {
     }
 
     // ------------------------------------------------
-    public void recibirViandas(List<Vianda> viandas) {
-        this.viandasEnStock.addAll(viandas);
-        huboCambioDeStock();
+    public void recibirViandas(List<Vianda> viandas){
+       if(viandas.size()<=espacioDisponible()){
+            this.viandasEnStock.addAll(viandas);
+            huboCambioDeStock();
+        }
+        else{
+            throw new ExcepecionViandasRechazadas("Las cantidad de viandas a ingresar supera el espacio disponible");
+        }
     }
 
     public List<Vianda> retirarViandas(int cantidadARetirar) {
@@ -57,7 +63,7 @@ public class Heladera {
         return viandasARetirar;
     }
 
-    public int cantViandasEnStock(){ return viandasEnStock.size(); };
+    public int cantViandasEnStock(){ return viandasEnStock.size(); }
     public int espacioDisponible(){return capacidadDeViandas - cantViandasEnStock();}
 
     public void huboIncidente(){
@@ -65,7 +71,7 @@ public class Heladera {
         notificadorDeSuscriptos.notificar("se produjo una falla");
     }
 
-    public void huboCambioDeStock(){
+    private void huboCambioDeStock(){
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
 
@@ -77,8 +83,7 @@ public class Heladera {
     // ---- Getters y Setters
     public Colaborador getColaboradorACargo() { return colaboradorACargo; }
     public Ubicacion getUbicacion() { return ubicacion; }
-    public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
-    public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
+    public List<Vianda> getViandasEnStock() {return viandasEnStock;}
     public Modelo getModelo() { return modelo; }
     public void setModelo(Modelo modelo) { this.modelo = modelo; }
     public EstadoHeladera getEstado() { return estado; }
@@ -89,17 +94,3 @@ public class Heladera {
     public void setNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { this.notificadorDeSuscriptos = notificadorDeSuscriptos; }
 }
 
-//public void sacarVianda(Vianda vianda) { this.viandasEnStock.remove(vianda); } -> TODO: Verificar si trae problemas devolver una lista de 1 elemento
-/*    public void controlarUltimaTemperatura() {
-        if (ultimaTemperaturaRegistrada != null) {
-            Float temperaturaMinima = modelo.getTemperaturaMinima();
-            Float temperaturaMaxima = modelo.getTemperaturaMaxima();
-
-            if (ultimaTemperaturaRegistrada < temperaturaMinima || ultimaTemperaturaRegistrada > temperaturaMaxima) {
-                estado = EstadoHeladera.inactiva;
-                sistema.serAlertado(this, TEMPERATURA);
-            } else {
-                estado = EstadoHeladera.activa;
-            }
-        }
-    }*/
