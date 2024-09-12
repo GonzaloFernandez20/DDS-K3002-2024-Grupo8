@@ -18,7 +18,7 @@ public class Heladera {
     private List<Vianda> viandasEnStock;
     private Modelo modelo;
     private EstadoHeladera estado;
-    private final NotificadorDeSuscriptos notificadorDeSuscriptos;
+    private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     // BROKER ------------------------------------------
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
@@ -29,8 +29,7 @@ public class Heladera {
                     Ubicacion ubicacion,
                     int capacidadDeViandas,
                     Modelo modelo,
-                    EstadoHeladera estado,
-                    NotificadorDeSuscriptos notificadorDeSuscriptos) {
+                    EstadoHeladera estado, NotificadorDeSuscriptos notificadorDeSuscriptos) {
         this.colaboradorACargo = colaboradorACargo;
         this.ubicacion = ubicacion;
         this.capacidadDeViandas = capacidadDeViandas;
@@ -63,15 +62,14 @@ public class Heladera {
 
     public void huboIncidente(){
         estado = EstadoHeladera.INACTIVA;
-        notificadorDeSuscriptos.notificar("se produjo una falla");
+        notificadorDeSuscriptos.notificar("se produjo una falla", this);
     }
 
     public void huboCambioDeStock(){
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
-
-        notificadorDeSuscriptos.notificar("quedan " + viandasQueQuedan + " viandas");
-        notificadorDeSuscriptos.notificar("faltan " + viandasQueFaltan + " viandas");
+        notificadorDeSuscriptos.notificar("quedan " + viandasQueQuedan + " viandas", this);
+        notificadorDeSuscriptos.notificar("faltan " + viandasQueFaltan + " viandas", this);
     }
 
 
@@ -83,7 +81,7 @@ public class Heladera {
     public Modelo getModelo() { return modelo; }
     public void setModelo(Modelo modelo) { this.modelo = modelo; }
     public EstadoHeladera getEstado() { return estado; }
-    public NotificadorDeSuscriptos getNotificadorDeSuscriptos() { return notificadorDeSuscriptos; }
+    public NotificadorDeSuscriptos getNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { return notificadorDeSuscriptos; }
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }
 }

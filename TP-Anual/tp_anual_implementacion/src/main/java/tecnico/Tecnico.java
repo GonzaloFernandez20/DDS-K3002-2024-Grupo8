@@ -4,7 +4,7 @@ import incidentes.EstadoDelIncidente;
 import incidentes.Incidente;
 import incidentes.Informe;
 import incidentes.VisitaPorIncidente;
-import localizacion.Area;
+import localizacion.AreaDeCobertura;
 import localizacion.Ubicacion;
 import medios_de_contacto.MedioDeContacto;
 import documentacion.Documento;
@@ -19,11 +19,11 @@ import java.util.List;
 public class Tecnico {
     private String cuil;
     private MedioDeContacto medioDeContacto;
-    private Area areaCobertura;
+    private AreaDeCobertura areaCobertura;
     private PersonaHumana persona;
     private List<Incidente> incidentesPendientes = new ArrayList<>();
 
-    public Tecnico(PersonaHumana persona, String cuil, Area areaCobertura) {
+    public Tecnico(PersonaHumana persona, String cuil, AreaDeCobertura areaCobertura) {
         this.persona = persona;
         this.cuil = cuil;
         this.areaCobertura = areaCobertura;
@@ -60,7 +60,7 @@ public class Tecnico {
     public boolean estaCercaDe(Ubicacion ubicacion){
         return areaCobertura.areaContiene(ubicacion);
     }
-    public boolean coincideConElArea(Area area){
+    public boolean coincideConElArea(AreaDeCobertura area){
         return areaCobertura.seSolapaCon(area);
     }
     public void notificarDeIncidente(Incidente incidente){

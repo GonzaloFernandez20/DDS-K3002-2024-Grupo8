@@ -10,10 +10,8 @@ import java.util.List;
 
 public class NotificadorDeSuscriptos {
     private Map<String, List<Colaborador>> suscriptos;
-    private final Heladera heladera;
 
-    public NotificadorDeSuscriptos(Heladera heladera) {
-        this.heladera = heladera;
+    public NotificadorDeSuscriptos() {
         this.suscriptos = new HashMap<>();
     }
 
@@ -26,10 +24,10 @@ public class NotificadorDeSuscriptos {
         suscriptos.get(evento).remove(colaborador);
     }
 
-    public void notificar(String evento){ // A cada colaborador suscripto a ese evento, se le envia un mensaje
+    public void notificar(String evento, Heladera heladera){ // A cada colaborador suscripto a ese evento, se le envia un mensaje
         String mensaje = CreadorDeMensajes.crearMensaje(evento, heladera);
         for (Colaborador suscripto : suscriptos.get(evento)){
-            suscripto.notificar(mensaje);
+            suscripto.serNotificado(mensaje);
         }
     }
 }

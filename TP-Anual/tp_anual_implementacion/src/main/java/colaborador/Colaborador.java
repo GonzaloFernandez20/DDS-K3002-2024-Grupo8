@@ -36,7 +36,7 @@ public class Colaborador {
         //puntos += contribucion.puntosQueSumaColaborador();
     }
 
-    public void notificar(String mensaje) {
+    public void serNotificado(String mensaje) {
         mensajesRecibidos.add(mensaje);
 
         for (MedioDeContacto medio : mediosDeContacto){
