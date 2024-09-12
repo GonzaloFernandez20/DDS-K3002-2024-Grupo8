@@ -122,6 +122,15 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-pills flex-column mb-auto colaboracion">
+                        <span class="fs-5">Colaboraciones</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/tarjeta-icon.png"/>
+                            <a href="DarDeAltaPersonaEnSitVulnerable.html" class="nav-link">
+                                Dar de alta a una persona
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -132,6 +141,12 @@
                     <div id="stars" class="stars-container"></div> <!-- Elemento donde se mostrarán los puntos -->
                     <h2 id="premios">Premios</h2>
                     <a href="CanjearPuntos.html"><button type="button" class="boton">Ver Premios disponibles</button></a>
+                </div>
+                <div class="reportar-falla referirAColaboracion" id="container-reporte-falla">
+                    <button class="btn-close" onclick="ocultarReporteFalla()"></button>
+                    <p class="fs-4">Falla Técnica</p>
+                    <p>¿Vio alguna falla?</p>
+                    <a href="ReportarFallaTecnica.html">Reportar</a>
                 </div>
             </div>
         </div>
@@ -150,5 +165,6 @@
     </footer>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="JS-ModificarColaboradorPremios.js"></script>
+    <script src="JS-ModificarColaboradorUsuario.js"></script>
 </body>
 </html>

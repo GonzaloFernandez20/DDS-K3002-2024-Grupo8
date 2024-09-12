@@ -102,6 +102,15 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav nav-pills flex-column mb-auto colaboracion">
+                            <span class="fs-5">Colaboraciones</span>
+                            <li class="nav-item">
+                                <image height="20px" width="20px" src="img/tarjeta-icon.png"/>
+                                <a href="DarDeAltaPersonaEnSitVulnerable.html" class="nav-link">
+                                    Dar de alta a una persona
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -179,6 +188,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="reportar-falla referirAColaboracion" id="container-reporte-falla">
+                        <button class="btn-close" onclick="ocultarReporteFalla()"></button>
+                        <p class="fs-4">Falla Técnica</p>
+                        <p>¿Vio alguna falla?</p>
+                        <a href="ReportarFallaTecnica.html">Reportar</a>
+                    </div>
                 </div>
             </div>
         </main>
@@ -197,5 +212,6 @@
         <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="JS-ModificarColaboradorHumanoSuscripciones.js"></script>
+        <script src="JS-ModificarColaboradorUsuario.js"></script>
     </body>
 </html>

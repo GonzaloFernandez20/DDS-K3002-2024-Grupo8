@@ -50,6 +50,10 @@ h3{
     height: 100vh;
 }
 
+.colaboracion{
+    color: #50bfa0;
+}
+
 .tags-medios-de-contacto{
     display: flex;
     gap: 10px;
@@ -234,4 +238,18 @@ input, select{
 .reportes-container embed {
     width: 95%;
     height: 400px;
+}
+
+.reportar-falla{
+    border: 1px solid #50bfa0;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 20px;
+    width: fit-content;
+    height: fit-content;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    background-color: #ffffffff;
+    display: block;
 }

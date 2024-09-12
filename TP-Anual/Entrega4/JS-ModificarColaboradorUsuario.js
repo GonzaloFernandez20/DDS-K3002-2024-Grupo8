@@ -30,3 +30,7 @@ document.querySelectorAll('.mod-cuenta').forEach(input => {
         // Modificar al usuario
     })
 })
+
+function ocultarReporteFalla() {
+    document.getElementById('container-reporte-falla').style.display = 'none';
+}
