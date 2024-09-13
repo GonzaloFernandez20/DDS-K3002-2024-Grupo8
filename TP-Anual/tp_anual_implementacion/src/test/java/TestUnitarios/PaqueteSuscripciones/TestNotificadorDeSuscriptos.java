@@ -1,5 +1,6 @@
 package TestUnitarios.PaqueteSuscripciones;
 
+import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.Direccion;
@@ -35,22 +36,11 @@ public class TestNotificadorDeSuscriptos {
     }
 
     private void inicializarHeladera(){
-        heladera = new Heladera(null,
-                new Ubicacion( new Direccion("Medrano", "981",null),"CABA", "Heladera Medrano UTN"),
-                5,
-                null,
-                null);
-        NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
-        heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);
+        heladera = FactoryInstanciasParaTests.instanciarOtraHeladera();
     }
 
     private void inicializarColaborador(){
-        PersonaHumana persona = new PersonaHumana("Juan", "Pérez",null , null, null);
-        List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-        mediosDeContacto.add(new Mail("juan.perez@gmail.com"));
-        mediosDeContacto.add(new Telegram( "1132283796"));
-
-        colaborador = new Colaborador(persona, mediosDeContacto);
+        colaborador = FactoryInstanciasParaTests.instanciarColaboradorHumano();
     }
     // <---------------------- Testeos ----------------------> //
 

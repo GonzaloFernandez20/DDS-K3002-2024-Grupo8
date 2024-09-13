@@ -1,22 +1,13 @@
 package TestUnitarios.PaqueteSuscripciones;
 
+import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.localizacion.Ubicacion;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.medios_de_contacto.Telegram;
-import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.suscripcion.CreadorDeMensajes;
-import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,22 +25,11 @@ public class TestCreadorDeMensajes {
     }
 
     private void inicializarHeladera(){
-        heladera = new Heladera(null,
-                new Ubicacion(new Direccion("Medrano", "981", null), "CABA", "Heladera Medrano UTN"),
-                5,
-                null,
-                null);
-        NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
-        heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);
+        heladera = FactoryInstanciasParaTests.instanciarOtraHeladera();
     }
 
     private void inicializarColaborador(){
-        PersonaHumana persona = new PersonaHumana("Juan", "Pérez",null , null, null);
-        List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-        mediosDeContacto.add(new Mail("juan.perez@gmail.com"));
-        mediosDeContacto.add(new Telegram( "1132283796"));
-
-        colaborador = new Colaborador(persona, mediosDeContacto);
+        colaborador = FactoryInstanciasParaTests.instanciarColaboradorHumano();
     }
 
     // <---------------------- Testeos ----------------------> //

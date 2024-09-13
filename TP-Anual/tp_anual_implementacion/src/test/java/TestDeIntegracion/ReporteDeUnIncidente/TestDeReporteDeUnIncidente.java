@@ -1,5 +1,6 @@
 package TestDeIntegracion.ReporteDeUnIncidente;
 
+import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.FallaTecnica;
@@ -54,22 +55,24 @@ public class TestDeReporteDeUnIncidente {
     }
 
     private void inicializarHeladera(){
-        heladera = new Heladera(null,
+/*        heladera = new Heladera(null,
                 new Ubicacion( new Direccion("Medrano", "981",null),"CABA", "Heladera Medrano UTN"),
                 5,
                 null,
                 null);
         notificadorDeSuscriptos = new NotificadorDeSuscriptos(heladera);
-        heladera.setNotificadorDeSuscriptos(notificadorDeSuscriptos);
+        heladera.setNotificadorDeSuscriptos(notificadorDeSuscriptos);*/
+        heladera = FactoryInstanciasParaTests.instanciarOtraHeladera();
     }
 
     private void inicializarColaborador(){
-        PersonaHumana persona = new PersonaHumana("Juan", "Pérez",null , null, null);
+/*        PersonaHumana persona = new PersonaHumana("Juan", "Pérez",null , null, null);
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
         mediosDeContacto.add(new Mail("juan.perez@gmail.com"));
         mediosDeContacto.add(new Telegram( "1132283796"));
 
-        colaboradorSuscriptor = new Colaborador(persona, mediosDeContacto);
+        colaboradorSuscriptor = new Colaborador(persona, mediosDeContacto);*/
+        colaboradorSuscriptor = FactoryInstanciasParaTests.instanciarColaboradorHumano();
     }
 
     private void reportarUnIncidente(){

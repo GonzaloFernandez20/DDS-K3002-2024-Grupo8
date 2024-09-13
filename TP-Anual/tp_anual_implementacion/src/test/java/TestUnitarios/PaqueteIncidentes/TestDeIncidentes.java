@@ -1,5 +1,6 @@
 package TestUnitarios.PaqueteIncidentes;
 
+import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.*;
 import Modelo.Dominio.localizacion.Direccion;
@@ -36,13 +37,7 @@ public class TestDeIncidentes {
     }
 
      void inicializarHeladera(){
-        heladera = new Heladera(null,
-                new Ubicacion( new Direccion("Medrano", "981",null),"CABA", "Heladera Medrano UTN"),
-                5,
-                null,
-                null);
-        NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
-        heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);
+        heladera = FactoryInstanciasParaTests.instanciarOtraHeladera();
     }
 
     // <---------------------- Testeos ----------------------> //
@@ -55,7 +50,7 @@ public class TestDeIncidentes {
         @DisplayName("La informacion obtenida acerca de una Falla Tecnica es correcta")
         public void testDeInformacionDeFalla(){
             String infoDeLaFalla = fallaTecnica.obtenerInformacion();
-            String infoEsperadaDeLaFalla = "una Falla Tecnica: \n" + "Descripcion: " + "Falla en la visagra" + "\n" + "Link Foto: " + null;
+            String infoEsperadaDeLaFalla = "se produjo una Falla Tecnica: \n" + "Descripcion: " + "Falla en la visagra" + "\n" + "Link Foto: " + null;
             assertEquals(infoDeLaFalla, infoEsperadaDeLaFalla, "Se obtuvo info de la falla");
         }
         @Test
