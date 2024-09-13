@@ -1,22 +1,6 @@
 package tp_anual.tp_anual_implementacion;
 
-import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.OfertaDeUnProducto;
-import Modelo.Dominio.contribucion.Producto;
-import Modelo.Dominio.localizacion.Direccion;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import Modelo.Dominio.persona.Persona;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona.PersonaJuridica;
-import Modelo.Dominio.sistema.Sistema;
-
-import java.time.LocalDate;
-
-import static Modelo.Dominio.contribucion.Rubro.GASTRONOMIA;
-import static org.junit.jupiter.api.Assertions.*;
-import static Modelo.Dominio.persona.TipoOrganizacion.empresa;
 
 @SpringBootTest
 public class TestOfertaDeUnProducto {
@@ -47,7 +31,7 @@ public class TestOfertaDeUnProducto {
         sistema.darDeAltaColaborador(colaborador1);
 
         direccion2 = new Direccion("Corrientes", "3000", "1390", "13D");
-        persona2 = new PersonaJuridica("Mundo Gastronomico", empresa, "Gastronomia", direccion2);
+        persona2 = new PersonaJuridica("Mundo Gastronomico", EMPRESA, "Gastronomia", direccion2);
         colaborador2 = new Colaborador(persona2);
         sistema.darDeAltaColaborador(colaborador2);
 

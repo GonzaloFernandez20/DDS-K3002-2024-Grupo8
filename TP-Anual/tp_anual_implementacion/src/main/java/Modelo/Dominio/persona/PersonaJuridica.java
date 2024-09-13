@@ -3,21 +3,19 @@ package Modelo.Dominio.persona;
 import Modelo.Dominio.localizacion.Direccion;
 
 public class PersonaJuridica extends Persona {
-    String razonSocial;
-    TipoOrganizacion tipoDeOrganizacion;
-    String rubro;
+    private final String razonSocial;
+    private final TipoOrganizacion tipoDeOrganizacion;
+    private final String rubro;
 
     public PersonaJuridica(String razonSocial, TipoOrganizacion tipoDeOrganizacion, String rubro, Direccion direccion) {
-        super(direccion);
+        if(razonSocial ==null){throw new IllegalArgumentException("La razon social es obligatorio");}
+        if(tipoDeOrganizacion ==null){throw new IllegalArgumentException("El tipo de organizacion es obligatorio");}
+        if(rubro ==null){throw new IllegalArgumentException("El rubro es obligatorio");}
         this.razonSocial = razonSocial;
         this.tipoDeOrganizacion = tipoDeOrganizacion;
         this.rubro = rubro;
+        this.direccion = direccion;
     }
 
-    public void setRazonSocial(String razonSocial) { this.razonSocial = razonSocial; }
-
-    public void setTipoDeOrganizacion(TipoOrganizacion tipoDeOrganizacion) { this.tipoDeOrganizacion = tipoDeOrganizacion; }
-
-    public void setRubro(String rubro) { this.rubro = rubro; }
 }
 
