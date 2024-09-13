@@ -2,12 +2,11 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import org.springframework.cglib.core.Local;
+import Modelo.Dominio.suscripcion.CreadorDeMensajes;
 
 
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.List;
 
 public class DistribucionDeVianda extends ContribucionConApertura {
 
@@ -38,7 +37,6 @@ public class DistribucionDeVianda extends ContribucionConApertura {
             this.viandas = heladeraDeOrigen.retirarViandas(cantidadDeViandas);
 
             for (Vianda vianda : viandas){
-                vianda.setEstadoVianda(EstadoVianda.EN_TRASLADO);
                 vianda.trasladar(heladeraDestino);
             }
         }else{
@@ -47,12 +45,19 @@ public class DistribucionDeVianda extends ContribucionConApertura {
     }
 
     @Override
-    public void manejarRechazoViandas() {
-        int cantidadQueEntra = heladeraDestino.espacioDisponible();
-        List<Vianda> viandasIngresadas = viandas.subList(0, cantidadQueEntra);
-        heladeraDestino.recibirViandas(viandasIngresadas);
-        for (Vianda vianda : viandasIngresadas){vianda.setEstadoVianda(EstadoVianda.ENTREGADA);}
-
+    public void manejarViandasQueNoEntraron() {
+        /*La distribucion se ocupa de que no se pierda referecia a cuales fueron las viandas que el colaborador sacó de la heladera origen y ataja la excepcion
+        en caso de que no entren en la heladera destino todas las viandas que saco de origen. El modo de manejarlo es que el colaborador va a ingresar solo aquellas
+        viandas que entren y se va a quedar con las que no entraron por lo que estas viandas continuan en estaddo "EN_TRASLADO" para reflejar que estan en manos de
+        quien las saco para distribuir. Lo importante es mantener la trazabilidad de donde estan las viandas cuando alguien se ofrece a distribuirlas
+        */
+        int viandasQueNoEntraron = 0;
+        for (Vianda vianda : viandas) {
+            if (vianda.getEstado() == EstadoVianda.EN_TRASLADO) {
+                viandasQueNoEntraron++;
+            }
+        }
+        colaborador.notificar(CreadorDeMensajes.sugerirHeladeras(heladeraDestino,viandasQueNoEntraron));
     }
 
     @Override

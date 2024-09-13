@@ -35,6 +35,7 @@ public class Vianda {
 
     public void trasladar(Heladera heladeraNueva) {
         heladera = heladeraNueva;
+        this.estado = EstadoVianda.EN_TRASLADO;
     }
 
     public EstadoVianda getEstado() {
