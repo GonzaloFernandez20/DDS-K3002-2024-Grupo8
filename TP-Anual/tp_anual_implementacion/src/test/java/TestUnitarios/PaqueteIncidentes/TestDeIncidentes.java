@@ -1,27 +1,51 @@
 package TestUnitarios.PaqueteIncidentes;
 
+import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.*;
+import Modelo.Dominio.localizacion.Direccion;
+import Modelo.Dominio.localizacion.Ubicacion;
+import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Dominio.tecnico.Tecnico;
+import Repositorios.RepositorioIncidentes;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 
-import static Modelo.Dominio.incidentes.EstadoDelIncidente.PENDIENTE;
-import static Modelo.Dominio.incidentes.EstadoDelIncidente.SOLUCIONADO;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.stream.Stream;
+
+import static Modelo.Dominio.incidentes.EstadoDelIncidente.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Pruebas relacionadas con los incidentes:")
 public class TestDeIncidentes {
-    static FallaTecnica fallaTecnica;
-    static Alerta alerta;
-    private VisitaTecnica visitaTecnica;
 
-    // Aca seteo lo necesario para los tests
-    @BeforeAll
-    public static void instanciasDeIncidentes(){
-         fallaTecnica = new FallaTecnica(null, "Falla en la visagra", null, null);
-         alerta = new Alerta(TipoAlerta.TEMPERATURA, null);
+    FallaTecnica fallaTecnica;
+    Alerta alerta;
+    Heladera heladera;
+    Tecnico tecnico;
+
+    // <---------------------- Configuraciones ----------------------> //
+
+    @BeforeEach
+    public void configuracionInicial(){
+        inicializarHeladera();
+        fallaTecnica = new FallaTecnica(null, "Falla en la visagra", heladera, null);
+        alerta = new Alerta(TipoAlerta.TEMPERATURA, heladera);
     }
+
+     void inicializarHeladera(){
+        heladera = new Heladera(null,
+                new Ubicacion( new Direccion("Medrano", "981",null),"CABA", "Heladera Medrano UTN"),
+                5,
+                null,
+                null);
+        NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
+        heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);
+    }
+
+    // <---------------------- Testeos ----------------------> //
 
     @Nested
     @DisplayName("Ocurre un incidente en una heladera")
@@ -34,7 +58,6 @@ public class TestDeIncidentes {
             String infoEsperadaDeLaFalla = "una Falla Tecnica: \n" + "Descripcion: " + "Falla en la visagra" + "\n" + "Link Foto: " + null;
             assertEquals(infoDeLaFalla, infoEsperadaDeLaFalla, "Se obtuvo info de la falla");
         }
-
         @Test
         @DisplayName("La informacion obtenida acerca de una Alerta es correcta")
         public void testDeInformacionDeAlerta() {
@@ -45,77 +68,67 @@ public class TestDeIncidentes {
         @Test
         @DisplayName("Al reportarse un incidente, su estado es \"PENDIENTE\" hasta que acuda un tecnico")
         public void testDeCreacionDeIncidentes(){
-
-            GestorDeIncidentes.reportar(fallaTecnica);
-            GestorDeIncidentes.reportar(alerta);
             assertAll(
                     () -> assertEquals(PENDIENTE, fallaTecnica.getEstado()),
                     () -> assertEquals(PENDIENTE, alerta.getEstado()) );
         }
     }
-
+    // <--------------------------------------------------------------> //
     @Nested
     @DisplayName("Un Tecnico acude a una heladera ante una Falla Tecnica o Alerta: ")
-    class TestSobreVisitaTecnica{
+    class TestSobreVisitaTecnica {
+        // -------- Entorno necesario
+        @BeforeEach
+        public void instanciarTecnico() {
+            tecnico = new Tecnico(null, null, null, null);
+        }
+        // --------
 
         @Test
-        @DisplayName("El tecnico pudo solucionar el incidente, quedo en estado: \"SOLUCIONADO\"")
-        public void testDeEstadoLuegoDeVisitaTecnicaExitosa(){
-            // Testeo del estado luego de que un tecnico acuda a la heladera
-            assertAll("Verificacion de estado de los incidentes",
-                    () ->assertEquals(SOLUCIONADO, fallaTecnica.getEstado()),
-                    () ->assertEquals(SOLUCIONADO, alerta.getEstado()) );
+        @DisplayName("El estado del incidente coincide con el estado indicado por el tecnico en la visita")
+        public void testDeEstadoLuegoDeVisitaTecnicaExitosa() {
 
+            // ----- El tecnico acude a la heladera
+            VisitaTecnica visitaDeFallaTecnica = new VisitaTecnica(NO_SOLUCIONADO, "Comprar una nueva visagra", tecnico, null, fallaTecnica);
+            VisitaTecnica visitaDeAlerta = new VisitaTecnica(SOLUCIONADO, "La heladera quedo abierta", tecnico, null, alerta);
+            // -----
+            fallaTecnica.registrarVisita(visitaDeFallaTecnica);
+            alerta.registrarVisita(visitaDeAlerta);
+
+            assertAll("Verificacion de estado de los incidentes luego de una visita",
+                    () -> assertEquals(NO_SOLUCIONADO, fallaTecnica.getEstado()),
+                    () -> assertEquals(SOLUCIONADO, alerta.getEstado()) );
+
+            assertAll("La visita quedo en el registro del incidente",
+                    () -> assertTrue(fallaTecnica.getVisitas().contains(visitaDeFallaTecnica)),
+                    () -> assertTrue(alerta.getVisitas().contains(visitaDeAlerta)));
         }
 
-        @Test
-        @DisplayName("El tecnico no pudo solucionar el incidente, quedo en estado: \"NO_SOLUCIONADO\"")
-        public void testDeEstadoLuegoDeVisitaTecnicaFallida(){
-            // Testeo del estado luego de que un tecnico acuda a la heladera
-        }
+        @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+        @Nested
+        @DisplayName("El técnico puede hacer varias visitas hasta solucionar el incidente y verificar visitas")
+        class TestDeIteracionDeVisitas{
+            @Test
+            @DisplayName("Todas las visitas fueron registradas")
+            public void testDeIteracionDeVisitasYChequeo() {
+                visitasTecnicas().forEach(arguments -> {
+                    VisitaTecnica visitaTecnica = (VisitaTecnica) arguments.get()[0];
+                    EstadoDelIncidente estadoEsperado = (EstadoDelIncidente) arguments.get()[1];
+                    fallaTecnica.registrarVisita(visitaTecnica);
 
-        @Test
-        @DisplayName("El tecnico pudo solucionar el incidente luego de 3 visitas a la heladera")
-        public void testDeIteracionDeVisitas(){
-            // Testeo del estado luego de que un tecnico acuda a la heladera
-        }
-    }
+                    assertEquals(estadoEsperado, fallaTecnica.getEstado(),
+                            "El estado de la falla técnica debería ser " + estadoEsperado); });
 
-    @Nested
-    @DisplayName("Testeos sobre funcionalidad de alertas")
-    class TestSobreAlerta{
+                assertEquals(3, fallaTecnica.getVisitas().size(), "Se deben registrar 3 visitas");
+            }
 
-    }
-}
-/*
-@DisplayName("Clase de Pruebas para la Calculadora")
-class CalculadoraTest {
-
-    Calculadora calculadora = new Calculadora();
-
-    @Test
-    @DisplayName("Prueba de suma: 2 + 3 debe dar 5")
-    void sumar_debeRetornarElResultadoCorrecto() {
-        assertEquals(5, calculadora.sumar(2, 3));
-    }
-
-    @Nested
-    @DisplayName("Pruebas para la funcionalidad de división")
-    class PruebasDeDivision {
-
-        @Test
-        @DisplayName("División: 6 / 3 debe dar 2")
-        void dividir_debeRetornarElResultadoCorrecto() {
-            assertEquals(2, calculadora.dividir(6, 3));
-        }
-
-        @Test
-        @DisplayName("División por cero debe lanzar una ArithmeticException")
-        void dividir_debeLanzarExceptionCuandoSeDividePorCero() {
-            assertThrows(ArithmeticException.class, () -> calculadora.dividir(6, 0));
+            private Stream<Arguments> visitasTecnicas() {
+                return Stream.of(
+                        Arguments.of(new VisitaTecnica(NO_SOLUCIONADO, "Comprar una nueva visagra", tecnico, null, fallaTecnica), NO_SOLUCIONADO),
+                        Arguments.of(new VisitaTecnica(NO_SOLUCIONADO, "La visagra era incorrecta", tecnico, null, fallaTecnica), NO_SOLUCIONADO),
+                        Arguments.of(new VisitaTecnica(SOLUCIONADO, "Trabajo terminado", tecnico, null, fallaTecnica), SOLUCIONADO)
+                );
+            }
         }
     }
 }
-*
-*
-* */

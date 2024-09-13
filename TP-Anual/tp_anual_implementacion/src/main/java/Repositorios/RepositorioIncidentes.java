@@ -3,12 +3,12 @@ package Repositorios;
 import Modelo.Dominio.incidentes.FallaTecnica;
 import Modelo.Dominio.incidentes.Incidente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioIncidentes {
     private static RepositorioIncidentes instancia;
-    private List<Incidente> incidentes = null;
-
+    private final List<Incidente> incidentes = new ArrayList<>();
 
     public static RepositorioIncidentes getInstancia(){
         if(instancia == null){

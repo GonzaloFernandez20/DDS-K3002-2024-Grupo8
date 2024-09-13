@@ -19,5 +19,5 @@ public abstract class Incidente {
 
     public Heladera getHeladeraDondeOcurrio() { return heladeraDondeOcurrio; }
     public EstadoDelIncidente getEstado() { return estado; }
-
+    public List<VisitaTecnica> getVisitas() { return visitas; }
 }
