@@ -1,7 +1,5 @@
 package TestUnitarios.PaqueteBrokers;
 
-package TestUnitarios.PaqueteBrokers;
-
 import Modelo.Brokers.BrokerMovimiento;
 import Modelo.Brokers.BrokerTemperatura;
 import Modelo.Dominio.colaborador.Colaborador;

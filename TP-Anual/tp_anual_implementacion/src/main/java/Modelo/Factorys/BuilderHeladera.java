@@ -35,12 +35,12 @@ public class BuilderHeladera {
         nuevaHeladera.setNotificadorDeSuscriptos(notificador);
     }
 
-    private static SensoreoDeMovimiento crearSensoreoDeMovimiento(Heladera nuevaHeladera) {
+/*    private static SensoreoDeMovimiento crearSensoreoDeMovimiento(Heladera nuevaHeladera) {
         return new SensoreoDeMovimiento(nuevaHeladera);
     }
 
     private static SensoreoDeTemperatura crearSensoreoDeTemperatura(Heladera nuevaHeladera) {
         return new SensoreoDeTemperatura(nuevaHeladera);
-    }
+    }*/
 
 }
