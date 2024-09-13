@@ -4,17 +4,13 @@ import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
 import Modelo.Dominio.sistema.RegistroDeRecaudacion;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 
 import static Modelo.Dominio.contribucion.Frecuencia.MENSUALMENTE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @DisplayName("Prueba integral: Donacion de Dinero")
 public class TestDonacionDeDinero {
     Colaborador colaborador;
@@ -26,29 +22,29 @@ public class TestDonacionDeDinero {
     public void configuracionInicial(){
         colaborador = FactoryInstanciasParaTests.instanciarColaboradorHumano();
         donacionDeDinero = new DonacionDeDinero(colaborador, 45068, MENSUALMENTE, LocalDate.now());
+        RegistroDeRecaudacion.getInstancia().setFondoRecaudado(0);
         donacionDeDinero.procesarLaContribucion();
-
     }
 
     // <---------------------- Testeos ----------------------> //
     @Nested
     @DisplayName("Se produce una Donacion de Dinero, el impacto se ve reflejado en el sistema")
-    class TestDeChequeoDeLaDonacion{
+    class TestDeChequeoDeTestLaDonacion{
         @Test
         @DisplayName("El monto se ve impactado en la recaudacion del sistema")
-        public void testChequeoDeFondoDeRecaudacion(){
+        public void atestChequeoDeFondoDeRecaudacion(){
             assertEquals(45068, RegistroDeRecaudacion.getInstancia().getFondoRecaudado());
         }
 
         @Test
         @DisplayName("La donacion queda registrada en el historial del colaborador")
-        public void testChequeoDeContribucionesDelColab(){
+        public void btestChequeoDeContribucionesDelColab(){
             assertTrue(colaborador.getHistorialDeContribuciones().contains(donacionDeDinero));
         }
 
         @Test
         @DisplayName("El colaborador obtiene puntos por su colaboracion")
-        public void testColaboradorSumaLosPuntos(){
+        public void ctestColaboradorSumaLosPuntos(){
             assertEquals(45068 * 0.5, colaborador.getPuntosAcumulados());
         }
     }
@@ -59,7 +55,7 @@ public class TestDonacionDeDinero {
         float fondoAcumulado = 45068;
         @Test
         @DisplayName("Al producirse varias donaciones, todas quedas acumuladas")
-        public void testVariasDonacionesImpactando(){
+        public void dtestVariasDonacionesImpactando(){
             DonacionDeDinero donacionDeDinero2 = new DonacionDeDinero(colaborador, 12000, MENSUALMENTE, LocalDate.now());
             donacionDeDinero2.procesarLaContribucion();
             fondoAcumulado += 12000;
