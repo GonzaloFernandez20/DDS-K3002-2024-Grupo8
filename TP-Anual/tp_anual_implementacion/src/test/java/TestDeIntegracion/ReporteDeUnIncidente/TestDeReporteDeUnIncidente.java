@@ -5,19 +5,9 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.FallaTecnica;
 import Modelo.Dominio.incidentes.GestorDeIncidentes;
-import Modelo.Dominio.incidentes.Incidente;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.localizacion.PuntoEnElMapa;
-import Modelo.Dominio.localizacion.Ubicacion;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.medios_de_contacto.Telegram;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Dominio.tecnico.LocalizadorDeTecnicos;
 import Modelo.Dominio.tecnico.Tecnico;
 import Repositorios.RepositorioIncidentes;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -41,9 +31,7 @@ import static org.mockito.Mockito.*;
 public class TestDeReporteDeUnIncidente {
     FallaTecnica fallaTecnica;
     Heladera heladera;
-    Colaborador colaboradorSuscriptor;
     List <Colaborador> colaboradoresSuscriptores;
-    NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     // <---------------------- Configuraciones ----------------------> //
 
@@ -55,44 +43,25 @@ public class TestDeReporteDeUnIncidente {
     }
 
     private void inicializarHeladera(){
-/*        heladera = new Heladera(null,
-                new Ubicacion( new Direccion("Medrano", "981",null),"CABA", "Heladera Medrano UTN"),
-                5,
-                null,
-                null);
-        notificadorDeSuscriptos = new NotificadorDeSuscriptos(heladera);
-        heladera.setNotificadorDeSuscriptos(notificadorDeSuscriptos);*/
         heladera = FactoryInstanciasParaTests.instanciarOtraHeladera();
-    }
-
-    private void inicializarColaborador(){
-/*        PersonaHumana persona = new PersonaHumana("Juan", "Pérez",null , null, null);
-        List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-        mediosDeContacto.add(new Mail("juan.perez@gmail.com"));
-        mediosDeContacto.add(new Telegram( "1132283796"));
-
-        colaboradorSuscriptor = new Colaborador(persona, mediosDeContacto);*/
-        colaboradorSuscriptor = FactoryInstanciasParaTests.instanciarColaboradorHumano();
-    }
-
-    private void reportarUnIncidente(){
-        GestorDeIncidentes.reportar(fallaTecnica);
     }
 
     private void suscribirColaboradores(String evento){
         colaboradoresSuscriptores = new ArrayList<>();
 
-        inicializarColaborador();
-
-        colaboradoresSuscriptores.add(colaboradorSuscriptor);
-        colaboradoresSuscriptores.add(colaboradorSuscriptor);
-        colaboradoresSuscriptores.add(colaboradorSuscriptor);
-        colaboradoresSuscriptores.add(colaboradorSuscriptor);
-        colaboradoresSuscriptores.add(colaboradorSuscriptor);
+        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
+        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
+        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
+        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
+        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
 
         for (Colaborador colaborador : colaboradoresSuscriptores){
             heladera.getNotificadorDeSuscriptos().suscribir(evento, colaborador);
         }
+    }
+
+    private void reportarUnIncidente(){
+        GestorDeIncidentes.reportar(fallaTecnica);
     }
     // -> El incidente fue reportado, toca testear todo lo que pasa despues
 
@@ -112,9 +81,10 @@ public class TestDeReporteDeUnIncidente {
         @Test
         @DisplayName("Todos los notificadores suscriptos a la heladera recibieron la notificacion sobre la falla")
         public void TestNotificadoresSuscriptos(){
+            String mensajeEsperado = "En la heladera: Heladera Medrano UTN (Medrano 981) " + "se produjo una falla";
             configuracionInicial();
             for (Colaborador colaborador : colaboradoresSuscriptores){
-                assertTrue(colaborador.getMensajesRecibidos().contains("se produjo una falla"));
+                assertTrue(colaborador.getMensajesRecibidos().contains(mensajeEsperado));
             }
         }
     }
@@ -140,9 +110,8 @@ public class TestDeReporteDeUnIncidente {
             suscribirColaboradores("se produjo una falla");
             reportarUnIncidente();
             // ------------ Verificacion del mensaje
-            String expectedMessage = "En la heladera: Heladera Medrano UTN (Medrano 981) " + "se produjo una Falla Tecnica: \n" + "Descripcion: " + "Vidrio Roto" + "\n" + "Link Foto: " + "foto.png";
-            verify(tecnicoMock).notificar(expectedMessage);
-
+            String mensajeEsperado = "En la heladera: Heladera Medrano UTN (Medrano 981) " + "se produjo una Falla Tecnica: \n" + "Descripcion: " + "Vidrio Roto" + "\n" + "Link Foto: " + "foto.png";
+            verify(tecnicoMock).notificar(mensajeEsperado);
         }
     }
 

@@ -80,5 +80,5 @@ public class Colaborador {
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
-
+    public List<Contribucion> getHistorialDeContribuciones() { return historialDeContribuciones; }
 }
