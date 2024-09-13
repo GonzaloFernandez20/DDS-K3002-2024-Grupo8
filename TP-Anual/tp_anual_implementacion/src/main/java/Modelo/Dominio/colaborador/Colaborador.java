@@ -75,6 +75,7 @@ public class Colaborador {
     // ---- Getters y Setters
     public Direccion getDireccion() { return persona.getDireccion(); }
     public double getPuntosAcumulados() { return puntosAcumulados; }
+    public List<Contribucion> getHistorialDeContribuciones() { return historialDeContribuciones; }
     public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }

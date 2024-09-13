@@ -1,4 +1,4 @@
-package TestDeIntegracion.ReporteDeUnIncidente;
+package TestDeIntegracion;
 
 import org.junit.jupiter.api.DisplayName;
 

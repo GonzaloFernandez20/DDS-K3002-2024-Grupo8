@@ -24,7 +24,7 @@ public class TestHeladera {
     Vianda viandaEnsalada = FactoryInstanciasParaTests.instanciarVianda("Ensalada", LocalDate.of(2025,12,2));
     List<Vianda> ingresoDeViandas = Arrays.asList(viandaPollo, viandaArroz, viandaMilanesa);
 
-
+    // <---------------------- Configuraciones ----------------------> //
     void setUpHeladeraVacia() {
         heladera = FactoryInstanciasParaTests.instanciarUnaHeladera();
         NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
@@ -41,6 +41,7 @@ public class TestHeladera {
         heladera.getViandasEnStock().add(viandaArroz);
     }
 
+    // <---------------------- Testeos ----------------------> //
     @Nested
     class PruebasEstadoDeLaHeladera {
         @Test
@@ -74,9 +75,8 @@ public class TestHeladera {
         void laHeladeraEstaLlena() {
             setUpHeladeraLlena();
             ExcepcionHeladeraLlena exception = assertThrows(ExcepcionHeladeraLlena.class,
-                    () -> {
-                        heladera.recibirVianda(viandaEnsalada);
-                    });
+                    () -> heladera.recibirVianda(viandaEnsalada));
+            assertEquals("La heladera esta llena, no entran más viandas",exception.getMessage());
             assertFalse(heladera.getViandasEnStock().contains(viandaEnsalada));
         }
     }
@@ -118,7 +118,7 @@ public class TestHeladera {
             void stockQuedaVacio() {
                 setUpHeladeraLlena();
                 heladera.retirarViandas(heladera.getViandasEnStock().size());
-                assertTrue(heladera.cantViandasEnStock() == 0);
+                assertEquals(0, heladera.cantViandasEnStock());
             }
 
             @Test
@@ -153,7 +153,7 @@ public class TestHeladera {
             void stockQuedaVacio() {
                 setUpHeladeraConVianda();
                 heladera.retirarViandas(5);
-                assertTrue(heladera.cantViandasEnStock() == 0);
+                assertEquals(0, heladera.cantViandasEnStock());
             }
         }
 
@@ -171,7 +171,7 @@ public class TestHeladera {
         @DisplayName("La cantidad de viandas en la heladera es 0 cuando esta vacia")
         void heladeraVacia() {
             setUpHeladeraVacia();
-            assertTrue(heladera.cantViandasEnStock() == 0);
+            assertEquals(0, heladera.cantViandasEnStock());
         }
 
         @Test
