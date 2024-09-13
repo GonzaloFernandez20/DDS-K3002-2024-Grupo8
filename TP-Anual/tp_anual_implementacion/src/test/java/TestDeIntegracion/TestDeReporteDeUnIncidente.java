@@ -1,4 +1,4 @@
-package TestDeIntegracion.ReporteDeUnIncidente;
+package TestDeIntegracion;
 
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;

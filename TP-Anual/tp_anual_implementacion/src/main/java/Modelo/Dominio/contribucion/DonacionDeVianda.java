@@ -14,9 +14,6 @@ public class DonacionDeVianda extends ContribucionConApertura {
         this.heladeraDestino = heladera;
         this.viandas = viandas;
     }
-    public void agregarViandaADonacion(Vianda vianda) {
-        viandas.add(vianda);
-    }
 
     @Override
     public double puntosQueSumaColaborador() {
@@ -33,9 +30,9 @@ public class DonacionDeVianda extends ContribucionConApertura {
         y por eso la distribucion mantiene las viandas que no entraron, en cambio, cuando él las dona, elegir cuantas donar y que hacer si al final no entran no
         recae en un problema de responsabilidad y no es necesario llevar la trazabailidad de viandas que "fueron prometidas".
         */
-        for (Vianda vianda : viandas) {
-            if (vianda.getEstado() == EstadoVianda.NO_ENTREGADA) {
-                viandas.remove(vianda);
+        for(int i=0; i <viandas.size(); i++){
+            if(viandas.get(i).getEstado().equals(EstadoVianda.NO_ENTREGADA)){
+                viandas.remove(i);
             }
         }
     }

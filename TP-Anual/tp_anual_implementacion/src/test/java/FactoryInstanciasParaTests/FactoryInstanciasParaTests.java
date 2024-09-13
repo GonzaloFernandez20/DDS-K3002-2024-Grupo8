@@ -16,7 +16,6 @@ import Modelo.Dominio.persona.TipoOrganizacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -44,34 +43,30 @@ public class FactoryInstanciasParaTests {
         return heladera;
     }
     public static Colaborador instanciarColaboradorJuridico(){
-        List<MedioDeContacto> medios = Arrays.asList(new Mail("textilesecologicos@gmail.com"));
-        Colaborador colaborador = new Colaborador(new PersonaJuridica(
-                                                                     "Textiles ecológicos S.A.",
-                                                                     TipoOrganizacion.EMPRESA,
-                                                                     "Textil",
-                                                                     null), medios);
-        return colaborador;
+        List<MedioDeContacto> medios = List.of(new Mail("textilesecologicos@gmail.com"));
+        return new Colaborador(new PersonaJuridica("Textiles ecológicos S.A.",
+                                                   TipoOrganizacion.EMPRESA,
+                                                   "Textil",
+                                                   null), medios);
     }
 
     public static Colaborador instanciarColaboradorHumano(){
-        List<MedioDeContacto> medios = Arrays.asList(new Mail("juanCarlos@gmail.com"));
-        Colaborador colaborador = new Colaborador(new PersonaHumana(
-                                                                "Juan",
-                                                                "Carlos",
-                                                                null,
-                                                                new Documento(TipoDeDocumento.DNI, "12345678", null),
-                                                                null), medios);
-        return colaborador;
+        List<MedioDeContacto> medios = List.of(new Mail("juanCarlos@gmail.com"));
+        return new Colaborador(new PersonaHumana(
+                                "Juan",
+                                "Carlos",
+                                null,
+                                new Documento(TipoDeDocumento.DNI, "12345678", null),
+                                null), medios);
     }
 
     public static Vianda instanciarVianda(String tipo, LocalDate fechaCaducidad){
-        Vianda vianda = new Vianda(tipo,
-                                    fechaCaducidad,
-                                    instanciarColaboradorHumano(),
-                                    instanciarUnaHeladera(),
-                                    null,
-                                    null);
-        return vianda;
+        return new Vianda(tipo,
+                            fechaCaducidad,
+                            instanciarColaboradorHumano(),
+                            instanciarUnaHeladera(),
+                            null,
+                            null);
     }
 }
 
