@@ -15,8 +15,8 @@ public class Modelo {
         this.temperaturaMinima = temperaturaMinima;
     }
 
-    public boolean controlarTemperatura(float temperatura){
-        return temperatura >= temperaturaMinima && temperatura <= temperaturaMinima;
+    public boolean controlarTemperatura(double temperatura){
+        return temperatura >= temperaturaMinima && temperatura <= temperaturaMaxima;
     }
 
     // ---- Getters y Setters

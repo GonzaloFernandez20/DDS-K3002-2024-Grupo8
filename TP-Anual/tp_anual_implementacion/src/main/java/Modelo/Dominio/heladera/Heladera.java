@@ -2,6 +2,8 @@ package Modelo.Dominio.heladera;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.Vianda;
+import Modelo.Dominio.incidentes.GestorDeIncidentes;
+import Modelo.Dominio.incidentes.TipoAlerta;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Excepciones.ExcepecionViandasRechazadas;
@@ -61,6 +63,18 @@ public class Heladera {
         }
         huboCambioDeStock();
         return viandasARetirar;
+    }
+
+    public void actualizar(double temperatura){
+        if(! modelo.controlarTemperatura(temperatura)) {
+            GestorDeIncidentes.getInstancia().reportarAlerta(this, TipoAlerta.TEMPERATURA);
+            setEstado(EstadoHeladera.INACTIVA);
+        }
+    }
+
+    public void notificarColaborador(){
+        GestorDeIncidentes.getInstancia().reportarAlerta(this, TipoAlerta.FRAUDE);
+        setEstado(EstadoHeladera.INACTIVA); // la inactiva?
     }
 
     public int cantViandasEnStock(){ return viandasEnStock.size(); }
