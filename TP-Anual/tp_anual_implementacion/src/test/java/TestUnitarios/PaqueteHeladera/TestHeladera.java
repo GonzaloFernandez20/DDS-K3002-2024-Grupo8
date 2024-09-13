@@ -1,141 +1,189 @@
 package TestUnitarios.PaqueteHeladera;
 
 import Modelo.Dominio.contribucion.Vianda;
-import Modelo.Dominio.heladera.EstadoHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
-import Modelo.Excepciones.ExcepecionViandasRechazadas;
-import org.junit.jupiter.api.BeforeEach;
+import Modelo.Excepciones.ExcepcionHeladeraLlena;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
+import static Modelo.Dominio.heladera.EstadoHeladera.ACTIVA;
+import static Modelo.Dominio.heladera.EstadoHeladera.INACTIVA;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestHeladera {
     Heladera heladera;
-    Vianda viandaArroz = new Vianda("Arroz", null,null,null,null,null);
-    Vianda viandaMilanesa = new Vianda("Milanesa", null,null,null,null,null);
-    Vianda viandaPollo = new Vianda("Pollo", null,null,null,null,null);
-    Vianda viandaEnsalada = new Vianda("Ensalada", null,null,null,null,null);
-    Vianda viandaTortilla = new Vianda("Tortilla", null,null,null,null,null);
-    List<Vianda> ingresoDeViandas1 = Arrays.asList(viandaEnsalada, viandaArroz, viandaMilanesa);
-    List<Vianda> ingresoDeViandas2 = Arrays.asList(viandaPollo, viandaTortilla);
-    List<Vianda> ingresoDeViandas3 = Arrays.asList(viandaEnsalada, viandaArroz, viandaMilanesa,viandaPollo, viandaTortilla,viandaEnsalada);
+    Vianda viandaArroz = new Vianda("Arroz", null, null, null, null, null);
+    Vianda viandaMilanesa = new Vianda("Milanesa", null, null, null, null, null);
+    Vianda viandaPollo = new Vianda("Pollo", null, null, null, null, null);
+    Vianda viandaEnsalada = new Vianda("Ensalada", null, null, null, null, null);
+    List<Vianda> ingresoDeViandas = Arrays.asList(viandaPollo, viandaArroz, viandaMilanesa);
 
-    @BeforeEach
-    void setUpHeladeraNueva(){
+
+    void setUpHeladeraVacia() {
         heladera = new Heladera(null,
-                                     new Ubicacion( new Direccion("Medrano", "981",null),"CABA", "Heladera Medrano UTN"),
-                                     5,
-                                     null,
-                                     null);
+                new Ubicacion(new Direccion("Medrano", "981", null), "CABA", "Heladera Medrano UTN"),
+                3,
+                null,
+                null);
         NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
         heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);
+    }
+
+    void setUpHeladeraLlena() {
+        setUpHeladeraVacia();
+        heladera.getViandasEnStock().addAll(ingresoDeViandas);
+    }
+
+    void setUpHeladeraConVianda() {
+        setUpHeladeraVacia();
+        heladera.getViandasEnStock().add(viandaArroz);
     }
 
     @Nested
     class PruebasEstadoDeLaHeladera {
         @Test
         @DisplayName("La heladera cuando se da de alta esta activa")
-        void heladeraActiva(){
-            assertEquals(EstadoHeladera.ACTIVA, heladera.getEstado());
+        void heladeraActiva() {
+            setUpHeladeraVacia();
+            assertEquals(ACTIVA, heladera.getEstado());
         }
+
         @Test
-        @DisplayName("Al ocurrile un incidente la heladera queda inactiva")
-        void heladeraInactiva(){
+        @DisplayName("Al ocurrirle un incidente la heladera queda inactiva")
+        void heladeraInactiva() {
+            setUpHeladeraVacia();
             heladera.huboIncidente();
-            assertEquals(EstadoHeladera.INACTIVA, heladera.getEstado());
+            assertEquals(INACTIVA, heladera.getEstado());
         }
     }
 
     @Nested
-    class PruebasDeIngresoDeViandas{
+    class PruebasDeIngresoDeVianda {
         @Test
-        @DisplayName("Todas las viandas del stock corresponden al ingreso efectuado")
-        void ingresarViandasEnHeladeraVacia(){
-            heladera.recibirViandas(ingresoDeViandas1);
-            assertAll(
-                    () -> assertEquals(ingresoDeViandas1, heladera.getViandasEnStock()),
-                    () -> assertTrue(ingresoDeViandas1.size() == heladera.getViandasEnStock().size())
-            );
+        @DisplayName("Se puede ingresar una vianda cuando queda espacio en la heladera")
+        void laHeladeraTieneEspacioDisponible() {
+            setUpHeladeraVacia();
+            heladera.recibirVianda(viandaMilanesa);
+            assertTrue(heladera.getViandasEnStock().contains(viandaMilanesa));
         }
+
         @Test
-        @DisplayName("Las viandas ingresadas se suman a las viandas actuales del stock")
-        void ingresarViandasEnHeladeraConViandas(){
-            heladera.recibirViandas(ingresoDeViandas1);
-            heladera.recibirViandas(ingresoDeViandas2);
-            assertAll(
-                    () -> assertNotEquals(ingresoDeViandas2, heladera.getViandasEnStock()),
-                    () -> assertTrue(heladera.getViandasEnStock().containsAll(ingresoDeViandas2)),
-                    () -> assertTrue(ingresoDeViandas1.size() < heladera.getViandasEnStock().size())
-            );
-        }
-        @Test
-        @DisplayName("La cantidad de viandas a ingresar supera el espacio disponible o la heladera esta llena")
-        void lasViandasAIngresarNoEntranEnLaHeladera(){
-            ExcepecionViandasRechazadas exception = assertThrows(ExcepecionViandasRechazadas.class,
-                    () -> {heladera.recibirViandas(ingresoDeViandas3);});
+        @DisplayName("No se puede ingresar una vianda cuando la heladera esta llena")
+        void laHeladeraEstaLlena() {
+            setUpHeladeraLlena();
+            ExcepcionHeladeraLlena exception = assertThrows(ExcepcionHeladeraLlena.class,
+                    () -> {
+                        heladera.recibirVianda(viandaEnsalada);
+                    });
+            assertFalse(heladera.getViandasEnStock().contains(viandaEnsalada));
         }
     }
 
     @Nested
     class PruebasDeRetiroDeViandas {
-        @Test
-        @DisplayName("La cantidad de viandas a retirar es menor a la cantidad de viandas en el stock")
-        void stockSuficiente(){
+
+        @Nested
+        @DisplayName("Caso de prueba: La cantidad de viandas a retirar es menor a la cantidad de viandas en el stock")
+        class stockSuficiente {
+            int cantidadARetirar = 2;
+            List<Vianda> viandasRetiradas;
+
+            void setUp() {
+                setUpHeladeraLlena();
+                viandasRetiradas = heladera.retirarViandas(cantidadARetirar);
+            }
+
+            @Test
+            @DisplayName("Las viandas retiradas ya no estan en el stock de la heladera")
+            void fueronRetiradas() {
+                setUp();
+                assertFalse(heladera.getViandasEnStock().containsAll(viandasRetiradas));
+            }
+
+            @Test
+            @DisplayName("Se retiro la cantidad de viandas solicitada")
+            void seRetiroLaCantidadDeseada() {
+                setUp();
+                assertEquals(cantidadARetirar, viandasRetiradas.size());
+            }
+        }
+
+        @Nested
+        @DisplayName("Caso de prueba: La cantidad de viandas a retirar es exáctamente la cantidad de viandas del stock")
+        class stockJusto {
+            @Test
+            @DisplayName("El stock queda vacio al retirar todas las viandas")
+            void stockQuedaVacio() {
+                setUpHeladeraLlena();
+                heladera.retirarViandas(heladera.getViandasEnStock().size());
+                assertTrue(heladera.cantViandasEnStock() == 0);
+            }
+
+            @Test
+            @DisplayName("Las viandas restiradas corresponden al stock completo de la heladera previo a vaciarla")
+            void elRetiroEsTodoElStock() {
+                setUpHeladeraLlena();
+                List<Vianda> stockPrevioARetirar = new ArrayList<>(heladera.getViandasEnStock());
+                List<Vianda> viandasretiradas = heladera.retirarViandas(stockPrevioARetirar.size());
+                assertEquals(stockPrevioARetirar, viandasretiradas);
+            }
 
         }
-        @Test
-        @DisplayName("La cantidad de viandas a retirar es exáctamente la cantidad de viandas del stock")
-        void stockQuedaVacio(){
 
+        @Nested
+        @DisplayName("Caso de prueba: La cantidad de viandas a retirar es mayor a la cantidad de viandas en el stock")
+        class stockInsuficiente {
+            @Test
+            @DisplayName("Solo se retiran las viandas que quedan en la heladera")
+            void seRetiraLoQueQueda(){
+                setUpHeladeraConVianda();
+                int cantidadARetirar = heladera.cantViandasEnStock()+2;
+                List<Vianda> viandasQueQuedan = new ArrayList<>(heladera.getViandasEnStock());
+                List<Vianda> viandasretiradas = heladera.retirarViandas(cantidadARetirar);
+                assertAll(
+                        ()->assertEquals(viandasQueQuedan, viandasretiradas),
+                        ()->assertTrue(cantidadARetirar > viandasretiradas.size())
+                );
+            }
+
+            @Test
+            @DisplayName("El stock queda vacio al retirar las viandas que quedan")
+            void stockQuedaVacio() {
+                setUpHeladeraConVianda();
+                heladera.retirarViandas(5);
+                assertTrue(heladera.cantViandasEnStock() == 0);
+            }
         }
+
         @Test
-        @DisplayName("La cantidad de viandas a retirar es mayor a la cantidad de viandas en el stock")
-        void stockInsuficiente(){
-
+        @DisplayName("Caso prueba: la heladera esta vacia por lo que no se retiran viandas")
+        void stockEstaVacio() {
+            setUpHeladeraVacia();
+            assertEquals(Collections.emptyList(), heladera.retirarViandas(3));
         }
-        @Test
-        @DisplayName("La heladera no tiene viandas a retirar")
-        void stockEstaVacio(){
-
-        }
-
     }
 
     @Nested
     class PruebasCantidadDeViandas {
         @Test
-        @DisplayName("No hay viandas en stock")
-        void heladeraVacia(){
-            assertTrue(heladera.getViandasEnStock().isEmpty());
+        @DisplayName("La cantidad de viandas en la heladera es 0 cuando esta vacia")
+        void heladeraVacia() {
+            setUpHeladeraVacia();
+            assertTrue(heladera.cantViandasEnStock() == 0);
         }
-        @Test
-        @DisplayName("HayViandasEnStock")
-        void heladeraTieneViandas(){
 
+        @Test
+        @DisplayName("La cantidad de viadas es mayor que cero cuando hay viandas en stock")
+        void heladeraTieneViandas() {
+            setUpHeladeraLlena();
+            assertTrue(heladera.cantViandasEnStock() > 0);
         }
     }
-
-    @Nested
-    class PruebasEspacioDisponible {
-        @Test
-        @DisplayName("La cantidad de viandas en stock corresponde a la capacidad máxima de la heladera")
-        void noHayEspacioDisponible(){
-
-        }
-        @Test
-        @DisplayName("El stock no ocupa la capacidad máxima de la heladera")
-        void quedaEspacioDisponible(){
-            assertTrue(heladera.espacioDisponible()>0);
-            //una heladaer con viandas
-        }
-    }
-
 }
+

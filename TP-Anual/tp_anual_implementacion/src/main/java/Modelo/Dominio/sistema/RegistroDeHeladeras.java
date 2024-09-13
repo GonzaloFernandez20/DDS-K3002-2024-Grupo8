@@ -27,9 +27,9 @@ public class RegistroDeHeladeras {
         return instancia;
     }
 
-    public List<Heladera> sugerirHeladerasDestino(Heladera heladera){
+    public List<Heladera> sugerirHeladerasDestino(Heladera heladera, int cantidadParaRedistribuir){
         List <Heladera> sugerencias = new ArrayList<>();
-        int cantidadDeViandasARedistribuir = heladera.cantViandasEnStock();
+        int cantidadDeViandasARedistribuir = cantidadParaRedistribuir;
         Heladera heladeraDeReferencia = heladera;
         List <Heladera> todasLasHeladeras = new ArrayList<>(heladeras);
 

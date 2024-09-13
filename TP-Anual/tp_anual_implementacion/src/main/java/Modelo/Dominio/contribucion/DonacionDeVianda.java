@@ -25,11 +25,19 @@ public class DonacionDeVianda extends ContribucionConApertura {
     }
 
     @Override
-    public void manejarRechazoViandas() {
-        int cantidadQueEntra = heladeraDestino.espacioDisponible();
-        viandas = viandas.subList(0, cantidadQueEntra);
-        heladeraDestino.recibirViandas(viandas);
-        for (Vianda vianda : viandas){vianda.setEstadoVianda(EstadoVianda.ENTREGADA);}
+    public void manejarViandasQueNoEntraron() {
+        /*En la donacion de viandas el listado de viandas donadas va a reflejar solo aquellas que explicitamente entraron en la
+        heladera es decir, aquellas que se donaron en esa heladera. Aunque el colaborador haya declarado que llevaba más, solo pudo ingresar cierta cantidad y esa es
+        la cantidad donada. Queda a criterio del colaborador generar otra donacion de viandas en otra heladera con aquellas que no pudo ingresar.
+        La diferencia con la distribucion, es que cuando el colaborador retira viandas es responsable de volver a colocarlas en otra heladera porque él no las donó
+        y por eso la distribucion mantiene las viandas que no entraron, en cambio, cuando él las dona, elegir cuantas donar y que hacer si al final no entran no
+        recae en un problema de responsabilidad y no es necesario llevar la trazabailidad de viandas que "fueron prometidas".
+        */
+        for (Vianda vianda : viandas) {
+            if (vianda.getEstado() == EstadoVianda.NO_ENTREGADA) {
+                viandas.remove(vianda);
+            }
+        }
     }
 
 

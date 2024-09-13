@@ -11,8 +11,8 @@ public class CreadorDeMensajes { // Como es una clase solo de comportamiento, no
         String mensaje = String.format("En la heladera: %s (%s)" + evento, heladera.getUbicacion().getNombreDelPunto(),
                                                                            heladera.getUbicacion().getDireccion() );
 
-        if (evento.equalsIgnoreCase("se produjo una falla")){
-            String heladerasSugeridas = sugerirHeladeras(heladera);
+        if (evento.equalsIgnoreCase("se produjo una falla.\n")){
+            String heladerasSugeridas = sugerirHeladeras(heladera,heladera.cantViandasEnStock());
             mensaje += heladerasSugeridas;
         }
         return mensaje;
@@ -20,10 +20,10 @@ public class CreadorDeMensajes { // Como es una clase solo de comportamiento, no
     // Ejemplo: "En la heladera Medrano (Medrano 981) hubo falla" // -> "se produjo una falla" es el evento.
     // Ejemplo: "En la heladera Medrano (Medrano 981) quedan 5 viandas" // -> "quedan 5 viandas" es el evento.
 
-    private static String sugerirHeladeras(Heladera heladera){
-        List <Heladera> heladeras = RegistroDeHeladeras.getInstancia().sugerirHeladerasDestino(heladera);
+    public static String sugerirHeladeras(Heladera heladera,int cantidadParaRedistribuir ){
+        List <Heladera> heladeras = RegistroDeHeladeras.getInstancia().sugerirHeladerasDestino(heladera,cantidadParaRedistribuir);
         if(!heladeras.isEmpty()){
-        StringBuilder heladerasSugeridas = new StringBuilder(", heladeras sugeridas para redistribuir las viandas: \n");
+        StringBuilder heladerasSugeridas = new StringBuilder("Heladeras sugeridas para redistribuir las viandas: \n");
             for (Heladera sugerencia : heladeras){
                 heladerasSugeridas.append(String.format("\tHeladera: %s (%s)\n", sugerencia.getUbicacion().getNombreDelPunto(),
                         sugerencia.getUbicacion().getDireccion()));

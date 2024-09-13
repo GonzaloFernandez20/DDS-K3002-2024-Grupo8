@@ -1,7 +1,7 @@
 package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Excepciones.ExcepecionViandasRechazadas;
+import Modelo.Excepciones.ExcepcionHeladeraLlena;
 
 import java.util.List;
 
@@ -12,16 +12,21 @@ public abstract class ContribucionConApertura extends Contribucion{
     @Override
     public void procesarLaContribucion() {
         try{
-            heladeraDestino.recibirViandas(viandas);
-            for (Vianda vianda : viandas){vianda.setEstadoVianda(EstadoVianda.ENTREGADA);}
+            for (Vianda vianda : viandas){
+                heladeraDestino.recibirVianda(vianda);
+                vianda.setEstadoVianda(EstadoVianda.ENTREGADA);
+            }
         }
-        catch (ExcepecionViandasRechazadas e){manejarRechazoViandas();}
+        catch (ExcepcionHeladeraLlena e){
+            manejarViandasQueNoEntraron();
+        }
         finally {
+            heladeraDestino.movimientoDeViandasFinalizado();
             colaborador.registrarContribucion(this);
         }
     }
 
-    public abstract void manejarRechazoViandas();
+    public abstract void manejarViandasQueNoEntraron();
 
     // ---- Getters y Setters
     public List<Vianda> getViandas() { return viandas; }
