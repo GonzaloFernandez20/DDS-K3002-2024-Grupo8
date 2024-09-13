@@ -1,6 +1,8 @@
 package Modelo.Dominio.sensoreos;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.security.SecureRandom;
@@ -23,8 +25,8 @@ public class LectorDeTarjeta {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
-                    // Genera una temperatura aleatoria para enviar a la heladera
-                    String codigo = generarCodigo();
+                    // Genera el codigo permitido. luego probar con el denegado
+                    String codigo = generarCodigoPermitido();
                     String mensaje = idHeladera + "," + codigo;
                     out.println(mensaje);
                     System.out.println("Datos enviados: Sensor ID = "+idHeladera +", Codigo = "+codigo);
@@ -37,14 +39,11 @@ public class LectorDeTarjeta {
         }
     }
 
-    private String generarCodigo() {
-        // Crear una instancia de SecureRandom para generar números aleatorios
-        SecureRandom random = new SecureRandom();
+    private String generarCodigoPermitido() {
+        return "12345678";
+    }
 
-        // Generar un número aleatorio de 8 dígitos
-        int numeroAleatorio = 10000000 + random.nextInt(90000000);
-
-        // Convertir el número aleatorio a una cadena de 8 dígitos
-        return String.format("%08d", numeroAleatorio);
+    private String generarCodigoDenegado() {
+        return "87654321";
     }
 }

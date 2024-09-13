@@ -10,7 +10,7 @@ import java.util.Optional;
 public class GestorDeAccesosAHeladeras {
     private static GestorDeAccesosAHeladeras instancia;
     private final List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
-    private final List<AccesoAHeladeras> tarjetasRegistradas;
+    public final List<AccesoAHeladeras> tarjetasRegistradas;
 
     // ------------------------------------------------
     private GestorDeAccesosAHeladeras() {

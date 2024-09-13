@@ -14,8 +14,9 @@ import java.util.HashMap;
 
 public class BrokerAccesoHeladeras {
     private int puerto;
-    private HashMap<Integer, Heladera> diccionarioHeladeras;
+    public HashMap<Integer, Heladera> diccionarioHeladeras;
     Socket clienteSocket = null;
+    public String respuesta = "Acceso denegado";
 
     public BrokerAccesoHeladeras(int puerto) {
         this.puerto = puerto;
@@ -29,6 +30,7 @@ public class BrokerAccesoHeladeras {
         diccionarioHeladeras.remove(idHeladera);
     }
 
+    public String getRespuesta() {return respuesta;}
 
     public void iniciarServidor() {
         try (ServerSocket serverSocket = new ServerSocket(puerto)) {
@@ -72,12 +74,14 @@ public class BrokerAccesoHeladeras {
             if(GestorDeAccesosAHeladeras.getInstancia().autorizarApertura(codigoTarjeta, heladera)) {
                 // Enviar el mensaje "Acceso permitido" al cliente
                 PrintWriter salida = new PrintWriter(clienteSocket.getOutputStream(), true);
-                salida.println("Acceso permitido");
+                respuesta = "Acceso permitido";
             } else {
                 // Enviar el mensaje "Acceso denegado" al cliente
                 PrintWriter salida = new PrintWriter(clienteSocket.getOutputStream(), true);
-                salida.println("Acceso denegado");
+                respuesta = "Acceso denegado";
             }
         }
     }
+
+
 }

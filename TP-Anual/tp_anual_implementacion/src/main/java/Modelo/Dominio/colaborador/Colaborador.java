@@ -2,12 +2,11 @@ package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.contribucion.Contribucion;
-import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import org.jetbrains.annotations.NotNull;
 import Modelo.Dominio.persona.Persona;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

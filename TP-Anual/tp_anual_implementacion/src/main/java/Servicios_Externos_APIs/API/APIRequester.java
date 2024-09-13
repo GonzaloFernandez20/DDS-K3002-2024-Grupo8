@@ -2,13 +2,6 @@ package Servicios_Externos_APIs.API;
 
 import java.io.IOException;
 
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-
 public class APIRequester {
     private static APIRequester instancia = null;
     private static final String URL = "https://9dc74674-32b4-4a0c-9a42-b49f62b65aef.mock.pstmn.io/";

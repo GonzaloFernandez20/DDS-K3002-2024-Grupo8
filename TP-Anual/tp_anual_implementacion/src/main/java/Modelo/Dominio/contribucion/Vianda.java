@@ -2,7 +2,6 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
 
@@ -20,8 +19,8 @@ public class Vianda {
                   LocalDate fechaDeCaducidad,
                   Colaborador colaborador,
                   Heladera heladera,
-                  @Nullable String calorias,
-                  @Nullable String peso) {
+                  String calorias,
+                  String peso) {
 
         this.tipoDeComida = tipoDeComida;
         this.fechaDeCaducidad = fechaDeCaducidad;
