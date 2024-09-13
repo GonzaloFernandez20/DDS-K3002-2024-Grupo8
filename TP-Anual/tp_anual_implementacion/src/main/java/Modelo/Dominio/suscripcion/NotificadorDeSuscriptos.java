@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class NotificadorDeSuscriptos {
-    private Map<String, List<Colaborador>> suscriptos;
+    private final Map<String, List<Colaborador>> suscriptos;
     private final Heladera heladera;
 
     public NotificadorDeSuscriptos(Heladera heladera) {
@@ -24,6 +24,7 @@ public class NotificadorDeSuscriptos {
 
     public void desuscribir(String evento, Colaborador colaborador){
         suscriptos.get(evento).remove(colaborador);
+        if (suscriptos.get(evento).isEmpty()) suscriptos.remove(evento);
     }
 
     public void notificar(String evento){ // A cada colaborador suscripto a ese evento, se le envia un mensaje
@@ -34,4 +35,8 @@ public class NotificadorDeSuscriptos {
             }
         }
     }
+
+    // ---- Getters y Setters
+    public Map<String, List<Colaborador>> getSuscriptos() { return suscriptos; }
+
 }

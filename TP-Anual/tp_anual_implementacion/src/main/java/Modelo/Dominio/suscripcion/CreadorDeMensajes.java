@@ -17,7 +17,7 @@ public class CreadorDeMensajes { // Como es una clase solo de comportamiento, no
         }
         return mensaje;
     }
-    // Ejemplo: "En la heladera Medrano (Medrano 981) hubo falla" // -> "hubo falla" es el evento.
+    // Ejemplo: "En la heladera Medrano (Medrano 981) hubo falla" // -> "se produjo una falla" es el evento.
     // Ejemplo: "En la heladera Medrano (Medrano 981) quedan 5 viandas" // -> "quedan 5 viandas" es el evento.
 
     private static String sugerirHeladeras(Heladera heladera){
