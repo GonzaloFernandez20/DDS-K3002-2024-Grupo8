@@ -1,15 +1,15 @@
-package TestUnitarios.PaqueteHeladera;
+package TestUnitarios;
 
+import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Excepciones.ExcepcionHeladeraLlena;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static Modelo.Dominio.heladera.EstadoHeladera.ACTIVA;
@@ -18,19 +18,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestHeladera {
     Heladera heladera;
-    Vianda viandaArroz = new Vianda("Arroz", null, null, null, null, null);
-    Vianda viandaMilanesa = new Vianda("Milanesa", null, null, null, null, null);
-    Vianda viandaPollo = new Vianda("Pollo", null, null, null, null, null);
-    Vianda viandaEnsalada = new Vianda("Ensalada", null, null, null, null, null);
+    Vianda viandaArroz = FactoryInstanciasParaTests.instanciarVianda("Arroz", LocalDate.of(2025,12,2));
+    Vianda viandaMilanesa = FactoryInstanciasParaTests.instanciarVianda("Milanesa", LocalDate.of(2025,12,2));
+    Vianda viandaPollo = FactoryInstanciasParaTests.instanciarVianda("Pollo", LocalDate.of(2025,12,2));
+    Vianda viandaEnsalada = FactoryInstanciasParaTests.instanciarVianda("Ensalada", LocalDate.of(2025,12,2));
     List<Vianda> ingresoDeViandas = Arrays.asList(viandaPollo, viandaArroz, viandaMilanesa);
 
 
     void setUpHeladeraVacia() {
-        heladera = new Heladera(null,
-                new Ubicacion(new Direccion("Medrano", "981", null), "CABA", "Heladera Medrano UTN"),
-                3,
-                null,
-                null);
+        heladera = FactoryInstanciasParaTests.instanciarUnaHeladera();
         NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
         heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);
     }

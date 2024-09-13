@@ -5,6 +5,7 @@ public class Mail implements MedioDeContacto{
     private String correo;
 
     public Mail(String correo) {
+        if (correo == null) {throw new IllegalArgumentException("El correo no puede ser nulo");}
         this.correo = correo;
     }
 

@@ -6,6 +6,8 @@ public class Direccion {
     String codPostal;
 
     public Direccion(String calle, String altura, String codPostal) {
+        if(calle ==null){throw new IllegalArgumentException("Una direccion necesita la calle");}
+        if(altura == null){throw new IllegalArgumentException("Una direccion necesita la altura");}
         this.calle = calle;
         this.altura = altura;
         this.codPostal = codPostal;

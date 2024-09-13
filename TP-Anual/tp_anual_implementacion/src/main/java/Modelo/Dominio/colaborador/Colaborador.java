@@ -6,7 +6,6 @@ import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import org.jetbrains.annotations.NotNull;
 import Modelo.Dominio.persona.Persona;
 
 import java.time.LocalDate;
@@ -22,6 +21,8 @@ public class Colaborador {
     private double puntosAcumulados;
 
     public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
+        if(persona ==null){throw new IllegalArgumentException("El colaborador debe corresponderse a una persona");}
+        if(mediosDeContacto == null || mediosDeContacto.isEmpty()){throw new IllegalArgumentException("Es necesario al menos un medio de contacto");}
         this.persona = persona;
         this.mediosDeContacto = mediosDeContacto;
         this.mensajesRecibidos = new ArrayList<>();
@@ -61,8 +62,8 @@ public class Colaborador {
         return true;
     }
 
-    public void sacarMedioDeContacto(@NotNull MedioDeContacto medioDeContacto) { mediosDeContacto.remove(medioDeContacto); }
-    public void agregarMedioDeContacto(@NotNull MedioDeContacto nuevoMedio) { mediosDeContacto.add(nuevoMedio);}
+    public void sacarMedioDeContacto(MedioDeContacto medioDeContacto) { mediosDeContacto.remove(medioDeContacto); }
+    public void agregarMedioDeContacto(MedioDeContacto nuevoMedio) { mediosDeContacto.add(nuevoMedio);}
 
     // Hecho de forma provisoria para reportes
     public Integer cantidadDeDonacionesDeViandaEntre(LocalDate fechaInicio, LocalDate fechaFin){

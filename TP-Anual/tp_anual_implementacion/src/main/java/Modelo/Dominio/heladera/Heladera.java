@@ -27,9 +27,14 @@ public class Heladera {
 
     public Heladera(Colaborador colaboradorACargo,
                     Ubicacion ubicacion,
-                    int capacidadDeViandas,
+                    Integer capacidadDeViandas,
                     Modelo modelo,
                     LocalDate puestaEnFuncionamiento) {
+
+        if(colaboradorACargo == null ){throw new IllegalArgumentException("La heladera requiere de un colaborador a cargo");}
+        if(ubicacion == null ){throw new IllegalArgumentException("La ubicacion es obligatoria");}
+        if(capacidadDeViandas == null){throw new IllegalArgumentException("La capacidad de la heladera es obligatoria");}
+        if(modelo == null){throw new IllegalArgumentException("El modelo es obligatorio");}
         this.colaboradorACargo = colaboradorACargo;
         this.ubicacion = ubicacion;
         this.capacidadDeViandas = capacidadDeViandas;

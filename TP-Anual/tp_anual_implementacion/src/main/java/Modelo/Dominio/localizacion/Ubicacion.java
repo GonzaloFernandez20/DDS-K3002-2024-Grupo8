@@ -7,6 +7,8 @@ public class Ubicacion {
     private String nombreDelPunto;
 
     public Ubicacion(Direccion direccion, String ciudad, String nombre){
+        if(direccion == null ){throw new IllegalArgumentException("La direccion es obligatoria");}
+        if(nombre == null ){throw new IllegalArgumentException("El nombre del punto es obligatorio");}
         this.nombreDelPunto = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
