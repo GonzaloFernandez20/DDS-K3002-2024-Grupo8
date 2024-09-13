@@ -7,6 +7,7 @@ import Modelo.Dominio.sensoreos.SensoreoTemperatura;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -14,11 +15,20 @@ import java.util.HashMap;
 public class BrokerAccesoHeladeras {
     private int puerto;
     private HashMap<Integer, Heladera> diccionarioHeladeras;
+    Socket clienteSocket = null;
 
     public BrokerAccesoHeladeras(int puerto) {
         this.puerto = puerto;
         diccionarioHeladeras = new HashMap<>();
     }
+    // ver desde donde se llama
+    public void agregarHeladerasAlDiccionario(Integer idHeladera, Heladera heladera) {
+        diccionarioHeladeras.put(idHeladera, heladera);
+    }
+    public void quitarHeladerasDelDiccionario(Integer idHeladera) {
+        diccionarioHeladeras.remove(idHeladera);
+    }
+
 
     public void iniciarServidor() {
         try (ServerSocket serverSocket = new ServerSocket(puerto)) {
@@ -52,14 +62,22 @@ public class BrokerAccesoHeladeras {
             }
         }
 
-        private void procesarMensaje(String mensaje) {
+        private void procesarMensaje(String mensaje) throws IOException {
             String[] partes = mensaje.split(",");
             int idHeladera = Integer.parseInt(partes[0]);
             String codigoTarjeta = partes[1];
             System.out.println("Datos recibidos: Heladera ID = " + idHeladera + ", Codigo tarjeta = " + codigoTarjeta);
 
             Heladera heladera = diccionarioHeladeras.get(idHeladera);
-            GestorDeAccesosAHeladeras.getInstancia().autorizarApertura(codigoTarjeta, heladera);
+            if(GestorDeAccesosAHeladeras.getInstancia().autorizarApertura(codigoTarjeta, heladera)) {
+                // Enviar el mensaje "Acceso permitido" al cliente
+                PrintWriter salida = new PrintWriter(clienteSocket.getOutputStream(), true);
+                salida.println("Acceso permitido");
+            } else {
+                // Enviar el mensaje "Acceso denegado" al cliente
+                PrintWriter salida = new PrintWriter(clienteSocket.getOutputStream(), true);
+                salida.println("Acceso denegado");
+            }
         }
     }
 }
