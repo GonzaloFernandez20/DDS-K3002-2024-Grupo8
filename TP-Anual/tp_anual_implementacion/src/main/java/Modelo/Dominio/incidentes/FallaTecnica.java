@@ -23,6 +23,6 @@ public class FallaTecnica extends Incidente{
 
     @Override
     public String obtenerInformacion() {
-        return "una Falla Tecnica: \n" + "Descripcion: " + descripcion + "\n" + "Link Foto: " + linkFoto;
+        return "se produjo una Falla Tecnica: \n" + "Descripcion: " + descripcion + "\n" + "Link Foto: " + linkFoto;
     }
 }

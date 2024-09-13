@@ -21,6 +21,7 @@ public class Colaborador {
     private AccesoDeColaborador tarjeta;
     private double puntosAcumulados;
 
+
     public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
         this.persona = persona;
         this.mediosDeContacto = mediosDeContacto;
@@ -77,5 +78,6 @@ public class Colaborador {
     public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
+    public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
 
 }

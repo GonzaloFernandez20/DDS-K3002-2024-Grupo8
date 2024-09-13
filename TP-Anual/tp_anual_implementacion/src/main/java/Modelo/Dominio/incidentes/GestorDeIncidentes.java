@@ -37,7 +37,7 @@ public class GestorDeIncidentes {
         Tecnico tecnicoAavisar = LocalizadorDeTecnicos.getInstancia().obtenerTecnicoMasCercano(ubicacionDeIncidente);
 
         if (tecnicoAavisar != null){
-            String aviso = String.format("En la heladera: %s (%s)" + nuevoIncidente.obtenerInformacion(),
+            String aviso = String.format("En la heladera: %s (%s) " + nuevoIncidente.obtenerInformacion(),
                     nuevoIncidente.getHeladeraDondeOcurrio().getUbicacion().getNombreDelPunto(),
                     nuevoIncidente.getHeladeraDondeOcurrio().getUbicacion().getDireccion());
 
