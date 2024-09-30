@@ -6,6 +6,8 @@ import Modelo.Dominio.heladera.Heladera;
         private Integer id;
         public Heladera heladera;
 
+
+
         public Integer getId() {
             return id;
         }
