@@ -38,9 +38,6 @@ public class Vianda {
     }
 
     public void trasladar(Heladera heladeraNueva) {
-        if(!heladera.equals(heladeraNueva)){
-            this.estado = EstadoVianda.EN_TRASLADO;
-        }
         heladera = heladeraNueva;
     }
 

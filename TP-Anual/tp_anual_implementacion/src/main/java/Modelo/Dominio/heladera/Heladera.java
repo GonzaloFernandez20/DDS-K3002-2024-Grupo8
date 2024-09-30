@@ -2,6 +2,8 @@ package Modelo.Dominio.heladera;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.Vianda;
+import Modelo.Dominio.incidentes.GestorDeIncidentes;
+import Modelo.Dominio.incidentes.TipoAlerta;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Excepciones.ExcepcionHeladeraLlena;
@@ -19,6 +21,7 @@ public class Heladera {
     private Modelo modelo;
     private EstadoHeladera estado;
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
+    private Float temperatura = modelo.temperaturaMinima + 1;
 
     // BROKER ------------------------------------------
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
@@ -67,6 +70,13 @@ public class Heladera {
         return viandasARetirar;
     }
 
+    public void actualizar(double temperatura){
+        if(! modelo.controlarTemperatura(temperatura)) {
+            GestorDeIncidentes.getInstancia().reportarAlerta(this, TipoAlerta.TEMPERATURA);
+            setEstado(EstadoHeladera.INACTIVA);
+        }
+    }
+
     public int cantViandasEnStock(){ return viandasEnStock.size(); }
     public int espacioDisponible(){return capacidadDeViandas - cantViandasEnStock();}
 
@@ -95,6 +105,11 @@ public class Heladera {
     public NotificadorDeSuscriptos getNotificadorDeSuscriptos() { return notificadorDeSuscriptos; }
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }
+
+    public Float getTemperatura() {
+        return temperatura;
+    }
+
     public void setNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { this.notificadorDeSuscriptos = notificadorDeSuscriptos; }
 }
 

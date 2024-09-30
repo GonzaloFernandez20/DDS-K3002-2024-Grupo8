@@ -3,8 +3,6 @@ package Modelo.Factorys;
 import DTOs.HeladeraDTO;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
-import Modelo.Dominio.heladera.SensoreoDeMovimiento;
-import Modelo.Dominio.heladera.SensoreoDeTemperatura;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
@@ -37,12 +35,12 @@ public class BuilderHeladera {
         nuevaHeladera.setNotificadorDeSuscriptos(notificador);
     }
 
-    private static SensoreoDeMovimiento crearSensoreoDeMovimiento(Heladera nuevaHeladera) {
+/*    private static SensoreoDeMovimiento crearSensoreoDeMovimiento(Heladera nuevaHeladera) {
         return new SensoreoDeMovimiento(nuevaHeladera);
     }
 
     private static SensoreoDeTemperatura crearSensoreoDeTemperatura(Heladera nuevaHeladera) {
         return new SensoreoDeTemperatura(nuevaHeladera);
-    }
+    }*/
 
 }
