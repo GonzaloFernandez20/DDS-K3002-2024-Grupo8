@@ -6,13 +6,13 @@
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.122.0">
-        <title>Colaboraciones</title>
+        <title>Administrar</title>
 
         <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
         
         <!-- Custom styles for this template -->
         <link href="CSS-HeaderFooter.css" rel="stylesheet">
-        <link href="CSS-Colaborar.css" rel="stylesheet">
+        <link href="CSS-MiCuenta.css" rel="stylesheet">
     </head>
 
     <body>
@@ -55,25 +55,57 @@
                 </div>
             </div>
         </header>
-
         
         <main class="container">
-                <div class="col-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="sidenav flex-column flex-shrink-0 p-3">
+                        <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Administrador</span>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto nav-chosen">
+                            <span class="fs-5">Administrar</span>
+                            <li class="nav-item">
+                                <image height="20px" width="20px" src="img/home-icon.svg"/>
+                                <a href="#carga-masiva" class="nav-link">
+                                    Carga masiva
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <image height="20px" width="20px" src="img/contact-icon.svg"/>
+                                <a href="#reportes" class="nav-link">
+                                    Reportes
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
                     <div class="main">
-                        <h1>Colaboraciones</h1>
-                        <h2>Para personas</h2>
+                        <h1>Administrar</h1>
+
+                        <h3 id="carga-masiva">Carga Masiva</h3>
+                        <form id="form-carga-masiva">
                             <div class="form-cuenta">
-                                <button onclick="window.location.href='DonarViandas.html'" class="btn-mod colaborar">Donar Viandas</button>
-                                <button onclick="window.location.href='DistribuirVianda.html'" class="btn-mod colaborar">Distribuir Viandas</button>
-                                <button onclick="window.location.href='EntregarTarjetasDeAcceso.html'" class="btn-mod colaborar">Dar de Alta a Persona Vulnerable</button>
-                                <button onclick="window.location.href='DonarDinero.html'" class="btn-mod colaborar">Donar Dinero</button>
+                                <label for="archivoCSVCarga">Archivo CSV de carga masiva</label>
+                                <input type="file" id="archivoCSVCarga" accept=".csv">
                             </div>
-                            <h2>Para organizaciones</h2>
-                            <div class="form-cuenta">
-                                <button onclick="window.location.href='HacerseCargoDeUnaHeladera.html'" class="btn-mod colaborar">Hacerse Cargo de Heladera</button>
-                                <button onclick="window.location.href='PublicarProductoOServicio.html'" class="btn-mod colaborar">Publicar Producto o Servicio</button>
-                                <button onclick="window.location.href='DonarDinero.html'" class="btn-mod colaborar">Donar Dinero</button>
-                            </div>
+                            <button type="submit" id="btn-carga-masiva" class="btn-mod confirm">Confirmar Carga de Colaboraciones</button>
+                        </form>
+                        
+                        <h3 id="reportes">Reportes</h3>
+                        <div class="reportes-container">
+                            <p>Cantidad de fallas por heladera</p>
+                            <embed type="application/pdf" src="reportes/CantidadFallasPorHeladera.pdf">
+                        </div>
+                        <div class="reportes-container">
+                            <p>Cantidad de viandas colocadas/retiradas por heladera</p>
+                            <embed type="application/pdf" src="reportes/CantidadViandasPorHeladera.pdf">
+                        </div>
+                        <div class="reportes-container">
+                            <p>Cantidad de viandas por colaborador</p>
+                            <embed type="application/pdf" src="reportes/CantidadViandasPorColaborador.pdf">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,8 +122,6 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
-        <script src="JS-ModificarColaboradorUsuario.js"></script>
-        <!--<script src="ModificarColaboradorHumano.js"></script>-->
         <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
