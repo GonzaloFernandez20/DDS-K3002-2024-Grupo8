@@ -6,14 +6,32 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Mapa</title>
+    <title>Mi Cuenta - Mis Puntos</title>
 
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom styles for this template -->
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
-    <link href="CSS-Mapa.css" rel="stylesheet">
+    <link href="CSS-MiCuenta.css" rel="stylesheet">
   </head>
+  <style>
+    .boton{
+        width: 280px;
+        border-radius: 10px;
+        padding: 10px 25px;
+        transition-duration: 0.4s;
+        text-align: center;
+        margin: 20px 25px 5px 0px;
+        color: #ffffff;
+        background-color: #50bfa0;
+        display: flex;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+  </style>
 
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -25,9 +43,6 @@
       </symbol>
       <symbol id="twitter" viewBox="0 0 16 16">
         <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-      </symbol>
-      <symbol id="delete-circle" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
       </symbol>
     </svg>
     
@@ -55,17 +70,86 @@
             </div>
         </div>
     </header>
-      
+
     <main class="container">
-             <div class="col-12">
-                <div class="main">
-                    <h1>Mapa</h1>
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.2186688583556!2d-58.422691923482915!3d-34.59863167295616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb2e1493a6a3%3A0x1862a7c0b8163e5d!2sUTN.BA!5e0!3m2!1ses!2sar!4v1725220450375!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <h2>Heladera N</h2>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="sidenav flex-column flex-shrink-0 p-3">
+                    <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <span class="fs-5">Usuario</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/home-icon.svg"/>
+                            <a href="ModificarColaboradorHumano.html" class="nav-link">
+                                Información Personal
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/contact-icon.svg"/>
+                            <a href="ModificarColaboradorHumano.html" class="nav-link">
+                            Contacto
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <span class="fs-5">Suscripciones</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/list-icon.svg"/>
+                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                                Listado de suscripciones
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/notifications-icon.svg"/>
+                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                            Suscribirme
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills flex-column mb-auto nav-chosen">
+                        <span class="fs-5">Mis puntos</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/puntos.png"/>
+                            <a href="#puntos-actuales" class="nav-link">
+                                Puntos actuales
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/premios.png"/>
+                            <a href="#premios" class="nav-link">
+                                Premios
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills flex-column mb-auto colaboracion">
+                        <span class="fs-5">Colaboraciones</span>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/tarjeta-icon.png"/>
+                            <a href="DarDeAltaPersonaEnSitVulnerable.html" class="nav-link">
+                                Dar de alta a una persona
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="col-md-10">
+                <div class="container main">
+                    <h1>Mi Cuenta</h1>
+                    <h2 id="puntos-actuales">Mis puntos</h2>
+                    <div id="stars" class="stars-container"></div> <!-- Elemento donde se mostrarán los puntos -->
+                    <h2 id="premios">Premios</h2>
+                    <a href="CanjearPuntos.html"><button type="button" class="boton">Ver Premios disponibles</button></a>
+                </div>
+                <div class="reportar-falla referirAColaboracion" id="container-reporte-falla">
+                    <button class="btn-close" onclick="ocultarReporteFalla()"></button>
+                    <p class="fs-4">Falla Técnica</p>
+                    <p>¿Vio alguna falla?</p>
+                    <a href="ReportarFallaTecnica.html">Reportar</a>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -79,8 +163,8 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-    <script src="JS-ModificarColaboradorUsuario.js"></script>
-    <!--<script src="ModificarColaboradorHumano.js"></script>-->
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS-ModificarColaboradorPremios.js"></script>
+    <script src="JS-ModificarColaboradorUsuario.js"></script>
 </body>
 </html>

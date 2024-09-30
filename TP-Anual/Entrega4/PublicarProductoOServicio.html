@@ -6,13 +6,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Mapa</title>
+    <title>Publicar Servicio o Producto</title>
 
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom styles for this template -->
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
-    <link href="CSS-Mapa.css" rel="stylesheet">
+    <link href="CSS-Colaboraciones.css" rel="stylesheet">
   </head>
 
   <body>
@@ -55,17 +55,70 @@
             </div>
         </div>
     </header>
-      
-    <main class="container">
-             <div class="col-12">
-                <div class="main">
-                    <h1>Mapa</h1>
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.2186688583556!2d-58.422691923482915!3d-34.59863167295616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb2e1493a6a3%3A0x1862a7c0b8163e5d!2sUTN.BA!5e0!3m2!1ses!2sar!4v1725220450375!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <h2>Heladera N</h2>
+
+	<main class="container">
+        <div class="container-colab">
+            <div class="row">
+                <h2>Ofrecer productos o servicios</h2>
+                
+                <div class="col-md-6">
+                    <form id="publicarServicioForm">
+
+                        <div class="input-group">
+                            <label for="rubro">Rubro (*)</label>
+                            <select id="rubro" >
+                                <option value="">Seleccione Rubro</option>
+                                <option value="gastronomia">Gastronomia</option>
+                                <option value="electronica">Electronica</option>
+                                <option value="hogar">Articulos para el hogar</option>
+                            </select>
+                            <div class="error-message" id="error-rubro"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="nombre-oferta">Nombre de la oferta (*)</label>
+                            <input type="text" id="nombre-oferta" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
+                            <div class="error-message" id="error-nombre"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="cant-puntos">Cantidad de puntos necesarios (*)</label>
+                            <input type="number" min="1" step="1" id="cant-puntos" placeholder="Ingrese cantidad de puntos necesarios" >
+                            <div class="error-message" id="error-puntos"></div>
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="imagen">Imagen ilustrativa</label>
+                            <input type="file" id="imagen" class="border border-border rounded p-2 w-full" />
+                            <div class="error-message" id="error-imagen"></div>
+                        </div>
+
+						<div class="input-group">
+                            <label for="epigrafe">Epígrafe para la imagen </label>
+                            <textarea id="caption" class="border border-border rounded p-2 w-full" rows="3"></textarea>
+                            <div class="error-message" id="error-epigrafe"></div>
+                        </div>
+
+						<div class="input-group">
+                            <label for="stock">Stock del producto (*)</label>
+                            <input type="number" min="1" step="1" id="stock" placeholder="Ingrese stock" >
+                            <div class="error-message" id="error-stock"></div>
+                        </div>
+
+                        <button type="submit">Realizar Colaboracion</button>
+                        
+                    </form>
+                </div>
+            
+                <div class="col-md-6 scroll-permitido">
+                    <img 
+                        src = "img/publicarServicio.png"
+                        alt = "Imagen de viandas siendo envueltas por flechas circulares";
+                        class="imagenContribucion"
+                    >
                 </div>
             </div>
+        </div>
     </main>
 
     <footer>
@@ -79,8 +132,8 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-    <script src="JS-ModificarColaboradorUsuario.js"></script>
-    <!--<script src="ModificarColaboradorHumano.js"></script>-->
-    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+	<script src="JS-PublicarProductoOServicio.js"></script>
+	<script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+  </body>
 </html>

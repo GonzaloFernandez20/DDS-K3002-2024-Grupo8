@@ -6,13 +6,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Mapa</title>
+    <title>Recomendación de Puntos de Colocación</title>
 
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom styles for this template -->
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
-    <link href="CSS-Mapa.css" rel="stylesheet">
+    <link href="CSS-RecomendacionColocacion.css" rel="stylesheet">
   </head>
 
   <body>
@@ -55,18 +55,13 @@
             </div>
         </div>
     </header>
-      
-    <main class="container">
-             <div class="col-12">
-                <div class="main">
-                    <h1>Mapa</h1>
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.2186688583556!2d-58.422691923482915!3d-34.59863167295616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb2e1493a6a3%3A0x1862a7c0b8163e5d!2sUTN.BA!5e0!3m2!1ses!2sar!4v1725220450375!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <h2>Heladera N</h2>
-                </div>
-            </div>
-    </main>
+
+    <div class="col-12">
+        <div class="main">
+            <h1>Recomendación Puntos de Colocación</h1>
+        </div>
+    </div>
+    <div id="map"></div>
 
     <footer>
         <div class="footer-logo">
@@ -79,8 +74,10 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-    <script src="JS-ModificarColaboradorUsuario.js"></script>
-    <!--<script src="ModificarColaboradorHumano.js"></script>-->
-    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZyVkwhsLwZG_We-8EAkhZFjRFL4VZlJM&loading=async&callback=initMap"
+    defer
+    ></script>
+    <script src="JS-RecomendacionColocacion.js"></script>
 </body>
 </html>
