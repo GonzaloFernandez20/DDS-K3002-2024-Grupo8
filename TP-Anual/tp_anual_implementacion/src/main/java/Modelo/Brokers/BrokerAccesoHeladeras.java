@@ -32,26 +32,13 @@ public class BrokerAccesoHeladeras {
 
     public String getRespuesta() {return respuesta;}
 
-    public void iniciarServidor() {
-        try (ServerSocket serverSocket = new ServerSocket(puerto)) {
-            System.out.println("Servidor iniciado en el puerto " + puerto);
-
-            while (true) {
-                Socket clienteSocket = serverSocket.accept();
-                new Thread(new BrokerAccesoHeladeras.ClienteHandler(clienteSocket)).start();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private class ClienteHandler implements Runnable {
         private Socket socket;
 
         public ClienteHandler(Socket socket) {
             this.socket = socket;
         }
-
+        // tiene que hacer procesarMensaje cuando recibe cosas del servidor. Dejo este método por ahora para saber la logica pero debe ir en el servidor.
         @Override
         public void run() {
             try (BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {

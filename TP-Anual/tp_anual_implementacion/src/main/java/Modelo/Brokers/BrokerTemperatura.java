@@ -20,18 +20,7 @@ public class BrokerTemperatura {
             diccionarioSensores.put(sensoreoTemperatura.getId(), sensoreoTemperatura);
         }
 
-        public void iniciarServidor() {
-            try (ServerSocket serverSocket = new ServerSocket(puerto)) {
-                System.out.println("Servidor iniciado en el puerto " + puerto);
-
-                while (true) {
-                    Socket clienteSocket = serverSocket.accept();
-                    new Thread(new ClienteHandler(clienteSocket)).start();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        // lo mismo que en broker acceso a heladeras
 
         private class ClienteHandler implements Runnable {
             private Socket socket;
