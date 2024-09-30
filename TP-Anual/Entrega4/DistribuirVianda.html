@@ -1,21 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.122.0">
-    <title>Header</title>
 
-    <!-- Bootstrap CSS (si aún necesitas usarlo para otros elementos) -->
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom styles for this template -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribuir Viandas</title>
     <link href="CSS-HeaderFooter.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS-Colaboraciones.css">
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
+
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="facebook" viewBox="0 0 16 16">
           <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
@@ -53,9 +49,67 @@
         </div>
     </header>
 
-    <main>
-        <div class="container">
-            <!-- Aquí iría el contenido principal de tu página -->
+    <main class="container">
+        <div class="container-colab">
+            <div class="row">
+                <h2>Distribución de Viandas</h2>
+                
+                <div class="col-md-6">
+                    <form id="distribucionViandaForm">
+
+                        <div class="input-group">
+                            <label for="heladeraOrigen">Heladera Origen (*)</label>
+                            <select id="heladeraOrigen" >
+                                <option value="">Seleccione Heladera de Origen</option>
+                                <option value="IDHeladera1">Heladera 1</option>
+                                <option value="IDHeladera2">Heladera 2</option>
+                                <option value="IDHeladera3">Heladera 3</option>
+                            </select>
+                            <div class="error-message" id="heladeraOrigenError"></div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="heladeraDestino">Heladera Destino (*)</label>
+                            <select id="heladeraDestino" >
+                                <option value="">Seleccione Heladera de Destino</option>
+                                <option value="IDHeladera1">Heladera 1</option>
+                                <option value="IDHeladera2">Heladera 2</option>
+                                <option value="IDHeladera3">Heladera 3</option>
+                            </select>
+                            <div class="error-message" id="heladeraDestinoError"></div>
+
+                            <a href="Mapa.html" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="cantidadViandas">Viandas a Distribuir (*)</label>
+                            <input type="number" min="1" step="1" id="cantidadViandas" placeholder="Ingrese Cantidad de Viandas a Distribuir" >
+                            <div class="error-message" id="cantidadViandasError"></div>
+                        </div>
+            
+                        <div class="input-group">
+                            <label for="motivoDistribucion">Motivo de Distribución (*)</label>
+                            <select id="motivoDistribucion" >
+                                <option value="">Seleccione el Motivo de Distribución</option>
+                                <option value="desperfecto">Desperfecto en Heladera</option>
+                                <option value="faltanViandas">Falta de Viandas en otra Heladera</option>
+                            </select>
+                            <div class="error-message" id="motivoDistribucionError"></div>
+                        </div>
+
+                        <button type="submit">Realizar Distribución</button>
+                        
+                    </form>
+                </div>
+            
+                <div class="col-md-6 container-img scroll-permitido">
+                    <img 
+                        src = "img/distribuirViandaImagen.png"
+                        alt = "Imagen de viandas siendo envueltas por flechas circulares";
+                        class="imagenContribucion"
+                    >
+                </div>
+            </div>
         </div>
     </main>
 
@@ -70,6 +124,10 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
+
+    <script src="JS-DistribuirVianda.js"></script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
