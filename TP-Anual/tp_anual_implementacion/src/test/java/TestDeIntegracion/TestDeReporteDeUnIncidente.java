@@ -49,11 +49,9 @@ public class TestDeReporteDeUnIncidente {
     private void suscribirColaboradores(String evento){
         colaboradoresSuscriptores = new ArrayList<>();
 
-        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
-        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
-        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
-        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
-        colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
+        for (int i = 0; i < 10; i++) {
+            colaboradoresSuscriptores.add(FactoryInstanciasParaTests.instanciarColaboradorHumano());
+        }
 
         for (Colaborador colaborador : colaboradoresSuscriptores){
             heladera.getNotificadorDeSuscriptos().suscribir(evento, colaborador);
@@ -63,7 +61,7 @@ public class TestDeReporteDeUnIncidente {
     private void reportarUnIncidente(){
         GestorDeIncidentes.reportar(fallaTecnica);
     }
-    // -> El incidente fue reportado, toca testear todo lo que pasa despues
+    // -> El incidente fue reportado, toca testear lo que pasa despues
 
     // <---------------------- Testeos ----------------------> //
 

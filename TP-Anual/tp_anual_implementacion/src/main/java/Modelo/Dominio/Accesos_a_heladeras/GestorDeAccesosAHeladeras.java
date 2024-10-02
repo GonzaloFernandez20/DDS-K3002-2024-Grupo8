@@ -38,5 +38,7 @@ public class GestorDeAccesosAHeladeras {
         tarjetasPendientesDeEntrega.add(new SolicitudTarjeta(destinatario, cantidadDeTarjetas)); }
 
     public void eliminarSolicitud(SolicitudTarjeta solicitud){ tarjetasPendientesDeEntrega.remove(solicitud); }
+
+    public void registrarTarjeta(AccesoAHeladeras tarjeta){ tarjetasRegistradas.add(tarjeta); }
 }
 

@@ -3,15 +3,10 @@ package TestUnitarios.PaqueteIncidentes;
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.*;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.localizacion.Ubicacion;
-import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Dominio.tecnico.Tecnico;
-import Repositorios.RepositorioIncidentes;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+
 
 
 import java.util.stream.Stream;

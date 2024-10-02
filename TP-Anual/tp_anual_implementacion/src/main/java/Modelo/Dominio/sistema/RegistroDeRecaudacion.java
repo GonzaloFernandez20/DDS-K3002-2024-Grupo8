@@ -19,5 +19,5 @@ public class RegistroDeRecaudacion {
         fondoRecaudado += dinero;
     }
     public float getFondoRecaudado() { return fondoRecaudado; }
-    public void setFondoRecaudado(float valor){this.fondoRecaudado = valor;}
+    //public void setFondoRecaudado(float valor){this.fondoRecaudado = valor;}
 }

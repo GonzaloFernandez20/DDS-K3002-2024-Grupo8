@@ -3,22 +3,12 @@ package TestUnitarios.PaqueteSuscripciones;
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.localizacion.Ubicacion;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.medios_de_contacto.Telegram;
-import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static Modelo.Dominio.incidentes.EstadoDelIncidente.PENDIENTE;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testeo de notificaciones a suscriptos ante un evento")
@@ -62,6 +52,12 @@ public class TestNotificadorDeSuscriptos {
             notificadorDeSuscriptos.desuscribir("se produjo una falla", colaborador);
             assertFalse(notificadorDeSuscriptos.getSuscriptos().containsKey("se produjo una falla"));
         }
+
+        @Test
+        @DisplayName("Intentar desuscribirse de un evento no existente")
+        public void desuscribirseEventoNoExistente() {
+            assertThrows(NullPointerException.class, () -> notificadorDeSuscriptos.desuscribir("evento inexistente", colaborador));
+        } // TODO: Manejo del error?
     }
 
     @Nested
@@ -73,17 +69,6 @@ public class TestNotificadorDeSuscriptos {
         public void colaboradorSeSuscribeAEvento(){
             notificadorDeSuscriptos.suscribir("se produjo una falla", colaborador);
             assertTrue(notificadorDeSuscriptos.getSuscriptos().get("se produjo una falla").contains(colaborador));
-        }
-
-        @Test
-        @DisplayName("Varios colaboradores ahora estan suscriptos a un evento")
-        public void colaboradoresSeSuscribenAEvento(){
-            notificadorDeSuscriptos.suscribir("se produjo una falla", colaborador);
-            notificadorDeSuscriptos.suscribir("se produjo una falla", colaborador);
-            notificadorDeSuscriptos.suscribir("se produjo una falla", colaborador);
-            notificadorDeSuscriptos.suscribir("se produjo una falla", colaborador);
-            notificadorDeSuscriptos.suscribir("se produjo una falla", colaborador);
-            assertEquals(5, notificadorDeSuscriptos.getSuscriptos().get("se produjo una falla").size());
         }
 
         @Test
@@ -114,6 +99,21 @@ public class TestNotificadorDeSuscriptos {
             assertAll( () -> assertEquals(3, notificadorDeSuscriptos.getSuscriptos().get("se produjo una falla").size()),
                        () -> assertEquals(1, notificadorDeSuscriptos.getSuscriptos().get("quedan 5 viandas").size()),
                        () -> assertEquals(2, notificadorDeSuscriptos.getSuscriptos().get("quedan 15 viandas").size()));
+        }
+    }
+
+    @Nested
+    @DisplayName("Un evento recibe suscripciones de manera masiva")
+    class TestDeSuscripcionMasiva{
+
+        @Test
+        @DisplayName("Un gran numero de colabores se suscriben a un evento")
+        public void agregarNumeroDeColaboradores() {
+            for (int i = 0; i < 1000; i++) {
+                Colaborador nuevoColaborador = FactoryInstanciasParaTests.instanciarColaboradorHumano();
+                notificadorDeSuscriptos.suscribir("se produjo una falla", nuevoColaborador);
+            }
+            assertEquals(1000, notificadorDeSuscriptos.getSuscriptos().get("se produjo una falla").size());
         }
     }
 }

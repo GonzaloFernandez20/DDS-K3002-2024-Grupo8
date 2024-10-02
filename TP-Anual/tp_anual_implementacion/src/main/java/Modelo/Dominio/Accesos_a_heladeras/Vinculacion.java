@@ -28,6 +28,7 @@ public class Vinculacion extends AccesoAHeladeras{
         this.fechaRegistro = LocalDate.now();
         this.fechaUltimoUso = LocalDate.now();
         this.historicoDeAccesosHeladera = new ArrayList<>();
+        GestorDeAccesosAHeladeras.getInstancia().registrarTarjeta(this);
     }
 
     @Override
