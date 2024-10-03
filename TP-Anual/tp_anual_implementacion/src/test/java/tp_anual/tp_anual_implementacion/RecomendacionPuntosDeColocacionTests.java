@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 
-@SpringBootTest
+
 class RecomendacionPuntosDeColocacionTests {
     private double latitud;
     private double longitud;
