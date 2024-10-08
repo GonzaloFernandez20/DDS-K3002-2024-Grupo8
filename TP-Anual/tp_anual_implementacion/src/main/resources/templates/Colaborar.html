@@ -13,12 +13,6 @@
         <!-- Custom styles for this template -->
         <link href="./assets/CSS/HeaderFooter.css" rel="stylesheet">
         <link href="./assets/CSS/Colaborar.css" rel="stylesheet">
-
-        <script>
-            function controlarRequisitos(tipoDeContribucion) {
-                window.location.href= '/Colaborar?tipo=' + tipoDeContribucion;
-            }
-        </script>
     </head>
 
     <body>
@@ -69,10 +63,12 @@
                         <h1>Colaboraciones</h1>
                         <h2>Para personas</h2>
                             <div class="form-cuenta">
-                                <button onclick="controlarRequisitos('DonarViandas')" class="btn-mod colaborar">Donar Viandas</button>
-                                <button onclick="controlarRequisitos('DistribuirVianda')" class="btn-mod colaborar">Distribuir Viandas</button>
-                                <button onclick="controlarRequisitos('EntregarTarjetasDeAcceso')" class="btn-mod colaborar">Dar de Alta a Persona Vulnerable</button>
-                                <button onclick="controlarRequisitos('DonarDinero')" class="btn-mod colaborar">Donar Dinero</button>
+                                <form action="/Colaborar" method="get">
+                                    <button type="submit" name="value" value="DonarViandas" class="btn-mod colaborar">Donar Viandas</button>
+                                    <button type="submit" name="value" value="DistribuirVianda" class="btn-mod colaborar">Distribuir Viandas</button>
+                                    <button type="submit" name="value" value="EntregarTarjetasDeAcceso" class="btn-mod colaborar">Dar de Alta a Persona Vulnerable</button>
+                                    <button type="submit" name="value" value="DonarDinero" class="btn-mod colaborar">Donar Dinero</button>
+                                </form>
                             </div>
                             <h2>Para organizaciones</h2>
                             <div class="form-cuenta">

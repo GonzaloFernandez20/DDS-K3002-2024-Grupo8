@@ -1,4 +1,4 @@
-package Controllers;
+package Modelo.Dominio.GestionDeContribuciones.Controladores;
 
 import Modelo.Dominio.GestionDeContribuciones.FormaDeContribuciones;
 import Modelo.Dominio.GestionDeContribuciones.ValidadorRequisitosContribucion;
@@ -8,7 +8,6 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +24,8 @@ import static Modelo.Dominio.documentacion.TipoDeDocumento.DNI;
 @Controller
 public class CtrlSeleccionDeContribucion {
     @GetMapping("/Colaborar")
-    public String Colaborar(@RequestParam String tipoDeContribucion, RedirectAttributes redirectAttributes, Model model) {
+    public String Colaborar(@RequestParam("value") String tipoDeContribucion, RedirectAttributes redirectAttributes) {
+        System.out.println("llegue");
         Documento documento = new Documento(DNI, "12344567", MASCULINO);
         Direccion direccion = new Direccion("Corrientes", "1000", "1234");
         MedioDeContacto medioDeContacto = new WhatsApp("1529102222");
@@ -34,16 +34,17 @@ public class CtrlSeleccionDeContribucion {
         PersonaHumana personaHumana = new PersonaHumana("Francisco", "Perez", LocalDate.now(), documento, direccion);
         Colaborador colaborador = new Colaborador(personaHumana, medios);
 
-
         FormaDeContribuciones formaDeContribucion = validarTipoDeAcceso(tipoDeContribucion);
 
-        ValidadorRequisitosContribucion validadorRequisitosContribucion = new ValidadorRequisitosContribucion();
-
+        //ValidadorRequisitosContribucion validadorRequisitosContribucion = new ValidadorRequisitosContribucion();
+        System.out.println("Tipo de contribución recibido: " + tipoDeContribucion);
         try {
-            validadorRequisitosContribucion.validarRequisitos(colaborador, formaDeContribucion);
+            ValidadorRequisitosContribucion.validarRequisitos(colaborador, formaDeContribucion);
+            redirectAttributes.addFlashAttribute("mensaje", "Puede colaborar en " + tipoDeContribucion);
             return "redirect:/" + tipoDeContribucion;
             //model.addAttribute("mensaje", "Puede colaborar en " + tipoDeContribucion);
         } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("mensaje", "No puede colaborar en " + tipoDeContribucion);
             return "redirect:/error";
             //model.addAttribute("mensaje", "No puede colaborar: " + e.getMessage());
         }

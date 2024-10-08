@@ -28,7 +28,7 @@ public class BrokerAccesoHeladerasTest {
     @BeforeEach
     public void setUp() {
         broker = new BrokerAccesoHeladeras(8080);
-        broker.iniciarServidor();
+        //broker.iniciarServidor();
         Direccion direccion = new Direccion("Medrano", "124", "1234");
         MedioDeContacto medioDeContacto = new MedioDeContacto() {
             @Override
@@ -37,7 +37,7 @@ public class BrokerAccesoHeladerasTest {
             }
         };
         Ubicacion ubicacion = new Ubicacion(direccion, "Buenos Aires", "ALmagro");
-        Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ong, "Gastronomia", direccion);
+        Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ONG, "Gastronomia", direccion);
         Colaborador colaborador = new Colaborador(personaJuridica, (List<MedioDeContacto>) medioDeContacto);
         Modelo modelo = new Modelo(15, 9);
         heladera1 = new Heladera(colaborador, ubicacion, 10, modelo, LocalDate.now());
@@ -49,7 +49,7 @@ public class BrokerAccesoHeladerasTest {
             }
         };
         Ubicacion ubicacion2 = new Ubicacion(direccion, "Buenos Aires", "ALmagro");
-        Persona personaJuridica2 = new PersonaJuridica("ONG", TipoOrganizacion.ong, "Gastronomia", direccion2);
+        Persona personaJuridica2 = new PersonaJuridica("ONG", TipoOrganizacion.ONG, "Gastronomia", direccion2);
         Colaborador colaborador2 = new Colaborador(personaJuridica2, (java.util.List<MedioDeContacto>) medioDeContacto2);
         Modelo modelo2 = new Modelo(15, 9);
         heladera2 = new Heladera(colaborador2, ubicacion2, 10, modelo2, LocalDate.now());

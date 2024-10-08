@@ -25,7 +25,7 @@ public class SensoreoMovimientoTest {
     @Test
     public void testActualizar() {
         BrokerMovimiento brokerMovimiento = new BrokerMovimiento(1234);
-        brokerMovimiento.iniciarServidor();
+        //brokerMovimiento.iniciarServidor();
         Direccion direccion = new Direccion("Medrano", "124", "1234");
         MedioDeContacto medioDeContacto = new MedioDeContacto() {
             @Override
@@ -34,7 +34,7 @@ public class SensoreoMovimientoTest {
             }
         };
         Ubicacion ubicacion = new Ubicacion(direccion, "Buenos Aires", "ALmagro");
-        Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ong, "Gastronomia", direccion);
+        Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ONG, "Gastronomia", direccion);
         Colaborador colaborador = new Colaborador(personaJuridica, (List<MedioDeContacto>) medioDeContacto);
         Modelo modelo = new Modelo(15, 9);
         Heladera heladera = new Heladera(colaborador, ubicacion, 10, modelo, LocalDate.now());

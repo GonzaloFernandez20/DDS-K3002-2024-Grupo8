@@ -33,7 +33,7 @@ public class GestorDeAccesosAHeladerasTest {
     @BeforeEach
     public void setUp() {
         BrokerAccesoHeladeras broker = new BrokerAccesoHeladeras(3456);
-        broker.iniciarServidor();
+        //broker.iniciarServidor();
         gestor = GestorDeAccesosAHeladeras.getInstancia();
         Direccion direccion = new Direccion("Medrano", "124", "1234");
         MedioDeContacto medioDeContacto = new MedioDeContacto() {
@@ -43,7 +43,7 @@ public class GestorDeAccesosAHeladerasTest {
             }
         };
         Ubicacion ubicacion = new Ubicacion(direccion, "Buenos Aires", "ALmagro");
-        Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ong, "Gastronomia", direccion);
+        Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ONG, "Gastronomia", direccion);
         Colaborador colaborador = new Colaborador(personaJuridica, (List<MedioDeContacto>) medioDeContacto);
         Modelo modelo = new Modelo(15, 9);
         heladera = new Heladera(colaborador, ubicacion, 10, modelo, LocalDate.now());

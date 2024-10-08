@@ -72,7 +72,7 @@ public class Heladera {
 
     public void actualizar(double temperatura){
         if(! modelo.controlarTemperatura(temperatura)) {
-            GestorDeIncidentes.getInstancia().reportarAlerta(this, TipoAlerta.TEMPERATURA);
+            GestorDeIncidentes.reportarAlerta(this, TipoAlerta.TEMPERATURA);
             setEstado(EstadoHeladera.INACTIVA);
         }
     }
