@@ -7,8 +7,8 @@ class Suscripcion {
 }
 
 let suscripcionesGenerales = [new Suscripcion(1, 'Heladera 1', 'Faltan 5 viandas'), new Suscripcion(2, 'Heladera 2', 'Quedan 2 viandas'), new Suscripcion(3, 'Heladera 3', 'Hay desperfectos')];
-
-document.getElementById('btn-crear-suscripcion').addEventListener('click', function(event) {
+/*
+document.getElementById('modal-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
     let heladeraElegida = document.getElementById('optionsHeladera').value;
@@ -43,4 +43,4 @@ document.getElementById('btn-crear-suscripcion').addEventListener('click', funct
     bootstrapModal.hide();
 
     document.getElementById('modal-form').reset();
-});
+});*/

@@ -48,6 +48,7 @@ public class Heladera {
         this.temperatura = getModelo().temperaturaMinima + 1;
         this.estado = EstadoHeladera.ACTIVA;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
+        this.notificadorDeSuscriptos = new NotificadorDeSuscriptos(this);
     }
 
     // ------------------------------------------------

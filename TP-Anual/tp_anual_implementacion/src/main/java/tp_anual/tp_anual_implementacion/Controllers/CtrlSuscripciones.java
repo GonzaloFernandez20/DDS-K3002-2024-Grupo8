@@ -22,12 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 @Controller
 public class CtrlSuscripciones {
 
-    private final Stream<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera));
+    private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());;
     // private final Stream<SuscripcionDTO> suscripciones = RepositorioSuscripciones.getInstancia().getSuscripciones.stream().map(suscripcion -> convertirSuscripcionADTO(suscripcion));
     // PENDIENTE
 
@@ -43,34 +43,34 @@ public class CtrlSuscripciones {
         return "ModificarColaboradorHumanoSuscripciones";
     }
 
-    @PostMapping("/ColaboradorSuscrito")
-    public String recibirSeleccion(@RequestParam("optionsHeladera") int idHeladeraElegida,
-                                   @RequestParam("check-suscripcion-disponen-viandas") boolean checkSuscripcionDisponenViandas, @RequestParam("cantidadDeViandasDisponibles") int cantidadDeViandasDisponibles,
-                                   @RequestParam("check-suscripcion-faltan-viandas") boolean checkSuscripcionFaltanViandas, @RequestParam("cantidadDeViandasFaltantes") int cantidadDeViandasFaltantes,
-                                   @RequestParam("check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto) {
+    @PostMapping("/ModificarColaboradorHumanoSuscripciones")
+    public String recibirSeleccion(@RequestParam(value = "optionsHeladera", defaultValue = "0") String idHeladeraElegida,
+                                   @RequestParam(required = false, value = "check-suscripcion-disponen-viandas") boolean checkSuscripcionDisponenViandas, @RequestParam(value = "cantidadDeViandasDisponibles", defaultValue = "0") int cantidadDeViandasDisponibles,
+                                   @RequestParam(required = false, value = "check-suscripcion-faltan-viandas") boolean checkSuscripcionFaltanViandas, @RequestParam(value = "cantidadDeViandasFaltantes",defaultValue = "0") int cantidadDeViandasFaltantes,
+                                   @RequestParam(value = "check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto) {
 
-        Heladera heladeraElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(idHeladeraElegida);
-
-        System.out.println("Llega devuelta al controlador con " + idHeladeraElegida + ", " + checkSuscripcionDesperfecto);
+        Heladera heladeraElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraElegida));
 
         // TO DO: CHECKEAR QUE CUANDO EL CHECKBOX ESTÉ EN TRUE HAYA ALGO EN EL INPUT
 
         String suscripcionesValidas = "";
 
-        if(validarSuscripcion(checkSuscripcionDisponenViandas, heladeraElegida, "Notificar cuando disponga únicamente de " + cantidadDeViandasDisponibles + " viandas.")) {
-            suscripcionesValidas += "Notificar cuando disponga únicamente de" + cantidadDeViandasDisponibles + " viandas. ";
+        if(validarSuscripcion(checkSuscripcionDisponenViandas, heladeraElegida, "quedan " + cantidadDeViandasDisponibles + " viandas")) {
+            suscripcionesValidas += "Notificar cuando disponga únicamente de " + cantidadDeViandasDisponibles + " viandas. ";
         }
 
-        if(validarSuscripcion(checkSuscripcionFaltanViandas, heladeraElegida, "Notificar cuando falten " + cantidadDeViandasFaltantes + " viandas para que se llene la heladera.")) {
+        if(validarSuscripcion(checkSuscripcionFaltanViandas, heladeraElegida, "faltan " + cantidadDeViandasFaltantes + " viandas")) {
             suscripcionesValidas += "Notificar cuando falten " + cantidadDeViandasFaltantes + " viandas para que se llene la heladera. ";
         }
 
-        if(validarSuscripcion(checkSuscripcionDesperfecto, heladeraElegida, "Notificar cuando se produjo una falla.")) {
+        if(validarSuscripcion(checkSuscripcionDesperfecto, heladeraElegida, "se produjo una falla")) {
             suscripcionesValidas += "Notificar cuando se produjo una falla.";
         }
 
         if(suscripcionesValidas.isEmpty()) {
-            return "Sus suscripciones fallaron.";
+            System.out.println("Sus suscripciones fallaron.");
+        } else {
+            System.out.println("Suscripciones válidas: " + suscripcionesValidas);
         }
 
         return "ModificarColaboradorHumanoSuscripciones";
@@ -79,14 +79,14 @@ public class CtrlSuscripciones {
     private boolean validarSuscripcion(boolean checkbox, Heladera heladera, String evento) {
         if(checkbox) {
             GestorDeSuscripciones.getInstancia().registrarSuscripcion(heladera, colaborador, evento);
-            System.out.println(heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
+            System.out.println("Voy a guardar "+heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
             /*
             En realidad todo depende de si el gestor logra registrar la suscripción, debería
                             devolver un boolean para mostrar el OK que está en el DS.
             */
             return true;
         }
-        System.out.println(heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
+        System.out.println("No voy a guardar " + heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
         return false;
     }
 

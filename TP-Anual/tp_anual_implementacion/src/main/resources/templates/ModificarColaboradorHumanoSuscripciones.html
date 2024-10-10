@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>Seleccionar Heladera</p>
-                                        <form id="modal-form" action="/ColaboradorSuscrito" method="post">
+                                        <form id="modal-form" action="/ModificarColaboradorHumanoSuscripciones" method="post">
                                             <select id="optionsHeladera" name="optionsHeladera">
                                                 <!--<option v-for="heladera in heladeras">{{heladera}}</option>-->
                                                 <!--TO DO: VER COMO HACER CON OBJETOS EN EL HTML-->
@@ -157,10 +157,10 @@
                                                     <div class="conjunto-N-viandas">
                                                         <p>Notificar cuando queden N viandas disponibles</p>
                                                         <label for="cantidadDeViandasDisponibles">Cantidad N de viandas:</label><br>
-                                                        <input type="number" id="cantidadDeViandasDisponibles" min="0" placeholder="Cantidad N con las que quiere ser avisado">
+                                                        <input type="number" id="cantidadDeViandasDisponibles" name="cantidadDeViandasDisponibles" min="0" placeholder="Cantidad N con las que quiere ser avisado">
                                                     </div>
                                                     <label class="switch">
-                                                        <input id="check-suscripcion-disponen-viandas" type="checkbox">
+                                                        <input id="check-suscripcion-disponen-viandas" name="check-suscripcion-disponen-viandas" type="checkbox" value="true">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
@@ -168,17 +168,17 @@
                                                     <div class="conjunto-N-viandas">
                                                         <p>Notificar cuando falten N viandas</p>
                                                         <label for="cantidadDeViandasFaltantes">Cantidad N de viandas:</label><br>
-                                                        <input type="number" id="cantidadDeViandasFaltantes" min="0" placeholder="Cantidad N con las que quiere ser avisado">
+                                                        <input type="number" id="cantidadDeViandasFaltantes" name="cantidadDeViandasFaltantes" min="0" placeholder="Cantidad N con las que quiere ser avisado">
                                                     </div>
                                                     <label class="switch">
-                                                        <input id="check-suscripcion-faltan-viandas" type="checkbox">
+                                                        <input id="check-suscripcion-faltan-viandas" name="check-suscripcion-faltan-viandas" type="checkbox" value="true">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
                                                 <div class="modal-option">
                                                     <p>Notificar por desperfecto</p>
                                                     <label class="switch">
-                                                        <input id="check-suscripcion-desperfecto" type="checkbox">
+                                                        <input id="check-suscripcion-desperfecto" name="check-suscripcion-desperfecto" type="checkbox" value="true">
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
