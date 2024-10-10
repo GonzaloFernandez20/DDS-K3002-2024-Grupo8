@@ -44,17 +44,3 @@ document.getElementById('btn-crear-suscripcion').addEventListener('click', funct
 
     document.getElementById('modal-form').reset();
 });
-
-var bodySubscriptions = new Vue({
-    el: '#bodySubscriptions',
-    data: {
-        suscripciones: suscripcionesGenerales
-    }
-});
-
-var optionsHeladera = new Vue({
-    el: '#optionsHeladera',
-    data: {
-        heladeras: ['Heladera 1', 'Heladera 2', 'Heladera 3']
-    }
-});

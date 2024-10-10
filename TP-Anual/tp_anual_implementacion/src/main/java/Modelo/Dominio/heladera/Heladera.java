@@ -13,6 +13,8 @@ import java.util.*;
 
 
 public class Heladera {
+    private int idHeladera;
+
     private final Colaborador colaboradorACargo;
     private final Ubicacion ubicacion;
     private final int capacidadDeViandas;
@@ -21,7 +23,7 @@ public class Heladera {
     private Modelo modelo;
     private EstadoHeladera estado;
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
-    private Float temperatura = modelo.temperaturaMinima + 1;
+    private Float temperatura;
 
     // BROKER ------------------------------------------
     private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
@@ -43,6 +45,7 @@ public class Heladera {
         this.capacidadDeViandas = capacidadDeViandas;
         this.viandasEnStock = new ArrayList<>();
         this.modelo = modelo;
+        this.temperatura = getModelo().temperaturaMinima + 1;
         this.estado = EstadoHeladera.ACTIVA;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
     }
@@ -95,6 +98,9 @@ public class Heladera {
 
 
     // ---- Getters y Setters
+    public int getIdHeladera() { return idHeladera; }
+    public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
+    public int getCapacidadDeViandas() { return capacidadDeViandas; }
     public Colaborador getColaboradorACargo() { return colaboradorACargo; }
     public Ubicacion getUbicacion() { return ubicacion; }
     public List<Vianda> getViandasEnStock() {return viandasEnStock;}

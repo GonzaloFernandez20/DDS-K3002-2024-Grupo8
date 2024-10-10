@@ -3,7 +3,7 @@ html {
   overflow-x: hidden;
 }
 
-.scroll-permitido {
+.scroll-permitido{
   overflow-x: auto;
 }
 
@@ -17,7 +17,9 @@ body {
   flex-direction: column;
 }
 
-body, html {
+body,html{
+  margin: 0;
+  padding: 0;
   height: 100%;
 }
 
@@ -36,7 +38,7 @@ header img {
   height: auto;
 }
 
-main {
+main{
   flex: 1;
 }
 
@@ -65,6 +67,7 @@ main {
 /* Button styles */
 .header-buttons {
   display: flex;
+  /*display: block;*/
 }
 
 .header-buttons button {
@@ -114,22 +117,22 @@ footer .social-icons li a:hover {
   color: #008cba;
 }
 
-.bi {
+.bi{
   fill: #50bfa0;
 }
 
-.bi:hover {
+.bi:hover{
   fill: hsl(163, 34%, 33%);
 }
 
-.referirAColaboracion p {
+.referirAColaboracion p{
   margin-top: 10px;
 }
 
-.referirAColaboracion a {
+.referirAColaboracion a{
   color: #1c8e7c;
 }
 
-.referirAColaboracion a:hover {
+.referirAColaboracion a:hover{
   color: #167264;
 }

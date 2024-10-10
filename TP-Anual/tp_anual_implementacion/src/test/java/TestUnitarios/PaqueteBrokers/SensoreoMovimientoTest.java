@@ -7,6 +7,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
+import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.persona.Persona;
 import Modelo.Dominio.persona.PersonaJuridica;
@@ -18,6 +19,7 @@ import Modelo.Dominio.sensoreos.SensoreoTemperatura;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SensoreoMovimientoTest {
@@ -35,8 +37,10 @@ public class SensoreoMovimientoTest {
         };
         Ubicacion ubicacion = new Ubicacion(direccion, "Buenos Aires", "ALmagro");
         Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ONG, "Gastronomia", direccion);
-        Colaborador colaborador = new Colaborador(personaJuridica, (List<MedioDeContacto>) medioDeContacto);
-        Modelo modelo = new Modelo(15, 9);
+        List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+        mediosDeContacto.add(new Mail("gastroalmagro@gmail.com"));
+        Colaborador colaborador = new Colaborador(personaJuridica, mediosDeContacto);
+        Modelo modelo = new Modelo("Heladera3000", 15, 9);
         Heladera heladera = new Heladera(colaborador, ubicacion, 10, modelo, LocalDate.now());
         System.out.print("Temperatura inicial de la heladera: " + heladera.getTemperatura());
 

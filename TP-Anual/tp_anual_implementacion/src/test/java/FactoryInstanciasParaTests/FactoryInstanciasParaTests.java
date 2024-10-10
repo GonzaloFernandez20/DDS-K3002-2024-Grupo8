@@ -24,7 +24,7 @@ public class FactoryInstanciasParaTests {
         Heladera heladera = new Heladera(instanciarColaboradorJuridico(),
                                          new Ubicacion(new Direccion("Mozart", "2300", null), "CABA", "Heladera Campus UTN"),
                                         3,
-                                        new Modelo(5f,1f),
+                                        new Modelo("Campus", 5f,1f),
                                         null);
         NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
         heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);
@@ -35,7 +35,7 @@ public class FactoryInstanciasParaTests {
         Heladera heladera = new Heladera(instanciarColaboradorJuridico(),
                                          new Ubicacion(new Direccion("Medrano", "981", null), "CABA", "Heladera Medrano UTN"),
                                         3,
-                                        new Modelo(5f,1f),
+                                        new Modelo("Medrano", 5f,1f),
                                         null);
         NotificadorDeSuscriptos notificadorHeladeraNueva = new NotificadorDeSuscriptos(heladera);
         heladera.setNotificadorDeSuscriptos(notificadorHeladeraNueva);

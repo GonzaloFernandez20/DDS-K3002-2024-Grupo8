@@ -8,6 +8,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
+import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.persona.Persona;
 import Modelo.Dominio.persona.PersonaJuridica;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,8 +40,10 @@ public class BrokerAccesoHeladerasTest {
         };
         Ubicacion ubicacion = new Ubicacion(direccion, "Buenos Aires", "ALmagro");
         Persona personaJuridica = new PersonaJuridica("ONG", TipoOrganizacion.ONG, "Gastronomia", direccion);
-        Colaborador colaborador = new Colaborador(personaJuridica, (List<MedioDeContacto>) medioDeContacto);
-        Modelo modelo = new Modelo(15, 9);
+        List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+        mediosDeContacto.add(new Mail("gastroalmagro@gmail.com"));
+        Colaborador colaborador = new Colaborador(personaJuridica, mediosDeContacto);
+        Modelo modelo = new Modelo("Heladera3000", 15, 9);
         heladera1 = new Heladera(colaborador, ubicacion, 10, modelo, LocalDate.now());
         Direccion direccion2 = new Direccion("Independencia", "124", "1234");
         MedioDeContacto medioDeContacto2 = new MedioDeContacto() {
@@ -50,8 +54,10 @@ public class BrokerAccesoHeladerasTest {
         };
         Ubicacion ubicacion2 = new Ubicacion(direccion, "Buenos Aires", "ALmagro");
         Persona personaJuridica2 = new PersonaJuridica("ONG", TipoOrganizacion.ONG, "Gastronomia", direccion2);
-        Colaborador colaborador2 = new Colaborador(personaJuridica2, (java.util.List<MedioDeContacto>) medioDeContacto2);
-        Modelo modelo2 = new Modelo(15, 9);
+        List<MedioDeContacto> mediosDeContacto2 = new ArrayList<>();
+        mediosDeContacto2.add(new Mail("almagrogastro@gmail.com"));
+        Colaborador colaborador2 = new Colaborador(personaJuridica, mediosDeContacto);
+        Modelo modelo2 = new Modelo("Heladera3500", 15, 9);
         heladera2 = new Heladera(colaborador2, ubicacion2, 10, modelo2, LocalDate.now());
     }
 

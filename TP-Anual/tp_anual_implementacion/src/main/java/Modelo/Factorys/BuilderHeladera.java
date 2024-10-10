@@ -22,7 +22,7 @@ public class BuilderHeladera {
     }
 
     private static Modelo crearModelo(HeladeraDTO dto) {
-        return new Modelo(dto.getTempMAXmodelo(), dto.getTempMINmodelo());
+        return new Modelo(dto.getNombreModelo(), dto.getTempMAXmodelo(), dto.getTempMINmodelo());
     }
 
     private static Ubicacion crearUbicacion(HeladeraDTO dto) {

@@ -8,12 +8,12 @@
         <meta name="generator" content="Hugo 0.122.0">
         <title>Mi Cuenta - Suscripciones</title>
 
-        <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="./assets/CSS/HeaderFooter.css" rel="stylesheet">
-        <link href="./assets/CSS/MiCuenta.css" rel="stylesheet">
-        <link href="./assets/CSS/Modal.css" rel="stylesheet">
+        <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+        <link href="/assets/CSS/MiCuenta.css" rel="stylesheet">
+        <link href="/assets/CSS/Modal.css" rel="stylesheet">
     </head>
 
     <body>
@@ -66,37 +66,37 @@
                         <ul class="nav nav-pills flex-column mb-auto">
                             <span class="fs-5">Usuario</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/home-icon.svg"/>
+                                <img alt="Casa" height="20px" width="20px" src="img/home-icon.svg"/>
                                 <a href="ModificarColaboradorHumano.html#info-personal" class="nav-link">Información Personal</a>
                             </li>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/contact-icon.svg"/>
+                                <img alt="Sobre" height="20px" width="20px" src="img/contact-icon.svg"/>
                                 <a href="ModificarColaboradorHumano.html#contacto" class="nav-link"> Contacto </a>
                             </li>
                         </ul>
                         <ul class="nav nav-pills flex-column mb-auto nav-chosen">
                             <span class="fs-5">Suscripciones</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/list-icon.svg"/>
+                                <img alt="Listado" height="20px" width="20px" src="img/list-icon.svg"/>
                                 <a href="#listado-suscripciones" class="nav-link">
                                     Listado de suscripciones
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/notifications-icon.svg"/>
+                                <img alt="Campana" height="20px" width="20px" src="img/notifications-icon.svg"/>
                                 <a href="#suscribir" class="nav-link"> Suscribirme </a>
                             </li>
                         </ul>
                         <ul class="nav nav-pills flex-column mb-auto">
                             <span class="fs-5">Mis puntos</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/puntos.png"/>
+                                <img alt="Puntos" height="20px" width="20px" src="img/puntos.png"/>
                                 <a href="ModificarColaboradorPremios.html#puntos-actuales" class="nav-link">
                                     Puntos actuales
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/premios.png"/>
+                                <img alt="Regalo" height="20px" width="20px" src="img/premios.png"/>
                                 <a href="ModificarColaboradorPremios.html#premios" class="nav-link">
                                     Premios
                                 </a>
@@ -105,7 +105,7 @@
                         <ul class="nav nav-pills flex-column mb-auto colaboracion">
                             <span class="fs-5">Colaboraciones</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/tarjeta-icon.png"/>
+                                <img alt="Tarjeta" height="20px" width="20px" src="img/tarjeta-icon.png"/>
                                 <a href="DarDeAltaPersonaEnSitVulnerable.html" class="nav-link">
                                     Dar de alta a una persona
                                 </a>
@@ -127,10 +127,12 @@
                                 </tr>
                             </thead>
                             <tbody id="bodySubscriptions">
-                                <tr v-for="suscripcion in suscripciones" :key="suscripcion.suscripcionId">
+                                <!-- EN SUSPENSO HASTA QUE SEPAMOS COMO SE MAPEAN LAS SUSCRIPCIONES
+                                    <tr v-for="suscripcion in suscripciones" :key="suscripcion.suscripcionId">
                                     <td>{{suscripcion.punto}}</td>
                                     <td>{{suscripcion.suceso}}</td>
-                                </tr>
+                                </tr>-->
+
                             </tbody>
                         </table>
                         <h3 id="suscribir">Suscribirme</h3>
@@ -148,7 +150,7 @@
                                             <select id="optionsHeladera" name="optionsHeladera">
                                                 <!--<option v-for="heladera in heladeras">{{heladera}}</option>-->
                                                 <!--TO DO: VER COMO HACER CON OBJETOS EN EL HTML-->
-                                                <option th:each="heladera : ${heladeras}" th:value="${heladera}" th:text="${heladera}"></option>
+                                                <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" ></option>
                                             </select>
                                             <div style="display: flex; flex-direction: column; margin-top: 20px;">
                                                 <div class="modal-option">
@@ -183,6 +185,7 @@
                                             </div>
                                             <button type="submit" class="btn subscribe" id="btn-crear-suscripcion">Crear suscripciones</button>
                                         </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -208,9 +211,8 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
-        <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-        <script src="./assets/JS/ModificarColaboradorHumanoSuscripciones.js"></script>
-        <script src="./assets/JS/ModificarColaboradorUsuario.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/JS/ModificarColaboradorHumanoSuscripciones.js"></script>
+        <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
     </body>
 </html>
