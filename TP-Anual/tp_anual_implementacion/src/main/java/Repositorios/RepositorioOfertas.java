@@ -15,8 +15,8 @@ public class RepositorioOfertas {
     private static RepositorioOfertas instancia;
     private static List<OfertaDeUnProducto> ofertas = List.of(
             // HARDCODEADO HASTA PERSISTENCIA
-            new OfertaDeUnProducto(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), "Campana", 50, "/img/alert-icon.svg", Rubro.JUGUETERIA, new Producto("Campana", 50)),
-            new OfertaDeUnProducto(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), "Lámpara", 250, null, Rubro.ARTICULOS_PARA_EL_HOGAR, new Producto("Lámpara blanca", 1))
+            new OfertaDeUnProducto(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), "Campana", 50, "/img/alert-icon.svg", Rubro.JUGUETERIA, new Producto("Campana", 1)),
+            new OfertaDeUnProducto(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), "Lámpara", 250, null, Rubro.ARTICULOS_PARA_EL_HOGAR, new Producto("Lámpara blanca", 50))
     );
 
     public static RepositorioOfertas getInstancia(){

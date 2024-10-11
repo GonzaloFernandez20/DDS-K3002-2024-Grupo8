@@ -17,9 +17,14 @@ public class NotificadorDeSuscriptos {
         this.suscriptos = new HashMap<>();
     }
 
-    public void suscribir(String evento, Colaborador colaborador){
-        suscriptos.computeIfAbsent(evento, key -> new ArrayList<>());
-        suscriptos.get(evento).add(colaborador);
+    public boolean suscribir(String evento, Colaborador colaborador){
+        try {
+            suscriptos.computeIfAbsent(evento, key -> new ArrayList<>());
+            suscriptos.get(evento).add(colaborador);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void desuscribir(String evento, Colaborador colaborador){

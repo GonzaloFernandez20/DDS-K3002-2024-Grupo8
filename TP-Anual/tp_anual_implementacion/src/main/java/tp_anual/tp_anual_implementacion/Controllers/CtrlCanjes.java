@@ -43,14 +43,18 @@ public class CtrlCanjes {
         System.out.println("Pide canjear el producto con id " + idOferta);
         OfertaDeUnProducto oferta = RepositorioOfertas.getInstancia().buscarOfertaPorId(Integer.parseInt(idOferta));
 
+        String mensaje;
         try {
             GestorDeOfertaDeProductos.canjearProducto(colaborador, oferta);
+            mensaje = "¡Felicidades! Logró realizar el canje de " + oferta.getNombreOferta() + " por " + oferta.getPuntosNecesarios() + " puntos.";
         } catch (Exception e) {
-            // TO DO: Mostrar excepciones por pantalla
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
+            mensaje = "Error en el canje: " + e.getMessage();
         }
 
-        return "CanjearPuntos";
+        model.addAttribute("mensaje", mensaje);
+
+        return mostrarProductosYServicios(model);
     }
 
     private OfertaDeUnProductoDTO convertirOfertaADTO(OfertaDeUnProducto oferta) {

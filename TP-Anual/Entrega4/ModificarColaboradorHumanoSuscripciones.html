@@ -137,54 +137,54 @@
                         <button id="btn-suscribir" class="btn-mod subscribe" data-bs-toggle="modal" data-bs-target="#modalSuscripcion">Quiero suscribirme a una heladera</button>
                         <div class="modal fade" id="modalSuscripcion" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title">Suscribirme a una Heladera</h5>
-                                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Seleccionar Heladera</p>
-                                    <form id="modal-form">
-                                        <select id="optionsHeladera">
-                                            <option v-for="heladera in heladeras">{{heladera}}</option>
-                                        </select>
-                                        <div style="display: flex; flex-direction: column; margin-top: 20px;">
-                                            <div class="modal-option">
-                                                <div class="conjunto-N-viandas">
-                                                    <p>Notificar cuando queden N viandas disponibles</p>
-                                                    <label for="cantidadDeViandasDisponibles">Cantidad N de viandas:</label><br>
-                                                    <input type="number" id="cantidadDeViandasDisponibles" min="0" placeholder="Cantidad N con las que quiere ser avisado">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title">Suscribirme a una Heladera</h5>
+                                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Seleccionar Heladera</p>
+                                        <form id="modal-form">
+                                            <select id="optionsHeladera">
+                                                <option v-for="heladera in heladeras">{{heladera}}</option>
+                                            </select>
+                                            <div style="display: flex; flex-direction: column; margin-top: 20px;">
+                                                <div class="modal-option">
+                                                    <div class="conjunto-N-viandas">
+                                                        <p>Notificar cuando queden N viandas disponibles</p>
+                                                        <label for="cantidadDeViandasDisponibles">Cantidad N de viandas:</label><br>
+                                                        <input type="number" id="cantidadDeViandasDisponibles" min="0" placeholder="Cantidad N con las que quiere ser avisado">
+                                                    </div>
+                                                    <label class="switch">
+                                                        <input id="check-suscripcion-disponen-viandas" type="checkbox">
+                                                        <span class="slider round"></span>
+                                                    </label>
                                                 </div>
-                                                <label class="switch">
-                                                    <input id="check-suscripcion-disponen-viandas" type="checkbox">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </div>
-                                            <div class="modal-option">
-                                                <div class="conjunto-N-viandas">
-                                                    <p>Notificar cuando falten N viandas</p>
-                                                    <label for="cantidadDeViandasFaltantes">Cantidad N de viandas:</label><br>
-                                                    <input type="number" id="cantidadDeViandasFaltantes" min="0" placeholder="Cantidad N con las que quiere ser avisado">
+                                                <div class="modal-option">
+                                                    <div class="conjunto-N-viandas">
+                                                        <p>Notificar cuando falten N viandas</p>
+                                                        <label for="cantidadDeViandasFaltantes">Cantidad N de viandas:</label><br>
+                                                        <input type="number" id="cantidadDeViandasFaltantes" min="0" placeholder="Cantidad N con las que quiere ser avisado">
+                                                    </div>
+                                                    <label class="switch">
+                                                        <input id="check-suscripcion-faltan-viandas" type="checkbox">
+                                                        <span class="slider round"></span>
+                                                    </label>
                                                 </div>
-                                                <label class="switch">
-                                                    <input id="check-suscripcion-faltan-viandas" type="checkbox">
-                                                    <span class="slider round"></span>
-                                                </label>
+                                                <div class="modal-option">
+                                                    <p>Notificar por desperfecto</p>
+                                                    <label class="switch">
+                                                        <input id="check-suscripcion-desperfecto" type="checkbox">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <div class="modal-option">
-                                                <p>Notificar por desperfecto</p>
-                                                <label class="switch">
-                                                    <input id="check-suscripcion-desperfecto" type="checkbox">
-                                                    <span class="slider round"></span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn subscribe" id="btn-crear-suscripcion">Crear suscripciones</button>
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn subscribe" id="btn-crear-suscripcion">Crear suscripciones</button>
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>

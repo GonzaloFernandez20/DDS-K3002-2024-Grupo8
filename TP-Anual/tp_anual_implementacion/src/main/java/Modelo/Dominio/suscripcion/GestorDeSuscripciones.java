@@ -16,10 +16,10 @@ public class GestorDeSuscripciones {
             return instancia;
         }
 
-        public void registrarSuscripcion(Heladera heladera,
+        public boolean registrarSuscripcion(Heladera heladera,
                                          Colaborador colaborador,
                                          String evento) {
-        heladera.getNotificadorDeSuscriptos().suscribir(evento,colaborador);
+            return heladera.getNotificadorDeSuscriptos().suscribir(evento,colaborador);
         }
 
         public void efectuarDesuscripcion(Heladera heladera,
