@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 
-    <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/assets/CSS/Home.css">
-    <link href="../static/assets/CSS/HeaderFooter.css" rel="stylesheet">
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/CSS/Home.css">
+    <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,11 +34,11 @@
 
               <nav class="col-md-6 text-center">
                   <ul class="nav-links justify-content-center">
-                      <li><a href="Home.html">Home</a></li>
-                      <li><a href="Colaborar.html">Colaborar</a></li>
-                      <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                      <li><a th:href="@{/}">Home</a></li>
+                      <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                      <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                       <li><a href="Nosotros.html">Nosotros</a></li>
-                      <li><a href="Mapa.html">Mapa</a></li>
+                      <li><a th:href="@{Mapa.html}">Mapa</a></li>
                   </ul>
               </nav>
 
@@ -60,12 +60,12 @@
                     de las personas con vulnerabilidad alimentaria. Estas heladeras se encuentran en: restaurantes, estaciones
                     de transporte público y otros establecimientos de fácil acceso tanto para las personas que los necesitan
                     como para aquellos que deciden colaborar con la causa</text>
-                    
+
                   <h2 class="titulos">¡Nuestras propuestas!</h2>
                     <div class="container mt-4">
                       <div class="row">
                         <div class="col-md-6">
-                        <div id="myCarousel" class="carousel slide mb-6" class="col-6" data-bs-ride="carousel">
+                        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
                         <div class="carousel-indicators">
                           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                           <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="carousel-inner">
                           <div class="carousel-item active">
-                            <img class="d-block w-100" src="../static/img/donarDineroCarousel.jpg" alt="Imagen 1">
+                            <img class="d-block w-100" src="/img/donarDineroCarousel.jpg" alt="Imagen 1">
                             <div class="container">
                               <div class="carousel-caption ">
                                 <h1>Donar dinero</h1>
@@ -83,7 +83,7 @@
                             </div>
                           </div>
                           <div class="carousel-item">
-                            <img class="d-block w-100" src="../static/img/distribucionVianda.jpg" alt="Imagen 1">
+                            <img class="d-block w-100" src="/img/distribucionVianda.jpg" alt="Imagen 1">
                             <div class="container">
                               <div class="carousel-caption">
                                 <h1>Distribuir viandas</h1>
@@ -92,7 +92,7 @@
                             </div>
                           </div>
                           <div class="carousel-item">
-                            <img class="d-block w-100" src="../static/img/registroPersonas.png" alt="Imagen 1">
+                            <img class="d-block w-100" src="/img/registroPersonas.png" alt="Imagen 1">
                             <div class="container">
                               <div class="carousel-caption">
                                 <h1>Registrar personas en situación vulnerable</h1>
@@ -101,7 +101,7 @@
                             </div>
                           </div>
                           <div class="carousel-item">
-                            <img class="d-block w-100" src="../static/img/donarViandas.jpg" alt="Imagen 1">
+                            <img class="d-block w-100" src="/img/donarViandas.jpg" alt="Imagen 1">
                             <div class="container">
                               <div class="carousel-caption">
                                 <h1>Donar viandas</h1>
@@ -121,9 +121,9 @@
                       </div>
                   <h2>Para personas</h2>
                 </div>
-                  
+
           <div class="col-md-6">
-            <div id="myCarousel2" class="carousel slide mb-6" class="col-6" data-bs-ride="carousel">
+            <div id="myCarousel2" class="carousel slide mb-6" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                   <button type="button" data-bs-target="#myCarousel2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                   <button type="button" data-bs-target="#myCarousel2" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
-                    <img class="d-block w-100" src="../static/img/donarDineroCarousel.jpg" alt="Imagen 1">
+                    <img class="d-block w-100" src="/img/donarDineroCarousel.jpg" alt="Imagen 1">
                     <div class="container">
                       <div class="carousel-caption ">
                         <h1>Donar dinero</h1>
@@ -140,7 +140,7 @@
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="../static/img/cargoHeladera.jpg" alt="Imagen 1">
+                    <img class="d-block w-100" src="/img/cargoHeladera.jpg" alt="Imagen 1">
                     <div class="container">
                       <div class="carousel-caption">
                         <h1>Hacerse cargo de una heladera</h1>
@@ -149,7 +149,7 @@
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" src="../static/img/ofrecerProductos.jpg" alt="Imagen 1">
+                    <img class="d-block w-100" src="/img/ofrecerProductos.jpg" alt="Imagen 1">
                     <div class="container">
                       <div class="carousel-caption">
                         <h1>Ofrecer productos</h1>
@@ -169,7 +169,7 @@
               </div>
             <h2>Para organizaciones</h2>
           </div>
-            
+
           </div>
         </div>
         </div>
@@ -188,7 +188,7 @@
       </ul>
     </footer>
 
-    <script src="../static/assets/JS/Home.js"></script>
-    <script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/JS/Home.js"></script>
+    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

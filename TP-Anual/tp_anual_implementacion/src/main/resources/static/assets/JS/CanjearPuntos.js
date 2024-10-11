@@ -18,7 +18,7 @@ class Imagen {
 let productos = [new Producto(0, "Campana", "Sonido", 50, new Imagen("img/notifications-icon.svg", "Una campana que ya estaba por ahí.")),
     new Producto(1, "Lámpara blanca", "Iluminación", 2500, null)
 ];
-
+/*
 var containerCanjeo = new Vue({
     el: '#containerCanjeo',
     data: {
@@ -39,4 +39,4 @@ var containerCanjeo = new Vue({
             }
         }
     }    
-});
+});*/
