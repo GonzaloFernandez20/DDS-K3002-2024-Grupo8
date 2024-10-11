@@ -71,9 +71,10 @@ formularioDonacion.addEventListener('submit', function(e) {
             return response.json();
         })
         .then(data => {
-            // Deberiamos chequear la respuesta del back
-            alert('Donación enviada exitosamente');
-            formularioDonacion.reset();
+            if(data.ok){
+                alert('Donación enviada exitosamente');
+                formularioDonacion.reset();
+            }
         })
         .catch(error => {
             console.error('Error:', error);
