@@ -8,11 +8,11 @@
         <meta name="generator" content="Hugo 0.122.0">
         <title>Administrar</title>
 
-        <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
         
         <!-- Custom styles for this template -->
-        <link href="../static/assets/CSS/HeaderFooter.css" rel="stylesheet">
-        <link href="../static/assets/CSS/MiCuenta.css" rel="stylesheet">
+        <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+        <link href="/assets/CSS/MiCuenta.css" rel="stylesheet">
     </head>
 
     <body>
@@ -40,11 +40,11 @@
 
                     <nav class="col-md-6 text-center">
                         <ul class="nav-links justify-content-center">
-                            <li><a href="Home.html">Home</a></li>
-                            <li><a href="Colaborar.html">Colaborar</a></li>
-                            <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                            <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                             <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a href="Mapa.html">Mapa</a></li>
+                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
                         </ul>
                     </nav>
 
@@ -96,15 +96,15 @@
                         <h3 id="reportes">Reportes</h3>
                         <div class="reportes-container">
                             <p>Cantidad de fallas por heladera</p>
-                            <embed type="application/pdf" src="../static/reportes/CantidadFallasPorHeladera.pdf">
+                            <embed type="application/pdf" src="/reportes/CantidadFallasPorHeladera.pdf">
                         </div>
                         <div class="reportes-container">
                             <p>Cantidad de viandas colocadas/retiradas por heladera</p>
-                            <embed type="application/pdf" src="../static/reportes/CantidadViandasPorHeladera.pdf">
+                            <embed type="application/pdf" src="/reportes/CantidadViandasPorHeladera.pdf">
                         </div>
                         <div class="reportes-container">
                             <p>Cantidad de viandas por colaborador</p>
-                            <embed type="application/pdf" src="../static/reportes/CantidadViandasPorColaborador.pdf">
+                            <embed type="application/pdf" src="/reportes/CantidadViandasPorColaborador.pdf">
                         </div>
                     </div>
                 </div>
@@ -122,6 +122,6 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
-        <script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

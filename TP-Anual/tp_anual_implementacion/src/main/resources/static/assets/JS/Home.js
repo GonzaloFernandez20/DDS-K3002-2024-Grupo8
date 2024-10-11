@@ -1,6 +1,6 @@
-document.getElementById('prev-person').addEventListener('click', () => {
+/*document.getElementById('prev-person').addEventListener('click', () => {
     alert('Mostrando colaboraciones previas para personas.');
-});
+});*/
 
 document.getElementById('next-person').addEventListener('click', () => {
     alert('Mostrando colaboraciones siguientes para personas.');
