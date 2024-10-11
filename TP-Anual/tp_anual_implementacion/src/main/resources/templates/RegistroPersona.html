@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../static/assets/CSS/Sesion.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Formulario principal -->
+        <div class="container">
+            <h2>REGISTRO</h2>
+            <form id="registroForm">
+                
+                <div class="input-group">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Ingrese usuario">
+                    <div class="error-message" id="usuarioError"></div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese contraseña">
+                    <div class="error-message" id="contrasenaError"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="tipoColaborador">Colaborador</label>
+                    <select id="tipoColaborador" name="tipoColaborador">
+                        <option value="">Seleccione tipo de colaborador</option>
+                        <option value="juridico">Juridico</option>
+                        <option value="humano">Humano</option>
+                    </select>
+                    <div class="error-message" id="tipoColaboradorError"></div>
+                </div>
+
+                <button type="submit">Registrar</button>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Formulario adicional para Colaborador Juridico -->
+    <div class="container" id="extraFormContainerJuridico" style="display: none;">
+        <form id="extraFormJuridico">
+            <div class="input-group">
+                <label for="razonSocial">Razón Social (*)</label>
+                <input type="text" id="razonSocial" name="razonSocial" placeholder="Ingrese su razón social">
+                <div class="error-message" id="razonSocialError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="rubro">Rubro (*)</label>
+                <input type="text" id="rubro" name="rubro" placeholder="Ingrese su rubro">
+                <div class="error-message" id="rubroError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="tipoOrganizacion">Tipo de Organización (*)</label>
+                <select id="tipoOrganizacion" name="tipoOrganizacion">
+                    <option value="">Seleccione tipo de organización</option>
+                    <option value="gubernamental">Gubernamental</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="ong">ONG</option>
+                    <option value="institución">Institución</option>
+                </select>
+                <div class="error-message" id="tipoOrganizacionError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="direccionE">Dirección de Empresa</label>
+                <input type="text" id="direccionE" name="direccionE" placeholder="Calle y altura">
+            </div>
+
+            <div class="input-checkbox">
+                <label for="medioContacto">Medio de Contacto (*)</label>
+                <input type="checkbox" id="medioContactoEmailJ" value="email">Email<br>
+                <input type="checkbox" id="medioContactoTelefonoJ" value="telefono">Telefono<br>
+                <input type="checkbox" id="medioContactoCorreoJ" value="postal">Correo Postal<br>
+
+                <div class="input-group" id="emailCajaJ" style="display: none;">
+                    <label for="emailIngresoJ">Ingresar Email</label>
+                    <input type="text" name="emailIngresoJ" placeholder="Ingresar Email" id="emailIngresadoJ">
+                    <div class="error-message" id="emailErrorJ"></div>
+                </div>
+
+                <div class="input-group" id="telefonoCajaJ" style="display: none;">
+                    <label for="telefonoIngresoJ">Ingresar Telefono</label>
+                    <input type="text" pattern="^[0-9]*$" name="telefonoIngresoJ" placeholder="Ingresar Telefono" id="telefonoIngresadoJ">
+                    <div class="error-message" id="telefonoErrorJ"></div>
+                </div>
+
+                <div class="input-group" id="correoCajaJ" style="display: none;">
+                    <label for="correoIngresoJ">Ingresar Direccion de Contacto</label>
+                    <input type="text" name="correoIngresoJ" placeholder="Ingresar Direccion" id="correoIngresadoJ">
+                    <div class="error-message" id="correoErrorJ"></div>
+                </div>
+
+                <div class="error-message" id="contactoErrorJ"></div>
+            </div>
+
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <!-- Formulario adicional para Colaborador Humano -->
+    <div class="container" id="extraFormContainerHumano" style="display: none;">
+        <form id="extraFormHumano">
+
+            <div class="input-group">
+                <label for="nombre">Nombre (*)</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+                <div class="error-message" id="nombreError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="apellido">Apellido (*)</label>
+                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido">
+                <div class="error-message" id="apellidoError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+            </div>
+
+            <div class="input-group">
+                <label for="direccionH">Dirección</label>
+                <input type="text" id="direccionH" name="direccionH" placeholder="Calle y altura">
+            </div>
+
+            <div class="input-checkbox">
+                <label for="medioContacto">Medio de Contacto (*)</label>
+                <input type="checkbox" id="medioContactoEmailH" value="email">Email<br>
+                <input type="checkbox" id="medioContactoTelefonoH" value="telefono">Telefono<br>
+                <input type="checkbox" id="medioContactoCorreoH" value="postal">Correo Postal<br>
+
+                <div class="input-group" id="emailCajaH" style="display: none;">
+                    <label for="emailIngresoH">Ingresar Email</label>
+                    <input type="text" name="emailIngresoH" placeholder="Ingresar Email" id="emailIngresadoH">
+                    <div class="error-message" id="emailErrorH"></div>
+                </div>
+
+                <div class="input-group" id="telefonoCajaH" style="display: none;">
+                    <label for="telefonoIngreso">Ingresar Telefono</label>
+                    <input type="text" pattern="^[0-9]*$" name="telefonoIngresoH" placeholder="Ingresar Telefono" id="telefonoIngresadoH">
+                    <div class="error-message" id="telefonoErrorH"></div>
+                </div>
+
+                <div class="input-group" id="correoCajaH" style="display: none;">
+                    <label for="direccionIngresoH">Ingresar Direccion de Contacto</label>
+                    <input type="text" name="correoCajaH" placeholder="Ingresar Direccion" id="correoIngresadoH">
+                    <div class="error-message" id="correoErrorH"></div>
+                </div>
+
+                <div class="error-message" id="contactoErrorH"></div>
+            </div>
+
+            <button type="submit">Ingresar</button></a>
+
+        </form>
+
+    </div>
+
+
+    <script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/JS/RegistroPersona.js"></script>
+</body>
+</html>
