@@ -47,7 +47,7 @@ public class CtrlSuscripciones {
     public String recibirSeleccion(@RequestParam(value = "optionsHeladera", defaultValue = "0") String idHeladeraElegida,
                                    @RequestParam(required = false, value = "check-suscripcion-disponen-viandas") boolean checkSuscripcionDisponenViandas, @RequestParam(value = "cantidadDeViandasDisponibles", defaultValue = "0") int cantidadDeViandasDisponibles,
                                    @RequestParam(required = false, value = "check-suscripcion-faltan-viandas") boolean checkSuscripcionFaltanViandas, @RequestParam(value = "cantidadDeViandasFaltantes",defaultValue = "0") int cantidadDeViandasFaltantes,
-                                   @RequestParam(value = "check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto,
+                                   @RequestParam(required = false, value = "check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto,
                                    Model model) {
 
         Heladera heladeraElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraElegida));

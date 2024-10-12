@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Colaborador {
     private final Persona persona;
@@ -79,6 +80,13 @@ public class Colaborador {
     public List<Contribucion> getHistorialDeContribuciones() { return historialDeContribuciones; }
     public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
     public Persona getPersona() { return persona; }
-    public AccesoDeColaborador getTarjeta() { return tarjeta; }
+    public AccesoDeColaborador getTarjeta() {
+        if(Objects.isNull(tarjeta)) {
+            /////////// RECONTRA HARDCODEADO. ES TEMPORAL. SI HAY UN GESTOR O ALGO, USARLO.
+            tarjeta = new AccesoDeColaborador("0", this);
+            ///////////
+        }
+        return tarjeta;
+    }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
 }

@@ -13,7 +13,7 @@ import java.util.*;
 
 
 public class Heladera {
-    private Integer idHeladera;
+    private int idHeladera;
 
     private final Colaborador colaboradorACargo;
     private final Ubicacion ubicacion;
