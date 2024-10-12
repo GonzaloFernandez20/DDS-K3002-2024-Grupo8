@@ -9,7 +9,7 @@ formularioDonacion.addEventListener('submit', function(e) {
     const frecuenciaDonacion = document.getElementById('frecuenciaDonacion');
     const metodoPago = document.getElementById('metodoDePago');
 
-    
+
     if (!monto.value) {
         hasError = true;
         document.getElementById('montoError').innerText = 'El monto es requerido';
@@ -48,7 +48,37 @@ formularioDonacion.addEventListener('submit', function(e) {
 
     if (!hasError) {
 
-        alert('Donacion enviada exitosamente');
-        formularioDonacion.reset();
+        // Le enviamos los datos al Back
+
+        const donacionData = {
+            monto: monto.value,
+            fecha: fechaDonacion.value,
+            frecuencia: frecuenciaDonacion.value,
+            metodoPago: metodoPago.value
+        };
+
+        fetch('/ProcesarDonacion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(donacionData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la red');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if(data.ok){
+                    alert('Donación enviada exitosamente');
+                    formularioDonacion.reset();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar la donación');
+            });
     }
 });

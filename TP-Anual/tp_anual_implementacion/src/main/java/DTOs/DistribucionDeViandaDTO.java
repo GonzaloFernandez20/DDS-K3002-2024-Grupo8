@@ -3,6 +3,7 @@ package DTOs;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.MotivoDeDistribucion;
 import Modelo.Dominio.heladera.Heladera;
+import org.jetbrains.annotations.NotNull;
 
 public class DistribucionDeViandaDTO {
     Colaborador colaborador;

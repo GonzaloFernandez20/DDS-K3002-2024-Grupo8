@@ -1,4 +1,4 @@
-formularioDistribucion = document.getElementById('distribucionViandaForm');
+/*formularioDistribucion = document.getElementById('distribucionViandaForm');
 formularioDistribucion.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -51,4 +51,4 @@ formularioDistribucion.addEventListener('submit', function(e) {
         alert('Solicitud de Distribucion Realizada');
         formularioDistribucion.reset();
     }
-});
+});*/
