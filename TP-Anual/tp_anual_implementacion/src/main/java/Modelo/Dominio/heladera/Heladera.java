@@ -13,7 +13,7 @@ import java.util.*;
 
 
 public class Heladera {
-    private int idHeladera;
+    private Integer idHeladera;
 
     private final Colaborador colaboradorACargo;
     private final Ubicacion ubicacion;
@@ -99,7 +99,7 @@ public class Heladera {
 
 
     // ---- Getters y Setters
-    public int getIdHeladera() { return idHeladera; }
+    public Integer getIdHeladera() { return idHeladera; }
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
     public int getCapacidadDeViandas() { return capacidadDeViandas; }
     public Colaborador getColaboradorACargo() { return colaboradorACargo; }

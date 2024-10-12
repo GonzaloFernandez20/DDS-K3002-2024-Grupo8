@@ -11,10 +11,9 @@ import java.time.LocalDate;
 public class DistribucionDeVianda extends ContribucionConApertura {
 
     private final Heladera heladeraDeOrigen;
-
-
     private final MotivoDeDistribucion motivoDeDistribucion;
     private final Integer cantidadDeViandas;
+    private final Heladera heladeraDestino;
 
     public DistribucionDeVianda(Colaborador colaborador,
                                 Heladera heladeraDeOrigen,
