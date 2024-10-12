@@ -40,22 +40,13 @@
 
             <nav class="col-md-6 text-center">
                 <ul class="nav-links justify-content-center">
-                    <li><a href="Home.html">Home</a></li>
-                    <li><a href="Colaborar.html">Colaborar</a></li>
-                    <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                    <li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                    <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                     <li><a href="Nosotros.html">Nosotros</a></li>
-                    <li><a href="Mapa.html">Mapa</a></li>
+                    <li><a th:href="@{Mapa.html}">Mapa</a></li>
                 </ul>
             </nav>
-                <nav class="col-md-6 text-center">
-                    <ul class="nav-links justify-content-center">
-                        <li><a th:href="@{/}">Home</a></li>
-                        <li><a th:href="@{/Colaborar}">Colaborar</a></li>
-                        <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                        <li><a href="Nosotros.html">Nosotros</a></li>
-                        <li><a th:href="@{Mapa.html}">Mapa</a></li>
-                    </ul>
-                </nav>
 
             <div class="header-buttons col-md-3 justify-content-center text-md-right">
                 <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
@@ -71,19 +62,18 @@
             <h2>Distribución de Viandas</h2>
 
             <div class="col-md-6">
-                <form id="distribucionViandaForm" action="/DistribuirViandaRespuesta" method="post">
+                <form id="distribucionViandaForm" action="/DistribuirVianda" method="post">
                     <div class="input-group">
                         <label for="heladeraOrigen">Heladera Origen (*)</label>
                         <select id="heladeraOrigen" name="heladeraOrigen">
-                            <option th:each="heladera : ${heladeras}" th:value="${heladera}" th:text="${heladera}"></option>
+                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
                         </select>
-                        <div class="error-message" id="heladeraOrigenError"></div>
-                    </div>
+                        </div>
 
                     <div class="input-group">
                         <label for="heladeraDestino">Heladera Destino (*)</label>
                         <select id="heladeraDestino" name="heladeraDestino">
-                            <option th:each="heladera : ${heladeras}" th:value="${heladera}" th:text="${heladera}"></option>
+                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
                         </select>
                         <div class="error-message" id="heladeraDestinoError"></div>
 
@@ -92,8 +82,7 @@
 
                     <div class="input-group">
                         <label for="cantidadViandas">Viandas a Distribuir (*)</label>
-                        <input type="number" min="1" step="1" id="cantidadViandas" name="cantidadViandas" placeholder="Ingrese Cantidad de Viandas a Distribuir" >
-                        <div class="error-message" id="cantidadViandasError"></div>
+                        <input type="number" step="1" id="cantidadViandas"  name="cantidadDeViandas" min="0" placeholder="Ingrese Cantidad de Viandas a Distribuir" >
                     </div>
 
                     <div class="input-group">
@@ -105,20 +94,15 @@
                     </div>
 
                     <button type="submit">Realizar Distribución</button>
+                    <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
+                        <p th:text="${mensaje}"></p>
+                    </div>
 
                 </form>
             </div>
 
             <div class="col-md-6 container-img scroll-permitido">
                 <img
-                        src = "/img/distribuirViandaImagen.png"
-                        <button type="submit">Realizar Distribución</button>
-
-                    </form>
-                </div>
-
-                <div class="col-md-6 container-img scroll-permitido">
-                    <img
                         src = "/img/distribuirViandaImagen.png"
                         alt = "Imagen de viandas siendo envueltas por flechas circulares";
                         class="imagenContribucion"
