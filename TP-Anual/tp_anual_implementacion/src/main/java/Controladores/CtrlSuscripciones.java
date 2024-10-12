@@ -60,15 +60,15 @@ public class CtrlSuscripciones {
 
         String suscripcionesValidas = "";
 
-        if(validarSuscripcion(checkSuscripcionDisponenViandas, heladeraElegida, "quedan " + cantidadDeViandasDisponibles + " viandas")) {
+        if(realizarSuscripcion(checkSuscripcionDisponenViandas, heladeraElegida, "quedan " + cantidadDeViandasDisponibles + " viandas")) {
             suscripcionesValidas += "Notificar cuando disponga únicamente de " + cantidadDeViandasDisponibles + " viandas. ";
         }
 
-        if(validarSuscripcion(checkSuscripcionFaltanViandas, heladeraElegida, "faltan " + cantidadDeViandasFaltantes + " viandas")) {
+        if(realizarSuscripcion(checkSuscripcionFaltanViandas, heladeraElegida, "faltan " + cantidadDeViandasFaltantes + " viandas")) {
             suscripcionesValidas += "Notificar cuando falten " + cantidadDeViandasFaltantes + " viandas para que se llene la heladera. ";
         }
 
-        if(validarSuscripcion(checkSuscripcionDesperfecto, heladeraElegida, "se produjo una falla")) {
+        if(realizarSuscripcion(checkSuscripcionDesperfecto, heladeraElegida, "se produjo una falla")) {
             suscripcionesValidas += "Notificar cuando se produjo una falla.";
         }
 
@@ -82,14 +82,24 @@ public class CtrlSuscripciones {
 
         return mostrarHeladeras(model);
     }
-    private boolean validarSuscripcion(boolean checkbox, Heladera heladera, String evento) {
-        Map<String, List<Colaborador>> suscriptos = heladera.getNotificadorDeSuscriptos().getSuscriptos();
-        boolean colaboraboradorQuedoSuscripto = suscriptos.get(evento).contains(colaborador);
 
-        if(checkbox && colaboraboradorQuedoSuscripto) {
+    private boolean realizarSuscripcion(boolean checkbox, Heladera heladera, String evento) {
+        if(checkbox) {
+            GestorDeSuscripciones.getInstancia().registrarSuscripcion(heladera, colaborador, evento);
             System.out.println("Voy a guardar "+heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
-            return true;
         }
+
+        Map<String, List<Colaborador>> suscriptos = heladera.getNotificadorDeSuscriptos().getSuscriptos();
+
+        try {
+            boolean colaboradorQuedoSuscripto = suscriptos.get(evento).contains(colaborador);
+            if(colaboradorQuedoSuscripto) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println("No voy a guardar " + heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
         return false;
     }

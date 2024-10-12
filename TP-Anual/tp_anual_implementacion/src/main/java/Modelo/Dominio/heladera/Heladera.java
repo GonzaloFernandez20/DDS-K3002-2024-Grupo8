@@ -43,6 +43,7 @@ public class Heladera {
         this.modelo = modelo;
         this.estado = EstadoHeladera.ACTIVA;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
+        notificadorDeSuscriptos = new NotificadorDeSuscriptos(this);
     }
 
     // ------------------------------------------------
