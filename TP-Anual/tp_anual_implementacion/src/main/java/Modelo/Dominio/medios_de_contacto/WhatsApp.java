@@ -1,6 +1,6 @@
 package Modelo.Dominio.medios_de_contacto;
 
-class WhatsApp implements MedioDeContacto{
+public class WhatsApp implements MedioDeContacto{
 
     private String nroDeTelefono;
 

@@ -5,8 +5,10 @@ import Modelo.Dominio.colaborador.Colaborador;
 import java.time.LocalDate;
 
 public class HeladeraDTO {
-    private Colaborador colaboradorACargo;
+    private int idHeladera; // Identificador del hibernate
+    private Colaborador colaboradorACargo; // Es ColaboradorDTO o Colaborador?
     private int capacidadViandas;
+    private String nombreModelo;
     private float tempMAXmodelo;
     private float tempMINmodelo;
     private String calle;
@@ -16,9 +18,10 @@ public class HeladeraDTO {
     private String nombreDelPunto;
     private LocalDate puestaEnFuncionamiento;
 
-    public HeladeraDTO(Colaborador colaboradorACargo, int capacidadViandas, float tempMAXmodelo, float tempMINmodelo, String calle, String altura, String codPostal, String ciudad, String nombreDelPunto, LocalDate puestaEnFuncionamiento) {
+    public HeladeraDTO(Colaborador colaboradorACargo, int capacidadViandas, String nombreModelo, float tempMAXmodelo, float tempMINmodelo, String calle, String altura, String codPostal, String ciudad, String nombreDelPunto, LocalDate puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
         this.capacidadViandas = capacidadViandas;
+        this.nombreModelo = nombreModelo;
         this.tempMAXmodelo = tempMAXmodelo;
         this.tempMINmodelo = tempMINmodelo;
         this.calle = calle;
@@ -29,9 +32,9 @@ public class HeladeraDTO {
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
     }
 
-    public Colaborador getColaboradorACargo() {
-        return colaboradorACargo;
-    }
+    public int getIdHeladera() { return idHeladera; }
+
+    public Colaborador getColaboradorACargo() { return colaboradorACargo; }
 
     public void setColaboradorACargo(Colaborador colaboradorACargo) {
         this.colaboradorACargo = colaboradorACargo;
@@ -44,6 +47,10 @@ public class HeladeraDTO {
     public void setCapacidadViandas(int capacidadViandas) {
         this.capacidadViandas = capacidadViandas;
     }
+
+    public String getNombreModelo() { return nombreModelo; }
+
+    public void setNombreModelo(String nombreModelo) { this.nombreModelo = nombreModelo; }
 
     public float getTempMAXmodelo() {
         return tempMAXmodelo;
@@ -104,5 +111,4 @@ public class HeladeraDTO {
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
 
     public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) { this.puestaEnFuncionamiento = puestaEnFuncionamiento; }
-
 }

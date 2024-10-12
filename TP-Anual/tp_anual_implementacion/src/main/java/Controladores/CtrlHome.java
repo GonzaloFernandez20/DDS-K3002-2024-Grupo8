@@ -5,10 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CtrlHome {
-
-    @GetMapping("/")
+    @GetMapping({"/", "/Home"})
     public String home() {
-        return "Home"; // Esto buscará un archivo index.html en src/main/resources/templates/
+        return "Home";
     }
 }
-

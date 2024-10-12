@@ -11,6 +11,7 @@ import java.util.*;
 
 
 public class Heladera {
+    private int idHeladera;
     private final Colaborador colaboradorACargo;
     private final Ubicacion ubicacion;
     private final int capacidadDeViandas;
@@ -96,5 +97,8 @@ public class Heladera {
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }
     public void setNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { this.notificadorDeSuscriptos = notificadorDeSuscriptos; }
+    public int getCapacidadDeViandas() { return capacidadDeViandas; }
+    public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
+    public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
 }
 

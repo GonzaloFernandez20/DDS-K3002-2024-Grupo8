@@ -26,4 +26,6 @@ public class Modelo {
     public float getTemperaturaMinima() { return temperaturaMinima; }
     public void setTemperaturaMaxima(float temperaturaMaxima) { this.temperaturaMaxima = temperaturaMaxima; }
     public void setTemperaturaMinima(float temperaturaMinima) { this.temperaturaMinima = temperaturaMinima; }
+    public String getNombreModelo() { return nombreModelo; }
+    public void setNombreModelo(String nombreModelo) { this.nombreModelo = nombreModelo; }
 }
