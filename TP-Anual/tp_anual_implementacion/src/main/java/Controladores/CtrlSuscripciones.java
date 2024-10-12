@@ -12,6 +12,7 @@ import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.suscripcion.GestorDeSuscripciones;
+import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Repositorios.RepositorioHeladeras;
 
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -45,8 +47,10 @@ public class CtrlSuscripciones {
 
     @PostMapping("/ModificarColaboradorHumanoSuscripciones")
     public String recibirSeleccion(@RequestParam(value = "optionsHeladera", defaultValue = "0") String idHeladeraElegida,
-                                   @RequestParam(required = false, value = "check-suscripcion-disponen-viandas") boolean checkSuscripcionDisponenViandas, @RequestParam(value = "cantidadDeViandasDisponibles", defaultValue = "0") int cantidadDeViandasDisponibles,
-                                   @RequestParam(required = false, value = "check-suscripcion-faltan-viandas") boolean checkSuscripcionFaltanViandas, @RequestParam(value = "cantidadDeViandasFaltantes",defaultValue = "0") int cantidadDeViandasFaltantes,
+                                   @RequestParam(required = false, value = "check-suscripcion-disponen-viandas") boolean checkSuscripcionDisponenViandas,
+                                   @RequestParam(value = "cantidadDeViandasDisponibles", defaultValue = "0") int cantidadDeViandasDisponibles,
+                                   @RequestParam(required = false, value = "check-suscripcion-faltan-viandas") boolean checkSuscripcionFaltanViandas,
+                                   @RequestParam(value = "cantidadDeViandasFaltantes",defaultValue = "0") int cantidadDeViandasFaltantes,
                                    @RequestParam(value = "check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto,
                                    Model model) {
 
@@ -78,15 +82,16 @@ public class CtrlSuscripciones {
 
         return mostrarHeladeras(model);
     }
-
     private boolean validarSuscripcion(boolean checkbox, Heladera heladera, String evento) {
-/*        if(checkbox && GestorDeSuscripciones.getInstancia().registrarSuscripcion(heladera, colaborador, evento)) {
+        Map<String, List<Colaborador>> suscriptos = heladera.getNotificadorDeSuscriptos().getSuscriptos();
+        boolean colaboraboradorQuedoSuscripto = suscriptos.get(evento).contains(colaborador);
+
+        if(checkbox && colaboraboradorQuedoSuscripto) {
             System.out.println("Voy a guardar "+heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
             return true;
         }
         System.out.println("No voy a guardar " + heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
-        return false;*/
-        return true;
+        return false;
     }
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
