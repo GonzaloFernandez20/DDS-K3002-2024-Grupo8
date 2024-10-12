@@ -36,15 +36,43 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         tipoColaborador.classList.remove('error');
     }
 
-    // Si no hay errores, se muestra el formulario correspondiente al colaborador seleccionado
-    if (!hasError) {
+    // --------------- VERIFICACION CON EL BACK
+    const datosDeUsuario = {
+        nombreDeUsuario: usuario.value,
+        contrasenia: contrasena.value
+    };
+
+    fetch('/ValidarUsuario', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datosDeUsuario),
+    })
+    .then(response =>{
+        if (!response.ok) {
+            throw new Error('Error en la red');
+        }
+        return response.text();
+    })
+    .then(msjDeRespuesta => {
+        alert(msjDeRespuesta);
+        if (!hasError) { desplegarFormulario(tipoColaborador.value); }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al registrar el usuario');
+    });
+
+    // Función para desplegar el formulario correspondiente según el tipo de colaborador
+    function desplegarFormulario(tipo) {
         const extraFormContainerJuridico = document.getElementById('extraFormContainerJuridico');
         const extraFormContainerHumano = document.getElementById('extraFormContainerHumano');
-        
-        if (tipoColaborador.value === 'juridico') {
+
+        if (tipo === 'juridico') {
             extraFormContainerJuridico.style.display = 'block';
             extraFormContainerHumano.style.display = 'none';
-        } else if (tipoColaborador.value === 'humano') {
+        } else if (tipo === 'humano') {
             extraFormContainerHumano.style.display = 'block';
             extraFormContainerJuridico.style.display = 'none';
         }
@@ -160,3 +188,29 @@ checkboxEmailJ.addEventListener('change', function() {
     const emailCaja = document.getElementById('emailCajaJ');
     emailCaja.style.display = this.checked ? 'inline' : 'none';
 });
+
+
+/* TODO: UNO DE ESTOS PARA CADA TIPO DE COLABORADOR
+    fetch('/ValidarUsuario', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datosDeUsuario),
+    })
+    .then(response =>{
+        if (!response.ok) {
+            throw new Error('Error en la red');
+        }
+        return response.text();
+    })
+    .then(msjDeRespuesta => {
+        alert(msjDeRespuesta);
+        if (!hasError) { desplegarFormulario(tipoColaborador.value); }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al registrar el usuario');
+    });
+
+*/

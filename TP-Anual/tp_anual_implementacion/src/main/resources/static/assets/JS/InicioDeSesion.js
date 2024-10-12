@@ -26,21 +26,10 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     let hasError = false;
 
     // Validación para el formulario de registro
-    if (username.toLowerCase() === 'admin') {
-        usernameError.textContent = 'El nombre de usuario "admin" no está permitido.';
-        document.getElementById('username').classList.add('error');
-        isValid = false;
-    }
 
     if (username === '') {
         usernameError.textContent = 'Por favor, ingrese un nombre de usuario.';
         document.getElementById('username').classList.add('error');
-        isValid = false;
-    }
-
-    if (password === '1234' || password.toLowerCase() === 'admin') {
-        passwordError.textContent = 'La contraseña no puede ser "1234" o "admin".';
-        document.getElementById('password').classList.add('error');
         isValid = false;
     }
 
@@ -49,6 +38,21 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         document.getElementById('password').classList.add('error');
         isValid = false;
     }
+
+    // ---------------
+
+    if (password === '1234' || password.toLowerCase() === 'admin') {
+        passwordError.textContent = 'La contraseña no puede ser "1234" o "admin".';
+        document.getElementById('password').classList.add('error');
+        isValid = false;
+    }
+
+    if (username.toLowerCase() === 'admin') {
+        usernameError.textContent = 'El nombre de usuario "admin" no está permitido.';
+        document.getElementById('username').classList.add('error');
+        isValid = false;
+    }
+
 
     // Validación para el formulario de inicio de sesión
     if (!usuario.value) {
