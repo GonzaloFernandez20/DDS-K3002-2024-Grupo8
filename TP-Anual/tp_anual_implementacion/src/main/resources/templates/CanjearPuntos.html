@@ -8,11 +8,11 @@
         <meta name="generator" content="Hugo 0.122.0">
         <title>Canjear mis puntos</title>
 
-        <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
         
         <!-- Custom styles for this template -->
-        <link href="../static/assets/CSS/HeaderFooter.css" rel="stylesheet">
-        <link href="../static/assets/CSS/CanjearPuntos.css" rel="stylesheet">
+        <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+        <link href="/assets/CSS/CanjearPuntos.css" rel="stylesheet">
     </head>
 
     <body>
@@ -40,11 +40,11 @@
     
                     <nav class="col-md-6 text-center">
                         <ul class="nav-links justify-content-center">
-                            <li><a href="Home.html">Home</a></li>
-                            <li><a href="Colaborar.html">Colaborar</a></li>
-                            <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                            <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                             <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a href="Mapa.html">Mapa</a></li>
+                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
                         </ul>
                     </nav>
     
@@ -62,32 +62,32 @@
                   <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw">Canjear Puntos</h1>
                     <p class="lead text-body-secondary">Aquí podrás ver todos los productos y servicios que se encuentran disponibles para ser canjeados.</p>
-                    <p class="fs-4">Mis Puntos: {{puntos}}</p>
+                    <p class="fs-4" th:text="'Mis Puntos: ' + ${puntosDelColaborador}"></p>
                   </div>
                 </div>
             </section>
             <div class="album py-5 bg-body-tertiary">
                 <div class="container">
+                    <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
+                        <p th:text="${mensaje}"></p>
+                    </div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="contenedorProductos">
-                        <div class="col" v-for="producto in productos" :key="producto.productoId">
+                        <div class="col" th:each="oferta : ${ofertas}">
                             <div class="card shadow-sm">
-                                <div v-if="producto.imagen" class="img-container">
-                                    <img :src="producto.imagen.nombre" class="card-img-top" alt="Producto"/>
+                                <div class="img-container">
+                                    <img th:src="${oferta.linkDeImagen != null ? oferta.linkDeImagen : '/img/dar.png'}" class="card-img-top" width="236px" height="236px" alt="Producto"/>
                                 </div>
-                                <div v-else class="bd-placeholder-img card-img-top">
-                                    <img src="../static/img/dar.png" class="card-img-top" alt="Una mano dando un corazón."/>
-                                </div>
-                                <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#ededed"/></svg>-->
                                 <div class="card-body">
-                                    <p class="fs-4">{{producto.nombreProducto}}</p>
-                                    <p class="card-text">Rubro: {{producto.rubro}}</p>
-                                    <div v-if="producto.imagen">
-                                        <p class="card-text">{{producto.imagen.epigrafe}}</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <button type="button" class="btn btn-canjear-producto" @click="conseguirProducto(producto.productoId)">Conseguir producto</button>
-                                        <small class="text-body-secondary">{{producto.puntosNecesarios}} puntos</small>
-                                    </div>
+                                    <p class="fs-4" th:text="${oferta.nombreOferta}"></p>
+                                    <p class="card-text" th:text="${oferta.rubro}"></p>
+                                    <p class="card-text" th:text="${oferta.nombreProducto}"></p>
+                                    <form action="/CanjearPuntos" method="post">
+                                        <input type="hidden" name="oferta" th:value="${oferta.idOferta}" />
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button type="submit" class="btn btn-canjear-producto">Conseguir producto</button>
+                                            <small class="text-body-secondary" th:text="${oferta.puntosNecesarios} + ' puntos'"></small>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +107,7 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-        <script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../static/assets/JS/CanjearPuntos.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/JS/CanjearPuntos.js"></script>
     </body>
 </html>

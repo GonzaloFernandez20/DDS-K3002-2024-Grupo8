@@ -47,6 +47,15 @@
                     <li><a href="Mapa.html">Mapa</a></li>
                 </ul>
             </nav>
+                <nav class="col-md-6 text-center">
+                    <ul class="nav-links justify-content-center">
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                        <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
+                        <li><a href="Nosotros.html">Nosotros</a></li>
+                        <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                    </ul>
+                </nav>
 
             <div class="header-buttons col-md-3 justify-content-center text-md-right">
                 <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
@@ -103,6 +112,14 @@
             <div class="col-md-6 container-img scroll-permitido">
                 <img
                         src = "/img/distribuirViandaImagen.png"
+                        <button type="submit">Realizar Distribución</button>
+
+                    </form>
+                </div>
+
+                <div class="col-md-6 container-img scroll-permitido">
+                    <img
+                        src = "/img/distribuirViandaImagen.png"
                         alt = "Imagen de viandas siendo envueltas por flechas circulares";
                         class="imagenContribucion"
                 >
@@ -125,6 +142,8 @@
 
 <script src="/assets/JS/DistribuirVianda.js"></script>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/JS/DistribuirVianda.js"></script>
+    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

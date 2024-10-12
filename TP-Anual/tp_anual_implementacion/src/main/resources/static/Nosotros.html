@@ -8,11 +8,11 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>Nosotros</title>
 
-    <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom styles for this template -->
-    <link href="../static/assets/CSS/HeaderFooter.css" rel="stylesheet">
-    <link href="../static/assets/CSS/Nosotros.css" rel="stylesheet">
+    <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+    <link href="/assets/CSS/Nosotros.css" rel="stylesheet">
   </head>
 
   <body>
@@ -40,11 +40,11 @@
 
                 <nav class="col-md-6 text-center">
                     <ul class="nav-links justify-content-center">
-                        <li><a href="Home.html">Home</a></li>
-                        <li><a href="Colaborar.html">Colaborar</a></li>
-                        <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                        <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                         <li><a href="Nosotros.html">Nosotros</a></li>
-                        <li><a href="Mapa.html">Mapa</a></li>
+                        <li><a th:href="@{Mapa.html}">Mapa</a></li>
                     </ul>
                 </nav>
 
@@ -65,13 +65,13 @@
                         <div class="form-cuenta">
 
                             <div class="grid-container scroll-permitido">
-                                <div class="circle"><img src="../static/img/abril.png"></div>
-                                <div class="circle"><img src="../static/img/carolina.png"></div>
-                                <div class="circle"><img src="../static/img/francisco.png"></div>
-                                <div class="circle"><img src="../static/img/gonzalo.jpeg"></div>
-                                <div class="circle"><img src="../static/img/melina.png"></div>
-                                <div class="circle"><img src="../static/img/sofia.png"></div>
-                                <div class="circle"><img src="../static/img/valentin.png"></div>
+                                <div class="circle"><img src="/img/abril.png"></div>
+                                <div class="circle"><img src="/img/carolina.png"></div>
+                                <div class="circle"><img src="/img/francisco.png"></div>
+                                <div class="circle"><img src="/img/gonzalo.jpeg"></div>
+                                <div class="circle"><img src="/img/melina.png"></div>
+                                <div class="circle"><img src="/img/sofia.png"></div>
+                                <div class="circle"><img src="/img/valentin.png"></div>
                             </div>
                             <div class="grid-container scroll-permitido">
                                 <label class="circle-label">Abril</label>
@@ -100,8 +100,6 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-    <script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="ModificarColaboradorUsuario.js"></script>
-    <!--<script src="ModificarColaboradorHumano.js"></script>-->
+    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Controller
 public class CtrlSuscripciones {
 
-    private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());;
+    private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());
     // private final Stream<SuscripcionDTO> suscripciones = RepositorioSuscripciones.getInstancia().getSuscripciones.stream().map(suscripcion -> convertirSuscripcionADTO(suscripcion));
     // PENDIENTE
 
@@ -47,7 +47,8 @@ public class CtrlSuscripciones {
     public String recibirSeleccion(@RequestParam(value = "optionsHeladera", defaultValue = "0") String idHeladeraElegida,
                                    @RequestParam(required = false, value = "check-suscripcion-disponen-viandas") boolean checkSuscripcionDisponenViandas, @RequestParam(value = "cantidadDeViandasDisponibles", defaultValue = "0") int cantidadDeViandasDisponibles,
                                    @RequestParam(required = false, value = "check-suscripcion-faltan-viandas") boolean checkSuscripcionFaltanViandas, @RequestParam(value = "cantidadDeViandasFaltantes",defaultValue = "0") int cantidadDeViandasFaltantes,
-                                   @RequestParam(value = "check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto) {
+                                   @RequestParam(value = "check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto,
+                                   Model model) {
 
         Heladera heladeraElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraElegida));
 
@@ -68,22 +69,19 @@ public class CtrlSuscripciones {
         }
 
         if(suscripcionesValidas.isEmpty()) {
-            System.out.println("Sus suscripciones fallaron.");
+            model.addAttribute("mensaje", "Sus suscripciones fallaron.");
         } else {
             System.out.println("Suscripciones válidas: " + suscripcionesValidas);
+            model.addAttribute("mensaje", "Suscripciones válidas: " + suscripcionesValidas);
         }
+        System.out.println(suscripcionesValidas);
 
-        return "ModificarColaboradorHumanoSuscripciones";
+        return mostrarHeladeras(model);
     }
 
     private boolean validarSuscripcion(boolean checkbox, Heladera heladera, String evento) {
-        if(checkbox) {
-            GestorDeSuscripciones.getInstancia().registrarSuscripcion(heladera, colaborador, evento);
+        if(checkbox && GestorDeSuscripciones.getInstancia().registrarSuscripcion(heladera, colaborador, evento)) {
             System.out.println("Voy a guardar "+heladera.getUbicacion().getNombreDelPunto() + ": " + evento);
-            /*
-            En realidad todo depende de si el gestor logra registrar la suscripción, debería
-                            devolver un boolean para mostrar el OK que está en el DS.
-            */
             return true;
         }
         System.out.println("No voy a guardar " + heladera.getUbicacion().getNombreDelPunto() + ": " + evento);

@@ -8,11 +8,11 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>Publicar Servicio o Producto</title>
 
-    <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom styles for this template -->
-    <link href="../static/assets/CSS/HeaderFooter.css" rel="stylesheet">
-    <link href="../static/assets/CSS/Colaboraciones.css" rel="stylesheet">
+    <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+    <link href="/assets/CSS/Colaboraciones.css" rel="stylesheet">
   </head>
 
   <body>
@@ -40,11 +40,11 @@
 
                 <nav class="col-md-6 text-center">
                     <ul class="nav-links justify-content-center">
-                        <li><a href="Home.html">Home</a></li>
-                        <li><a href="Colaborar.html">Colaborar</a></li>
-                        <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                        <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                         <li><a href="Nosotros.html">Nosotros</a></li>
-                        <li><a href="Mapa.html">Mapa</a></li>
+                        <li><a th:href="@{Mapa.html}">Mapa</a></li>
                     </ul>
                 </nav>
 
@@ -94,7 +94,7 @@
                         </div>
 
 						<div class="input-group">
-                            <label for="epigrafe">Epígrafe para la imagen </label>
+                            <label for="caption">Epígrafe para la imagen </label>
                             <textarea id="caption" class="border border-border rounded p-2 w-full" rows="3"></textarea>
                             <div class="error-message" id="error-epigrafe"></div>
                         </div>
@@ -112,7 +112,7 @@
             
                 <div class="col-md-6 scroll-permitido">
                     <img 
-                        src = "../static/img/publicarServicio.png"
+                        src = "/img/publicarServicio.png"
                         alt = "Imagen de viandas siendo envueltas por flechas circulares";
                         class="imagenContribucion"
                     >
@@ -132,8 +132,8 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-	<script src="../static/assets/JS/PublicarProductoOServicio.js"></script>
-	<script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/assets/JS/PublicarProductoOServicio.js"></script>
+	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </div>
   </body>
 </html>

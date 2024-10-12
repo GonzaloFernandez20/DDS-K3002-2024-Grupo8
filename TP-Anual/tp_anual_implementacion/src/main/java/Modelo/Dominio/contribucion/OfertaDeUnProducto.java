@@ -6,6 +6,7 @@ import Modelo.Dominio.sistema.Sistema;
 import java.time.LocalDate;
 
 public class OfertaDeUnProducto extends Contribucion {
+    private int idOferta;
     private String nombreOferta;
     private double puntosNecesarios;
     private String linkDeImagen;
@@ -35,6 +36,15 @@ public class OfertaDeUnProducto extends Contribucion {
     public boolean hayStock() { return producto.tengoStock(); }
 
     // ---- Getters y Setters
+    public int getIdOferta() { return idOferta; }
+
+    public String getNombreOferta() { return nombreOferta; }
+
     public double getPuntosNecesarios() { return puntosNecesarios; }
 
+    public String getLinkDeImagen() { return linkDeImagen; }
+
+    public Rubro getRubro() { return rubro; }
+
+    public Producto getProducto() { return producto; }
 }
