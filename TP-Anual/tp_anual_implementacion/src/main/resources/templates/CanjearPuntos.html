@@ -8,10 +8,11 @@
         <meta name="generator" content="Hugo 0.122.0">
         <title>Canjear mis puntos</title>
 
-        <link href="/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
         
-        <link href="/static/assets/CSS/HeaderFooter.css" rel="stylesheet">
-        <link href="/static/assets/CSS/CanjearPuntos.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+        <link href="/assets/CSS/CanjearPuntos.css" rel="stylesheet">
     </head>
 
     <body>
@@ -36,14 +37,14 @@
                     <div class="logo col-md-3 justify-content-center text-md-left">
                         <p>Acá va el logo</p>
                     </div>
-
+    
                     <nav class="col-md-6 text-center">
                         <ul class="nav-links justify-content-center">
-                            <li><a href="Home.html">Home</a></li>
-                            <li><a href="Colaborar.html">Colaborar</a></li>
-                            <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                            <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                             <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a href="Mapa.html">Mapa</a></li>
+                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
                         </ul>
                     </nav>
     
@@ -74,7 +75,7 @@
                         <div class="col" th:each="oferta : ${ofertas}">
                             <div class="card shadow-sm">
                                 <div class="img-container">
-                                    <img th:src="${oferta.linkDeImagen != null ? oferta.linkDeImagen : '/static/img/dar.png'}" class="card-img-top" width="236px" height="236px" alt="Producto"/>
+                                    <img th:src="${oferta.linkDeImagen != null ? oferta.linkDeImagen : '/img/dar.png'}" class="card-img-top" width="236px" height="236px" alt="Producto"/>
                                 </div>
                                 <div class="card-body">
                                     <p class="fs-4" th:text="${oferta.nombreOferta}"></p>
@@ -106,7 +107,7 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
-        <script src="/static/assets/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/static/assets/JS/CanjearPuntos.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/JS/CanjearPuntos.js"></script>
     </body>
 </html>

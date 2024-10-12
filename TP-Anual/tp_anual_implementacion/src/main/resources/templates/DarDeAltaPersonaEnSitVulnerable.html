@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dar de alta persona en situación vulnerable</title>
-        <link href="/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/static/assets/CSS/HeaderFooter.css" rel="stylesheet">
+        <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/CSS/Colaboraciones.css">
     </head>
 
@@ -32,11 +32,11 @@
 
                     <nav class="col-md-6 text-center">
                         <ul class="nav-links justify-content-center">
-                            <li><a href="Home.html">Home</a></li>
-                            <li><a href="Colaborar.html">Colaborar</a></li>
-                            <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                            <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
                             <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a href="Mapa.html">Mapa</a></li>
+                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
                         </ul>
                     </nav>
 
@@ -125,7 +125,7 @@
                 
                     <div class="col-md-6 container-img scroll-permitido">
                         <img 
-                            src = "/static/img/darDeAltaImagen.jpg"
+                            src = "/img/darDeAltaImagen.jpg"
                             alt = "Imagen de una mano agarrando una tarjeta";
                             class="imagenContribucion"
                         >
@@ -145,7 +145,7 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
-        <script src="/static/assets/JS/DarDeAltaPersonaEnSitVulnerable.js"></script>
-        <script src="/static/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/JS/DarDeAltaPersonaEnSitVulnerable.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
