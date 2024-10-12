@@ -10,7 +10,14 @@ import DTOs.DonacionDeDineroDTO;
 @Controller
 public class CtrlDonacionDeDinero {
 
-    @PostMapping("endpoint")
+    @GetMapping("/DonarDinero")
+    public String donarDineroHome() {
+        return "DonarDinero";
+    }
+
+
+
+
     public ResponseEntity<String> crearDonacion(@RequestBody DonacionDeDineroDTO donacionDTO) {
         GestorDonacionDeDinero.crearContribucion(donacionDTO);
 

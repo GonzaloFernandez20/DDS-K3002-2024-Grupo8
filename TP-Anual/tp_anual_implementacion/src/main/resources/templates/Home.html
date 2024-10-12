@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 
-    <link href="/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/assets/CSS/Home.css">
-    <link href="/static/assets/CSS/HeaderFooter.css" rel="stylesheet">
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/CSS/Home.css">
+    <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,9 +36,9 @@
                   <ul class="nav-links justify-content-center">
                       <li><a th:href="@{/}">Home</a></li>
                       <li><a th:href="@{/Colaborar}">Colaborar</a></li>
-                      <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                      <li><a href="Nosotros.html">Nosotros</a></li>
-                      <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                      <li><a th:href="@{/CanjearPuntos}">Canjear Puntos</a></li>
+                      <li><a th:href="@{/Nosotros}">Nosotros</a></li>
+                      <li><a th:href="@{/Mapa.html}">Mapa</a></li>
                   </ul>
               </nav>
 
@@ -78,7 +78,7 @@
                             <div class="container">
                               <div class="carousel-caption ">
                                 <h1>Donar dinero</h1>
-                                <p><a class="btn btn-lg btn-primary" href="DonarDinero.html">Quiero colaborar!</a></p>
+                                  <p><a class="btn btn-lg btn-primary" th:href="@{/DonarDinero}">Quiero colaborar!</a></p>
                               </div>
                             </div>
                           </div>
