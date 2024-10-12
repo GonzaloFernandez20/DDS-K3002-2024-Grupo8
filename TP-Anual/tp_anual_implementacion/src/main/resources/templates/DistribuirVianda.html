@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distribuir Viandas</title>
-    <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/CSS/Colaboraciones.css">
-    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/CSS/HeaderFooter.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/CSS/Colaboraciones.css">
+    <link href="/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -33,11 +33,11 @@
 
                 <nav class="col-md-6 text-center">
                     <ul class="nav-links justify-content-center">
-                        <li><a th:href="@{/}">Home</a></li>
-                        <li><a th:href="@{/Colaborar}">Colaborar</a></li>
-                        <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Colaborar.html">Colaborar</a></li>
+                        <li><a href="CanjearPuntos.html">Canjear Puntos</a></li>
                         <li><a href="Nosotros.html">Nosotros</a></li>
-                        <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                        <li><a href="Mapa.html">Mapa</a></li>
                     </ul>
                 </nav>
 
@@ -104,7 +104,7 @@
             
                 <div class="col-md-6 container-img scroll-permitido">
                     <img 
-                        src = "/img/distribuirViandaImagen.png"
+                        src = "/static/img/distribuirViandaImagen.png"
                         alt = "Imagen de viandas siendo envueltas por flechas circulares";
                         class="imagenContribucion"
                     >
@@ -125,8 +125,8 @@
         </ul>
     </footer>
 
-    <script src="/assets/JS/DistribuirVianda.js"></script>
-    <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/JS/DistribuirVianda.js"></script>
+    <script src="/static/assets/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
