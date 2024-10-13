@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -42,6 +43,9 @@ public class CtrlDistribucionViandas {
 
     @GetMapping("/DistribuirVianda")
     public String mostrarFormulario(Model model) {
+        if(Objects.isNull(colaborador.getTarjeta())) {
+            return "PedirAccesoColaborador";
+        }
         model.addAttribute("heladeras", heladeras);
         this.setMotivos();
         model.addAttribute("motivos", motivos);

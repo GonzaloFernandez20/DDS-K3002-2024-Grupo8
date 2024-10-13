@@ -14,7 +14,8 @@ public class PersonaHumana extends Persona {
     public PersonaHumana(String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento, Direccion direccion) {
         if(nombre ==null){throw new IllegalArgumentException("El nombre es obligatorio");}
         if(apellido ==null){throw new IllegalArgumentException("El apellido es obligatorio");}
-        if(documento ==null){throw new IllegalArgumentException("El documento es obligatorio");}
+        // if(documento ==null){throw new IllegalArgumentException("El documento es obligatorio");}
+        // EL DOCUMENTO NO ES OBLIGATORIO. LAS PERSONAS EN SITUACIÓN VULNERABLE PUEDEN NO TENER DOCUMENTO.
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaDeNacimiento = fechaDeNacimiento;

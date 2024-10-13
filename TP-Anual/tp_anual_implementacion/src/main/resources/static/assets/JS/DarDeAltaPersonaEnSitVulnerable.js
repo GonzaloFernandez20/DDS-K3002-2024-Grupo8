@@ -4,26 +4,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const nombrePersonaVul = document.getElementById("nombrePersonaVul");
     const fechaNacimientoPersonaVul = document.getElementById("fechaNacimientoPersonaVul");
     const sitViviendaPersonaVul = document.getElementById("sitViviendaPersonaVul");
-    const domicilioPersonaVul = document.getElementById("domicilioPersonaVul");
+    const calleDomicilioPersonaVul = document.getElementById("calleDomicilioPersonaVul");
+    const alturaDomicilioPersonaVul = document.getElementById("alturaDomicilioPersonaVul");
     const tipoDocumentoPersonaVul = document.getElementById("tipoDocPersonaVul");
     const numeroDocumentoPersonaVul = document.getElementById("numeroDocPersonaVul");
     const tieneMenoresPersonaVul = document.getElementById("tieneMenoresPersonaVul");
     const cantidadMenoresPersonaVul = document.getElementById("cantidadMenoresPersonaVul");
     const tarjetaPersonaVul = document.getElementById("tarjetaPersonaVul");
 
-    domicilioPersonaVul.parentElement.style.display = "none";
+    calleDomicilioPersonaVul.parentElement.style.display = "none";
+    alturaDomicilioPersonaVul.parentElement.style.display = "none";
     numeroDocumentoPersonaVul.parentElement.style.display = "none";
     cantidadMenoresPersonaVul.parentElement.style.display = "none";
 
     sitViviendaPersonaVul.addEventListener("change", function () {
-        if (sitViviendaPersonaVul.value === "Posee domicilio") {
-            domicilioPersonaVul.parentElement.style.display = "block";
-            domicilioPersonaVul.setAttribute("required", "required");
+        if (sitViviendaPersonaVul.value === "POSEE_DOMICILIO") {
+            calleDomicilioPersonaVul.parentElement.style.display = "block";
+            calleDomicilioPersonaVul.setAttribute("required", "required");
+            alturaDomicilioPersonaVul.parentElement.style.display = "block";
+            alturaDomicilioPersonaVul.setAttribute("required", "required");
         } else {
-            domicilioPersonaVul.parentElement.style.display = "none";
-            domicilioPersonaVul.removeAttribute("required");
+            calleDomicilioPersonaVul.parentElement.style.display = "none";
+            calleDomicilioPersonaVul.removeAttribute("required");
+            alturaDomicilioPersonaVul.parentElement.style.display = "none";
+            alturaDomicilioPersonaVul.removeAttribute("required");
         }
     });
+
+    tipoDocumentoPersonaVul.addEventListener("change", function () {
+        numeroDocumentoPersonaVul.parentElement.style.display = "block";
+        numeroDocumentoPersonaVul.setAttribute("required", "required");
+    })
 
     tieneMenoresPersonaVul.addEventListener("change", function () {
         if (tieneMenoresPersonaVul.value === "Sí") {

@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -47,8 +48,12 @@ public class CtrlDonarViandas {
             estados.add(EstadoVianda.RETIRADA);
         }
     }
+
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
+        if(Objects.isNull(colaborador.getTarjeta())) {
+            return "PedirAccesoColaborador";
+        }
         System.out.println("Muestra las heladeras");
         setEstados();
         model.addAttribute("estados", estados);

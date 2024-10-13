@@ -80,15 +80,6 @@ public class Colaborador {
     public List<Contribucion> getHistorialDeContribuciones() { return historialDeContribuciones; }
     public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
     public Persona getPersona() { return persona; }
-    public AccesoDeColaborador getTarjeta() {
-        if(Objects.isNull(tarjeta)) {
-            /// HARDCODEADO TEMPORALMENTE.
-            /// A MENOS QUE LO ARREGLEN NO LO BORREN PORQUE ROMPE UN CONTROLADOR.
-            tarjeta = new AccesoDeColaborador("0000", this);
-            ///
-        }
-
-        return tarjeta;
-    }
+    public AccesoDeColaborador getTarjeta() { return tarjeta; }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
 }

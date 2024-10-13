@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th=http://www.thymeleaf.org>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +35,7 @@
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                             <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a href="Nosotros.html">Nosotros</a></li>
+                            <li><a th:href="@{Nosotros}">Nosotros</a></li>
                             <li><a th:href="@{Mapa.html}">Mapa</a></li>
                         </ul>
                     </nav>
@@ -52,7 +52,6 @@
             <div class="container-colab">
                 <div class="row">
                     <h2>Dar de alta persona en situación vulnerable</h2>
-
                     <div class="col-md-6">
                         <form id="form-dar-de-alta-persona-en-sit-vulnerable" action="/DarDeAltaPersonaEnSitVulnerable" method="post">
 
@@ -60,7 +59,12 @@
                                 <label for="nombrePersonaVul">Nombre (*)</label>
                                 <input type="text" id="nombrePersonaVul" name="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
                             </div>
-                            
+
+                            <div class="input-group">
+                                <label for="apellidoPersonaVul">Apellido (*)</label>
+                                <input type="text" id="apellidoPersonaVul" name="apellidoPersonaVul" placeholder="Ingrese el apellido de la persona a dar de alta" required>
+                            </div>
+
                             <div class="input-group">
                                 <label for="fechaNacimientoPersonaVul">Fecha de nacimiento de la persona (*)</label>
                                 <input type="date" id="fechaNacimientoPersonaVul" placeholder="dd/mm/aaaa" required>
@@ -70,20 +74,25 @@
                             
                             <div class="input-group">
                                 <label for="sitViviendaPersonaVul">Situación de vivienda de la persona (*)</label>
-                                <select id="sitViviendaPersonaVul" required>
-                                    <option th:each="estado : ${estadoDeViviendas}" th:value="${estado}" th:text="${estado}"></option>
+                                <select id="sitViviendaPersonaVul" name="sitViviendaPersonaVul" required>
+                                    <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado.toString()}"></option>
                                 </select>
                             </div>
 
                             <div class="input-group">
-                                <label for="domicilioPersonaVul">Domicilio </label>
-                                <input type="text" id="domicilioPersonaVul" placeholder="Ingrese el domicilio de la persona">
+                                <label for="calleDomicilioPersonaVul">Calle del domicilio </label>
+                                <input type="text" id="calleDomicilioPersonaVul" placeholder="Ingrese la calle del domicilio de la persona">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="alturaDomicilioPersonaVul">Altura del domicilio </label>
+                                <input type="text" id="alturaDomicilioPersonaVul" placeholder="Ingrese la altura del domicilio de la persona">
                             </div>
 
                             <div class="input-group">
                                 <label for="tipoDocPersonaVul">Tipo de documento de la persona</label>
-                                <select id="tipoDocPersonaVul">
-                                    <option th:each="tipo : ${tipoDeDocumentos}" th:value="${tipo}" th:text="${tipo}"></option>
+                                <select id="tipoDocPersonaVul" name="tipoDocPersonaVul">
+                                    <option th:each="tipo : ${tiposDocumento}" th:value="${tipo}" th:text="${tipo.toString()}"></option>
                                 </select>
                             </div>
 

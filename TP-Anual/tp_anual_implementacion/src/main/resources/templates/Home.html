@@ -53,6 +53,9 @@
     <main class="container">
         <div class="col-12">
             <div class="main">
+                <div th:if="${mensaje}" class="alert alert-success">
+                    <p th:text="${mensaje}"></p>
+                </div>
                 <h1 class="titulos">Sistema para la Mejora del Acceso
                     Alimentario en Contextos de
                     Vulnerabilidad Socioeconómica</h1>
