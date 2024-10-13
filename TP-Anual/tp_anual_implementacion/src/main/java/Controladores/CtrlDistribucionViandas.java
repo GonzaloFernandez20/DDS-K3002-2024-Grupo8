@@ -12,6 +12,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Factorys.FactoryDistribucionDeViandas;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -54,9 +55,11 @@ public class CtrlDistribucionViandas {
                                      @RequestParam(value = "cantidadViandas", defaultValue = "0") int cantidadViandas,
                                      @RequestParam(value = "motivoDistribucion", defaultValue = "0") MotivoDeDistribucion motivoDistribucion,
                                      Model model) {
+        System.out.println("hola");
         Heladera heladeraOrigen = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraOrigen));
         Heladera heladeraDestino = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraDestino));
         DistribucionDeViandaDTO distribucionDeViandaDTO = new DistribucionDeViandaDTO(colaborador, heladeraOrigen, heladeraDestino, motivoDistribucion, cantidadViandas);
+        FactoryDistribucionDeViandas.crearDistribucionAPartirDe(distribucionDeViandaDTO);
         GestorDistribucionDeViandas.crearContribucion(distribucionDeViandaDTO);
         // agregar a la base de datos
         model.addAttribute("mensaje", "Distribución realizada con éxito!");
