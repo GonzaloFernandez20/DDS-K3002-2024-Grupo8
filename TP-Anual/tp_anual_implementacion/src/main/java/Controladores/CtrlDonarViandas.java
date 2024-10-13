@@ -71,12 +71,18 @@ public class CtrlDonarViandas {
         ViandaDTO viandaDTO = new ViandaDTO(tipoVianda, fechaCaducidad, fechaDonacion, colaborador, heladeraElegida, calorias, peso, estado);
         List<ViandaDTO> viandas = new ArrayList<>();
         viandas.add(viandaDTO);
-        DonacionDeViandaDTO donacionDeViandaDTO = new DonacionDeViandaDTO(colaborador, heladeraElegida, viandas);
+        if(colaborador.getTarjeta().aperturaAutorizada(heladeraElegida)) {
+            DonacionDeViandaDTO donacionDeViandaDTO = new DonacionDeViandaDTO(colaborador, heladeraElegida, viandas);
 
-        BuilderDonacionDeViandas.crearDonacionAPartirDe(donacionDeViandaDTO);
-        GestorDonacionDeViandas.crearContribucion(donacionDeViandaDTO);
-        model.addAttribute("mensaje", "Donacion realizada con éxito!");
-        return mostrarHeladeras(model);
+            BuilderDonacionDeViandas.crearDonacionAPartirDe(donacionDeViandaDTO);
+            GestorDonacionDeViandas.crearContribucion(donacionDeViandaDTO);
+            model.addAttribute("mensaje", "Donacion realizada con éxito!");
+            return mostrarHeladeras(model);
+        } else{
+            model.addAttribute("mensaje", "No tiene acceso a la heladera!");
+            return "Home";
+        }
+
     }
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {

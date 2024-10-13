@@ -55,16 +55,18 @@ public class CtrlDistribucionViandas {
                                      @RequestParam(value = "cantidadViandas", defaultValue = "0") int cantidadViandas,
                                      @RequestParam(value = "motivoDistribucion", defaultValue = "0") MotivoDeDistribucion motivoDistribucion,
                                      Model model) {
-        System.out.println("hola");
         Heladera heladeraOrigen = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraOrigen));
         Heladera heladeraDestino = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraDestino));
-        DistribucionDeViandaDTO distribucionDeViandaDTO = new DistribucionDeViandaDTO(colaborador, heladeraOrigen, heladeraDestino, motivoDistribucion, cantidadViandas);
-        FactoryDistribucionDeViandas.crearDistribucionAPartirDe(distribucionDeViandaDTO);
-        GestorDistribucionDeViandas.crearContribucion(distribucionDeViandaDTO);
-        // agregar a la base de datos
-        model.addAttribute("mensaje", "Distribución realizada con éxito!");
-
-        return mostrarFormulario(model);
+        if(colaborador.getTarjeta().aperturaAutorizada(heladeraOrigen) && colaborador.getTarjeta().aperturaAutorizada(heladeraDestino)) {
+            DistribucionDeViandaDTO distribucionDeViandaDTO = new DistribucionDeViandaDTO(colaborador, heladeraOrigen, heladeraDestino, motivoDistribucion, cantidadViandas);
+            GestorDistribucionDeViandas.crearContribucion(distribucionDeViandaDTO);
+            // agregar a la base de datos
+            model.addAttribute("mensaje", "Distribución realizada con éxito!");
+            return mostrarFormulario(model);
+        }else {
+            model.addAttribute("mensaje", "No tiene permiso para acceder a las heladeras!");
+            return "Home";
+        }
     }
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {

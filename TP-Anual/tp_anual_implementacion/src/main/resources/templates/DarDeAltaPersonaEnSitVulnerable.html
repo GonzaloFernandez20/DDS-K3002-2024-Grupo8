@@ -54,11 +54,11 @@
                     <h2>Dar de alta persona en situación vulnerable</h2>
 
                     <div class="col-md-6">
-                        <form id="form-dar-de-alta-persona-en-sit-vulnerable">
+                        <form id="form-dar-de-alta-persona-en-sit-vulnerable" action="/DarDeAltaPersonaEnSitVulnerable" method="post">
 
                             <div class="input-group">
                                 <label for="nombrePersonaVul">Nombre (*)</label>
-                                <input type="text" id="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
+                                <input type="text" id="nombrePersonaVul" name="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a dar de alta" required>
                             </div>
                             
                             <div class="input-group">
@@ -71,9 +71,7 @@
                             <div class="input-group">
                                 <label for="sitViviendaPersonaVul">Situación de vivienda de la persona (*)</label>
                                 <select id="sitViviendaPersonaVul" required>
-                                    <option>--Seleccione--</option>
-                                    <option>Posee domicilio</option>
-                                    <option>Situación de calle</option>
+                                    <option th:each="estado : ${estadoDeViviendas}" th:value="${estado}" th:text="${estado}"></option>
                                 </select>
                             </div>
 
@@ -85,12 +83,7 @@
                             <div class="input-group">
                                 <label for="tipoDocPersonaVul">Tipo de documento de la persona</label>
                                 <select id="tipoDocPersonaVul">
-                                    <option>--Seleccione--</option>
-                                    <option>LC</option>
-                                    <option>LE</option>
-                                    <option>CI</option>
-                                    <option>DNI</option>
-                                    <option>Pasaporte</option>
+                                    <option th:each="tipo : ${tipoDeDocumentos}" th:value="${tipo}" th:text="${tipo}"></option>
                                 </select>
                             </div>
 
@@ -119,6 +112,9 @@
                             </div>
 
                             <button type="submit">Dar de alta</button>
+                            <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
+                                <p th:text="${mensaje}"></p>
+                            </div>
 
                         </form>
                     </div>

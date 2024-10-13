@@ -64,19 +64,19 @@
             
                         <div class="input-group">
                             <label for="fechaCaducidad">Fecha de Caducidad (*)</label>
-                            <input type="date" id="fechaCaducidad" name="fechaCaducidad">
+                            <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
                             <div class="error-message" id="fechaCaducidadError"></div>
                         </div>
 
                         <div class="input-group">
                             <label for="fechaDonacion">Fecha de Donación (*)</label>
-                            <input type="date" id="fechaDonacion" name="fechaDonacion">
+                            <input type="date" id="fechaDonacion" name="fechaDonacion" required>
                             <div class="error-message" id="fechaDonacionError"></div>
                         </div>
 
                         <div class="input-group">
                             <label for="heladera">Donar en la Heladera (*)</label>
-                            <select id="heladera" name="heladera">
+                            <select id="heladera" name="heladera" required>
                                 <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
                             </select>
                             
@@ -95,7 +95,7 @@
 
                         <div class="input-group">
                             <label for="estado">Estado de la vianda (*)</label>
-                            <select id="estado" name="estado">
+                            <select id="estado" name="estado" required>
                                 <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}">Seleccione un estado</option>
                             </select>
                         </div>
