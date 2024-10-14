@@ -7,6 +7,10 @@ public class GestorDeOfertaDeProductos {
     private Colaborador colaborador;
     private OfertaDeUnProducto ofertaDeUnProducto;
 
+    public static void crearContribucion(Colaborador colaborador, OfertaDeUnProducto ofertaDeUnProducto) {
+        ofertaDeUnProducto.procesarLaContribucion();
+    }
+
     public static void canjearProducto(Colaborador colaborador, OfertaDeUnProducto ofertaDeUnProducto) throws Exception {
         validarCanje(colaborador, ofertaDeUnProducto);
         ofertaDeUnProducto.serCanjeada();

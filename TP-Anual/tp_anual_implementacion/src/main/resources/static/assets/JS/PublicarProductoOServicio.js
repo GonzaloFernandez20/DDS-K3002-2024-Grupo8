@@ -1,13 +1,10 @@
 form_productos = document.getElementById('publicarServicioForm');
-form_productos.addEventListener('submit', function(e) {
-    e.preventDefault();
-
+function validarFormulario() {
     let hasError = false;
 
     const rubro = document.getElementById('rubro');
     const nombre_oferta = document.getElementById('nombre-oferta');
     const cant_puntos = document.getElementById('cant-puntos');
-
     
     if (!rubro.value) {
         hasError = true;
@@ -45,9 +42,5 @@ form_productos.addEventListener('submit', function(e) {
         stock.classList.remove('error');
     }
 
-    if (!hasError) {
-
-        alert('Solicitud de Publicación realizada');
-        form_productos.reset();
-    }
-});
+    return !hasError;
+}

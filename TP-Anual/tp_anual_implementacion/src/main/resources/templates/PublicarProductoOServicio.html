@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-bs-theme="auto">
+<html lang="es" data-bs-theme="auto" xmlns:th=http://www.thymeleaf.org>
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,14 +43,14 @@
                         <li><a th:href="@{/}">Home</a></li>
                         <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                         <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                        <li><a href="Nosotros.html">Nosotros</a></li>
-                        <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                        <li><a th:href="@{Nosotros}">Nosotros</a></li>
+                        <li><a th:href="@{Mapa}">Mapa</a></li>
                     </ul>
                 </nav>
 
                 <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                    <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                    <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                    <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                    <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
                 </div>
             </div>
         </div>
@@ -62,51 +62,54 @@
                 <h2>Ofrecer productos o servicios</h2>
                 
                 <div class="col-md-6">
-                    <form id="publicarServicioForm">
+                    <form id="publicarServicioForm" action="/PublicarProductoOServicio" method="post">
 
                         <div class="input-group">
                             <label for="rubro">Rubro (*)</label>
-                            <select id="rubro" >
+                            <select id="rubro" name="rubro">
                                 <option value="">Seleccione Rubro</option>
-                                <option value="gastronomia">Gastronomia</option>
-                                <option value="electronica">Electronica</option>
-                                <option value="hogar">Articulos para el hogar</option>
+                                <option th:each="rubro : ${rubros}" th:value="${rubro}" th:text="${rubro}"></option>
                             </select>
                             <div class="error-message" id="error-rubro"></div>
                         </div>
 
                         <div class="input-group">
                             <label for="nombre-oferta">Nombre de la oferta (*)</label>
-                            <input type="text" id="nombre-oferta" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
+                            <input type="text" id="nombre-oferta" name="nombre-oferta" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre de la oferta" />
                             <div class="error-message" id="error-nombre"></div>
                         </div>
 
                         <div class="input-group">
+                            <label for="nombre-oferta">Nombre del producto (*)</label>
+                            <input type="text" id="nombre-producto" name="nombre-producto" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
+                            <div class="error-message" id="error-producto"></div>
+                        </div>
+
+                        <div class="input-group">
                             <label for="cant-puntos">Cantidad de puntos necesarios (*)</label>
-                            <input type="number" min="1" step="1" id="cant-puntos" placeholder="Ingrese cantidad de puntos necesarios" >
+                            <input type="number" min="1" step="1" id="cant-puntos" name="cant-puntos" placeholder="Ingrese cantidad de puntos necesarios" >
                             <div class="error-message" id="error-puntos"></div>
                         </div>
             
                         <div class="input-group">
                             <label for="imagen">Imagen ilustrativa</label>
-                            <input type="file" id="imagen" class="border border-border rounded p-2 w-full" />
+                            <input type="file" id="imagen" name="imagen" class="border border-border rounded p-2 w-full" />
                             <div class="error-message" id="error-imagen"></div>
                         </div>
 
-						<div class="input-group">
+						<!--<div class="input-group">
                             <label for="caption">Epígrafe para la imagen </label>
                             <textarea id="caption" class="border border-border rounded p-2 w-full" rows="3"></textarea>
                             <div class="error-message" id="error-epigrafe"></div>
-                        </div>
+                        </div>-->
 
 						<div class="input-group">
                             <label for="stock">Stock del producto (*)</label>
-                            <input type="number" min="1" step="1" id="stock" placeholder="Ingrese stock" >
+                            <input type="number" min="1" step="1" id="stock" name="stock" placeholder="Ingrese stock">
                             <div class="error-message" id="error-stock"></div>
                         </div>
 
-                        <button type="submit">Realizar Colaboracion</button>
-                        
+                        <button type="submit" onclick="return validarFormulario()">Realizar Colaboracion</button>
                     </form>
                 </div>
             
@@ -132,7 +135,7 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-	<script src="/assets/JS/PublicarProductoOServicio.js"></script>
+	<!--<script src="/assets/JS/PublicarProductoOServicio.js"></script>-->
 	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </div>
   </body>
