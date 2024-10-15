@@ -41,7 +41,7 @@
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                             <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a href="Nosotros.html">Nosotros</a></li>
+                            <li><a th:href="Nosotros.html">Nosotros</a></li>
                             <li><a th:href="@{Mapa.html}">Mapa</a></li>
                         </ul>
                     </nav>
@@ -56,31 +56,30 @@
     
 
         <main class="container col-md-6" id="container-reportar">
-            <h1 id="title-reportar">Reportar Falla Técnica</h1>   
+            <h1 id="title-reportar">Reportar Falla Técnica</h1>
 
-            <form id="form-reportar-falla">
+            <form id="form-reportar-falla" method="post" th:action="@{/ReportarFallaTecnica}" enctype="multipart/form-data">
                 <div class="input-group">
-                    <label for="fechaFalla">Fecha de descubrimiento del incidente (*)</label><br>
-                    <input type="datetime-local" id="fechaFalla" placeholder="DD/MM/AAAA __:__" required>
+                    <label for="heladeraReportada">Heladera en la que ocurrió la falla (*)</label>
+                    <select id="heladeraReportada" name="heladeraReportada">
+                        <option th:each="heladera : ${heladerasAReportar}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
+                    </select>
                 </div>
-            
-                <div class="input-group">
-                    <!--Estaría bueno que sea un select, ya que conocemos todas nuestras heladeras-->
-                    <label for="nombrePuntoFalla">Nombre del punto en que ocurrió la falla (*)</label><br>
-                    <input type="text" id="nombrePuntoFalla" placeholder="Ingrese el punto en el que ocurrió la falla" required>
-                </div>
-        
+
                 <div class="input-group">
                     <label for="descripcionFalla">Descripción de la falla</label><br>
-                    <input type="text" id="descripcionFalla" placeholder="Ingrese una descripción de la falla hallada">
+                    <input type="text" id="descripcionFalla" name="descripcionFalla" placeholder="Ingrese una descripción de la falla hallada">
                 </div>
-    
+
                 <div class="input-group">
                     <label for="fotoFalla">Foto de la falla</label><br>
-                    <input type="file" id="fotoFalla">
+                    <input type="file" id="fotoFalla" name="fotoFalla">
                 </div>
-    
+
                 <button type="submit" id="btn-reportar">Reportar falla</button>
+                <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
+                    <p th:text="${mensaje}"></p>
+                </div>
             </form>
         </main>
 
