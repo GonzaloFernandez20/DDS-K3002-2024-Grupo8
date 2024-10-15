@@ -12,16 +12,17 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class CtrlPublicarProductoOServicio {
@@ -63,21 +64,29 @@ public class CtrlPublicarProductoOServicio {
                                             @RequestParam(name = "nombre-oferta") String nombreOferta,
                                             @RequestParam(name = "nombre-producto") String nombreProducto,
                                             @RequestParam(name = "cant-puntos", defaultValue = "0") double cantPuntos,
-                                            /*@RequestParam(value = "imagen", required = false) String imagen,*/
-                                            @RequestParam(name = "stock", defaultValue = "0") int stock) {
+                                            @RequestParam(name = "imagen", required = false) MultipartFile imagen,
+                                            @RequestParam(name = "stock", defaultValue = "0") int stock,
+                                            Model model) {
 
-        // TO DO: VER CÓMO AGARRAR LA IMAGEN DEL FRONT. DEVOLVER UN MENSAJE. VER CÓMO MANTENER LAS VALIDACIONES DEL FRONT SIN QUE SE DEJEN DE HACER EN EL BACK
+        String pathImagen = null;
+        if (!Objects.isNull(imagen) && !imagen.isEmpty()) {
+            pathImagen = DescargaDeArchivo.guardarArchivo("/fotosProductosOServicios/", imagen);
+        }
+
         Rubro rubro = Rubro.valueOf(stringRubro);
         Producto producto = new Producto(nombreProducto, stock);
-        OfertaDeUnProducto ofertaDeUnProducto = new OfertaDeUnProducto(colaborador, nombreOferta, cantPuntos, null, rubro, producto);
+        OfertaDeUnProducto ofertaDeUnProducto = new OfertaDeUnProducto(colaborador, nombreOferta, cantPuntos, pathImagen, rubro, producto);
         GestorDeOfertaDeProductos.crearContribucion(colaborador, ofertaDeUnProducto);
 
         System.out.println("Rubro: " + rubro);
         System.out.println("Nombre oferta: " + nombreOferta);
         System.out.println("Nombre producto: " + nombreProducto);
         System.out.println("Cant puntos: " + cantPuntos);
+        System.out.println("Path imagen: " + pathImagen);
         System.out.println("Stock: " + stock);
 
-        return "PublicarProductoOServicio";
+        model.addAttribute("mensaje", "¡Felicitaciones! La oferta de " + nombreOferta + " se realizó exitosamente.");
+
+        return mostrarRubros(model);
     }
 }

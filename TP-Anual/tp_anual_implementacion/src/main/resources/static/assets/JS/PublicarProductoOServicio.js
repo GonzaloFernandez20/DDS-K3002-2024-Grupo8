@@ -4,6 +4,7 @@ function validarFormulario() {
 
     const rubro = document.getElementById('rubro');
     const nombre_oferta = document.getElementById('nombre-oferta');
+    const nombre_producto = document.getElementById('nombre-producto');
     const cant_puntos = document.getElementById('cant-puntos');
     
     if (!rubro.value) {
@@ -15,13 +16,22 @@ function validarFormulario() {
         rubro.classList.remove('error');
     }
 
-    if (nombre_oferta.value == null) {
+    if (nombre_oferta.value === "") {
         hasError = true;
         document.getElementById('error-nombre').innerText = 'Ingresar nombre de la oferta';
         nombre_oferta.classList.add('error');
     } else {
         document.getElementById('error-nombre').innerText = '';
         nombre_oferta.classList.remove('error');
+    }
+
+    if (nombre_producto.value === "") {
+        hasError = true;
+        document.getElementById('error-producto').innerText = 'Ingresar nombre del producto';
+        nombre_producto.classList.add('error');
+    } else {
+        document.getElementById('error-producto').innerText = '';
+        nombre_producto.classList.remove('error');
     }
 
     if (!cant_puntos.value) {

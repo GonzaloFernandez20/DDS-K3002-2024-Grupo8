@@ -62,7 +62,7 @@
                 <h2>Ofrecer productos o servicios</h2>
                 
                 <div class="col-md-6">
-                    <form id="publicarServicioForm" action="/PublicarProductoOServicio" method="post">
+                    <form id="publicarServicioForm" action="/PublicarProductoOServicio" method="post" enctype="multipart/form-data">
 
                         <div class="input-group">
                             <label for="rubro">Rubro (*)</label>
@@ -80,14 +80,14 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="nombre-oferta">Nombre del producto (*)</label>
+                            <label for="nombre-producto">Nombre del producto (*)</label>
                             <input type="text" id="nombre-producto" name="nombre-producto" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
                             <div class="error-message" id="error-producto"></div>
                         </div>
 
                         <div class="input-group">
                             <label for="cant-puntos">Cantidad de puntos necesarios (*)</label>
-                            <input type="number" min="1" step="1" id="cant-puntos" name="cant-puntos" placeholder="Ingrese cantidad de puntos necesarios" >
+                            <input type="number" min="1" step="any" id="cant-puntos" name="cant-puntos" placeholder="Ingrese cantidad de puntos necesarios" >
                             <div class="error-message" id="error-puntos"></div>
                         </div>
             
@@ -110,13 +110,16 @@
                         </div>
 
                         <button type="submit" onclick="return validarFormulario()">Realizar Colaboracion</button>
+                        <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
+                            <p th:text="${mensaje}"></p>
+                        </div>
                     </form>
                 </div>
             
                 <div class="col-md-6 scroll-permitido">
                     <img 
                         src = "/img/publicarServicio.png"
-                        alt = "Imagen de viandas siendo envueltas por flechas circulares";
+                        alt = "Imagen de viandas siendo envueltas por flechas circulares"
                         class="imagenContribucion"
                     >
                 </div>
@@ -135,8 +138,7 @@
             <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
         </ul>
     </footer>
-	<!--<script src="/assets/JS/PublicarProductoOServicio.js"></script>-->
+	<script src="/assets/JS/PublicarProductoOServicio.js"></script>
 	<script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
-</div>
   </body>
 </html>
