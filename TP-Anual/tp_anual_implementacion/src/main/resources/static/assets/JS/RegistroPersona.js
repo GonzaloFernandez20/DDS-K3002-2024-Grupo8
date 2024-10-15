@@ -1,11 +1,14 @@
+let usuario, contrasena;
+// Capturar los valores de WhatsApp y Telegram
+
 document.getElementById('registroForm').addEventListener('submit', function(e) {
     e.preventDefault();
     let hasError = false;
 
-    const usuario = document.getElementById('usuario');
-    const contrasena = document.getElementById('contrasena');
+    usuario = document.getElementById('usuario');
+    contrasena = document.getElementById('contrasena');
     const tipoColaborador = document.getElementById('tipoColaborador');
-    
+
     // Validación del usuario
     if (!usuario.value) {
         hasError = true;
@@ -89,6 +92,12 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     const emailCaja = document.getElementById('emailCajaJ');
     const telefonoCaja = document.getElementById('telefonoCajaJ');
     const correoCaja = document.getElementById('correoCajaJ');
+    const calle = document.getElementById('correoCajaJ'); // TODO: AGREGAR AL FORM ESTOS CAMPOS
+    const altura = document.getElementById('correoCajaJ');
+    const codigoPostal = document.getElementById('correoCajaJ');
+
+    const whatsappChecked = document.getElementById('checkbox-wp-j').checked;
+    const telegramChecked = document.getElementById('checkbox-tl-j').checked;
 
     // Validación de los campos obligatorios
     if (!razonSocial.value) {
@@ -126,6 +135,46 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
         document.getElementById('contactoErrorJ').innerText = '';
     }
 
+    // Generamos los datos a enviar
+    const colaboradorJuridico = {
+        nombreDeUsuario: usuario.value,
+        contrasenia: contrasena.value,
+        razonSocial: razonSocial.value,
+        tipoOrganizacion: tipoOrganizacion.value,
+        rubro: rubro.value,
+        calle: calle.value,
+        altura: altura.value,
+        codigoPostal: codigoPostal.value,
+        whatsapp: whatsappChecked,
+        telegram: telegramChecked,
+        mediosDeContacto: [
+            { tipo: 'email', valor: emailCaja.value },
+            { tipo: 'telefono', valor: telefonoCaja.value },
+            { tipo: 'correo', valor: correoCaja.value }
+        ]
+    };
+    // -> Enviamos los datos al back
+    fetch('/RegistrarColaboradorJuridico', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(colaboradorJuridico),
+    })
+        .then(response =>{
+            if (!response.ok) {
+                throw new Error('Error en la red');
+            }
+            return response.text();
+        })
+        .then(msjDeRespuesta => {
+            alert(msjDeRespuesta);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un error al registrar el usuario');
+        });
+
     if (!hasError) {
         alert('Formulario de colaborador Jurídico enviado correctamente');
         location.href = "InicioDeSesion.html";
@@ -139,7 +188,18 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     const nombre = document.getElementById('nombre');
     const apellido = document.getElementById('apellido');
     const fechaNacimiento = document.getElementById('fechaNacimiento');
-    const direccion = document.getElementById('direccion');
+    const emailCaja = document.getElementById('emailCajaJ');
+    const telefonoCaja = document.getElementById('telefonoCajaJ');
+    const correoCaja = document.getElementById('correoCajaJ');
+    const tipoDeDocumento = document.getElementById('correoCajaJ');
+    const numero = document.getElementById('correoCajaJ');
+    const sexo = document.getElementById('correoCajaJ');
+    const calle = document.getElementById('correoCajaJ');
+    const altura = document.getElementById('correoCajaJ');
+    const codigoPostal = document.getElementById('correoCajaJ');
+    const mediosDeContacto = document.getElementById('correoCajaJ');
+    const whatsappChecked = document.getElementById('checkbox-wp-h').checked;
+    const telegramChecked = document.getElementById('checkbox-tl-h').checked;
 
     // Validación de los campos obligatorios
     if (!nombre.value) {
@@ -169,12 +229,56 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
         fechaNacimiento.classList.remove('error');
     }
 
-    if (!(checkboxCorreoH.checked || checkboxEmailH.checked || checkboxTelefonoH.checked)) {
+    if (!(checkboxEmailH.checked || checkboxTelefonoH.checked)) {
         hasError = true;
         document.getElementById('contactoErrorH').innerText = 'Debe seleccionar al menos un Medio de Contacto';
     } else {
         document.getElementById('contactoErrorH').innerText = '';
     }
+
+    // Generamos los datos a enviar
+    const colaboradorHumano = {
+        nombreDeUsuario: usuario.value,
+        contrasenia: contrasena.value,
+        nombre: nombre.value,
+        apellido: apellido.value,
+        fechaNacimiento: fechaNacimiento.value,
+        tipoDeDocumento: tipoDeDocumento.value,
+        numero: numero.value,
+        sexo: sexo.value,
+         //TODO: Agregar al form estos campos necesarios
+        calle: calle.value,
+        altura: altura.value,
+        codigoPostal: codigoPostal.value,
+        whatsapp: whatsappChecked,
+        telegram: telegramChecked,
+        mediosDeContacto: [
+            { tipo: 'email', valor: emailCaja.value },
+            { tipo: 'telefono', valor: telefonoCaja.value },
+            { tipo: 'correo', valor: correoCaja.value }
+        ]
+    };
+// -> Enviamos los datos al back
+    fetch('/RegistrarColaboradorHumano', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(colaboradorHumano),
+    })
+        .then(response =>{
+            if (!response.ok) {
+                throw new Error('Error en la red');
+            }
+            return response.text();
+        })
+        .then(msjDeRespuesta => {
+            alert(msjDeRespuesta);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un error al registrar el usuario');
+        });
 
     if (!hasError) {
         alert('Formulario de colaborador Humano enviado correctamente');
@@ -182,35 +286,34 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     }
 });
 
-// Ejemplo para un checkbox de contacto
-var checkboxEmailJ = document.getElementById("medioContactoEmailJ");
+// ---------- PARA COLABORADORES JURIDICOS
+
+// Funcionalidad de checkbox de Email
+const checkboxEmailJ = document.getElementById("medioContactoEmailJ");
 checkboxEmailJ.addEventListener('change', function() {
     const emailCaja = document.getElementById('emailCajaJ');
     emailCaja.style.display = this.checked ? 'inline' : 'none';
 });
 
+// Funcionalidad de checkbox de Telefono
+const checkboxTelefonoJ = document.getElementById("medioContactoTelefonoJ");
+checkboxTelefonoJ.addEventListener('change', function() {
+    const telefonoCaja = document.getElementById('telefonoCajaJ');
+    telefonoCaja.style.display = this.checked ? 'inline' : 'none';
+});
 
-/* TODO: UNO DE ESTOS PARA CADA TIPO DE COLABORADOR
-    fetch('/ValidarUsuario', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosDeUsuario),
-    })
-    .then(response =>{
-        if (!response.ok) {
-            throw new Error('Error en la red');
-        }
-        return response.text();
-    })
-    .then(msjDeRespuesta => {
-        alert(msjDeRespuesta);
-        if (!hasError) { desplegarFormulario(tipoColaborador.value); }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al registrar el usuario');
-    });
+// ---------- PARA COLABORADORES HUMANOS
 
-*/
+// Funcionalidad de checkbox de Email
+const checkboxEmailH = document.getElementById("medioContactoEmailH");
+checkboxEmailH.addEventListener('change', function() {
+    const emailCaja = document.getElementById('emailCajaH');
+    emailCaja.style.display = this.checked ? 'inline' : 'none';
+});
+
+// Funcionalidad de checkbox de Telefono
+const checkboxTelefonoH = document.getElementById("medioContactoTelefonoH");
+checkboxTelefonoH.addEventListener('change', function() {
+    const telefonoCaja = document.getElementById('telefonoCajaH');
+    telefonoCaja.style.display = this.checked ? 'inline' : 'none';
+});

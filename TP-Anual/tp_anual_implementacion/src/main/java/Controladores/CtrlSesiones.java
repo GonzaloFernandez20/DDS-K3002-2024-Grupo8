@@ -1,8 +1,11 @@
 package Controladores;
 
-import DTOs.ColaboradorDTO;
+import DTOs.ColaboradorHumanoDTO;
+import DTOs.ColaboradorJuridicoDTO;
+import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Factorys.BuilderColabHumano;
+import Modelo.Factorys.BuilderColabJuridico;
 import Modelo.seguridad.Validador;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import java.util.Map;
 @Controller
 public class CtrlSesiones {
 
+    // ------------------------------------
     @GetMapping("/InicioDeSesion")
     public String inicioDeSesion(){ return "InicioDeSesion"; }
 
@@ -29,13 +33,23 @@ public class CtrlSesiones {
         // TODO: HACER UNA REQUEST A BD PARA TRAER ESE USUARIO
         return null;
     }
-
-    @PostMapping("/RegistrarUsuario")
-    public ResponseEntity<String> registrarUsuario(ColaboradorDTO nuevoUsuarioDTO) {
-
-        return null;
+    // ------------------------------------
+    // SEPARAMOS EN REGISTROS DE COLABORADORES JURIDICOS Y HUMANOS
+    @PostMapping("/RegistrarColaboradorJuridico")
+    public ResponseEntity<String> registrarColaboradorJuridico(ColaboradorJuridicoDTO colaboradorDTO) {
+        Colaborador colaborador = BuilderColabJuridico.crearColaboradorJuridicoAPartirDe(colaboradorDTO);
+        //Registrar usuario en el sistema
+        //Cargar colaborador en BD
+        return ResponseEntity.ok("Usuario creado con exito.");
     }
 
+    @PostMapping("/RegistrarColaboradorHumano")
+    public ResponseEntity<String> registrarColaboradorHumano(ColaboradorHumanoDTO colaboradorDTO) {
+        Colaborador colaborador = BuilderColabHumano.crearColaboradorHumanoAPartirDe(colaboradorDTO);
+        //Registrar usuario en el sistema
+        //Cargar colaborador en BD
+        return ResponseEntity.ok("Usuario creado con exito.");
+    }
     // ------------------------------------
 
     @PostMapping("/ValidarUsuario")
