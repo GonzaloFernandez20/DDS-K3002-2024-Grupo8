@@ -1,5 +1,6 @@
 package Repositorios;
 
+import Modelo.Dominio.incidentes.Alerta;
 import Modelo.Dominio.incidentes.FallaTecnica;
 import Modelo.Dominio.incidentes.Incidente;
 
@@ -22,5 +23,8 @@ public class RepositorioIncidentes {
     public void sumarIncidente(Incidente incidente){incidentes.add(incidente);}
     public List<Incidente> getFallasTecnicas(){
         return incidentes.stream().filter(incidente -> incidente instanceof FallaTecnica).toList();
+    }
+    public List<Alerta> getAlertas() {
+        return incidentes.stream().filter(incidente -> incidente instanceof Alerta).map(incidente -> (Alerta) incidente).toList();
     }
 }

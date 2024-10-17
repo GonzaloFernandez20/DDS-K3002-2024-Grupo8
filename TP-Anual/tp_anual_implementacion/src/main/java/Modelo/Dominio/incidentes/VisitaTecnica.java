@@ -5,6 +5,7 @@ import Modelo.Dominio.tecnico.Tecnico;
 import java.time.LocalDateTime;
 
 public class VisitaTecnica {
+    private Integer idVisitaTecnica;
     private Tecnico tecnico;
     private LocalDateTime fechaDeVisita;
     private String detalleDeTrabajo;
@@ -21,6 +22,7 @@ public class VisitaTecnica {
         this.incidenteAtendido = incidenteAtendido;
     }
 
+    public Integer getIdVisitaTecnica() { return idVisitaTecnica; }
     public EstadoDelIncidente getEstadoVisita() { return estadoVisita; }
     public Incidente getIncidenteAtendido() { return incidenteAtendido; }
 

@@ -40,14 +40,14 @@
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                             <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                            <li><a th:href="@{Nosotros}">Nosotros</a></li>
+                            <li><a th:href="@{Mapa}">Mapa</a></li>
                         </ul>
                     </nav>
 
                     <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                        <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                        <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                        <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                        <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                             <p class="fs-5" id="non-warning-message">¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
                             <div id="warnings">
                                 <p class="fs-5">Elija el nombre del punto al que quiere consultar entre las heladeras que presentaron alertas:</p> 
-                                <select id="elegir-heladera">
+                                <select id="elegir-heladera" name="elegir-heladera">
                                 </select>
                                 <p class="fs-5" id="heladera-elegida"></p> 
                                 <div class="scroll-permitido">
@@ -152,6 +152,24 @@
                                     </tr>
                                 </thead>
                                 <tbody id="user-heladeras">
+                                    <tr th:each="heladera : ${heladeras}">
+                                        <td th:text="${heladera.nombreDelPunto}"></td>
+                                        <td th:text="${heladera.ciudad}"></td>
+                                        <td th:text="${heladera.calle} + ' ' + ${heladera.altura}"></td>
+                                        <td th:text="${heladera.nombreModelo}"></td>
+                                        <td th:text="${heladera.capacidadViandas}"></td>
+                                        <td th:text="${heladera.puestaEnFuncionamiento}"></td>
+                                        <form action="/ModificarHeladera" method="post">
+                                            <td class="row-button"><button class="listado-button modificar" th:value="${heladera.idHeladera}">
+                                                <svg height="20px" width="20px">
+                                                    <image height="20px" width="20px" href="img/edit-icon.svg"/>
+                                                </svg>
+                                            </button></td>
+                                        </form>
+                                        <form action="/EliminarHeladera" method="post">
+                                            <td class="row-button"><button class="listado-button eliminar" th:value="${heladera.idHeladera}">X</button></td>
+                                        </form>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -176,7 +194,7 @@
                         <button class="btn-close" onclick="ocultarReporteFalla()"></button>
                         <p class="fs-4">Falla Técnica</p>
                         <p>¿Vio alguna falla?</p>
-                        <a href="ReportarFallaTecnica.html">Reportar</a>
+                        <a th:href="@{ReportarFallaTecnica}">Reportar</a>
                     </div>
                 </div>
             </div>

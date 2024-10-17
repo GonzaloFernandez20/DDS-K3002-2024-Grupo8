@@ -36,7 +36,7 @@ let heladerasDeUnUsuario = [
 function iniciarPantalla() {
     document.getElementById('mod-heladera').style.display = "none";
     agregarHeladerasConAlerta();
-    agregarHeladerasAlListadoGeneral();
+    // agregarHeladerasAlListadoGeneral();
 }
 
 // Función para agregar las heladeras con alerta
@@ -61,7 +61,7 @@ function agregarHeladerasConAlerta() {
 }
 
 // Función para agregar heladeras al listado general
-function agregarHeladerasAlListadoGeneral() {
+/*function agregarHeladerasAlListadoGeneral() {
     let agregarFilaListado = '';
 
     heladerasDeUnUsuario.forEach((heladera, i) => {
@@ -83,7 +83,7 @@ function agregarHeladerasAlListadoGeneral() {
     });
 
     document.getElementById('user-heladeras').innerHTML = agregarFilaListado;
-}
+}*/
 
 // Función para modificar una heladera
 function modificarHeladera(numeroDeHeladera) {
