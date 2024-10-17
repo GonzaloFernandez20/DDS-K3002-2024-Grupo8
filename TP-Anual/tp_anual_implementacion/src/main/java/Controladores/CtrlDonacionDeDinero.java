@@ -17,7 +17,7 @@ public class CtrlDonacionDeDinero {
         return "DonarDinero";
     }
 
-    @PostMapping("/ProcesarDonacion")
+    @PostMapping("/ProcesarDonacionDeDinero")
     public ResponseEntity<String> crearDonacion(@RequestBody DonacionDeDineroDTO donacionDTO) {
         DonacionDeDinero nuevaDonacion = FactoryDonacionDeDinero.crearContribucionAPartirDe(donacionDTO);
         GestorDonacionDeDinero.crearContribucion(nuevaDonacion);

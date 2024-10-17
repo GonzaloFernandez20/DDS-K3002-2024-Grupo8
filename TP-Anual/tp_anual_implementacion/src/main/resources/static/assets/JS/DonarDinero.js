@@ -57,7 +57,7 @@ formularioDonacion.addEventListener('submit', function(e) {
             metodoPago: metodoPago.value
         };
 
-        fetch('/ProcesarDonacion', {
+        fetch('/ProcesarDonacionDeDinero', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
