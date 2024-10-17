@@ -57,14 +57,12 @@ public class CtrlSesiones {
         String nombreDeUsuario = request.get("nombreDeUsuario");
         String contrasenia = request.get("contrasenia");
 
-        // TODO: Crear un metodo en el validador para validar que el nombre de usuario no esta duplicado en el sistema
-        // TODO: Manejar las excepciones para devolver el error correcto ante el fallo de cada criterio
         try {
             Validador.getInstancia().validarConstrasenia(contrasenia);
-            //Validador.getInstancia().validarNombreDeUsuario(nombreDeUsuario);
+            Validador.getInstancia().validarNombreDeUsuario(nombreDeUsuario);
 
             return ResponseEntity.ok("Usuario y contraseña validados exitosamente."); // Si sale to bien
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

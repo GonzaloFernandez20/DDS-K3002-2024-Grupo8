@@ -18,8 +18,19 @@ public class Validador { // -> Deberia ser una clase singleton y laburar con 1 e
         return instancia;
     }
     // ----------------------------------------------------------------
-    public boolean validarConstrasenia (String contrasenia) {
-        return LISTA_CRITERIOS.stream().allMatch(criterio -> criterio.criterioSeguridad(contrasenia));
+    public boolean validarConstrasenia (String contrasenia) throws RuntimeException {
+        return LISTA_CRITERIOS.stream().allMatch(criterio -> {
+            try {
+                return criterio.criterioSeguridad(contrasenia);
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        });
+    }
+
+    public boolean validarNombreDeUsuario(String nombreDeUsuario) throws Exception {
+        // Controlar que no exista otro usuario con ese nombre en la BD
+        return true;
     }
 
     // <--------------- FUNCIONES AUXILIARES --------------->

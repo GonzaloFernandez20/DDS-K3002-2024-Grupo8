@@ -52,20 +52,24 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         },
         body: JSON.stringify(datosDeUsuario),
     })
-    .then(response =>{
-        if (!response.ok) {
-            throw new Error('Error en la red');
-        }
-        return response.text();
-    })
-    .then(msjDeRespuesta => {
-        alert(msjDeRespuesta);
-        if (!hasError) { desplegarFormulario(tipoColaborador.value); }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al registrar el usuario');
-    });
+        .then(response => {
+            return response.text().then(msjDeRespuesta => {
+                if (!response.ok) {
+                    throw new Error(msjDeRespuesta);
+                }
+                return msjDeRespuesta;
+            });
+        })
+        .then(msjDeRespuesta => {
+            alert(msjDeRespuesta);
+            if (!hasError) {
+                desplegarFormulario(tipoColaborador.value);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(error.message);
+        });
 
     // Función para desplegar el formulario correspondiente según el tipo de colaborador
     function desplegarFormulario(tipo) {
