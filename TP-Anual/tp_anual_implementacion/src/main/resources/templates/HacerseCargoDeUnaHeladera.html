@@ -35,9 +35,9 @@
                         <ul class="nav-links justify-content-center">
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/Colaborar}">Colaborar</a></li>
-                            <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                            <li><a th:href="@{/CanjearPuntos}">Canjear Puntos</a></li>
+                            <li><a th:href="@{/Nosotros}">Nosotros</a></li>
+                            <li><a th:href="@{/Mapa}">Mapa</a></li>
                         </ul>
                     </nav>
 
@@ -65,9 +65,9 @@
                             <div class="input-group">
                                 <label for="direccionHeladera">Dirección</label>
                                 <input type="text" id="direccionHeladera" placeholder="Ingrese la dirección de la heladera" required>
-                                <a href="RecomedacionColocacion.html">Solicitar puntos de recomendación</a>
+                                <a th:href="@{/RecomendacionColocacion}">Solicitar puntos de recomendación</a>
                             </div>
-            
+
                             <div class="input-group">
                                 <label for="nombrePuntoHeladera">Nombre del punto</label>
                                 <input type="text" id="nombrePuntoHeladera" placeholder="Ingrese el nombre del punto en que estará la heladera" required>
@@ -94,7 +94,7 @@
 
                     <div class="col-md-6 container-img">
                         <img 
-                            src = "/img/heladera.jpg"
+                            src = "/img/heladera2.jpg"
                             alt = "Imagen de una heladera blanca";
                             class="imagenContribucion"
                         >

@@ -1,4 +1,4 @@
-package Controladores;
+package Controladores.Navbar;
 import Modelo.Dominio.GestionDeContribuciones.FormaDeContribuciones;
 import Modelo.Dominio.GestionDeContribuciones.ValidadorRequisitosContribucion;
 import Modelo.Dominio.colaborador.Colaborador;
