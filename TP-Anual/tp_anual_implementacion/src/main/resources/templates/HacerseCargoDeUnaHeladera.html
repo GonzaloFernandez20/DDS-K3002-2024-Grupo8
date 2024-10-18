@@ -42,8 +42,8 @@
                     </nav>
 
                     <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                        <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                        <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                        <a th:href="@{/InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                        <a th:href="@{/RegistroPersona}"><button type="button">Registrarse</button></a>
                     </div>
                 </div>
             </div>
@@ -60,32 +60,38 @@
                             <div class="input-group">
                                 <label for="ciudadHeladera">Ciudad</label>
                                 <input type="text" id="ciudadHeladera" placeholder="Ingrese la ciudad de la heladera" required>
+                                <div class="error-message" id="ciudadHeladeraError"></div>
                             </div>
                 
                             <div class="input-group">
                                 <label for="direccionHeladera">Dirección</label>
                                 <input type="text" id="direccionHeladera" placeholder="Ingrese la dirección de la heladera" required>
                                 <a th:href="@{/RecomendacionColocacion}">Solicitar puntos de recomendación</a>
+                                <div class="error-message" id="direccionHeladeraError"></div>
                             </div>
 
                             <div class="input-group">
                                 <label for="nombrePuntoHeladera">Nombre del punto</label>
                                 <input type="text" id="nombrePuntoHeladera" placeholder="Ingrese el nombre del punto en que estará la heladera" required>
+                                <div class="error-message" id="nombrePuntoHeladeraError"></div>
                             </div>
 
                             <div class="input-group">
                                 <label for="modeloHeladera">Modelo de heladera</label>
                                 <input type="text" id="modeloHeladera" placeholder="Ingrese el modelo de la heladera" required>
+                                <div class="error-message" id="modeloHeladeraError"></div>
                             </div>
 
                             <div class="input-group">
                                 <label for="capacidadHeladera">Capacidad de la heladera en viandas</label>
                                 <input type="number" min="1" id="capacidadHeladera" placeholder="Ingrese la cantidad máxima de viandas que se puedan ingresar" required>
+                                <div class="error-message" id="capacidadHeladeraError"></div>
                             </div>
 
                             <div class="input-group">
                                 <label for="fechaFuncionamientoHeladera">Fecha de puesta en funcionamiento</label>
                                 <input type="date" id="fechaFuncionamientoHeladera" placeholder="dd/mm/aaaa" required>
+                                <div class="error-message" id="fechaFuncionamientoHeladeraError"></div>
                             </div>
 
                             <button type="submit">Hacerse cargo de esta heladera</button>
@@ -115,6 +121,7 @@
                 <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </footer>
+        <script src="/assets/JS/HacerseCargoDeHeladera.js"></script>
         <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

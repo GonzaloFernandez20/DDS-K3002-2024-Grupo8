@@ -9,6 +9,9 @@ let geocoder;
 let responseDiv;
 let response;
 
+let inputRadio
+let inputText
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 14,
@@ -17,12 +20,13 @@ function initMap() {
   });
   geocoder = new google.maps.Geocoder();
 
-  const inputText = document.createElement("input");
+  inputText = document.createElement("input");
+
 
   inputText.type = "text";
   inputText.placeholder = "Ingresar Punto de Referencia";
 
-  const inputRadio = document.createElement("input");
+  inputRadio = document.createElement("input");
 
   inputRadio.type = "number";
   inputRadio.placeholder = "Ingresar Radio de Búsqueda (m)";
@@ -93,6 +97,43 @@ function geocode(request) {
         infoWindow.setContent(titulo + results[0].formatted_address);
 
         infoWindow.open({anchor: marker});
+
+        // Obtener latitud y longitud
+        const latitud = results[0].geometry.location.lat();
+        const longitud = results[0].geometry.location.lng();
+
+        // Obtener el radio ingresado
+        const radio = inputRadio.value;
+
+        const data = {
+            latitud: parseFloat(latitud),
+            longitud: parseFloat(longitud),
+            radio: parseInt(radio),
+        };
+
+        // Realizar la solicitud POST
+        fetch('/ObtenerPuntosRecomendados', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                //console.log('Puntos recomendados:', data);
+                // Logica para mostrar los puntos en el mapa
+            })
+            .catch(error => {
+                console.error('Error al realizar la solicitud:', error);
+            });
+
+
         return results;
     })
     .catch((e) => {
