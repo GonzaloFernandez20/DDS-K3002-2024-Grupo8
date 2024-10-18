@@ -7,18 +7,33 @@ import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.persona.Persona;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "Colaborador")
 public class Colaborador {
+    @Id
+    @GeneratedValue
+    private Integer id_colaborador;
+    @OneToOne
+    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     private final Persona persona;
+    @OneToMany
+    @JoinColumn(name = "id_medio_de_contacto", referencedColumnName = "id_medio_de_contacto")
     private final List<MedioDeContacto> mediosDeContacto;
+    @ElementCollection
     private final List<String> mensajesRecibidos;
+    @OneToMany
+    @JoinColumn(name = "id_contribucion", referencedColumnName = "id_contribucion")
     private final List<Contribucion> historialDeContribuciones;
+    @OneToOne(mappedBy = "id_colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AccesoDeColaborador tarjeta;
+    @Column(name = "puntos_acumulados")
     private double puntosAcumulados;
 
 
@@ -75,6 +90,15 @@ public class Colaborador {
 
 
     // ---- Getters y Setters
+
+    public void setTarjeta(AccesoDeColaborador tarjeta) {
+        if(tarjeta == null){
+            if(this.tarjeta != null) this.tarjeta.setColaborador(null);
+        }
+        else tarjeta.setColaborador(this);
+        this.tarjeta = tarjeta;
+    }
+
     public Direccion getDireccion() { return persona.getDireccion(); }
     public double getPuntosAcumulados() { return puntosAcumulados; }
     public List<Contribucion> getHistorialDeContribuciones() { return historialDeContribuciones; }

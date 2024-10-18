@@ -2,13 +2,21 @@ package Modelo.Dominio.persona;
 
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.documentacion.Documento;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "PersonaHumana")
 public class PersonaHumana extends Persona {
+    @Column(name = "nombre")
     private final String nombre;
+    @Column(name = "apellido")
     private final String apellido;
+    @Column(name = "fecha_de_nacimiento")
     private LocalDate fechaDeNacimiento;
+    @OneToOne
+    @JoinColumn(name = "id_documento", referencedColumnName = "id_documento")
     private final Documento documento;
 
     public PersonaHumana(String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento, Direccion direccion) {

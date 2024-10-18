@@ -9,9 +9,13 @@ import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "HacerseCargoDeHeladera")
 public class HacerseCargoDeHeladera extends Contribucion{
-
+    @OneToOne
+    @JoinColumn(name = "id_heladera", referencedColumnName = "id_heladera")
     private final Heladera heladeraACargo;
 
     public HacerseCargoDeHeladera(Colaborador colaborador, Heladera heladeraACargo) {

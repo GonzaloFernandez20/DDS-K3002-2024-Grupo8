@@ -2,15 +2,24 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.sistema.Sistema;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "OfertaDeUnProducto")
 public class OfertaDeUnProducto extends Contribucion {
+    @Column(name = "idOferta")
     private int idOferta;
+    @Column(name = "nombre_de_oferta")
     private String nombreOferta;
+    @Column(name = "puntos_necesarios")
     private double puntosNecesarios;
+    @Column(name = "link_a_imagen")
     private String linkDeImagen;
+    @Enumerated(EnumType.STRING)
     private Rubro rubro;
+    @OneToOne
+    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
     private Producto producto;
 
     public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String linkDeImagen, Rubro rubro, Producto producto) {

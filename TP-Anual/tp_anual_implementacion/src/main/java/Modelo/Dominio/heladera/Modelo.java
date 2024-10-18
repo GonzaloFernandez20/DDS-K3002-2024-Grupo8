@@ -1,8 +1,18 @@
 package Modelo.Dominio.heladera;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Modelo")
 public class Modelo {
+    @Id
+    @GeneratedValue
+    private Integer id_modelo;
+    @Column(name = "modelo")
     private String nombreModelo;
+    @Column(name = "temp_max")
     float temperaturaMaxima;
+    @Column(name = "temp_max")
     float temperaturaMinima;
 
     public Modelo(float temperaturaMaxima, float temperaturaMinima) {

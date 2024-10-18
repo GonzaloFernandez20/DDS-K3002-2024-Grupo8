@@ -3,17 +3,20 @@ package Modelo.Dominio.contribucion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.suscripcion.CreadorDeMensajes;
+import jakarta.persistence.*;
 
 
 import java.util.ArrayList;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "DistribucionDeVianda")
 public class DistribucionDeVianda extends ContribucionConApertura {
-
+    @ManyToOne
+    @JoinColumn(name = "id_heladera_origen", referencedColumnName = "id_heladera")
     private final Heladera heladeraDeOrigen;
-
-
+    @Enumerated(EnumType.STRING)
     private final MotivoDeDistribucion motivoDeDistribucion;
+    @Column(name = "cantidad_de_viandas")
     private final Integer cantidadDeViandas;
 
     public DistribucionDeVianda(Colaborador colaborador,

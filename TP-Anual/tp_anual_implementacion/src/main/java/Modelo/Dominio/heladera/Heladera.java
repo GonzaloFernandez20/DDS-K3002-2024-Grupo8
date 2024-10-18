@@ -5,20 +5,38 @@ import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Excepciones.ExcepcionHeladeraLlena;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.*;
 
-
+@Entity
+@Table(name = "Heladera")
 public class Heladera {
+    @Id
+    @GeneratedValue
+    private Integer id_heladera;
+    @Column(name = "idHeladera")
     private int idHeladera;
+    @ManyToOne
+    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
     private final Colaborador colaboradorACargo;
+    @ManyToOne
+    @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion")
     private final Ubicacion ubicacion;
+    @Column(name = "cantidad_de_viandas")
     private final int capacidadDeViandas;
+    @Column(name = "fecha_de_puesta_en_funcionamiento")
     private final LocalDate puestaEnFuncionamiento;
+    @OneToMany
+    @JoinColumn(name = "is_vianda", referencedColumnName = "id_vianda")
     private final List<Vianda> viandasEnStock;
+    @ManyToOne
+    @JoinColumn(name = "id_modelo", referencedColumnName = "id_modelo")
     private Modelo modelo;
+    @Enumerated(EnumType.STRING)
     private EstadoHeladera estado;
+
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     // BROKER ------------------------------------------

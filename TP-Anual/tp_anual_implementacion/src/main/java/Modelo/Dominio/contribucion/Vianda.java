@@ -2,18 +2,33 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import jakarta.persistence.*;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "Vianda")
 public class Vianda {
+    @Id
+    @GeneratedValue
+    private Integer id_vianda;
+    @Column(name = "tipo_de_comida")
     private final String tipoDeComida;
+    @Column(name = "fecha_de_caducidad")
     private final LocalDate fechaDeCaducidad;
+    @Column(name = "fecha_de_donacion")
     private final LocalDate fechaDeDonacion;
+    @OneToOne
+    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
     private final Colaborador colaborador;
+    @OneToOne
+    @JoinColumn(name = "id_heladera", referencedColumnName = "id_heladera")
     private Heladera heladera;
+    @Column(name = "calorias")
     private final String calorias;
+    @Column(name = "peso")
     private final String peso;
+    @Enumerated(EnumType.STRING)
     private EstadoVianda estado;
 
     public Vianda(String tipoDeComida,

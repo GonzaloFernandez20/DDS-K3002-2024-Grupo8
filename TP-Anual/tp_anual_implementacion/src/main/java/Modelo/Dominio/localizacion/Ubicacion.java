@@ -1,9 +1,21 @@
 package Modelo.Dominio.localizacion;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Ubicacion")
 public class Ubicacion {
+    @Id
+    @GeneratedValue
+    private Integer id_ubicaion;
+    @OneToOne
+    @JoinColumn(name = "id_punto_en_el_mapa", referencedColumnName = "id_punto_en_el_mapa")
     private PuntoEnElMapa punto;
+    @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion")
     private Direccion direccion;
+    @Column(name = "ciudad")
     private String ciudad;
+    @Column(name = "nombre_del_punto")
     private String nombreDelPunto;
 
     public Ubicacion(Direccion direccion, String ciudad, String nombre){

@@ -1,10 +1,17 @@
 package Modelo.Dominio.persona;
 
 import Modelo.Dominio.localizacion.Direccion;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "PersonaJuridica")
 public class PersonaJuridica extends Persona {
+    @Column(name = "razon_social")
     private final String razonSocial;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_de_organizacion")
     private final TipoOrganizacion tipoDeOrganizacion;
+    @Column(name = "rubro")
     private final String rubro;
 
     public PersonaJuridica(String razonSocial, TipoOrganizacion tipoDeOrganizacion, String rubro, Direccion direccion) {
@@ -16,6 +23,7 @@ public class PersonaJuridica extends Persona {
         this.rubro = rubro;
         this.direccion = direccion;
     }
+
 
 }
 

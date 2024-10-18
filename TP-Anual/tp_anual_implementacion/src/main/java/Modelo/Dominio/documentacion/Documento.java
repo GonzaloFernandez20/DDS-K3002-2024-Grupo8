@@ -1,8 +1,18 @@
 package Modelo.Dominio.documentacion;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Documento")
 public class Documento{
+    @Id
+    @GeneratedValue
+    private Integer id_documento;
+    @Enumerated(EnumType.STRING)
     TipoDeDocumento tipo;
+    @Column(name = "numero")
     String numero;
+    @Enumerated(EnumType.STRING)
     Sexo sexo;
 
     public Documento(TipoDeDocumento tipo, String numero, Sexo sexo){

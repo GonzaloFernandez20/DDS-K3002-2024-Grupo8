@@ -3,11 +3,15 @@ package Modelo.Dominio.contribucion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.sistema.RegistroDeRecaudacion;
 import Modelo.Dominio.sistema.Sistema;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "Contribucion")
 public class DonacionDeDinero extends Contribucion {
+    @Column(name = "monto")
     private final float monto;
+    @Enumerated(EnumType.STRING)
     private Frecuencia frecuencia;
 
     public DonacionDeDinero(Colaborador colaborador, float monto, Frecuencia frecuencia, LocalDate fechaDeContribucion) {

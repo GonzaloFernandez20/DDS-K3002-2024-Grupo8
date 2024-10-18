@@ -1,7 +1,16 @@
 package Modelo.Dominio.localizacion;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "PuntoEnElMapa")
 public class PuntoEnElMapa {
+    @Id
+    @GeneratedValue
+    private Integer id_punto_en_el_mapa;
+    @Column(name = "latitud")
     double latitud;
+    @Column(name = "longitud")
     double longitud;
 
     public PuntoEnElMapa(double latitud, double longitud){
