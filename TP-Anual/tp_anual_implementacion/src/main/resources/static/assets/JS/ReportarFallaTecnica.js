@@ -1,4 +1,4 @@
-document.getElementById('form-reportar-falla').addEventListener('submit', function(event) {
+/*document.getElementById('form-reportar-falla').addEventListener('submit', function(event) {
     event.preventDefault();
 
     let heladeraReportada = document.getElementById('heladeraReportada').value;
@@ -8,4 +8,4 @@ document.getElementById('form-reportar-falla').addEventListener('submit', functi
     //REPORTAR FALLA EN BACK
 
     alert("Se reportó exitosamente la falla. ¡Muchas gracias!");
-});
+});*/

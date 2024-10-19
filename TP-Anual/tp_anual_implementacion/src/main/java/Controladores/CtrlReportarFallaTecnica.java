@@ -7,15 +7,18 @@ import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.incidentes.FallaTecnica;
 import Modelo.Dominio.incidentes.GestorDeIncidentes;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Factorys.FactoryFallaTecnica;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import Controladores.DescargaDeArchivo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -48,13 +51,15 @@ public class CtrlReportarFallaTecnica {
 
         String pathFotoFalla = null;
         if (!fotoFalla.isEmpty()) {
-            pathFotoFalla = guardarFoto(fotoFalla);
+            pathFotoFalla = DescargaDeArchivo.guardarArchivo("/fotosHeladerasReportadas/", fotoFalla);
         }
 
 
 
         FallaTecnicaDTO fallaTecnicaDTO = new FallaTecnicaDTO(colaborador, heladeraReportada, descripcionFalla, pathFotoFalla);
-        GestorDeIncidentes.reportarFallaTecnica(fallaTecnicaDTO);
+        FallaTecnica nuevoIncidente = FactoryFallaTecnica.CrearFallaTecnicaAPartirDe(fallaTecnicaDTO);
+
+        GestorDeIncidentes.reportar(nuevoIncidente);
 
         model.addAttribute("mensaje", "Falla reportada exitosamente!");
 
@@ -63,16 +68,5 @@ public class CtrlReportarFallaTecnica {
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
         return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
-    }
-
-    private String guardarFoto(MultipartFile fotoFalla) {
-
-        String filePath = "/fotosHeladerasReportadas/" + fotoFalla.getOriginalFilename();
-        try {
-            fotoFalla.transferTo(new File(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return filePath;
     }
 }
