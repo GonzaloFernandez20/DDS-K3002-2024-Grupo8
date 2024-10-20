@@ -22,15 +22,15 @@ public class Colaborador {
     private Integer id_colaborador;
     @OneToOne
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    private final Persona persona;
+    private Persona persona;
     @OneToMany
     @JoinColumn(name = "id_medio_de_contacto", referencedColumnName = "id_medio_de_contacto")
-    private final List<MedioDeContacto> mediosDeContacto;
+    private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
-    private final List<String> mensajesRecibidos;
+    private List<String> mensajesRecibidos;
     @OneToMany
     @JoinColumn(name = "id_contribucion", referencedColumnName = "id_contribucion")
-    private final List<Contribucion> historialDeContribuciones;
+    private List<Contribucion> historialDeContribuciones;
     @OneToOne(mappedBy = "id_colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")

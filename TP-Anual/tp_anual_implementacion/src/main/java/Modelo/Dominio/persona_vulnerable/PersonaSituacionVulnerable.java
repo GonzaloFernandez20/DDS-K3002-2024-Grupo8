@@ -23,7 +23,7 @@ public class PersonaSituacionVulnerable {
     private Vinculacion vinculacion;
     @OneToOne
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
-    private final PersonaHumana persona;
+    private PersonaHumana persona;
 
     public PersonaSituacionVulnerable(/*String nombre, String apellido,
                                       LocalDate fechaDeNacimiento,

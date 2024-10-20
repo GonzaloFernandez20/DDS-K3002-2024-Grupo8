@@ -20,17 +20,17 @@ public class Heladera {
     private int idHeladera;
     @ManyToOne
     @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
-    private final Colaborador colaboradorACargo;
+    private Colaborador colaboradorACargo;
     @ManyToOne
     @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion")
-    private final Ubicacion ubicacion;
+    private Ubicacion ubicacion;
     @Column(name = "cantidad_de_viandas")
-    private final int capacidadDeViandas;
+    private int capacidadDeViandas;
     @Column(name = "fecha_de_puesta_en_funcionamiento")
-    private final LocalDate puestaEnFuncionamiento;
+    private LocalDate puestaEnFuncionamiento;
     @OneToMany
     @JoinColumn(name = "is_vianda", referencedColumnName = "id_vianda")
-    private final List<Vianda> viandasEnStock;
+    private List<Vianda> viandasEnStock;
     @ManyToOne
     @JoinColumn(name = "id_modelo", referencedColumnName = "id_modelo")
     private Modelo modelo;
@@ -40,8 +40,8 @@ public class Heladera {
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     // BROKER ------------------------------------------
-    private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
-    private static final int BROKER_PORT = 12345; // Puerto del broker
+    private static String BROKER_ADDRESS = "localhost"; // Dirección del broker
+    private static int BROKER_PORT = 12345; // Puerto del broker
     // ------------------------------------------------
 
     public Heladera(Colaborador colaboradorACargo,

@@ -1,7 +1,14 @@
 package Modelo.Dominio.medios_de_contacto;
 
-public class Telegram implements MedioDeContacto{
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "Telegram")
+public class Telegram implements MedioDeContacto{
+    @Id
+    @GeneratedValue
+    private  Integer id_telegram;
+    @Column(name = "nro_de_telefono")
     private String nroDeTelefono;
 
     public Telegram(String nroDeTelefono) {

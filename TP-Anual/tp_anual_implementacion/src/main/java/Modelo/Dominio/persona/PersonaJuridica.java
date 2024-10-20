@@ -7,12 +7,12 @@ import jakarta.persistence.*;
 @Table(name = "PersonaJuridica")
 public class PersonaJuridica extends Persona {
     @Column(name = "razon_social")
-    private final String razonSocial;
+    private String razonSocial;
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_de_organizacion")
-    private final TipoOrganizacion tipoDeOrganizacion;
+    private TipoOrganizacion tipoDeOrganizacion;
     @Column(name = "rubro")
-    private final String rubro;
+    private String rubro;
 
     public PersonaJuridica(String razonSocial, TipoOrganizacion tipoDeOrganizacion, String rubro, Direccion direccion) {
         if(razonSocial ==null){throw new IllegalArgumentException("La razon social es obligatorio");}

@@ -16,7 +16,7 @@ import jakarta.persistence.*;
 public class HacerseCargoDeHeladera extends Contribucion{
     @OneToOne
     @JoinColumn(name = "id_heladera", referencedColumnName = "id_heladera")
-    private final Heladera heladeraACargo;
+    private Heladera heladeraACargo;
 
     public HacerseCargoDeHeladera(Colaborador colaborador, Heladera heladeraACargo) {
         this.colaborador = colaborador;

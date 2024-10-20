@@ -10,14 +10,14 @@ import java.time.LocalDate;
 @Table(name = "PersonaHumana")
 public class PersonaHumana extends Persona {
     @Column(name = "nombre")
-    private final String nombre;
+    private String nombre;
     @Column(name = "apellido")
-    private final String apellido;
+    private String apellido;
     @Column(name = "fecha_de_nacimiento")
     private LocalDate fechaDeNacimiento;
     @OneToOne
     @JoinColumn(name = "id_documento", referencedColumnName = "id_documento")
-    private final Documento documento;
+    private Documento documento;
 
     public PersonaHumana(String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento, Direccion direccion) {
         if(nombre ==null){throw new IllegalArgumentException("El nombre es obligatorio");}

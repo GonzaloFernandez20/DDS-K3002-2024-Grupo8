@@ -13,21 +13,21 @@ public class Vianda {
     @GeneratedValue
     private Integer id_vianda;
     @Column(name = "tipo_de_comida")
-    private final String tipoDeComida;
+    private String tipoDeComida;
     @Column(name = "fecha_de_caducidad")
-    private final LocalDate fechaDeCaducidad;
+    private LocalDate fechaDeCaducidad;
     @Column(name = "fecha_de_donacion")
-    private final LocalDate fechaDeDonacion;
+    private LocalDate fechaDeDonacion;
     @OneToOne
     @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
-    private final Colaborador colaborador;
+    private Colaborador colaborador;
     @OneToOne
     @JoinColumn(name = "id_heladera", referencedColumnName = "id_heladera")
     private Heladera heladera;
     @Column(name = "calorias")
-    private final String calorias;
+    private String calorias;
     @Column(name = "peso")
-    private final String peso;
+    private String peso;
     @Enumerated(EnumType.STRING)
     private EstadoVianda estado;
 

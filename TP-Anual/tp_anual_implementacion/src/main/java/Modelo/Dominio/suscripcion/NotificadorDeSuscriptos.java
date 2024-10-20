@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class NotificadorDeSuscriptos {
-    private final Map<String, List<Colaborador>> suscriptos;
-    private final Heladera heladera;
+    private Map<String, List<Colaborador>> suscriptos;
+    private Heladera heladera;
 
     public NotificadorDeSuscriptos(Heladera heladera) {
         this.heladera = heladera;
