@@ -115,10 +115,12 @@
                         <h2>Heladeras Asociadas</h2>
                         <div id="box-alertas">
                             <h3 id="alertas">Alertas</h3>
-                            <p class="fs-5" id="non-warning-message">¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
+                            <p class="fs-5" id="non-warning-message" >¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
                             <div id="warnings">
-                                <p class="fs-5">Elija el nombre del punto al que quiere consultar entre las heladeras que presentaron alertas:</p> 
-                                <select id="elegir-heladera" name="elegir-heladera">
+                                <p class="fs-5">Elija el punto al que quiere consultar entre las heladeras que presentaron alertas:</p>
+                                <select id="elegir-heladera" name="elegir-heladera" onchange="mostrarAlertasDeHeladera(this.value)">
+                                    <option value="">Seleccione Heladera</option>
+                                    <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ' - ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
                                 </select>
                                 <p class="fs-5" id="heladera-elegida"></p> 
                                 <div class="scroll-permitido">
@@ -131,6 +133,11 @@
                                             </tr>
                                         </thead>
                                         <tbody id="heladeras-warnings">
+                                            <tr th:each="warning : ${warnings}" th:class="'heladera' + ${warning.idHeladera} + ' alerta'" hidden>
+                                                <td th:text="${warning.momentoDelSuceso}"></td>
+                                                <td th:text="${warning.tipoAlerta}"></td>
+                                                <td th:text="${warning.estado}"></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

@@ -21,7 +21,7 @@ class Heladera {
 }
 
 // Datos iniciales
-let warningHeladeraDeUsuario = [
+/* let warningHeladeraDeUsuario = [
     new WarningHeladera("Las Violetas", "CABA", "Medrano 5", "Temperatura baja", "23/04/2023", "Resuelto"),
     new WarningHeladera("Las Violetas", "CABA", "Medrano 5", "Temperatura alta", "25/04/2023", "No resuelto"),
     new WarningHeladera("Campus", "CABA", "Mozart 2300", "Mucho movimiento", "25/08/2024", "No resuelto")
@@ -30,17 +30,30 @@ let warningHeladeraDeUsuario = [
 let heladerasDeUnUsuario = [
     new Heladera("Las Violetas", "CABA", "Medrano 5", "SuperFrio3000", "30", "01/01/2020"),
     new Heladera("Campus", "CABA", "Mozart 2300", "ColdX", "15", "06/07/2008")
-];
+];*/
 
 // Función para iniciar la pantalla y cargar datos
-function iniciarPantalla() {
+/*function iniciarPantalla() {
     document.getElementById('mod-heladera').style.display = "none";
-    agregarHeladerasConAlerta();
+    // agregarHeladerasConAlerta();
     // agregarHeladerasAlListadoGeneral();
+}*/
+
+function mostrarAlertasDeHeladera(idHeladera) {
+    let alertas = document.getElementsByClassName('alerta');
+
+    for(let i= 0; i<alertas.length; i++) {
+        let alertaDeLaIteracion = alertas[i];
+        if(alertaDeLaIteracion.classList.contains('heladera' + idHeladera)) {
+            alertaDeLaIteracion.removeAttribute('hidden');
+        } else {
+            alertas[i].setAttribute('hidden', true);
+        }
+    }
 }
 
 // Función para agregar las heladeras con alerta
-function agregarHeladerasConAlerta() {
+/*function agregarHeladerasConAlerta() {
     let agregarFilaWarning = '';
 
     warningHeladeraDeUsuario.forEach(warning => {
@@ -58,7 +71,7 @@ function agregarHeladerasConAlerta() {
     document.getElementById('heladeras-warnings').innerHTML = agregarFilaWarning;
     document.getElementById('non-warning-message').style.display = "none";
     document.getElementById('warnings').style.display = "block";
-}
+}*/
 
 // Función para agregar heladeras al listado general
 /*function agregarHeladerasAlListadoGeneral() {
@@ -133,4 +146,4 @@ function heladeraQueTengaEseNombre(nombreDelPunto, index, heladeras) {
     return heladeras[index].nombreDelPunto == nombreDelPunto;
 }
 
-iniciarPantalla();
+// iniciarPantalla();

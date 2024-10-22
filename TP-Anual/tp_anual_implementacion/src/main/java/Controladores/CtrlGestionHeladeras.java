@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /*  TO DO:
-* - Visualizar las opciones de heladeras
-* - Visualizar las alertas por heladera
 * - Poder modificar una heladera (/ModificarHeladera)
 * - Poder dar de baja una heladera (/EliminarHeladera)
 * - Tener una forma consistente de que las pantallas que compartan el jurídico y el humano
@@ -39,7 +37,7 @@ public class CtrlGestionHeladeras {
 
     @GetMapping("/ModificarColaboradorJuridicoHeladeras")
     public String mostrarHeladerasYAlertas(Model model) {
-        model.addAttribute("alertas", alertas);
+        model.addAttribute("warnings", alertas);
         model.addAttribute("heladeras", heladeras);
 
         return "ModificarColaboradorJuridicoHeladeras";
@@ -55,8 +53,13 @@ public class CtrlGestionHeladeras {
         return mostrarHeladerasYAlertas(model);
     }
 
+    int i = 0;
+
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
-        return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
+        HeladeraDTO heladeraDTO = new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
+        heladeraDTO.setIdHeladera(i);
+        i++;
+        return heladeraDTO;
     }
 
     private AlertaDTO convertirAlertaADTO(Alerta alerta) {

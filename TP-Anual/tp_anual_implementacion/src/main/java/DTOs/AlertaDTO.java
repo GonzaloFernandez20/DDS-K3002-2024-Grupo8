@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class AlertaDTO {
+    public int idAlerta;
     public LocalDateTime momentoDelSuceso;
     public int idHeladera;
     public List<Integer> idVisitasTecnicas;

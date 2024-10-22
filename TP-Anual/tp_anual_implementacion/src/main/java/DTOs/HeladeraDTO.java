@@ -34,6 +34,8 @@ public class HeladeraDTO {
 
     public int getIdHeladera() { return idHeladera; }
 
+    public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
+
     public Colaborador getColaboradorACargo() { return colaboradorACargo; }
 
     public void setColaboradorACargo(Colaborador colaboradorACargo) {
