@@ -111,6 +111,9 @@
 
                 <div class="col-md-10">
                     <div class="container main">
+                        <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
+                            <p th:text="${mensaje}"></p>
+                        </div>
                         <h1>Mi Cuenta</h1>
                         <h2>Heladeras Asociadas</h2>
                         <div id="box-alertas">
@@ -166,13 +169,13 @@
                                         <td th:text="${heladera.nombreModelo}"></td>
                                         <td th:text="${heladera.capacidadViandas}"></td>
                                         <td th:text="${heladera.puestaEnFuncionamiento}"></td>
-                                        <form action="/ModificarHeladera" method="post">
-                                            <td class="row-button"><button class="listado-button modificar" th:value="${heladera.idHeladera}">
+                                        <td class="row-button">
+                                            <button class="listado-button modificar" th:attr="onclick='modificarHeladera(' + ${heladera.idHeladera} + ')'">
                                                 <svg height="20px" width="20px">
                                                     <image height="20px" width="20px" href="img/edit-icon.svg"/>
                                                 </svg>
-                                            </button></td>
-                                        </form>
+                                            </button>
+                                        </td>
                                         <form action="/EliminarHeladera" method="post">
                                             <td class="row-button"><button class="listado-button eliminar" th:value="${heladera.idHeladera}">X</button></td>
                                         </form>
@@ -180,18 +183,27 @@
                                 </tbody>
                             </table>
                         </div>
-                        <form id="mod-heladera">
+
+                        <form id="mod-heladera" action="/ModificarHeladera" method="post">
                             <h3>Heladera a modificar:</h3>
-                            <h3 id="mod-heladera-title"></h3>
+                            <input type="hidden" id="mod-heladera-punto-title" name="mod-heladera-punto-title"></input>
                             <div class="form-cuenta">
                                 <label for="nuevaCiudadHeladera">Ciudad:</label>
-                                <input type="text" id="nuevaCiudadHeladera"><br>
-                                <label for="nuevaDireccionHeladera">Dirección:</label>
-                                <input type="text" id="nuevaDireccionHeladera"><br>
+                                <input type="text" id="nuevaCiudadHeladera" name="nuevaCiudadHeladera"><br>
+                                <label for="nuevaCalleHeladera">Calle:</label>
+                                <input type="text" id="nuevaCalleHeladera" name="nuevaCalleHeladera"><br>
+                                <label for="nuevaAlturaHeladera">Altura:</label>
+                                <input type="text" id="nuevaAlturaHeladera" name="nuevaAlturaHeladera"><br>
+                                <label for="nuevoCodigoPostal">Código Postal:</label>
+                                <input type="text" id="nuevoCodigoPostal" name="nuevoCodigoPostal"><br>
                                 <label for="nuevoModeloHeladera">Modelo de la heladera:</label>
-                                <input type="text" id="nuevoModeloHeladera"><br>
+                                <input type="text" id="nuevoModeloHeladera" name="nuevoModeloHeladera"><br>
+                                <label for="nuevaTempMax">Temperatura máxima:</label>
+                                <input type="number" id="nuevaTempMax" name="nuevaTempMax">
+                                <label for="nuevaTempMin">Temperatura mínima:</label>
+                                <input type="number" id="nuevaTempMin" name="nuevaTempMin">
                                 <label for="nuevaCapacidadHeladera">Capacidad de viandas:</label>
-                                <input type="number" id="nuevaCapacidadHeladera" min="1" required>
+                                <input type="number" id="nuevaCapacidadHeladera" name="nuevaCapacidadHeladera" min="1">
                             </div>
                             <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
                             <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
