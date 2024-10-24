@@ -20,4 +20,6 @@ public class Alerta extends Incidente{
     public String obtenerInformacion() {
         return "una Alerta de tipo: " + tipoAlerta.name();
     }
+
+    public TipoAlerta getTipoAlerta() { return tipoAlerta; }
 }

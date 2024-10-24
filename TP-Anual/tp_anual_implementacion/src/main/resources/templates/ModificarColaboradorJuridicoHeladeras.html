@@ -40,14 +40,14 @@
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                             <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                            <li><a th:href="@{Nosotros}">Nosotros</a></li>
+                            <li><a th:href="@{Mapa}">Mapa</a></li>
                         </ul>
                     </nav>
 
                     <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                        <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                        <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                        <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                        <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
                     </div>
                 </div>
             </div>
@@ -63,13 +63,13 @@
                             <span class="fs-5">Usuario</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/home-icon.svg"/>
-                                <a href="ModificarColaboradorJuridicoCuenta.html#info-personal" class="nav-link">
+                                <a th:href="@{ModificarColaborador#info-personal}" class="nav-link">
                                     Información Personal
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/contact-icon.svg"/>
-                                <a href="ModificarColaboradorJuridicoCuenta.html#contacto" class="nav-link">
+                                <a th:href="@{ModificarColaborador#contacto}" class="nav-link">
                                 Contacto
                                 </a>
                             </li>
@@ -95,13 +95,13 @@
                             <span class="fs-5">Mis puntos</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/puntos.png"/>
-                                <a href="ModificarColaboradorPremios.html#puntos-actuales" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                                     Puntos actuales
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/premios.png"/>
-                                <a href="ModificarColaboradorPremios.html#premios" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                                     Premios
                                 </a>
                             </li>
@@ -111,14 +111,19 @@
 
                 <div class="col-md-10">
                     <div class="container main">
+                        <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
+                            <p th:text="${mensaje}"></p>
+                        </div>
                         <h1>Mi Cuenta</h1>
                         <h2>Heladeras Asociadas</h2>
                         <div id="box-alertas">
                             <h3 id="alertas">Alertas</h3>
-                            <p class="fs-5" id="non-warning-message">¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
+                            <p class="fs-5" id="non-warning-message" >¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
                             <div id="warnings">
-                                <p class="fs-5">Elija el nombre del punto al que quiere consultar entre las heladeras que presentaron alertas:</p> 
-                                <select id="elegir-heladera">
+                                <p class="fs-5">Elija el punto al que quiere consultar entre las heladeras que presentaron alertas:</p>
+                                <select id="elegir-heladera" name="elegir-heladera" onchange="mostrarAlertasDeHeladera(this.value)">
+                                    <option value="">Seleccione Heladera</option>
+                                    <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ' - ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
                                 </select>
                                 <p class="fs-5" id="heladera-elegida"></p> 
                                 <div class="scroll-permitido">
@@ -131,6 +136,11 @@
                                             </tr>
                                         </thead>
                                         <tbody id="heladeras-warnings">
+                                            <tr th:each="warning : ${warnings}" th:class="'heladera' + ${warning.idHeladera} + ' alerta'" hidden>
+                                                <td th:text="${warning.momentoDelSuceso}"></td>
+                                                <td th:text="${warning.tipoAlerta}"></td>
+                                                <td th:text="${warning.estado}"></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -152,21 +162,49 @@
                                     </tr>
                                 </thead>
                                 <tbody id="user-heladeras">
+                                    <tr th:each="heladera : ${heladeras}">
+                                        <td th:text="${heladera.nombreDelPunto}"></td>
+                                        <td th:text="${heladera.ciudad}"></td>
+                                        <td th:text="${heladera.calle} + ' ' + ${heladera.altura}"></td>
+                                        <td th:text="${heladera.nombreModelo}"></td>
+                                        <td th:text="${heladera.capacidadViandas}"></td>
+                                        <td th:text="${heladera.puestaEnFuncionamiento}"></td>
+                                        <td class="row-button">
+                                            <button class="listado-button modificar" th:attr="onclick='modificarHeladera(' + ${heladera.idHeladera} + ')'">
+                                                <svg height="20px" width="20px">
+                                                    <image height="20px" width="20px" href="img/edit-icon.svg"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                        <form action="/EliminarHeladera" method="post">
+                                            <input type="hidden" id="heladera-por-eliminar" name="heladera-por-eliminar" th:value="${heladera.idHeladera}"></input>
+                                            <td class="row-button"><button class="listado-button eliminar">X</button></td>
+                                        </form>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <form id="mod-heladera">
+
+                        <form id="mod-heladera" action="/ModificarHeladera" method="post">
                             <h3>Heladera a modificar:</h3>
-                            <h3 id="mod-heladera-title"></h3>
+                            <input type="hidden" id="mod-heladera-punto-title" name="mod-heladera-punto-title"></input>
                             <div class="form-cuenta">
                                 <label for="nuevaCiudadHeladera">Ciudad:</label>
-                                <input type="text" id="nuevaCiudadHeladera"><br>
-                                <label for="nuevaDireccionHeladera">Dirección:</label>
-                                <input type="text" id="nuevaDireccionHeladera"><br>
+                                <input type="text" id="nuevaCiudadHeladera" name="nuevaCiudadHeladera"><br>
+                                <label for="nuevaCalleHeladera">Calle:</label>
+                                <input type="text" id="nuevaCalleHeladera" name="nuevaCalleHeladera"><br>
+                                <label for="nuevaAlturaHeladera">Altura:</label>
+                                <input type="text" id="nuevaAlturaHeladera" name="nuevaAlturaHeladera"><br>
+                                <label for="nuevoCodigoPostal">Código Postal:</label>
+                                <input type="text" id="nuevoCodigoPostal" name="nuevoCodigoPostal"><br>
                                 <label for="nuevoModeloHeladera">Modelo de la heladera:</label>
-                                <input type="text" id="nuevoModeloHeladera"><br>
+                                <input type="text" id="nuevoModeloHeladera" name="nuevoModeloHeladera"><br>
+                                <label for="nuevaTempMax">Temperatura máxima:</label>
+                                <input type="number" id="nuevaTempMax" name="nuevaTempMax">
+                                <label for="nuevaTempMin">Temperatura mínima:</label>
+                                <input type="number" id="nuevaTempMin" name="nuevaTempMin">
                                 <label for="nuevaCapacidadHeladera">Capacidad de viandas:</label>
-                                <input type="number" id="nuevaCapacidadHeladera" min="1" required>
+                                <input type="number" id="nuevaCapacidadHeladera" name="nuevaCapacidadHeladera" min="1">
                             </div>
                             <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
                             <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
@@ -176,7 +214,7 @@
                         <button class="btn-close" onclick="ocultarReporteFalla()"></button>
                         <p class="fs-4">Falla Técnica</p>
                         <p>¿Vio alguna falla?</p>
-                        <a href="ReportarFallaTecnica.html">Reportar</a>
+                        <a th:href="@{ReportarFallaTecnica}">Reportar</a>
                     </div>
                 </div>
             </div>

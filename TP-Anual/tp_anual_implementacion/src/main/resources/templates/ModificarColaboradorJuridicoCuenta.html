@@ -43,14 +43,14 @@
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                             <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                            <li><a th:href="@{Nosotros}">Nosotros</a></li>
+                            <li><a th:href="@{Mapa}">Mapa</a></li>
                         </ul>
                     </nav>
 
                     <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                        <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                        <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                        <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                        <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
                     </div>
                 </div>
             </div>
@@ -83,13 +83,13 @@
                                 <svg height="20px" width="20px">
                                     <image height="20px" width="5px" x="7.5px" y="0" href="img/alert-icon.svg"/>
                                 </svg>
-                                <a href="ModificarColaboradorJuridicoHeladeras.html#alertas" class="nav-link">
+                                <a th:href="@{ModificarColaboradorJuridicoHeladeras#alertas}" class="nav-link">
                                     Alertas
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/list-icon.svg"/>
-                                <a href="ModificarColaboradorJuridicoHeladeras.html#listado" class="nav-link">
+                                <a th:href="@{ModificarColaboradorJuridicoHeladeras#listado}" class="nav-link">
                                     Listado de Heladeras
                                 </a>
                             </li>
@@ -98,13 +98,13 @@
                             <span class="fs-5">Mis puntos</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/puntos.png"/>
-                                <a href="ModificarColaboradorPremios.html#puntos-actuales" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                                     Puntos actuales
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/premios.png"/>
-                                <a href="ModificarColaboradorPremios.html#premios" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                                     Premios
                                 </a>
                             </li>

@@ -43,14 +43,14 @@
                             <li><a th:href="@{/}">Home</a></li>
                             <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                             <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a href="Nosotros.html">Nosotros</a></li>
-                            <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                            <li><a th:href="@{Nosotros}">Nosotros</a></li>
+                            <li><a th:href="@{Mapa}">Mapa</a></li>
                         </ul>
                     </nav>
 
                     <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                        <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                        <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                        <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                        <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
                     </div>
                 </div>
             </div>
@@ -81,13 +81,13 @@
                             <span class="fs-5">Suscripciones</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/list-icon.svg"/>
-                                <a href="ModificarColaboradorHumanoSuscripciones.html#listado-suscripciones" class="nav-link">
+                                <a th:href="@{ModificarColaboradorHumanoSuscripciones#listado-suscripciones}" class="nav-link">
                                     Listado de suscripciones
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/notifications-icon.svg"/>
-                                <a href="ModificarColaboradorHumanoSuscripciones.html#suscribir" class="nav-link">
+                                <a th:href="@{ModificarColaboradorHumanoSuscripciones#suscripciones}" class="nav-link">
                                 Suscribirme
                                 </a>
                             </li>
@@ -96,13 +96,13 @@
                             <span class="fs-5">Mis puntos</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/puntos.png"/>
-                                <a href="ModificarColaboradorPremios.html#puntos-actuales" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                                     Puntos actuales
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/premios.png"/>
-                                <a href="ModificarColaboradorPremios.html#premios" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                                     Premios
                                 </a>
                             </li>
@@ -111,7 +111,7 @@
                             <span class="fs-5">Colaboraciones</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/tarjeta-icon.png"/>
-                                <a href="DarDeAltaPersonaEnSitVulnerable.html" class="nav-link">
+                                <a th:href="@{DarDeAltaPersonaEnSitVulnerable}" class="nav-link">
                                     Dar de alta a una persona
                                 </a>
                             </li>
@@ -168,7 +168,7 @@
                         <button class="btn-close" onclick="ocultarReporteFalla()"></button>
                         <p class="fs-4">Falla Técnica</p>
                         <p>¿Vio alguna falla?</p>
-                        <a href="ReportarFallaTecnica.html">Reportar</a>
+                        <a th:href="@{ReportarFallaTecnica}">Reportar</a>
                     </div>
                 </div>
             </div>

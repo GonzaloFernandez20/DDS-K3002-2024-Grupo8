@@ -223,10 +223,6 @@ input, select{
     transition: border-color 0.4s;
 }
 
-#warnings{
-    display: none;
-}
-
 #mod-heladera{
     display: none;
 }
