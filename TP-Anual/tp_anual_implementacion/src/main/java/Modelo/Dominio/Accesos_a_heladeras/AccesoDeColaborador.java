@@ -2,51 +2,45 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Entity
+@Table(name = "AccesoDeColaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
-    private final Colaborador colaborador;
-    private final List<PermisoDeApertura> permisosDeApertura;
+    @OneToOne
+    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
+    private Colaborador colaborador;
 
     public AccesoDeColaborador(String codigoTarjeta,
                                Colaborador colaborador) {
         this.codigoTarjeta = codigoTarjeta;
         this.colaborador = colaborador;
-        this.permisosDeApertura = new ArrayList<>();
         this.historicoDeAccesosHeladera = new ArrayList<>();
     }
     // ----------------------------------------------------------
     @Override
     public boolean aperturaAutorizada(Heladera heladera) { // -> Buscar que haya hecha un permiso en esa heladera y que no este vencido.
-        Optional<PermisoDeApertura> permiso = permisosDeApertura.stream()
+        Optional<PermisoDeApertura> permiso = historicoDeAccesosHeladera.stream()
                                                                 .filter(permisoDeApertura -> permisoDeApertura.esValida(heladera))
                                                                 .findFirst();
         if (permiso.isPresent()){
             PermisoDeApertura permisoEncontrado = permiso.get();
-            registrarAcceso(permisoEncontrado);
+            registrarAcceso((PermisoDeAperturaParaColaborar) permisoEncontrado);
             return true;
         } else return false;
     }
 
-    private void registrarAcceso(PermisoDeApertura permiso) {
+    private void registrarAcceso(PermisoDeAperturaParaColaborar permiso) {
         permiso.getContribucion().procesarLaContribucion();
-        Apertura nuevaApertura = new Apertura(permiso.getHeladera(),
-                                              permiso.getMotivo(),
-                                              permiso.getContribucion().getViandas());
-        historicoDeAccesosHeladera.add(nuevaApertura);
-        retirarPermiso(permiso);
+        if(!permiso.getEstaVencida()) {
+            historicoDeAccesosHeladera.add(permiso);
+        }
     }
 
-    public void agregarPermiso(PermisoDeApertura permiso){
-        permisosDeApertura.add(permiso);
-    }
-    public void retirarPermiso(PermisoDeApertura permiso){
-        permisosDeApertura.remove(permiso); // Elimina la primera aparicion del objeto.
-    }
 
     // Hecho de forma provisoria para reportes
     public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
