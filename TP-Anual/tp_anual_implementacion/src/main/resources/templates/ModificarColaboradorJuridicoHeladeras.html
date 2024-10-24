@@ -63,13 +63,13 @@
                             <span class="fs-5">Usuario</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/home-icon.svg"/>
-                                <a href="ModificarColaboradorJuridicoCuenta.html#info-personal" class="nav-link">
+                                <a th:href="@{ModificarColaborador#info-personal}" class="nav-link">
                                     Información Personal
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/contact-icon.svg"/>
-                                <a href="ModificarColaboradorJuridicoCuenta.html#contacto" class="nav-link">
+                                <a th:href="@{ModificarColaborador#contacto}" class="nav-link">
                                 Contacto
                                 </a>
                             </li>
@@ -95,13 +95,13 @@
                             <span class="fs-5">Mis puntos</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/puntos.png"/>
-                                <a href="ModificarColaboradorPremios.html#puntos-actuales" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                                     Puntos actuales
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/premios.png"/>
-                                <a href="ModificarColaboradorPremios.html#premios" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                                     Premios
                                 </a>
                             </li>
@@ -177,7 +177,8 @@
                                             </button>
                                         </td>
                                         <form action="/EliminarHeladera" method="post">
-                                            <td class="row-button"><button class="listado-button eliminar" th:value="${heladera.idHeladera}">X</button></td>
+                                            <input type="hidden" id="heladera-por-eliminar" name="heladera-por-eliminar" th:value="${heladera.idHeladera}"></input>
+                                            <td class="row-button"><button class="listado-button eliminar">X</button></td>
                                         </form>
                                     </tr>
                                 </tbody>

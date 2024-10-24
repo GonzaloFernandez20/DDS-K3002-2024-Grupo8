@@ -22,12 +22,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/*  TO DO:
-* - Poder dar de baja una heladera (/EliminarHeladera)
-* - Tener una forma consistente de que las pantallas que compartan el jurídico y el humano
-* se puedan mostrar igual pero cambiando determinadas partes de la pantalla--> EN CAMINO... YA ESTÁS POR LLEGAR!
-* */
-
 @Controller
 public class CtrlGestionHeladeras {
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
@@ -113,16 +107,27 @@ public class CtrlGestionHeladeras {
     }
 
     @PostMapping("/EliminarHeladera")
-    public String eliminarHeladera(Model model) {
+    public String eliminarHeladera(@RequestParam("heladera-por-eliminar") int idHeladera,
+                                    Model model) {
+        // RepositorioHeladeras.eliminarHeladeraConId(idHeladera);
+        // LO DEBE RECIBIR EL REPOSITORIO PARA ACTUALIZARLO EN LA BD
+
+        System.out.println("Se elimina la heladera " + idHeladera);
+
+        model.addAttribute("mensaje", "La heladera se ha dado de baja con éxito.");
+
         return mostrarHeladerasYAlertas(model);
     }
 
+    //Hardcodeado
     int i = 0;
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
         HeladeraDTO heladeraDTO = new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
+        // Hardcodeado
         heladeraDTO.setIdHeladera(i);
         i++;
+        //
         return heladeraDTO;
     }
 

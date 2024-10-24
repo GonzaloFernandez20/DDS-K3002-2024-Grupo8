@@ -58,14 +58,14 @@
                         <li><a th:href="@{/}">Home</a></li>
                         <li><a th:href="@{/Colaborar}">Colaborar</a></li>
                         <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                        <li><a href="Nosotros.html">Nosotros</a></li>
-                        <li><a th:href="@{Mapa.html}">Mapa</a></li>
+                        <li><a th:href="@{Nosotros}">Nosotros</a></li>
+                        <li><a th:href="@{Mapa}">Mapa</a></li>
                     </ul>
                 </nav>
 
                 <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                    <a href="InicioDeSesion.html"><button type="button">Inicio de Sesión</button></a>
-                    <a href="RegistroPersona.html"><button type="button">Registrarse</button></a>
+                    <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                    <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
                 </div>
             </div>
         </div>
@@ -81,29 +81,46 @@
                         <span class="fs-5">Usuario</span>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/home-icon.svg"/>
-                            <a href="ModificarColaboradorHumano.html" class="nav-link">
+                            <a th:href="@{ModificarColaborador#info-personal}" class="nav-link">
                                 Información Personal
                             </a>
                         </li>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/contact-icon.svg"/>
-                            <a href="ModificarColaboradorHumano.html" class="nav-link">
+                            <a th:href="@{ModificarColaborador#contacto}" class="nav-link">
                             Contacto
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav nav-pills flex-column mb-auto">
+                    <ul class="nav nav-pills flex-column mb-auto" th:if="${tipoColaborador == 'PersonaHumana'}">
                         <span class="fs-5">Suscripciones</span>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/list-icon.svg"/>
-                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                            <a th:href="@{ModificarColaboradorHumanoSuscripciones#listado-suscripciones}" class="nav-link">
                                 Listado de suscripciones
                             </a>
                         </li>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/notifications-icon.svg"/>
-                            <a href="ModificarColaboradorHumanoSuscripciones.html" class="nav-link">
+                            <a th:href="@{ModificarColaboradorHumanoSuscripciones#suscripciones}" class="nav-link">
                             Suscribirme
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills flex-column mb-auto" th:if="${tipoColaborador == 'PersonaJuridica'}">
+                        <span class="fs-5">Heladeras</span>
+                        <li class="nav-item">
+                            <svg height="20px" width="20px">
+                                <image height="20px" width="5px" x="7.5px" y="0" href="img/alert-icon.svg"/>
+                            </svg>
+                            <a th:href="@{ModificarColaboradorJuridicoHeladeras#alertas}" class="nav-link">
+                                Alertas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <image height="20px" width="20px" src="img/list-icon.svg"/>
+                            <a th:href="@{ModificarColaboradorJuridicoHeladeras#listado}" class="nav-link">
+                                Listado de Heladeras
                             </a>
                         </li>
                     </ul>
@@ -122,11 +139,11 @@
                             </a>
                         </li>
                     </ul>
-                    <ul class="nav nav-pills flex-column mb-auto colaboracion">
+                    <ul class="nav nav-pills flex-column mb-auto colaboracion" th:if="${tipoColaborador == 'PersonaHumana'}">
                         <span class="fs-5">Colaboraciones</span>
                         <li class="nav-item">
                             <image height="20px" width="20px" src="img/tarjeta-icon.png"/>
-                            <a href="DarDeAltaPersonaEnSitVulnerable.html" class="nav-link">
+                            <a th:href="@{DarDeAltaPersonaEnSitVulnerable}" class="nav-link">
                                 Dar de alta a una persona
                             </a>
                         </li>
@@ -138,15 +155,17 @@
                 <div class="container main">
                     <h1>Mi Cuenta</h1>
                     <h2 id="puntos-actuales">Mis puntos</h2>
-                    <div id="stars" class="stars-container"></div> <!-- Elemento donde se mostrarán los puntos -->
+                    <div id="stars" class="stars-container">
+                        <p th:text="${puntos}"></p>
+                    </div> <!-- Elemento donde se mostrarán los puntos -->
                     <h2 id="premios">Premios</h2>
-                    <a href="CanjearPuntos.html"><button type="button" class="boton">Ver Premios disponibles</button></a>
+                    <a th:href="@{CanjearPuntos}"><button type="button" class="boton">Ver Premios disponibles</button></a>
                 </div>
                 <div class="reportar-falla referirAColaboracion" id="container-reporte-falla">
                     <button class="btn-close" onclick="ocultarReporteFalla()"></button>
                     <p class="fs-4">Falla Técnica</p>
                     <p>¿Vio alguna falla?</p>
-                    <a href="ReportarFallaTecnica.html">Reportar</a>
+                    <a th:href="@{ReportarFallaTecnica}">Reportar</a>
                 </div>
             </div>
         </div>
@@ -164,7 +183,6 @@
         </ul>
     </footer>
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/JS/ModificarColaboradorPremios.js"></script>
     <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
 </body>
 </html>

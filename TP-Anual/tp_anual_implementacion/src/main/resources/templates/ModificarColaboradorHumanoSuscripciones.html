@@ -67,11 +67,11 @@
                             <span class="fs-5">Usuario</span>
                             <li class="nav-item">
                                 <img alt="Casa" height="20px" width="20px" src="img/home-icon.svg"/>
-                                <a href="ModificarColaboradorHumano.html#info-personal" class="nav-link">Información Personal</a>
+                                <a th:href="@{ModificarColaboradorHumano#info-personal}" class="nav-link">Información Personal</a>
                             </li>
                             <li class="nav-item">
                                 <img alt="Sobre" height="20px" width="20px" src="img/contact-icon.svg"/>
-                                <a href="ModificarColaboradorHumano.html#contacto" class="nav-link"> Contacto </a>
+                                <a th:href="@{ModificarColaboradorHumano#contacto}" class="nav-link"> Contacto </a>
                             </li>
                         </ul>
                         <ul class="nav nav-pills flex-column mb-auto nav-chosen">
@@ -91,13 +91,13 @@
                             <span class="fs-5">Mis puntos</span>
                             <li class="nav-item">
                                 <img alt="Puntos" height="20px" width="20px" src="img/puntos.png"/>
-                                <a href="ModificarColaboradorPremios.html#puntos-actuales" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                                     Puntos actuales
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <img alt="Regalo" height="20px" width="20px" src="img/premios.png"/>
-                                <a href="ModificarColaboradorPremios.html#premios" class="nav-link">
+                                <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                                     Premios
                                 </a>
                             </li>
@@ -106,7 +106,7 @@
                             <span class="fs-5">Colaboraciones</span>
                             <li class="nav-item">
                                 <img alt="Tarjeta" height="20px" width="20px" src="img/tarjeta-icon.png"/>
-                                <a href="DarDeAltaPersonaEnSitVulnerable.html" class="nav-link">
+                                <a th:href="@{DarDeAltaPersonaEnSitVulnerable}" class="nav-link">
                                     Dar de alta a una persona
                                 </a>
                             </li>
@@ -195,7 +195,7 @@
                         <button class="btn-close" onclick="ocultarReporteFalla()"></button>
                         <p class="fs-4">Falla Técnica</p>
                         <p>¿Vio alguna falla?</p>
-                        <a href="ReportarFallaTecnica.html">Reportar</a>
+                        <a th:href="@{ReportarFallaTecnica}">Reportar</a>
                     </div>
                 </div>
             </div>
