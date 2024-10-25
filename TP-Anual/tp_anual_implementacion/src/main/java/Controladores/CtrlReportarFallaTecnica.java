@@ -51,7 +51,7 @@ public class CtrlReportarFallaTecnica {
 
         String pathFotoFalla = null;
         if (!fotoFalla.isEmpty()) {
-            pathFotoFalla = DescargaDeArchivo.guardarArchivo("/fotosHeladerasReportadas/", fotoFalla);
+            pathFotoFalla = DescargaDeArchivo.guardarArchivo("fotosHeladerasReportadas", fotoFalla);
         }
 
 
