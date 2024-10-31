@@ -68,7 +68,7 @@
                         <select id="heladeraOrigen" name="heladeraOrigen">
                             <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
                         </select>
-                        </div>
+                    </div>
 
                     <div class="input-group">
                         <label for="heladeraDestino">Heladera Destino (*)</label>
