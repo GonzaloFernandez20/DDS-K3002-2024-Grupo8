@@ -6,15 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class EsContraseniaFuerte extends Criterio{
-    static File listaDeConstrasenias = new File("src/main/java/Modelo/seguridad/10KPasswords.txt");
-
+    static File listaDeContrasenias = new File(EsContraseniaFuerte.class.getClassLoader().getResource("utils/10KPasswords.txt").getFile());
     @Override
     public boolean criterioSeguridad(String contrasenia) {
         boolean esFuerte = true;
 
-        try(BufferedReader bufferDeLectura = new BufferedReader(new FileReader(listaDeConstrasenias))) {
+        try(BufferedReader bufferDeLectura = new BufferedReader(new FileReader(listaDeContrasenias))) {
                 // Bloque "try-with-resources" para asegurar que el buffer se cierre automaticamente despues de su uso.
-            if (listaDeConstrasenias.exists()) {
+            if (listaDeContrasenias.exists()) {
 
                 String lineaLeida;
 

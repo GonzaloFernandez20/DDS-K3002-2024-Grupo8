@@ -79,7 +79,6 @@
                 <label>Medio de Contacto (*)</label>
                 <input type="checkbox" id="medioContactoEmailJ" value="email">Email<br>
                 <input type="checkbox" id="medioContactoTelefonoJ" value="telefono">Telefono<br>
-                <input type="checkbox" id="medioContactoCorreoJ" value="postal">Correo Postal<br>
 
                 <div class="input-group" id="emailCajaJ" style="display: none;">
                     <label for="emailIngresadoJ">Ingresar Email</label>
@@ -91,12 +90,18 @@
                     <label for="telefonoIngresadoJ">Ingresar Telefono</label>
                     <input type="text" pattern="^[0-9]*$" name="telefonoIngresoJ" placeholder="Ingresar Telefono" id="telefonoIngresadoJ">
                     <div class="error-message" id="telefonoErrorJ"></div>
-                </div>
 
-                <div class="input-group" id="correoCajaJ" style="display: none;">
-                    <label for="correoIngresadoJ">Ingresar Direccion de Contacto</label>
-                    <input type="text" name="correoIngresoJ" placeholder="Ingresar Direccion" id="correoIngresadoJ">
-                    <div class="error-message" id="correoErrorJ"></div>
+                    <!-- Checkboxes añadidos debajo del campo de Telefono -->
+                    <div class="checkbox-group">
+                        <div class="checkbox-whatsapp">
+                            <input type="checkbox" id="checkbox-wp-j" name="whatsApp">
+                            <label for="checkbox-wp-j">WhatsApp</label>
+                        </div>
+                        <div class="checkbox-telegram">
+                            <input type="checkbox" id="checkbox-tl-j" name="telegram">
+                            <label for="checkbox-tl-j">Telegram</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="error-message" id="contactoErrorJ"></div>
@@ -136,7 +141,6 @@
                 <label>Medio de Contacto (*)</label>
                 <input type="checkbox" id="medioContactoEmailH" value="email">Email<br>
                 <input type="checkbox" id="medioContactoTelefonoH" value="telefono">Telefono<br>
-                <input type="checkbox" id="medioContactoCorreoH" value="postal">Correo Postal<br>
 
                 <div class="input-group" id="emailCajaH" style="display: none;">
                     <label for="emailIngresadoH">Ingresar Email</label>
@@ -148,18 +152,24 @@
                     <label for="telefonoIngresadoH">Ingresar Telefono</label>
                     <input type="text" pattern="^[0-9]*$" name="telefonoIngresoH" placeholder="Ingresar Telefono" id="telefonoIngresadoH">
                     <div class="error-message" id="telefonoErrorH"></div>
-                </div>
 
-                <div class="input-group" id="correoCajaH" style="display: none;">
-                    <label for="correoIngresadoH">Ingresar Direccion de Contacto</label>
-                    <input type="text" name="correoCajaH" placeholder="Ingresar Direccion" id="correoIngresadoH">
-                    <div class="error-message" id="correoErrorH"></div>
+                    <!-- Checkboxes añadidos debajo del campo de Telefono -->
+                    <div class="checkbox-group">
+                        <div class="checkbox-whatsapp">
+                            <input type="checkbox" id="checkbox-wp-h" name="whatsApp">
+                            <label for="checkbox-wp-h">WhatsApp</label>
+                        </div>
+                        <div class="checkbox-telegram">
+                            <input type="checkbox" id="checkbox-tl-h" name="telegram">
+                            <label for="checkbox-tl-h">Telegram</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="error-message" id="contactoErrorH"></div>
             </div>
 
-            <button type="submit">Ingresar</button></a>
+            <button type="submit">Ingresar</button>
 
         </form>
 

@@ -18,7 +18,7 @@ class ValidadorTests {
     }
 
     @Test
-    void testFortalezaContraseña() {
+    void testFortalezaContrasenia() {
         setUp();
         assertFalse(validador.validarConstrasenia("1234"), "No cumple criterio: Contrasenia insegura");
         assertTrue(validador.validarConstrasenia("Riquelme10"), "Cumple criterio: Contrasenia segura");
