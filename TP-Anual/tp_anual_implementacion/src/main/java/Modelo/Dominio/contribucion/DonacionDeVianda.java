@@ -2,10 +2,13 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Entity
+@Table(name = "DonacionDeVianda")
 public class DonacionDeVianda extends ContribucionConApertura {
 
     public DonacionDeVianda(Colaborador colaborador, Heladera heladera, List <Vianda> viandas, LocalDate fechaDeContribucion) {

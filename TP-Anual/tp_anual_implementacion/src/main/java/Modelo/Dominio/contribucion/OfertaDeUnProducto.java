@@ -2,15 +2,26 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.sistema.Sistema;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "OfertaDeUnProducto")
+@DiscriminatorValue("ofrecer_producto")
 public class OfertaDeUnProducto extends Contribucion {
+    //POR QUÉ ESTÁ ÉSTE ATRIBUTO???
+    @Column(name = "idOferta")
     private int idOferta;
+    @Column(name = "nombre_de_oferta")
     private String nombreOferta;
+    @Column(name = "puntos_necesarios")
     private double puntosNecesarios;
+    @Column(name = "link_a_imagen")
     private String linkDeImagen;
+    @Enumerated(EnumType.STRING)
     private Rubro rubro;
+    @OneToOne
+    @JoinColumn(name = "producto", referencedColumnName = "id_producto")
     private Producto producto;
 
     public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String linkDeImagen, Rubro rubro, Producto producto) {

@@ -1,11 +1,20 @@
 package Modelo.Dominio.persona;
 
 import Modelo.Dominio.localizacion.Direccion;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
+@Entity
 public class PersonaJuridica extends Persona {
-    private final String razonSocial;
-    private final TipoOrganizacion tipoDeOrganizacion;
-    private final String rubro;
+    @Column(name = "razon_social")
+    private String razonSocial;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_de_organizacion")
+    private TipoOrganizacion tipoDeOrganizacion;
+    @Column(name = "rubro")
+    private String rubro;
 
     public PersonaJuridica(String razonSocial, TipoOrganizacion tipoDeOrganizacion, String rubro, Direccion direccion) {
         if(razonSocial ==null){throw new IllegalArgumentException("La razon social es obligatorio");}
@@ -16,6 +25,7 @@ public class PersonaJuridica extends Persona {
         this.rubro = rubro;
         this.direccion = direccion;
     }
+
 
 }
 

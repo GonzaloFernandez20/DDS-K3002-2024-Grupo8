@@ -1,6 +1,7 @@
 package Repositorios;
 
-import Modelo.Dominio.Accesos_a_heladeras.Apertura;
+import Modelo.Dominio.Accesos_a_heladeras.PermisoDeApertura;
+import Modelo.Dominio.Accesos_a_heladeras.PermisoDeAperturaParaColaborar;
 import Modelo.Dominio.heladera.Heladera;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 
 
 public class RepositorioAperturas {
-    private List<Apertura> aperturas = null;
+    private List<PermisoDeAperturaParaColaborar> aperturas = null;
     private static RepositorioAperturas instancia;
 
     public static RepositorioAperturas getInstancia() {
@@ -20,8 +21,9 @@ public class RepositorioAperturas {
         }
         return instancia;
     }
-    public List<Apertura> aperturasEntreFechas(LocalDate fechaInicio, LocalDate fechaFin){
-        return aperturas.stream().filter(apertura -> apertura.getFecha().isAfter(fechaInicio.atStartOfDay()) && apertura.getFecha().isBefore(fechaFin.atStartOfDay())).toList();
+    public List<PermisoDeAperturaParaColaborar> aperturasEntreFechas(LocalDate fechaInicio, LocalDate fechaFin){
+        return null;//el repositorio este vuela a la mierda con la BD andando
+        //return aperturas.stream().filter(apertura -> apertura.getFechaDeVencimiento().isAfter(fechaInicio.atStartOfDay()) && apertura.getFechaDeVencimiento().isBefore(fechaFin.atStartOfDay())).toList();
     }
     public Integer cantidadDeDepositosDeHeladeraEntreFechas(Heladera heladera, LocalDate fechaInicio, LocalDate fechaFin){
         return this.aperturasEntreFechas(fechaInicio,fechaFin).stream().filter(apertura -> apertura.getMotivo().equals(INGRESAR_VIANDAS_DONADAS)).toList().size();

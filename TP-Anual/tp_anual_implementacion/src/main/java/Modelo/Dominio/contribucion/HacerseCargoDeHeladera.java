@@ -1,18 +1,25 @@
 package Modelo.Dominio.contribucion;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
-import Modelo.Dominio.sistema.RegistroDeHeladeras;
-import Servicios_Externos_APIs.API.APIRequester;
-import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
+import Modelo.Dominio.sistema.RegistroDeHeladeras;
+import Servicios_Externos_APIs.API.APIRequester;
+import Servicios_Externos_APIs.API.ResponseRecomendacion;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "HacerseCargoDeHeladera")
 public class HacerseCargoDeHeladera extends Contribucion{
-
-    private final Heladera heladeraACargo;
+    @OneToOne
+    @JoinColumn(name = "heladera_a_cargo", referencedColumnName = "id_heladera")
+    private Heladera heladeraACargo;
 
     public HacerseCargoDeHeladera(Colaborador colaborador, Heladera heladeraACargo) {
         this.colaborador = colaborador;

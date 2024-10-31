@@ -5,25 +5,45 @@ import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Excepciones.ExcepcionHeladeraLlena;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-
+@Entity
+@Table(name = "Heladera")
 public class Heladera {
+    @Id
+    @GeneratedValue
+    private Integer id_heladera;
+    //POR QUÉ ESTÁ ESTE ATRIBUTO???
+    @Column(name = "id_heladera_trucho")
     private int idHeladera;
-    private final Colaborador colaboradorACargo;
-    private final Ubicacion ubicacion;
-    private final int capacidadDeViandas;
-    private final LocalDate puestaEnFuncionamiento;
-    private final List<Vianda> viandasEnStock;
+    @ManyToOne
+    @JoinColumn(name = "colaborador_a_cargo", referencedColumnName = "id_colaborador")
+    private Colaborador colaboradorACargo;
+    @ManyToOne
+    @JoinColumn(name = "ubicacion", referencedColumnName = "id_ubicacion")
+    private Ubicacion ubicacion;
+    @Column(name = "cantidad_de_viandas")
+    private int capacidadDeViandas;
+    @Column(name = "fecha_de_puesta_en_funcionamiento")
+    private LocalDate puestaEnFuncionamiento;
+    @OneToMany(mappedBy = "heladera")
+    private List<Vianda> viandasEnStock;
+    @ManyToOne
+    @JoinColumn(name = "modelo", referencedColumnName = "id_modelo")
     private Modelo modelo;
+    @Enumerated(EnumType.STRING)
     private EstadoHeladera estado;
+    @OneToOne
+    @JoinColumn(name = "notificador_de_suscriptos", referencedColumnName = "id_notificador_de_suscriptos")
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     // BROKER ------------------------------------------
-    private static final String BROKER_ADDRESS = "localhost"; // Dirección del broker
-    private static final int BROKER_PORT = 12345; // Puerto del broker
+    private static String BROKER_ADDRESS = "localhost"; // Dirección del broker
+    private static int BROKER_PORT = 12345; // Puerto del broker
     // ------------------------------------------------
 
     public Heladera(Colaborador colaboradorACargo,

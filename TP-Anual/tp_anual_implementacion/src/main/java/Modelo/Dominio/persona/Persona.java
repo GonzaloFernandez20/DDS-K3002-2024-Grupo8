@@ -1,7 +1,16 @@
 package Modelo.Dominio.persona;
 import Modelo.Dominio.localizacion.Direccion;
+import jakarta.persistence.*;
 
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Persona {
+    @Id
+    @GeneratedValue
+    private Integer id_persona;
+    @ManyToOne
+    @JoinColumn(name = "direccion", referencedColumnName = "id_direccion")
     public Direccion direccion;
 
     // ---- Getters y Setters

@@ -3,11 +3,6 @@ package Modelo.Dominio.heladera;
 import Modelo.Dominio.incidentes.GestorDeIncidentes;
 import Modelo.Dominio.incidentes.TipoAlerta;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 

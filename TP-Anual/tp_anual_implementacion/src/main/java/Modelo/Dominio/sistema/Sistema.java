@@ -6,7 +6,9 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.Incidente;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public final class Sistema {
     private static Sistema instancia = null;

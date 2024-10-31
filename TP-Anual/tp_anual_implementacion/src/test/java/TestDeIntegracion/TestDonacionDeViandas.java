@@ -2,7 +2,7 @@ package TestDeIntegracion;
 
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.DonacionDeVianda;
+import Modelo.Dominio.contribucion.contribucionConApertura.DonacionDeVianda;
 import Modelo.Dominio.contribucion.EstadoVianda;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Nested;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

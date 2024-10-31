@@ -1,15 +1,25 @@
 package Modelo.Dominio.persona;
 
-import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.localizacion.Direccion;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
 
+@Entity
 public class PersonaHumana extends Persona {
-    private final String nombre;
-    private final String apellido;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "apellido")
+    private String apellido;
+    @Column(name = "fecha_de_nacimiento")
     private LocalDate fechaDeNacimiento;
-    private final Documento documento;
+    @OneToOne
+    @JoinColumn(name = "documento", referencedColumnName = "id_documento")
+    private Documento documento;
 
     public PersonaHumana(String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento, Direccion direccion) {
         if(nombre ==null){throw new IllegalArgumentException("El nombre es obligatorio");}

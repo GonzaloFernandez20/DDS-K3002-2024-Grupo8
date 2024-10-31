@@ -2,54 +2,59 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
+@Entity
+@Table(name = "AccesoDeColaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
-    private final Colaborador colaborador;
-    private final List<PermisoDeApertura> permisosDeApertura;
+    @OneToOne
+    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
+    private Colaborador colaborador;
 
     public AccesoDeColaborador(String codigoTarjeta,
                                Colaborador colaborador) {
         this.codigoTarjeta = codigoTarjeta;
         this.colaborador = colaborador;
-        this.permisosDeApertura = new ArrayList<>();
         this.historicoDeAccesosHeladera = new ArrayList<>();
     }
     // ----------------------------------------------------------
     @Override
     public boolean aperturaAutorizada(Heladera heladera) { // -> Buscar que haya hecha un permiso en esa heladera y que no este vencido.
-        Optional<PermisoDeApertura> permiso = permisosDeApertura.stream()
+        Optional<PermisoDeApertura> permiso = historicoDeAccesosHeladera.stream()
                                                                 .filter(permisoDeApertura -> permisoDeApertura.esValida(heladera))
                                                                 .findFirst();
         if (permiso.isPresent()){
             PermisoDeApertura permisoEncontrado = permiso.get();
-            registrarAcceso(permisoEncontrado);
+            registrarAcceso((PermisoDeAperturaParaColaborar) permisoEncontrado);
             return true;
         } else return false;
     }
 
-    private void registrarAcceso(PermisoDeApertura permiso) {
+    private void registrarAcceso(PermisoDeAperturaParaColaborar permiso) {
         permiso.getContribucion().procesarLaContribucion();
-        Apertura nuevaApertura = new Apertura(permiso.getHeladera(),
-                                              permiso.getMotivo(),
-                                              permiso.getContribucion().getViandas());
-        historicoDeAccesosHeladera.add(nuevaApertura);
-        retirarPermiso(permiso);
+        if(!permiso.getEstaVencida()) {
+            historicoDeAccesosHeladera.add(permiso);
+        }
     }
 
-    public void agregarPermiso(PermisoDeApertura permiso){
-        permisosDeApertura.add(permiso);
+
+    public Colaborador getColaborador() {
+        return colaborador;
     }
-    public void retirarPermiso(PermisoDeApertura permiso){
-        permisosDeApertura.remove(permiso); // Elimina la primera aparicion del objeto.
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
     }
 
     // Hecho de forma provisoria para reportes
     public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
-        return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
+        return 10;//RE TRUCHO, CUANDO ESTË LISTA LA BD LO CORRIJO
+        //return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
     }
 }

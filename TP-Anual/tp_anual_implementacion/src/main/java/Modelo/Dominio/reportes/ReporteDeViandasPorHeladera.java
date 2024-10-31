@@ -5,11 +5,19 @@ package Modelo.Dominio.reportes;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.sistema.RegistroDeHeladeras;
 import Repositorios.RepositorioAperturas;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name = "ReporteViandasPorHeladera")
 public class ReporteDeViandasPorHeladera extends ReporteSemanal{
+    @OneToMany
+    @JoinColumn(name = "id_reporte", referencedColumnName = "id_reporte")
     private List<ViandasPorHeladera> viandasPorHeladeras = null;
 
     public ReporteDeViandasPorHeladera(LocalDate fechaDeCreacion) {

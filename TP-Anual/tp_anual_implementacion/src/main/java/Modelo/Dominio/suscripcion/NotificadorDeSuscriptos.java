@@ -2,14 +2,21 @@ package Modelo.Dominio.suscripcion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+@Entity
+@Table(name = "NotificadorDeSuscriptos")
 public class NotificadorDeSuscriptos {
+    @Id
+    @GeneratedValue
+    private Integer id_notificador_de_suscriptos;
+    @Transient
     private final Map<String, List<Colaborador>> suscriptos;
+    @OneToOne(mappedBy = "notificadorDeSuscriptos")
     private final Heladera heladera;
 
     public NotificadorDeSuscriptos(Heladera heladera) {

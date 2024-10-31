@@ -2,16 +2,23 @@ package Modelo.Dominio.persona_vulnerable;
 
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
 import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.documentacion.Documento;
-import Modelo.Dominio.localizacion.Direccion;
+import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
-public class PersonaSituacionVulnerable /*extends PersonaHumana*/ {
+@Entity
+@Table(name = "PersonaEnSituacionVulnerable")
+public class PersonaSituacionVulnerable {
+    @Id
+    @GeneratedValue
+    private Integer id_persona_en_situacion_vulnerable;
+    @Enumerated(EnumType.STRING)
     private EstadoDeVivienda estadoDeVivienda;
+    @Column(name = "cantidad_de_menores")
     private int cantMenores;
+    @OneToOne(mappedBy = "personaSituacionVulnerable")
     private Vinculacion vinculacion;
-    private final PersonaHumana persona;
+    @OneToOne
+    @JoinColumn(name = "persona", referencedColumnName = "id_persona")
+    private PersonaHumana persona;
 
     public PersonaSituacionVulnerable(/*String nombre, String apellido,
                                       LocalDate fechaDeNacimiento,

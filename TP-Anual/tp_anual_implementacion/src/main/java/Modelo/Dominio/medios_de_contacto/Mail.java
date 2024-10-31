@@ -1,7 +1,13 @@
 package Modelo.Dominio.medios_de_contacto;
 
-public class Mail implements MedioDeContacto{
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "Mail")
+public class Mail extends MedioDeContacto{
+    @Column(name = "correo")
     private String correo;
 
     public Mail(String correo) {

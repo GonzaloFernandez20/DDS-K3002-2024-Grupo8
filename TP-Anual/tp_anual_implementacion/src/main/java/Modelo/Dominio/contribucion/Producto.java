@@ -1,7 +1,16 @@
 package Modelo.Dominio.contribucion;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Producto")
 public class Producto {
+    @Id
+    @GeneratedValue
+    private Integer id_producto;
+    @Column(name = "nombre_de_producto")
     String nombreProducto;
+    @Column(name = "stock")
     int stock;
 
     public String getNombreProducto() {
