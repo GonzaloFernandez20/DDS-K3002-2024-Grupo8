@@ -10,19 +10,20 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 @Entity
 @Table(name = "Vinculacion")
 public class Vinculacion extends AccesoAHeladeras{
     @OneToOne
-    @JoinColumn(name = "id_persona_humana", referencedColumnName = "id_persona_humana")
+    @JoinColumn(name = "persona_en_situacion_vulnerabre", referencedColumnName = "id_persona_en_situacion_vulnerable")
     private PersonaSituacionVulnerable personaSituacionVulnerable;
     @OneToOne
-    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
+    @JoinColumn(name = "colaborador_registrante", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorQueRegistro;
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
-    @Column(name = "cantidad_de_usos_restantes_por_dia")
+    @Column(name = "usos_restantes_por_dia")
     private int cantUsosRestantesPorDia;
     @Column(name = "fecha_ultimo_uso")
     private LocalDate fechaUltimoUso;

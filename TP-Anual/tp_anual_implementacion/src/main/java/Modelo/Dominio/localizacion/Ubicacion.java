@@ -7,10 +7,11 @@ import jakarta.persistence.*;
 public class Ubicacion {
     @Id
     @GeneratedValue
-    private Integer id_ubicaion;
+    private Integer id_ubicacion;
     @OneToOne
     @JoinColumn(name = "id_punto_en_el_mapa", referencedColumnName = "id_punto_en_el_mapa")
     private PuntoEnElMapa punto;
+    @OneToOne
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion")
     private Direccion direccion;
     @Column(name = "ciudad")

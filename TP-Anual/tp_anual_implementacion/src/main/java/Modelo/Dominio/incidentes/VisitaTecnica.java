@@ -7,17 +7,22 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "VisitaTecnica")
 public class VisitaTecnica {
+    @Id
+    @GeneratedValue
+    private Integer id_visita_tecnica;
+    @ManyToOne
+    @JoinColumn(name = "tecnico", referencedColumnName = "id_tecnico")
     private Tecnico tecnico;
     @Column(name = "fecha_de_visita")
     private LocalDateTime fechaDeVisita;
     @Column(name = "detalle_de_trabajo")
     private String detalleDeTrabajo;
-    @Column(name = "foto")
+    @Column(name = "link_foto")
     private String linkFoto;
     @Enumerated(EnumType.STRING)
     private EstadoDelIncidente estadoVisita;
     @ManyToOne
-    @JoinColumn(name = "id_incidente", referencedColumnName = "id_incidente")
+    @JoinColumn(name = "incidenteAtendido", referencedColumnName = "id_incidente")
     private Incidente incidenteAtendido;
 
     public VisitaTecnica(EstadoDelIncidente estadoVisita, String detalleDeTrabajo, Tecnico tecnico, String linkFoto, Incidente incidenteAtendido) {

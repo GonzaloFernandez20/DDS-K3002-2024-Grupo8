@@ -2,17 +2,19 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 @Entity
 @Table(name = "AccesoDeColaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
     @OneToOne
-    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
+    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private Colaborador colaborador;
 
     public AccesoDeColaborador(String codigoTarjeta,
@@ -42,8 +44,17 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     }
 
 
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
+
     // Hecho de forma provisoria para reportes
     public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
-        return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
+        return 10;//RE TRUCHO, CUANDO ESTË LISTA LA BD LO CORRIJO
+        //return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
     }
 }

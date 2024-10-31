@@ -3,11 +3,11 @@ package Modelo.Dominio.localizacion;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Localizacion")
+@Table(name = "Direccion")
 public class Direccion {
     @Id
     @GeneratedValue
-    private Integer id_localizacion;
+    private Integer id_direccion;
     @Column(name ="calle")
     private String calle;
     @Column(name ="altura")

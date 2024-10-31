@@ -1,16 +1,16 @@
 package Modelo.Dominio.incidentes;
 
 import Modelo.Dominio.heladera.Heladera;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 @Entity
 @Table(name = "Alerta")
 public class Alerta extends Incidente{
-    @Id
-    @GeneratedValue
-    private  Integer id_alerta;
     @Enumerated(EnumType.STRING)
     private TipoAlerta tipoAlerta;
 

@@ -9,8 +9,8 @@ public class ViandasPorHeladera{
     @Id
     @GeneratedValue
     private Integer id_viandas_por_heladera;
-    @OneToOne
-    @JoinColumn(name = "id_heladera", referencedColumnName = "id_heladera")
+    @ManyToOne
+    @JoinColumn(name = "heladera", referencedColumnName = "id_heladera")
     private Heladera heladera;
     @Column(name = "viandas_retiradas")
     private Integer ViandasRetiradas;

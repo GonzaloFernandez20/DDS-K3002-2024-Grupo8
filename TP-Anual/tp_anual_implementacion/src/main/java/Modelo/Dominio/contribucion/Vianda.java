@@ -18,11 +18,11 @@ public class Vianda {
     private LocalDate fechaDeCaducidad;
     @Column(name = "fecha_de_donacion")
     private LocalDate fechaDeDonacion;
-    @OneToOne
-    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
+    @ManyToOne
+    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private Colaborador colaborador;
-    @OneToOne
-    @JoinColumn(name = "id_heladera", referencedColumnName = "id_heladera")
+    @ManyToOne
+    @JoinColumn(name = "heladera", referencedColumnName = "id_heladera")
     private Heladera heladera;
     @Column(name = "calorias")
     private String calorias;

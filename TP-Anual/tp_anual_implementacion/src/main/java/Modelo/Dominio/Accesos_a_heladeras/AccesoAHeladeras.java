@@ -10,11 +10,11 @@ import java.util.List;
 public abstract class AccesoAHeladeras {
     @Id
     @GeneratedValue
-    private Integer id_acceso_a_heladera;
+    private Integer id_acceso_a_heladeras;
     @Column(name = "codigo_tarjeta")
     protected String codigoTarjeta;
     @OneToMany
-    @JoinColumn(name = "id_acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
+    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
     protected List <PermisoDeApertura> historicoDeAccesosHeladera = null;
 
     public abstract boolean aperturaAutorizada(Heladera heladera);

@@ -5,16 +5,16 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.suscripcion.CreadorDeMensajes;
 import jakarta.persistence.*;
 
-
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
 @Entity
 @Table(name = "DistribucionDeVianda")
 public class DistribucionDeVianda extends ContribucionConApertura {
     @ManyToOne
-    @JoinColumn(name = "id_heladera_origen", referencedColumnName = "id_heladera")
+    @JoinColumn(name = "heladera_origen", referencedColumnName = "id_heladera")
     private final Heladera heladeraDeOrigen;
     @Enumerated(EnumType.STRING)
+    @Column(name = "motivo_de_distribucion")
     private final MotivoDeDistribucion motivoDeDistribucion;
     @Column(name = "cantidad_de_viandas")
     private final Integer cantidadDeViandas;

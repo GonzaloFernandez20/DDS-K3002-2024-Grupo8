@@ -9,15 +9,12 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "FallaTecnica")
 public class FallaTecnica extends Incidente{
-    @Id
-    @GeneratedValue
-    private  Integer id_falla_tecnica;
     @OneToOne
-    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
+    @JoinColumn(name = "colaborador_informante", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorInformante;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "foto")
+    @Column(name = "link_foto")
     private String linkFoto;
 
     public FallaTecnica(Colaborador colaboradorInformante, String descripcion, Heladera heladera, String linkFoto) {

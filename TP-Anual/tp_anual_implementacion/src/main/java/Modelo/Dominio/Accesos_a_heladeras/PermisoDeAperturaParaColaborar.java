@@ -10,12 +10,13 @@ import java.time.LocalDateTime;
 @DiscriminatorValue("ParaColaborar")
 public class PermisoDeAperturaParaColaborar extends PermisoDeApertura{
     @OneToOne
-    @JoinColumn(name = "id_contribucion", referencedColumnName = "id_contribucion")
+    @JoinColumn(name = "contribucion", referencedColumnName = "id_contribucion")
     private ContribucionConApertura contribucion;
     @Column(name = "fecha_de_vencimiento")
     private LocalDate fechaDeVencimiento;
     @Column(name = "esta_vencida")
     private boolean estaVencida;
+
 
     public PermisoDeAperturaParaColaborar(Heladera heladera, MotivoApertura motivo) {
         super(heladera, motivo);

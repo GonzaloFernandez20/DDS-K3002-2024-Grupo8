@@ -2,12 +2,11 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.sistema.RegistroDeRecaudacion;
-import Modelo.Dominio.sistema.Sistema;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 @Entity
-@Table(name = "Contribucion")
+@Table(name = "DonacionDeDinero")
 public class DonacionDeDinero extends Contribucion {
     @Column(name = "monto")
     private final float monto;

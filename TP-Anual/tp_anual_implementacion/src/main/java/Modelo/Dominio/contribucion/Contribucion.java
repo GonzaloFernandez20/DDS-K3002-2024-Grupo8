@@ -1,9 +1,9 @@
 package Modelo.Dominio.contribucion;
 
-import java.time.LocalDate;
-
 import Modelo.Dominio.colaborador.Colaborador;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Contribucion")
@@ -13,7 +13,7 @@ public abstract class Contribucion {
     @GeneratedValue
     private Integer id_contribucion;
     @ManyToOne
-    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
+    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     protected Colaborador colaborador;
     @Column(name = "fecha_de_contribucion")
     protected LocalDate fechaDeContribucion;

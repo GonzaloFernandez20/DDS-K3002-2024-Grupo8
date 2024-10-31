@@ -1,10 +1,12 @@
 package Modelo.Dominio.persona;
 
 import Modelo.Dominio.localizacion.Direccion;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Entity
-@Table(name = "PersonaJuridica")
 public class PersonaJuridica extends Persona {
     @Column(name = "razon_social")
     private String razonSocial;

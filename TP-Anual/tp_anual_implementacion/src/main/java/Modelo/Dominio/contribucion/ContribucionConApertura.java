@@ -5,14 +5,16 @@ import Modelo.Excepciones.ExcepcionHeladeraLlena;
 import jakarta.persistence.*;
 
 import java.util.List;
-@MappedSuperclass
+@Entity
+@Table(name = "ContribucionConApertura")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ContribucionConApertura extends Contribucion{
-    @OneToMany(mappedBy = "id_contribucion")
+    @OneToMany
+    @JoinColumn(name = "contribucion_con_apertura", referencedColumnName = "id_contribucion")
     protected List<Vianda> viandas;
     @ManyToOne
-    @JoinColumn(name = "id_heladera_destino")
+    @JoinColumn(name = "heladera_destino", referencedColumnName = "id_heladera")
     protected Heladera heladeraDestino;
-
     @Override
     public void procesarLaContribucion() {
         try{

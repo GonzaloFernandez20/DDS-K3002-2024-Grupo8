@@ -16,9 +16,9 @@ public abstract class Incidente {
     @Column(name = "momento_del_suceso")
     protected LocalDateTime momentoDelSuceso;
     @OneToOne
-    @JoinColumn(name = "id_heladera", referencedColumnName = "id_heladera")
+    @JoinColumn(name = "heladera_donde_ocurrio", referencedColumnName = "id_heladera")
     protected Heladera heladeraDondeOcurrio;
-    @OneToMany(mappedBy = "id_incidente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "incidenteAtendido", cascade = CascadeType.ALL, orphanRemoval = true)
     protected List <VisitaTecnica> visitas;
     @Enumerated(EnumType.STRING)
     protected EstadoDelIncidente estado;

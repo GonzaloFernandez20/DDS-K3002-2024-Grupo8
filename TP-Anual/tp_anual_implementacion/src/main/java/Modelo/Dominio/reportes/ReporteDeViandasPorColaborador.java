@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "ReporteDeViandasPorColaborador")
 public class ReporteDeViandasPorColaborador extends ReporteSemanal{
     @OneToMany
-    @JoinColumn(name = "id_reporte", referencedColumnName = "id_reporte")
+    @JoinColumn(name = "reporte", referencedColumnName = "id_reporte")
     private List<ViandasPorColaborador> viandasPorColaborador;
 
     public ReporteDeViandasPorColaborador(LocalDate fechaDeCreacion) {

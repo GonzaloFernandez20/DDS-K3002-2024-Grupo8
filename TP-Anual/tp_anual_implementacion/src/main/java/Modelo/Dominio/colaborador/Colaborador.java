@@ -2,7 +2,6 @@ package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.contribucion.Contribucion;
-import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
@@ -12,7 +11,6 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Colaborador")
@@ -21,21 +19,19 @@ public class Colaborador {
     @GeneratedValue
     private Integer id_colaborador;
     @OneToOne
-    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @JoinColumn(name = "persona", referencedColumnName = "id_persona")
     private Persona persona;
     @OneToMany
-    @JoinColumn(name = "id_medio_de_contacto", referencedColumnName = "id_medio_de_contacto")
+    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
     private List<String> mensajesRecibidos;
-    @OneToMany
-    @JoinColumn(name = "id_contribucion", referencedColumnName = "id_contribucion")
+    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Contribucion> historialDeContribuciones;
-    @OneToOne(mappedBy = "id_colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
     private double puntosAcumulados;
-
 
     public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
         if(persona ==null){throw new IllegalArgumentException("El colaborador debe corresponderse a una persona");}
@@ -91,13 +87,13 @@ public class Colaborador {
 
     // ---- Getters y Setters
 
-    public void setTarjeta(AccesoDeColaborador tarjeta) {
+/*    public void setTarjeta(AccesoDeColaborador tarjeta) {
         if(tarjeta == null){
             if(this.tarjeta != null) this.tarjeta.setColaborador(null);
         }
         else tarjeta.setColaborador(this);
         this.tarjeta = tarjeta;
-    }
+    }revisar al final de mappear*/
 
     public Direccion getDireccion() { return persona.getDireccion(); }
     public double getPuntosAcumulados() { return puntosAcumulados; }

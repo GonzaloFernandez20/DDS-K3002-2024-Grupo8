@@ -8,7 +8,8 @@ import Modelo.Excepciones.ExcepcionHeladeraLlena;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Heladera")
@@ -16,27 +17,28 @@ public class Heladera {
     @Id
     @GeneratedValue
     private Integer id_heladera;
-    @Column(name = "idHeladera")
+    //POR QUÉ ESTÁ ESTE ATRIBUTO???
+    @Column(name = "id_heladera_trucho")
     private int idHeladera;
     @ManyToOne
-    @JoinColumn(name = "id_colaborador", referencedColumnName = "id_colaborador")
+    @JoinColumn(name = "colaborador_a_cargo", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorACargo;
     @ManyToOne
-    @JoinColumn(name = "id_ubicacion", referencedColumnName = "id_ubicacion")
+    @JoinColumn(name = "ubicacion", referencedColumnName = "id_ubicacion")
     private Ubicacion ubicacion;
     @Column(name = "cantidad_de_viandas")
     private int capacidadDeViandas;
     @Column(name = "fecha_de_puesta_en_funcionamiento")
     private LocalDate puestaEnFuncionamiento;
-    @OneToMany
-    @JoinColumn(name = "is_vianda", referencedColumnName = "id_vianda")
+    @OneToMany(mappedBy = "heladera")
     private List<Vianda> viandasEnStock;
     @ManyToOne
-    @JoinColumn(name = "id_modelo", referencedColumnName = "id_modelo")
+    @JoinColumn(name = "modelo", referencedColumnName = "id_modelo")
     private Modelo modelo;
     @Enumerated(EnumType.STRING)
     private EstadoHeladera estado;
-
+    @OneToOne
+    @JoinColumn(name = "notificador_de_suscriptos", referencedColumnName = "id_notificador_de_suscriptos")
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     // BROKER ------------------------------------------

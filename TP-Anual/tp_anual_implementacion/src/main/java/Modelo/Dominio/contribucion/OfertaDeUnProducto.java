@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 @Entity
 @Table(name = "OfertaDeUnProducto")
+@DiscriminatorValue("ofrecer_producto")
 public class OfertaDeUnProducto extends Contribucion {
+    //POR QUÉ ESTÁ ÉSTE ATRIBUTO???
     @Column(name = "idOferta")
     private int idOferta;
     @Column(name = "nombre_de_oferta")
@@ -19,7 +21,7 @@ public class OfertaDeUnProducto extends Contribucion {
     @Enumerated(EnumType.STRING)
     private Rubro rubro;
     @OneToOne
-    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto")
+    @JoinColumn(name = "producto", referencedColumnName = "id_producto")
     private Producto producto;
 
     public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String linkDeImagen, Rubro rubro, Producto producto) {

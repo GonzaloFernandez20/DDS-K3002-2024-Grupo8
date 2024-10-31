@@ -12,7 +12,7 @@ public class Modelo {
     private String nombreModelo;
     @Column(name = "temp_max")
     float temperaturaMaxima;
-    @Column(name = "temp_max")
+    @Column(name = "temp_min")
     float temperaturaMinima;
 
     public Modelo(float temperaturaMaxima, float temperaturaMinima) {

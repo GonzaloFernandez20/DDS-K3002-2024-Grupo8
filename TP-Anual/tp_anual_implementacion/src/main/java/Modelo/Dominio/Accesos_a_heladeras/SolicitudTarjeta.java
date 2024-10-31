@@ -10,7 +10,7 @@ public class SolicitudTarjeta {
     @GeneratedValue
     private Integer id_solicitud_tarjeta;
     @ManyToOne
-    @JoinColumn(name = "id_persona_humana")
+    @JoinColumn(name = "destinatario", referencedColumnName = "id_persona")
     private PersonaHumana destinatario;
     @Column(name = "cantidad_de_tarjetas")
     private int cantidadDeTarjetas;

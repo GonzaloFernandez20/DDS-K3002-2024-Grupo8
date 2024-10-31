@@ -8,8 +8,6 @@ import Modelo.Dominio.tecnico.Tecnico;
 import Modelo.Factorys.FactoryFallaTecnica;
 import Repositorios.RepositorioIncidentes;
 
-import java.util.List;
-
 public class GestorDeIncidentes {
 
     public static void reportarAlerta(Heladera heladera, TipoAlerta tipoAlerta){
