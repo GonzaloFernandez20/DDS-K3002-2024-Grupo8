@@ -1,5 +1,7 @@
 package Modelo.seguridad;
 
+import Modelo.Excepciones.ExcepcionContraseniaDebil;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,7 +10,7 @@ import java.io.IOException;
 public class EsContraseniaFuerte extends Criterio{
     static File listaDeContrasenias = new File(EsContraseniaFuerte.class.getClassLoader().getResource("utils/10KPasswords.txt").getFile());
     @Override
-    public boolean criterioSeguridad(String contrasenia) {
+    public boolean criterioSeguridad(String contrasenia) throws Exception {
         boolean esFuerte = true;
 
         try(BufferedReader bufferDeLectura = new BufferedReader(new FileReader(listaDeContrasenias))) {
@@ -23,7 +25,7 @@ public class EsContraseniaFuerte extends Criterio{
                     for (String palabra : palabras) {
                         if (palabra.equals(contrasenia)) {
                             esFuerte = false;
-                            break;
+                            throw new ExcepcionContraseniaDebil("Contrasenia demasiado debil, elija otra.");
                         }
                     }
                 }
