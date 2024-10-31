@@ -1,4 +1,4 @@
-package Controladores;
+package Controladores.Navbar;
 
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;

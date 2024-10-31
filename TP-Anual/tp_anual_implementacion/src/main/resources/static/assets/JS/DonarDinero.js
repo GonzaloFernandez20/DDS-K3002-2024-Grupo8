@@ -39,7 +39,7 @@ formularioDonacion.addEventListener('submit', function(e) {
 
     if (!metodoPago.value) {
         hasError = true;
-        document.getElementById('metodoDePagoError').innerText = 'Debe seleccionar una frecuencia de colaboracion';
+        document.getElementById('metodoDePagoError').innerText = 'Debe seleccionar un medio de pago';
         metodoPago.classList.add('error');
     } else {
         document.getElementById('metodoDePagoError').innerText = '';
