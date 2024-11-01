@@ -15,6 +15,11 @@ public class GestorDeIncidentes {
         reportar(nuevoIncidente);
     }
 
+    public static void reportarFallaTecnica(FallaTecnicaDTO fallaTecnicaDTO){
+        FallaTecnica nuevoIncidente = FactoryFallaTecnica.CrearFallaTecnicaAPartirDe(fallaTecnicaDTO);
+        reportar(nuevoIncidente);
+    }
+
     public static void reportar(Incidente nuevoIncidente) {
         nuevoIncidente.getHeladeraDondeOcurrio().huboIncidente();
         darAvisoATecnico(nuevoIncidente);

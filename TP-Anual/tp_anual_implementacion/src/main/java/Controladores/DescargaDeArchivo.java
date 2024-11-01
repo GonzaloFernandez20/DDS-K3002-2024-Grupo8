@@ -8,7 +8,7 @@ import java.io.IOException;
 public final class DescargaDeArchivo {
     public static String guardarArchivo(String pathDondeDebeGuardarse, MultipartFile archivo) {
         // Cambiar al path dentro de src/main/resources/uploads
-        String folderPath = new File("TP-Anual/tp_anual_implementacion/src/main/resources/" + pathDondeDebeGuardarse).getAbsolutePath();
+        String folderPath = new File("src/main/resources/" + pathDondeDebeGuardarse).getAbsolutePath();
         String filePath = folderPath + "/" + archivo.getOriginalFilename();
 
         try {

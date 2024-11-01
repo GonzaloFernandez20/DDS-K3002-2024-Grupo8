@@ -48,7 +48,7 @@ public class CtrlReportarFallaTecnica {
 
         String pathFotoFalla = null;
         if (!fotoFalla.isEmpty()) {
-            pathFotoFalla = guardarFoto(fotoFalla);
+            pathFotoFalla = DescargaDeArchivo.guardarArchivo("/fotosHeladerasReportadas/", fotoFalla);
         }
 
 
@@ -65,7 +65,7 @@ public class CtrlReportarFallaTecnica {
         return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
     }
 
-    private String guardarFoto(MultipartFile fotoFalla) {
+    /*private String guardarFoto(MultipartFile fotoFalla) {
 
         String filePath = "/fotosHeladerasReportadas/" + fotoFalla.getOriginalFilename();
         try {
@@ -74,5 +74,5 @@ public class CtrlReportarFallaTecnica {
             e.printStackTrace();
         }
         return filePath;
-    }
+    }*/
 }
