@@ -12,7 +12,6 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Factorys.FactoryDistribucionDeViandas;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,7 @@ public class CtrlDistribucionViandas {
     @GetMapping("/DistribuirVianda")
     public String mostrarFormulario(Model model) {
         if(Objects.isNull(colaborador.getTarjeta())) {
-            return "PedirAccesoColaborador";
+            return "PedirTarjetaColaborador";
         }
         model.addAttribute("heladeras", heladeras);
         this.setMotivos();

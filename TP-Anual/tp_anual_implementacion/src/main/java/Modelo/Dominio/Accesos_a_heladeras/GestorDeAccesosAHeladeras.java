@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GestorDeAccesosAHeladeras {
+public class    GestorDeAccesosAHeladeras {
     private static GestorDeAccesosAHeladeras instancia;
     private final List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
     private final List<AccesoAHeladeras> tarjetasRegistradas;
