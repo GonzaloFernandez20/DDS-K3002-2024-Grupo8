@@ -37,4 +37,11 @@ public class VisitaTecnica {
     public EstadoDelIncidente getEstadoVisita() { return estadoVisita; }
     public Incidente getIncidenteAtendido() { return incidenteAtendido; }
 
+    public Integer getId_visita_tecnica() {
+        return id_visita_tecnica;
+    }
+
+    public void setId_visita_tecnica(Integer id_visita_tecnica) {
+        this.id_visita_tecnica = id_visita_tecnica;
+    }
 }
