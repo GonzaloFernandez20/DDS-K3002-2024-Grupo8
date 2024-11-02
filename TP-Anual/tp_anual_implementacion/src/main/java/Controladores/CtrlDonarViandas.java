@@ -1,10 +1,8 @@
 package Controladores;
 
-import DTOs.DonacionDeDineroDTO;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraDTO;
 import DTOs.ViandaDTO;
-import Modelo.Dominio.GestionDeContribuciones.GestorDonacionDeDinero;
 import Modelo.Dominio.GestionDeContribuciones.GestorDonacionDeViandas;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
@@ -16,15 +14,11 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Factorys.BuilderDonacionDeViandas;
-import Modelo.Factorys.FactoryDonacionDeDinero;
 import Repositorios.RepositorioHeladeras;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -52,7 +46,7 @@ public class CtrlDonarViandas {
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
         if(Objects.isNull(colaborador.getTarjeta())) {
-            return "PedirAccesoColaborador";
+            return "PedirTarjetaColaborador";
         }
         System.out.println("Muestra las heladeras");
         setEstados();
