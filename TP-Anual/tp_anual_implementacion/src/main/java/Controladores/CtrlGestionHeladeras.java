@@ -132,7 +132,7 @@ public class CtrlGestionHeladeras {
     }
 
     private AlertaDTO convertirAlertaADTO(Alerta alerta) {
-        List<Integer> idVisitas = alerta.getVisitas().stream().map(visitaTecnica -> visitaTecnica.getId_visita_tecnica()).collect(Collectors.toList());
+        List<Integer> idVisitas = alerta.getVisitas().stream().map(visitaTecnica -> visitaTecnica.getIdVisitaTecnica()).collect(Collectors.toList());
         return new AlertaDTO(alerta.getMomentoDelSuceso(), alerta.getHeladeraDondeOcurrio().getIdHeladera(), idVisitas, alerta.getEstado(), alerta.getTipoAlerta());
     }
 }
