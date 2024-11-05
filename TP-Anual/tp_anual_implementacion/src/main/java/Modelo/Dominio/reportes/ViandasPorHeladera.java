@@ -12,4 +12,8 @@ public class ViandasPorHeladera{
         ViandasRetiradas = viandasRetiradas;
         ViandasColocadas = viandasColocadas;
     }
+
+    public Heladera getHeladera() { return heladera; }
+    public Integer getViandasRetiradas() { return ViandasRetiradas; }
+    public Integer getViandasColocadas() { return ViandasColocadas; }
 }

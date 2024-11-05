@@ -23,5 +23,7 @@ public class Ubicacion {
     //public String getDireccion() { return direccion.toString(); }
     public PuntoEnElMapa getPunto() { return punto; }
     public String getCiudad() { return ciudad; }
+
+    public String getNombreCompletoDeUbicacion() { return nombreDelPunto + " - " + direccion.getCalle() + " " + direccion.getAltura() + ", " + ciudad; }
 }
 

@@ -14,6 +14,7 @@ public class GestorDeReportes {
         }
         return instancia;
     }
+
     public void generarReportesSemanales(){
         /*Proceso calendarizado que hace todos los cálculos necesarios*/
         ReporteDeFallas reporteDeFallas = new ReporteDeFallas(LocalDate.now());
@@ -26,4 +27,6 @@ public class GestorDeReportes {
         reportes.add(reporteDeViandasPorHeladera);
         reportes.add(reporteDeViandasPorColaborador);
     }
+
+    public List<ReporteSemanal> getReportes() { return reportes; }
 }

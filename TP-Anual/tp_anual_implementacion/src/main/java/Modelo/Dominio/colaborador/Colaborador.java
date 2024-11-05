@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Colaborador {
+    private Integer id_colaborador;
     private final Persona persona;
     private final List<MedioDeContacto> mediosDeContacto;
     private final List<String> mensajesRecibidos;
@@ -82,4 +83,6 @@ public class Colaborador {
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
+
+    public Integer getId_colaborador() { return id_colaborador; }
 }

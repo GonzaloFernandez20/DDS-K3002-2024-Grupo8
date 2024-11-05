@@ -3,6 +3,7 @@ package Modelo.Dominio.incidentes;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -24,5 +25,9 @@ public class FallaTecnica extends Incidente{
     @Override
     public String obtenerInformacion() {
         return "se produjo una Falla Tecnica: \n" + "Descripcion: " + descripcion + "\n" + "Link Foto: " + linkFoto;
+    }
+
+    public boolean sucedioEntre(LocalDate fechaInicio, LocalDate fechaFin) {
+        return momentoDelSuceso.isAfter(fechaInicio.atStartOfDay()) && momentoDelSuceso.isBefore(fechaFin.atStartOfDay());
     }
 }

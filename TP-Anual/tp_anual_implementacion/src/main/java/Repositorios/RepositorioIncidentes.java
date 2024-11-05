@@ -37,10 +37,16 @@ public class RepositorioIncidentes {
     public List<Incidente> getIncidentes() {return incidentes;}
 
     public void sumarIncidente(Incidente incidente){incidentes.add(incidente);}
-    public List<Incidente> getFallasTecnicas(){
-        return incidentes.stream().filter(incidente -> incidente instanceof FallaTecnica).toList();
+
+    public List<FallaTecnica> getFallasTecnicas(){
+        return incidentes.stream().filter(incidente -> incidente instanceof FallaTecnica).map(incidente -> (FallaTecnica) incidente).toList();
     }
+
     public List<Alerta> getAlertas() {
         return incidentes.stream().filter(incidente -> incidente instanceof Alerta).map(incidente -> (Alerta) incidente).toList();
+    }
+
+    public List<FallaTecnica> getFallasTecnicasDeHeladeraEntreFechas(Heladera heladera, LocalDate fechaInicio, LocalDate fechaFin){
+        return getFallasTecnicas().stream().filter( falla -> falla.getHeladeraDondeOcurrio().equals(heladera) && falla.sucedioEntre(fechaInicio, fechaFin)).toList();
     }
 }
