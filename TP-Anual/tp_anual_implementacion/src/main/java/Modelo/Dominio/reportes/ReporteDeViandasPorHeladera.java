@@ -15,10 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReporteDeViandasPorHeladera extends ReporteSemanal{
-    private List<ViandasPorHeladera> viandasPorHeladeras = null;
+    private List<ViandasPorHeladera> viandasPorHeladeras;
 
     public ReporteDeViandasPorHeladera(LocalDate fechaDeCreacion) {
         super(fechaDeCreacion);
+        viandasPorHeladeras  = new ArrayList<>();
     }
 
    @Override

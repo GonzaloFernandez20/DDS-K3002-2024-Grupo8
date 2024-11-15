@@ -21,11 +21,15 @@ import static Modelo.Dominio.incidentes.TipoAlerta.TEMPERATURA;
 
 public class RepositorioIncidentes {
     private static RepositorioIncidentes instancia;
-    // HARDCODEADO
-    private final List<Incidente> incidentes = List.of(
-            new Alerta(FRAUDE, new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50", "1010"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now())),
-            new Alerta(TEMPERATURA, new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50", "1010"), "CABA", "Gastronomos Argentinos 2"), 15, new Modelo(15, -2), LocalDate.now()))
-    );
+    private List<Incidente> incidentes;
+
+    /*public RepositorioIncidentes() {
+        incidentes = new ArrayList<>();
+
+        // HARDCODEADO
+        /*incidentes.add(new Alerta(FRAUDE, new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50", "1010"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now())));
+        incidentes.add(new Alerta(TEMPERATURA, new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50", "1010"), "CABA", "Gastronomos Argentinos 2"), 15, new Modelo(15, -2), LocalDate.now())));
+    }*/
 
     public static RepositorioIncidentes getInstancia(){
         if(instancia == null){
@@ -34,9 +38,26 @@ public class RepositorioIncidentes {
         return instancia;
     }
 
-    public List<Incidente> getIncidentes() {return incidentes;}
+    public List<Incidente> getIncidentes() {
+        verificarExistenciaDeIncidentes();
+        return incidentes;
+    }
 
-    public void sumarIncidente(Incidente incidente){incidentes.add(incidente);}
+    public void sumarIncidente(Incidente incidente){
+        verificarExistenciaDeIncidentes();
+        incidentes.add(incidente);
+        System.out.println("Agregue " + incidente.obtenerInformacion());
+    }
+
+    private void verificarExistenciaDeIncidentes(){
+        if(incidentes == null) {
+            incidentes = new ArrayList<>();
+        }
+    }
+
+    public void limpiarInstancia() {
+        instancia = null;
+    }
 
     public List<FallaTecnica> getFallasTecnicas(){
         return incidentes.stream().filter(incidente -> incidente instanceof FallaTecnica).map(incidente -> (FallaTecnica) incidente).toList();

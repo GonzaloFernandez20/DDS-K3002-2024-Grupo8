@@ -8,7 +8,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.provider.Arguments;
 
 
-
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import static Modelo.Dominio.incidentes.EstadoDelIncidente.*;
@@ -119,6 +119,16 @@ public class TestDeIncidentes {
                         Arguments.of(new VisitaTecnica(SOLUCIONADO, "Trabajo terminado", tecnico, null, fallaTecnica), SOLUCIONADO)
                 );
             }
+        }
+    }
+
+    @Nested
+    @DisplayName("Se verifica la fecha en la falla tecnica")
+    class TestSobreFechaEnLaQueSucedioUnaFalla{
+        @Test
+        @DisplayName("La falla sucedio entre estas dos fechas")
+        public void testSobreFechaEnLaQueSucedio(){
+            assertTrue(fallaTecnica.sucedioEntre(LocalDate.now().minusWeeks(1), LocalDate.now()));
         }
     }
 }

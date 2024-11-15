@@ -16,6 +16,7 @@ public class ReporteDeViandasPorColaborador extends ReporteSemanal{
 
     public ReporteDeViandasPorColaborador(LocalDate fechaDeCreacion) {
         super(fechaDeCreacion);
+        viandasPorColaborador  = new ArrayList<>();
     }
 
     public void sumarViandasPorColaborador(ViandasPorColaborador unaViandaPorColaborador){

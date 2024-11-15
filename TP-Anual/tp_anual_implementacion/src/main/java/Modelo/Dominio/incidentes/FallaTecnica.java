@@ -28,6 +28,11 @@ public class FallaTecnica extends Incidente{
     }
 
     public boolean sucedioEntre(LocalDate fechaInicio, LocalDate fechaFin) {
-        return momentoDelSuceso.isAfter(fechaInicio.atStartOfDay()) && momentoDelSuceso.isBefore(fechaFin.atStartOfDay());
+        return (momentoDelSuceso.isAfter(fechaInicio.atStartOfDay()) && momentoDelSuceso.isBefore(fechaFin.atStartOfDay()))
+                || momentoDelSuceso.toLocalDate().equals(fechaInicio) || momentoDelSuceso.toLocalDate().isEqual(fechaFin);
     }
+
+    public String getDescripcion() { return descripcion; }
+    public String getLinkFoto() { return linkFoto; }
+    public Colaborador getColaboradorInformante() { return colaboradorInformante; }
 }

@@ -15,48 +15,98 @@ import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.persona.PersonaJuridica;
 import Modelo.Dominio.persona.TipoOrganizacion;
 import Modelo.Dominio.reportes.GestorDeReportes;
+import Modelo.Dominio.reportes.*;
+import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
+
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.print.Doc;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestGenerarReportesSemanales {
-
     FallaTecnica fallaTecnica;
+    ReporteDeFallas reporteDeFallas;
+    Heladera heladera;
 
     @BeforeEach
     void setUp() {
-        Direccion direccion = new Direccion("Saraza", "1200", "1234");
-        Documento documento = new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO);
-        PersonaHumana personaHumana = new PersonaHumana("Luis", "Gómez", LocalDate.now().minusYears(23), documento, direccion);
+        GestorDeReportes.getInstancia().limpiarInstancia();
+        RepositorioIncidentes.getInstancia().limpiarInstancia();
+
+        Direccion direccion = new Direccion("Beauchef", "500", "2020");
+        Documento documento = new Documento(TipoDeDocumento.DNI, "40.400.400", Sexo.FEMENINO);
+        PersonaHumana personaHumana = new PersonaHumana("Juana", "Gonzalez", LocalDate.now().minusYears(25), documento, direccion);
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-        WhatsApp unMedio = new WhatsApp("15 2350-2350");
+        WhatsApp unMedio = new WhatsApp("15 2300-2950");
         mediosDeContacto.add(unMedio);
         Colaborador colaboradorHumano = new Colaborador(personaHumana, mediosDeContacto);
 
-        PersonaJuridica personaJuridica = new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", direccion);
-        Colaborador colaboradorJuridico = new Colaborador(personaJuridica, mediosDeContacto);
+        heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500", "2020")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500", "2020"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
 
-        Ubicacion ubicacion = new Ubicacion(direccion, "CABA", "Gastronomos Argentinos 1");
-        Modelo modelo = new Modelo(20, -20);
+        RepositorioHeladeras.getInstancia().agregarHeladera(heladera);
 
-        Heladera heladera = new Heladera(colaboradorJuridico, ubicacion, 30, modelo, LocalDate.now().minusYears(1));
+        fallaTecnica = new FallaTecnica(colaboradorHumano, "Se le quemó un foquito.", heladera, null);
 
-        FallaTecnica fallaTecnica = new FallaTecnica(colaboradorHumano, "Se le quemó un foquito.", heladera, null);
-
-        RepositorioIncidentes.getInstancia().sumarIncidente(fallaTecnica);
-
-        GestorDeReportes.getInstancia().generarReportesSemanales();
+        reporteDeFallas = new ReporteDeFallas(LocalDate.now());
+        reporteDeFallas.sumarFallasPorheladera(new FallasPorHeladera(heladera, 1));
     }
 
     @Test
-    void ValidacionCompletarReporteDeFallas() {
-        assertTrue(GestorDeReportes.getInstancia().getReportes().contains(fallaTecnica));
+    void ValidacionCompletarReporteDeFallaTecnica() {
+        RepositorioIncidentes.getInstancia().sumarIncidente(fallaTecnica);
+
+        reporteDeFallas.completarReporte();
+
+        String path = "src/main/resources/reportes/ReporteDeFallas.pdf";
+
+        File pdfFile = new File(path);
+        assertTrue(pdfFile.exists() && pdfFile.length() > 0, "No se encontró el PDF.");
+
+        try {
+            PdfReader reader = new PdfReader(path);
+            for (int i = 1; i <= reader.getNumberOfPages(); i++) {
+                String pageContent = PdfTextExtractor.getTextFromPage(reader, i);
+                assertTrue(pageContent.contains("Mini Gastronomos Argentinos"), "No se encontró la heladera ingresada en el PDF.");
+            }
+            reader.close();
+        } catch (IOException e) {
+
+        }
+    }
+
+    @Test
+    void ValidacionCompletarReportesSemanales() {
+        RepositorioIncidentes.getInstancia().sumarIncidente(fallaTecnica);
+        GestorDeReportes.getInstancia().generarReportesSemanales();
+
+        try {
+            List<FallasPorHeladera> fallasSemanales = GestorDeReportes.getInstancia().getReportesDeFallas().getLast().getFallasPorHeladera();
+
+            FallasPorHeladera fallaDeEstaHeladera = new FallasPorHeladera(heladera, 1);
+
+            assertTrue(laListaDeFallasPorHeladeraContieneLaFalla(fallasSemanales, fallaDeEstaHeladera));
+        } catch (Exception e){
+            assertTrue(false, "No hay fallas.");
+        }
+    }
+
+    private boolean laListaDeFallasPorHeladeraContieneLaFalla(List<FallasPorHeladera> lista1, FallasPorHeladera falla) {
+        for(int i=0; i<lista1.size(); i++) {
+            if(lista1.get(i).getHeladera().getIdHeladera() == falla.getHeladera().getIdHeladera() && Objects.equals(lista1.get(i).getCantidadDeFallas(), falla.getCantidadDeFallas())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

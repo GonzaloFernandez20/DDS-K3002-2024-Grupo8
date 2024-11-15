@@ -15,7 +15,7 @@ public class GeneradorPDFReporte {
         Document document = new Document();
 
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/reportes/ " + reporteSemanal.getClass().getSimpleName() + ".pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/reportes/" + reporteSemanal.getClass().getSimpleName() + ".pdf"));
 
             LocalDate fechaDeCreacion = reporteSemanal.getFechaDeCreacion();
 
