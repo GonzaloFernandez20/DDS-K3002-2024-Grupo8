@@ -60,10 +60,12 @@ public class RepositorioIncidentes {
     }
 
     public List<FallaTecnica> getFallasTecnicas(){
+        verificarExistenciaDeIncidentes();
         return incidentes.stream().filter(incidente -> incidente instanceof FallaTecnica).map(incidente -> (FallaTecnica) incidente).toList();
     }
 
     public List<Alerta> getAlertas() {
+        verificarExistenciaDeIncidentes();
         return incidentes.stream().filter(incidente -> incidente instanceof Alerta).map(incidente -> (Alerta) incidente).toList();
     }
 
