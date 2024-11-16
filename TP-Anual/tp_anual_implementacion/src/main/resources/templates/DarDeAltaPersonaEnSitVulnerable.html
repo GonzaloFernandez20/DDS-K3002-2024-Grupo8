@@ -67,7 +67,7 @@
 
                             <div class="input-group">
                                 <label for="fechaNacimientoPersonaVul">Fecha de nacimiento de la persona (*)</label>
-                                <input type="date" id="fechaNacimientoPersonaVul" placeholder="dd/mm/aaaa" required>
+                                <input type="date" id="fechaNacimientoPersonaVul" name="fechaNacimientoPersonaVul" placeholder="dd/mm/aaaa" required>
                             </div>
 
                             <!-- Consideramos que la fecha de registo es en el momento que la cargamos-->
@@ -81,12 +81,12 @@
 
                             <div class="input-group">
                                 <label for="calleDomicilioPersonaVul">Calle del domicilio </label>
-                                <input type="text" id="calleDomicilioPersonaVul" placeholder="Ingrese la calle del domicilio de la persona">
+                                <input type="text" id="calleDomicilioPersonaVul" name="calleDomicilioPersonaVul" placeholder="Ingrese la calle del domicilio de la persona">
                             </div>
 
                             <div class="input-group">
                                 <label for="alturaDomicilioPersonaVul">Altura del domicilio </label>
-                                <input type="text" id="alturaDomicilioPersonaVul" placeholder="Ingrese la altura del domicilio de la persona">
+                                <input type="text" id="alturaDomicilioPersonaVul" name="alturaDomicilioPersonaVul" placeholder="Ingrese la altura del domicilio de la persona">
                             </div>
 
                             <div class="input-group">
@@ -98,12 +98,12 @@
 
                             <div class="input-group">
                                 <label for="numeroDocPersonaVul">Número de documento de la persona</label>
-                                <input type="text" id="numeroDocPersonaVul" placeholder="Ingrese el número de documento de la persona">
+                                <input type="text" id="numeroDocPersonaVul" name="numeroDocPersonaVul" placeholder="Ingrese el número de documento de la persona">
                             </div>
 
                             <div class="input-group">
                                 <label for="tieneMenoresPersonaVul">¿La persona tiene menores a cargo?</label>
-                                <select id="tieneMenoresPersonaVul">
+                                <select id="tieneMenoresPersonaVul" name="tieneMenoresPersonaVul">
                                     <option>--Seleccione--</option>
                                     <option>Sí</option>
                                     <option>No</option>
@@ -112,12 +112,12 @@
 
                             <div class="input-group">
                                 <label for="cantidadMenoresPersonaVul">Cantidad de menores que tiene a cargo la persona</label>
-                                <input type="number" min="0" id="cantidadMenoresPersonaVul" placeholder="Ingrese la cantidad de menores que tiene a cargo la persona">
+                                <input type="number" min="0" id="cantidadMenoresPersonaVul" name="cantidadMenoresPersonaVul" placeholder="Ingrese la cantidad de menores que tiene a cargo la persona">
                             </div>
 
                             <div class="input-group">
                                 <label for="tarjetaPersonaVul">Código de tarjeta entregada</label>
-                                <input type="text" id="tarjetaPersonaVul" placeholder="Ingrese el código de tarjeta entregada" required>
+                                <input type="text" id="tarjetaPersonaVul" name="tarjetaPersonaVul" placeholder="Ingrese el código de tarjeta entregada" required>
                             </div>
 
                             <button type="submit">Dar de alta</button>

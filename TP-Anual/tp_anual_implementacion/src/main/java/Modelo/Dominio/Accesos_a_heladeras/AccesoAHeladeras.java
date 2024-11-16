@@ -1,6 +1,7 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.persona.Persona;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -30,5 +31,5 @@ public abstract class AccesoAHeladeras {
             this.historicoDeAccesosHeladera.remove(permisoDeApertura);
     }
 
-
+    public abstract Persona getPersonaHumana();
 }

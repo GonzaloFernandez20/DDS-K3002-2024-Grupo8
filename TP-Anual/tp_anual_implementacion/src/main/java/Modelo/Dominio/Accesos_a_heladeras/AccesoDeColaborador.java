@@ -2,6 +2,7 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.persona.Persona;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -44,8 +45,8 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     }
 
 
-    public Colaborador getColaborador() {
-        return colaborador;
+    public Persona getPersonaHumana() {
+        return colaborador.getPersona();
     }
 
     public void setColaborador(Colaborador colaborador) {

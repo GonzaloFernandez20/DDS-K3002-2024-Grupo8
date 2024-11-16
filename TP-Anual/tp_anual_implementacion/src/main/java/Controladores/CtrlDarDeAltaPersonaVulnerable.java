@@ -1,5 +1,7 @@
 package Controladores;
 
+import Modelo.Dominio.Accesos_a_heladeras.GestorDeAccesosAHeladeras;
+import Modelo.Dominio.Accesos_a_heladeras.SolicitudTarjeta;
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
@@ -11,8 +13,6 @@ import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.persona_vulnerable.EstadoDeVivienda;
 import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ import java.util.Objects;
 
 @Controller
 public class CtrlDarDeAltaPersonaVulnerable {
-    PersonaHumana personaHumana = new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200", "1234"));
+    PersonaHumana personaHumana = new PersonaHumana("Luis", "Gomez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200", "1234"));
     private final Colaborador colaborador = new Colaborador(personaHumana, List.of(new WhatsApp("15 2350-2350")));
 
     List<EstadoDeVivienda> estadoDeViviendas = new ArrayList<>();
@@ -48,6 +48,8 @@ public class CtrlDarDeAltaPersonaVulnerable {
             tipoDeDocumentos.add(TipoDeDocumento.PASAPORTE);
         }
     }
+    // hardcodeo solicitud de tarjeta para tener el codigo de tarjeta de antemano
+    SolicitudTarjeta solicitudTarjeta = new SolicitudTarjeta(personaHumana, 1);
 
     @GetMapping("/DarDeAltaPersonaEnSitVulnerable")
     public String mostrarDatos(Model model) {
@@ -55,11 +57,12 @@ public class CtrlDarDeAltaPersonaVulnerable {
         tipoDeDocumentos();
         model.addAttribute("estados", estadoDeViviendas);
         model.addAttribute("tiposDocumento", tipoDeDocumentos);
+
         return "DarDeAltaPersonaEnSitVulnerable";
     }
 
     @PostMapping("/DarDeAltaPersonaEnSitVulnerable")
-    public ResponseEntity<String> recibirDatos (@RequestParam(value = "nombrePersonaVul", defaultValue = "0") String nombrePersonaVul,
+    public String recibirDatos (@RequestParam(value = "nombrePersonaVul", defaultValue = "0") String nombrePersonaVul,
                                 @RequestParam(value = "apellidoPersonaVul", defaultValue = "0") String apellidoPersonaVul,
                                 @RequestParam(value = "fechaNacimientoPersonaVul", defaultValue = "0") String stringFechaNacimientoPersonaVul,
                                 @RequestParam(value = "sitViviendaPersonaVul", defaultValue = "0") String stringSitViviendaPersonaVul,
@@ -69,7 +72,7 @@ public class CtrlDarDeAltaPersonaVulnerable {
                                 @RequestParam(value = "numeroDocPersonaVul", required = false) String numeroDocPersonaVul,
                                 @RequestParam(value = "tieneMenoresPersonaVul", required = false) String tieneMenoresPersonaVul,
                                 @RequestParam(value = "cantidadMenoresPersonaVul", defaultValue = "0") int cantidadMenoresPersonaVul,
-                                @RequestParam(value = "tarjetaPersonaVul", defaultValue = "0") String tarjetaPersonaVul)
+                                @RequestParam(value = "tarjetaPersonaVul", defaultValue = "0") String tarjetaPersonaVul, Model model)
     {
         TipoDeDocumento tipoDocPersonaVul;
         if(Objects.isNull(stringTipoDocPersonaVul)) {
@@ -92,23 +95,7 @@ public class CtrlDarDeAltaPersonaVulnerable {
         PersonaSituacionVulnerable personaSituacionVulnerable = new PersonaSituacionVulnerable(sitViviendaPersonaVul, cantidadMenoresPersonaVul, null, personaHumanaEnSitVulnerable);
         Vinculacion vinculacion = new Vinculacion(tarjetaPersonaVul, personaSituacionVulnerable, colaborador);
         personaSituacionVulnerable.setVinculacion(vinculacion);
-
-        /*
-        if(colaborador.getTarjeta().aperturaAutorizada(heladeraElegida)) {
-            DonacionDeViandaDTO donacionDeViandaDTO = new DonacionDeViandaDTO(colaborador, heladeraElegida, viandas);
-
-            BuilderDonacionDeViandas.crearDonacionAPartirDe(donacionDeViandaDTO);
-            GestorDonacionDeViandas.crearContribucion(donacionDeViandaDTO);
-            model.addAttribute("mensaje", "Donacion realizada con éxito!");
-            return mostrarHeladeras(model);
-        } else{
-            model.addAttribute("mensaje", "No tiene acceso a la heladera!");
-            return "Home";
-        }
-
-        ES UN CONTROLADOR ABM.
-        */
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        model.addAttribute("mensaje", "Vinculación realizada con éxito!");
+        return "Home";
     }
 }

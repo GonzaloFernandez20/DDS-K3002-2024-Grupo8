@@ -35,10 +35,20 @@ public class    GestorDeAccesosAHeladeras {
     }
 
     public void generarSolicitud(PersonaHumana destinatario, int cantidadDeTarjetas){
-        tarjetasPendientesDeEntrega.add(new SolicitudTarjeta(destinatario, cantidadDeTarjetas)); }
+        SolicitudTarjeta solicitudTarjeta = new SolicitudTarjeta(destinatario, cantidadDeTarjetas);
+        tarjetasPendientesDeEntrega.add(solicitudTarjeta); }
 
     public void eliminarSolicitud(SolicitudTarjeta solicitud){ tarjetasPendientesDeEntrega.remove(solicitud); }
 
-    public void registrarTarjeta(AccesoAHeladeras tarjeta){ tarjetasRegistradas.add(tarjeta); }
+    public void registrarTarjeta(AccesoAHeladeras tarjeta){
+        System.out.println(tarjeta.getPersonaHumana());
+        System.out.println(tarjeta.getCodigoTarjeta());
+        if(tarjetasPendientesDeEntrega.stream().anyMatch(solicitudTarjeta -> solicitudTarjeta.esElMismoDestinatario(tarjeta.getPersonaHumana()) && solicitudTarjeta.esLaMismaTarjeta(tarjeta.getCodigoTarjeta()))){
+            tarjetasRegistradas.add(tarjeta);
+        }else {
+           throw new IllegalArgumentException("La tarjeta no existe");
+        }
+
+    }
 }
 

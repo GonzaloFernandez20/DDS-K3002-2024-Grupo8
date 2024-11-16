@@ -4,6 +4,8 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.EstadoVianda;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.persona.Persona;
+import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
 import jakarta.persistence.*;
 
@@ -97,8 +99,8 @@ public class Vinculacion extends AccesoAHeladeras{
         this.fechaRegistro = fechaRegistro;
     }
 
-    public Colaborador getColaboradorQueRegistro() {
-        return colaboradorQueRegistro;
+    public Persona getPersonaHumana() {
+        return (PersonaHumana) colaboradorQueRegistro.getPersona();
     }
 
     public void setColaboradorQueRegistro(Colaborador colaboradorQueRegistro) {
