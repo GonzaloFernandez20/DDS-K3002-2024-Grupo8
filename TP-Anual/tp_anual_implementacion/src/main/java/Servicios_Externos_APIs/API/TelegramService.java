@@ -1,4 +1,13 @@
-// https://core.telegram.org/tdlib/notification-api/
+package Servicios_Externos_APIs.API;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import java.io.IOException;
+
+
 public class TelegramService {
 
     private static final String TELEGRAM_API_BASE = "https://api.telegram.org/bot";
@@ -11,7 +20,7 @@ public class TelegramService {
 
         Request request = new Request.Builder()
                 .url(url)
-                .post(RequestBody.create(MediaType.parse("application/json"), jsonBody))
+                .post(RequestBody.create(jsonBody, MediaType.get("application/json")))
                 .build();
 
         try (Response response = CLIENT.newCall(request).execute()) {
