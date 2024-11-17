@@ -29,8 +29,4 @@ public class WhatsAppService {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        sendTextMessage("NUMERO", "MENSAJE");
-    }
 }
