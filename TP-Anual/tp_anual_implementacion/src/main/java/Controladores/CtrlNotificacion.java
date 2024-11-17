@@ -11,6 +11,6 @@ public class CtrlNotificacion {
     public CtrlNotificacion() { this.notificacionService = new NotificacionService(); }
 
     @GetMapping("/EnviarNotificacion")
-    public void sendNotification(String medio, String userId, String recipient, String message) { notificacionService.sendNotification(medio, userId, recipient, message); }
+    public void sendNotification(String medio, String userId, String message) { notificacionService.sendNotification(medio, userId, message); }
 
 }
