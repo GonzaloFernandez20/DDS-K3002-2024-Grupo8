@@ -1,9 +1,25 @@
-// https://cloud.google.com/appengine/docs/standard/services/mail/sending-mail-with-mail-api?hl=es-419&tab=java#top
-class EmailService {
-    public static void sendEmail(String toEmail, String subject, String plainText, String htmlText, List<File> attachments) {
+package Servicios_Externos_APIs.API;
+
+import java.io.IOException;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+public class MailService {
+    public static void sendEmail(String toEmail, String subject, String plainText) {
         String host = "smtp.gmail.com"; // Cambiar si se usa otro servicio
-        final String user = AppConfig.get("XXXX"); // Usuario remitente
-        final String password = AppConfig.get("XXXX"); // Contraseña remitente
+        //falta crear el usuario que envia el correo
+        final String user = ""; // Usuario remitente
+        final String password = ""; // Contraseña remitente
 
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
@@ -31,20 +47,6 @@ class EmailService {
                 MimeBodyPart textPart = new MimeBodyPart();
                 textPart.setText(plainText, "UTF-8");
                 multipart.addBodyPart(textPart);
-            }
-
-            if (htmlText != null && !htmlText.isEmpty()) { // Parte de contenido HTML
-                MimeBodyPart htmlPart = new MimeBodyPart();
-                htmlPart.setContent(htmlText, "text/html");
-                multipart.addBodyPart(htmlPart);
-            }
-
-            if (attachments != null) {// Adjuntar archivos (si existen)
-                for (File file : attachments) {
-                    MimeBodyPart attachmentPart = new MimeBodyPart();
-                    attachmentPart.attachFile(file);
-                    multipart.addBodyPart(attachmentPart);
-                }
             }
 
             msg.setContent(multipart);// Establecer el contenido del mensaje
