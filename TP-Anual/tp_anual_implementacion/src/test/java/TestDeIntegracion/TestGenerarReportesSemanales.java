@@ -1,6 +1,11 @@
 package TestDeIntegracion;
 
+import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
+import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Accesos_a_heladeras.MotivoApertura;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.DonacionDeVianda;
+import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
@@ -16,6 +21,7 @@ import Modelo.Dominio.persona.PersonaJuridica;
 import Modelo.Dominio.persona.TipoOrganizacion;
 import Modelo.Dominio.reportes.GestorDeReportes;
 import Modelo.Dominio.reportes.*;
+import Modelo.Dominio.sistema.Sistema;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 
@@ -37,6 +43,8 @@ public class TestGenerarReportesSemanales {
     FallaTecnica fallaTecnica;
     ReporteDeFallas reporteDeFallas;
     Heladera heladera;
+    ReporteDeViandasPorColaborador reporteDeViandasPorColaborador;
+    Colaborador colaboradorHumano;
 
     @BeforeEach
     void setUp() {
@@ -49,7 +57,10 @@ public class TestGenerarReportesSemanales {
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
         WhatsApp unMedio = new WhatsApp("15 2300-2950");
         mediosDeContacto.add(unMedio);
-        Colaborador colaboradorHumano = new Colaborador(personaHumana, mediosDeContacto);
+        colaboradorHumano = new Colaborador(personaHumana, mediosDeContacto);
+        colaboradorHumano.setId_colaborador(999);
+
+        Sistema.getInstancia().darDeAltaColaborador(colaboradorHumano);
 
         heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500", "2020")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500", "2020"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
 
@@ -58,7 +69,8 @@ public class TestGenerarReportesSemanales {
         fallaTecnica = new FallaTecnica(colaboradorHumano, "Se le quemó un foquito.", heladera, null);
 
         reporteDeFallas = new ReporteDeFallas(LocalDate.now());
-        reporteDeFallas.sumarFallasPorheladera(new FallasPorHeladera(heladera, 1));
+
+        reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador(LocalDate.now());
     }
 
     @Test
@@ -80,29 +92,47 @@ public class TestGenerarReportesSemanales {
             }
             reader.close();
         } catch (IOException e) {
-
+            assertTrue(false);
         }
     }
 
     @Test
     void ValidacionCompletarReportesSemanales() {
         RepositorioIncidentes.getInstancia().sumarIncidente(fallaTecnica);
+
+        AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("TP89", colaboradorHumano);
+        colaboradorHumano.setTarjeta(accesoDeColaborador);
+
+        Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaboradorHumano, heladera, null, null);
+        DonacionDeVianda contribucionDeVianda = new DonacionDeVianda(colaboradorHumano, heladera, List.of(vianda), LocalDate.now());
+
+        GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, MotivoApertura.INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
+        accesoDeColaborador.aperturaAutorizada(heladera);
+
         GestorDeReportes.getInstancia().generarReportesSemanales();
 
-        try {
-            List<FallasPorHeladera> fallasSemanales = GestorDeReportes.getInstancia().getReportesDeFallas().getLast().getFallasPorHeladera();
+        List<FallasPorHeladera> fallasSemanales = GestorDeReportes.getInstancia().getReportesDeFallas().getLast().getFallasPorHeladera();
+        FallasPorHeladera fallaDeEstaHeladera = new FallasPorHeladera(heladera, 1);
+        assertTrue(laListaDeFallasPorHeladeraContieneLaFalla(fallasSemanales, fallaDeEstaHeladera));
 
-            FallasPorHeladera fallaDeEstaHeladera = new FallasPorHeladera(heladera, 1);
-
-            assertTrue(laListaDeFallasPorHeladeraContieneLaFalla(fallasSemanales, fallaDeEstaHeladera));
-        } catch (Exception e){
-            assertTrue(false, "No hay fallas.");
-        }
+        List<ViandasPorColaborador> viandasPorColaboradorSemanales = GestorDeReportes.getInstancia().getReportesDeViandasPorColaborador().getLast().getViandasPorColaborador();
+        ViandasPorColaborador viandasPorColaborador = new ViandasPorColaborador(colaboradorHumano, 1);
+        assertTrue(laListaDeViandasPorColaboradorContieneLasViandasPorColaborador(viandasPorColaboradorSemanales, viandasPorColaborador));
     }
 
-    private boolean laListaDeFallasPorHeladeraContieneLaFalla(List<FallasPorHeladera> lista1, FallasPorHeladera falla) {
-        for(int i=0; i<lista1.size(); i++) {
-            if(lista1.get(i).getHeladera().getIdHeladera() == falla.getHeladera().getIdHeladera() && Objects.equals(lista1.get(i).getCantidadDeFallas(), falla.getCantidadDeFallas())) {
+    private boolean laListaDeFallasPorHeladeraContieneLaFalla(List<FallasPorHeladera> fallas, FallasPorHeladera falla) {
+        for(int i=0; i<fallas.size(); i++) {
+            if(fallas.get(i).getHeladera().getIdHeladera() == falla.getHeladera().getIdHeladera() && Objects.equals(fallas.get(i).getCantidadDeFallas(), falla.getCantidadDeFallas())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean laListaDeViandasPorColaboradorContieneLasViandasPorColaborador (List<ViandasPorColaborador> viandas, ViandasPorColaborador vianda) {
+        for(int i=0; i<viandas.size(); i++) {
+            if(Objects.equals(viandas.get(i).getColaborador().getId_colaborador(), vianda.getColaborador().getId_colaborador()) && Objects.equals(viandas.get(i).getCantidadDeViandas(), vianda.getCantidadDeViandas())) {
                 return true;
             }
         }

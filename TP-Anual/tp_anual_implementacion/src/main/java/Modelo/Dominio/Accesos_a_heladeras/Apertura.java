@@ -20,7 +20,8 @@ public class Apertura {
         this.viandasAsociadas = viandas;
     }
     public boolean aperturaParaEntregaDeDonacionEntre(LocalDate fechaInicio, LocalDate fechaFin){
-        return this.getFecha().isAfter(fechaInicio.atStartOfDay()) && this.getFecha().isBefore(fechaFin.atStartOfDay());
+        return (fecha.isAfter(fechaInicio.atStartOfDay()) && fecha.isBefore(fechaFin.atStartOfDay()))
+                || fecha.toLocalDate().equals(fechaInicio) || fecha.toLocalDate().isEqual(fechaFin);
     }
 
     public Heladera getHeladera() {

@@ -48,7 +48,6 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
         permisosDeApertura.remove(permiso); // Elimina la primera aparicion del objeto.
     }
 
-    // Hecho de forma provisoria para reportes
     public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
         return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
     }

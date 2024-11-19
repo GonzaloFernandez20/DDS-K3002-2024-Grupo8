@@ -4,12 +4,10 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.sistema.Sistema;
 import com.itextpdf.text.pdf.PdfPTable;
 
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReporteDeViandasPorColaborador extends ReporteSemanal{
     private List<ViandasPorColaborador> viandasPorColaborador;
@@ -28,8 +26,10 @@ public class ReporteDeViandasPorColaborador extends ReporteSemanal{
         List<Colaborador> colaboradoresConocidos = Sistema.getInstancia().getColaboradores();
         colaboradoresConocidos.forEach(colaborador -> {
             Integer cantidadDeDonacionesDeViandas = colaborador.cantidadDeDonacionesDeViandaEntre(LocalDate.now().minusWeeks(1), LocalDate.now());
-            ViandasPorColaborador viandasPorColaborador = new ViandasPorColaborador(colaborador,cantidadDeDonacionesDeViandas);
+            ViandasPorColaborador viandasPorColaborador = new ViandasPorColaborador(colaborador, cantidadDeDonacionesDeViandas);
             sumarViandasPorColaborador(viandasPorColaborador);
+            System.out.println("Colaborador: " + colaborador.getId_colaborador());
+            System.out.println("Cantidad de Donaciones de Viandas: " + cantidadDeDonacionesDeViandas);
         });
         super.completarReporte();
     }
@@ -48,4 +48,6 @@ public class ReporteDeViandasPorColaborador extends ReporteSemanal{
             tabla.addCell(String.valueOf(viandas.getCantidadDeViandas()));
         }
     }
+
+    public List<ViandasPorColaborador> getViandasPorColaborador() { return viandasPorColaborador; }
 }

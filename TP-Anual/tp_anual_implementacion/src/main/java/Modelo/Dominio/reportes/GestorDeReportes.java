@@ -47,4 +47,6 @@ public class GestorDeReportes {
     public List<ReporteSemanal> getReportes() { return reportes; }
 
     public List<ReporteDeFallas> getReportesDeFallas() { return reportes.stream().filter(reporte -> reporte instanceof ReporteDeFallas).map(reporte -> (ReporteDeFallas) reporte).toList(); }
+    public List<ReporteDeViandasPorColaborador> getReportesDeViandasPorColaborador() { return reportes.stream().filter(reporte -> reporte instanceof ReporteDeViandasPorColaborador).map(reporte -> (ReporteDeViandasPorColaborador) reporte).toList(); }
+    public List<ReporteDeViandasPorHeladera> getReportesDeViandasPorHeladera() { return reportes.stream().filter(reporte -> reporte instanceof ReporteDeViandasPorHeladera).map(reporte -> (ReporteDeViandasPorHeladera) reporte).toList(); }
 }

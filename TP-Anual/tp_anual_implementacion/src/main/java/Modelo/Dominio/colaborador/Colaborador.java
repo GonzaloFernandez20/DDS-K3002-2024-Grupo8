@@ -70,7 +70,7 @@ public class Colaborador {
 
     // Hecho de forma provisoria para reportes
     public Integer cantidadDeDonacionesDeViandaEntre(LocalDate fechaInicio, LocalDate fechaFin){
-        if(tarjeta == null){return 0;}
+        if(tarjeta == null){ return 0; }
         else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
     }
 
@@ -84,5 +84,8 @@ public class Colaborador {
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
 
+    public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
     public Integer getId_colaborador() { return id_colaborador; }
+
+    public void setTarjeta(AccesoDeColaborador accesoDeColaborador) { this.tarjeta = accesoDeColaborador; }
 }
