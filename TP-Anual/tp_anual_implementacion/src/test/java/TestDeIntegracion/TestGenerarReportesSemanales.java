@@ -1,6 +1,7 @@
 package TestDeIntegracion;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
+import Modelo.Dominio.Accesos_a_heladeras.Apertura;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
 import Modelo.Dominio.Accesos_a_heladeras.MotivoApertura;
 import Modelo.Dominio.colaborador.Colaborador;
@@ -22,6 +23,7 @@ import Modelo.Dominio.persona.TipoOrganizacion;
 import Modelo.Dominio.reportes.GestorDeReportes;
 import Modelo.Dominio.reportes.*;
 import Modelo.Dominio.sistema.Sistema;
+import Repositorios.RepositorioAperturas;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.INGRESAR_VIANDAS_DONADAS;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestGenerarReportesSemanales {
@@ -45,6 +48,7 @@ public class TestGenerarReportesSemanales {
     Heladera heladera;
     ReporteDeViandasPorColaborador reporteDeViandasPorColaborador;
     Colaborador colaboradorHumano;
+    ReporteDeViandasPorHeladera reporteDeViandasPorHeladera;
 
     @BeforeEach
     void setUp() {
@@ -69,8 +73,8 @@ public class TestGenerarReportesSemanales {
         fallaTecnica = new FallaTecnica(colaboradorHumano, "Se le quemó un foquito.", heladera, null);
 
         reporteDeFallas = new ReporteDeFallas(LocalDate.now());
-
         reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador(LocalDate.now());
+        reporteDeViandasPorHeladera = new ReporteDeViandasPorHeladera(LocalDate.now());
     }
 
     @Test
@@ -103,11 +107,16 @@ public class TestGenerarReportesSemanales {
         AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("TP89", colaboradorHumano);
         colaboradorHumano.setTarjeta(accesoDeColaborador);
 
+        heladera.setIdHeladera(8888);
+
         Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaboradorHumano, heladera, null, null);
         DonacionDeVianda contribucionDeVianda = new DonacionDeVianda(colaboradorHumano, heladera, List.of(vianda), LocalDate.now());
 
-        GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, MotivoApertura.INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
+        GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
         accesoDeColaborador.aperturaAutorizada(heladera);
+
+        Apertura apertura = new Apertura(heladera, INGRESAR_VIANDAS_DONADAS, List.of(vianda));
+        RepositorioAperturas.getInstancia().agregarApertura(apertura);
 
         GestorDeReportes.getInstancia().generarReportesSemanales();
 
@@ -118,6 +127,10 @@ public class TestGenerarReportesSemanales {
         List<ViandasPorColaborador> viandasPorColaboradorSemanales = GestorDeReportes.getInstancia().getReportesDeViandasPorColaborador().getLast().getViandasPorColaborador();
         ViandasPorColaborador viandasPorColaborador = new ViandasPorColaborador(colaboradorHumano, 1);
         assertTrue(laListaDeViandasPorColaboradorContieneLasViandasPorColaborador(viandasPorColaboradorSemanales, viandasPorColaborador));
+
+        List<ViandasPorHeladera> viandasPorHeladerasSemanales = GestorDeReportes.getInstancia().getReportesDeViandasPorHeladera().getLast().getViandasPorHeladeras();
+        ViandasPorHeladera viandasPorHeladera = new ViandasPorHeladera(heladera, 0, 1);
+        assertTrue(laListaDeViandasPorHeladerasContieneLasViandasPorHeladera(viandasPorHeladerasSemanales, viandasPorHeladera));
     }
 
     private boolean laListaDeFallasPorHeladeraContieneLaFalla(List<FallasPorHeladera> fallas, FallasPorHeladera falla) {
@@ -133,6 +146,16 @@ public class TestGenerarReportesSemanales {
     private boolean laListaDeViandasPorColaboradorContieneLasViandasPorColaborador (List<ViandasPorColaborador> viandas, ViandasPorColaborador vianda) {
         for(int i=0; i<viandas.size(); i++) {
             if(Objects.equals(viandas.get(i).getColaborador().getId_colaborador(), vianda.getColaborador().getId_colaborador()) && Objects.equals(viandas.get(i).getCantidadDeViandas(), vianda.getCantidadDeViandas())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean laListaDeViandasPorHeladerasContieneLasViandasPorHeladera(List<ViandasPorHeladera> viandas, ViandasPorHeladera vianda) {
+        for(int i=0; i<viandas.size(); i++) {
+            if(Objects.equals(viandas.get(i).getHeladera().getIdHeladera(), vianda.getHeladera().getIdHeladera()) && viandas.get(i).getViandasColocadas() == vianda.getViandasColocadas() && viandas.get(i).getViandasRetiradas() == vianda.getViandasRetiradas()) {
                 return true;
             }
         }

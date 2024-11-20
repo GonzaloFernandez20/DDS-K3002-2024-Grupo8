@@ -1,18 +1,15 @@
 package Modelo.Dominio.reportes;
 
-
-
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.sistema.RegistroDeHeladeras;
 import Repositorios.RepositorioAperturas;
+import Repositorios.RepositorioHeladeras;
 import com.itextpdf.text.pdf.PdfPTable;
 
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReporteDeViandasPorHeladera extends ReporteSemanal{
     private List<ViandasPorHeladera> viandasPorHeladeras;
@@ -24,13 +21,16 @@ public class ReporteDeViandasPorHeladera extends ReporteSemanal{
 
    @Override
     public void completarReporte(){
-        List<Heladera> heladerasConocidas = RegistroDeHeladeras.getInstancia().getHeladeras();
+        List<Heladera> heladerasConocidas = RepositorioHeladeras.getInstancia().getHeladeras();
         heladerasConocidas.forEach(heladera -> {
             ViandasPorHeladera viandasPorHeladera =
                     new ViandasPorHeladera(heladera,
-                            RepositorioAperturas.getInstancia().cantidadDeDepositosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()),
-                            RepositorioAperturas.getInstancia().cantidadDeRetirosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()));
+                            RepositorioAperturas.getInstancia().cantidadDeRetirosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()),
+                            RepositorioAperturas.getInstancia().cantidadDeDepositosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()));
             this.sumarViandasPorHeladera(viandasPorHeladera);
+            System.out.println("Heladera " + heladera.getIdHeladera());
+            System.out.println("Depositos: " + viandasPorHeladera.getViandasColocadas());
+            System.out.println("Retiros: " + viandasPorHeladera.getViandasRetiradas());
         });
         super.completarReporte();
     }
@@ -54,4 +54,6 @@ public class ReporteDeViandasPorHeladera extends ReporteSemanal{
             tabla.addCell(String.valueOf(viandas.getViandasRetiradas()));
         }
     }
+
+    public List<ViandasPorHeladera> getViandasPorHeladeras() { return viandasPorHeladeras; }
 }

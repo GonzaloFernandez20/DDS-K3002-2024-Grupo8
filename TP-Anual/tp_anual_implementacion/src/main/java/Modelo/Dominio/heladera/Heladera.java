@@ -101,5 +101,6 @@ public class Heladera {
     public int getCapacidadDeViandas() { return capacidadDeViandas; }
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
     public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
+    public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
 }
 

@@ -2,11 +2,8 @@ package Modelo.Dominio.reportes;
 
 import com.itextpdf.text.pdf.PdfPTable;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 public class ReporteSemanal {
     private LocalDate fechaDeCreacion;

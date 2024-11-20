@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import Modelo.Dominio.sistema.RegistroDeHeladeras;
+import Repositorios.RepositorioHeladeras;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import Modelo.Dominio.colaborador.Colaborador;
@@ -23,7 +24,7 @@ public class HacerseCargoDeHeladera extends Contribucion{
     @Override
     public void procesarLaContribucion() {
         colaborador.registrarContribucion(this);
-        RegistroDeHeladeras.getInstancia().darDeAltaHeladera(heladeraACargo);
+        RepositorioHeladeras.getInstancia().agregarHeladera(heladeraACargo);
     }
 
     @Override
