@@ -22,6 +22,10 @@ public class Direccion {
         this.altura = altura;
         this.codPostal = codPostal;
     }
+
+    public Direccion() {
+    }
+
     public String toString(){
         return calle+" "+altura;
     }

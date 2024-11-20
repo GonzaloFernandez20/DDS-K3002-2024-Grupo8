@@ -19,6 +19,7 @@ public class Ubicacion {
     @Column(name = "nombre_del_punto")
     private String nombreDelPunto;
 
+    public Ubicacion(){}
     public Ubicacion(Direccion direccion, String ciudad, String nombre){
         if(direccion == null ){throw new IllegalArgumentException("La direccion es obligatoria");}
         if(nombre == null ){throw new IllegalArgumentException("El nombre del punto es obligatorio");}
@@ -36,5 +37,9 @@ public class Ubicacion {
     //public String getDireccion() { return direccion.toString(); }
     public PuntoEnElMapa getPunto() { return punto; }
     public String getCiudad() { return ciudad; }
+
+    public void setPunto(PuntoEnElMapa punto) {
+        this.punto = punto;
+    }
 }
 

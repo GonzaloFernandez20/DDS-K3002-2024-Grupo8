@@ -44,6 +44,9 @@ public class Colaborador {
         this.puntosAcumulados = 0;
     }
 
+    public Colaborador() {
+    }
+
     public void registrarContribucion(Contribucion contribucion){
         historialDeContribuciones.add(contribucion);
         puntosAcumulados += contribucion.puntosQueSumaColaborador();
@@ -102,4 +105,11 @@ public class Colaborador {
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
+    public void setTarjeta(AccesoDeColaborador tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+
+    public void setHistorialDeContribuciones(List<Contribucion> historialDeContribuciones) {
+        this.historialDeContribuciones = historialDeContribuciones;
+    }
 }

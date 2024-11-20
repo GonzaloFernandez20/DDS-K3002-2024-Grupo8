@@ -2,7 +2,8 @@ package TestDeIntegracion;
 
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.contribucionConApertura.DonacionDeVianda;
+
+import Modelo.Dominio.contribucion.DonacionDeVianda;
 import Modelo.Dominio.contribucion.EstadoVianda;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
