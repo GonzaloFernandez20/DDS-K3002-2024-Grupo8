@@ -1,7 +1,5 @@
 package Controladores;
 
-import Modelo.Dominio.heladera.Heladera;
-import Repositorios.RepositorioHeladeras;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +12,7 @@ import java.util.Objects;
 @Controller
 public class CtrlAdministrador {
     @GetMapping("/Administrador")
-    public String mostrarPagina(Model model) {
-        return "Administrador";
-    }
+    public String mostrarPagina(Model model) { return "Administrador"; }
 
     @PostMapping("/Administrador")
     public String recibirSeleccion(@RequestParam(name = "archivoCSVCarga", required = false) MultipartFile archivo,
