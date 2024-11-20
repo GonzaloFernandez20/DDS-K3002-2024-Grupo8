@@ -11,7 +11,7 @@ import java.io.IOException;
 public class TelegramService {
 
     private static final String TELEGRAM_API_BASE = "https://api.telegram.org/bot";
-    private static final String TOKEN = "TuTokenAqui"; // Token del bot
+    private static final String TOKEN = "7676554277:AAFhDgNgPHT7vQxdYlUY04kf7G_Z6MGQoF8";
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
     public static void sendTextMessage(String chatId, String message) {
