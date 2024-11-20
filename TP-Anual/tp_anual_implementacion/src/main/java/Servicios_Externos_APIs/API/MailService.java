@@ -18,8 +18,8 @@ public class MailService {
     public static void sendEmail(String toEmail, String subject, String plainText) {
         String host = "smtp.gmail.com"; // Cambiar si se usa otro servicio
         //falta crear el usuario que envia el correo
-        final String user = ""; // Usuario remitente
-        final String password = ""; // Contraseña remitente
+        final String user = "diseno.de.sistemas.24@gmail.com";
+        final String password = "DISENO2024";
 
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
