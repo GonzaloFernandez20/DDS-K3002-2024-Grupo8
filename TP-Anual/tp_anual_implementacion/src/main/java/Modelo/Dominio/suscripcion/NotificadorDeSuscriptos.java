@@ -36,7 +36,19 @@ public class NotificadorDeSuscriptos {
         }
     }
 
+    public List<String> eventosALosQueEstaSuscritoUnColaborador(Colaborador colaborador) {
+        List<String> eventos = new ArrayList<>();
+
+        suscriptos.forEach( (evento, suscriptores) -> {
+            if(suscriptores.contains(colaborador)){
+                eventos.add(evento);
+            }
+        });
+
+        return eventos;
+    }
+
     // ---- Getters y Setters
     public Map<String, List<Colaborador>> getSuscriptos() { return suscriptos; }
-
+    public Heladera getHeladera() { return heladera; }
 }

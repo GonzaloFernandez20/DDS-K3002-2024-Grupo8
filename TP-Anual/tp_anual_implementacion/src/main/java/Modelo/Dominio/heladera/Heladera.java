@@ -74,15 +74,15 @@ public class Heladera {
 
     public void huboIncidente(){
         estado = EstadoHeladera.INACTIVA;
-        notificadorDeSuscriptos.notificar("se produjo una falla");
+        notificadorDeSuscriptos.notificar("Se produjo una falla.");
     }
 
     public void movimientoDeViandasFinalizado(){
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
 
-        notificadorDeSuscriptos.notificar("quedan " + viandasQueQuedan + " viandas");
-        notificadorDeSuscriptos.notificar("faltan " + viandasQueFaltan + " viandas");
+        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas.");
+        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas.");
     }
 
 
