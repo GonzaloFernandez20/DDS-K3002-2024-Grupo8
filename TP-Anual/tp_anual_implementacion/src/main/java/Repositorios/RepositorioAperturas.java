@@ -23,10 +23,10 @@ public class RepositorioAperturas {
         return instancia;
     }
     public List<PermisoDeAperturaParaColaborar> aperturasEntreFechas(LocalDate fechaInicio, LocalDate fechaFin){
-        return null;//el repositorio este vuela a la mierda con la BD andando
-        /*verificarExistenciaAperturas();
+        //return null;//el repositorio este vuela a la mierda con la BD andando
+        verificarExistenciaAperturas();
 
-        return aperturas.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList();*/
+        return aperturas.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList();
     }
     public Integer cantidadDeDepositosDeHeladeraEntreFechas(Heladera heladera, LocalDate fechaInicio, LocalDate fechaFin){
         return this.aperturasEntreFechas(fechaInicio,fechaFin).stream().filter(apertura -> apertura.getMotivo().equals(INGRESAR_VIANDAS_DONADAS)).toList().size();

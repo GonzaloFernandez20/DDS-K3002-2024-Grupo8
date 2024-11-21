@@ -2,6 +2,8 @@ package TestUnitarios;
 
 import Modelo.Dominio.Accesos_a_heladeras.PermisoDeAperturaParaColaborar;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.ContribucionConApertura;
+import Modelo.Dominio.contribucion.DonacionDeVianda;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
@@ -34,11 +36,23 @@ public class TestApertura {
     void setUp() {
         Heladera heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500", "2020")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500", "2020"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
 
-        apertura = new PermisoDeAperturaParaColaborar(heladera, INGRESAR_VIANDAS_DONADAS);
+        Direccion direccion = new Direccion("Beauchef", "500", "2020");
+        Documento documento = new Documento(TipoDeDocumento.DNI, "40.400.400", Sexo.FEMENINO);
+        PersonaHumana personaHumana = new PersonaHumana("Juana", "Gonzalez", LocalDate.now().minusYears(25), documento, direccion);
+        List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+        WhatsApp unMedio = new WhatsApp("15 2300-2950");
+        mediosDeContacto.add(unMedio);
+        Colaborador colaborador = new Colaborador(personaHumana, mediosDeContacto);
+
+        Vianda vianda = new Vianda("Fideos", LocalDate.now().plusWeeks(1), colaborador, heladera, null, null);
+
+        DonacionDeVianda contribucion = new DonacionDeVianda(colaborador, heladera, List.of(vianda), LocalDate.now());
+
+        apertura = new PermisoDeAperturaParaColaborar(heladera, INGRESAR_VIANDAS_DONADAS, contribucion);
     }
 
-    /*@Test
+    @Test
     void ValidarQueEstaEnFechaSiEsUnaAperturaDeHoy() {
         assertTrue(apertura.aperturaParaEntregaDeDonacionEntre(LocalDate.now().minusWeeks(1), LocalDate.now()));
-    }*/
+    }
 }

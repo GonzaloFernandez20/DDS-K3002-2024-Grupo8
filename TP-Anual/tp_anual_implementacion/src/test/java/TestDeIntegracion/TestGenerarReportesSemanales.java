@@ -82,7 +82,7 @@ public class TestGenerarReportesSemanales {
 
         reporteDeFallas.completarReporte();
 
-        String path = "src/main/resources/reportes/ReporteDeFallas.pdf";
+        String path = "src/main/resources/static/reportes/ReporteDeFallas.pdf";
 
         File pdfFile = new File(path);
         assertTrue(pdfFile.exists() && pdfFile.length() > 0, "No se encontró el PDF.");
@@ -114,7 +114,7 @@ public class TestGenerarReportesSemanales {
         GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
         accesoDeColaborador.aperturaAutorizada(heladera);
 
-        PermisoDeAperturaParaColaborar apertura = new PermisoDeAperturaParaColaborar(heladera, INGRESAR_VIANDAS_DONADAS);
+        PermisoDeAperturaParaColaborar apertura = new PermisoDeAperturaParaColaborar(heladera, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda);
         RepositorioAperturas.getInstancia().agregarApertura(apertura);
 
         GestorDeReportes.getInstancia().generarReportesSemanales();
