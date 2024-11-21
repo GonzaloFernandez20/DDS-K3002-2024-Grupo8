@@ -4,6 +4,7 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 @Entity
@@ -31,4 +32,13 @@ public class FallaTecnica extends Incidente{
     public String obtenerInformacion() {
         return "se produjo una Falla Tecnica: \n" + "Descripcion: " + descripcion + "\n" + "Link Foto: " + linkFoto;
     }
+
+    public boolean sucedioEntre(LocalDate fechaInicio, LocalDate fechaFin) {
+        return (momentoDelSuceso.isAfter(fechaInicio.atStartOfDay()) && momentoDelSuceso.isBefore(fechaFin.atStartOfDay()))
+                || momentoDelSuceso.toLocalDate().equals(fechaInicio) || momentoDelSuceso.toLocalDate().isEqual(fechaFin);
+    }
+
+    public String getDescripcion() { return descripcion; }
+    public String getLinkFoto() { return linkFoto; }
+    public Colaborador getColaboradorInformante() { return colaboradorInformante; }
 }

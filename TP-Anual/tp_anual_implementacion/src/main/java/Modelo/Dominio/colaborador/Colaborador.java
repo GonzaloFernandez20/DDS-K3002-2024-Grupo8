@@ -2,6 +2,7 @@ package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.contribucion.Contribucion;
+import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
@@ -11,6 +12,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Colaborador")
@@ -20,18 +22,19 @@ public class Colaborador {
     private Integer id_colaborador;
     @OneToOne
     @JoinColumn(name = "persona", referencedColumnName = "id_persona")
-    private Persona persona;
+    private final Persona persona;
     @OneToMany
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
-    private List<MedioDeContacto> mediosDeContacto;
+    private final List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
-    private List<String> mensajesRecibidos;
+    private final List<String> mensajesRecibidos;
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Contribucion> historialDeContribuciones;
+    private final List<Contribucion> historialDeContribuciones;
     @OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
     private double puntosAcumulados;
+
 
     public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
         if(persona ==null){throw new IllegalArgumentException("El colaborador debe corresponderse a una persona");}
@@ -86,8 +89,7 @@ public class Colaborador {
 
 
     // ---- Getters y Setters
-
-/*    public void setTarjeta(AccesoDeColaborador tarjeta) {
+    /*    public void setTarjeta(AccesoDeColaborador tarjeta) {
         if(tarjeta == null){
             if(this.tarjeta != null) this.tarjeta.setColaborador(null);
         }
@@ -102,4 +104,9 @@ public class Colaborador {
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
+
+    public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
+    public Integer getId_colaborador() { return id_colaborador; }
+
+    public void setTarjeta(AccesoDeColaborador accesoDeColaborador) { this.tarjeta = accesoDeColaborador; }
 }
