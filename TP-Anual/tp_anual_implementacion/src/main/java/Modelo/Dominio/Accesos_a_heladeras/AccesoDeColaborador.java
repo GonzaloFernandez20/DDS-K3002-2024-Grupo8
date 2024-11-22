@@ -3,6 +3,7 @@ package Modelo.Dominio.Accesos_a_heladeras;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.persona.Persona;
+import Repositorios.RepositorioAperturas;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -10,7 +11,9 @@ import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
 @Entity
 @Table(name = "AccesoDeColaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
@@ -38,10 +41,18 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     }
 
     private void registrarAcceso(PermisoDeAperturaParaColaborar permiso) {
-        permiso.getContribucion().procesarLaContribucion();
         if(!permiso.getEstaVencida()) {
-            historicoDeAccesosHeladera.add(permiso);
+            permiso.setEstaVencida(true);
+            // Se vence una vez que fue usado...
+            // Esto va a cambiar cuando agreguemos el parametro fueUsado
+            permiso.getContribucion().procesarLaContribucion();
+            RepositorioAperturas.getInstancia().agregarApertura(permiso);
         }
+        /*permiso.getContribucion().procesarLaContribucion();
+        if(!permiso.getEstaVencida()) {
+            System.out.println("Voy a agregar un acceso");
+            historicoDeAccesosHeladera.add(permiso);
+        }*/
     }
 
 
@@ -55,7 +66,12 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
 
     // Hecho de forma provisoria para reportes
     public Integer cantidadDeAperturasPorDonacionesEntre(LocalDate fechaInicio,LocalDate fechaFin){
-        return 10;//RE TRUCHO, CUANDO ESTË LISTA LA BD LO CORRIJO
-        //return historicoDeAccesosHeladera.stream().filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
+        //return 10;//CUANDO ESTE LISTA LA BD LO CORRIJO
+
+        return historicoDeAccesosHeladera.stream().filter(acceso -> acceso instanceof PermisoDeAperturaParaColaborar)
+                .map(apertura -> (PermisoDeAperturaParaColaborar) apertura)
+                .filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
     }
+
+    public List<PermisoDeApertura> getHistoricoDeAccesosHeladera() { return historicoDeAccesosHeladera; }
 }

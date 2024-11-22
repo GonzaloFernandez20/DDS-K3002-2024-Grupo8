@@ -6,7 +6,6 @@ import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaJuridica;
 import Modelo.Dominio.persona.TipoOrganizacion;
 

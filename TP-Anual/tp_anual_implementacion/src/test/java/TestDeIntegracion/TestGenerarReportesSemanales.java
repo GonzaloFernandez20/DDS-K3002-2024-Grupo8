@@ -111,11 +111,10 @@ public class TestGenerarReportesSemanales {
         Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaboradorHumano, heladera, null, null);
         DonacionDeVianda contribucionDeVianda = new DonacionDeVianda(colaboradorHumano, heladera, List.of(vianda), LocalDate.now());
 
+        // Solicita abrir la heladera
         GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
+        // Abre la heladera porque está autorizado
         accesoDeColaborador.aperturaAutorizada(heladera);
-
-        PermisoDeAperturaParaColaborar apertura = new PermisoDeAperturaParaColaborar(heladera, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda);
-        RepositorioAperturas.getInstancia().agregarApertura(apertura);
 
         GestorDeReportes.getInstancia().generarReportesSemanales();
 
