@@ -9,7 +9,11 @@ public class GestorDePermisosDeApertura {
                                                      MotivoApertura motivo,
                                                      ContribucionConApertura contribucionAsociada,
                                                      Heladera heladeraAabrir) {
-//        PermisoDeApertura nuevoPermiso = new PermisoDeApertura(contribucionAsociada, heladeraAabrir, motivo);
-//        colaborador.getTarjeta().agregarPermiso(nuevoPermiso);
+        PermisoDeAperturaParaColaborar nuevoPermiso = new PermisoDeAperturaParaColaborar(heladeraAabrir, motivo, contribucionAsociada);
+        colaborador.getTarjeta().addPermisoDeApertura(nuevoPermiso);
+        /*
+        PermisoDeAperturaParaDonar nuevoPermiso = new PermisoDeApertura(contribucionAsociada, heladeraAabrir, motivo);
+        colaborador.getTarjeta().agregarPermiso(nuevoPermiso);
+        */
     }
 }

@@ -17,9 +17,10 @@ public class PermisoDeAperturaParaColaborar extends PermisoDeApertura{
     @Column(name = "esta_vencida")
     private boolean estaVencida;
 
-
-    public PermisoDeAperturaParaColaborar(Heladera heladera, MotivoApertura motivo) {
+    public PermisoDeAperturaParaColaborar(Heladera heladera, MotivoApertura motivo, ContribucionConApertura contribucion) {
         super(heladera, motivo);
+        this.contribucion = contribucion;
+        fechaDeVencimiento = LocalDate.now();
     }
 
     public ContribucionConApertura getContribucion() {
@@ -44,6 +45,11 @@ public class PermisoDeAperturaParaColaborar extends PermisoDeApertura{
 
     public void setEstaVencida(boolean estaVencida) {
         this.estaVencida = estaVencida;
+    }
+
+    public boolean aperturaParaEntregaDeDonacionEntre(LocalDate fechaInicio, LocalDate fechaFin){
+        return (fechaDeVencimiento.isAfter(fechaInicio) && fechaDeVencimiento.isBefore(fechaFin))
+                || fechaDeVencimiento.equals(fechaInicio) || fechaDeVencimiento.isEqual(fechaFin);
     }
 
     public boolean getEstaVencida() {

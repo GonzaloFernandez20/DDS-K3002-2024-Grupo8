@@ -94,15 +94,15 @@ public class Heladera {
 
     public void huboIncidente(){
         estado = EstadoHeladera.INACTIVA;
-        notificadorDeSuscriptos.notificar("se produjo una falla");
+        notificadorDeSuscriptos.notificar("Se produjo una falla.");
     }
 
     public void movimientoDeViandasFinalizado(){
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
 
-        notificadorDeSuscriptos.notificar("quedan " + viandasQueQuedan + " viandas");
-        notificadorDeSuscriptos.notificar("faltan " + viandasQueFaltan + " viandas");
+        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas.");
+        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas.");
     }
 
 
@@ -121,5 +121,6 @@ public class Heladera {
     public int getCapacidadDeViandas() { return capacidadDeViandas; }
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
     public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
+    public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
 }
 

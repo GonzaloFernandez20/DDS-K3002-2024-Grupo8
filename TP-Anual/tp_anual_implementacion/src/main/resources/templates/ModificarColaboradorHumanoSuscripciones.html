@@ -127,12 +127,10 @@
                                 </tr>
                             </thead>
                             <tbody id="bodySubscriptions">
-                                <!-- EN SUSPENSO HASTA QUE SEPAMOS COMO SE MAPEAN LAS SUSCRIPCIONES
-                                    <tr v-for="suscripcion in suscripciones" :key="suscripcion.suscripcionId">
-                                    <td>{{suscripcion.punto}}</td>
-                                    <td>{{suscripcion.suceso}}</td>
-                                </tr>-->
-
+                                <tr th:each="suscripcion : ${suscripciones}">
+                                    <td th:text="${suscripcion.nombreDelPunto}"></td>
+                                    <td th:text="${suscripcion.evento}"></td>
+                                </tr>
                             </tbody>
                         </table>
                         <h3 id="suscribir">Suscribirme</h3>

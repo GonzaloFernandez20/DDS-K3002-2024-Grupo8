@@ -19,4 +19,7 @@ public class ViandasPorColaborador{
         this.colaborador = colaborador;
         this.cantidadDeViandas = cantidadDeViandas;
     }
+
+    public Colaborador getColaborador() { return colaborador; }
+    public Integer getCantidadDeViandas() { return cantidadDeViandas; }
 }

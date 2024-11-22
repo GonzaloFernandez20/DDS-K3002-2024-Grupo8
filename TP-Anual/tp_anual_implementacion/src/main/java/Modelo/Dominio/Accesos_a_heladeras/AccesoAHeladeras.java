@@ -25,7 +25,7 @@ public abstract class AccesoAHeladeras {
         this.codigoTarjeta = codigoTarjeta;
     }
     public void addPermisoDeApertura(PermisoDeApertura permisoDeApertura) {
-            this.historicoDeAccesosHeladera.add(permisoDeApertura);
+        this.historicoDeAccesosHeladera.add(permisoDeApertura);
     }
     public void removePermisoDeApertura(PermisoDeApertura permisoDeApertura) {
             this.historicoDeAccesosHeladera.remove(permisoDeApertura);

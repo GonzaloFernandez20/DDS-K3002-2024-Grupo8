@@ -19,4 +19,7 @@ public class FallasPorHeladera {
         this.heladera = heladera;
         this.cantidadDeFallas = cantidadDeFallas;
     }
+
+    public Heladera getHeladera() { return heladera; }
+    public Integer getCantidadDeFallas() { return cantidadDeFallas; }
 }
