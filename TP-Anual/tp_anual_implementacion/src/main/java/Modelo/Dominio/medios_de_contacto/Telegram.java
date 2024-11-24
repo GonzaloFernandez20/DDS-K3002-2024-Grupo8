@@ -17,7 +17,7 @@ public class Telegram extends MedioDeContacto{
     }
 
     @Override
-    public void notificar(String mensaje, String userId) {
-        TelegramService.sendTextMessage(userId, mensaje);
+    public void notificar(String mensaje) {
+       // TelegramService.sendTextMessage(userId, mensaje);
     }
 }

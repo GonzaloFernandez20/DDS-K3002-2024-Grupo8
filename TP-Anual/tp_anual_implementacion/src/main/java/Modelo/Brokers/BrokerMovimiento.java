@@ -1,7 +1,8 @@
 package Modelo.Brokers;
 
-import Modelo.Dominio.sensoreos.SensoreoAvisoRobo;
-import Modelo.Dominio.sensoreos.SensoreoTemperatura;
+import Modelo.Dominio.heladera.SensoreoDeMovimiento;
+import Modelo.Dominio.heladera.SensoreoDeTemperatura;
+import Modelo.Dominio.heladera.SensoreoDeMovimiento;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,14 +13,14 @@ import java.util.HashMap;
 
 public class BrokerMovimiento {
     private int puerto;
-    private HashMap<Integer, SensoreoAvisoRobo> diccionarioSensores;
+    private HashMap<Integer, SensoreoDeMovimiento> diccionarioSensores;
 
     public BrokerMovimiento(int puerto) {
         this.puerto = puerto;
         diccionarioSensores = new HashMap<>();
     }
 
-    public void sumarSensoreo(SensoreoAvisoRobo sensoreoAvisoRobo) {
+    public void sumarSensoreo(SensoreoDeMovimiento sensoreoAvisoRobo) {
         diccionarioSensores.put(sensoreoAvisoRobo.getId(), sensoreoAvisoRobo);
     }
     // lo mismo que en broker acceso a heladeras
@@ -47,8 +48,8 @@ public class BrokerMovimiento {
             int id = Integer.parseInt(partes[0]);
             System.out.println("Datos recibidos: Sensor ID = " + id);
 
-            SensoreoAvisoRobo sensoreoAvisoRobo = diccionarioSensores.get(id);
-            sensoreoAvisoRobo.notificarColaborador();
+            SensoreoDeMovimiento sensoreoAvisoRobo = diccionarioSensores.get(id);
+            sensoreoAvisoRobo.enviarAlerta();
         }
     }
 }

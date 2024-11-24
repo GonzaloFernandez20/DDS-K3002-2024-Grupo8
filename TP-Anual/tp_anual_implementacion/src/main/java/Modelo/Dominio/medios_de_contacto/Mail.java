@@ -20,8 +20,8 @@ public class Mail extends MedioDeContacto{
 
 
     @Override
-    public void notificar(String mensaje, String userId) {
+    public void notificar(String mensaje) {
         String subject = "Notificacion Heladera";
-        MailService.sendEmail(userId ,subject,mensaje);
+       // MailService.sendEmail(subject,mensaje);
     }
 }

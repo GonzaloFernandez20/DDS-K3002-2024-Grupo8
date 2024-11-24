@@ -22,7 +22,7 @@ public class NotificacionService {
         MedioDeContacto medioDeContacto = mediosDeContacto.get(medio);
 
         if (medioDeContacto != null) {
-            medioDeContacto.notificar(message, userId);
+            medioDeContacto.notificar(message);
         } else {
             System.out.println("Medio de contacto no soportado: " + medioDeContacto);
         }

@@ -1,5 +1,5 @@
 package Modelo.Brokers;
-import Modelo.Dominio.sensoreos.SensoreoTemperatura;
+import Modelo.Dominio.heladera.SensoreoDeTemperatura;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -9,14 +9,14 @@ import java.util.List;
 
 public class BrokerTemperatura {
     private int puerto;
-    private HashMap<Integer, SensoreoTemperatura> diccionarioSensores;
+    private HashMap<Integer, SensoreoDeTemperatura> diccionarioSensores;
 
     public BrokerTemperatura(int puerto) {
         this.puerto = puerto;
         diccionarioSensores = new HashMap<>();
     }
 
-    public void sumarSensoreo(SensoreoTemperatura sensoreoTemperatura) {
+    public void sumarSensoreo(SensoreoDeTemperatura sensoreoTemperatura) {
         diccionarioSensores.put(sensoreoTemperatura.getId(), sensoreoTemperatura);
     }
 
@@ -44,11 +44,11 @@ public class BrokerTemperatura {
         private void procesarMensaje(String mensaje) {
             String[] partes = mensaje.split(",");
             int id = Integer.parseInt(partes[0]);
-            double temperatura = Double.parseDouble(partes[1]);
+            float temperatura = Float.parseFloat(partes[1]);
             System.out.println("Datos recibidos: Sensor ID = " + id + ", Temperatura = " + temperatura);
 
-            SensoreoTemperatura sensoreoTemperatura = diccionarioSensores.get(id);
-            sensoreoTemperatura.actualizar(temperatura);
+            SensoreoDeTemperatura sensoreoTemperatura = diccionarioSensores.get(id);
+            sensoreoTemperatura.actualizarTemperatura(temperatura);
 
         }
     }

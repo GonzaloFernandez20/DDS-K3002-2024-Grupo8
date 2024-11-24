@@ -13,7 +13,7 @@ public class WhatsAppService {
     private static final String API_TOKEN = "kj35lw02kue0fdtr"; // Token de autenticación
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
-    public static void sendTextMessage(String numero) {
+    public static void sendTextMessage(String numero, String mensaje) {
         RequestBody body = new FormBody.Builder()
                 .add("token", API_TOKEN)
                 .add("to", numero) // numero del receptor

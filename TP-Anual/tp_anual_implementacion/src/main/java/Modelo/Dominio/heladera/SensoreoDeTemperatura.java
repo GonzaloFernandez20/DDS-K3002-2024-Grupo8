@@ -12,6 +12,12 @@ public class SensoreoDeTemperatura {
     private TimerTask tareaActual;
     private float ultimaTemperaturaRegistrada;
 
+    public Integer getId() {
+        return ID;
+    }
+
+    Integer ID;
+
     public SensoreoDeTemperatura(Heladera heladera) {
         this.heladera = heladera;
         timerDeConexion = new Timer();
