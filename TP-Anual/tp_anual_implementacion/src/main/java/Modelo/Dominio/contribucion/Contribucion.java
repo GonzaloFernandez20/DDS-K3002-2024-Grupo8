@@ -20,5 +20,24 @@ public abstract class Contribucion {
 
     public abstract void procesarLaContribucion();
     public abstract double puntosQueSumaColaborador();
+
+    public Contribucion() {
+    }
+
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
+
+    public LocalDate getFechaDeContribucion() {
+        return fechaDeContribucion;
+    }
+
+    public void setFechaDeContribucion(LocalDate fechaDeContribucion) {
+        this.fechaDeContribucion = fechaDeContribucion;
+    }
 }
 

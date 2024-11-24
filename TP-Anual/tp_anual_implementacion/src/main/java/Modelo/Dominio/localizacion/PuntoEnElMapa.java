@@ -18,6 +18,9 @@ public class PuntoEnElMapa {
         this.longitud = longitud;
     }
 
+    public PuntoEnElMapa() {
+    }
+
     // ----------> Getters y Setters
     public double getLatitud() {
         return latitud;

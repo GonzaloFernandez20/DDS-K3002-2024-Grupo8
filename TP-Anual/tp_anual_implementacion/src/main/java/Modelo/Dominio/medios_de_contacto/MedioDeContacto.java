@@ -8,5 +8,5 @@ public abstract class MedioDeContacto {
     @Id
     @GeneratedValue
     private  Integer id_medio_de_contacto;
-    public void notificar(String mensaje) {}
+    public void notificar(String mensaje,String userId) {}
 }

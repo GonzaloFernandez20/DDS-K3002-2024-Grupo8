@@ -2,7 +2,6 @@ package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.contribucion.Contribucion;
-import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
@@ -12,7 +11,6 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Colaborador")
@@ -22,14 +20,14 @@ public class Colaborador {
     private Integer id_colaborador;
     @OneToOne
     @JoinColumn(name = "persona", referencedColumnName = "id_persona")
-    private final Persona persona;
+    private Persona persona;
     @OneToMany
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
-    private final List<MedioDeContacto> mediosDeContacto;
+    private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
-    private final List<String> mensajesRecibidos;
+    private List<String> mensajesRecibidos;
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private final List<Contribucion> historialDeContribuciones;
+    private List<Contribucion> historialDeContribuciones;
     @OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
@@ -45,6 +43,9 @@ public class Colaborador {
         this.historialDeContribuciones = new ArrayList<>();
         this.tarjeta = null;
         this.puntosAcumulados = 0;
+    }
+
+    public Colaborador() {
     }
 
     public void registrarContribucion(Contribucion contribucion){
@@ -104,9 +105,15 @@ public class Colaborador {
     public Persona getPersona() { return persona; }
     public AccesoDeColaborador getTarjeta() { return tarjeta; }
     public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
+    public void setTarjeta(AccesoDeColaborador tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+
+    public void setHistorialDeContribuciones(List<Contribucion> historialDeContribuciones) {
+        this.historialDeContribuciones = historialDeContribuciones;
+    }
 
     public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
     public Integer getId_colaborador() { return id_colaborador; }
 
-    public void setTarjeta(AccesoDeColaborador accesoDeColaborador) { this.tarjeta = accesoDeColaborador; }
 }
