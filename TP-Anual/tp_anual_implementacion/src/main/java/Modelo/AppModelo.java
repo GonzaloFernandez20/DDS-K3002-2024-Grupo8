@@ -47,10 +47,10 @@ public class AppModelo {
     ){
         return args -> {
 //Insert de clase con otras clases que sean sus atributos
+/*            direccionRepository.save(heladera.getUbicacion().getDireccion());
             GeneradorDeClases generadorDeClases = new GeneradorDeClases();
             Heladera heladera = generadorDeClases.heladera();
             Colaborador colaborador = generadorDeClases.colaboradorJuridico();
-/*            direccionRepository.save(heladera.getUbicacion().getDireccion());
             puntoEnElMapaRepository.save(heladera.getUbicacion().getPunto());
             ubicacionRepository.save(heladera.getUbicacion());
             direccionRepository.save(heladera.getColaboradorACargo().getDireccion());
@@ -59,7 +59,6 @@ public class AppModelo {
             colaboradorRepository.save(heladera.getColaboradorACargo());
             modeloRepository.save(heladera.getModelo());
             heladeraRepository.save(heladera);
-*/
             direccionRepository.save(colaborador.getDireccion());
             personaJuridicaRepository.save((PersonaJuridica) colaborador.getPersona());
             medioDeContactoRepository.saveAll(colaborador.getMediosDeContacto());
@@ -67,7 +66,6 @@ public class AppModelo {
             donacionDeDineroRepository.save((DonacionDeDinero)colaborador.getHistorialDeContribuciones().getFirst());
             colaboradorRepository.save(colaborador);
 //Ir a buscar las clases a la BD e imprimirlas
-/*
             List<Ubicacion> ubicaciones = ubicacionRepository.findAll();
             // Create ObjectMapper for JSON processing
             ObjectMapper objectMapper = new ObjectMapper();
@@ -80,6 +78,7 @@ public class AppModelo {
                 System.err.println("Error writing JSON to file");
             }
 */
+
         };
     }
 }
