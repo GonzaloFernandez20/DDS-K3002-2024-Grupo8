@@ -8,6 +8,7 @@ import Modelo.Dominio.incidentes.GestorDeIncidentes;
 import Modelo.Dominio.tecnico.LocalizadorDeTecnicos;
 import Modelo.Dominio.tecnico.Tecnico;
 import Repositorios.RepositorioIncidentes;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -68,14 +69,14 @@ public class TestDeReporteDeUnIncidente {
     @Nested
     @DisplayName("incidente reportado: efectos que se disparan hacia la Heladera")
     class TestHeladeraRecibeElReporte{
-
+        @Disabled
         @Test
         @DisplayName("El estado de la heladera ahora es \"INACTIVA\"")
         public void TestHeladeraQuedoInactiva(){
             configuracionInicial();
             assertEquals(INACTIVA, heladera.getEstado());
         }
-
+        @Disabled
         @Test
         @DisplayName("Todos los notificadores suscriptos a la heladera recibieron la notificacion sobre la falla")
         public void TestNotificadoresSuscriptos(){

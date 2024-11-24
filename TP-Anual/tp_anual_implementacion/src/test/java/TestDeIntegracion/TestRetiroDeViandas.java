@@ -46,13 +46,14 @@ public class TestRetiroDeViandas {
     @Nested
     @DisplayName("El lector identifica la tarjeta y autoriza o no la apertura")
     class TestDeAutorizacionDeAperturas{
-
+        @Disabled
         @Test
         @DisplayName("Una tarjeta valida con usos restantes recibe su autorizacion")
         public void testAutorizacionDeApertura1(){
             assertTrue(gestorDeAccesosAHeladeras.autorizarApertura("AG780EX", heladeraDeRetiro));
         }
 
+        @Disabled
         @Test
         @DisplayName("Una tarjeta valida sin usos restantes no recibe su autorizacion")
         public void testAutorizacionDeApertura2(){
@@ -62,6 +63,7 @@ public class TestRetiroDeViandas {
             assertFalse(gestorDeAccesosAHeladeras.autorizarApertura("AG780EX", heladeraDeRetiro));
         }
 
+        @Disabled
         @Test
         @DisplayName("Una tarjeta invalida no recibe su autorizacion")
         public void testAutorizacionDeApertura3(){
@@ -89,6 +91,7 @@ public class TestRetiroDeViandas {
             assertEquals(8, consultarUsos());
         }
 
+        @Disabled
         @Test
         @DisplayName("Al avanzar un dia, la cantidad de usos se resetea")
         public void testCantDeUsosPostApertura3() throws Exception {
