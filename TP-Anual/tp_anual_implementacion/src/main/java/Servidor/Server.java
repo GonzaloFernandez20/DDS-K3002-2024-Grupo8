@@ -1,19 +1,15 @@
 package Servidor;
 
-import Modelo.Dominio.Repositories.DireccionRepository;
-import Modelo.Dominio.Repositories.PuntoEnElMapaRepository;
-import Modelo.Dominio.Repositories.UbicacionRepository;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.localizacion.PuntoEnElMapa;
-import Modelo.Dominio.localizacion.Ubicacion;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages={"Controladores"})
+@ComponentScan(basePackages={"Controladores", "Modelo"})
+@EntityScan(basePackages={"Modelo"})
+@EnableJpaRepositories(basePackages={"Modelo.Dominio.Repositories", "Repositorios"})
 public class Server {
     public static void main(String[] args) {
         SpringApplication.run(Server.class, args);
