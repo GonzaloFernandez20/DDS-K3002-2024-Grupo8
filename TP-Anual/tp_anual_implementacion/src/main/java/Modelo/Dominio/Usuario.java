@@ -1,5 +1,6 @@
 package Modelo.Dominio;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,8 @@ public class Usuario {
     private Integer id_usuario;
 
     String contrasenia;
+
+    @JsonProperty("nombreDeUsuario")
     String usuario;
 
 

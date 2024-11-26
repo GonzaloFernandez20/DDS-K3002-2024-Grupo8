@@ -1,18 +1,22 @@
-package Controladores;
+package Controladores.Sesiones;
 
 import Modelo.Dominio.Usuario;
 import Modelo.seguridad.GestorInicioDeSesion;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import javax.sql.DataSource;
-import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/IniciarSesion")
+@RequestMapping("/InicioDeSesion")
 public class CtrlInicioDeSesion {
+
+    private final GestorInicioDeSesion gestorInicioDeSesion;
+
+    @Autowired
+    public CtrlInicioDeSesion(GestorInicioDeSesion gestorInicioDeSesion) {
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
+    }
 
     @GetMapping
     public String inicioDeSesion() {
@@ -20,10 +24,9 @@ public class CtrlInicioDeSesion {
     }
 
     @PostMapping
-    public ResponseEntity<String> iniciarSesion(@RequestParam String usuario,
-                                                @RequestParam String contrasenia) {
+    public ResponseEntity<String> iniciarSesion(@RequestBody Usuario usuario) {
         try {
-            int idColaborador = GestorInicioDeSesion.buscarUsuarioEnBD(usuario, contrasenia);
+            int idColaborador = gestorInicioDeSesion.buscarUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia());
 
             return ResponseEntity.ok("Usuario y contraseña validados exitosamente.");
         } catch (RuntimeException e) {
