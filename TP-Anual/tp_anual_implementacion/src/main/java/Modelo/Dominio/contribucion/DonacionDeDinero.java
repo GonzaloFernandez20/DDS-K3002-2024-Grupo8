@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Table(name = "DonacionDeDinero")
 public class DonacionDeDinero extends Contribucion {
     @Column(name = "monto")
-    private final float monto;
+    private float monto;
     @Enumerated(EnumType.STRING)
     private Frecuencia frecuencia;
 
@@ -30,4 +30,23 @@ public class DonacionDeDinero extends Contribucion {
         double coeficiente = 0.5;
         return monto * coeficiente;
     }
+
+    public DonacionDeDinero() {
+    }
+    public float getMonto() {
+        return monto;
+    }
+
+    public void setMonto(float monto) {
+        this.monto = monto;
+    }
+
+    public Frecuencia getFrecuencia() {
+        return frecuencia;
+    }
+
+    public void setFrecuencia(Frecuencia frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
 }

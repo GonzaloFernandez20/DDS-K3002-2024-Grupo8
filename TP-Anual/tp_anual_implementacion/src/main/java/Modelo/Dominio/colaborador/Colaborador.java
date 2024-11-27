@@ -46,6 +46,8 @@ public class Colaborador {
     }
 
     public Colaborador() {
+        this.historialDeContribuciones = new ArrayList<>();
+        this.mensajesRecibidos = new ArrayList<>();
     }
 
     public void registrarContribucion(Contribucion contribucion){
@@ -97,6 +99,10 @@ public class Colaborador {
         else tarjeta.setColaborador(this);
         this.tarjeta = tarjeta;
     }revisar al final de mappear*/
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
 
     public Direccion getDireccion() { return persona.getDireccion(); }
     public double getPuntosAcumulados() { return puntosAcumulados; }

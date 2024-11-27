@@ -46,6 +46,11 @@ public class Heladera {
     private static int BROKER_PORT = 12345; // Puerto del broker
     // ------------------------------------------------
 
+
+    public Heladera() {
+        this.viandasEnStock = new ArrayList<>();
+    }
+
     public Heladera(Colaborador colaboradorACargo,
                     Ubicacion ubicacion,
                     Integer capacidadDeViandas,
@@ -122,5 +127,21 @@ public class Heladera {
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
     public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
     public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
+
+    public void setColaboradorACargo(Colaborador colaboradorACargo) {
+        this.colaboradorACargo = colaboradorACargo;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setCapacidadDeViandas(int capacidadDeViandas) {
+        this.capacidadDeViandas = capacidadDeViandas;
+    }
+
+    public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) {
+        this.puestaEnFuncionamiento = puestaEnFuncionamiento;
+    }
 }
 

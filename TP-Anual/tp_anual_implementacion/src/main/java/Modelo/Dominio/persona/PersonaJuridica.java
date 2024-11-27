@@ -25,7 +25,7 @@ public class PersonaJuridica extends Persona {
         this.rubro = rubro;
         this.direccion = direccion;
     }
-
+    public PersonaJuridica(){}
 
 }
 

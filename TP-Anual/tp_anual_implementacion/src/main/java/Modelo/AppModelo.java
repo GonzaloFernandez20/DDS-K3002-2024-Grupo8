@@ -6,6 +6,8 @@ import Modelo.Dominio.contribucion.DonacionDeDinero;
 import Modelo.Dominio.contribucion.Frecuencia;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.contribucion.Vianda;
+import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.heladera.EstadoHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
@@ -47,25 +49,36 @@ public class AppModelo {
     ){
         return args -> {
 //Insert de clase con otras clases que sean sus atributos
-            GeneradorDeClases generadorDeClases = new GeneradorDeClases();
-            Heladera heladera = generadorDeClases.heladera();
-            Colaborador colaborador = generadorDeClases.colaboradorJuridico();
-/*            direccionRepository.save(heladera.getUbicacion().getDireccion());
-            puntoEnElMapaRepository.save(heladera.getUbicacion().getPunto());
-            ubicacionRepository.save(heladera.getUbicacion());
-            direccionRepository.save(heladera.getColaboradorACargo().getDireccion());
-            personaJuridicaRepository.save((PersonaJuridica) heladera.getColaboradorACargo().getPersona());
-            medioDeContactoRepository.saveAll(heladera.getColaboradorACargo().getMediosDeContacto());
-            colaboradorRepository.save(heladera.getColaboradorACargo());
-            modeloRepository.save(heladera.getModelo());
+            Heladera heladera = new Heladera();
+            heladera.setEstado(EstadoHeladera.ACTIVA);
+            heladera.setCapacidadDeViandas(3333);
+            heladera.setPuestaEnFuncionamiento(LocalDate.now());
             heladeraRepository.save(heladera);
-*/
-            direccionRepository.save(colaborador.getDireccion());
-            personaJuridicaRepository.save((PersonaJuridica) colaborador.getPersona());
-            medioDeContactoRepository.saveAll(colaborador.getMediosDeContacto());
-//            hacerseCargoDeHeladeraRepository.save((HacerseCargoDeHeladera) colaborador.getHistorialDeContribuciones().get(0));
-            donacionDeDineroRepository.save((DonacionDeDinero)colaborador.getHistorialDeContribuciones().getFirst());
-            colaboradorRepository.save(colaborador);
+
+            Colaborador colaboradorJuridico = new Colaborador();
+            colaboradorRepository.save(colaboradorJuridico);
+
+            PersonaJuridica personaJuridica = new PersonaJuridica();
+            personaJuridicaRepository.save(personaJuridica);
+
+            DonacionDeDinero donacionDeDinero = new DonacionDeDinero();
+            donacionDeDinero.setFechaDeContribucion(LocalDate.now());
+            donacionDeDinero.setMonto(10000);
+            donacionDeDinero.setFrecuencia(Frecuencia.UNICAMENTE);
+            donacionDeDinero.setColaborador(colaboradorJuridico);
+            donacionDeDineroRepository.save(donacionDeDinero);
+
+            HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera();
+            hacerseCargoDeHeladera.setColaborador(colaboradorJuridico);
+            hacerseCargoDeHeladera.setHeladeraACargo(heladera);
+            hacerseCargoDeHeladeraRepository.save(hacerseCargoDeHeladera);
+
+            heladera.setColaboradorACargo(colaboradorJuridico);
+            heladeraRepository.save(heladera);
+
+            colaboradorJuridico.registrarContribucion(donacionDeDinero);
+            colaboradorJuridico.setPersona(personaJuridica);
+            colaboradorRepository.save(colaboradorJuridico);
 //Ir a buscar las clases a la BD e imprimirlas
 /*
             List<Ubicacion> ubicaciones = ubicacionRepository.findAll();
