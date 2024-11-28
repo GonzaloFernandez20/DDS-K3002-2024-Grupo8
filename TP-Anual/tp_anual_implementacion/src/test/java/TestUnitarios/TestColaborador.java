@@ -4,7 +4,7 @@ import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
 import Modelo.Dominio.Accesos_a_heladeras.MotivoApertura;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.DonacionDeVianda;
+import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
@@ -24,6 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +57,11 @@ public class TestColaborador {
 
         Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaborador, heladera, null, null);
 
-        DonacionDeVianda contribucionDeVianda = new DonacionDeVianda(colaborador, heladera, List.of(vianda), LocalDate.now());
+        DonacionDeViandas contribucionDeVianda = new DonacionDeViandas(colaborador, heladera, List.of(vianda), LocalDate.now());
 
         GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaborador, MotivoApertura.INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
-        accesoDeColaborador.aperturaAutorizada(heladera);
+        accesoDeColaborador.estaAutorizadaLaApertura(heladera);
 
-        assertEquals(1, (int) colaborador.cantidadDeDonacionesDeViandaEntre(LocalDate.now().minusWeeks(1), LocalDate.now()));
+        assertEquals(1, (int) colaborador.cantidadDeDonacionesDeViandaEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
     }
 }

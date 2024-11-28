@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,14 +31,18 @@ public class ReporteDeViandasPorHeladera extends ReporteSemanal{
         viandasPorHeladeras  = new ArrayList<>();
     }
 
+    public ReporteDeViandasPorHeladera() {
+       super();
+    }
+
     @Override
     public void completarReporte(){
         List<Heladera> heladerasConocidas = RepositorioHeladeras.getInstancia().getHeladeras();
         heladerasConocidas.forEach(heladera -> {
             ViandasPorHeladera viandasPorHeladera =
                     new ViandasPorHeladera(heladera,
-                            RepositorioAperturas.getInstancia().cantidadDeRetirosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()),
-                            RepositorioAperturas.getInstancia().cantidadDeDepositosDeHeladeraEntreFechas(heladera,LocalDate.now().minusWeeks(1),LocalDate.now()));
+                            RepositorioAperturas.getInstancia().cantidadDeRetirosDeHeladeraEntreFechas(heladera, LocalDateTime.now().minusWeeks(1),LocalDateTime.now()),
+                            RepositorioAperturas.getInstancia().cantidadDeDepositosDeHeladeraEntreFechas(heladera,LocalDateTime.now().minusWeeks(1),LocalDateTime.now()));
             this.sumarViandasPorHeladera(viandasPorHeladera);
         });
         super.completarReporte();

@@ -8,8 +8,9 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_usuario;
-
+    @Column(name = "contraseña")
     String contrasenia;
+    @Column(name = "usuario")
     String usuario;
 
 
@@ -33,7 +34,5 @@ public class Usuario {
         return id_usuario;
     }
 
-    public void setId_usuario(Integer id_usuario) {
-        this.id_usuario = id_usuario;
-    }
+    public Usuario() {}
 }

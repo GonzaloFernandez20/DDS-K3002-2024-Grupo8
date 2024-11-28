@@ -1,4 +1,4 @@
-package Modelo.Factorys;
+package Modelo.Mappers;
 
 import DTOs.VisitaTecnicaDTO;
 import Modelo.Dominio.incidentes.VisitaTecnica;

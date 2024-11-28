@@ -1,4 +1,4 @@
-package Modelo.Factorys;
+package Modelo.Mappers;
 
 import DTOs.HeladeraDTO;
 import Modelo.Dominio.heladera.Heladera;

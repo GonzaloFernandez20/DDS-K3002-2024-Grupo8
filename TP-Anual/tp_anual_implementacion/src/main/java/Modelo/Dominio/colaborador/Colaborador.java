@@ -9,6 +9,7 @@ import Modelo.Dominio.persona.Persona;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class Colaborador {
     public void agregarMedioDeContacto(MedioDeContacto nuevoMedio) { mediosDeContacto.add(nuevoMedio);}
 
     // Hecho de forma provisoria para reportes
-    public Integer cantidadDeDonacionesDeViandaEntre(LocalDate fechaInicio, LocalDate fechaFin){
+    public Integer cantidadDeDonacionesDeViandaEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
         if(tarjeta == null){return 0;}
         else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
     }

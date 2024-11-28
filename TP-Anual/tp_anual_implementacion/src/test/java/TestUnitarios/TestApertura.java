@@ -1,9 +1,8 @@
 package TestUnitarios;
 
-import Modelo.Dominio.Accesos_a_heladeras.PermisoDeAperturaParaColaborar;
+import Modelo.Dominio.Accesos_a_heladeras.AperturaConPermiso;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.ContribucionConApertura;
-import Modelo.Dominio.contribucion.DonacionDeVianda;
+import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
@@ -30,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestApertura {
 
-    PermisoDeAperturaParaColaborar apertura;
+    AperturaConPermiso apertura;
 
     @BeforeEach
     void setUp() {
@@ -46,9 +45,9 @@ public class TestApertura {
 
         Vianda vianda = new Vianda("Fideos", LocalDate.now().plusWeeks(1), colaborador, heladera, null, null);
 
-        DonacionDeVianda contribucion = new DonacionDeVianda(colaborador, heladera, List.of(vianda), LocalDate.now());
+        DonacionDeViandas contribucion = new DonacionDeViandas(colaborador, heladera, List.of(vianda), LocalDate.now());
 
-        apertura = new PermisoDeAperturaParaColaborar(heladera, INGRESAR_VIANDAS_DONADAS, contribucion);
+        apertura = new AperturaConPermiso(heladera, INGRESAR_VIANDAS_DONADAS, contribucion);
     }
 
     @Test

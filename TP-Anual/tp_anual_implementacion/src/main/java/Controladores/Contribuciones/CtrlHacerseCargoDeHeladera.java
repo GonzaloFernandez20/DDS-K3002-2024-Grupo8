@@ -5,7 +5,7 @@ import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
-import Modelo.Factorys.BuilderHeladera;
+import Modelo.Mappers.BuilderHeladera;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import org.springframework.http.HttpStatus;

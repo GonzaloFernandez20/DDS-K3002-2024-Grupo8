@@ -16,10 +16,13 @@ public class ReporteSemanal {
     @GeneratedValue
     private Integer id_reporte;
     @Column(name = "fecha_de_creacion")
-    private LocalDate fechaDeCreacion;
+    protected LocalDate fechaDeCreacion;
 
     public ReporteSemanal(LocalDate fechaDeCreacion) {
         this.fechaDeCreacion = LocalDate.now();
+    }
+
+    public ReporteSemanal() {
     }
 
     public LocalDate getFechaDeCreacion() {

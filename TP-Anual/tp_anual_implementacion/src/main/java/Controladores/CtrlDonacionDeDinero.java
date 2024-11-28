@@ -2,7 +2,7 @@ package Controladores;
 
 import Modelo.Dominio.GestionDeContribuciones.GestorDonacionDeDinero;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
-import Modelo.Factorys.FactoryDonacionDeDinero;
+import Modelo.Mappers.FactoryDonacionDeDinero;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

@@ -2,7 +2,7 @@ package TestDeIntegracion;
 
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.DonacionDeVianda;
+import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.contribucion.EstadoVianda;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDonacionDeViandas {
-    DonacionDeVianda donacionDeVianda;
+    DonacionDeViandas donacionDeVianda;
     Heladera heladeraDestino;
     Colaborador colaborador;
     List<Vianda> viandasDeLaDonacion = new ArrayList<>();
@@ -35,7 +35,7 @@ public class TestDonacionDeViandas {
         viandasDonadas.add(viandaPancho);
         viandasDeLaDonacion.addAll(viandasDonadas);
 
-        donacionDeVianda = new DonacionDeVianda(colaborador= FactoryInstanciasParaTests.instanciarColaboradorHumano(),
+        donacionDeVianda = new DonacionDeViandas(colaborador= FactoryInstanciasParaTests.instanciarColaboradorHumano(),
                                                 heladeraDestino = FactoryInstanciasParaTests.instanciarUnaHeladera(),
                                                 viandasDonadas,
                                                 LocalDate.now());

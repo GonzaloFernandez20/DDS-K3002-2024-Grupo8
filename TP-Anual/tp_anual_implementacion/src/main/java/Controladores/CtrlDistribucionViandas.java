@@ -1,9 +1,11 @@
 package Controladores;
 
 import DTOs.DistribucionDeViandaDTO;
-import DTOs.HeladeraDTO;
-import Modelo.Dominio.GestionDeContribuciones.GestorDistribucionDeViandas;
+import DTOs.HeladeraSeleccionDTO;
+import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Repositories.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.DistribucionDeViandas;
 import Modelo.Dominio.contribucion.MotivoDeDistribucion;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
@@ -12,7 +14,12 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Excepciones.ExcepcionNoHayEspacioEnDestino;
+import Modelo.Excepciones.ExcepcionViandasInsuficientesEnOrigen;
+import Modelo.Mappers.DistribucionDeViandasMapper;
+import Modelo.Mappers.HeladeraSeleccionMapper;
 import Repositorios.RepositorioHeladeras;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,16 +27,25 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
 public class CtrlDistribucionViandas {
+
+    private final HeladeraRepository repositorioHeladeras;
+    @Autowired
+    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras) {
+        this.repositorioHeladeras = repositorioHeladeras;
+    }
+
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
     private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200", "1234")), List.of(new WhatsApp("15 2350-2350")));
-    //
-    private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(this::convertirHeladeraADTO).collect(Collectors.toList());
-    //model.addAtribute("heladeras", new DistribucionDeVianda(colaborador, heladeraOrigen, heladeraDestino, MotivoDeDistribucion.FALTA_DE_VIANDAS, 2, LocalDate.now()));
+
+    //TODO 2: usar repo que se conecta a bd.
+    private final List<HeladeraSeleccionDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
+            map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
+
 
     List<MotivoDeDistribucion> motivos = new ArrayList<>();
 
@@ -42,9 +58,9 @@ public class CtrlDistribucionViandas {
 
     @GetMapping("/DistribuirVianda")
     public String mostrarFormulario(Model model) {
-        if(Objects.isNull(colaborador.getTarjeta())) {
-            return "PedirTarjetaColaborador";
-        }
+        //if(Objects.isNull(colaborador.getTarjeta())) {
+         //   return "PedirTarjetaColaborador";
+        //}
         model.addAttribute("heladeras", heladeras);
         this.setMotivos();
         model.addAttribute("motivos", motivos);
@@ -53,26 +69,33 @@ public class CtrlDistribucionViandas {
     }
 
     @PostMapping("/DistribuirVianda")
-    public String procesarFormulario(@RequestParam(value = "heladeraOrigen", defaultValue = "0") String idHeladeraOrigen,
-                                     @RequestParam(value = "heladeraDestino", defaultValue = "0") String idHeladeraDestino,
-                                     @RequestParam(value = "cantidadViandas", defaultValue = "0") int cantidadViandas,
-                                     @RequestParam(value = "motivoDistribucion", defaultValue = "0") MotivoDeDistribucion motivoDistribucion,
-                                     Model model) {
-        Heladera heladeraOrigen = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraOrigen));
-        Heladera heladeraDestino = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraDestino));
-        if(colaborador.getTarjeta().aperturaAutorizada(heladeraOrigen) && colaborador.getTarjeta().aperturaAutorizada(heladeraDestino)) {
-            DistribucionDeViandaDTO distribucionDeViandaDTO = new DistribucionDeViandaDTO(colaborador, heladeraOrigen, heladeraDestino, motivoDistribucion, cantidadViandas);
-            GestorDistribucionDeViandas.crearContribucion(distribucionDeViandaDTO);
-            // agregar a la base de datos
+    public String procesarSolicitudDistribucion(@RequestBody DistribucionDeViandaDTO distribucionDTO, Model model) {
+
+        DistribucionDeViandas nuevaDistribucion = procesarDTO(distribucionDTO);
+
+        try{
+            GestorDePermisosDeApertura.generarPermisosDeDistribucion(nuevaDistribucion);
             model.addAttribute("mensaje", "Distribución realizada con éxito!");
-            return mostrarFormulario(model);
-        }else {
-            model.addAttribute("mensaje", "No tiene permiso para acceder a las heladeras!");
             return "Home";
+        }catch (ExcepcionViandasInsuficientesEnOrigen e){
+            //TODO 5 mostrar mensaje de la excepcion
+            return "";
         }
+        catch (ExcepcionNoHayEspacioEnDestino e){
+            //TODO 6 mostrar mensaje de la excepcion
+            return "";
+        }
+
     }
 
-    private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
-        return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
+    private DistribucionDeViandas procesarDTO(DistribucionDeViandaDTO dto){
+        Optional<Heladera> heladeraOrigenElegida = repositorioHeladeras.findById(dto.getHeladeraDeOrigenID());
+        Optional<Heladera> heladeraDestinoElegida = repositorioHeladeras.findById(dto.getHeladeraDestinoID());
+        DistribucionDeViandas nuevaDistribucion = DistribucionDeViandasMapper.crearDistribucionAPartirDe(dto,
+                                                                                                         heladeraOrigenElegida.get(),
+                                                                                                         heladeraDestinoElegida.get(),
+                                                                                                         colaborador);
+        return nuevaDistribucion;
     }
+
 }

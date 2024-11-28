@@ -1,41 +1,26 @@
 package DTOs;
 
-import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.heladera.Heladera;
-
 import java.util.List;
 
 public class DonacionDeViandaDTO {
-    Colaborador colaborador;
-    Heladera heladera;
-    List<ViandaDTO> viandasDTO;
+   private int heladeraID;
+   private List<ViandaDTO> viandasDTO;
 
-    public DonacionDeViandaDTO(Colaborador colaborador, Heladera heladera, List<ViandaDTO> viandas) {
-        this.colaborador = colaborador;
-        this.heladera = heladera;
-        this.viandasDTO = viandas;
+    // Constructor ----------------------------------------------------
+    public DonacionDeViandaDTO() {
     }
 
-    public Colaborador getColaborador() {
-        return colaborador;
+    // Getters y setters -----------------------------------------------------------------
+    public int getHeladeraID() {
+        return heladeraID;
     }
-
-    public void setColaborador(Colaborador colaborador) {
-        this.colaborador = colaborador;
-    }
-
-    public Heladera getHeladera() {
-        return heladera;
-    }
-
-    public void setHeladera(Heladera heladera) {
-        this.heladera = heladera;
+    public void setHeladeraID(int heladera) {
+        this.heladeraID = heladera;
     }
 
     public List<ViandaDTO> getViandasDTO() {
         return viandasDTO;
     }
-
     public void setViandasDTO(List<ViandaDTO> viandasDTO) {
         this.viandasDTO = viandasDTO;
     }

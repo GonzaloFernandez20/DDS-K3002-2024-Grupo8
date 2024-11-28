@@ -37,11 +37,6 @@ public class Vianda {
                   Heladera heladera,
                   @Nullable String calorias,
                   @Nullable String peso) {
-        if(tipoDeComida == null){throw new IllegalArgumentException("El tipo de comida es obligatorio");}
-        if(fechaDeCaducidad == null){throw new IllegalArgumentException("La fecha de caducidad es obligatoria");}
-        if(colaborador == null){throw new IllegalArgumentException("El colaborador es obligatorio");}
-        if(heladera == null){throw new IllegalArgumentException("La heladera es obligatoria");}
-
         this.tipoDeComida = tipoDeComida;
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.fechaDeDonacion = LocalDate.now();
@@ -50,6 +45,10 @@ public class Vianda {
         this.calorias = calorias;
         this.peso = peso;
         this.estado = EstadoVianda.NO_ENTREGADA;
+    }
+
+    public Vianda() {
+
     }
 
     public void trasladar(Heladera heladeraNueva) {

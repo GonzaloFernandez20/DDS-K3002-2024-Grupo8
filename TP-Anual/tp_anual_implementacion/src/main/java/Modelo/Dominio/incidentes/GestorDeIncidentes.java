@@ -5,7 +5,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.tecnico.LocalizadorDeTecnicos;
 import Modelo.Dominio.tecnico.Tecnico;
-import Modelo.Factorys.FactoryFallaTecnica;
+import Modelo.Mappers.FactoryFallaTecnica;
 import Repositorios.RepositorioIncidentes;
 
 public class GestorDeIncidentes {

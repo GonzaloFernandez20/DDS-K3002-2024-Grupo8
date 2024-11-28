@@ -6,36 +6,33 @@ import jakarta.persistence.*;
 
 import java.util.List;
 @Entity
-@Table(name = "ContribucionConApertura")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ContribucionConApertura extends Contribucion{
-    @OneToMany
-    @JoinColumn(name = "contribucion_con_apertura", referencedColumnName = "id_contribucion")
-    protected List<Vianda> viandas;
     @ManyToOne
     @JoinColumn(name = "heladera_destino", referencedColumnName = "id_heladera")
     protected Heladera heladeraDestino;
+
+    //Metodos --------------------------------------------------------
     @Override
     public void procesarLaContribucion() {
-        try{
-            for (Vianda vianda : viandas){
+
+            for (Vianda vianda : getViandas()){
                 heladeraDestino.recibirVianda(vianda);
                 vianda.setEstadoVianda(EstadoVianda.ENTREGADA);
             }
-        }
-        catch (ExcepcionHeladeraLlena e){
-            manejarViandasQueNoEntraron();
-        }
-        finally {
             heladeraDestino.movimientoDeViandasFinalizado();
             colaborador.registrarContribucion(this);
         }
-    }
 
-    public abstract void manejarViandasQueNoEntraron();
+    public int cantidadDeViandasInvolucradas(){
+        return getViandas().size();
+    };
 
-    // ---- Getters y Setters
-    public List<Vianda> getViandas() { return viandas; }
-    public Heladera getHeladeraDestino() { return heladeraDestino; }
+
+    // Getters y Setters ------------------------------------------------------------------------------
+    public Heladera getHeladeraDestino() {return heladeraDestino;}
+    public void setHeladeraDestino(Heladera heladeraDestino) {this.heladeraDestino = heladeraDestino;}
+
+    public abstract List<Vianda> getViandas();
 
 }

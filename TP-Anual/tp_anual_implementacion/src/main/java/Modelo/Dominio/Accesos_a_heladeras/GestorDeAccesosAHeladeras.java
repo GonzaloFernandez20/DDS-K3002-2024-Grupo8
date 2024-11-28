@@ -30,7 +30,7 @@ public class    GestorDeAccesosAHeladeras {
                                                                 .filter(unAcceso -> codigoDeTarjeta.equals(unAcceso.getCodigoTarjeta()))
                                                                 .findFirst();
         if (acceso.isPresent()){
-            return acceso.get().aperturaAutorizada(heladera); // Chequea si tiene un permiso hecho
+            return acceso.get().estaAutorizadaLaApertura(heladera); // Chequea si tiene un permiso hecho
         }else return false; // Si devuelve false es porque la tarjeta no esta registrada en el sistema, no autorizo que abra la heladera
     }
 

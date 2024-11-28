@@ -29,7 +29,14 @@ public class Vinculacion extends AccesoAHeladeras{
     private int cantUsosRestantesPorDia;
     @Column(name = "fecha_ultimo_uso")
     private LocalDate fechaUltimoUso;
+    @OneToMany
+    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
+    private List <Apertura> aperturasDeHeladera = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "consumidor_final", referencedColumnName = "id_acceso_a_heladeras")
+    private List <Vianda> viandasRetiradas = new ArrayList<>();
 
+    // Constructores -----------------------------------------------------------
     public Vinculacion(String codigoTarjeta,
                        PersonaSituacionVulnerable personaSituacionVulnerable,
                        Colaborador colaboradorQueRegistro) {
@@ -39,12 +46,14 @@ public class Vinculacion extends AccesoAHeladeras{
         reiniciarUsosPermitidos();
         this.fechaRegistro = LocalDate.now();
         this.fechaUltimoUso = LocalDate.now();
-        this.historicoDeAccesosHeladera = new ArrayList<>();
-        GestorDeAccesosAHeladeras.getInstancia().registrarTarjeta(this);
     }
 
+    public Vinculacion() {
+
+    }
+    // Metodos  -----------------------------------------------------------------------------------------------------
     @Override
-    public boolean aperturaAutorizada(Heladera heladera) {
+    public boolean estaAutorizadaLaApertura(Heladera heladera) {
         consultarUltimoAcceso();
         if(cantUsosRestantesPorDia > 0) {
             registrarAcceso(heladera);
@@ -53,10 +62,14 @@ public class Vinculacion extends AccesoAHeladeras{
     }
 
     private void registrarAcceso(Heladera heladera) {
-        List <Vianda> viandaRetirada = heladera.retirarViandas(1);
-        viandaRetirada.getFirst().setEstadoVianda(EstadoVianda.RETIRADA);
-        PermisoDeAperturaParaRetirar nuevoApertura = new PermisoDeAperturaParaRetirar(heladera, RETIRAR_VIANDA);
-        historicoDeAccesosHeladera.add(nuevoApertura);
+
+        // TODO revisar si conviene que este en otro lado el retirar la vianda y cambiarles el estado
+        Vianda viandaRetirada = heladera.retirarViandas(1).getFirst();
+        viandaRetirada.setEstadoVianda(EstadoVianda.RETIRADA);
+
+        viandasRetiradas.add(viandaRetirada);
+        Apertura nuevoApertura = new Apertura(heladera, RETIRAR_VIANDA);
+        aperturasDeHeladera.add(nuevoApertura);
         cantUsosRestantesPorDia--;
     }
 
@@ -73,45 +86,28 @@ public class Vinculacion extends AccesoAHeladeras{
         cantUsosRestantesPorDia = 4 + personaSituacionVulnerable.getCantMenores() * 2;
     }
 
-    // ----------> Getters y Setters
+    // Getters y Setters -----------------------------------------------------------------------------------------------------------------------------------------
+    public Persona getPersonaHumana() {return (PersonaHumana) colaboradorQueRegistro.getPersona();}
 
-    public LocalDate getFechaUltimoUso() {
-        return fechaUltimoUso;
-    }
+    public LocalDate getFechaUltimoUso() {return fechaUltimoUso;}
+    public void setFechaUltimoUso(LocalDate fechaUltimoUso) {this.fechaUltimoUso = fechaUltimoUso;}
 
-    public void setFechaUltimoUso(LocalDate fechaUltimoUso) {
-        this.fechaUltimoUso = fechaUltimoUso;
-    }
+    public int getCantUsosRestantesPorDia() {return cantUsosRestantesPorDia;}
+    public void setCantUsosRestantesPorDia(int cantUsosRestantesPorDia) {this.cantUsosRestantesPorDia = cantUsosRestantesPorDia;}
 
-    public int getCantUsosRestantesPorDia() {
-        return cantUsosRestantesPorDia;
-    }
+    public LocalDate getFechaRegistro() {return fechaRegistro;}
+    public void setFechaRegistro(LocalDate fechaRegistro) {this.fechaRegistro = fechaRegistro;}
 
-    public void setCantUsosRestantesPorDia(int cantUsosRestantesPorDia) {
-        this.cantUsosRestantesPorDia = cantUsosRestantesPorDia;
-    }
+    public Colaborador getColaboradorQueRegistro() {return colaboradorQueRegistro;}
+    public void setColaboradorQueRegistro(Colaborador colaboradorQueRegistro) {this.colaboradorQueRegistro = colaboradorQueRegistro;}
 
-    public LocalDate getFechaRegistro() {
-        return fechaRegistro;
-    }
+    public PersonaSituacionVulnerable getPersonaSituacionVulnerable() {return personaSituacionVulnerable;}
+    public void setPersonaSituacionVulnerable(PersonaSituacionVulnerable personaSituacionVulnerable) {this.personaSituacionVulnerable = personaSituacionVulnerable;}
 
-    public void setFechaRegistro(LocalDate fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
+    public List<Apertura> getAperturasDeHeladera() {return aperturasDeHeladera;}
+    public void setAperturasDeHeladera(List<Apertura> aperturasDeHeladera) {this.aperturasDeHeladera = aperturasDeHeladera;}
 
-    public Persona getPersonaHumana() {
-        return (PersonaHumana) colaboradorQueRegistro.getPersona();
-    }
+    public List<Vianda> getViandasRetiradas() {return viandasRetiradas;}
+    public void setViandasRetiradas(List<Vianda> viandasRetiradas) {this.viandasRetiradas = viandasRetiradas;}
 
-    public void setColaboradorQueRegistro(Colaborador colaboradorQueRegistro) {
-        this.colaboradorQueRegistro = colaboradorQueRegistro;
-    }
-
-    public PersonaSituacionVulnerable getPersonaSituacionVulnerable() {
-        return personaSituacionVulnerable;
-    }
-
-    public void setPersonaSituacionVulnerable(PersonaSituacionVulnerable personaSituacionVulnerable) {
-        this.personaSituacionVulnerable = personaSituacionVulnerable;
-    }
 }

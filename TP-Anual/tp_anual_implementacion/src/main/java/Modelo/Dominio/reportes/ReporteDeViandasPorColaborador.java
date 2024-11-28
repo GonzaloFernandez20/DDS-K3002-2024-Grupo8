@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import com.itextpdf.text.pdf.PdfPTable;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,7 @@ public class ReporteDeViandasPorColaborador extends ReporteSemanal{
         super(fechaDeCreacion);
     }
 
+
     public void sumarViandasPorColaborador(ViandasPorColaborador unaViandaPorColaborador){
         viandasPorColaborador.add(unaViandaPorColaborador);
     }
@@ -33,7 +35,7 @@ public class ReporteDeViandasPorColaborador extends ReporteSemanal{
     public void completarReporte(){
         List<Colaborador> colaboradoresConocidos = Sistema.getInstancia().getColaboradores();
         colaboradoresConocidos.forEach(colaborador -> {
-            Integer cantidadDeDonacionesDeViandas = colaborador.cantidadDeDonacionesDeViandaEntre(LocalDate.now().minusWeeks(1), LocalDate.now());
+            Integer cantidadDeDonacionesDeViandas = colaborador.cantidadDeDonacionesDeViandaEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now());
             ViandasPorColaborador viandasPorColaborador = new ViandasPorColaborador(colaborador, cantidadDeDonacionesDeViandas);
             sumarViandasPorColaborador(viandasPorColaborador);
         });

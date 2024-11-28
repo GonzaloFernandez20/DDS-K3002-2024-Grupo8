@@ -58,26 +58,26 @@
                     <form id="form-donar-heladera" action="/DonarViandas" method="post">
 
                         <div class="input-group">
-                            <label for="tipoDeVianda">Tipo de vianda (*)</label>
+                            <label for="tipoDeVianda">Tipo de comida (*)</label>
                             <input type="text" id="tipoDeVianda" name="tipoDeVianda" placeholder="Ingrese el tipo de vianda" required>
                         </div>
             
                         <div class="input-group">
-                            <label for="fechaCaducidad">Fecha de Caducidad (*)</label>
+                            <label for="fechaCaducidad">Fecha de caducidad (*)</label>
                             <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
                             <div class="error-message" id="fechaCaducidadError"></div>
                         </div>
 
                         <div class="input-group">
-                            <label for="fechaDonacion">Fecha de Donación (*)</label>
+                            <label for="fechaDonacion">Fecha de donación (*)</label>
                             <input type="date" id="fechaDonacion" name="fechaDonacion" required>
                             <div class="error-message" id="fechaDonacionError"></div>
                         </div>
 
                         <div class="input-group">
-                            <label for="heladera">Donar en la Heladera (*)</label>
+                            <label for="heladera">Heladera destino (*)</label>
                             <select id="heladera" name="heladera" required>
-                                <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
+                                <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + '( ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad} + ')' +"></option>
                             </select>
                             
                             <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
@@ -100,7 +100,7 @@
                             </select>
                         </div>
 
-                        <button type="submit">Realizar Donacion</button>
+                        <button type="submit"> Confirmar </button>
                         <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
                             <p th:text="${mensaje}"></p>
                         </div>

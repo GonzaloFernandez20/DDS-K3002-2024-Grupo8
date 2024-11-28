@@ -14,22 +14,14 @@ public abstract class AccesoAHeladeras {
     private Integer id_acceso_a_heladeras;
     @Column(name = "codigo_tarjeta")
     protected String codigoTarjeta;
-    @OneToMany
-    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
-    protected List <PermisoDeApertura> historicoDeAccesosHeladera = null;
 
-    public abstract boolean aperturaAutorizada(Heladera heladera);
-    public String getCodigoTarjeta(){ return codigoTarjeta; }
+    //Métodos ---------------------------------------------------------------------------------
+    public abstract boolean estaAutorizadaLaApertura(Heladera heladera);
 
-    public void setCodigoTarjeta(String codigoTarjeta) {
-        this.codigoTarjeta = codigoTarjeta;
-    }
-    public void addPermisoDeApertura(PermisoDeApertura permisoDeApertura) {
-        this.historicoDeAccesosHeladera.add(permisoDeApertura);
-    }
-    public void removePermisoDeApertura(PermisoDeApertura permisoDeApertura) {
-            this.historicoDeAccesosHeladera.remove(permisoDeApertura);
-    }
 
+    //Getters y Setters ----------------------------------------------------------------------
     public abstract Persona getPersonaHumana();
+
+    public String getCodigoTarjeta(){ return codigoTarjeta; }
+    public void setCodigoTarjeta(String codigoTarjeta) {this.codigoTarjeta = codigoTarjeta;}
 }

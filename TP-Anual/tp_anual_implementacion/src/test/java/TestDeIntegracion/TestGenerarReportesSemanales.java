@@ -2,9 +2,8 @@ package TestDeIntegracion;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
-import Modelo.Dominio.Accesos_a_heladeras.PermisoDeAperturaParaColaborar;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.DonacionDeVianda;
+import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
@@ -22,7 +21,6 @@ import Modelo.Dominio.persona.TipoOrganizacion;
 import Modelo.Dominio.reportes.GestorDeReportes;
 import Modelo.Dominio.reportes.*;
 import Modelo.Dominio.sistema.Sistema;
-import Repositorios.RepositorioAperturas;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 
@@ -109,12 +107,12 @@ public class TestGenerarReportesSemanales {
         heladera.setIdHeladera(8888);
 
         Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaboradorHumano, heladera, null, null);
-        DonacionDeVianda contribucionDeVianda = new DonacionDeVianda(colaboradorHumano, heladera, List.of(vianda), LocalDate.now());
+        DonacionDeViandas contribucionDeVianda = new DonacionDeViandas(colaboradorHumano, heladera, List.of(vianda), LocalDate.now());
 
         // Solicita abrir la heladera
         GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
         // Abre la heladera porque está autorizado
-        accesoDeColaborador.aperturaAutorizada(heladera);
+        accesoDeColaborador.estaAutorizadaLaApertura(heladera);
 
         GestorDeReportes.getInstancia().generarReportesSemanales();
 

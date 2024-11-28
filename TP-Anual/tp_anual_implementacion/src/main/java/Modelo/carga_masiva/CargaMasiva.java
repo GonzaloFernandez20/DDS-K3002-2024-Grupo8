@@ -1,9 +1,9 @@
 package Modelo.carga_masiva;
 
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.DistribucionDeVianda;
+import Modelo.Dominio.contribucion.DistribucionDeViandas;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
-import Modelo.Dominio.contribucion.DonacionDeVianda;
+import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.contribucion.RegistroDePersonasEnSituacionVulnerable;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
@@ -94,11 +94,11 @@ public class CargaMasiva {
                 colaborador.registrarContribucion(contribucionDinero);
                 break;
             case "DONACION_VIANDAS":
-                DonacionDeVianda contribucionDonarVianda = new DonacionDeVianda(colaborador, null, null, fechaContribucion);
+                DonacionDeViandas contribucionDonarVianda = new DonacionDeViandas(colaborador, null, null, fechaContribucion);
                 colaborador.registrarContribucion(contribucionDonarVianda);
                 break;
             case "REDISTRIBUCION_VIANDAS":
-                DistribucionDeVianda contribucionDistribuirVianda = new DistribucionDeVianda(colaborador, null, null, null, null, fechaContribucion);
+                DistribucionDeViandas contribucionDistribuirVianda = new DistribucionDeViandas(colaborador, null, null, null, null, fechaContribucion);
                 colaborador.registrarContribucion(contribucionDistribuirVianda);
                 break;
             case "ENTREGA_TARJETAS":

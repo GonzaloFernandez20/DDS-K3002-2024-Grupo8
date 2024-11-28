@@ -1,4 +1,4 @@
-package Modelo.Factorys;
+package Modelo.Mappers;
 
 import DTOs.ColaboradorHumanoDTO;
 import Modelo.Dominio.colaborador.Colaborador;

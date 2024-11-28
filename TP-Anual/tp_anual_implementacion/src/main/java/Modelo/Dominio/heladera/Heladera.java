@@ -41,21 +41,13 @@ public class Heladera {
     @JoinColumn(name = "notificador_de_suscriptos", referencedColumnName = "id_notificador_de_suscriptos")
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
-    // BROKER ------------------------------------------
-    private static String BROKER_ADDRESS = "localhost"; // Dirección del broker
-    private static int BROKER_PORT = 12345; // Puerto del broker
-    // ------------------------------------------------
-
+    //Constructores ------------------------------------------------------
     public Heladera(Colaborador colaboradorACargo,
                     Ubicacion ubicacion,
                     Integer capacidadDeViandas,
                     Modelo modelo,
                     LocalDate puestaEnFuncionamiento) {
-/*
-        if(colaboradorACargo == null ){throw new IllegalArgumentException("La heladera requiere de un colaborador a cargo");}
-*/        if(ubicacion == null ){throw new IllegalArgumentException("La ubicacion es obligatoria");}
-        if(capacidadDeViandas == null){throw new IllegalArgumentException("La capacidad de la heladera es obligatoria");}
-        if(modelo == null){throw new IllegalArgumentException("El modelo es obligatorio");}
+
         this.colaboradorACargo = colaboradorACargo;
         this.ubicacion = ubicacion;
         this.capacidadDeViandas = capacidadDeViandas;
@@ -66,7 +58,15 @@ public class Heladera {
         notificadorDeSuscriptos = new NotificadorDeSuscriptos(this);
     }
 
-    // ------------------------------------------------
+    public Heladera() {
+
+    }
+
+    // Metodos --------------------------------------------------------------------------------
+    public int capacidadRestante(){
+        return capacidadDeViandas - viandasEnStock.size();
+    }
+
     public void recibirVianda(Vianda vianda){
        if(espacioDisponible()>0){
             this.viandasEnStock.add(vianda);

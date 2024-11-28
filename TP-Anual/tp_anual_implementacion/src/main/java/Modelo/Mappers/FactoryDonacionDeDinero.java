@@ -1,4 +1,4 @@
-package Modelo.Factorys;
+package Modelo.Mappers;
 
 import DTOs.DonacionDeDineroDTO;
 import Modelo.Dominio.contribucion.DonacionDeDinero;

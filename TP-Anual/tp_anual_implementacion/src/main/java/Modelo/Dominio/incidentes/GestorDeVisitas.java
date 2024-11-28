@@ -2,7 +2,7 @@ package Modelo.Dominio.incidentes;
 
 import DTOs.VisitaTecnicaDTO;
 import Modelo.Dominio.heladera.EstadoHeladera;
-import Modelo.Factorys.FactoryVisitaTecnica;
+import Modelo.Mappers.FactoryVisitaTecnica;
 
 public class GestorDeVisitas {
     public static void registrarVisita(VisitaTecnicaDTO visitaTecnicaDTO){
