@@ -1,4 +1,4 @@
-package Modelo.Dominio.Repositories;
+package Modelo.Dominio.Repositories.heladera;
 
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;

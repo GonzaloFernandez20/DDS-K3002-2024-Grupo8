@@ -2,10 +2,7 @@ package Modelo.Dominio.persona;
 
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -17,7 +14,7 @@ public class PersonaHumana extends Persona {
     private String apellido;
     @Column(name = "fecha_de_nacimiento")
     private LocalDate fechaDeNacimiento;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "documento", referencedColumnName = "id_documento")
     private Documento documento;
 

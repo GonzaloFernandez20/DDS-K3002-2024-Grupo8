@@ -1,4 +1,4 @@
-package Modelo.Dominio.Repositories;
+package Modelo.Dominio.Repositories.medios_de_contacto;
 
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;

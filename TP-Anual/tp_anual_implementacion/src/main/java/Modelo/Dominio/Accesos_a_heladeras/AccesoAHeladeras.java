@@ -14,7 +14,7 @@ public abstract class AccesoAHeladeras {
     private Integer id_acceso_a_heladeras;
     @Column(name = "codigo_tarjeta")
     protected String codigoTarjeta;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
     protected List <PermisoDeApertura> historicoDeAccesosHeladera = null;
 

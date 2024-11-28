@@ -1,6 +1,17 @@
 package Modelo;
 
-import Modelo.Dominio.Repositories.*;
+
+import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Modelo.Dominio.Repositories.contribucion.DonacionDeDineroRepository;
+import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
+import Modelo.Dominio.Repositories.documentacion.DocumentoRepository;
+import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Modelo.Dominio.Repositories.heladera.ModeloRepository;
+import Modelo.Dominio.Repositories.localizacion.DireccionRepository;
+import Modelo.Dominio.Repositories.localizacion.PuntoEnElMapaRepository;
+import Modelo.Dominio.Repositories.localizacion.UbicacionRepository;
+import Modelo.Dominio.Repositories.medios_de_contacto.MedioDeContactoRepository;
+import Modelo.Dominio.Repositories.persona.PersonaJuridicaRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
 import Modelo.Dominio.contribucion.Frecuencia;
@@ -56,29 +67,31 @@ public class AppModelo {
             heladeraRepository.save(heladera);
 
             Colaborador colaboradorJuridico = new Colaborador();
-            colaboradorRepository.save(colaboradorJuridico);
+//            colaboradorRepository.save(colaboradorJuridico);
 
             PersonaJuridica personaJuridica = new PersonaJuridica();
-            personaJuridicaRepository.save(personaJuridica);
+            personaJuridica.setRubro("Limpieza");
+            personaJuridica.setRazonSocial("1234567890");
+            personaJuridica.setTipoDeOrganizacion(TipoOrganizacion.ONG);
 
             DonacionDeDinero donacionDeDinero = new DonacionDeDinero();
             donacionDeDinero.setFechaDeContribucion(LocalDate.now());
             donacionDeDinero.setMonto(10000);
             donacionDeDinero.setFrecuencia(Frecuencia.UNICAMENTE);
             donacionDeDinero.setColaborador(colaboradorJuridico);
-            donacionDeDineroRepository.save(donacionDeDinero);
 
             HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera();
             hacerseCargoDeHeladera.setColaborador(colaboradorJuridico);
             hacerseCargoDeHeladera.setHeladeraACargo(heladera);
-            hacerseCargoDeHeladeraRepository.save(hacerseCargoDeHeladera);
+
+            colaboradorJuridico.registrarContribucion(donacionDeDinero);
+            colaboradorJuridico.registrarContribucion(hacerseCargoDeHeladera);
+            colaboradorJuridico.setPersona(personaJuridica);
+            colaboradorRepository.save(colaboradorJuridico);
 
             heladera.setColaboradorACargo(colaboradorJuridico);
             heladeraRepository.save(heladera);
 
-            colaboradorJuridico.registrarContribucion(donacionDeDinero);
-            colaboradorJuridico.setPersona(personaJuridica);
-            colaboradorRepository.save(colaboradorJuridico);
 //Ir a buscar las clases a la BD e imprimirlas
 /*
             List<Ubicacion> ubicaciones = ubicacionRepository.findAll();

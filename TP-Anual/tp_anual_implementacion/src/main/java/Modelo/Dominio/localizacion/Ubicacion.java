@@ -8,10 +8,10 @@ public class Ubicacion {
     @Id
     @GeneratedValue
     private Integer id_ubicacion;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_punto_en_el_mapa", referencedColumnName = "id_punto_en_el_mapa")
     private PuntoEnElMapa punto;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion")
     private Direccion direccion;
     @Column(name = "ciudad")

@@ -1,4 +1,4 @@
-package Modelo.Dominio.Repositories;
+package Modelo.Dominio.Repositories.colaborador;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.localizacion.Direccion;

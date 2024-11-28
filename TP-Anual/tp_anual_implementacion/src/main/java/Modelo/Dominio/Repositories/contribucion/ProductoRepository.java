@@ -1,4 +1,4 @@
-package Modelo.Dominio.Repositories;
+package Modelo.Dominio.Repositories.contribucion;
 
 import Modelo.Dominio.contribucion.Producto;
 import Modelo.Dominio.localizacion.Direccion;
