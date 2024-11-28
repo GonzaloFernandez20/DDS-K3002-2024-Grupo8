@@ -39,8 +39,12 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         tipoColaborador.classList.remove('error');
     }
 
+    // --------------- CHEQUEO DE ERRORES
+
+    if (hasError) { return; }
+
     // --------------- VERIFICACION CON EL BACK
-    const datosDeUsuario = {
+/*    const datosDeUsuario = {
         nombreDeUsuario: usuario.value,
         contrasenia: contrasena.value
     };
@@ -69,7 +73,7 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         .catch(error => {
             console.error('Error:', error);
             alert(error.message);
-        });
+        });*/
 
     // Función para desplegar el formulario correspondiente según el tipo de colaborador
     function desplegarFormulario(tipo) {

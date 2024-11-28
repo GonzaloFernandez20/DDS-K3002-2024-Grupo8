@@ -1,4 +1,4 @@
-package Controladores;
+package Controladores.Sesiones;
 
 import DTOs.ColaboradorHumanoDTO;
 import DTOs.ColaboradorJuridicoDTO;
@@ -33,7 +33,7 @@ public class CtrlRegistroDePersona {
 
     // ------------------------------------
 
-    @GetMapping("/Registro")
+    @GetMapping("/RegistroPersona")
     public String registro (){ return "RegistroPersona"; }
 
     // ------------------------------------

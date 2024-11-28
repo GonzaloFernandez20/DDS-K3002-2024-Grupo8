@@ -1,94 +1,90 @@
-document.getElementById('registrationForm').addEventListener('submit', function(event) {
+document.getElementById('registrationForm').addEventListener('submit', async function (event) {
     event.preventDefault();
-
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const usernameError = document.getElementById('usernameError');
-    const passwordError = document.getElementById('passwordError');
+    console.log('Formulario enviado');
 
     const usuario = document.getElementById('usuario');
     const contrasena = document.getElementById('contrasena');
     const usuarioError = document.getElementById('usuarioError');
     const contrasenaError = document.getElementById('contrasenaError');
 
+    console.log('Usuario:', usuario.value);
+    console.log('Contraseña:', contrasena.value)
+
     // Reset de mensajes de error y clases
-    usernameError.textContent = '';
-    passwordError.textContent = '';
-    usuarioError.textContent = '';
-    contrasenaError.textContent = '';
-    
-    document.getElementById('username').classList.remove('error');
-    document.getElementById('password').classList.remove('error');
-    usuario.classList.remove('error');
-    contrasena.classList.remove('error');
+    resetearErrores([usuario, contrasena], [usuarioError, contrasenaError]);
 
-    let isValid = true;
-    let hasError = false;
-
-    // Validación para el formulario de registro
-
-    if (username === '') {
-        usernameError.textContent = 'Por favor, ingrese un nombre de usuario.';
-        document.getElementById('username').classList.add('error');
-        isValid = false;
-    }
-
-    if (password === '') {
-        passwordError.textContent = 'Por favor, ingrese una contraseña.';
-        document.getElementById('password').classList.add('error');
-        isValid = false;
-    }
-
-    // ---------------
-
-    if (password === '1234' || password.toLowerCase() === 'admin') {
-        passwordError.textContent = 'La contraseña no puede ser "1234" o "admin".';
-        document.getElementById('password').classList.add('error');
-        isValid = false;
-    }
-
-    if (username.toLowerCase() === 'admin') {
-        usernameError.textContent = 'El nombre de usuario "admin" no está permitido.';
-        document.getElementById('username').classList.add('error');
-        isValid = false;
-    }
-
+    let huboError = false;
 
     // Validación para el formulario de inicio de sesión
-    if (!usuario.value) {
-        usuarioError.innerText = 'El usuario es requerido';
-        usuario.classList.add('error');
-        hasError = true;
-    } 
-
-    if (!contrasena.value) {
-        contrasenaError.innerText = 'La contraseña es requerida';
-        contrasena.classList.add('error');
-        hasError = true;
-    } 
+    huboError |= validateField(usuario, usuarioError, 'El usuario es requerido');
+    huboError |= validateField(contrasena, contrasenaError, 'La contraseña es requerida');
 
     // Resultado después de validación de registro e inicio de sesión
-    if (!hasError && isValid) {
-        if (usuario.value === "admin" && contrasena.value === "admin") {
-            location.href = "Administrador.html";
-        } else if (usuario.value && contrasena.value) {
-            location.href = "Home.html";
-        } else {
-            alert('Registro exitoso!');
+    if (!huboError) {
+        await verificarUsuario(usuario.value, contrasena.value);
+    }
+
+
+    // -----------------------------------------------------------------------------------------------
+    // Verificamos el usuario en el Back
+    async function verificarUsuario(usuario, contrasena) {
+        const datosDeUsuario = {
+            nombreDeUsuario: usuario,
+            contrasenia: contrasena
+        };
+
+        try {
+            const respuesta = await fetch('/InicioDeSesion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(datosDeUsuario),
+            });
+            // const tokenGenerado = await respuesta.text();
+            if (!respuesta.ok) {
+                throw new Error("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
+            }
+            alert("Usuario y contraseña validados exitosamente.");
+            // localStorage.setItem('authToken', tokenGenerado);
+            window.location.href = "/Home";
+        } catch (error) {
+            console.error('Error:', error);
+            alert(error.message);
         }
     }
+
+    // Función para resetear los errores
+    function resetearErrores(inputs, errorElements) {
+        inputs.forEach(input => input.classList.remove('error'));
+        errorElements.forEach(errorElement => errorElement.textContent = '');
+    }
+
+    // Función para validar un campo
+    function validateField(input, errorElement, errorMessage) {
+        if (!input.value) {
+            errorElement.innerText = errorMessage;
+            input.classList.add('error');
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*    if (isValid) {
+            if (usuario.value === "admin" && contrasena.value === "admin") {
+                location.href = "Administrador.html";
+            } else if (usuario.value && contrasena.value) {
+
+                location.href = "Home.html";
+            } else {
+                alert('Registro exitoso!');
+            }
+        }*/
 });
+
 
 // Manejo de eventos "input" para eliminar errores de los campos
-document.getElementById('username').addEventListener('input', function() {
-    document.getElementById('usernameError').textContent = '';
-    this.classList.remove('error');
-});
-
-document.getElementById('password').addEventListener('input', function() {
-    document.getElementById('passwordError').textContent = '';
-    this.classList.remove('error');
-});
 
 document.getElementById('usuario').addEventListener('input', function() {
     document.getElementById('usuarioError').textContent = '';
@@ -99,3 +95,4 @@ document.getElementById('contrasena').addEventListener('input', function() {
     document.getElementById('contrasenaError').textContent = '';
     this.classList.remove('error');
 });
+
