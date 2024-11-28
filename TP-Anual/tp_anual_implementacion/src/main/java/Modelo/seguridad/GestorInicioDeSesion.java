@@ -15,15 +15,12 @@ public class GestorInicioDeSesion {
         this.usuariosRepository = usuariosRepository;
     }
 
-    public int buscarUsuarioEnBD(String usuario, String contrasenia) throws RuntimeException {
-
+    public boolean existeUsuarioEnBD(String usuario, String contrasenia) throws RuntimeException {
         Usuario usuarioObtenido = usuariosRepository.buscarUsuario(usuario, contrasenia);
-
-        if (usuarioObtenido == null) {
+        return usuarioObtenido != null;
+/*      if (usuarioObtenido == null) {
             throw new RuntimeException("No existe ese usuario "+usuario+" "+contrasenia);
-        }
-
-        return usuarioObtenido.getId_usuario();
+        }*/
     }
 
 }

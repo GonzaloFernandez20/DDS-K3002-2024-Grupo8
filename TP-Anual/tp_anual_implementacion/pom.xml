@@ -23,11 +23,7 @@
 			<artifactId>quartz</artifactId>
 			<version>2.3.0</version>
 		</dependency>-->
-        <dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>1.6.2</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
@@ -48,7 +44,9 @@
 			<version>5.8.1</version>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- DEPENDENCIAS DE SPRING-BOOT -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -83,6 +81,26 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- Spring Security -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
@@ -90,12 +108,12 @@
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>retrofit</artifactId>
-			<version>2.9.0</version> <!-- Usa la versión más reciente disponible -->
+			<version>2.9.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>converter-gson</artifactId>
-			<version>2.9.0</version> <!-- Usa la versión más reciente disponible -->
+			<version>2.9.0</version>
 		</dependency>
 
 		<dependency>
@@ -122,17 +140,14 @@
 			<version>5.5.13.3</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+		<!-- BASE DE DATOS -->
 
 		<!-- SQL SERVER
-                <dependency>
-                    <groupId>com.microsoft.sqlserver</groupId>
-                    <artifactId>mssql-jdbc</artifactId>
-					<version>12.2.0.jre11</version>
-                </dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>12.2.0.jre11</version>
+		</dependency>
         -->
 		<!-- MY SQL-->
 		<dependency>
@@ -141,7 +156,44 @@
 			<version>8.0.28</version>
 		</dependency>
 
-</dependencies>
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<!-- JWT (Sesion de un usuario) -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
