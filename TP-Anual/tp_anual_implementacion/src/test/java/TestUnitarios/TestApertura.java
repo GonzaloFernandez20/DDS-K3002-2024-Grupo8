@@ -21,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,6 @@ public class TestApertura {
 
     @Test
     void ValidarQueEstaEnFechaSiEsUnaAperturaDeHoy() {
-        assertTrue(apertura.aperturaParaEntregaDeDonacionEntre(LocalDate.now().minusWeeks(1), LocalDate.now()));
+        assertTrue(apertura.aperturaParaEntregaDeDonacionEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
     }
 }
