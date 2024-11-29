@@ -1,27 +1,34 @@
 package Modelo.seguridad;
 
+import Modelo.Dominio.Repositories.ColaboradorRepository;
 import Modelo.Dominio.Repositories.UsuariosRepository;
 import Modelo.Dominio.Usuario;
-import org.springframework.beans.factory.annotation.Autowired;
+import Modelo.Dominio.colaborador.Colaborador;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@RequiredArgsConstructor
 public class GestorInicioDeSesion {
 
     private final UsuariosRepository usuariosRepository;
+    private final ColaboradorRepository colaboradorRepository;
 
-    @Autowired
-    public GestorInicioDeSesion(UsuariosRepository usuariosRepository) {
-        this.usuariosRepository = usuariosRepository;
+    public Optional<Usuario> obtenerUsuarioEnBD(String usuario, String contrasenia) {
+        return usuariosRepository.buscarUsuario(usuario, contrasenia);
     }
 
-    public boolean existeUsuarioEnBD(String usuario, String contrasenia) throws RuntimeException {
-        Usuario usuarioObtenido = usuariosRepository.buscarUsuario(usuario, contrasenia);
-        return usuarioObtenido != null;
-/*      if (usuarioObtenido == null) {
-            throw new RuntimeException("No existe ese usuario "+usuario+" "+contrasenia);
-        }*/
+    public Colaborador obtenerColaboradorPorID(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            String idUsuario = authentication.getName();
+            return colaboradorRepository.obtenerColaboradorSegunID(idUsuario);
+        }
+        return null;
     }
 
 }
-

@@ -15,11 +15,11 @@ public class UtilsJWT {
     // Establecemos la validez de nuestro token por un lapso de 1 hora (milisegundos)
     private static final long tiempoDeExpiracion = 3600000;
 
-    public static String generarToken(String nombreDeUsuario){
+    public static String generarToken(String id_colaborador){
         Date fechaActual = new Date();
         Date fechaDeExpiracion = new Date(fechaActual.getTime() + tiempoDeExpiracion);
         String token = Jwts.builder()
-                .setSubject(nombreDeUsuario)
+                .setSubject(id_colaborador)
                 .setIssuedAt(fechaActual)
                 .setExpiration(fechaDeExpiracion)
                 .signWith(key)
@@ -40,7 +40,7 @@ public class UtilsJWT {
         }
     }
 
-    public static String obtenerSujetoDelToken(String token) {
+    public static String obtenerSujetoDelToken(String token) { // Este obtiene el id_colaborador en el token
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
@@ -48,6 +48,4 @@ public class UtilsJWT {
                 .getBody();
         return claims.getSubject();
     }
-
-
 }

@@ -4,7 +4,6 @@ import Modelo.Dominio.Usuario;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
 import Modelo.seguridad.SesionActiva.UtilsJWT;
-import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,8 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/InicioDeSesion")
@@ -31,9 +32,10 @@ public class CtrlInicioDeSesion {
 
     @PostMapping
     public ResponseEntity<Void> iniciarSesion(@RequestBody Usuario usuario) {
+        Optional<Usuario> usuarioObtenido = gestorInicioDeSesion.obtenerUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia());
 
-        if (gestorInicioDeSesion.existeUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia())){
-            String token = UtilsJWT.generarToken(usuario.getUsuario());
+        if (usuarioObtenido.isPresent()){
+            String token = UtilsJWT.generarToken(usuarioObtenido.get().getId_colaborador().toString());
             ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
             return ResponseEntity
                     .ok()
@@ -48,13 +50,13 @@ public class CtrlInicioDeSesion {
     @PostMapping
     public ResponseEntity<String> iniciarSesion(@RequestBody Usuario usuario) {
 
-        if (gestorInicioDeSesion.existeUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia())){
+        if (gestorInicioDeSesion.obtenerUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia())){
             String token = UtilsJWT.generarToken(usuario.getUsuario());
             // ResponseEntity.ok("Usuario y contraseña validados exitosamente.");
             return ResponseEntity.ok(token);
         }else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
         try {
-            gestorInicioDeSesion.existeUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia());
+            gestorInicioDeSesion.obtenerUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia());
             return ResponseEntity.ok("Usuario y contraseña validados exitosamente.");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario y contrasenia incorrectos. Vuelva a intentarlo");

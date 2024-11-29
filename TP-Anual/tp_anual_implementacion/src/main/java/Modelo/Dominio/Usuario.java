@@ -1,5 +1,6 @@
 package Modelo.Dominio;
 
+import Modelo.Dominio.colaborador.Colaborador;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -9,12 +10,15 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_usuario;
-    @Column(name = "contraseña")
+    @Column(name = "contrasenia")
     String contrasenia;
 
     @JsonProperty("nombreDeUsuario")
     @Column(name = "usuario")
     String usuario;
+
+    @Column(name = "id_colaborador")
+    Integer id_colaborador;
 
 
     public String getContrasenia() {
@@ -38,4 +42,8 @@ public class Usuario {
     }
 
     public Usuario() {}
+
+    public Integer getId_colaborador() { return id_colaborador; }
+
+    public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
 }
