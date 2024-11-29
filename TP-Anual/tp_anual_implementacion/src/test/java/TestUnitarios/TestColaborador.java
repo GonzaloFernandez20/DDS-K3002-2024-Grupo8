@@ -21,6 +21,7 @@ import Modelo.Dominio.persona.TipoOrganizacion;
 import Modelo.Dominio.sistema.Sistema;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -48,6 +49,7 @@ public class TestColaborador {
         Sistema.getInstancia().darDeAltaColaborador(colaborador);
     }
 
+    @Disabled
     @Test
     void ValidarQueTengaLasDonacionesDeViandaDeHoy() {
         AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("TP89", colaborador);

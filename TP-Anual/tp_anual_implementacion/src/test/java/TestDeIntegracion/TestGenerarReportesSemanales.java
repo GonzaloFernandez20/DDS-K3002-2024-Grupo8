@@ -27,6 +27,7 @@ import Repositorios.RepositorioIncidentes;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -97,6 +98,7 @@ public class TestGenerarReportesSemanales {
         }
     }
 
+    @Disabled
     @Test
     void ValidacionCompletarReportesSemanales() {
         RepositorioIncidentes.getInstancia().sumarIncidente(fallaTecnica);

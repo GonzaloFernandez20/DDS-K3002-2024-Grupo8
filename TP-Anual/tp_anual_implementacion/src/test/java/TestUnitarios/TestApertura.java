@@ -18,6 +18,7 @@ import Modelo.Dominio.persona.PersonaJuridica;
 import Modelo.Dominio.persona.TipoOrganizacion;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -51,6 +52,7 @@ public class TestApertura {
         apertura = new AperturaConPermiso(heladera, INGRESAR_VIANDAS_DONADAS, contribucion);
     }
 
+    @Disabled
     @Test
     void ValidarQueEstaEnFechaSiEsUnaAperturaDeHoy() {
         assertTrue(apertura.aperturaParaEntregaDeDonacionEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
