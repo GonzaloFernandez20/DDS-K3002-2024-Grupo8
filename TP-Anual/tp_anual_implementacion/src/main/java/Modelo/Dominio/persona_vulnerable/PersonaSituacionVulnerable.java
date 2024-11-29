@@ -14,9 +14,9 @@ public class PersonaSituacionVulnerable {
     private EstadoDeVivienda estadoDeVivienda;
     @Column(name = "cantidad_de_menores")
     private int cantMenores;
-    @OneToOne(mappedBy = "personaSituacionVulnerable")
+    @OneToOne(mappedBy = "personaSituacionVulnerable", cascade = CascadeType.PERSIST)
     private Vinculacion vinculacion;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "persona", referencedColumnName = "id_persona")
     private PersonaHumana persona;
 

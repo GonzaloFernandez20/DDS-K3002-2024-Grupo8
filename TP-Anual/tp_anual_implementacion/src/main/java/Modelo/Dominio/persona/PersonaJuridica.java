@@ -25,8 +25,30 @@ public class PersonaJuridica extends Persona {
         this.rubro = rubro;
         this.direccion = direccion;
     }
-    public PersonaJuridica() {}
+    public PersonaJuridica(){}
 
+    public String getRazonSocial() {
+        return razonSocial;
+    }
 
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public TipoOrganizacion getTipoDeOrganizacion() {
+        return tipoDeOrganizacion;
+    }
+
+    public void setTipoDeOrganizacion(TipoOrganizacion tipoDeOrganizacion) {
+        this.tipoDeOrganizacion = tipoDeOrganizacion;
+    }
+
+    public String getRubro() {
+        return rubro;
+    }
+
+    public void setRubro(String rubro) {
+        this.rubro = rubro;
+    }
 }
 

@@ -28,12 +28,15 @@ import java.time.LocalDate;
 public class HacerseCargoDeHeladera extends Contribucion{
     @OneToOne
     @JoinColumn(name = "heladera_a_cargo", referencedColumnName = "id_heladera")
-    private final Heladera heladeraACargo;
+    private Heladera heladeraACargo;
 
     public HacerseCargoDeHeladera(Colaborador colaborador, Heladera heladeraACargo) {
         this.colaborador = colaborador;
         this.fechaDeContribucion = LocalDate.now();
         this.heladeraACargo = heladeraACargo;
+    }
+
+    public HacerseCargoDeHeladera() {
     }
 
     @Override
@@ -55,6 +58,14 @@ public class HacerseCargoDeHeladera extends Contribucion{
 	//double latitud = 37.7749;
 	//double longitud = -122.4194;
 	//int radio = 5000;
+
+    public Heladera getHeladeraACargo() {
+        return heladeraACargo;
+    }
+
+    public void setHeladeraACargo(Heladera heladeraACargo) {
+        this.heladeraACargo = heladeraACargo;
+    }
 
     public void consultarRecomendaciones(double latitud, double longitud, int radio) throws IOException{
         ResponseRecomendacion puntos = APIRequester.getInstancia().obtenerPuntosRecomendados(latitud, longitud, radio);

@@ -19,17 +19,17 @@ public class Colaborador {
     @Id
     @GeneratedValue
     private Integer id_colaborador;
-    @OneToOne
-    @JoinColumn(name = "persona", referencedColumnName = "id_persona")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "persona" ,referencedColumnName = "id_persona")
     private Persona persona;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
     private List<String> mensajesRecibidos;
-    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Contribucion> historialDeContribuciones;
-    @OneToOne(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "colaborador", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
     private double puntosAcumulados;
@@ -47,6 +47,8 @@ public class Colaborador {
     }
 
     public Colaborador() {
+        this.historialDeContribuciones = new ArrayList<>();
+        this.mensajesRecibidos = new ArrayList<>();
     }
 
     public void registrarContribucion(Contribucion contribucion){
@@ -98,6 +100,10 @@ public class Colaborador {
         else tarjeta.setColaborador(this);
         this.tarjeta = tarjeta;
     }revisar al final de mappear*/
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
 
     public Direccion getDireccion() { return persona.getDireccion(); }
     public double getPuntosAcumulados() { return puntosAcumulados; }

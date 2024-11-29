@@ -1,4 +1,4 @@
-package Modelo.Dominio.Repositories;
+package Modelo.Dominio.Repositories.colaborador;
 
 import Modelo.Dominio.Usuario;
 import Modelo.Dominio.colaborador.Colaborador;

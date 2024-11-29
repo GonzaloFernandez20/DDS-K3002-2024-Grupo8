@@ -20,24 +20,24 @@ public class Heladera {
     //POR QUÉ ESTÁ ESTE ATRIBUTO???
     @Column(name = "id_heladera_trucho")
     private int idHeladera;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador_a_cargo", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorACargo;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ubicacion", referencedColumnName = "id_ubicacion")
     private Ubicacion ubicacion;
     @Column(name = "cantidad_de_viandas")
     private int capacidadDeViandas;
     @Column(name = "fecha_de_puesta_en_funcionamiento")
     private LocalDate puestaEnFuncionamiento;
-    @OneToMany(mappedBy = "heladera")
+    @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST)
     private List<Vianda> viandasEnStock;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "modelo", referencedColumnName = "id_modelo")
     private Modelo modelo;
     @Enumerated(EnumType.STRING)
     private EstadoHeladera estado;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "notificador_de_suscriptos", referencedColumnName = "id_notificador_de_suscriptos")
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
@@ -59,7 +59,7 @@ public class Heladera {
     }
 
     public Heladera() {
-
+        this.viandasEnStock = new ArrayList<>();
     }
 
     // Metodos --------------------------------------------------------------------------------
@@ -122,5 +122,21 @@ public class Heladera {
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
     public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
     public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
+
+    public void setColaboradorACargo(Colaborador colaboradorACargo) {
+        this.colaboradorACargo = colaboradorACargo;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setCapacidadDeViandas(int capacidadDeViandas) {
+        this.capacidadDeViandas = capacidadDeViandas;
+    }
+
+    public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) {
+        this.puestaEnFuncionamiento = puestaEnFuncionamiento;
+    }
 }
 

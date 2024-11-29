@@ -9,7 +9,7 @@ public abstract class Persona {
     @Id
     @GeneratedValue
     private Integer id_persona;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "direccion", referencedColumnName = "id_direccion")
     public Direccion direccion;
 
