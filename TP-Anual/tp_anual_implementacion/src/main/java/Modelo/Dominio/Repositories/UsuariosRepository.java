@@ -1,6 +1,6 @@
 package Modelo.Dominio.Repositories;
 
-import Modelo.Dominio.Usuario;
+import Modelo.seguridad.SesionActiva.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

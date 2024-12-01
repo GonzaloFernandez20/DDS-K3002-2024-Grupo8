@@ -1,8 +1,6 @@
 package Modelo.Dominio.Repositories.colaborador;
 
-import Modelo.Dominio.Usuario;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.localizacion.Direccion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

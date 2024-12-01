@@ -1,6 +1,5 @@
-package Modelo.Dominio;
+package Modelo.seguridad.SesionActiva;
 
-import Modelo.Dominio.colaborador.Colaborador;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 

@@ -44,7 +44,7 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
     if (hasError) { return; }
 
     // --------------- VERIFICACION CON EL BACK
-/*    const datosDeUsuario = {
+    const datosDeUsuario = {
         nombreDeUsuario: usuario.value,
         contrasenia: contrasena.value
     };
@@ -73,7 +73,7 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         .catch(error => {
             console.error('Error:', error);
             alert(error.message);
-        });*/
+        });
 
     // Función para desplegar el formulario correspondiente según el tipo de colaborador
     function desplegarFormulario(tipo) {
@@ -177,16 +177,12 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
         })
         .then(msjDeRespuesta => {
             alert(msjDeRespuesta);
+            window.location.href = "/Home";
         })
         .catch(error => {
             console.error('Error:', error);
             alert('Hubo un error al registrar el usuario');
         });
-
-    if (!hasError) {
-        alert('Formulario de colaborador Jurídico enviado correctamente');
-        location.href = "InicioDeSesion.html";
-    }
 });
 
 document.getElementById('extraFormContainerHumano').addEventListener('submit', function(e) {

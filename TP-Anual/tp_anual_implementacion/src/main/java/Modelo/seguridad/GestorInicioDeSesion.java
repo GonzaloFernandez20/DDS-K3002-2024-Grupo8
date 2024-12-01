@@ -2,9 +2,8 @@ package Modelo.seguridad;
 
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.UsuariosRepository;
-import Modelo.Dominio.Usuario;
+import Modelo.seguridad.SesionActiva.Usuario;
 import Modelo.Dominio.colaborador.Colaborador;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

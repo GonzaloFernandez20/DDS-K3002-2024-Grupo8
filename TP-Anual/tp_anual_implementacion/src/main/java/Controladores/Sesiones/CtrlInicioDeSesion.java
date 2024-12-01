@@ -1,6 +1,6 @@
 package Controladores.Sesiones;
 
-import Modelo.Dominio.Usuario;
+import Modelo.seguridad.SesionActiva.Usuario;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
 import Modelo.seguridad.SesionActiva.UtilsJWT;

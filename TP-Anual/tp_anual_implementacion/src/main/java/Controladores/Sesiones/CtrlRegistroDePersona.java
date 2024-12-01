@@ -2,10 +2,17 @@ package Controladores.Sesiones;
 
 import DTOs.ColaboradorHumanoDTO;
 import DTOs.ColaboradorJuridicoDTO;
+import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Mappers.BuilderColabHumano;
 import Modelo.Mappers.BuilderColabJuridico;
+import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
+import Modelo.seguridad.SesionActiva.UtilsJWT;
 import Modelo.seguridad.Validador;
+import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +22,13 @@ import java.util.Map;
 
 @Controller
 public class CtrlRegistroDePersona {
+
+    private final ColaboradorRepository colaboradorRepository;
+
+    @Autowired
+    public CtrlRegistroDePersona(ColaboradorRepository colaboradorRepository) {
+        this.colaboradorRepository = colaboradorRepository;
+    }
 
     @PostMapping("/ValidarUsuario")
     public ResponseEntity<String> validarUsuario(@RequestBody Map<String, String> request) { // Investigar
@@ -41,16 +55,28 @@ public class CtrlRegistroDePersona {
     @PostMapping("/RegistrarColaboradorJuridico")
     public ResponseEntity<String> registrarColaboradorJuridico(@RequestBody ColaboradorJuridicoDTO colaboradorDTO) { // Investigar
         Colaborador colaborador = BuilderColabJuridico.crearColaboradorJuridicoAPartirDe(colaboradorDTO);
-        //Registrar usuario en el sistema
-        //Cargar colaborador en BD
-        return ResponseEntity.ok("Usuario creado con exito.");
+        colaboradorRepository.save(colaborador);    //Cargar colaborador en BD
+
+        String token = UtilsJWT.generarToken(colaborador.getId_colaborador().toString());
+        ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .build();
     }
 
     @PostMapping("/RegistrarColaboradorHumano")
     public ResponseEntity<String> registrarColaboradorHumano(@RequestBody ColaboradorHumanoDTO colaboradorDTO) {
         Colaborador colaborador = BuilderColabHumano.crearColaboradorHumanoAPartirDe(colaboradorDTO);
-        //Registrar usuario en el sistema
-        //Cargar colaborador en BD
-        return ResponseEntity.ok("Usuario creado con exito.");
+        colaboradorRepository.save(colaborador);
+
+        String token = UtilsJWT.generarToken(colaborador.getId_colaborador().toString());
+        ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .build();
     }
 }

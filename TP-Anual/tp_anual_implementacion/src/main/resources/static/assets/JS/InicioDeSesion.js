@@ -41,12 +41,10 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
                 },
                 body: JSON.stringify(datosDeUsuario),
             });
-            // const tokenGenerado = await respuesta.text();
             if (!respuesta.ok) {
                 throw new Error("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
             }
             alert("Usuario y contraseña validados exitosamente.");
-            // localStorage.setItem('authToken', tokenGenerado);
             window.location.href = "/Home";
         } catch (error) {
             console.error('Error:', error);

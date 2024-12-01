@@ -18,6 +18,7 @@ import Modelo.Excepciones.ExcepcionNoHayEspacioEnDestino;
 import Modelo.Excepciones.ExcepcionViandasInsuficientesEnOrigen;
 import Modelo.Mappers.DistribucionDeViandasMapper;
 import Modelo.Mappers.HeladeraSeleccionMapper;
+import Modelo.seguridad.GestorInicioDeSesion;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -34,9 +35,12 @@ import java.util.stream.Collectors;
 public class CtrlDistribucionViandas {
 
     private final HeladeraRepository repositorioHeladeras;
+    private final GestorInicioDeSesion gestorInicioDeSesion;
+
     @Autowired
-    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras) {
+    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion) {
         this.repositorioHeladeras = repositorioHeladeras;
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
     }
 
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
@@ -94,7 +98,7 @@ public class CtrlDistribucionViandas {
         DistribucionDeViandas nuevaDistribucion = DistribucionDeViandasMapper.crearDistribucionAPartirDe(dto,
                                                                                                          heladeraOrigenElegida.get(),
                                                                                                          heladeraDestinoElegida.get(),
-                                                                                                         colaborador);
+                                                                                                         gestorInicioDeSesion.obtenerColaboradorPorID());
         return nuevaDistribucion;
     }
 
