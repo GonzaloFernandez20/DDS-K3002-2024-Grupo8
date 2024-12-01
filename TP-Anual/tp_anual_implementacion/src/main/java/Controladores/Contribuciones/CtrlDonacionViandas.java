@@ -1,4 +1,4 @@
-package Controladores;
+package Controladores.Contribuciones;
 
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
