@@ -18,7 +18,7 @@ public class HeladeraDTO {
     private String nombreDelPunto;
     private LocalDate puestaEnFuncionamiento;
 
-    public HeladeraDTO(Colaborador colaboradorACargo, int capacidadViandas, String nombreModelo, float tempMAXmodelo, float tempMINmodelo, String calle, String altura, String codPostal, String ciudad, String nombreDelPunto, LocalDate puestaEnFuncionamiento) {
+    public HeladeraDTO(Colaborador colaboradorACargo, int capacidadViandas, String nombreModelo, float tempMAXmodelo, float tempMINmodelo, String calle, String altura, String ciudad, String nombreDelPunto, LocalDate puestaEnFuncionamiento) {
         this.colaboradorACargo = colaboradorACargo;
         this.capacidadViandas = capacidadViandas;
         this.nombreModelo = nombreModelo;
@@ -26,7 +26,6 @@ public class HeladeraDTO {
         this.tempMINmodelo = tempMINmodelo;
         this.calle = calle;
         this.altura = altura;
-        this.codPostal = codPostal;
         this.ciudad = ciudad;
         this.nombreDelPunto = nombreDelPunto;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
