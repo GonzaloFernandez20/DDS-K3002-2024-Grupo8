@@ -8,14 +8,13 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.incidentes.EstadoDelIncidente;
 import Modelo.Dominio.incidentes.FallaTecnica;
-import Modelo.Dominio.incidentes.Incidente;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona.PersonaJuridica;
-import Modelo.Dominio.persona.TipoOrganizacion;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
+import Modelo.Dominio.Persona.TipoOrganizacion;
 import Repositorios.RepositorioIncidentes;
 import org.junit.jupiter.api.Test;
 

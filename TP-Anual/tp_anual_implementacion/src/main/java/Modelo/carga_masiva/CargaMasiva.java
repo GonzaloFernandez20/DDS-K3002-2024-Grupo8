@@ -9,7 +9,7 @@ import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.sistema.Sistema;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;

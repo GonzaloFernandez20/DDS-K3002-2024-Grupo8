@@ -1,12 +1,10 @@
-package Modelo.Dominio.persona;
+package Modelo.Dominio.Persona;
 
 import Modelo.Dominio.localizacion.Direccion;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "Persona_Juridica")
 public class PersonaJuridica extends Persona {
     @Column(name = "razon_social")
     private String razonSocial;
@@ -16,21 +14,20 @@ public class PersonaJuridica extends Persona {
     @Column(name = "rubro")
     private String rubro;
 
+    //Constructores ----------------------------------------------------------------------------------------------------
     public PersonaJuridica(String razonSocial, TipoOrganizacion tipoDeOrganizacion, String rubro, Direccion direccion) {
-        if(razonSocial ==null){throw new IllegalArgumentException("La razon social es obligatorio");}
-        if(tipoDeOrganizacion ==null){throw new IllegalArgumentException("El tipo de organizacion es obligatorio");}
-        if(rubro ==null){throw new IllegalArgumentException("El rubro es obligatorio");}
         this.razonSocial = razonSocial;
         this.tipoDeOrganizacion = tipoDeOrganizacion;
         this.rubro = rubro;
         this.direccion = direccion;
     }
+
     public PersonaJuridica(){}
 
+    //Getters y Setters ------------------------------------------------------------------------------------------------
     public String getRazonSocial() {
         return razonSocial;
     }
-
     public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
     }
@@ -38,15 +35,11 @@ public class PersonaJuridica extends Persona {
     public TipoOrganizacion getTipoDeOrganizacion() {
         return tipoDeOrganizacion;
     }
-
-    public void setTipoDeOrganizacion(TipoOrganizacion tipoDeOrganizacion) {
-        this.tipoDeOrganizacion = tipoDeOrganizacion;
-    }
+    public void setTipoDeOrganizacion(TipoOrganizacion tipoDeOrganizacion) {this.tipoDeOrganizacion = tipoDeOrganizacion;}
 
     public String getRubro() {
         return rubro;
     }
-
     public void setRubro(String rubro) {
         this.rubro = rubro;
     }

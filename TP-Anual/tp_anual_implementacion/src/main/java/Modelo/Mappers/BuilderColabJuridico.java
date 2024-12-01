@@ -3,7 +3,7 @@ package Modelo.Mappers;
 import DTOs.ColaboradorJuridicoDTO;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.Persona.PersonaJuridica;
 
 public class BuilderColabJuridico {
     public static Colaborador crearColaboradorJuridicoAPartirDe(ColaboradorJuridicoDTO colaboradorDTO){

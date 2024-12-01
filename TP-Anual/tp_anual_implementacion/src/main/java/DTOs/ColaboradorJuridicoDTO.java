@@ -1,7 +1,7 @@
 package DTOs;
 
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.persona.TipoOrganizacion;
+import Modelo.Dominio.Persona.TipoOrganizacion;
 
 import java.util.List;
 

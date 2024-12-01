@@ -1,7 +1,6 @@
 package Modelo.Dominio.Repositories.persona;
 
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.Persona.PersonaJuridica;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

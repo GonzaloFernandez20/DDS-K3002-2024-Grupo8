@@ -1,4 +1,4 @@
-package Modelo.Dominio.persona;
+package Modelo.Dominio.Persona;
 
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "Persona_Humana")
 public class PersonaHumana extends Persona {
     @Column(name = "nombre")
     private String nombre;
@@ -18,11 +19,8 @@ public class PersonaHumana extends Persona {
     @JoinColumn(name = "documento", referencedColumnName = "id_documento")
     private Documento documento;
 
+    //Constructores -------------------------------------------------------------------------------------------------------------
     public PersonaHumana(String nombre, String apellido, LocalDate fechaDeNacimiento, Documento documento, Direccion direccion) {
-        if(nombre ==null){throw new IllegalArgumentException("El nombre es obligatorio");}
-        if(apellido ==null){throw new IllegalArgumentException("El apellido es obligatorio");}
-        // if(documento ==null){throw new IllegalArgumentException("El documento es obligatorio");}
-        // EL DOCUMENTO NO ES OBLIGATORIO. LAS PERSONAS EN SITUACIÓN VULNERABLE PUEDEN NO TENER DOCUMENTO.
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaDeNacimiento = fechaDeNacimiento;
@@ -30,20 +28,28 @@ public class PersonaHumana extends Persona {
         this.direccion = direccion;
     }
 
-    // ---- Getters y Setters
+    public PersonaHumana() {
+
+    }
+
+    // Getters y Setters -------------------------------------------------------------------------------------------------------
     public String getNombre() {
         return nombre;
     }
+    public void setNombre(String nombre) {this.nombre = nombre;}
+
     public String getApellido() {
         return apellido;
     }
+    public void setApellido(String apellido) {this.apellido = apellido;}
+
     public LocalDate getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
     public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
-    public Documento getDocumento() {
-        return documento;
-    }
+
+    public Documento getDocumento() {return documento;}
+    public void setDocumento(Documento documento) {this.documento = documento;}
 }

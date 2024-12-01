@@ -1,20 +1,7 @@
 package tp_anual.tp_anual_implementacion;
-import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.RegistroDePersonasEnSituacionVulnerable;
 
-import Modelo.Dominio.localizacion.Direccion;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona_vulnerable.EstadoDeVivienda;
-import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class TestContribucionRegistrarVulnerables{
 /*    private Direccion direccion;

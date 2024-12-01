@@ -4,7 +4,7 @@ import DTOs.ColaboradorHumanoDTO;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 
 public class BuilderColabHumano {
     public static Colaborador crearColaboradorHumanoAPartirDe(ColaboradorHumanoDTO colaboradorDTO){

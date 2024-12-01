@@ -2,7 +2,7 @@ package Modelo.Dominio.tecnico;
 
 import Modelo.Dominio.localizacion.AreaDeCobertura;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 import jakarta.persistence.*;
 
 @Entity

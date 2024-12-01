@@ -1,8 +1,7 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
-import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.persona.Persona;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.Persona;
+import Modelo.Dominio.Persona.PersonaHumana;
 import jakarta.persistence.*;
 
 import java.security.SecureRandom;

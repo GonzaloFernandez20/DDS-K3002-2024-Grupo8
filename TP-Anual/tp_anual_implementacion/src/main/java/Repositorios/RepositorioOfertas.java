@@ -6,8 +6,8 @@ import Modelo.Dominio.contribucion.Producto;
 import Modelo.Dominio.contribucion.Rubro;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.persona.PersonaJuridica;
-import Modelo.Dominio.persona.TipoOrganizacion;
+import Modelo.Dominio.Persona.PersonaJuridica;
+import Modelo.Dominio.Persona.TipoOrganizacion;
 
 import java.util.List;
 

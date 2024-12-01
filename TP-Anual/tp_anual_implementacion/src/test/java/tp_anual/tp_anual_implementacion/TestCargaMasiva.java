@@ -10,8 +10,7 @@ import Modelo.Dominio.documentacion.Documento;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.sistema.Sistema;
 
 import java.io.FileNotFoundException;

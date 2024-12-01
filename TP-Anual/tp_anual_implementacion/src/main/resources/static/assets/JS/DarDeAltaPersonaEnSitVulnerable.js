@@ -2,19 +2,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("form-dar-de-alta-persona-en-sit-vulnerable");
     
     const nombrePersonaVul = document.getElementById("nombrePersonaVul");
+    const apellidoPersonaVul = document.getElementById("apellidoPersonaVul");
     const fechaNacimientoPersonaVul = document.getElementById("fechaNacimientoPersonaVul");
     const sitViviendaPersonaVul = document.getElementById("sitViviendaPersonaVul");
     const calleDomicilioPersonaVul = document.getElementById("calleDomicilioPersonaVul");
     const alturaDomicilioPersonaVul = document.getElementById("alturaDomicilioPersonaVul");
     const tipoDocumentoPersonaVul = document.getElementById("tipoDocPersonaVul");
     const numeroDocumentoPersonaVul = document.getElementById("numeroDocPersonaVul");
+    const sexoDoc = document.getElementById("sexoDoc");
     const tieneMenoresPersonaVul = document.getElementById("tieneMenoresPersonaVul");
     const cantidadMenoresPersonaVul = document.getElementById("cantidadMenoresPersonaVul");
     const tarjetaPersonaVul = document.getElementById("tarjetaPersonaVul");
 
+    //Campos del formulario que aparecen segun otras opciones seleccionadas -----------------------------------
     calleDomicilioPersonaVul.parentElement.style.display = "none";
     alturaDomicilioPersonaVul.parentElement.style.display = "none";
     numeroDocumentoPersonaVul.parentElement.style.display = "none";
+    sexoDoc.parentElement.style.display = "none";
     cantidadMenoresPersonaVul.parentElement.style.display = "none";
 
     sitViviendaPersonaVul.addEventListener("change", function () {
@@ -34,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
     tipoDocumentoPersonaVul.addEventListener("change", function () {
         numeroDocumentoPersonaVul.parentElement.style.display = "block";
         numeroDocumentoPersonaVul.setAttribute("required", "required");
+        sexoDoc.parentElement.style.display = "block";
+        sexoDoc.setAttribute("required", "required");
     })
 
     tieneMenoresPersonaVul.addEventListener("change", function () {
@@ -46,36 +52,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    form.addEventListener("submit", function (event) {
-        let isValid = true;
-        
-        if (nombrePersonaVul.value.trim() === "") {
-            alert("El nombre es obligatorio.");
-            isValid = false;
-        }
+    //Armado del JSON ----------------------------------------------------------------------------
+    const datosDeVulnerable = {
+        nombre: nombrePersonaVul.value,
+        apellido:apellidoPersonaVul.value,
+        fechaNacimiento:fechaNacimientoPersonaVul.value,
+        tipoDeDocumento:tipoDocumentoPersonaVul.value,
+        numeroDocumento:numeroDocumentoPersonaVul.value,
+        sexo:sexoDoc.value,
+        direccionCalle: calleDomicilioPersonaVul.value,
+        direccionAltura: alturaDomicilioPersonaVul.value,
+        estadoDeVivienda: sitViviendaPersonaVul.value,
+        cantidadMenores: cantidadMenoresPersonaVul.value,
+        codigoTarjeta: tarjetaPersonaVul.value
+    };
 
-        if (fechaNacimientoPersonaVul.value === "") {
-            alert("La fecha de nacimiento es obligatoria.");
-            isValid = false;
-        }
-
-        if (sitViviendaPersonaVul.value === "--Seleccione--") {
-            alert("Debes seleccionar una situación de vivienda.");
-            isValid = false;
-        }
-
-        if (tarjetaPersonaVul.value.trim() === "") {
-            alert("El código de tarjeta es obligatorio.");
-            isValid = false;
-        }
-
-        if (tieneMenoresPersonaVul.value === "Sí" && cantidadMenoresPersonaVul.value === "") {
-            alert("Debes ingresar la cantidad de menores a cargo.");
-            isValid = false;
-        }
-
-        if (!isValid) {
-            event.preventDefault();
-        }
+    // Envio del JSON -----------------------------------------------------------------------------
+    const respuesta = fetch('/DarDeAltaPersonaEnSitVulnerable', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datosDeVulnerable),
     });
+
 });

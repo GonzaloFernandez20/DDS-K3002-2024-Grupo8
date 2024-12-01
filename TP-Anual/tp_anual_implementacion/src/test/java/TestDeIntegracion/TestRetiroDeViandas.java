@@ -4,7 +4,7 @@ import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDeAccesosAHeladeras;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
+import Modelo.Dominio.Persona_vulnerable.PersonaSituacionVulnerable;
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 

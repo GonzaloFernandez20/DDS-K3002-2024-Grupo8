@@ -6,10 +6,10 @@ import Modelo.Dominio.heladera.Heladera;
 import org.jetbrains.annotations.NotNull;
 
 public class DistribucionDeViandaDTO {
-    int heladeraDeOrigenID;
-    int heladeraDestinoID;
-    MotivoDeDistribucion motivoDeDistribucion;
-    int cantidadDeViandas;
+    private int heladeraDeOrigenID;
+    private int heladeraDestinoID;
+    private String motivoDeDistribucion;
+    private int cantidadDeViandas;
 
     //Constructor ----------------------------------------------------------------------------------------------------
     public DistribucionDeViandaDTO() {
@@ -22,10 +22,10 @@ public class DistribucionDeViandaDTO {
         this.cantidadDeViandas = cantidadDeViandas;
     }
 
-    public MotivoDeDistribucion getMotivoDeDistribucion() {
+    public String getMotivoDeDistribucion() {
         return motivoDeDistribucion;
     }
-    public void setMotivoDeDistribucion(MotivoDeDistribucion motivoDeDistribucion) {this.motivoDeDistribucion = motivoDeDistribucion;}
+    public void setMotivoDeDistribucion(String motivoDeDistribucion) {this.motivoDeDistribucion = motivoDeDistribucion;}
 
     public int getHeladeraDestinoID() {
         return heladeraDestinoID;

@@ -11,11 +11,11 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona.PersonaJuridica;
-import Modelo.Dominio.persona.TipoOrganizacion;
-import Modelo.Dominio.persona_vulnerable.EstadoDeVivienda;
-import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
+import Modelo.Dominio.Persona.TipoOrganizacion;
+import Modelo.Dominio.Persona_vulnerable.EstadoDeVivienda;
+import Modelo.Dominio.Persona_vulnerable.PersonaSituacionVulnerable;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 
 import java.time.LocalDate;

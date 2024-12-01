@@ -1,4 +1,4 @@
-package Modelo.Dominio.persona;
+package Modelo.Dominio.Persona;
 import Modelo.Dominio.localizacion.Direccion;
 import jakarta.persistence.*;
 
@@ -13,7 +13,7 @@ public abstract class Persona {
     @JoinColumn(name = "direccion", referencedColumnName = "id_direccion")
     public Direccion direccion;
 
-    // ---- Getters y Setters
+    // Getters y Setters -----------------------------------------------------------
     public Direccion getDireccion() {
         return direccion;
     }

@@ -2,7 +2,7 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.persona.Persona;
+import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
