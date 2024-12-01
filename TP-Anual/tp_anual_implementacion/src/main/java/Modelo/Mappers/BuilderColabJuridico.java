@@ -14,8 +14,7 @@ public class BuilderColabJuridico {
                         colaboradorDTO.getRubro(),
                         new Direccion(
                                 colaboradorDTO.getCalle(),
-                                colaboradorDTO.getAltura(),
-                                colaboradorDTO.getCodPostal()
+                                colaboradorDTO.getAltura()
                         )),
                 colaboradorDTO.getMediosDeContacto()
         );

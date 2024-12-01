@@ -27,7 +27,7 @@ import java.io.IOException;
 @Controller
 public class CtrlReportarFallaTecnica {
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
-    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Fabian", "Bielinski", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "40.303.456", Sexo.MASCULINO), new Direccion("Montes Carballo", "1689", "1407")), List.of(new WhatsApp("15 1610-6160")));
+    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Fabian", "Bielinski", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "40.303.456", Sexo.MASCULINO), new Direccion("Montes Carballo", "1689")), List.of(new WhatsApp("15 1610-6160")));
     //
     private final List<HeladeraDTO> heladerasAReportar = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(this::convertirHeladeraADTO).collect(Collectors.toList());
 
@@ -62,7 +62,7 @@ public class CtrlReportarFallaTecnica {
     }
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
-        return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
+        return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
     }
 
     /*private String guardarFoto(MultipartFile fotoFalla) {

@@ -31,7 +31,7 @@ import java.util.List;
 public class CtrlSeleccionDeContribucion {
     //COLABORADORES HARDCODEADOS
     //private final Colaborador colaboradorActual = new Colaborador(new PersonaHumana("Fabian", "Bielinski", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "40.303.456", Sexo.MASCULINO), new Direccion("Montes Carballo", "1689", "1407")), List.of(new WhatsApp("15 1610-6160")));
-    private final Colaborador colaboradorActual = new Colaborador(new PersonaJuridica("Pinos S.A.", ONG, "Cerrajeria", new Direccion("Oliden", "779", "1408")), List.of(new WhatsApp("15 4419-6172")));
+    private final Colaborador colaboradorActual = new Colaborador(new PersonaJuridica("Pinos S.A.", ONG, "Cerrajeria", new Direccion("Oliden", "779")), List.of(new WhatsApp("15 4419-6172")));
 
     @GetMapping("/Colaborar")
     public String mostrarColaboraciones(Model model) {

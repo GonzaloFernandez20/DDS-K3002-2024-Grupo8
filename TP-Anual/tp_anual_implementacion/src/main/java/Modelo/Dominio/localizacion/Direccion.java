@@ -12,15 +12,12 @@ public class Direccion {
     private String calle;
     @Column(name ="altura")
     private String altura;
-    @Column(name ="codPostal")
-    private String codPostal;
 
-    public Direccion(String calle, String altura, String codPostal) {
+    public Direccion(String calle, String altura) {
         if(calle ==null){throw new IllegalArgumentException("Una direccion necesita la calle");}
         if(altura == null){throw new IllegalArgumentException("Una direccion necesita la altura");}
         this.calle = calle;
         this.altura = altura;
-        this.codPostal = codPostal;
     }
 
     public Direccion() {
@@ -42,11 +39,5 @@ public class Direccion {
     }
     public void setAltura(String altura) {
         this.altura = altura;
-    }
-    public String getCodPostal() {
-        return codPostal;
-    }
-    public void setCodPostal(String codPostal) {
-        this.codPostal = codPostal;
     }
 }

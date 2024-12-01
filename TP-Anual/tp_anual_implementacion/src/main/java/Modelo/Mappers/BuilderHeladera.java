@@ -28,7 +28,7 @@ public class BuilderHeladera {
     }
 
     private static Ubicacion crearUbicacion(HeladeraDTO dto) {
-        Direccion nuevaDireccion = new Direccion( dto.getCalle(), dto.getAltura(), dto.getCodPostal());
+        Direccion nuevaDireccion = new Direccion( dto.getCalle(), dto.getAltura());
         return new Ubicacion(nuevaDireccion, dto.getCiudad(), dto.getNombreDelPunto());
     }
 

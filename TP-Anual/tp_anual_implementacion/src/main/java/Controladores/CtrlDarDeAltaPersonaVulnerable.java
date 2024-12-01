@@ -26,7 +26,7 @@ import java.util.Objects;
 
 @Controller
 public class CtrlDarDeAltaPersonaVulnerable {
-    PersonaHumana personaHumana = new PersonaHumana("Luis", "Gomez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200", "1234"));
+    PersonaHumana personaHumana = new PersonaHumana("Luis", "Gomez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200"));
     private final Colaborador colaborador = new Colaborador(personaHumana, List.of(new WhatsApp("15 2350-2350")));
 
     List<EstadoDeVivienda> estadoDeViviendas = new ArrayList<>();
@@ -90,7 +90,7 @@ public class CtrlDarDeAltaPersonaVulnerable {
 
         LocalDate fechaNacimientoPersonaVul = LocalDate.parse(stringFechaNacimientoPersonaVul);
         Documento documento = new Documento(tipoDocPersonaVul, numeroDocPersonaVul, null);
-        Direccion direccion = new Direccion(calleDomicilioPersonaVul, alturaDomicilioPersonaVul, null);
+        Direccion direccion = new Direccion(calleDomicilioPersonaVul, alturaDomicilioPersonaVul);
         PersonaHumana personaHumanaEnSitVulnerable = new PersonaHumana(nombrePersonaVul, apellidoPersonaVul, fechaNacimientoPersonaVul, documento, direccion);
         PersonaSituacionVulnerable personaSituacionVulnerable = new PersonaSituacionVulnerable(sitViviendaPersonaVul, cantidadMenoresPersonaVul, null, personaHumanaEnSitVulnerable);
         Vinculacion vinculacion = new Vinculacion(tarjetaPersonaVul, personaSituacionVulnerable, colaborador);

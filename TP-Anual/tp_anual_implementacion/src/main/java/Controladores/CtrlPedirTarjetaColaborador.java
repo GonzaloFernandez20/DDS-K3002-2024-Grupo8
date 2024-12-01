@@ -21,7 +21,7 @@ import java.util.List;
 @Controller
 public class CtrlPedirTarjetaColaborador {
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
-    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200", "1234")), List.of(new WhatsApp("15 2350-2350")));
+    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200")), List.of(new WhatsApp("15 2350-2350")));
 
     @GetMapping("/PedirTarjetaColaborador")
     public String pedirAcceso() {
@@ -34,7 +34,7 @@ public class CtrlPedirTarjetaColaborador {
 
         if(rtaAcceso.equals("pedirTarjeta")) {
             // esta hardcodeado, habria que ver como generar una sesion. Cuando hagamos esto hay que modificar el diagrama de secuencia.
-            Direccion direccion = new Direccion("Cordoba", "123", "1234");
+            Direccion direccion = new Direccion("Cordoba", "123");
             Documento documento = new Documento(TipoDeDocumento.DNI, "123456", Sexo.FEMENINO);
             PersonaHumana persona = new PersonaHumana("Carla", "Gonzalez", LocalDate.now(), documento, direccion);
             GestorDeAccesosAHeladeras.getInstancia().generarSolicitud(persona, 1);

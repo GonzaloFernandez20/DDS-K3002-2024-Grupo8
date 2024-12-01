@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 public class CtrlSuscripciones {
 
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
-    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200", "1234")), List.of(new WhatsApp("15 2350-2350")));
+    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200")), List.of(new WhatsApp("15 2350-2350")));
     //
 
     private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());
@@ -107,11 +107,11 @@ public class CtrlSuscripciones {
     }
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
-        return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
+        return new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
     } // Investigar el uso de model mapper para mapeo de objetos en dtos
 
     private Heladera procesarDTOHeladera(HeladeraDTO heladeraDTO) {
-        Direccion direccionHeladera = new Direccion(heladeraDTO.getCalle(), heladeraDTO.getAltura(), heladeraDTO.getCodPostal());
+        Direccion direccionHeladera = new Direccion(heladeraDTO.getCalle(), heladeraDTO.getAltura());
         Ubicacion ubicacionHeladera = new Ubicacion(direccionHeladera, heladeraDTO.getCiudad(), heladeraDTO.getNombreDelPunto());
         Modelo modeloHeladera = new Modelo(heladeraDTO.getTempMAXmodelo(), heladeraDTO.getTempMINmodelo());
         return new Heladera(heladeraDTO.getColaboradorACargo(), ubicacionHeladera, heladeraDTO.getCapacidadViandas(), modeloHeladera, heladeraDTO.getPuestaEnFuncionamiento());
@@ -124,9 +124,9 @@ public class CtrlSuscripciones {
         // List<NotificadorDeSuscriptos> notificadores = RepositorioSuscripciones.getInstancia().getSuscripciones();
         List<NotificadorDeSuscriptos> notificadores = List.of(
                 new NotificadorDeSuscriptos(
-                        new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50", "1010"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now())),
+                        new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now())),
                 new NotificadorDeSuscriptos(
-                        new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50", "1010"), "CABA", "Gastronomos Argentinos 2"), 15, new Modelo(15, -2), LocalDate.now())
+                        new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 15, new Modelo(15, -2), LocalDate.now())
                 )
         );
         notificadores.get(0).suscribir("Se produjo una falla.", colaborador);

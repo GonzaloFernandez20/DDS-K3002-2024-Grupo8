@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Controller
 public class CtrlGestionHeladeras {
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
-    private final Colaborador colaborador = new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com")));
+    private final Colaborador colaborador = new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com")));
     //
     private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());
     private final List<AlertaDTO> alertas = RepositorioIncidentes.getInstancia().getAlertas().stream().map(alerta -> convertirAlertaADTO(alerta)).collect(Collectors.toList());
@@ -123,7 +123,7 @@ public class CtrlGestionHeladeras {
     int i = 0;
 
     private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
-        HeladeraDTO heladeraDTO = new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getDireccion().getCodPostal(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
+        HeladeraDTO heladeraDTO = new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
         // Hardcodeado
         heladeraDTO.setIdHeladera(i);
         i++;
