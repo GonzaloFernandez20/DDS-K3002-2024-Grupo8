@@ -119,5 +119,4 @@ public class Colaborador {
 
     public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
     public Integer getId_colaborador() { return id_colaborador; }
-
 }

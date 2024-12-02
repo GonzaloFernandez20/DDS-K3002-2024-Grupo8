@@ -3,32 +3,38 @@ package DTOs;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Getter
 public class ColaboradorHumanoDTO {
-    private String usuario;
-    private String constrasenia;
-    private String nombre;
-    private String apellido;
-    private LocalDate fechaDeNacimiento;
-    private TipoDeDocumento tipo;
-    private String numero;
-    private Sexo sexo;
-    private String calle;
-    private String altura;
-    private String codPostal;
-    private List<MedioDeContacto> mediosDeContacto;
+
+    private final String usuario;
+    private final String constrasenia;
+
+    private final String nombre;
+    private final String apellido;
+    private final LocalDate fechaDeNacimiento;
+    private final TipoDeDocumento tipo;
+    private final String numero;
+    private final Sexo sexo;
+    private final String calle;
+    private final String altura;
+
+    private final String email;
+    private final String telefono;
+
+    private final boolean tieneWp;
+    private final boolean tieneTg;
 
 
     public ColaboradorHumanoDTO(String usuario, String contrasenia,
                                 String nombre, String apellido,
                                 LocalDate fechaDeNacimiento,
                                 TipoDeDocumento tipo, String numero,
-                                Sexo sexo, String calle, String altura,
-                                String codPostal,
-                                List<MedioDeContacto> mediosDeContacto) {
+                                Sexo sexo, String calle, String altura, String email, String telefono, boolean tieneWp, boolean tieneTg) {
         this.usuario = usuario;
         this.constrasenia = contrasenia;
         this.nombre = nombre;
@@ -39,47 +45,9 @@ public class ColaboradorHumanoDTO {
         this.sexo = sexo;
         this.calle = calle;
         this.altura = altura;
-        this.codPostal = codPostal;
-        this.mediosDeContacto = mediosDeContacto;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public LocalDate getFechaDeNacimiento() {
-        return fechaDeNacimiento;
-    }
-
-    public TipoDeDocumento getTipo() {
-        return tipo;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public Sexo getSexo() {
-        return sexo;
-    }
-
-    public String getCalle() {
-        return calle;
-    }
-
-    public String getAltura() {
-        return altura;
-    }
-
-    public String getCodPostal() {
-        return codPostal;
-    }
-
-    public List<MedioDeContacto> getMediosDeContacto() {
-        return mediosDeContacto;
+        this.email = email;
+        this.telefono = telefono;
+        this.tieneWp = tieneWp;
+        this.tieneTg = tieneTg;
     }
 }

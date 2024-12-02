@@ -15,24 +15,29 @@ import java.util.Optional;
 public class GestorInicioDeSesion {
 
     private final UsuariosRepository usuariosRepository;
-    private final ColaboradorRepository colaboradorRepository;
 
     @Autowired
-    public GestorInicioDeSesion(UsuariosRepository usuariosRepository, ColaboradorRepository colaboradorRepository) {
+    public GestorInicioDeSesion(UsuariosRepository usuariosRepository) {
         this.usuariosRepository = usuariosRepository;
-        this.colaboradorRepository = colaboradorRepository;
     }
 
     public Optional<Usuario> obtenerUsuarioEnBD(String usuario, String contrasenia) {
         return usuariosRepository.buscarUsuario(usuario, contrasenia);
     }
 
-    public Colaborador obtenerColaboradorPorID(){
+    public Colaborador obtenerColaboradorPorID() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
-            String idUsuario = authentication.getName();
-            return colaboradorRepository.obtenerColaboradorSegunID(idUsuario);
-        }
+            String credenciales = authentication.getName();
+            String[] partes = credenciales.split(" ");
+            String nombreDeUsuario = partes[0];
+            String contrasenia = partes[1];
+
+            Optional<Usuario> usuario = usuariosRepository.buscarUsuario(nombreDeUsuario, contrasenia);
+            if (usuario.isPresent()) {
+                return usuario.get().getColaborador();
+            }
+        } // De momento sirve dejarlo de esta manera. En un futuro podriamos directamente traer el id_colaborador
         return null;
     }
 

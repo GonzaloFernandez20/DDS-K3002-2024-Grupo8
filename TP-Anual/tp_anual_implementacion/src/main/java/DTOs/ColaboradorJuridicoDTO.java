@@ -1,25 +1,30 @@
 package DTOs;
 
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.Persona.TipoOrganizacion;
+import lombok.Getter;
 
-import java.util.List;
-
+@Getter
 public class ColaboradorJuridicoDTO {
-    private String usuario;
-    private String constrasenia;
-    private String razonSocial;
-    private TipoOrganizacion tipoDeOrganizacion;
-    private String rubro;
-    private String calle;
-    private String altura;
-    private String codPostal;
-    private List<MedioDeContacto> mediosDeContacto;
+
+    private final String usuario;
+    private final String constrasenia;
+
+    private final String razonSocial;
+    private final String tipoDeOrganizacion;
+    private final String rubro;
+    private final String calle;
+    private final String altura;
+    private final String email;
+    private final String telefono;
+
+    private final boolean tieneWp;
+    private final boolean tieneTg;
+
 
     // Constructor
     public ColaboradorJuridicoDTO(String usuario, String contrasenia, String razonSocial,
-                                  TipoOrganizacion tipoDeOrganizacion, String rubro, String calle,
-                                  String altura, String codPostal, List<MedioDeContacto> mediosDeContacto) {
+                                  String tipoDeOrganizacion, String rubro, String calle,
+                                  String altura, String telefono, String email, boolean tieneWp, boolean tieneTg) {
         this.usuario = usuario;
         this.constrasenia = contrasenia;
         this.razonSocial = razonSocial;
@@ -27,17 +32,11 @@ public class ColaboradorJuridicoDTO {
         this.rubro = rubro;
         this.calle = calle;
         this.altura = altura;
-        this.codPostal = codPostal;
-        this.mediosDeContacto = mediosDeContacto;
+        this.telefono = telefono;
+        this.email = email;
+        this.tieneWp = tieneWp;
+        this.tieneTg = tieneTg;
     }
 
-    // Getters y Setters
-    public String getRazonSocial() { return razonSocial; }
-    public TipoOrganizacion getTipoDeOrganizacion() { return tipoDeOrganizacion; }
-    public String getRubro() { return rubro; }
-    public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
-    public String getCalle() { return calle; }
-    public String getAltura() { return altura; }
-    public String getCodPostal() { return codPostal; }
 }
 

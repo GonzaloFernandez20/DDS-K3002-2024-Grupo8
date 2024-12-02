@@ -1,5 +1,9 @@
 package Modelo.seguridad;
 
+import Modelo.Dominio.Repositories.UsuariosRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,9 +11,7 @@ public class Validador { // -> Deberia ser una clase singleton y laburar con 1 e
     private static Validador instancia = null;
     private static List<Criterio> LISTA_CRITERIOS; // -> Lista estática y constante de objetos Criterio
 
-    private Validador(){ // Constructor
-        instanciarCriteriosDeValidacion();
-    }
+    private Validador(){ instanciarCriteriosDeValidacion(); }
 
     public static Validador getInstancia() {
         if (instancia == null) {
@@ -27,12 +29,6 @@ public class Validador { // -> Deberia ser una clase singleton y laburar con 1 e
             }
         });
     }
-
-    public boolean validarNombreDeUsuario(String nombreDeUsuario) throws Exception {
-        // Controlar que no exista otro usuario con ese nombre en la BD
-        return true;
-    }
-
     // <--------------- FUNCIONES AUXILIARES --------------->
     private void instanciarCriteriosDeValidacion(){
         LISTA_CRITERIOS = Arrays.asList(

@@ -7,15 +7,18 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 .container {
     background-color: #ffffff;
-    padding: 40px;
+    padding: 1cm;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 350px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .container h2 {
@@ -127,3 +130,20 @@ button:hover {
     display: block;
     margin-bottom: 5px;
 }
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group label {
+    margin-left: 5px;
+}
+
+.checkbox-whatsapp,
+.checkbox-telegram {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+

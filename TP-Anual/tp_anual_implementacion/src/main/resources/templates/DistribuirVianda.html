@@ -15,6 +15,7 @@
     <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
     <link href="/assets/CSS/Colaboraciones.css" rel="stylesheet">
     <link rel="stylesheet">
+    <script src="/assets/JS/load-header-footer.js" defer></script>
 </head>
 
 <body>
@@ -31,30 +32,7 @@
     </symbol>
 </svg>
 
-<header>
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="logo col-md-3 justify-content-center text-md-left">
-                <p>Acá va el logo</p>
-            </div>
-
-            <nav class="col-md-6 text-center">
-                <ul class="nav-links justify-content-center">
-                    <li><a th:href="@{/}">Home</a></li>
-                    <li><a th:href="@{/Colaborar}">Colaborar</a></li>
-                    <li><a th:href="@{/CanjearPuntos}">Canjear Puntos</a></li>
-                    <li><a th:href="@{/Nosotros}">Nosotros</a></li>
-                    <li><a th:href="@{/Mapa}">Mapa</a></li>
-                </ul>
-            </nav>
-
-            <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
-                <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
-            </div>
-        </div>
-    </div>
-</header>
+<div id="header"></div>
 
 <main class="container">
     <div class="container-colab">
@@ -112,17 +90,7 @@
     </div>
 </main>
 
-<footer>
-    <div class="footer-logo">
-        <p>Acá va el logo</p>
-        <span>&copy; 2024 Company, Inc</span>
-    </div>
-    <ul class="social-icons">
-        <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-        <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-        <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-    </ul>
-</footer>
+<div id="footer"></div>
 
 <script src="/assets/JS/DistribuirVianda.js"></script>
 <script src="assets/dist/js/bootstrap.bundle.min.js"></script>

@@ -2,14 +2,13 @@ package Controladores.Sesiones;
 
 import DTOs.ColaboradorHumanoDTO;
 import DTOs.ColaboradorJuridicoDTO;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Mappers.BuilderColabHumano;
-import Modelo.Mappers.BuilderColabJuridico;
+import Modelo.Dominio.Repositories.UsuariosRepository;
+import Modelo.Mappers.ColabHumanoMapper;
+import Modelo.Mappers.ColabJuridicoMapper;
 import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
+import Modelo.seguridad.SesionActiva.Usuario;
 import Modelo.seguridad.SesionActiva.UtilsJWT;
 import Modelo.seguridad.Validador;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -18,28 +17,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CtrlRegistroDePersona {
 
-    private final ColaboradorRepository colaboradorRepository;
+    private final UsuariosRepository usuariosRepository;
 
     @Autowired
-    public CtrlRegistroDePersona(ColaboradorRepository colaboradorRepository) {
-        this.colaboradorRepository = colaboradorRepository;
+    public CtrlRegistroDePersona(UsuariosRepository usuariosRepository) {
+        this.usuariosRepository = usuariosRepository;
     }
 
     @PostMapping("/ValidarUsuario")
-    public ResponseEntity<String> validarUsuario(@RequestBody Map<String, String> request) { // Investigar
-        String nombreDeUsuario = request.get("nombreDeUsuario");
-        String contrasenia = request.get("contrasenia");
-
+    public ResponseEntity<String> validarUsuario(@RequestParam String contrasenia) {
         try {
             Validador.getInstancia().validarConstrasenia(contrasenia);
-            Validador.getInstancia().validarNombreDeUsuario(nombreDeUsuario);
-
-            return ResponseEntity.ok("Usuario y contraseña validados exitosamente."); // Si sale to bien
+            return ResponseEntity.ok("Usuario y contraseña validados exitosamente.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -54,10 +48,10 @@ public class CtrlRegistroDePersona {
     // SEPARAMOS EN REGISTROS DE COLABORADORES JURIDICOS Y HUMANOS
     @PostMapping("/RegistrarColaboradorJuridico")
     public ResponseEntity<String> registrarColaboradorJuridico(@RequestBody ColaboradorJuridicoDTO colaboradorDTO) { // Investigar
-        Colaborador colaborador = BuilderColabJuridico.crearColaboradorJuridicoAPartirDe(colaboradorDTO);
-        colaboradorRepository.save(colaborador);    //Cargar colaborador en BD
+        Usuario usuario = ColabJuridicoMapper.crearColaboradorJuridicoAPartirDe(colaboradorDTO);
+        usuariosRepository.save(usuario);   //Cargar colaborador en BD
 
-        String token = UtilsJWT.generarToken(colaborador.getId_colaborador().toString());
+        String token = UtilsJWT.generarToken(usuario.getUsuario()+" "+usuario.getContrasenia());
         ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
 
         return ResponseEntity
@@ -68,10 +62,10 @@ public class CtrlRegistroDePersona {
 
     @PostMapping("/RegistrarColaboradorHumano")
     public ResponseEntity<String> registrarColaboradorHumano(@RequestBody ColaboradorHumanoDTO colaboradorDTO) {
-        Colaborador colaborador = BuilderColabHumano.crearColaboradorHumanoAPartirDe(colaboradorDTO);
-        colaboradorRepository.save(colaborador);
+        Usuario usuario = ColabHumanoMapper.crearColaboradorHumanoAPartirDe(colaboradorDTO);
+        usuariosRepository.save(usuario);   //Cargar colaborador en BD
 
-        String token = UtilsJWT.generarToken(colaborador.getId_colaborador().toString());
+        String token = UtilsJWT.generarToken(usuario.getUsuario()+" "+usuario.getContrasenia());
         ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
 
         return ResponseEntity
