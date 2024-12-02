@@ -7,7 +7,7 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.Telegram;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.seguridad.SesionActiva.Usuario;
 
 import java.util.ArrayList;

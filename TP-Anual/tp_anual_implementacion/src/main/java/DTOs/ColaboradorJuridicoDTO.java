@@ -1,6 +1,6 @@
 package DTOs;
 
-import Modelo.Dominio.persona.TipoOrganizacion;
+import Modelo.Dominio.Persona.TipoOrganizacion;
 import lombok.Getter;
 
 @Getter
