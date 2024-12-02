@@ -36,8 +36,6 @@ public class Colaborador {
 
 
     public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
-        if(persona ==null){throw new IllegalArgumentException("El colaborador debe corresponderse a una persona");}
-        if(mediosDeContacto == null || mediosDeContacto.isEmpty()){throw new IllegalArgumentException("Es necesario al menos un medio de contacto");}
         this.persona = persona;
         this.mediosDeContacto = mediosDeContacto;
         this.mensajesRecibidos = new ArrayList<>();
@@ -122,5 +120,4 @@ public class Colaborador {
 
     public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
     public Integer getId_colaborador() { return id_colaborador; }
-
 }

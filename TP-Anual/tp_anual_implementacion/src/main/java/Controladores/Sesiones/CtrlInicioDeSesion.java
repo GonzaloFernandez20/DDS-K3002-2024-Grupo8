@@ -35,7 +35,7 @@ public class CtrlInicioDeSesion {
         Optional<Usuario> usuarioObtenido = gestorInicioDeSesion.obtenerUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia());
 
         if (usuarioObtenido.isPresent()){
-            String token = UtilsJWT.generarToken(usuarioObtenido.get().getId_colaborador().toString());
+            String token = UtilsJWT.generarToken(usuarioObtenido.get().getUsuario()+" "+usuarioObtenido.get().getContrasenia());
             ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
             return ResponseEntity
                     .ok()
@@ -44,26 +44,3 @@ public class CtrlInicioDeSesion {
         }else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // Devolvemos solo el codigo de error, sin mensaje
     }
 }
-
-
-/*
-    @PostMapping
-    public ResponseEntity<String> iniciarSesion(@RequestBody Usuario usuario) {
-
-        if (gestorInicioDeSesion.obtenerUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia())){
-            String token = UtilsJWT.generarToken(usuario.getUsuario());
-            // ResponseEntity.ok("Usuario y contraseña validados exitosamente.");
-            return ResponseEntity.ok(token);
-        }else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
-        try {
-            gestorInicioDeSesion.obtenerUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia());
-            return ResponseEntity.ok("Usuario y contraseña validados exitosamente.");
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
-        }
-    }
-
-
-
-
-    */

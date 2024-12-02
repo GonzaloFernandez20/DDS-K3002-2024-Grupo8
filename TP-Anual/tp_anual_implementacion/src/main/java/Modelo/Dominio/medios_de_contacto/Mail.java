@@ -14,7 +14,6 @@ public class Mail extends MedioDeContacto{
     public Mail() {}
 
     public Mail(String correo) {
-        if (correo == null) {throw new IllegalArgumentException("El correo no puede ser nulo");}
         this.correo = correo;
     }
 
