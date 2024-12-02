@@ -16,7 +16,7 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private Colaborador colaborador;
     @OneToMany
-    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
+    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
     private List <AperturaConPermiso> aperturasDeHeladera;
 
     //Constructores-------------------------------------------------------------

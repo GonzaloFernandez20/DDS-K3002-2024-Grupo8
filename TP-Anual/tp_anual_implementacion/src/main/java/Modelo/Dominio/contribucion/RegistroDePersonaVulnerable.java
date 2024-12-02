@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Table(name = "RegistroDePersonasEnSituacionVulnerable")
 public class RegistroDePersonaVulnerable extends Contribucion {
      @OneToOne
-     @JoinColumn(name = "vinculacion", referencedColumnName = "id_acceso_a_heladeras")
+     @JoinColumn(name = "vinculacion", referencedColumnName = "codigo_tarjeta")
      private Vinculacion tarjetaEntregada;
 
     //Construcctores ---------------------------------------------------------------------------------------------------------------------

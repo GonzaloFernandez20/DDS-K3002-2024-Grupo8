@@ -30,10 +30,10 @@ public class Vinculacion extends AccesoAHeladeras{
     @Column(name = "fecha_ultimo_uso")
     private LocalDate fechaUltimoUso;
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
+    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
     private List <Apertura> aperturasDeHeladera = new ArrayList<>();
     @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "consumidor_final", referencedColumnName = "id_acceso_a_heladeras")
+    @JoinColumn(name = "consumidor_final", referencedColumnName = "codigo_tarjeta")
     private List <Vianda> viandasRetiradas = new ArrayList<>();
 
     // Constructores -----------------------------------------------------------
