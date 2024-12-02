@@ -82,12 +82,12 @@ public class CtrlDistribucionViandas {
             model.addAttribute("mensaje", "Distribución realizada con éxito!");
             return "Home";
         }catch (ExcepcionViandasInsuficientesEnOrigen e){
-            //TODO 5 mostrar mensaje de la excepcion
-            return "";
+            model.addAttribute("mensaje", "La cantidad de viandas en la heladera origen es insuficiente");
+            return "DistribuirVianda";
         }
         catch (ExcepcionNoHayEspacioEnDestino e){
-            //TODO 6 mostrar mensaje de la excepcion
-            return "";
+            model.addAttribute("mensaje", "No hay suficiente espacio en la heladera destino");
+            return "DistribuirVianda";
         }
 
     }
