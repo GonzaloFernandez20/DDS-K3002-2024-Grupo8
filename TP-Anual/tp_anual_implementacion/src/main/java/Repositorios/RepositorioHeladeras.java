@@ -1,6 +1,12 @@
 package Repositorios;
 
+import DTOs.ColaboradorHumanoDTO;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.Vianda;
+import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.documentacion.Sexo;
+import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
@@ -8,6 +14,7 @@ import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Persona.TipoOrganizacion;
+import Modelo.Mappers.BuilderColabHumano;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,8 +37,33 @@ public class RepositorioHeladeras {
 
         Heladera heladera1 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now());
         heladera1.setIdHeladera(9999);
-        Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 15, new Modelo(15, -2), LocalDate.now());
+        Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 2, new Modelo(15, -2), LocalDate.now());
         heladera2.setIdHeladera(1111);
+
+        Mail mail = new Mail();
+        mail.setCorreo("alfred200@gmail.com");
+        Colaborador colaborador = BuilderColabHumano.crearColaboradorHumanoAPartirDe(
+                new ColaboradorHumanoDTO(
+                        "alfredo123",
+                        "alref000",
+                        "Alfredo",
+                        "García",
+                        LocalDate.now().minusYears(40),
+                        TipoDeDocumento.DNI,
+                        "20300444",
+                        Sexo.MASCULINO,
+                        "Carlos Calvo",
+                        "400",
+                        "1020",
+                        List.of(mail)
+                        )
+        );
+        heladera1.recibirVianda(new Vianda("Fideos", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
+        heladera1.recibirVianda(new Vianda("Arroz con Pollo", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
+        heladera1.recibirVianda(new Vianda("Milanesa napolitana", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
+
+        heladeras.add(heladera1);
+        heladeras.add(heladera2);
 
         return heladeras;
     }

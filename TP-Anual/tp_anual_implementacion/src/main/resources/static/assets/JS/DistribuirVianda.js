@@ -1,10 +1,12 @@
 document.getElementById('heladeraDestino').addEventListener('change', function(e) {
+    console.log("Toqué la heladeraDestino");
     if(document.getElementById('heladeraOrigen').value) {
         agregarMaximoDeViandasADistribuir();
     }
 });
 
 document.getElementById('heladeraOrigen').addEventListener('change', function(e) {
+    console.log("Toqué la heladeraOrigen");
     if(document.getElementById('heladeraDestino').value) {
         agregarMaximoDeViandasADistribuir();
     }
@@ -15,9 +17,15 @@ function agregarMaximoDeViandasADistribuir() {
     const opcionOrigen = heladeraOrigen.options[heladeraOrigen.selectedIndex];
     const capacidadMaximaPorStockOrigen = opcionOrigen.getAttribute("data-stock");
 
+    console.log(opcionOrigen);
+    console.log(capacidadMaximaPorStockOrigen);
+
     const heladeraDestino = document.getElementById('heladeraDestino');
     const opcionDestino = heladeraDestino.options[heladeraDestino.selectedIndex];
     const capacidadMaximaPorCapacidadDestino = opcionDestino.getAttribute("data-capacidad");
+
+    console.log(opcionDestino);
+    console.log(capacidadMaximaPorCapacidadDestino);
 
     const cantidadViandas = document.getElementById('cantidadViandas');
 

@@ -77,6 +77,8 @@ public class CtrlDistribucionViandas {
 
         DistribucionDeViandas nuevaDistribucion = procesarDTO(distribucionDTO);
 
+        System.out.println(nuevaDistribucion.getMotivoDeDistribucion().toString() + ' ' + nuevaDistribucion.getCantidadDeViandasAMover() + ' ' + nuevaDistribucion.getHeladeraDeOrigen().getUbicacion().getNombreCompletoDeUbicacion());
+
         try{
             GestorDePermisosDeApertura.generarPermisosDeDistribucion(nuevaDistribucion);
             model.addAttribute("mensaje", "Distribución realizada con éxito!");

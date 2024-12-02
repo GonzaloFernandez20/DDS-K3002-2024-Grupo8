@@ -65,14 +65,15 @@
                 <form id="distribucionViandaForm" action="/DistribuirVianda" method="post">
                     <div class="input-group">
                         <label for="heladeraOrigen">Heladera Origen (*)</label>
-                        <select id="heladeraOrigen" name="heladeraOrigen" required>
+                        <select id="heladeraOrigen" name="heladeraOrigen">
                             <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" th:data-stock="${heladera.stockDeViandas}"></option>
                         </select>
+                        <div class="error-message" id="heladeraOrigenError"></div>
                     </div>
 
                     <div class="input-group">
                         <label for="heladeraDestino">Heladera Destino (*)</label>
-                        <select id="heladeraDestino" name="heladeraDestino" required>
+                        <select id="heladeraDestino" name="heladeraDestino">
                             <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ' - ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" th:data-capacidad="${heladera.capacidadRestante}"></option>
                         </select>
                         <div class="error-message" id="heladeraDestinoError"></div>
@@ -82,12 +83,13 @@
 
                     <div class="input-group">
                         <label for="cantidadViandas">Viandas a Distribuir (*)</label>
-                        <input type="number" step="1" id="cantidadViandas" required name="cantidadDeViandas" min="1" disabled placeholder="Ingrese Cantidad de Viandas a Distribuir" >
+                        <input type="number" step="1" id="cantidadViandas" name="cantidadDeViandas" min="1" disabled placeholder="Ingrese Cantidad de Viandas a Distribuir" >
+                        <div class="error-message" id="cantidadViandasError"></div>
                     </div>
 
                     <div class="input-group">
                         <label for="motivoDistribucion">Motivo de Distribución (*)</label>
-                        <select id="motivoDistribucion" required name="motivoDistribucion">
+                        <select id="motivoDistribucion" name="motivoDistribucion">
                             <option th:each="motivo : ${motivos}" th:value="${motivo}" th:text="${motivo}"></option>
                         </select>
                         <div class="error-message" id="motivoDistribucionError"></div>
