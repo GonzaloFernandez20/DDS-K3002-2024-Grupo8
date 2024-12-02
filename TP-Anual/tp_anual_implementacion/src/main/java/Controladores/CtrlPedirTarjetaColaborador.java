@@ -1,6 +1,6 @@
 package Controladores;
 
-import Modelo.Dominio.Accesos_a_heladeras.GestorDeAccesosAHeladeras;
+import Modelo.Dominio.Accesos_a_heladeras.GestorDeAperturasAHeladeras;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
@@ -37,7 +37,7 @@ public class CtrlPedirTarjetaColaborador {
             Direccion direccion = new Direccion("Cordoba", "123");
             Documento documento = new Documento(TipoDeDocumento.DNI, "123456", Sexo.FEMENINO);
             PersonaHumana persona = new PersonaHumana("Carla", "Gonzalez", LocalDate.now(), documento, direccion);
-            GestorDeAccesosAHeladeras.getInstancia().generarSolicitud(persona, 1);
+            GestorDeAperturasAHeladeras.getInstancia().generarSolicitud(persona, 1);
             redirectAttributes.addFlashAttribute("mensaje", "Vas a recibir la tarjeta en los próximos días.");
         }
 

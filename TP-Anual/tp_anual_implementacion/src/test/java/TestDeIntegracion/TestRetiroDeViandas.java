@@ -1,14 +1,13 @@
 package TestDeIntegracion;
 
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
-import Modelo.Dominio.Accesos_a_heladeras.GestorDeAccesosAHeladeras;
+import Modelo.Dominio.Accesos_a_heladeras.GestorDeAperturasAHeladeras;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.Persona_vulnerable.PersonaSituacionVulnerable;
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.mockStatic;
 @DisplayName("Prueba integral: Retiro de una vianda por parte de una PeSV")
 public class TestRetiroDeViandas {
     PersonaSituacionVulnerable personaSituacionVulnerable;
-    GestorDeAccesosAHeladeras gestorDeAccesosAHeladeras;
+    GestorDeAperturasAHeladeras gestorDeAccesosAHeladeras;
     Heladera heladeraDeRetiro;
 
     // <---------------------- Configuraciones ----------------------> //
@@ -26,7 +25,7 @@ public class TestRetiroDeViandas {
     @BeforeEach
     public void configuracionInicial(){
         personaSituacionVulnerable = FactoryInstanciasParaTests.instanciarPersonaEnSV();
-        gestorDeAccesosAHeladeras = GestorDeAccesosAHeladeras.getInstancia();
+        gestorDeAccesosAHeladeras = GestorDeAperturasAHeladeras.getInstancia();
         heladeraDeRetiro = FactoryInstanciasParaTests.instanciarOtraHeladera();
         for (int i = 0; i < 10; i++){
             Vianda vianda = FactoryInstanciasParaTests.instanciarVianda("Milanga", LocalDate.of(2024, 10, 14));

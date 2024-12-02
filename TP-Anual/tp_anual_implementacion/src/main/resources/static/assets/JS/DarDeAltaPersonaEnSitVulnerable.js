@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => {
                 return response.text().then(msjDeRespuesta => {
                     if (!response.ok) {
-                        throw new Error(msjDeRespuesta);
+                        showAlert(msjDeRespuesta, "error");
                     }
                     return msjDeRespuesta;
                 });

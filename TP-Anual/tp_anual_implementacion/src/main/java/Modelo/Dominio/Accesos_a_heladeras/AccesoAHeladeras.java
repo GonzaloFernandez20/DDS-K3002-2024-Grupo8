@@ -5,12 +5,10 @@ import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class AccesoAHeladeras {
     @Id
-    @GeneratedValue
-    private Integer id_acceso_a_heladeras;
-    @Column(name = "codigo_tarjeta")
+    @Column(name = "codigo_tarjeta", nullable = false, unique = true)
     protected String codigoTarjeta;
 
     //Métodos ---------------------------------------------------------------------------------

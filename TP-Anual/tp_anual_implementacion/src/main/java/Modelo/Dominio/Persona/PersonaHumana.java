@@ -15,7 +15,7 @@ public class PersonaHumana extends Persona {
     private String apellido;
     @Column(name = "fecha_de_nacimiento")
     private LocalDate fechaDeNacimiento;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "documento", referencedColumnName = "id_documento")
     private Documento documento;
 

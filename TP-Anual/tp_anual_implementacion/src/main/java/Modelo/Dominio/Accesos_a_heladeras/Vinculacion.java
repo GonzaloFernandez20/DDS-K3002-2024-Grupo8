@@ -17,7 +17,7 @@ import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 @Entity
 @Table(name = "Vinculacion")
 public class Vinculacion extends AccesoAHeladeras{
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "persona_en_situacion_vulnerabre", referencedColumnName = "id_persona_en_situacion_vulnerable")
     private PersonaSituacionVulnerable personaSituacionVulnerable;
     @OneToOne
@@ -29,10 +29,10 @@ public class Vinculacion extends AccesoAHeladeras{
     private int cantUsosRestantesPorDia;
     @Column(name = "fecha_ultimo_uso")
     private LocalDate fechaUltimoUso;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
     private List <Apertura> aperturasDeHeladera = new ArrayList<>();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "consumidor_final", referencedColumnName = "id_acceso_a_heladeras")
     private List <Vianda> viandasRetiradas = new ArrayList<>();
 

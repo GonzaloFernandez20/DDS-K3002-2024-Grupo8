@@ -4,7 +4,7 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.DistribucionDeViandas;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
 import Modelo.Dominio.contribucion.DonacionDeViandas;
-import Modelo.Dominio.contribucion.RegistroDePersonasEnSituacionVulnerable;
+import Modelo.Dominio.contribucion.RegistroDePersonaVulnerable;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.medios_de_contacto.Mail;
@@ -102,7 +102,7 @@ public class CargaMasiva {
                 colaborador.registrarContribucion(contribucionDistribuirVianda);
                 break;
             case "ENTREGA_TARJETAS":
-                RegistroDePersonasEnSituacionVulnerable contribucionRegistro = new RegistroDePersonasEnSituacionVulnerable(colaborador, null, fechaContribucion);
+                RegistroDePersonaVulnerable contribucionRegistro = new RegistroDePersonaVulnerable(colaborador, null, fechaContribucion);
                 colaborador.registrarContribucion(contribucionRegistro);
                 break;
         }

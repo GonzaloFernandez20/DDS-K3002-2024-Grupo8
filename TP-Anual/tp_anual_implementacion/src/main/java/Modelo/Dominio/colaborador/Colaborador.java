@@ -18,25 +18,23 @@ public class Colaborador {
     @Id
     @GeneratedValue
     private Integer id_colaborador;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "persona" ,referencedColumnName = "id_persona")
     private Persona persona;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
     private List<String> mensajesRecibidos;
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Contribucion> historialDeContribuciones;
-    @OneToOne(mappedBy = "colaborador", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
     private double puntosAcumulados;
 
 
     public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
-        if(persona ==null){throw new IllegalArgumentException("El colaborador debe corresponderse a una persona");}
-        if(mediosDeContacto == null || mediosDeContacto.isEmpty()){throw new IllegalArgumentException("Es necesario al menos un medio de contacto");}
         this.persona = persona;
         this.mediosDeContacto = mediosDeContacto;
         this.mensajesRecibidos = new ArrayList<>();

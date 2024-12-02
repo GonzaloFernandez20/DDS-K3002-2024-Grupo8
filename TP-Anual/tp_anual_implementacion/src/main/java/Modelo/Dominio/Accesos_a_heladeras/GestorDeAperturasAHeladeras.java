@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class    GestorDeAccesosAHeladeras {
-    private static GestorDeAccesosAHeladeras instancia;
+public class GestorDeAperturasAHeladeras {
+    private static GestorDeAperturasAHeladeras instancia;
     private final List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
     private final List<AccesoAHeladeras> tarjetasRegistradas;
 
     // ------------------------------------------------
-    private GestorDeAccesosAHeladeras() {
+    private GestorDeAperturasAHeladeras() {
         this.tarjetasRegistradas = new ArrayList<>();
         this.tarjetasPendientesDeEntrega = new ArrayList<>();
     }
 
-    public static GestorDeAccesosAHeladeras getInstancia() {
+    public static GestorDeAperturasAHeladeras getInstancia() {
         if (instancia == null) {
-            instancia = new GestorDeAccesosAHeladeras();
+            instancia = new GestorDeAperturasAHeladeras();
         }
         return instancia;
     }

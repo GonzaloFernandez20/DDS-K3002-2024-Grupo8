@@ -1,13 +1,12 @@
 package Modelo.Brokers;
 
-import Modelo.Dominio.Accesos_a_heladeras.GestorDeAccesosAHeladeras;
+import Modelo.Dominio.Accesos_a_heladeras.GestorDeAperturasAHeladeras;
 import Modelo.Dominio.heladera.Heladera;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
@@ -57,7 +56,7 @@ public class BrokerAccesoHeladeras {
             System.out.println("Datos recibidos: Heladera ID = " + idHeladera + ", Codigo tarjeta = " + codigoTarjeta);
 
             Heladera heladera = diccionarioHeladeras.get(idHeladera);
-            if(GestorDeAccesosAHeladeras.getInstancia().autorizarApertura(codigoTarjeta, heladera)) {
+            if(GestorDeAperturasAHeladeras.getInstancia().autorizarApertura(codigoTarjeta, heladera)) {
                 // Enviar el mensaje "Acceso permitido" al cliente
                 PrintWriter salida = new PrintWriter(clienteSocket.getOutputStream(), true);
                 respuesta = "Acceso permitido";
