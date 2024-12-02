@@ -138,5 +138,9 @@ public class Heladera {
     public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) {
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
     }
+
+    public Integer getId_heladera() {
+        return id_heladera;
+    }
 }
 

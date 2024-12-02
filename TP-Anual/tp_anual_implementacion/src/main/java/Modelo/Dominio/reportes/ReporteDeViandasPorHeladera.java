@@ -19,11 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
-@Table(name = "ReporteViandasPorHeladera")
+
 public class ReporteDeViandasPorHeladera extends ReporteSemanal{
-    @OneToMany
-    @JoinColumn(name = "id_reporte", referencedColumnName = "id_reporte")
     private List<ViandasPorHeladera> viandasPorHeladeras;
 
     public ReporteDeViandasPorHeladera(LocalDate fechaDeCreacion) {

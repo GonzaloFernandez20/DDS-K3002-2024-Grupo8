@@ -1,5 +1,6 @@
 package Modelo.Dominio.reportes;
 
+import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
@@ -14,39 +15,65 @@ import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 import com.itextpdf.text.pdf.PdfPTable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-@Entity
-@Table(name = "ReporteFallas")
+
 public class ReporteDeFallas extends ReporteSemanal{
-    @OneToMany
-    @JoinColumn(name = "reporte", referencedColumnName = "id_reporte")
-    private List<FallasPorHeladera> fallasPorHeladera;
+    private List<FallasPorHeladera> fallasPorHeladera = new ArrayList<FallasPorHeladera>();
 
-    public ReporteDeFallas(LocalDate fechaDeCreacion) {
-        super(fechaDeCreacion);
-        fallasPorHeladera = new ArrayList<>();
+    //Inyección dedependencias actual que funciona pero es medio desprolija
+    private HeladeraRepository heladeraRepository;
+
+    public void setHeladeraRepository(HeladeraRepository heladeraRepository) {
+        this.heladeraRepository = heladeraRepository;
     }
+
+    //Inyección de dependencias ideal
+    //@Autowired
+    //private HeladeraRepository heladeraRepository;
+    public ReporteDeFallas() {
+    }
+
+    //MELI, PROBÁ ÉSTE MÉTODO, SI FUNCIONA EL RESTO SALE SOLO
+
+    public void metodoDeMELI(){
+        List<Heladera> heladeras = heladeraRepository.findAll();
+        System.out.println(Arrays.toString(heladeras.stream().map(heladera -> heladera.getId_heladera()).toArray()));
+    }
+
+
+
+
 
     @Override
     public void completarReporte(){
-        List<Heladera> heladerasConocidas = RepositorioHeladeras.getInstancia().getHeladeras();
-        heladerasConocidas.forEach(heladera -> {
-            FallasPorHeladera fallasPorHeladera = new FallasPorHeladera(heladera, RepositorioIncidentes.getInstancia()
-                    .getFallasTecnicasDeHeladeraEntreFechas(heladera, LocalDate.now().minusWeeks(1), LocalDate.now()).size());
-            this.sumarFallasPorheladera(fallasPorHeladera);
-            System.out.println(fallasPorHeladera.getHeladera().getUbicacion().getNombreCompletoDeUbicacion());
-            System.out.println(fallasPorHeladera.getCantidadDeFallas());
-        });
+        //Acceder al repo y traer los datos
+        Map<Integer, Integer> id_heladera_y_fallas = heladeraRepository.traerReportesDeFallasEntreFechas(LocalDate.now().minusWeeks(1), LocalDate.now());
+        List<Integer> ids_de_heladeras = new ArrayList<Integer>(id_heladera_y_fallas.values());
+        List<Heladera> heladeras = new ArrayList<Heladera>(heladeraRepository.findAllById(ids_de_heladeras));
+        for (Map.Entry<Integer, Integer> map : id_heladera_y_fallas.entrySet()) {
+            Heladera heladera = heladeras.stream().filter(heladera_en_lista -> heladera_en_lista.getIdHeladera() == map.getKey()).toList().get(0);
+            //Completo el FallasPorHeladera
+            FallasPorHeladera cantFallasPorHeladera = new FallasPorHeladera();
+            cantFallasPorHeladera.setHeladera(heladera);
+            cantFallasPorHeladera.setCantidadDeFallas(map.getValue());
 
+            this.sumarFallasPorheladera(cantFallasPorHeladera);
+
+            //Elimino la haladera para que la próxima lista sea un poco más corta y trabaje más rápido
+            heladeras.remove(heladera);
+        }
         super.completarReporte();
     }
 
