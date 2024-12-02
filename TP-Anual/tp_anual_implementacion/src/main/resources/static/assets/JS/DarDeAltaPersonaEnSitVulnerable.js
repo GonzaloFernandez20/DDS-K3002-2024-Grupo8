@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("form-dar-de-alta-persona-en-sit-vulnerable");
-    
+document.addEventListener("DOMContentLoaded", () => {
     const nombrePersonaVul = document.getElementById("nombrePersonaVul");
     const apellidoPersonaVul = document.getElementById("apellidoPersonaVul");
     const fechaNacimientoPersonaVul = document.getElementById("fechaNacimientoPersonaVul");
@@ -51,29 +49,50 @@ document.addEventListener("DOMContentLoaded", function () {
             cantidadMenoresPersonaVul.removeAttribute("required");
         }
     });
+    document.getElementById("form-dar-de-alta-persona-en-sit-vulnerable").addEventListener("submit", async function (event) {
+        // Previene la recarga de la página
+        event.preventDefault();
+        //Armado del JSON ----------------------------------------------------------------------------
+        const datosDeVulnerable = {
+            nombre: nombrePersonaVul.value,
+            apellido: apellidoPersonaVul.value,
+            fechaNacimiento: fechaNacimientoPersonaVul.value,
+            tipoDeDocumento: tipoDocumentoPersonaVul.value,
+            numeroDocumento: numeroDocumentoPersonaVul.value,
+            sexo: sexoDoc.value,
+            direccionCalle: calleDomicilioPersonaVul.value,
+            direccionAltura: alturaDomicilioPersonaVul.value,
+            estadoDeVivienda: sitViviendaPersonaVul.value,
+            cantidadMenores: cantidadMenoresPersonaVul.value,
+            codigoTarjeta: tarjetaPersonaVul.value
+        };
 
-    //Armado del JSON ----------------------------------------------------------------------------
-    const datosDeVulnerable = {
-        nombre: nombrePersonaVul.value,
-        apellido:apellidoPersonaVul.value,
-        fechaNacimiento:fechaNacimientoPersonaVul.value,
-        tipoDeDocumento:tipoDocumentoPersonaVul.value,
-        numeroDocumento:numeroDocumentoPersonaVul.value,
-        sexo:sexoDoc.value,
-        direccionCalle: calleDomicilioPersonaVul.value,
-        direccionAltura: alturaDomicilioPersonaVul.value,
-        estadoDeVivienda: sitViviendaPersonaVul.value,
-        cantidadMenores: cantidadMenoresPersonaVul.value,
-        codigoTarjeta: tarjetaPersonaVul.value
-    };
+        // Envio del JSON -----------------------------------------------------------------------------
+        fetch('/DarDeAltaPersonaEnSitVulnerable', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datosDeVulnerable),
+        })
+            .then(response => {
+                return response.text().then(msjDeRespuesta => {
+                    if (!response.ok) {
+                        throw new Error(msjDeRespuesta);
+                    }
+                    return msjDeRespuesta;
+                });
+            })
+            .then(msjDeRespuesta => {
+                showAlert(msjDeRespuesta, "success");
+                setTimeout(function() {
+                    window.location.href = "/Home";
+                }, 4000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            });
 
-    // Envio del JSON -----------------------------------------------------------------------------
-    const respuesta = fetch('/DarDeAltaPersonaEnSitVulnerable', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datosDeVulnerable),
     });
-
 });

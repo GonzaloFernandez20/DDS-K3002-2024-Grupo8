@@ -53,7 +53,7 @@ public class TestGenerarReportesSemanales {
         GestorDeReportes.getInstancia().limpiarInstancia();
         RepositorioIncidentes.getInstancia().limpiarInstancia();
 
-        Direccion direccion = new Direccion("Beauchef", "500", "2020");
+        Direccion direccion = new Direccion("Beauchef", "500");
         Documento documento = new Documento(TipoDeDocumento.DNI, "40.400.400", Sexo.FEMENINO);
         PersonaHumana personaHumana = new PersonaHumana("Juana", "Gonzalez", LocalDate.now().minusYears(25), documento, direccion);
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
@@ -64,7 +64,7 @@ public class TestGenerarReportesSemanales {
 
         Sistema.getInstancia().darDeAltaColaborador(colaboradorHumano);
 
-        heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500", "2020")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500", "2020"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
+        heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
 
         RepositorioHeladeras.getInstancia().agregarHeladera(heladera);
 

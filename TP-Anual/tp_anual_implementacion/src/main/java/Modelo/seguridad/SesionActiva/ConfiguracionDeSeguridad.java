@@ -21,10 +21,10 @@ public class ConfiguracionDeSeguridad {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest -> authRequest
-                        //.anyRequest().permitAll())
-                        .requestMatchers("/Home", "InicioDeSesion", "/RegistroPersona", "/Mapa", "/Nosotros").permitAll()
-                        .requestMatchers("/assets/**", "/img/**").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
+                       // .requestMatchers("/Home", "InicioDeSesion", "/RegistroPersona", "/Mapa", "/Nosotros").permitAll()
+                        //.requestMatchers("/assets/**", "/img/**").permitAll()
+                        //.anyRequest().authenticated())
                 //.formLogin(formularioLogin -> formularioLogin.loginPage("/InicioDeSesion").permitAll()) // Permitimos el acceso público a la página de login
                 .exceptionHandling(excepcionNoLoggueado ->
                         excepcionNoLoggueado.authenticationEntryPoint((request, response, authException) -> {

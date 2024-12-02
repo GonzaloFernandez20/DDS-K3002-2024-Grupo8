@@ -25,7 +25,7 @@ import java.util.List;
 public class FactoryInstanciasParaTests {
     public static Heladera instanciarUnaHeladera(){
         Heladera heladera = new Heladera(instanciarColaboradorJuridico(),
-                                         new Ubicacion(new Direccion("Mozart", "2300", null), "CABA", "Heladera Campus UTN"),
+                                         new Ubicacion(new Direccion("Mozart", "2300"), "CABA", "Heladera Campus UTN"),
                                         3,
                                         new Modelo(5f,1f),
                                         null);
@@ -36,7 +36,7 @@ public class FactoryInstanciasParaTests {
     }
     public static Heladera instanciarOtraHeladera(){
         Heladera heladera = new Heladera(instanciarColaboradorJuridico(),
-                                         new Ubicacion(new Direccion("Medrano", "981", null), "CABA", "Heladera Medrano UTN"),
+                                         new Ubicacion(new Direccion("Medrano", "981"), "CABA", "Heladera Medrano UTN"),
                                         10,
                                         new Modelo(5f,1f),
                                         null);
@@ -81,10 +81,9 @@ public class FactoryInstanciasParaTests {
     public static PersonaSituacionVulnerable instanciarPersonaEnSV(){
         PersonaSituacionVulnerable persona = new PersonaSituacionVulnerable(EstadoDeVivienda.SITUACION_DE_CALLE,
                                               2,
-                                              null,
                                               instanciarPersonaHumana());
-        Vinculacion vinculacion = new Vinculacion("AG780EX", persona, instanciarColaboradorHumano() );
-        persona.setVinculacion(vinculacion);
+        Vinculacion vinculacion = new Vinculacion("AG780EX", instanciarColaboradorHumano(),persona );
+
         return persona;
     }
 }
