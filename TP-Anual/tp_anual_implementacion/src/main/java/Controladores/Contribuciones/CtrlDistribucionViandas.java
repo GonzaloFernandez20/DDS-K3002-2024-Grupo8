@@ -2,6 +2,7 @@ package Controladores.Contribuciones;
 
 import DTOs.DistribucionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
+import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
@@ -21,6 +22,8 @@ import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -73,34 +76,46 @@ public class CtrlDistribucionViandas {
     }
 
     @PostMapping("/DistribuirVianda")
-    public String procesarSolicitudDistribucion(@RequestBody DistribucionDeViandaDTO distribucionDTO, Model model) {
+    public ResponseEntity<String> procesarSolicitudDistribucion(@RequestBody DistribucionDeViandaDTO distribucionDTO) {
+        System.out.println(distribucionDTO.getMotivoDeDistribucion() + ' ' + distribucionDTO.getCantidadDeViandas() + ' ' + distribucionDTO.getHeladeraDeOrigenID() + ' ' + distribucionDTO.getHeladeraDestinoID());
 
         DistribucionDeViandas nuevaDistribucion = procesarDTO(distribucionDTO);
 
-        System.out.println(nuevaDistribucion.getMotivoDeDistribucion().toString() + ' ' + nuevaDistribucion.getCantidadDeViandasAMover() + ' ' + nuevaDistribucion.getHeladeraDeOrigen().getUbicacion().getNombreCompletoDeUbicacion());
+        System.out.println(nuevaDistribucion.getMotivoDeDistribucion().toString() + ' ' + nuevaDistribucion.getCantidadDeViandasAMover() + ' ' + nuevaDistribucion.getHeladeraDeOrigen().getUbicacion().getNombreCompletoDeUbicacion() + ' ' + nuevaDistribucion.getHeladeraDestino().getUbicacion().getNombreCompletoDeUbicacion());
 
         try{
             GestorDePermisosDeApertura.generarPermisosDeDistribucion(nuevaDistribucion);
-            model.addAttribute("mensaje", "Distribución realizada con éxito!");
-            return "Home";
+            return ResponseEntity.ok("La declaración de la distribución se ha realizado con éxito!");
         }catch (ExcepcionViandasInsuficientesEnOrigen e){
-            model.addAttribute("mensaje", "La cantidad de viandas en la heladera origen es insuficiente");
-            return "DistribuirVianda";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad de viandas en la heladera origen es insuficiente.");
         }
         catch (ExcepcionNoHayEspacioEnDestino e){
-            model.addAttribute("mensaje", "No hay suficiente espacio en la heladera destino");
-            return "DistribuirVianda";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay espacio suficiente en la heladera destino.");
         }
-
     }
 
     private DistribucionDeViandas procesarDTO(DistribucionDeViandaDTO dto){
+        Heladera heladeraOrigenElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(dto.getHeladeraDeOrigenID());
+        Heladera heladeraDestinoElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(dto.getHeladeraDestinoID());
+
+        // TO DO: Para cuando implemente Persistencia y Sesión.
+        // Es headcodeo puro lo otro, con el fin de probar que funcione el resto
+        /*
         Optional<Heladera> heladeraOrigenElegida = repositorioHeladeras.findById(dto.getHeladeraDeOrigenID());
         Optional<Heladera> heladeraDestinoElegida = repositorioHeladeras.findById(dto.getHeladeraDestinoID());
         DistribucionDeViandas nuevaDistribucion = DistribucionDeViandasMapper.crearDistribucionAPartirDe(dto,
                                                                                                          heladeraOrigenElegida.get(),
                                                                                                          heladeraDestinoElegida.get(),
-                                                                                                         gestorInicioDeSesion.obtenerColaboradorPorID());
+                                                                                                       gestorInicioDeSesion.obtenerColaboradorPorID());
+                                                                                                       */
+        AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("1010", colaborador);
+        colaborador.setTarjeta(accesoDeColaborador);
+
+        DistribucionDeViandas nuevaDistribucion = DistribucionDeViandasMapper.crearDistribucionAPartirDe(dto,
+                heladeraOrigenElegida,
+                heladeraDestinoElegida,
+                colaborador);
+
         return nuevaDistribucion;
     }
 
