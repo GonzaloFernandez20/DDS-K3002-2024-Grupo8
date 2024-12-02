@@ -18,6 +18,19 @@ public class GeneradorDeCookie {
                 .build();
         return cookie;
     }
-}
 
 // Devolvemos una cookie con la informacion del token, que luego el navegador se encargara de enviar ante cada solicitud
+
+    public static ResponseCookie eliminarCookie(){
+        ResponseCookie cookie = ResponseCookie.from("token", "")
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(0) // 1 hora
+                .sameSite("Strict")
+                .build();
+        return cookie;
+    }
+}
+
+// Se elimina la cookie para cerrar sesion
