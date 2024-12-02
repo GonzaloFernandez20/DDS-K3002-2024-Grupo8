@@ -7,8 +7,8 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.Alerta;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.persona.PersonaJuridica;
-import Modelo.Dominio.persona.TipoOrganizacion;
+import Modelo.Dominio.Persona.PersonaJuridica;
+import Modelo.Dominio.Persona.TipoOrganizacion;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 

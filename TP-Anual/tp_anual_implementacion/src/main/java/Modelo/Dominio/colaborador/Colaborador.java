@@ -5,10 +5,9 @@ import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.persona.Persona;
+import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

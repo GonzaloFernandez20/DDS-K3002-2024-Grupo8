@@ -15,9 +15,9 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona.PersonaJuridica;
-import Modelo.Dominio.persona.TipoOrganizacion;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
+import Modelo.Dominio.Persona.TipoOrganizacion;
 import Modelo.Dominio.sistema.Sistema;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +37,7 @@ public class TestColaborador {
 
     @BeforeEach
     void setUp() {
-        Direccion direccion = new Direccion("Beauchef", "500", "2020");
+        Direccion direccion = new Direccion("Beauchef", "500");
         Documento documento = new Documento(TipoDeDocumento.DNI, "40.400.400", Sexo.FEMENINO);
         PersonaHumana personaHumana = new PersonaHumana("Juana", "Gonzalez", LocalDate.now().minusYears(25), documento, direccion);
         List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
@@ -55,7 +55,7 @@ public class TestColaborador {
         AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("TP89", colaborador);
         colaborador.setTarjeta(accesoDeColaborador);
 
-        Heladera heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500", "2020")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500", "2020"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
+        Heladera heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
 
         Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaborador, heladera, null, null);
 

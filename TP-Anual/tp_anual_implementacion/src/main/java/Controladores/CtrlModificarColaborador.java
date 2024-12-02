@@ -5,13 +5,11 @@ import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
 
 
-import Modelo.Dominio.persona.TipoOrganizacion;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

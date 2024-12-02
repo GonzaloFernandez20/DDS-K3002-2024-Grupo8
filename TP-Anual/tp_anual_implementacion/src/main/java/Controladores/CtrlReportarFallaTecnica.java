@@ -10,7 +10,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.GestorDeIncidentes;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.io.File;
-import java.io.IOException;
 
 
 @Controller

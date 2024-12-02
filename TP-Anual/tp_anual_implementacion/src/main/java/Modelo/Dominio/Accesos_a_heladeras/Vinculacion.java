@@ -4,9 +4,9 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.EstadoVianda;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.persona.Persona;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona_vulnerable.PersonaSituacionVulnerable;
+import Modelo.Dominio.Persona.Persona;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona_vulnerable.PersonaSituacionVulnerable;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -38,8 +38,8 @@ public class Vinculacion extends AccesoAHeladeras{
 
     // Constructores -----------------------------------------------------------
     public Vinculacion(String codigoTarjeta,
-                       PersonaSituacionVulnerable personaSituacionVulnerable,
-                       Colaborador colaboradorQueRegistro) {
+                       Colaborador colaboradorQueRegistro,
+                       PersonaSituacionVulnerable personaSituacionVulnerable) {
         this.codigoTarjeta = codigoTarjeta;
         this.personaSituacionVulnerable = personaSituacionVulnerable;
         this.colaboradorQueRegistro = colaboradorQueRegistro;

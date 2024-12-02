@@ -1,4 +1,4 @@
-package Modelo.Dominio.persona_vulnerable;
+package Modelo.Dominio.Persona_vulnerable;
 
 public enum EstadoDeVivienda {
     POSEE_DOMICILIO,

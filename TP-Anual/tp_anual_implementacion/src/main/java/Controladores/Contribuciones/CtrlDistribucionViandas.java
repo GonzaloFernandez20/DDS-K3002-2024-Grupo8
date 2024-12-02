@@ -13,7 +13,7 @@ import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Excepciones.ExcepcionNoHayEspacioEnDestino;
 import Modelo.Excepciones.ExcepcionViandasInsuficientesEnOrigen;
 import Modelo.Mappers.DistribucionDeViandasMapper;

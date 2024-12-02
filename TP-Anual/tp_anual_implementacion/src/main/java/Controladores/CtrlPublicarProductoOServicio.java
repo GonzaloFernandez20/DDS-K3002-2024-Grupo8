@@ -10,7 +10,7 @@ import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

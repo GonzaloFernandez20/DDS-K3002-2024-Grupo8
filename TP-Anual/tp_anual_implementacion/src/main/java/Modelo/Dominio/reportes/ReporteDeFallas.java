@@ -1,15 +1,6 @@
 package Modelo.Dominio.reportes;
 
-import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.heladera.Modelo;
-import Modelo.Dominio.incidentes.FallaTecnica;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.localizacion.Ubicacion;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaJuridica;
-import Modelo.Dominio.persona.TipoOrganizacion;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 import com.itextpdf.text.pdf.PdfPTable;

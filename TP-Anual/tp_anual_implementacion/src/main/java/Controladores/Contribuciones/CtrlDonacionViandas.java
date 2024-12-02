@@ -12,7 +12,7 @@ import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.Mappers.DonacionDeViandasMapper;
 import Repositorios.RepositorioHeladeras;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -60,8 +61,7 @@ public class CtrlDonacionViandas {
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
         //if(Objects.isNull(colaborador.getTarjeta())) {
-          //  return "PedirTarjetaColaborador";
-        //}
+          //  return "PedirTarjetaColaborador";}
         setEstados();
         model.addAttribute("estados", estados);
         model.addAttribute("heladeras", heladeras);

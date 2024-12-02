@@ -1,4 +1,4 @@
-package Modelo.Dominio.persona;
+package Modelo.Dominio.Persona;
 
 public enum TipoOrganizacion {
     GUBERNAMENTAL,

@@ -1,20 +1,12 @@
 package Controladores.Navbar;
 
-import Modelo.Dominio.GestionDeContribuciones.FormaDeContribuciones;
-import Modelo.Dominio.GestionDeContribuciones.ValidadorRequisitosContribucion;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.documentacion.Documento;
-import Modelo.Dominio.documentacion.Sexo;
-import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
 
-import static Modelo.Dominio.GestionDeContribuciones.FormaDeContribuciones.*;
-import static Modelo.Dominio.documentacion.Sexo.MASCULINO;
-import static Modelo.Dominio.persona.TipoOrganizacion.ONG;
+import static Modelo.Dominio.Persona.TipoOrganizacion.ONG;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

@@ -13,9 +13,8 @@ public class Direccion {
     @Column(name ="altura")
     private String altura;
 
+    //Constructores -----------------------------------------------------------
     public Direccion(String calle, String altura) {
-        if(calle ==null){throw new IllegalArgumentException("Una direccion necesita la calle");}
-        if(altura == null){throw new IllegalArgumentException("Una direccion necesita la altura");}
         this.calle = calle;
         this.altura = altura;
     }
@@ -23,21 +22,22 @@ public class Direccion {
     public Direccion() {
     }
 
+    //Metodos ------------------------------------------------------------------
     public String toString(){
         return calle+" "+altura;
     }
 
-    // ----------> Getters y Setters
+    // Getters y Setters -------------------------------------------------------
     public String getCalle() {
         return calle;
     }
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
+    public void setCalle(String calle) {this.calle = calle;}
+
     public String getAltura() {
         return altura;
     }
     public void setAltura(String altura) {
         this.altura = altura;
     }
+
 }

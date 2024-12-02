@@ -75,7 +75,7 @@
     transition: border-color 0.3s;
     font-size: 16px;
     color: #333;
-    background: #fff url('arrow-down.png') no-repeat right;
+    //background: #fff url('arrow-down.png') no-repeat right;
     background-size: 12px;
 }
 
@@ -115,6 +115,14 @@
     font-size: 13px;
     height: 15px;
     margin-top: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
 }
 
 .main-container {

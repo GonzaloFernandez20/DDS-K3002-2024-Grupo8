@@ -1,8 +1,8 @@
 package Modelo.Dominio.GestionDeContribuciones;
 
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.persona.PersonaHumana;
-import Modelo.Dominio.persona.PersonaJuridica;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Excepciones.ExcepcionFaltaTarjeta;
 import Modelo.Excepciones.ExcepcionNoEsPersonaHumana;
 import Modelo.Excepciones.ExcepcionNoEsPersonaJuridica;

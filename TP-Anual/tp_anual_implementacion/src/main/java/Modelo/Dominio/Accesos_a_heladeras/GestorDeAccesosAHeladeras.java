@@ -1,7 +1,7 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaHumana;
 
 import java.util.ArrayList;
 import java.util.List;
