@@ -75,15 +75,6 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="heladera">Heladera destino (*)</label>
-                            <select id="heladera" name="heladera" required>
-                                <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + '( ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad} + ')' +"></option>
-                            </select>
-                            
-                            <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
-                        </div>
-
-                        <div class="input-group">
                             <label for="peso">Peso de la vianda</label>
                             <input type="text" id="peso" name="peso" placeholder="Ingrese el peso de la vianda" required>
                         </div>

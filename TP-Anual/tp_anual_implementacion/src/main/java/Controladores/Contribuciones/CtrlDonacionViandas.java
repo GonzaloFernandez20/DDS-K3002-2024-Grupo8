@@ -1,6 +1,7 @@
 package Controladores.Contribuciones;
 
 import DTOs.DonacionDeViandaDTO;
+import DTOs.HeladeraDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
@@ -10,7 +11,9 @@ import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
+import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.persona.PersonaHumana;
 import Modelo.Mappers.HeladeraSeleccionMapper;
@@ -38,7 +41,6 @@ public class CtrlDonacionViandas {
         this.repositorioHeladeras = repositorioHeladeras;
     }
 
-
     //TODO 1: traerse las heladeras de la bd y mapearlas en HeladeraSeleccionDTO usando el mapper
     private final List<HeladeraSeleccionDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
             map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
@@ -57,31 +59,50 @@ public class CtrlDonacionViandas {
         }
     }
 
-    @GetMapping("/DonarViandas")
+    Heladera heladeraSeleccionada;
+
+    @GetMapping("/PrevioDonarViandas")
     public String mostrarHeladeras(Model model) {
+        List<Heladera> heladerasList = RepositorioHeladeras.getInstancia().getHeladeras();
+        System.out.println("Heladeras desde el repositorio: " + heladerasList.size());
+
+        model.addAttribute("heladeras", heladeras);
+        return "PrevioDonarViandas";
+    }
+
+    @PostMapping("/PrevioDonarViandas")
+    public void procesarSolicitudDonacionViadas(@RequestBody HeladeraDTO heladeraDTO, Model model){
+
+        Direccion direccion = new Direccion(heladeraDTO.getCalle(), heladeraDTO.getAltura());
+        Ubicacion ubicacion = new Ubicacion(direccion, heladeraDTO.getCiudad(), heladeraDTO.getNombreDelPunto());
+        Modelo modelo = new Modelo(heladeraDTO.getTempMAXmodelo(), heladeraDTO.getTempMINmodelo());
+        heladeraSeleccionada = new Heladera(colaborador, ubicacion, heladeraDTO.getCapacidadViandas(), modelo, heladeraDTO.getPuestaEnFuncionamiento());
+
+        return "redirect:/DonarViandas";
+    }
+
+    private DonacionDeViandas procesarDonacionDTO(DonacionDeViandaDTO dto){
+        DonacionDeViandas nuevaDonacion = DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraSeleccionada,colaborador);
+        return nuevaDonacion;
+    }
+
+    @GetMapping("/DonarViandas")
+    public String solicitarDatosViandas(Model model) {
         //if(Objects.isNull(colaborador.getTarjeta())) {
-          //  return "PedirTarjetaColaborador";
+        //  return "PedirTarjetaColaborador";
         //}
         setEstados();
         model.addAttribute("estados", estados);
-        model.addAttribute("heladeras", heladeras);
         return "DonarViandas";
     }
 
     @PostMapping("/DonarViandas")
-    public String procesarSolicitudDonacionViadas(@RequestBody DonacionDeViandaDTO donacionDTO, Model model){
+    public String donarVianda(@RequestBody DonacionDeViandaDTO donacionDTO, Model model){
 
-        DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
+        DonacionDeViandas nuevaDonacion = procesarDonacionDTO(donacionDTO);
         GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
         model.addAttribute("mensaje", "Donacion realizada con éxito!");
         return "Home";
 
     }
-
-    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
-        Optional <Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
-        DonacionDeViandas nuevaDonacion = DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(),colaborador);
-        return nuevaDonacion;
-    }
-
 }

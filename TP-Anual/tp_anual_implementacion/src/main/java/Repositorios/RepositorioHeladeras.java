@@ -30,11 +30,15 @@ public class RepositorioHeladeras {
 
         Heladera heladera1 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now());
         heladera1.setIdHeladera(9999);
+        heladeras.add(heladera1);
+
         Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 15, new Modelo(15, -2), LocalDate.now());
         heladera2.setIdHeladera(1111);
+        heladeras.add(heladera2);
 
         return heladeras;
     }
+
 
     public Heladera buscarHeladeraPorId(int idBuscado) {
         return heladeras.stream().filter(heladera -> heladera.getIdHeladera() == idBuscado).findFirst().orElse(null);
