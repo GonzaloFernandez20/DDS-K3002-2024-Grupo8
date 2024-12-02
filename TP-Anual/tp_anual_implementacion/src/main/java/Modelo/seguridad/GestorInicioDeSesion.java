@@ -25,7 +25,7 @@ public class GestorInicioDeSesion {
         return usuariosRepository.buscarUsuario(usuario, contrasenia);
     }
 
-    public Colaborador obtenerColaboradorPorID(){
+    public Colaborador obtenerColaboradorPorID() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             String credenciales = authentication.getName();

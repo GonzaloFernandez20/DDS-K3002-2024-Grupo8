@@ -13,6 +13,7 @@
         <!-- Custom styles for this template -->
         <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
         <link href="/assets/CSS/MiCuenta.css" rel="stylesheet">
+        <script src="/assets/JS/load-header-footer.js" defer></script>
     </head>
 
     <body>
@@ -27,31 +28,8 @@
             <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
         </symbol>
         </svg>
-        
-        <header>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="logo col-md-3 justify-content-center text-md-left">
-                        <p>Acá va el logo</p>
-                    </div>
 
-                    <nav class="col-md-6 text-center">
-                        <ul class="nav-links justify-content-center">
-                            <li><a th:href="@{/}">Home</a></li>
-                            <li><a th:href="@{/Colaborar}">Colaborar</a></li>
-                            <li><a th:href="@{CanjearPuntos}">Canjear Puntos</a></li>
-                            <li><a th:href="@{Nosotros}">Nosotros</a></li>
-                            <li><a th:href="@{Mapa}">Mapa</a></li>
-                        </ul>
-                    </nav>
-
-                    <div class="header-buttons col-md-3 justify-content-center text-md-right">
-                        <a th:href="@{InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
-                        <a th:href="@{RegistroPersona}"><button type="button">Registrarse</button></a>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <div id="header"></div>
 
         <main class="container">
             <div class="row">
@@ -220,17 +198,7 @@
             </div>
         </main>
 
-        <footer>
-            <div class="footer-logo">
-                <p>Acá va el logo</p>
-                <span>&copy; 2024 Company, Inc</span>
-            </div>
-            <ul class="social-icons">
-                <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-                <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-                <li><a href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-            </ul>
-        </footer>
+        <div id="header"></div>
         <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
         <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
         <script src="/assets/JS/ModificarColaboradorJuridicoHeladeras.js"></script>
