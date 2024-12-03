@@ -61,7 +61,7 @@
                         <select id="heladera" name="heladera" required>
                             <option th:each="heladera : ${heladeras}"
                                     th:value="${heladera.getIdHeladera()}"
-                                    th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ')'" />
+                                    th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ')'" th:data-stock="${heladera.getStock()}" />
                         </select>
 
                         <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>

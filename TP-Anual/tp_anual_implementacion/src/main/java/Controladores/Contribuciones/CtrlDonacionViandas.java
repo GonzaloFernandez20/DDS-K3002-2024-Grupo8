@@ -20,6 +20,7 @@ import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.Mappers.DonacionDeViandasMapper;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,14 +72,20 @@ public class CtrlDonacionViandas {
     }
 
     @PostMapping("/PrevioDonarViandas")
-    public void procesarSolicitudDonacionViadas(@RequestBody HeladeraDTO heladeraDTO, Model model){
-
+    public ResponseEntity<String> procesarSolicitudDonacionViadas(@RequestBody HeladeraDTO heladeraDTO){
+        System.out.println(heladeraDTO.getIdHeladera());
         Direccion direccion = new Direccion(heladeraDTO.getCalle(), heladeraDTO.getAltura());
         Ubicacion ubicacion = new Ubicacion(direccion, heladeraDTO.getCiudad(), heladeraDTO.getNombreDelPunto());
         Modelo modelo = new Modelo(heladeraDTO.getTempMAXmodelo(), heladeraDTO.getTempMINmodelo());
         heladeraSeleccionada = new Heladera(colaborador, ubicacion, heladeraDTO.getCapacidadViandas(), modelo, heladeraDTO.getPuestaEnFuncionamiento());
-
-        return "redirect:/DonarViandas";
+        /*
+        * try {
+            gestorTarjetas.registrarVinculacion(nuevoVulnerablevinculado);
+            return ResponseEntity.ok("Registro realizado con éxito!");
+        }catch(RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }*/
+        return ResponseEntity.ok("Heladera ingresada con éxito!");
     }
 
     private DonacionDeViandas procesarDonacionDTO(DonacionDeViandaDTO dto){

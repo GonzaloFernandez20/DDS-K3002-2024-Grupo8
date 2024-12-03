@@ -10,6 +10,7 @@ public class HeladeraSeleccionDTO {
     private String ciudad;
     private int capacidadRestante;
     private EstadoHeladera estado;
+    private int stock;
 
 
     public HeladeraSeleccionDTO(int idHeladera,
@@ -18,7 +19,8 @@ public class HeladeraSeleccionDTO {
                                 String altura,
                                 String ciudad,
                                 int capacidadRestante,
-                                EstadoHeladera estado) {
+                                EstadoHeladera estado,
+                                int stock) {
         this.idHeladera=idHeladera;
         this.nombreDelPunto = nombreDelPunto;
         this.calle = calle;
@@ -26,6 +28,7 @@ public class HeladeraSeleccionDTO {
         this.ciudad = ciudad;
         this.capacidadRestante = capacidadRestante;
         this.estado = estado;
+        this.stock = stock;
     }
 
     public int getIdHeladera() {
@@ -34,6 +37,14 @@ public class HeladeraSeleccionDTO {
 
     public void setIdHeladera(int idHeladera) {
         this.idHeladera = idHeladera;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public String getNombreDelPunto() {
