@@ -28,12 +28,10 @@ public class GestorInicioDeSesion {
     public Colaborador obtenerColaboradorPorID() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
-            String credenciales = authentication.getName();
-            String[] partes = credenciales.split(" ");
-            String nombreDeUsuario = partes[0];
-            String contrasenia = partes[1];
+            String nombreDeUsuario = authentication.getName();
 
-            Optional<Usuario> usuario = usuariosRepository.buscarUsuario(nombreDeUsuario, contrasenia);
+            // Busca el usuario solo con el nombre de usuario, ya que la autenticación ya está validada.
+            Optional<Usuario> usuario = usuariosRepository.findByNombreDeUsuario(nombreDeUsuario);
             if (usuario.isPresent()) {
                 return usuario.get().getColaborador();
             }

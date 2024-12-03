@@ -35,7 +35,7 @@ public class CtrlInicioDeSesion {
         Optional<Usuario> usuarioObtenido = gestorInicioDeSesion.obtenerUsuarioEnBD(usuario.getUsuario(), usuario.getContrasenia());
 
         if (usuarioObtenido.isPresent()){
-            String token = UtilsJWT.generarToken(usuarioObtenido.get().getUsuario()+" "+usuarioObtenido.get().getContrasenia());
+            String token = UtilsJWT.generarToken(usuarioObtenido.get().getUsuario());
             ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
             return ResponseEntity
                     .ok()

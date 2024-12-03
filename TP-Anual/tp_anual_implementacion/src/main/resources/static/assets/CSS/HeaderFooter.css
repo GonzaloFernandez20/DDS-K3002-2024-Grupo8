@@ -95,11 +95,9 @@ main{
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 .header-buttons button.rojo:hover {
   background-color: hsl(359, 55%, 30%);
 }
-
 /* Footer styles */
 footer {
   margin-top: auto;
@@ -151,10 +149,9 @@ footer .social-icons li a:hover {
 .referirAColaboracion a:hover{
   color: #167264;
 }
-
 h1{
-    color: #50bfa0;
-    text-align: center;
-    padding-top: 2%;
-    padding-bottom: 1%;
+  color: #50bfa0;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 1%;
 }

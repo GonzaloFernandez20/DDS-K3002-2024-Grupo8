@@ -12,5 +12,6 @@ public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
     @Query(value = "SELECT * FROM usuario WHERE usuario = ?1 AND contrasenia = ?2", nativeQuery = true)
     Optional<Usuario> buscarUsuario(String usuario, String contrasenia);
 
-
+    @Query(value = "SELECT * FROM usuario WHERE usuario = ?1", nativeQuery = true)
+    Optional<Usuario> findByNombreDeUsuario(String nombreDeUsuario);
 }
