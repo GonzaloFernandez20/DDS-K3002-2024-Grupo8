@@ -28,4 +28,10 @@ public class PuntoEnElMapa {
     public double getLongitud() {
         return longitud;
     }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public void setLongitud(double longitud) { this.longitud = longitud; }
 }

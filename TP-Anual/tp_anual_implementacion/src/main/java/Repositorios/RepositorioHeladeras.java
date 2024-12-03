@@ -7,6 +7,7 @@ import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
+import Modelo.Dominio.heladera.EstadoHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
@@ -39,6 +40,9 @@ public class RepositorioHeladeras {
         heladera1.setIdHeladera(9999);
         Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 2, new Modelo(15, -2), LocalDate.now());
         heladera2.setIdHeladera(1111);
+        Heladera heladera3 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 3"), 20, new Modelo(10, -2), LocalDate.now());
+        heladera3.setIdHeladera(3030);
+        heladera3.setEstado(EstadoHeladera.INACTIVA);
 
         Mail mail = new Mail();
         mail.setCorreo("alfred200@gmail.com");
@@ -64,6 +68,7 @@ public class RepositorioHeladeras {
 
         heladeras.add(heladera1);
         heladeras.add(heladera2);
+        heladeras.add(heladera3);
 
         return heladeras;
     }

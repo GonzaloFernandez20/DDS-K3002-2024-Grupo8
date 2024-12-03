@@ -37,10 +37,12 @@ public class Ubicacion {
     //public String getDireccion() { return direccion.toString(); }
     public PuntoEnElMapa getPunto() { return punto; }
     public String getCiudad() { return ciudad; }
+    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
 
     public void setPunto(PuntoEnElMapa punto) {
         this.punto = punto;
     }
+    public void setDireccion(Direccion direccion) { this.direccion = direccion; }
 
     public String getNombreCompletoDeUbicacion() { return nombreDelPunto + " - " + direccion.getCalle() + " " + direccion.getAltura() + ", " + ciudad; }
 }

@@ -169,3 +169,9 @@ h2 {
 .hipervinculo{
     font-size: 15px;
 }
+
+.inactiva {
+    background-color: lightgrey;
+    color: dimgrey;
+    pointer-events:none;
+}

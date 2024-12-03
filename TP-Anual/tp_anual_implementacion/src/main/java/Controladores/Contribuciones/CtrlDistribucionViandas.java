@@ -14,6 +14,7 @@ import Modelo.Excepciones.ExcepcionViandasInsuficientesEnOrigen;
 import Modelo.Mappers.DistribucionDeViandasMapper;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+import Repositorios.RepositorioHeladeras;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +55,12 @@ public class CtrlDistribucionViandas {
         //if(Objects.isNull(colaborador.getTarjeta())) {
          //   return "PedirTarjetaColaborador";
         //}
+        /*
+        PENDIENTE PARA PERSISTENCIA
         heladeras = repositorioHeladeras.findAll().stream().
+                map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
+        */
+        heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
 
         model.addAttribute("heladeras", heladeras);
