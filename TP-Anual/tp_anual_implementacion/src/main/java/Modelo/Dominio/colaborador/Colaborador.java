@@ -90,13 +90,7 @@ public class Colaborador {
 
 
     // ---- Getters y Setters
-    /*    public void setTarjeta(AccesoDeColaborador tarjeta) {
-        if(tarjeta == null){
-            if(this.tarjeta != null) this.tarjeta.setColaborador(null);
-        }
-        else tarjeta.setColaborador(this);
-        this.tarjeta = tarjeta;
-    }revisar al final de mappear*/
+
 
     public void setPersona(Persona persona) {
         this.persona = persona;

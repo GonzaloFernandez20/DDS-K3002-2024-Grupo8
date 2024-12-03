@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public class GestorDeAperturasAHeladeras {
     private static GestorDeAperturasAHeladeras instancia;
-    private final List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
     private final List<AccesoAHeladeras> tarjetasRegistradas;
+
 
     // ------------------------------------------------
     private GestorDeAperturasAHeladeras() {
         this.tarjetasRegistradas = new ArrayList<>();
-        this.tarjetasPendientesDeEntrega = new ArrayList<>();
+
     }
 
     public static GestorDeAperturasAHeladeras getInstancia() {
@@ -34,21 +34,6 @@ public class GestorDeAperturasAHeladeras {
         }else return false; // Si devuelve false es porque la tarjeta no esta registrada en el sistema, no autorizo que abra la heladera
     }
 
-    public void generarSolicitud(PersonaHumana destinatario, int cantidadDeTarjetas){
-        SolicitudTarjeta solicitudTarjeta = new SolicitudTarjeta(destinatario, cantidadDeTarjetas);
-        tarjetasPendientesDeEntrega.add(solicitudTarjeta); }
 
-    public void eliminarSolicitud(SolicitudTarjeta solicitud){ tarjetasPendientesDeEntrega.remove(solicitud); }
-
-    public void registrarTarjeta(AccesoAHeladeras tarjeta){
-        System.out.println(tarjeta.getPersonaHumana());
-        System.out.println(tarjeta.getCodigoTarjeta());
-        if(tarjetasPendientesDeEntrega.stream().anyMatch(solicitudTarjeta -> solicitudTarjeta.esElMismoDestinatario(tarjeta.getPersonaHumana()) && solicitudTarjeta.esLaMismaTarjeta(tarjeta.getCodigoTarjeta()))){
-            tarjetasRegistradas.add(tarjeta);
-        }else {
-           throw new IllegalArgumentException("La tarjeta no existe");
-        }
-
-    }
 }
 

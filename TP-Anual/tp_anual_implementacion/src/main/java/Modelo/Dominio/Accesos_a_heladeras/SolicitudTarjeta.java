@@ -2,6 +2,7 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.Persona.Persona;
 import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.colaborador.Colaborador;
 import jakarta.persistence.*;
 
 import java.security.SecureRandom;
@@ -15,16 +16,21 @@ public class SolicitudTarjeta {
     @GeneratedValue
     private Integer id_solicitud_tarjeta;
     @ManyToOne
-    @JoinColumn(name = "destinatario", referencedColumnName = "id_persona")
-    private Persona destinatario;
+    @JoinColumn(name = "destinatario", referencedColumnName = "id_colaborador")
+    private Colaborador destinatario;
     @Column(name = "cantidad_de_tarjetas")
     private int cantidadDeTarjetas;
+    @Transient
     private List<String> codigos = new ArrayList<>();
 
-    public SolicitudTarjeta(PersonaHumana destinatario, int cantidadDeTarjetas) {
+    public SolicitudTarjeta(Colaborador destinatario, int cantidadDeTarjetas) {
         this.destinatario = destinatario;
         this.cantidadDeTarjetas = cantidadDeTarjetas;
         codigos = this.generarCodigos();
+    }
+
+    public SolicitudTarjeta() {
+
     }
 
     public List<String> generarCodigos() {
@@ -53,11 +59,11 @@ public class SolicitudTarjeta {
         return sb.toString();
     }
 
-    public Persona getDestinatario() {
+    public Colaborador getDestinatario() {
         return destinatario;
     }
 
-    public void setDestinatario(PersonaHumana destinatario) {
+    public void setDestinatario(Colaborador destinatario) {
         this.destinatario = destinatario;
     }
 
