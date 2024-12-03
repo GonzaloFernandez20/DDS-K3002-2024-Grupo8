@@ -15,6 +15,7 @@ import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.Mappers.DonacionDeViandasMapper;
+import Modelo.seguridad.GestorInicioDeSesion;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +35,12 @@ import java.util.stream.Collectors;
 public class CtrlDonacionViandas {
 
     private final HeladeraRepository repositorioHeladeras;
+    private final GestorInicioDeSesion gestorInicioDeSesion;
+
     @Autowired
-    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras) {
+    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion) {
         this.repositorioHeladeras = repositorioHeladeras;
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
     }
 
 
@@ -60,8 +64,8 @@ public class CtrlDonacionViandas {
 
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
-        //if(Objects.isNull(colaborador.getTarjeta())) {
-          //  return "PedirTarjetaColaborador";}
+        if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
+            return "PedirTarjetaColaborador";}
         setEstados();
         model.addAttribute("estados", estados);
         model.addAttribute("heladeras", heladeras);

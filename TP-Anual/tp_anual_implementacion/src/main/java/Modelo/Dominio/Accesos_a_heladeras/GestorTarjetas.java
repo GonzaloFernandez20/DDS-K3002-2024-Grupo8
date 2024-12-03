@@ -1,19 +1,25 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.GestionDeContribuciones.GestorRegistroPersonaVulnerable;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Modelo.Dominio.colaborador.Colaborador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class GestorTarjetas {
-    GestorRegistroPersonaVulnerable gestorRegistroPersonaVulnerable;
-    ColaboradorRepository colaboradorRepository;
-    VinculacionRepository vinculacionRepository;
+    private GestorRegistroPersonaVulnerable gestorRegistroPersonaVulnerable;
+    private ColaboradorRepository colaboradorRepository;
+    private VinculacionRepository vinculacionRepository;
+    private List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
+    private List<AccesoAHeladeras> tarjetasRegistradas;
 
     @Autowired
     public GestorTarjetas(GestorRegistroPersonaVulnerable gestorRegistroPersonaVulnerable,
@@ -22,6 +28,7 @@ public class GestorTarjetas {
         this.gestorRegistroPersonaVulnerable = gestorRegistroPersonaVulnerable;
         this.colaboradorRepository = colaboradorRepository;
         this.vinculacionRepository = vinculacionRepository;
+        this.tarjetasPendientesDeEntrega = new ArrayList<>();
     }
 
     //Metodos ----------------------------------------------------------------------------------------------------
@@ -40,5 +47,21 @@ public class GestorTarjetas {
         }catch (DataIntegrityViolationException e){
             throw new RuntimeException("La tarjeta que intenta registrar pertenece a otra persona.");
         }
+    }
+
+    public void generarSolicitud(Colaborador destinatario, int cantidadDeTarjetas){
+        SolicitudTarjeta solicitudTarjeta = new SolicitudTarjeta(destinatario, cantidadDeTarjetas);
+        tarjetasPendientesDeEntrega.add(solicitudTarjeta); }
+    public void eliminarSolicitud(SolicitudTarjeta solicitud){ tarjetasPendientesDeEntrega.remove(solicitud); }
+
+    public void registrarTarjeta(AccesoAHeladeras tarjeta){
+        System.out.println(tarjeta.getPersonaHumana());
+        System.out.println(tarjeta.getCodigoTarjeta());
+        if(tarjetasPendientesDeEntrega.stream().anyMatch(solicitudTarjeta -> solicitudTarjeta.esElMismoDestinatario(tarjeta.getPersonaHumana()) && solicitudTarjeta.esLaMismaTarjeta(tarjeta.getCodigoTarjeta()))){
+            tarjetasRegistradas.add(tarjeta);
+        }else {
+            throw new IllegalArgumentException("La tarjeta no existe");
+        }
+
     }
 }
