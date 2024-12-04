@@ -55,14 +55,14 @@ public class CtrlDistribucionViandas {
         //if(Objects.isNull(colaborador.getTarjeta())) {
          //   return "PedirTarjetaColaborador";
         //}
-        /*
-        PENDIENTE PARA PERSISTENCIA
+
+        //PENDIENTE PARA PERSISTENCIA
         heladeras = repositorioHeladeras.findAll().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
-        */
-        heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
-                map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
 
+        /*heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
+                map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
+*/
         model.addAttribute("heladeras", heladeras);
         this.setMotivos();
         model.addAttribute("motivos", motivos);

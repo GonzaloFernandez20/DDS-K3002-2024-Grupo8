@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Heladera")
@@ -123,7 +124,10 @@ public class Heladera {
     public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
     public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
 
-    public Integer getid_heladera() { return id_heladera; }
+    public Integer getid_heladera() {
+        if(Objects.isNull(id_heladera)) { return 0; } // No compila sino
+        return id_heladera;
+    }
 
     public void setColaboradorACargo(Colaborador colaboradorACargo) {
         this.colaboradorACargo = colaboradorACargo;
