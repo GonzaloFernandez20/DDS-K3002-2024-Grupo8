@@ -2,8 +2,8 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.GestionDeContribuciones.GestorRegistroPersonaVulnerable;
 import Modelo.Dominio.Persona.PersonaHumana;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Repositories.Accesos_a_heladeras.VinculacionRepository;
+import Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

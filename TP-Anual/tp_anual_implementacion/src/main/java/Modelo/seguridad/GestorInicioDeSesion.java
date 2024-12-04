@@ -1,7 +1,7 @@
 package Modelo.seguridad;
 
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.UsuariosRepository;
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.UsuariosRepository;
 import Modelo.seguridad.SesionActiva.Usuario;
 import Modelo.Dominio.colaborador.Colaborador;
 import org.springframework.beans.factory.annotation.Autowired;

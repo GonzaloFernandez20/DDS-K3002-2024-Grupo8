@@ -3,7 +3,7 @@ package Controladores.Contribuciones;
 import DTOs.VinculacionPersonaVulnerableDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
+import Repositories.Accesos_a_heladeras.VinculacionRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;

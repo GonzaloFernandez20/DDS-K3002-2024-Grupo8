@@ -1,7 +1,6 @@
 package Repositories.colaborador;
 
 import DAOs.ViandasPorColaboradorDAO;
-import Modelo.Dominio.Usuario;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.localizacion.Direccion;
 import org.springframework.data.jpa.repository.JpaRepository;
