@@ -1,5 +1,6 @@
 package Controladores;
 
+import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
@@ -10,6 +11,8 @@ import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona.PersonaJuridica;
 
 
+import Modelo.seguridad.GestorInicioDeSesion;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +22,13 @@ import java.util.List;
 
 @Controller
 public class CtrlModificarColaborador {
-    //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
-    // Humano:
-    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200")), List.of(new WhatsApp("15 2350-2350")));
-    // Juridico:
-    // private final Colaborador colaborador = new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50", "1010")), List.of(new Mail("gastronomosargentinos@gmail.com")));
-    //
+
+    private final GestorInicioDeSesion gestorInicioDeSesion;
+
+    @Autowired
+    public CtrlModificarColaborador(GestorInicioDeSesion gestorInicioDeSesion) {
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
+    }
 
     @GetMapping("/ModificarColaborador")
     public String mostrarColaborador() {
@@ -40,6 +44,8 @@ public class CtrlModificarColaborador {
 
     @GetMapping("/ModificarColaboradorPremios")
     public String mostrarPremios(Model model) {
+        Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
+
         model.addAttribute("tipoColaborador", tipoPersonaDelColaborador());
         model.addAttribute("puntos", colaborador.getPuntosAcumulados());
 
@@ -47,6 +53,8 @@ public class CtrlModificarColaborador {
     }
 
     private String tipoPersonaDelColaborador() {
+        Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
+
         if(colaborador.getPersona() instanceof PersonaHumana) {
             return "PersonaHumana";
         }

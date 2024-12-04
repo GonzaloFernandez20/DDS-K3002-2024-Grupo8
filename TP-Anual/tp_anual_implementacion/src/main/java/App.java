@@ -1,4 +1,4 @@
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+/*import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.DonacionDeDineroRepository;
 import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Modelo.Dominio.Repositories.documentacion.DocumentoRepository;
@@ -23,4 +23,4 @@ public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
-}
+}*/
