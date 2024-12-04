@@ -1,7 +1,6 @@
 package Modelo.Dominio.reportes;
 
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
-import Modelo.Dominio.reportes.*;
+import Config.AppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -12,9 +11,11 @@ import java.util.List;
 
 @Component
 public class GestorDeReportes {
-    private List<ReporteSemanal> reportes;
+    private List<ReporteSemanal> reportes = new ArrayList<ReporteSemanal>();
     private static GestorDeReportes instancia  = null;
 
+    @Autowired
+    AppConfig config;
 
     public static GestorDeReportes getInstancia() {
         if (instancia == null) {
@@ -26,24 +27,22 @@ public class GestorDeReportes {
 
 
     public void generarReportesSemanales(){
-        /*Proceso calendarizado que hace todos los cálculos necesarios*/
-/*        ReporteDeFallas reporteDeFallas = this.generarReporteDeFallasPorHeladera();//new ReporteDeFallas();
+        ReporteDeFallas reporteDeFallas = config.reporteDeFallas();
         reporteDeFallas.setFechaDeCreacion(LocalDate.now());
-        reporteDeFallas.setHeladeraRepository(heladeraRepository);
-
-//        ReporteDeViandasPorColaborador reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador(LocalDate.now());
-//        ReporteDeViandasPorHeladera reporteDeViandasPorHeladera = new ReporteDeViandasPorHeladera(LocalDate.now());
-
         reporteDeFallas.completarReporte();
-//        reporteDeViandasPorColaborador.completarReporte();
-//        reporteDeViandasPorHeladera.completarReporte();
 
-        verificarExistenciaDeReportes();
+        ReporteDeViandasPorColaborador reporteDeViandasPorColaborador = config.reporteDeViandasPorColaborador();
+        reporteDeViandasPorColaborador.setFechaDeCreacion(LocalDate.now());
+        reporteDeViandasPorColaborador.completarReporte();
+
+        ReporteDeViandasPorHeladera reporteDeViandasPorHeladera = config.reporteDeViandasPorHeladera();
+        reporteDeViandasPorHeladera.setFechaDeCreacion(LocalDate.now());
+        reporteDeViandasPorHeladera.completarReporte();
 
         reportes.add(reporteDeFallas);
-//        reportes.add(reporteDeViandasPorHeladera);
-//        reportes.add(reporteDeViandasPorColaborador);
-    */}
+        reportes.add(reporteDeViandasPorHeladera);
+        reportes.add(reporteDeViandasPorColaborador);
+    }
 
     private void verificarExistenciaDeReportes() {
         if(reportes == null) {

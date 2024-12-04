@@ -15,6 +15,20 @@ public class ViandasPorHeladera{
         ViandasColocadas = viandasColocadas;
     }
 
+    public ViandasPorHeladera() {}
+
+    public void setHeladera(Heladera heladera) {
+        this.heladera = heladera;
+    }
+
+    public void setViandasRetiradas(Integer viandasRetiradas) {
+        ViandasRetiradas = viandasRetiradas;
+    }
+
+    public void setViandasColocadas(Integer viandasColocadas) {
+        ViandasColocadas = viandasColocadas;
+    }
+
     public Heladera getHeladera() { return heladera; }
     public Integer getViandasRetiradas() { return ViandasRetiradas; }
     public Integer getViandasColocadas() { return ViandasColocadas; }

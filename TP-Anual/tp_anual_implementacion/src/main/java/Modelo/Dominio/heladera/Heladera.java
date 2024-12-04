@@ -101,8 +101,8 @@ public class Heladera {
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
 
-        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas.");
-        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas.");
+//        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas.");
+//        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas.");
     }
 
 

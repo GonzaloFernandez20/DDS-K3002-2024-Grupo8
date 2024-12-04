@@ -3,7 +3,7 @@ package Controladores.Contribuciones;
 import DTOs.DistribucionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.DistribucionDeViandas;
 import Modelo.Dominio.contribucion.MotivoDeDistribucion;

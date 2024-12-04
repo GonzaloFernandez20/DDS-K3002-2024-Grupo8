@@ -22,7 +22,7 @@ public class Apertura {
     protected MotivoApertura motivo;
     @Column(name = "fecha_apertura")
     public LocalDateTime fechaApertura;
-    @Column(name = "cantiadad_viandas")
+    @Column(name = "cantidad_viandas")
     protected int cantidadViandasInvolucradas;
 
     //Constructores ------------------------------------------------------------------

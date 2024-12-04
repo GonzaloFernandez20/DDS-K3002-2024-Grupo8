@@ -1,6 +1,7 @@
 package ProcesosCalendarizados;
 
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Config.AppConfig;
+import Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.reportes.GestorDeReportes;
 import Modelo.Dominio.reportes.ReporteDeFallas;
 import org.slf4j.Logger;
@@ -19,22 +20,13 @@ public class ScheduledTasks {
     private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
 
     @Autowired
-    HeladeraRepository heladeraRepository;
+    AppConfig config = new AppConfig();
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 5000)
     public void genererReportesSemanales(){
         logger.info("Fixed Rate Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
 
-        ReporteDeFallas reporteDeFallas = new ReporteDeFallas();
-        reporteDeFallas.setFechaDeCreacion(LocalDate.now());
-        //Con una inyección automática de spring la línea de abajo no tendría que estar
-        reporteDeFallas.setHeladeraRepository(heladeraRepository);
-        //Método de prueba
-        reporteDeFallas.metodoDeMELI();
-    }
-    @Bean
-    GestorDeReportes generarGestorDeReportes(){
-        return GestorDeReportes.getInstancia();
+        config.gestorDeReportes().generarReportesSemanales();
     }
 }

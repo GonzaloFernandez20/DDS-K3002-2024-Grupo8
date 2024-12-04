@@ -22,7 +22,7 @@ public class DistribucionDeViandas extends ContribucionConApertura {
     private  MotivoDeDistribucion motivoDeDistribucion;
     @Column(name = "cantidad_de_viandas")
     private  Integer cantidadDeViandasAMover;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "vianda_distribuida",
             joinColumns = @JoinColumn(name = "distribucion", referencedColumnName = "id_contribucion"),
