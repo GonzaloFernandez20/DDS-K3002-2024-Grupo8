@@ -47,6 +47,14 @@
                     <button type="submit" name="value" value="EntregarTarjetasDeAcceso" class="btn-mod colaborar">Dar de Alta a Persona Vulnerable</button>
                     <button type="submit" name="value" value="DonarDinero" class="btn-mod colaborar">Donar Dinero</button>
                 </form>
+
+                <div>
+                    <img
+                            src = "/img/ColaborarHumano.jpeg"
+                            alt = "Imagen de mujer colocando una vianda en una heladera"
+                            class="imagenColaboracion"
+                    >
+                </div>
             </div>
             <div class="form-cuenta" th:if="${tipoColaborador == 'PersonaJuridica'}">
                 <h2>Para organizaciones</h2>
@@ -55,6 +63,13 @@
                     <button type="submit" name="value" value="PublicarProductoOServicio" class="btn-mod colaborar">Publicar Producto o Servicio</button>
                     <button type="submit" name="value" value="DonarDinero" class="btn-mod colaborar">Donar Dinero</button>
                 </form>
+                <div>
+                    <img
+                            src = "/img/ColaborarJuridico.jpg"
+                            alt = "Imagen de dos hombres instalando una heladera"
+                            class="imagenColaboracion"
+                    >
+                </div>
             </div>
         </div>
     </div>
