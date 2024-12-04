@@ -160,6 +160,14 @@ public class App {
             aperturaConPermiso.setCantidadViandasInvolucradas(1);
             aperturaConPermisoRepository.save(aperturaConPermiso);
 
+            AperturaConPermiso aperturaConPermisoIngresar = new AperturaConPermiso();
+            aperturaConPermisoIngresar.setContribucion(donacionDeViandas);
+            aperturaConPermisoIngresar.setHeladera(donacionDeViandas.getHeladeraDestino());
+            aperturaConPermisoIngresar.setMotivo(MotivoApertura.INGRESAR_VIANDAS_DONADAS);
+            aperturaConPermisoIngresar.setFechaApertura(LocalDateTime.now());
+            aperturaConPermisoIngresar.setCantidadViandasInvolucradas(1);
+            aperturaConPermisoRepository.save(aperturaConPermisoIngresar);
+
             heladera.setColaboradorACargo(colaboradorJuridico);
             heladeraRepository.save(heladera);
 

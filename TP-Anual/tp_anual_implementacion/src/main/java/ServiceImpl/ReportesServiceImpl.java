@@ -90,7 +90,7 @@ public class ReportesServiceImpl implements ReportesService {
 
         List<Integer> viandas_colocadas_lista = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getViandasColocadas()).toList();
         List<Integer> viandas_retiradas_lista = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getViandasRetiradas()).toList();
-        List<Integer> ids_de_heladeras = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getId_heladera()).toList();
+        List<Integer> ids_de_heladeras        = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getId_heladera()     ).toList();
 
         List<Heladera> heladeras_BD = heladeraRepository.findAllById(ids_de_heladeras);
 
@@ -109,8 +109,8 @@ public class ReportesServiceImpl implements ReportesService {
             viandasPorHeladeraList.add(viandasPorHeladera);
         }
 
-        System.out.println("Lista de ViandasPorHeladera: \n");
-        System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getHeladera()).toArray()));
+        System.out.println("Lista de ViandasPorHeladera:");
+        System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getHeladera().getId_heladera()).toArray()));
         System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getViandasColocadas()).toArray()));
         System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getViandasRetiradas()).toArray()));
         return viandasPorHeladeraList;
