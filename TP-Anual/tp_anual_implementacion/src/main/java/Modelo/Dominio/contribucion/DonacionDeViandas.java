@@ -2,10 +2,7 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "DonacionDeVianda")
 public class DonacionDeViandas extends ContribucionConApertura {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "donacion", referencedColumnName = "id_contribucion")
     private List<Vianda> viandasDonadas;
     //Constructores------------------------------------------------------------------------------------------------------------

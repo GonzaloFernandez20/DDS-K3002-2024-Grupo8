@@ -101,8 +101,8 @@ public class Heladera {
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
 
-        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas.");
-        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas.");
+//        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas.");
+//        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas.");
     }
 
 
@@ -137,6 +137,10 @@ public class Heladera {
 
     public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) {
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
+    }
+
+    public Integer getId_heladera() {
+        return id_heladera;
     }
 }
 
