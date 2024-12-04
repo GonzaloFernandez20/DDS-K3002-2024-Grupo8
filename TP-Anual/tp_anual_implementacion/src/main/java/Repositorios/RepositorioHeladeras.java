@@ -36,6 +36,8 @@ public class RepositorioHeladeras {
     public List<Heladera> getHeladeras() {
         verificarExistenciaDeHeladeras();
 
+        System.out.println("1.Cantidad de heladeras: " + heladeras.size());
+
         Heladera heladera1 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now());
         heladera1.setIdHeladera(9999);
         Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 2, new Modelo(15, -2), LocalDate.now());
@@ -43,6 +45,8 @@ public class RepositorioHeladeras {
         Heladera heladera3 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 3"), 20, new Modelo(10, -2), LocalDate.now());
         heladera3.setIdHeladera(3030);
         heladera3.setEstado(EstadoHeladera.INACTIVA);
+
+        System.out.println("2.Cantidad de heladeras: " + heladeras.size());
 
         Mail mail = new Mail();
         mail.setCorreo("alfred200@gmail.com");
@@ -66,9 +70,15 @@ public class RepositorioHeladeras {
         heladera1.recibirVianda(new Vianda("Arroz con Pollo", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
         heladera1.recibirVianda(new Vianda("Milanesa napolitana", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
 
+        System.out.println("3.Cantidad de heladeras: " + heladeras.size());
+
         heladeras.add(heladera1);
+        System.out.println("4.Cantidad de heladeras: " + heladeras.size());
         heladeras.add(heladera2);
+        System.out.println("5.Cantidad de heladeras: " + heladeras.size());
         heladeras.add(heladera3);
+
+        System.out.println("6.Cantidad de heladeras: " + heladeras.size());
 
         return heladeras;
     }

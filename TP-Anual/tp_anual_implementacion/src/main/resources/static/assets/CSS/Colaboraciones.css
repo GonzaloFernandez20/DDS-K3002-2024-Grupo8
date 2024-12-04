@@ -173,5 +173,6 @@ h2 {
 .inactiva {
     background-color: lightgrey;
     color: dimgrey;
-    pointer-events:none;
+    pointer-events: none;
+    cursor: not-allowed;
 }

@@ -157,6 +157,9 @@ public class App {
             vianda.setFechaDeCaducidad(LocalDate.now().plusDays(5));
             vianda.setTipoDeComida("Pollo con verduras");
             viandaRepository.save(vianda);
+
+            DonacionDeViandas donacionDeViandas = new DonacionDeViandas();
+
         };
     }
 }*/

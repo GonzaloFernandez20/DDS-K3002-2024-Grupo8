@@ -66,7 +66,7 @@
                     <div class="input-group">
                         <label for="heladeraOrigen">Heladera Origen (*)</label>
                         <select id="heladeraOrigen" name="heladeraOrigen">
-                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" th:class="${heladera.estado == 'INACTIVA'  ? 'inactiva' : ''}" th:data-stock="${heladera.stockDeViandas}"></option>
+                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" th:class="${heladera.estado.name() == 'INACTIVA' or heladera.stockDeViandas == 0 ? 'inactiva' : ''}" th:disabled="${heladera.estado.name() == 'INACTIVA'}" th:data-stock="${heladera.stockDeViandas}"></option>
                         </select>
                         <div class="error-message" id="heladeraOrigenError"></div>
                     </div>
@@ -74,7 +74,7 @@
                     <div class="input-group">
                         <label for="heladeraDestino">Heladera Destino (*)</label>
                         <select id="heladeraDestino" name="heladeraDestino">
-                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ' - ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" th:data-capacidad="${heladera.capacidadRestante}"></option>
+                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ' - ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" th:class="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0 ? 'inactiva' : ''}" th:disabled="${heladera.estado.name() == 'INACTIVA'}" th:data-capacidad="${heladera.capacidadRestante}"></option>
                         </select>
                         <div class="error-message" id="heladeraDestinoError"></div>
 

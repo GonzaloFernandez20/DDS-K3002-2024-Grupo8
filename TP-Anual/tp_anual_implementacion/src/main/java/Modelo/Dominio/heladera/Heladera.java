@@ -123,6 +123,8 @@ public class Heladera {
     public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
     public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
 
+    public Integer getid_heladera() { return id_heladera; }
+
     public void setColaboradorACargo(Colaborador colaboradorACargo) {
         this.colaboradorACargo = colaboradorACargo;
     }
