@@ -16,7 +16,7 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     @OneToOne
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private Colaborador colaborador;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
     private List <AperturaConPermiso> aperturasDeHeladera;
 

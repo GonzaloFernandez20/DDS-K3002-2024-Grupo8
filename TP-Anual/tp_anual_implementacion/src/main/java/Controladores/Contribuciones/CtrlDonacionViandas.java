@@ -3,6 +3,8 @@ package Controladores.Contribuciones;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
@@ -34,9 +36,14 @@ import java.util.stream.Collectors;
 public class CtrlDonacionViandas {
 
     private final HeladeraRepository repositorioHeladeras;
+    private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    private final AperturaConPermisoRepository aperturaConPermisoRepository;
+
     @Autowired
-    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras) {
+    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, AccesoDeColaboradorRepository accesoDeColaboradorRepository, AperturaConPermisoRepository aperturaConPermisoRepository) {
         this.repositorioHeladeras = repositorioHeladeras;
+        this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
+        this.aperturaConPermisoRepository = aperturaConPermisoRepository;
     }
 
 
@@ -72,7 +79,10 @@ public class CtrlDonacionViandas {
     public String procesarSolicitudDonacionViadas(@RequestBody DonacionDeViandaDTO donacionDTO, Model model){
 
         DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
-        GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+
+        GestorDePermisosDeApertura gestorDePermisosDeApertura = new GestorDePermisosDeApertura(accesoDeColaboradorRepository, aperturaConPermisoRepository);
+
+        gestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
         model.addAttribute("mensaje", "Donacion realizada con éxito!");
         return "Home";
 

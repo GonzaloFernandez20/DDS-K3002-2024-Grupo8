@@ -4,6 +4,9 @@ import DTOs.DistribucionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
+import Modelo.Dominio.Repositories.contribucion.DistribucionDeViandaRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.DistribucionDeViandas;
@@ -32,11 +35,17 @@ public class CtrlDistribucionViandas {
 
     private final HeladeraRepository repositorioHeladeras;
     private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    private final AperturaConPermisoRepository aperturaConPermisoRepository;
+    private final DistribucionDeViandaRepository distribucionDeViandaRepository;
 
     @Autowired
-    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion) {
+    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion, AccesoDeColaboradorRepository accesoDeColaboradorRepository, AperturaConPermisoRepository aperturaConPermisoRepository, DistribucionDeViandaRepository distribucionDeViandaRepository) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
+        this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
+        this.aperturaConPermisoRepository = aperturaConPermisoRepository;
+        this.distribucionDeViandaRepository = distribucionDeViandaRepository;
     }
 
     private List<HeladeraSeleccionDTO> heladeras;
@@ -60,9 +69,6 @@ public class CtrlDistribucionViandas {
         heladeras = repositorioHeladeras.findAll().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
 
-        /*heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
-                map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
-*/
         model.addAttribute("heladeras", heladeras);
         this.setMotivos();
         model.addAttribute("motivos", motivos);
@@ -79,22 +85,23 @@ public class CtrlDistribucionViandas {
 
             System.out.println(nuevaDistribucion.getMotivoDeDistribucion().toString() + ' ' + nuevaDistribucion.getCantidadDeViandasAMover() + ' ' + nuevaDistribucion.getHeladeraDeOrigen().getUbicacion().getNombreCompletoDeUbicacion() + ' ' + nuevaDistribucion.getHeladeraDestino().getUbicacion().getNombreCompletoDeUbicacion());
 
-            GestorDePermisosDeApertura.generarPermisosDeDistribucion(nuevaDistribucion);
+            distribucionDeViandaRepository.save(nuevaDistribucion);
+
+            GestorDePermisosDeApertura gestorDePermisosDeApertura = new GestorDePermisosDeApertura(accesoDeColaboradorRepository, aperturaConPermisoRepository);
+            gestorDePermisosDeApertura.generarPermisosDeDistribucion(nuevaDistribucion);
             return ResponseEntity.ok("La declaración de la distribución se ha realizado con éxito!");
         } catch (ExcepcionViandasInsuficientesEnOrigen e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad de viandas en la heladera origen es insuficiente.");
         } catch (ExcepcionNoHayEspacioEnDestino e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No hay espacio suficiente en la heladera destino.");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error desconocido.");
         }
     }
 
     private DistribucionDeViandas procesarDTO(DistribucionDeViandaDTO dto){
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
-        // HARDCODEADO POR MOTIVOS DIDÁCTICOS,AL IGUAL QUE EL COMENTARIO EN PEDIRLE TARJETA AL COLABORADOR
-        AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("1010", colaborador);
-        colaborador.setTarjeta(accesoDeColaborador);
 
         Optional<Heladera> heladeraOrigenElegida = repositorioHeladeras.findById(dto.getHeladeraDeOrigenID());
         Optional<Heladera> heladeraDestinoElegida = repositorioHeladeras.findById(dto.getHeladeraDestinoID());

@@ -118,8 +118,8 @@ public class App {
         - 1 colaboradorHumano*
 
             * */
-            /*
-            PuntoEnElMapa puntoEnElMapa = new PuntoEnElMapa();
+
+            /*PuntoEnElMapa puntoEnElMapa = new PuntoEnElMapa();
             puntoEnElMapa.setLatitud(1234567);
             puntoEnElMapa.setLongitud(7654321);
 
@@ -242,7 +242,11 @@ public class App {
             heladera.recibirVianda(vianda);
             heladera.recibirVianda(vianda2);
             heladeraRepository.save(heladera);
-            */
+
+            AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador();
+            accesoDeColaborador.setColaborador(colaboradorHumano);
+            accesoDeColaborador.setCodigoTarjeta("1111AA");
+            accesoDeColaboradorRepository.save(accesoDeColaborador);*/
         };
     }
 }
