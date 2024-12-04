@@ -91,7 +91,7 @@ public class App {
             Direccion direccion = new Direccion();
             direccion.setAltura("9999");
             direccion.setCalle("Medrano");
-            direccion.setCodPostal("567");
+//            direccion.setCodPostal("567");
 
             Ubicacion ubicacion = new Ubicacion();
             ubicacion.setPunto(puntoEnElMapa);
