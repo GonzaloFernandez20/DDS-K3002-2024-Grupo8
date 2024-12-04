@@ -45,6 +45,7 @@ public class CtrlDonacionViandas {
     //TODO 1: traerse las heladeras de la bd y mapearlas en HeladeraSeleccionDTO usando el mapper
     private final List<HeladeraSeleccionDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
             map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
+    /*heladeraRepository.findAll().stream().map(heladera->newHeladeraDTO(heladera.getId(),heladera.getNombre())).collect(Collectors.toList());*/
 
     private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200")), List.of(new WhatsApp("15 2350-2350")));
     List<EstadoVianda> estados = new ArrayList<>();
@@ -72,12 +73,12 @@ public class CtrlDonacionViandas {
     }
 
     @PostMapping("/PrevioDonarViandas")
-    public ResponseEntity<String> procesarSolicitudDonacionViadas(@RequestBody HeladeraDTO heladeraDTO){
-        System.out.println(heladeraDTO.getIdHeladera());
-        Direccion direccion = new Direccion(heladeraDTO.getCalle(), heladeraDTO.getAltura());
+    public ResponseEntity<String> procesarSolicitudDonacionViadas(@RequestBody int IDHeladera){
+        Optional<Heladera> heladera= this.repositorioHeladeras.findById(IDHeladera);
+        /*Direccion direccion = new Direccion(heladeraDTO.getCalle(), heladeraDTO.getAltura());
         Ubicacion ubicacion = new Ubicacion(direccion, heladeraDTO.getCiudad(), heladeraDTO.getNombreDelPunto());
-        Modelo modelo = new Modelo(heladeraDTO.getTempMAXmodelo(), heladeraDTO.getTempMINmodelo());
-        heladeraSeleccionada = new Heladera(colaborador, ubicacion, heladeraDTO.getCapacidadViandas(), modelo, heladeraDTO.getPuestaEnFuncionamiento());
+        Modelo modelo = new Modelo(heladeraDTO.getTempMAXmodelo(), heladeraDTO.getTempMINmodelo());*/
+        heladeraSeleccionada = heladera.get();
         /*
         * try {
             gestorTarjetas.registrarVinculacion(nuevoVulnerablevinculado);
