@@ -149,13 +149,13 @@
 			<version>12.2.0.jre11</version>
 		</dependency>
 
-		<!-- MY SQL
+		<!-- MY SQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.28</version>
 		</dependency>
--->
+
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 		<!-- JWT (Sesion de un usuario) -->

@@ -3,6 +3,8 @@ package Controladores.Contribuciones;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
 import Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
@@ -37,9 +39,14 @@ public class CtrlDonacionViandas {
     private final HeladeraRepository repositorioHeladeras;
     private final GestorInicioDeSesion gestorInicioDeSesion;
 
+    private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    private final AperturaConPermisoRepository aperturaConPermisoRepository;
+
     @Autowired
-    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion) {
+    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, AccesoDeColaboradorRepository accesoDeColaboradorRepository, AperturaConPermisoRepository aperturaConPermisoRepository, GestorInicioDeSesion gestorInicioDeSesion) {
         this.repositorioHeladeras = repositorioHeladeras;
+        this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
+        this.aperturaConPermisoRepository = aperturaConPermisoRepository;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
     }
 
@@ -76,7 +83,9 @@ public class CtrlDonacionViandas {
     public String procesarSolicitudDonacionViadas(@RequestBody DonacionDeViandaDTO donacionDTO, Model model){
 
         DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
-        GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+        GestorDePermisosDeApertura gestorDePermisosDeApertura = new GestorDePermisosDeApertura(accesoDeColaboradorRepository, aperturaConPermisoRepository);
+
+        gestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
         model.addAttribute("mensaje", "Donacion realizada con éxito!");
         return "Home";
 

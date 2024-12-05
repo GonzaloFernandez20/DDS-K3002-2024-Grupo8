@@ -4,13 +4,15 @@ import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.heladera.Heladera;
 
 public class HeladeraSeleccionMapper {
-
     public static HeladeraSeleccionDTO convertirEnHeladeraSeleccionDTO(Heladera heladera) {
-        return new HeladeraSeleccionDTO(heladera.getUbicacion().getNombreDelPunto(),
-                                        heladera.getUbicacion().getDireccion().getCalle(),
-                                        heladera.getUbicacion().getDireccion().getAltura(),
-                                        heladera.getUbicacion().getCiudad(),
-                                        heladera.capacidadRestante(),
-                                        heladera.getEstado());
+        System.out.println(heladera.getUbicacion().getNombreCompletoDeUbicacion() + " " + heladera.getEstado());
+        return new HeladeraSeleccionDTO(heladera.getId_heladera(),
+                heladera.getUbicacion().getNombreDelPunto(),
+                heladera.getUbicacion().getDireccion().getCalle(),
+                heladera.getUbicacion().getDireccion().getAltura(),
+                heladera.getUbicacion().getCiudad(),
+                heladera.getViandasEnStock().size(),
+                heladera.capacidadRestante(),
+                heladera.getEstado());
     }
 }

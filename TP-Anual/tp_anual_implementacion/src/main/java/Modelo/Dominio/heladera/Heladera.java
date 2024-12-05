@@ -30,7 +30,7 @@ public class Heladera {
     private int capacidadDeViandas;
     @Column(name = "fecha_de_puesta_en_funcionamiento")
     private LocalDate puestaEnFuncionamiento;
-    @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Vianda> viandasEnStock;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "modelo", referencedColumnName = "id_modelo")

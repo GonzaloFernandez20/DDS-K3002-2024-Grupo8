@@ -28,7 +28,7 @@ public class Colaborador {
     private List<String> mensajesRecibidos;
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Contribucion> historialDeContribuciones;
-    @OneToOne(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
     private double puntosAcumulados;

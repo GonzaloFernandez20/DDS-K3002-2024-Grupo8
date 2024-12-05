@@ -10,7 +10,4 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
-public interface AccesoDeColaboradorRepository extends JpaRepository<AccesoDeColaborador, Integer> {
-
-}
+public interface AccesoDeColaboradorRepository extends JpaRepository<AccesoDeColaborador, Integer> { }

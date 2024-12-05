@@ -23,7 +23,7 @@ public class ScheduledTasks {
     AppConfig config = new AppConfig();
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 100000)
     public void genererReportesSemanales(){
         logger.info("Fixed Rate Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
 

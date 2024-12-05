@@ -1,10 +1,15 @@
+import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.Accesos_a_heladeras.AperturaConPermiso;
 import Modelo.Dominio.Accesos_a_heladeras.MotivoApertura;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.contribucion.*;
-import Modelo.Dominio.reportes.ReporteDeFallas;
-import Repositories.AperturaConPermisoRepository;
+import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
+import Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
 import Repositories.colaborador.ColaboradorRepository;
 import Repositories.contribucion.DonacionDeDineroRepository;
+import Repositories.contribucion.DonacionDeViandasRepository;
 import Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Repositories.documentacion.DocumentoRepository;
 import Repositories.heladera.HeladeraRepository;
@@ -41,6 +46,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Modelo.Dominio.contribucion.EstadoVianda.ENTREGADA;
+import static Modelo.Dominio.documentacion.Sexo.FEMENINO;
+import static Modelo.Dominio.documentacion.TipoDeDocumento.DNI;
+
 @SpringBootApplication(exclude = {
         SecurityAutoConfiguration.class,
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
@@ -76,6 +85,10 @@ public class App {
     FallaTecnicaRepository fallaTecnicaRepository;
     @Autowired
     AperturaConPermisoRepository aperturaConPermisoRepository;
+    @Autowired
+    AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    @Autowired
+    DonacionDeViandasRepository donacionDeViandasRepository;
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
@@ -83,8 +96,47 @@ public class App {
     CommandLineRunner commandLineRunner(
     ){
         return args -> {
+            /*Vianda vianda = new Vianda();
+            vianda.setEstadoVianda(ENTREGADA);
+            vianda.setColaborador(colaboradorHumano);
+            vianda.setFechaDeDonacion(LocalDate.now());
+            vianda.setFechaDeCaducidad(LocalDate.now().plusDays(5));
+            vianda.setTipoDeComida("Pollo con verduras");
+
+            Vianda vianda2 = new Vianda();
+            vianda2.setEstadoVianda(ENTREGADA);
+            vianda2.setColaborador(colaboradorHumano);
+            vianda2.setFechaDeDonacion(LocalDate.now());
+            vianda2.setFechaDeCaducidad(LocalDate.now().plusDays(7));
+            vianda2.setTipoDeComida("Fideos");
+
+            DonacionDeViandas donacionDeViandas = new DonacionDeViandas();
+            donacionDeViandas.setViandas(List.of(vianda, vianda2));
+            donacionDeViandas.setHeladeraDestino(heladera);
+            donacionDeViandas.setColaborador(colaboradorHumano);
+            donacionDeViandas.setFechaDeContribucion(LocalDate.now());
+
+            vianda.setHeladera(heladera);
+            vianda2.setHeladera(heladera);
+
+            donacionDeViandasRepository.save(donacionDeViandas);
+
+            heladera.recibirVianda(vianda);
+            heladera.recibirVianda(vianda2);
+            heladeraRepository.save(heladera);*/
+
+            AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador();
+            accesoDeColaborador.setColaborador(colaboradorHumano);
+            accesoDeColaborador.setCodigoTarjeta("1111AA");
+            accesoDeColaborador.setColaborador(colaboradorHumano);
+            colaboradorHumano.setTarjeta(accesoDeColaborador);
+            colaboradorRepository.save(colaboradorHumano);
+            accesoDeColaboradorRepository.save(accesoDeColaborador);
+
+            System.out.println("Tarjeta: " + colaboradorHumano.getTarjeta());
+
 //Insert de clase con otras clases que sean sus atributos
-            PuntoEnElMapa puntoEnElMapa = new PuntoEnElMapa();
+            /*PuntoEnElMapa puntoEnElMapa = new PuntoEnElMapa();
             puntoEnElMapa.setLatitud(1234567);
             puntoEnElMapa.setLongitud(7654321);
 
@@ -178,7 +230,7 @@ public class App {
             fallaTecnica.setMomentoDelSuceso(LocalDateTime.now());
             fallaTecnica.setColaboradorInformante(colaboradorJuridico);
             fallaTecnica.setHeladeraDondeOcurrio(heladera);
-            fallaTecnicaRepository.save(fallaTecnica);
+            fallaTecnicaRepository.save(fallaTecnica);*/
         };
     }
 }
