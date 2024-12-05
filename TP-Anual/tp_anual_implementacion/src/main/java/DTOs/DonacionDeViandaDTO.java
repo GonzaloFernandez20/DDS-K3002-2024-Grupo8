@@ -1,9 +1,11 @@
 package DTOs;
 
+import java.util.Date;
 import java.util.List;
 
 public class DonacionDeViandaDTO {
    private int heladeraID;
+   private Date fechaDonacion;
    private List<ViandaDTO> viandasDTO;
 
     // Constructor ----------------------------------------------------
@@ -23,5 +25,11 @@ public class DonacionDeViandaDTO {
     }
     public void setViandasDTO(List<ViandaDTO> viandasDTO) {
         this.viandasDTO = viandasDTO;
+    }
+    public Date getFechaDonacion() {
+        return fechaDonacion;
+    }
+    public void setFechaDonacion(Date fechaDonacion) {
+        this.fechaDonacion = fechaDonacion;
     }
 }

@@ -1,4 +1,3 @@
-
 function showAlert(message, type) {
     const alertContainer = document.getElementById("alert-container");
 

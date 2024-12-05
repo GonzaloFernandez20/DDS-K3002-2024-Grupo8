@@ -18,6 +18,7 @@ import Modelo.Mappers.DonacionDeViandasMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Repositorios.RepositorioHeladeras;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,7 @@ public class CtrlDonacionViandas {
     //TODO 1: traerse las heladeras de la bd y mapearlas en HeladeraSeleccionDTO usando el mapper
     private final List<HeladeraSeleccionDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
             map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
+    /*heladeraRepository.findAll().stream().map(heladera->newHeladeraDTO(heladera.getId(),heladera.getNombre())).collect(Collectors.toList());*/
 
     private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200")), List.of(new WhatsApp("15 2350-2350")));
     List<EstadoVianda> estados = new ArrayList<>();
@@ -68,25 +70,34 @@ public class CtrlDonacionViandas {
             return "PedirTarjetaColaborador";
         }
         setEstados();
-        model.addAttribute("estados", estados);
         model.addAttribute("heladeras", heladeras);
+        model.addAttribute("estados", estados);
         return "DonarViandas";
     }
 
-    @PostMapping("/DonarViandas")
-    public String procesarSolicitudDonacionViadas(@RequestBody DonacionDeViandaDTO donacionDTO, Model model){
-
-        DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
-        GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
-        model.addAttribute("mensaje", "Donacion realizada con éxito!");
-        return "Home";
-
+    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
+        Optional<Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
+        if (heladeraElegida.isPresent()) {
+            return DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(), colaborador);
+        } else {
+            throw new RuntimeException("Heladera no encontrada con ID: " + dto.getHeladeraID());
+        }
     }
 
-    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
-        Optional <Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
-        DonacionDeViandas nuevaDonacion = DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(),colaborador);
-        return nuevaDonacion;
+    @PostMapping("/DonarViandas")
+    public  ResponseEntity<String> donarVianda(@RequestBody DonacionDeViandaDTO donacionDTO){
+        if (donacionDTO == null || donacionDTO.getViandasDTO() == null || donacionDTO.getViandasDTO().isEmpty()) {
+            throw new RuntimeException("La donación o la lista de viandas está vacía");
+        }
+
+        try {
+            DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
+            GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+            return ResponseEntity.ok("Donacion realizada con éxito!");
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
+        }
     }
 
 }

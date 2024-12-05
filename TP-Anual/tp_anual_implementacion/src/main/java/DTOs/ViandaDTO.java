@@ -11,6 +11,7 @@ public class ViandaDTO {
     private LocalDate fechaDeCaducidad;
     private String calorias;
     private String peso;
+    private EstadoVianda estado;
 
     // Constructores------------------------------------------------
     public ViandaDTO() {
@@ -19,12 +20,14 @@ public class ViandaDTO {
     public ViandaDTO(String tipoDeComida,
                      LocalDate fechaDeCaducidad,
                      String calorias,
-                     String peso)
+                     String peso,
+                     EstadoVianda estado)
     {
         this.tipoDeComida = tipoDeComida;
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.calorias = calorias;
         this.peso = peso;
+        this.estado = estado;
     }
 
     // Getters y setters ------------------------------------------------------------------------------------
@@ -39,6 +42,9 @@ public class ViandaDTO {
 
     public String getPeso() { return peso; }
     public void setPeso(String peso) { this.peso = peso; }
+
+    public EstadoVianda getEstado() { return estado; }
+    public void setEstado(EstadoVianda estado) { this.estado = estado; }
 
 }
 
