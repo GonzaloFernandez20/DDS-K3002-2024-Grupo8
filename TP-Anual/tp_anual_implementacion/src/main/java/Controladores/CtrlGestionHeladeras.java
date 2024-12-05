@@ -68,10 +68,6 @@ public class CtrlGestionHeladeras {
             heladeraAModificar.setAltura(altura);
         }
 
-        if(!Objects.isNull(codigoPostal)) {
-            heladeraAModificar.setCodPostal(codigoPostal);
-        }
-
         if(!Objects.isNull(modelo)) {
             heladeraAModificar.setNombreModelo(modelo);
         }
@@ -97,7 +93,6 @@ public class CtrlGestionHeladeras {
         System.out.println(heladeraAModificar.getCiudad());
         System.out.println(heladeraAModificar.getCalle());
         System.out.println(heladeraAModificar.getAltura());
-        System.out.println(heladeraAModificar.getCodPostal());
         System.out.println(heladeraAModificar.getNombreModelo());
         System.out.println(heladeraAModificar.getTempMAXmodelo());
         System.out.println(heladeraAModificar.getTempMINmodelo());

@@ -109,7 +109,7 @@ public class App {
             heladera.setPuestaEnFuncionamiento(LocalDate.now());
             heladera.setUbicacion(ubicacion);
             heladera.setModelo(modelo);
-            heladeraRepository.save(heladera);
+            // heladeraRepository.save(heladera);
 
             Colaborador colaboradorJuridico = new Colaborador();
 
@@ -140,17 +140,20 @@ public class App {
             donacionDeViandas.setHeladeraDestino(heladera);
             donacionDeViandas.setViandas(viandas);
             donacionDeViandas.procesarLaContribucion();
+            //heladeraRepository.save(heladera);
 
             HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera();
             hacerseCargoDeHeladera.setColaborador(colaboradorJuridico);
             hacerseCargoDeHeladera.setHeladeraACargo(heladera);
             hacerseCargoDeHeladera.procesarLaContribucion();
+            //heladeraRepository.save(heladera);
 
             colaboradorJuridico.registrarContribucion(donacionDeDinero);
             colaboradorJuridico.registrarContribucion(hacerseCargoDeHeladera);
             colaboradorJuridico.registrarContribucion(donacionDeViandas);
             colaboradorJuridico.setPersona(personaJuridica);
             colaboradorRepository.save(colaboradorJuridico);
+            // El colaborador guarda las contribuciones, las contribuciones guardan
 
             AperturaConPermiso aperturaConPermiso = new AperturaConPermiso();
             aperturaConPermiso.setContribucion(donacionDeViandas);

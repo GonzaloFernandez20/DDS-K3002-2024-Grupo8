@@ -40,12 +40,15 @@
                                 <input type="text" id="ciudadHeladera" placeholder="Ingrese la ciudad de la heladera" required>
                                 <div class="error-message" id="ciudadHeladeraError"></div>
                             </div>
-                
+
                             <div class="input-group">
                                 <label for="direccionHeladera">Dirección</label>
-                                <input type="text" id="direccionHeladera" placeholder="Ingrese la dirección de la heladera" required>
-                                <a th:href="@{/RecomendacionColocacion}">Solicitar puntos de recomendación</a>
+                                <input type="text" id="direccionHeladera" placeholder="Ingrese la calle de la heladera" required>
                                 <div class="error-message" id="direccionHeladeraError"></div>
+                                <label for="altura">Altura</label>
+                                <input type="text" id="altura" placeholder="Ingrese la altura de la heladera" required>
+                                <a th:href="@{/RecomendacionColocacion}">Solicitar puntos de recomendación</a>
+                                <div class="error-message" id="alturaError"></div>
                             </div>
 
                             <div class="input-group">

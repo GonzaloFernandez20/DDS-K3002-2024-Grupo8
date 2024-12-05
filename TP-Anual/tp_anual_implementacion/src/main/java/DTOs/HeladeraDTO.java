@@ -13,7 +13,6 @@ public class HeladeraDTO {
     private float tempMINmodelo;
     private String calle;
     private String altura;
-    private String codPostal;
     private String ciudad;
     private String nombreDelPunto;
     private LocalDate puestaEnFuncionamiento;
@@ -83,14 +82,6 @@ public class HeladeraDTO {
 
     public void setAltura(String altura) {
         this.altura = altura;
-    }
-
-    public String getCodPostal() {
-        return codPostal;
-    }
-
-    public void setCodPostal(String codPostal) {
-        this.codPostal = codPostal;
     }
 
     public String getCiudad() {
