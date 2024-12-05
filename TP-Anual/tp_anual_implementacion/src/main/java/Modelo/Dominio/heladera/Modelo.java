@@ -25,6 +25,8 @@ public class Modelo {
         this.temperaturaMinima = temperaturaMinima;
     }
 
+    public Modelo() {}
+
     public boolean controlarTemperatura(float temperatura){
         return temperatura >= temperaturaMinima && temperatura <= temperaturaMinima;
     }

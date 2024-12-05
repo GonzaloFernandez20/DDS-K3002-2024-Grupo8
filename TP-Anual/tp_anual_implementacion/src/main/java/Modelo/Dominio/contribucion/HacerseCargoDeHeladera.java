@@ -14,10 +14,8 @@ import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.sistema.RegistroDeHeladeras;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 import java.io.IOException;
@@ -26,7 +24,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "HacerseCargoDeHeladera")
 public class HacerseCargoDeHeladera extends Contribucion{
-    @OneToOne
+    @OneToOne( cascade = CascadeType.PERSIST )
     @JoinColumn(name = "heladera_a_cargo", referencedColumnName = "id_heladera")
     private Heladera heladeraACargo;
 
@@ -42,7 +40,6 @@ public class HacerseCargoDeHeladera extends Contribucion{
     @Override
     public void procesarLaContribucion() {
         colaborador.registrarContribucion(this);
-        RepositorioHeladeras.getInstancia().agregarHeladera(heladeraACargo);
     }
 
     @Override
