@@ -61,56 +61,38 @@ public class CtrlDonacionViandas {
         }
     }
 
-    Heladera heladeraSeleccionada;
-
-    @GetMapping("/PrevioDonarViandas")
-    public String mostrarHeladeras(Model model) {
-        List<Heladera> heladerasList = RepositorioHeladeras.getInstancia().getHeladeras();
-        System.out.println("Heladeras desde el repositorio: " + heladerasList.size());
-
-        model.addAttribute("heladeras", heladeras);
-        return "PrevioDonarViandas";
-    }
-
-    @PostMapping("/PrevioDonarViandas")
-    public ResponseEntity<String> procesarSolicitudDonacionViadas(@RequestBody int IDHeladera){
-        Optional<Heladera> heladera= this.repositorioHeladeras.findById(IDHeladera);
-        /*Direccion direccion = new Direccion(heladeraDTO.getCalle(), heladeraDTO.getAltura());
-        Ubicacion ubicacion = new Ubicacion(direccion, heladeraDTO.getCiudad(), heladeraDTO.getNombreDelPunto());
-        Modelo modelo = new Modelo(heladeraDTO.getTempMAXmodelo(), heladeraDTO.getTempMINmodelo());*/
-        heladeraSeleccionada = heladera.get();
-        /*
-        * try {
-            gestorTarjetas.registrarVinculacion(nuevoVulnerablevinculado);
-            return ResponseEntity.ok("Registro realizado con éxito!");
-        }catch(RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }*/
-        return ResponseEntity.ok("Heladera ingresada con éxito!");
-    }
-
-    private DonacionDeViandas procesarDonacionDTO(DonacionDeViandaDTO dto){
-        DonacionDeViandas nuevaDonacion = DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraSeleccionada,colaborador);
-        return nuevaDonacion;
-    }
-
     @GetMapping("/DonarViandas")
-    public String solicitarDatosViandas(Model model) {
-        //if(Objects.isNull(colaborador.getTarjeta())) {
-        //  return "PedirTarjetaColaborador";
-        //}
+    public String mostrarHeladeras(Model model) {
+        /*if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
+            return "PedirTarjetaColaborador";}*/
         setEstados();
+        model.addAttribute("heladeras", heladeras);
         model.addAttribute("estados", estados);
         return "DonarViandas";
     }
 
+    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
+        Optional<Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
+        if (heladeraElegida.isPresent()) {
+            return DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(), colaborador);
+        } else {
+            throw new RuntimeException("Heladera no encontrada con ID: " + dto.getHeladeraID());
+        }
+    }
+
     @PostMapping("/DonarViandas")
-    public String donarVianda(@RequestBody DonacionDeViandaDTO donacionDTO, Model model){
+    public  ResponseEntity<String> donarVianda(@RequestBody DonacionDeViandaDTO donacionDTO){
+        if (donacionDTO == null || donacionDTO.getViandasDTO() == null || donacionDTO.getViandasDTO().isEmpty()) {
+            throw new RuntimeException("La donación o la lista de viandas está vacía");
+        }
 
-        DonacionDeViandas nuevaDonacion = procesarDonacionDTO(donacionDTO);
-        GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
-        model.addAttribute("mensaje", "Donacion realizada con éxito!");
-        return "Home";
-
+        try {
+            DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
+            GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+            return ResponseEntity.ok("Donacion realizada con éxito!");
+        }catch (Exception e) {
+            e.printStackTrace();  // Agrega esta línea para ver el error en la consola
+            return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
+        }
     }
 }
