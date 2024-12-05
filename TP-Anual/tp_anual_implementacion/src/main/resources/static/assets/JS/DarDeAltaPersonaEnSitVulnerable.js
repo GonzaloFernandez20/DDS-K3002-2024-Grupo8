@@ -79,15 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.text().then(msjDeRespuesta => {
                     if (!response.ok) {
                         showAlert(msjDeRespuesta, "error");
+                    }else{
+                        showAlert(msjDeRespuesta, "success");
+                        setTimeout(function() {
+                            window.location.href = "/Home";
+                        }, 4000);
                     }
-                    return msjDeRespuesta;
                 });
-            })
-            .then(msjDeRespuesta => {
-                showAlert(msjDeRespuesta, "success");
-                setTimeout(function() {
-                    window.location.href = "/Home";
-                }, 400000);
             })
             .catch(error => {
                 console.error('Error:', error);

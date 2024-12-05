@@ -17,10 +17,10 @@ import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 @Entity
 @Table(name = "Vinculacion")
 public class Vinculacion extends AccesoAHeladeras{
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_en_situacion_vulnerabre", referencedColumnName = "id_persona_en_situacion_vulnerable")
     private PersonaSituacionVulnerable personaSituacionVulnerable;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "colaborador_registrante", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorQueRegistro;
     @Column(name = "fecha_registro")

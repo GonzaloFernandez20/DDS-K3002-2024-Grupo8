@@ -85,11 +85,11 @@ public class CtrlRegistrarPersonaVulnerable {
     }
 
     @PostMapping("/DarDeAltaPersonaEnSitVulnerable")
-    public ResponseEntity<String> resgistrarPersonaVulnerable (@RequestBody VinculacionPersonaVulnerableDTO personaVulnerableDTO) {
+    public ResponseEntity<String> registrarPersonaVulnerable (@RequestBody VinculacionPersonaVulnerableDTO personaVulnerableDTO) {
         Vinculacion nuevoVulnerablevinculado = procesarDTO(personaVulnerableDTO);
         try {
             gestorTarjetas.registrarVinculacion(nuevoVulnerablevinculado);
-            return ResponseEntity.ok("Registro realizado con éxito!");
+            return ResponseEntity.ok().body("\"Registro realizado con éxito!\"");
         }catch(RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

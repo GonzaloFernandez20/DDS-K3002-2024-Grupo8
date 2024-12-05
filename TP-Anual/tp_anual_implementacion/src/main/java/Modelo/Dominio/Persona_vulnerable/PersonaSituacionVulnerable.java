@@ -8,15 +8,15 @@ import jakarta.persistence.*;
 @Table(name = "Persona_Situacion_Vulnerable")
 public class PersonaSituacionVulnerable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_persona_en_situacion_vulnerable;
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_vivienda")
     private EstadoDeVivienda estadoDeVivienda;
     @Column(name = "cantidad_de_menores")
     private int cantMenores;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "persona", referencedColumnName = "id_persona")
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "persona" ,referencedColumnName = "id_persona")
     private PersonaHumana persona;
 
     //Constructores ----------------------------------------------------------------------------------------------------
