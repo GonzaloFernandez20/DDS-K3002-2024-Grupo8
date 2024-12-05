@@ -8,6 +8,7 @@ import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 
+import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,12 @@ public class Colaborador {
     private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
     private List<String> mensajesRecibidos;
-    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name = "colaborador" ,referencedColumnName = "id_colaborador")
     private List<Contribucion> historialDeContribuciones;
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
+
+    @OneToOne(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
     private double puntosAcumulados;

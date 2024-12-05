@@ -22,14 +22,21 @@ public class ConfiguracionDeSeguridad {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest -> authRequest
                         //.anyRequest().permitAll())
-                        .requestMatchers("/", "/Home", "/InicioDeSesion", "/RegistroPersona", "/Mapa", "/Nosotros", "/Header", "/Footer", "/CierreDeSesion", "/RegistrarColaboradorJuridico", "RegistrarColaboradorHumano", "/ValidarUsuario").permitAll()
+                        .requestMatchers("/", "/Home", "/InicioDeSesion", "/RegistroPersona", "/Mapa", "/Nosotros",
+                                         "/Header", "/Footer", "/CierreDeSesion", "/ValidarUsuario",
+                                         "/RegistrarColaboradorJuridico", "/RegistrarColaboradorHumano").permitAll()
                         .requestMatchers("/assets/**", "/img/**").permitAll()
                         .anyRequest().authenticated())
                 //.formLogin(formularioLogin -> formularioLogin.loginPage("/InicioDeSesion").permitAll()) // Permitimos el acceso público a la página de login
                 .exceptionHandling(excepcionNoLoggueado ->
                         excepcionNoLoggueado.authenticationEntryPoint((request, response, authException) -> {
-                    response.sendRedirect("/InicioDeSesion"); // Si el usuario no está autenticado y trata de acceder a una ruta privada
-                }))
+                            String redirectUrl = request.getRequestURI();
+                            if (request.getQueryString() != null) {
+                                redirectUrl += "?" + request.getQueryString();
+                            }
+                            response.sendRedirect("/InicioDeSesion?redirect=" + redirectUrl); //Si el usuario no esta autenticado y trata de acceder a una ruta privada
+                        })
+                )
                 .sessionManagement(sessionManager-> sessionManager
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(filtroDeAutenticacionJWT, UsernamePasswordAuthenticationFilter.class) // Primero deberia validar la validez del token en la cookie

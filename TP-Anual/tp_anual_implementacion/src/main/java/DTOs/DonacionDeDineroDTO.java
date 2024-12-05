@@ -2,25 +2,17 @@ package DTOs;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.Frecuencia;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
+@Getter
 public class DonacionDeDineroDTO {
-    Colaborador colaborador;
     float monto;
-    Frecuencia frecuencia;
+    String frecuencia;
 
-    public DonacionDeDineroDTO(Colaborador colaborador, float monto, Frecuencia frecuencia) {
-        this.colaborador = colaborador;
+    public DonacionDeDineroDTO(float monto, String frecuencia) {
         this.monto = monto;
         this.frecuencia = frecuencia;
     }
-
-
-    public Colaborador getColaborador() { return colaborador; }
-    public void setColaborador(Colaborador colaborador) { this.colaborador = colaborador; }
-    public float getMonto() { return monto; }
-    public void setMonto(float monto) { this.monto = monto; }
-    public Frecuencia getFrecuencia() { return frecuencia; }
-    public void setFrecuencia(Frecuencia frecuencia) { this.frecuencia = frecuencia; }
 }

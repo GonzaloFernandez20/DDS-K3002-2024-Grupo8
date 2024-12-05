@@ -16,20 +16,23 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
     // Resultado después de validación de registro e inicio de sesión
     if (!huboError) {
-        await verificarUsuario(usuario.value, contrasena.value);
+        const params = new URLSearchParams(window.location.search);
+        const redirect = params.get('redirect');
+
+        await verificarUsuario(usuario.value, contrasena.value, redirect);
     }
 
     // -----------------------------------------------------------------------------------------------
 
     // Verificamos el usuario en el Back
-    async function verificarUsuario(usuario, contrasena) {
+    async function verificarUsuario(usuario, contrasena, redirect) {
         const datosDeUsuario = {
             nombreDeUsuario: usuario,
             contrasenia: contrasena
         };
 
         try {
-            const respuesta = await fetch('/InicioDeSesion', {
+            const respuesta = await fetch(`/InicioDeSesion${redirect ? `?redirect=${encodeURIComponent(redirect)}` : ''}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,7 +43,10 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
                 throw new Error("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
             }
             alert("Usuario y contraseña validados exitosamente.");
+            if (redirect) {window.location.href = redirect;}
+            else {
             window.location.href = "/Home";
+            }
         } catch (error) {
             console.error('Error:', error);
             alert(error.message);

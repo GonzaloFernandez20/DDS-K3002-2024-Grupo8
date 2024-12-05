@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 @Entity
-@Table(name = "DonacionDeDinero")
+@Table(name = "donacion_de_dinero")
 public class DonacionDeDinero extends Contribucion {
     @Column(name = "monto")
     private float monto;
@@ -31,8 +31,8 @@ public class DonacionDeDinero extends Contribucion {
         return monto * coeficiente;
     }
 
-    public DonacionDeDinero() {
-    }
+    public DonacionDeDinero() {}
+
     public float getMonto() {
         return monto;
     }
