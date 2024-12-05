@@ -241,3 +241,14 @@ table{
 #mod-heladera{
     display: none;
 }
+
+.imagenColaboracion{
+    border-radius: 8px;
+    border: 4px solid black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 320px;
+    width: 610px;
+    margin-top: 20px
+}

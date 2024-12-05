@@ -8,6 +8,8 @@ import Modelo.Dominio.Persona.PersonaJuridica;
 
 import static Modelo.Dominio.Persona.TipoOrganizacion.ONG;
 
+import Modelo.seguridad.GestorInicioDeSesion;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +21,17 @@ import java.util.List;
 
 @Controller
 public class CtrlSeleccionDeContribucion {
-    //COLABORADORES HARDCODEADOS
-    //private final Colaborador colaboradorActual = new Colaborador(new PersonaHumana("Fabian", "Bielinski", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "40.303.456", Sexo.MASCULINO), new Direccion("Montes Carballo", "1689", "1407")), List.of(new WhatsApp("15 1610-6160")));
-    private final Colaborador colaboradorActual = new Colaborador(new PersonaJuridica("Pinos S.A.", ONG, "Cerrajeria", new Direccion("Oliden", "779")), List.of(new WhatsApp("15 4419-6172")));
+    private final GestorInicioDeSesion gestorInicioDeSesion;
+
+    @Autowired
+    public CtrlSeleccionDeContribucion(GestorInicioDeSesion gestorInicioDeSesion) {
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
+    }
 
     @GetMapping("/Colaborar")
     public String mostrarColaboraciones(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+
         if (colaboradorActual.getPersona() instanceof PersonaHumana) {
             model.addAttribute("tipoColaborador", "PersonaHumana");
         } else if (colaboradorActual.getPersona() instanceof PersonaJuridica) {

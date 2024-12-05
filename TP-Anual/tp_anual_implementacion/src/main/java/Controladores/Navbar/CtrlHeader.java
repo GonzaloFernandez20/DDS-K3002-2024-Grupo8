@@ -1,8 +1,6 @@
 package Controladores.Navbar;
 
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.Persona.PersonaHumana;
-import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.seguridad.GestorInicioDeSesion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
