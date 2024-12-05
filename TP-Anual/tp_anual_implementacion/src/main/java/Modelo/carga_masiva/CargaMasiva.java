@@ -60,7 +60,7 @@ public class CargaMasiva {
 
                     System.out.println("Procesando colaborador: " + nombre + " " + apellido + " con documento: " + tipoDocString + " " + doc + " y mail: " + mail);
 
-                    TipoDeDocumento tipoDoc = this.castearTipoDoc(tipoDocString);
+                    TipoDeDocumento tipoDoc = this.castearTipoDocumento(tipoDocString);
                     List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
                     Mail mailMedio = new Mail(mail);
                     mediosDeContacto.add(mailMedio);
@@ -108,7 +108,7 @@ public class CargaMasiva {
         }
     }
 
-    public TipoDeDocumento castearTipoDoc(String tipoDoc) {
+    public TipoDeDocumento castearTipoDocumento(String tipoDoc) {
         switch (tipoDoc) {
             case "LC":
                 return TipoDeDocumento.LC;
@@ -122,7 +122,7 @@ public class CargaMasiva {
     }
 
     public Boolean sonCeldasValidas(String[] partes) {
-        return this.castearTipoDoc(partes[0]) != null &&
+        return this.castearTipoDocumento(partes[0]) != null &&
                 partes[1].length() <= 10 || isNumeric(partes[1]) &&
                 partes[2].length() <= 50 &&
                 partes[3].length() <= 50 &&

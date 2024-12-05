@@ -11,8 +11,30 @@ import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.localizacion.Direccion;
 
+import java.util.Objects;
+
 public class VinculacionPersonaVulnerableMapper {
     public static Vinculacion crearVinculacionAPartirDeDTO(VinculacionPersonaVulnerableDTO dto, Colaborador colaborador){
+        Documento documento;
+        if(dto.getTipoDeDocumento().equals("NO_INGRESADO")){
+            documento = null;
+        }
+        else{
+         documento= new Documento(
+                    TipoDeDocumento.valueOf(dto.getTipoDeDocumento()),
+                    dto.getNumeroDocumento(),
+                    Sexo.valueOf(dto.getSexo())
+            );
+        }
+
+        Direccion direccion;
+        if(EstadoDeVivienda.valueOf(dto.getEstadoDeVivienda()).equals(EstadoDeVivienda.POSEE_DOMICILIO)) {
+            direccion =  new Direccion(
+                    dto.getDireccionCalle(),
+                    dto.getDireccionAltura()
+                    );
+        } else direccion = null;
+
         Vinculacion nuevaVinculacion = new Vinculacion(
                 dto.getCodigoTarjeta(),
                 colaborador,
@@ -23,17 +45,9 @@ public class VinculacionPersonaVulnerableMapper {
                                 dto.getNombre(),
                                 dto.getApellido(),
                                 dto.getFechaNacimiento(),
-                                new Documento(
-                                        TipoDeDocumento.valueOf(dto.getTipoDeDocumento()),
-                                        dto.getNumeroDocumento(),
-                                        Sexo.valueOf(dto.getSexo())
-                                ),
-                                new Direccion(
-                                        dto.getDireccionCalle(),
-                                        dto.getDireccionAltura()
-                                )
-                        )
-                ));
+                                documento,
+                               direccion
+                        )));
         return nuevaVinculacion;
     }
 }

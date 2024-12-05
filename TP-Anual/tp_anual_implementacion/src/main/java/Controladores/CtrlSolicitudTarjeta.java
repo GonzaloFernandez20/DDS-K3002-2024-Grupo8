@@ -30,8 +30,8 @@ public class CtrlSolicitudTarjeta {
         return "PedirTarjetaColaborador";
     }
 
-    @PostMapping("/PedirTarjetaColaborador")
-    public String solicitarTarjetas(@RequestParam("respuestaFormAcceso") String rtaAcceso,
+    @PostMapping("/SolicitarTarjetas")
+    public String solicitarTarjeta(@RequestParam("respuestaFormAcceso") String rtaAcceso,
                                     @RequestParam(name = "cantidad", defaultValue = "1") int cantidadDeTarjetas,
                                     RedirectAttributes redirectAttributes) {
         if(rtaAcceso.equals("pedirTarjeta")) {

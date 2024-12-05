@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
             nombre: nombrePersonaVul.value,
             apellido: apellidoPersonaVul.value,
             fechaNacimiento: fechaNacimientoPersonaVul.value,
-            tipoDeDocumento: tipoDocumentoPersonaVul.value,
-            numeroDocumento: numeroDocumentoPersonaVul.value,
+            tipoDeDocumento: tipoDocumentoPersonaVul.value || "NO_INGRESADO",
+            numeroDocumento: numeroDocumentoPersonaVul.value ,
             sexo: sexoDoc.value,
             direccionCalle: calleDomicilioPersonaVul.value,
             direccionAltura: alturaDomicilioPersonaVul.value,
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 showAlert(msjDeRespuesta, "success");
                 setTimeout(function() {
                     window.location.href = "/Home";
-                }, 4000);
+                }, 400000);
             })
             .catch(error => {
                 console.error('Error:', error);

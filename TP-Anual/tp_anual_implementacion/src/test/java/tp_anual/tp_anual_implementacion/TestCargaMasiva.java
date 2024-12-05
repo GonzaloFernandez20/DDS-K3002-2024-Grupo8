@@ -84,10 +84,10 @@ public class TestCargaMasiva {
     @Disabled
     @Test
     void ValidacionesCasteoTipoDeDocumento() {
-        assertSame(cargaMasiva.castearTipoDoc("DNI"), DNI, "Castea correctamente al DNI");
-        assertSame(cargaMasiva.castearTipoDoc("LC"), LC, "Castea correctamente a la LC");
-        assertSame(cargaMasiva.castearTipoDoc("LE"), LE, "Castea correctamente a la LE");
-        assertNull(cargaMasiva.castearTipoDoc(" DNI"), "No identifica un tipo de documento incorrecto");
+        assertSame(cargaMasiva.castearTipoDocumento("DNI"), DNI, "Castea correctamente al DNI");
+        assertSame(cargaMasiva.castearTipoDocumento("LC"), LC, "Castea correctamente a la LC");
+        assertSame(cargaMasiva.castearTipoDocumento("LE"), LE, "Castea correctamente a la LE");
+        assertNull(cargaMasiva.castearTipoDocumento(" DNI"), "No identifica un tipo de documento incorrecto");
     }
     @Disabled
     @Test

@@ -65,7 +65,8 @@ public class CtrlDonacionViandas {
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
-            return "PedirTarjetaColaborador";}
+            return "PedirTarjetaColaborador";
+        }
         setEstados();
         model.addAttribute("estados", estados);
         model.addAttribute("heladeras", heladeras);

@@ -12,8 +12,7 @@ import java.util.Optional;
 @Entity
 @Table(name = "AccesoDeColaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
-    @OneToOne
-    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
+    @OneToOne(mappedBy = "tarjeta")
     private Colaborador colaborador;
     @OneToMany
     @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
