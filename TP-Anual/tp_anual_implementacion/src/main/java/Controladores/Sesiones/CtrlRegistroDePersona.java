@@ -33,7 +33,9 @@ public class CtrlRegistroDePersona {
     public ResponseEntity<String> validarUsuario(@RequestParam String contrasenia) {
         try {
             Validador.getInstancia().validarConstrasenia(contrasenia);
-            return ResponseEntity.ok("Usuario y contraseña validados exitosamente.");
+            return ResponseEntity.ok()
+                    .header("Content-Type", "text/plain; charset=UTF-8")
+                    .body("Usuario y contraseña validados exitosamente.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -51,7 +53,7 @@ public class CtrlRegistroDePersona {
         Usuario usuario = ColabJuridicoMapper.crearColaboradorJuridicoAPartirDe(colaboradorDTO);
         usuariosRepository.save(usuario);   //Cargar colaborador en BD
 
-        String token = UtilsJWT.generarToken(usuario.getUsuario()+" "+usuario.getContrasenia());
+        String token = UtilsJWT.generarToken(usuario.getUsuario());
         ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
 
         return ResponseEntity
@@ -65,7 +67,7 @@ public class CtrlRegistroDePersona {
         Usuario usuario = ColabHumanoMapper.crearColaboradorHumanoAPartirDe(colaboradorDTO);
         usuariosRepository.save(usuario);   //Cargar colaborador en BD
 
-        String token = UtilsJWT.generarToken(usuario.getUsuario()+" "+usuario.getContrasenia());
+        String token = UtilsJWT.generarToken(usuario.getUsuario());
         ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
 
         return ResponseEntity

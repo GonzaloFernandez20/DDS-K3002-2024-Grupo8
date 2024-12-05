@@ -5,10 +5,8 @@ formularioDonacion.addEventListener('submit', function(e) {
     let hasError = false;
 
     const monto = document.getElementById('montoADonar');
-    const fechaDonacion = document.getElementById('fechaDonacion');
     const frecuenciaDonacion = document.getElementById('frecuenciaDonacion');
     const metodoPago = document.getElementById('metodoDePago');
-
 
     if (!monto.value) {
         hasError = true;
@@ -17,15 +15,6 @@ formularioDonacion.addEventListener('submit', function(e) {
     } else {
         document.getElementById('montoError').innerText = '';
         monto.classList.remove('error');
-    }
-
-    if (!fechaDonacion.value) {
-        hasError = true;
-        document.getElementById('fechaDonacionError').innerText = 'La fecha es requerida';
-        fechaDonacion.classList.add('error');
-    } else {
-        document.getElementById('fechaDonacionError').innerText = '';
-        fechaDonacion.classList.remove('error');
     }
 
     if (!frecuenciaDonacion.value) {
@@ -52,9 +41,7 @@ formularioDonacion.addEventListener('submit', function(e) {
 
         const donacionData = {
             monto: monto.value,
-            fecha: fechaDonacion.value,
             frecuencia: frecuenciaDonacion.value,
-            metodoPago: metodoPago.value
         };
 
         fetch('/ProcesarDonacionDeDinero', {
@@ -68,13 +55,8 @@ formularioDonacion.addEventListener('submit', function(e) {
                 if (!response.ok) {
                     throw new Error('Error en la red');
                 }
-                return response.json();
-            })
-            .then(data => {
-                if(data.ok){
-                    alert('Donación enviada exitosamente');
-                    formularioDonacion.reset();
-                }
+                alert('Donación enviada exitosamente');
+                formularioDonacion.reset();
             })
             .catch(error => {
                 console.error('Error:', error);

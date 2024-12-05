@@ -9,12 +9,15 @@ import java.time.LocalDate;
 @Table(name = "Contribucion")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Contribucion {
+
     @Id
     @GeneratedValue
     private Integer id_contribucion;
-    @ManyToOne
-    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "colaborador")
     protected Colaborador colaborador;
+
     @Column(name = "fecha_de_contribucion")
     protected LocalDate fechaDeContribucion;
 
