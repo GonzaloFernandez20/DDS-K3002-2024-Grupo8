@@ -86,7 +86,17 @@ public class ReportesServiceImpl implements ReportesService {
     public List<ViandasPorHeladera> traerViandasPorHeladera(){
         List<ViandasPorHeladera> viandasPorHeladeraList = new ArrayList<ViandasPorHeladera>();
 
-        List<ViandasPorHeladeraDAO> viandasPorHeladeraDAOS = aperturaRepository.traerViandasIngresadasYRetiradasEntreFechas(LocalDateTime.now().minusWeeks(1), LocalDateTime.now());
+        List<Heladera> heladeras_BD = heladeraRepository.findAll();
+
+        heladeras_BD.forEach( heladera -> {
+            ViandasPorHeladera viandasPorHeladera = new ViandasPorHeladera();
+            viandasPorHeladera.setHeladera(heladera);
+            viandasPorHeladera.setViandasRetiradas(aperturaRepository.traerViandasRetiradasEntreFechasDeUnaHeladera(heladera.getId_heladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
+            viandasPorHeladera.setViandasColocadas(aperturaRepository.traerViandasIngresadasEntreFechasDeUnaHeladera(heladera.getId_heladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
+            viandasPorHeladeraList.add(viandasPorHeladera);
+        });
+
+        /*List<ViandasPorHeladeraDAO> viandasPorHeladeraDAOS = aperturaRepository.traerViandasIngresadasYRetiradasEntreFechas(LocalDateTime.now().minusWeeks(1), LocalDateTime.now());
 
         List<Integer> viandas_colocadas_lista = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getViandasColocadas()).toList();
         List<Integer> viandas_retiradas_lista = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getViandasRetiradas()).toList();
@@ -107,7 +117,7 @@ public class ReportesServiceImpl implements ReportesService {
             viandasPorHeladera.setHeladera(heladera);
 
             viandasPorHeladeraList.add(viandasPorHeladera);
-        }
+        }*/
 
         System.out.println("Lista de ViandasPorHeladera:");
         System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getHeladera().getId_heladera()).toArray()));

@@ -125,7 +125,7 @@ public class App {
             heladera.recibirVianda(vianda2);
             heladeraRepository.save(heladera);*/
 
-            AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador();
+            /*AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador();
             accesoDeColaborador.setColaborador(colaboradorHumano);
             accesoDeColaborador.setCodigoTarjeta("1111AA");
             accesoDeColaborador.setColaborador(colaboradorHumano);
@@ -133,7 +133,7 @@ public class App {
             colaboradorRepository.save(colaboradorHumano);
             accesoDeColaboradorRepository.save(accesoDeColaborador);
 
-            System.out.println("Tarjeta: " + colaboradorHumano.getTarjeta());
+            System.out.println("Tarjeta: " + colaboradorHumano.getTarjeta());*/
 
 //Insert de clase con otras clases que sean sus atributos
             /*PuntoEnElMapa puntoEnElMapa = new PuntoEnElMapa();
