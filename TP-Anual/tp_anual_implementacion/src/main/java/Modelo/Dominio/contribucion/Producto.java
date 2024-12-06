@@ -21,6 +21,9 @@ public class Producto {
         return stock;
     }
 
+    public Producto(){
+    }
+
     public Producto(String nombreProducto, int stock) {
         this.nombreProducto = nombreProducto;
         this.stock = stock;
