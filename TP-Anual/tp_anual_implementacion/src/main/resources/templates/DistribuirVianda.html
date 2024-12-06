@@ -45,7 +45,7 @@
                         <label for="heladeraOrigen">Heladera Origen (*)</label>
                         <select id="heladeraOrigen" name="heladeraOrigen">
                             <option value="" selected disabled>Seleccione una heladera</option>
-                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad} + ' (dispone de ' + ${heladera.stockDeViandas} + ' viandas)'" th:class="${heladera.stockDeViandas == 0 ? 'inactiva' : ''}" th:disabled="${heladera.stockDeViandas == 0}" th:data-stock="${heladera.stockDeViandas}"></option>
+                            <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad} + ' (dispone de ' + ${heladera.getCapacidadRestante()} + ' viandas)'" th:class="${heladera.getCapacidadRestante == 0 ? 'inactiva' : ''}" th:disabled="${heladera.getCapacidadRestante == 0}" th:data-stock="${heladera.getCapacidadRestante}"></option>
                         </select>
                         <div class="error-message" id="heladeraOrigenError"></div>
                     </div>

@@ -10,7 +10,6 @@ function establecerFechaHoy() {
 
     // Establecer el valor mínimo en el input de fecha
     document.getElementById("fechaCaducidad").setAttribute("min", hoy);
-    document.getElementById("fechaDonacion").setAttribute("min", hoy);
 }
 
 // Mostrar viandas en la interfaz

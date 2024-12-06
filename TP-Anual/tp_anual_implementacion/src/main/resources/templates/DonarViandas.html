@@ -42,10 +42,12 @@
                             <select id="heladera" name="heladera" required>
                                 <option value="" selected disabled>--Seleccione una opcion--</option>
                                 <option th:each="heladera : ${heladeras}"
-                                        th:value="${heladera.getIdHeladera()}"
-                                        th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ')'" th:data-stock="${heladera.getCapacidadRestante()}" />
-                                        th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ' (faltan ' + ${heladera.capacidadRestante} + ' viandas para llenar la heladera)'" th:data-stock="${heladera.getStockDeViandas()}"
-                                        th:class="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0 ? 'inactiva' : ''}" th:disabled="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0}"/>
+                                        th:value="${heladera.idHeladera}"
+                                        th:text="${heladera.nombreDelPunto + ' (' + heladera.calle + ' ' + heladera.altura + ', ' + heladera.ciudad + ') (faltan ' + heladera.capacidadRestante + ' viandas para llenar la heladera)'}"
+                                        th:data-stock="${heladera.capacidadRestante}"
+                                        th:class="${heladera.estado.name() == 'INACTIVA' || heladera.capacidadRestante == 0 ? 'inactiva' : ''}"
+                                        th:disabled="${heladera.estado.name() == 'INACTIVA' || heladera.capacidadRestante == 0}">
+                                </option>
                             </select>
 
                             <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
