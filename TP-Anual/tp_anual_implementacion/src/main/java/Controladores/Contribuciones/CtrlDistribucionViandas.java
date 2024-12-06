@@ -66,7 +66,6 @@ public class CtrlDistribucionViandas {
             return "PedirTarjetaColaborador";
         }
 
-        //PENDIENTE PARA PERSISTENCIA
         heladeras = repositorioHeladeras.findAll().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
 

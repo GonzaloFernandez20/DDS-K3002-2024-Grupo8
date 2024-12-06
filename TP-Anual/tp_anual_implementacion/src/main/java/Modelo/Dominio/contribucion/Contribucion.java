@@ -14,7 +14,7 @@ public abstract class Contribucion {
     @GeneratedValue
     private Integer id_contribucion;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE}) // ACA HUBO UN CASCADE PERSIST TAMBIÉN
     @JoinColumn(name = "colaborador")
     protected Colaborador colaborador;
 
