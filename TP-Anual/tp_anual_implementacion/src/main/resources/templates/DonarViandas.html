@@ -43,16 +43,10 @@
                                 <option value="" selected disabled>--Seleccione una opcion--</option>
                                 <option th:each="heladera : ${heladeras}"
                                         th:value="${heladera.getIdHeladera()}"
-                                        th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ')'" th:data-stock="${heladera.getStock()}" />
+                                        th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ')'" th:data-stock="${heladera.getCapacidadRestante()}" />
                             </select>
 
                             <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="fechaDonacion">Fecha de donación (*)</label>
-                            <input type="date" id="fechaDonacion" name="fechaDonacion" required>
-                            <div class="error-message" id="fechaDonacionError"></div>
                         </div>
 
                         <div class="input-group">
@@ -84,21 +78,13 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="peso">Peso de la vianda (*)</label>
-                                    <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" required>
+                                    <label for="peso">Peso de la vianda</label>
+                                    <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" >
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="calorias">Calorías de la vianda (*)</label>
-                                    <input type="text" id="calorias" placeholder="Ingrese las calorías" required>
-                                </div>
-
-                                <div class="input-group">
-                                    <label for="estado">Estado de la vianda (*)</label>
-                                    <select id="estado" required>
-                                        <option value="" selected disabled>--Seleccione una opción--</option>
-                                        <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}"></option>
-                                    </select>
+                                    <label for="calorias">Calorías de la vianda</label>
+                                    <input type="text" id="calorias" placeholder="Ingrese las calorías" >
                                 </div>
 
                                 <button id="guardar-vianda">Guardar Vianda</button>

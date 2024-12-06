@@ -18,9 +18,6 @@ public class Heladera {
     @Id
     @GeneratedValue
     private Integer id_heladera;
-    //POR QUÉ ESTÁ ESTE ATRIBUTO???
-    @Column(name = "id_heladera_trucho")
-    private int idHeladera;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador_a_cargo", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorACargo;
@@ -121,8 +118,6 @@ public class Heladera {
     public void setNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { this.notificadorDeSuscriptos = notificadorDeSuscriptos; }
     public int getCapacidadDeViandas() { return capacidadDeViandas; }
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
-    public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
-    public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
 
     public Integer getid_heladera() {
         if(Objects.isNull(id_heladera)) { return 0; } // No compila sino

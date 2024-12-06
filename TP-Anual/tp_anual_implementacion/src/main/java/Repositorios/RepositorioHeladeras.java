@@ -39,11 +39,8 @@ public class RepositorioHeladeras {
         System.out.println("1.Cantidad de heladeras: " + heladeras.size());
 
         Heladera heladera1 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now());
-        heladera1.setIdHeladera(9999);
         Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 2, new Modelo(15, -2), LocalDate.now());
-        heladera2.setIdHeladera(1111);
         Heladera heladera3 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 3"), 20, new Modelo(10, -2), LocalDate.now());
-        heladera3.setIdHeladera(3030);
         heladera3.setEstado(EstadoHeladera.INACTIVA);
 
         System.out.println("2.Cantidad de heladeras: " + heladeras.size());
@@ -86,7 +83,7 @@ public class RepositorioHeladeras {
     }
 
     public Heladera buscarHeladeraPorId(int idBuscado) {
-        return heladeras.stream().filter(heladera -> heladera.getIdHeladera() == idBuscado).findFirst().orElse(null);
+        return null;/*heladeras.stream().filter(heladera -> heladera.getIdHeladera() == idBuscado).findFirst().orElse(null);*/
     }
 
     public void agregarHeladera(Heladera heladera) {

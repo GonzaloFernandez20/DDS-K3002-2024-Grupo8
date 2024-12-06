@@ -72,7 +72,7 @@ public class CtrlHacerseCargoDeHeladera {
         nuevaContribucion.setHeladeraACargo(nuevaHeladera);
         nuevaContribucion.setFechaDeContribucion(LocalDate.now());
 
-        System.out.println(colaborador.getId_colaborador() + " " + nuevaHeladera.getIdHeladera());
+
 
         Hibernate.initialize(colaborador.getHistorialDeContribuciones());
         nuevaContribucion.procesarLaContribucion();

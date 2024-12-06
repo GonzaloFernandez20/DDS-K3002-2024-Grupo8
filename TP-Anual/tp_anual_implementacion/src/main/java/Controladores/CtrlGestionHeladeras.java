@@ -106,7 +106,6 @@ public class CtrlGestionHeladeras {
 
         model.addAttribute("mensaje", "¡Felicitaciones! Se pudo modificar la información de la heladera exitosamente.");
 
-        System.out.println(heladeraAModificar.getIdHeladera());
         System.out.println(heladeraAModificar.getUbicacion().getCiudad());
         System.out.println(heladeraAModificar.getUbicacion().getDireccion().getCalle());
         System.out.println(heladeraAModificar.getUbicacion().getDireccion().getAltura());

@@ -29,8 +29,7 @@ public class GestorDePermisosDeApertura {
                 MotivoApertura.INGRESAR_VIANDAS_DONADAS,
                 nuevaDonacion, nuevaDonacion.getHeladeraDestino());
 
-        // TODO 3: hacer la tarea 5 del CU - Declarar Donacion De Viandas del trello
-        //accesoDeColaboradorRepository.save(colaborador.getTarjeta());
+        accesoDeColaboradorRepository.save(nuevaDonacion.getColaborador().getTarjeta());
     }
 
     public void generarPermisosDeDistribucion(DistribucionDeViandas nuevaDistribucion) {

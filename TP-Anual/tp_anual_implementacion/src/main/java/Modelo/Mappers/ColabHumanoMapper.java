@@ -9,6 +9,7 @@ import Modelo.Dominio.medios_de_contacto.Telegram;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.seguridad.SesionActiva.Usuario;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
