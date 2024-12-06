@@ -1,11 +1,12 @@
-form_productos = document.getElementById('publicarServicioForm');
+/*form_productos = document.getElementById('publicarServicioForm');
 function validarFormulario() {
     let hasError = false;
 
     const rubro = document.getElementById('rubro');
-    const nombre_oferta = document.getElementById('nombre-oferta');
-    const nombre_producto = document.getElementById('nombre-producto');
-    const cant_puntos = document.getElementById('cant-puntos');
+    const nombre_oferta = document.getElementById('nombreOferta');
+    const nombre_producto = document.getElementById('nombreProducto');
+    const cant_puntos = document.getElementById('puntosNecesarios');
+    const stock = document.getElementById('stock');
     
     if (!rubro.value) {
         hasError = true;
@@ -51,6 +52,30 @@ function validarFormulario() {
         document.getElementById('error-stock').innerText = '';
         stock.classList.remove('error');
     }
-
-    return !hasError;
 }
+*/
+
+form_productos.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = {
+        rubro: document.getElementById('rubro').value,
+        nombreOferta: document.getElementById('nombreOferta').value,
+        nombreProducto: document.getElementById('nombreProducto').value,
+        puntosNecesarios: document.getElementById('puntosNecesarios').value,
+        stock: document.getElementById('stock').value,
+    };
+
+    try {
+        const response = await fetch('/PublicarProductoOServicio', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+        alert(result.mensaje);
+    } catch (error) {
+        console.error('Error al enviar los datos:', error);
+    }
+});

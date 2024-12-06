@@ -1,34 +1,37 @@
 package Controladores.Contribuciones;
 
-import Controladores.DescargaDeArchivo;
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
+import Modelo.Dominio.Repositories.contribucion.OfertaDeUnProductoRepository;
+import Modelo.Dominio.Repositories.contribucion.ProductoRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
-import Modelo.Dominio.contribucion.Producto;
 import Modelo.Dominio.contribucion.Rubro;
 
 import Modelo.Mappers.OfertaMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class CtrlPublicarProductoOServicio {
     private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final OfertaDeUnProductoRepository ofertaRepository;
+    private final ProductoRepository productoRepository;
 
     @Autowired
-    public CtrlPublicarProductoOServicio(GestorInicioDeSesion gestorInicioDeSesion) {
+    public CtrlPublicarProductoOServicio(GestorInicioDeSesion gestorInicioDeSesion, OfertaDeUnProductoRepository ofertaRepository, ProductoRepository productoRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
+        this.ofertaRepository = ofertaRepository;
+        this.productoRepository = productoRepository;
     }
 
     private List<Rubro> obtenerTodosLosRubros() {
@@ -61,10 +64,14 @@ public class CtrlPublicarProductoOServicio {
     }
 
     @PostMapping("/PublicarProductoOServicio")
-    public String publicarProductoOServicio(@RequestBody OfertaDeUnProductoDTO ofertaDTO, Model model) {
+    @Transactional
+    public String publicarProductoOServicio(@ModelAttribute OfertaDeUnProductoDTO ofertaDTO, @RequestParam("imagen") MultipartFile imagen,
+                                            Model model) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
+        ofertaDTO.setPathImagenAPartirDeArchivo(imagen);
 
         OfertaDeUnProducto ofertaDeUnProducto = OfertaMapper.crearOfertaAPartirDe(colaborador, ofertaDTO);
+        Hibernate.initialize(colaborador.getHistorialDeContribuciones());
         GestorDeOfertaDeProductos.crearContribucion(colaborador, ofertaDeUnProducto);
 
         System.out.println("Rubro: " + ofertaDeUnProducto.getRubro());
@@ -73,6 +80,8 @@ public class CtrlPublicarProductoOServicio {
         System.out.println("Cant puntos: " + ofertaDeUnProducto.getPuntosNecesarios());
         System.out.println("Stock: " + ofertaDeUnProducto.getProducto().getStock());
 
+        ofertaRepository.save(ofertaDeUnProducto);
+        productoRepository.save(ofertaDeUnProducto.getProducto());
         model.addAttribute("mensaje", "¡Felicitaciones! La oferta de " + ofertaDeUnProducto.getProducto().getNombreProducto() + " se realizó exitosamente.");
 
         return mostrarRubros(model);

@@ -58,8 +58,8 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="nombre-producto">Nombre del producto (*)</label>
-                            <input type="text" id="nombre-producto" name="nombre-producto" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
+                            <label for="nombreProducto">Nombre del producto (*)</label>
+                            <input type="text" id="nombreProducto" name="nombreProducto" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
                             <div class="error-message" id="error-producto"></div>
                         </div>
 
@@ -87,7 +87,7 @@
                             <div class="error-message" id="error-stock"></div>
                         </div>
 
-                        <button type="submit" onclick="return validarFormulario()">Realizar Colaboracion</button>
+                        <button type="submit">Realizar Colaboracion</button>
                         <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
                             <p th:text="${mensaje}"></p>
                         </div>

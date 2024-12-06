@@ -1,5 +1,6 @@
 package Modelo.Mappers;
 
+import Controladores.DescargaDeArchivo;
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
@@ -15,7 +16,7 @@ public class OfertaMapper {
                 colaborador,
                 ofertaDTO.getNombreOferta(),
                 ofertaDTO.getPuntosNecesarios(),
-                ofertaDTO.getImagen(),
+                ofertaDTO.getPathImagen(),
                 Rubro.valueOf(ofertaDTO.getRubro()),
                 producto
         );

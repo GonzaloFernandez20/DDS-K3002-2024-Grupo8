@@ -1,5 +1,6 @@
 package DTOs;
 
+import Controladores.DescargaDeArchivo;
 import Modelo.Dominio.contribucion.Rubro;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,15 +8,15 @@ public class OfertaDeUnProductoDTO {
     private int idOferta;
     private String nombreOferta;
     private double puntosNecesarios;
-    private MultipartFile imagen;
+    private String pathImagen;
     private String rubro;
     private String nombreProducto;
     private int stock;
 
-    public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, MultipartFile imagen, Rubro rubro, String nombreProducto, int stock) {
+    public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, String path, Rubro rubro, String nombreProducto, int stock) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
-        this.imagen = imagen;
+        this.pathImagen = path;
         this.rubro = rubro.toString();
         this.nombreProducto = nombreProducto;
         this.stock = stock;
@@ -31,9 +32,11 @@ public class OfertaDeUnProductoDTO {
 
     public double getPuntosNecesarios() { return puntosNecesarios; }
 
-    public void setImagen(MultipartFile imagen) { this.imagen = imagen; }
+    public void setPathImagenAPartirDeArchivo(MultipartFile imagen) { this.pathImagen = DescargaDeArchivo.guardarArchivo("/fotosProductosOServicios/", imagen); }
 
-    public MultipartFile getImagen() { return imagen; }
+    public void setPathImagenAPartirDePath(String path) { this.pathImagen = path; }
+
+    public String getPathImagen() { return pathImagen; }
 
     public void setRubro(Rubro rubro) { this.rubro = rubro.toString(); }
 
