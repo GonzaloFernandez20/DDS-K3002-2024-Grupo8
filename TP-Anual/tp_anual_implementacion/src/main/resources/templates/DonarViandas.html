@@ -43,7 +43,8 @@
                                 <option value="" selected disabled>--Seleccione una opcion--</option>
                                 <option th:each="heladera : ${heladeras}"
                                         th:value="${heladera.getIdHeladera()}"
-                                        th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ')'" th:data-stock="${heladera.getStock()}" />
+                                        th:text="${heladera.getNombreDelPunto()} + ' (' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ' (faltan ' + ${heladera.capacidadRestante} + ' viandas para llenar la heladera)'" th:data-stock="${heladera.getStockDeViandas()}"
+                                        th:class="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0 ? 'inactiva' : ''}" th:disabled="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0}"/>
                             </select>
 
                             <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
@@ -116,7 +117,7 @@
                 <div class="col-md-6 container-img scroll-permitido">
                     <img 
                     src = "/img/donarViandasImagen.png"
-                    alt = "Ocho viandas con alimentos variados en cada una.";
+                    alt = "Ocho viandas con alimentos variados en cada una."
                     class="imagenContribucion"
                     >
                 </div>
