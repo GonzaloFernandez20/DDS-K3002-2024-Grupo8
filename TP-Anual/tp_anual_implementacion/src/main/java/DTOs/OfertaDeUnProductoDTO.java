@@ -1,20 +1,21 @@
 package DTOs;
 
 import Modelo.Dominio.contribucion.Rubro;
+import org.springframework.web.multipart.MultipartFile;
 
 public class OfertaDeUnProductoDTO {
     private int idOferta;
     private String nombreOferta;
     private double puntosNecesarios;
-    private String linkDeImagen;
+    private MultipartFile imagen;
     private String rubro;
     private String nombreProducto;
     private int stock;
 
-    public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, String linkDeImagen, Rubro rubro, String nombreProducto, int stock) {
+    public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, MultipartFile imagen, Rubro rubro, String nombreProducto, int stock) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
-        this.linkDeImagen = linkDeImagen;
+        this.imagen = imagen;
         this.rubro = rubro.toString();
         this.nombreProducto = nombreProducto;
         this.stock = stock;
@@ -30,9 +31,9 @@ public class OfertaDeUnProductoDTO {
 
     public double getPuntosNecesarios() { return puntosNecesarios; }
 
-    public void setLinkDeImagen(String linkDeImagen) { this.linkDeImagen = linkDeImagen; }
+    public void setImagen(MultipartFile imagen) { this.imagen = imagen; }
 
-    public String getLinkDeImagen() { return linkDeImagen; }
+    public MultipartFile getImagen() { return imagen; }
 
     public void setRubro(Rubro rubro) { this.rubro = rubro.toString(); }
 

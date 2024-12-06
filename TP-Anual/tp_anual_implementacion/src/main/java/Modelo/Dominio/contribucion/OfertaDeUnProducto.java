@@ -1,8 +1,10 @@
 package Modelo.Dominio.contribucion;
 
+import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.sistema.Sistema;
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 @Entity
@@ -16,18 +18,18 @@ public class OfertaDeUnProducto extends Contribucion {
     private String nombreOferta;
     @Column(name = "puntos_necesarios")
     private double puntosNecesarios;
-    @Column(name = "link_a_imagen")
-    private String linkDeImagen;
+    @Column(name = "imagen")
+    private MultipartFile imagen;
     @Enumerated(EnumType.STRING)
     private Rubro rubro;
     @OneToOne
     @JoinColumn(name = "producto", referencedColumnName = "id_producto")
     private Producto producto;
 
-    public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String linkDeImagen, Rubro rubro, Producto producto) {
+    public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, MultipartFile imagen, Rubro rubro, Producto producto) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
-        this.linkDeImagen = linkDeImagen;
+        this.imagen = imagen;
         this.rubro = rubro;
         this.producto = producto;
         this.colaborador = colaborador;
@@ -46,13 +48,14 @@ public class OfertaDeUnProducto extends Contribucion {
     public void serCanjeada() { producto.disminuirStock(); }
     public boolean hayStock() { return producto.tengoStock(); }
 
+
     // ---- Getters y Setters
     public double getPuntosNecesarios() { return puntosNecesarios; }
     public String getNombreOferta() { return nombreOferta; }
     public void setNombreOferta(String nombreOferta) { this.nombreOferta = nombreOferta; }
     public void setPuntosNecesarios(double puntosNecesarios) { this.puntosNecesarios = puntosNecesarios; }
-    public String getLinkDeImagen() { return linkDeImagen; }
-    public void setLinkDeImagen(String linkDeImagen) { this.linkDeImagen = linkDeImagen; }
+    public MultipartFile getImagen() { return imagen; }
+    public void setImagen(MultipartFile imagen) { this.imagen = imagen; }
     public Rubro getRubro() { return rubro; }
     public void setRubro(Rubro rubro) { this.rubro = rubro; }
     public Producto getProducto() { return producto; }
