@@ -38,4 +38,16 @@ public class VisitaTecnica {
     public Incidente getIncidenteAtendido() { return incidenteAtendido; }
 
     public Integer getIdVisitaTecnica() { return id_visita_tecnica; }
+    public String getDetalleDeTrabajo() {
+        return detalleDeTrabajo;
+    }
+    public String getLinkFoto() { return linkFoto; }
+    public LocalDateTime getFechaDeVisita() { return fechaDeVisita; }
+
+    public Tecnico getTecnico() {
+        return tecnico;
+    }
+
+    public LocalDateTime getFechaDeTrabajo() { return fechaDeVisita; }
+
 }

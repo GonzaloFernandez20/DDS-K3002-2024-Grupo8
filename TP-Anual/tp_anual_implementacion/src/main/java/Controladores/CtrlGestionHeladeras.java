@@ -2,6 +2,9 @@ package Controladores;
 
 import DTOs.HeladeraDTO;
 import DTOs.AlertaDTO;
+import DTOs.HeladeraSeleccionDTO;
+import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Modelo.Dominio.Repositories.incidentes.AlertaRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.Alerta;
@@ -9,9 +12,13 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Persona.TipoOrganizacion;
+import Modelo.Mappers.AlertaMapper;
+import Modelo.Mappers.HeladeraMapper;
+import Modelo.seguridad.GestorInicioDeSesion;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,14 +31,26 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CtrlGestionHeladeras {
-    //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
-    private final Colaborador colaborador = new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com")));
-    //
-    private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());
-    private final List<AlertaDTO> alertas = RepositorioIncidentes.getInstancia().getAlertas().stream().map(alerta -> convertirAlertaADTO(alerta)).collect(Collectors.toList());
+
+    private List<HeladeraDTO> heladeras;
+    private List<AlertaDTO> alertas;
+
+    private final HeladeraRepository heladeraRepository;
+    private final AlertaRepository alertaRepository;
+
+    @Autowired
+    public CtrlGestionHeladeras(HeladeraRepository repositorioHeladeras, AlertaRepository alertaRepository) {
+        this.heladeraRepository = repositorioHeladeras;
+        this.alertaRepository = alertaRepository;
+    }
 
     @GetMapping("/ModificarColaboradorJuridicoHeladeras")
     public String mostrarHeladerasYAlertas(Model model) {
+        heladeras = heladeraRepository.findAll().stream().
+                map(heladera -> HeladeraMapper.convertirEnHeladeraDTO(heladera)).collect(Collectors.toList());
+        alertas = alertaRepository.findAll().stream().
+                map(alerta -> AlertaMapper.convertirEnAlertaDTO(alerta)).collect(Collectors.toList());
+
         model.addAttribute("warnings", alertas);
         model.addAttribute("heladeras", heladeras);
 
@@ -43,13 +62,12 @@ public class CtrlGestionHeladeras {
                                     @RequestParam(name = "nuevaCiudadHeladera", required = false) String nombreCiudad,
                                     @RequestParam(name = "nuevaCalleHeladera", required = false) String calle,
                                     @RequestParam(name = "nuevaAlturaHeladera", required = false) String altura,
-                                    @RequestParam(name = "nuevoCodigoPostal", required = false) String codigoPostal,
                                     @RequestParam(name = "nuevoModeloHeladera", required = false) String modelo,
                                     @RequestParam(name = "nuevaTempMax", required = false) Integer tempMax,
                                     @RequestParam(name = "nuevaTempMin", required = false) Integer tempMin,
                                     @RequestParam(name = "nuevaCapacidadHeladera", required = false) Integer capacidad,
                                     Model model) {
-        HeladeraDTO heladeraAModificar = heladeras.stream().filter(heladera -> heladera.getIdHeladera() == idHeladera).findFirst().orElse(null);
+        Heladera heladeraAModificar = heladeraRepository.findById(idHeladera).get();
 
         if(Objects.isNull(heladeraAModificar)) {
             model.addAttribute("mensaje", "Error: No eligió una heladera válida");
@@ -57,51 +75,45 @@ public class CtrlGestionHeladeras {
         }
 
         if(!Objects.isNull(nombreCiudad)) {
-            heladeraAModificar.setCiudad(nombreCiudad);
+            heladeraAModificar.getUbicacion().setCiudad(nombreCiudad);
         }
 
         if(!Objects.isNull(calle)) {
-            heladeraAModificar.setCalle(calle);
+            heladeraAModificar.getUbicacion().getDireccion().setCalle(calle);
         }
 
         if(!Objects.isNull(altura)) {
-            heladeraAModificar.setAltura(altura);
-        }
-
-        if(!Objects.isNull(codigoPostal)) {
-            heladeraAModificar.setCodPostal(codigoPostal);
+            heladeraAModificar.getUbicacion().getDireccion().setAltura(altura);
         }
 
         if(!Objects.isNull(modelo)) {
-            heladeraAModificar.setNombreModelo(modelo);
+            heladeraAModificar.getModelo().setNombreModelo(modelo);
         }
 
         if(!Objects.isNull(tempMax)) {
-            heladeraAModificar.setTempMAXmodelo(tempMax);
+            heladeraAModificar.getModelo().setTemperaturaMaxima(tempMax);
         }
 
         if(!Objects.isNull(tempMin)) {
-            heladeraAModificar.setTempMINmodelo(tempMin);
+            heladeraAModificar.getModelo().setTemperaturaMinima(tempMin);
         }
 
         if(!Objects.isNull(capacidad)) {
-            heladeraAModificar.setCapacidadViandas(capacidad);
+            heladeraAModificar.setCapacidadDeViandas(capacidad);
         }
 
-        // RepositorioHeladeras.modificarHeladera(heladeraAModificar);
-        // LO DEBE RECIBIR EL REPOSITORIO PARA ACTUALIZARLO EN LA BD
+        heladeraRepository.save(heladeraAModificar);
 
         model.addAttribute("mensaje", "¡Felicitaciones! Se pudo modificar la información de la heladera exitosamente.");
 
         System.out.println(heladeraAModificar.getIdHeladera());
-        System.out.println(heladeraAModificar.getCiudad());
-        System.out.println(heladeraAModificar.getCalle());
-        System.out.println(heladeraAModificar.getAltura());
-        System.out.println(heladeraAModificar.getCodPostal());
-        System.out.println(heladeraAModificar.getNombreModelo());
-        System.out.println(heladeraAModificar.getTempMAXmodelo());
-        System.out.println(heladeraAModificar.getTempMINmodelo());
-        System.out.println(heladeraAModificar.getCapacidadViandas());
+        System.out.println(heladeraAModificar.getUbicacion().getCiudad());
+        System.out.println(heladeraAModificar.getUbicacion().getDireccion().getCalle());
+        System.out.println(heladeraAModificar.getUbicacion().getDireccion().getAltura());
+        System.out.println(heladeraAModificar.getModelo().getNombreModelo());
+        System.out.println(heladeraAModificar.getModelo().getTemperaturaMaxima());
+        System.out.println(heladeraAModificar.getModelo().getTemperaturaMinima());
+        System.out.println(heladeraAModificar.getCapacidadDeViandas());
 
         return mostrarHeladerasYAlertas(model);
     }
@@ -109,30 +121,13 @@ public class CtrlGestionHeladeras {
     @PostMapping("/EliminarHeladera")
     public String eliminarHeladera(@RequestParam("heladera-por-eliminar") int idHeladera,
                                     Model model) {
-        // RepositorioHeladeras.eliminarHeladeraConId(idHeladera);
-        // LO DEBE RECIBIR EL REPOSITORIO PARA ACTUALIZARLO EN LA BD
+        Heladera heladeraAEliminar = heladeraRepository.findById(idHeladera).get();
+        heladeraRepository.delete(heladeraAEliminar);
 
         System.out.println("Se elimina la heladera " + idHeladera);
 
         model.addAttribute("mensaje", "La heladera se ha dado de baja con éxito.");
 
         return mostrarHeladerasYAlertas(model);
-    }
-
-    //Hardcodeado
-    int i = 0;
-
-    private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
-        HeladeraDTO heladeraDTO = new HeladeraDTO(heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento());
-        // Hardcodeado
-        heladeraDTO.setIdHeladera(i);
-        i++;
-        //
-        return heladeraDTO;
-    }
-
-    private AlertaDTO convertirAlertaADTO(Alerta alerta) {
-        List<Integer> idVisitas = alerta.getVisitas().stream().map(visitaTecnica -> visitaTecnica.getIdVisitaTecnica()).collect(Collectors.toList());
-        return new AlertaDTO(alerta.getMomentoDelSuceso(), alerta.getHeladeraDondeOcurrio().getIdHeladera(), idVisitas, alerta.getEstado(), alerta.getTipoAlerta());
     }
 }

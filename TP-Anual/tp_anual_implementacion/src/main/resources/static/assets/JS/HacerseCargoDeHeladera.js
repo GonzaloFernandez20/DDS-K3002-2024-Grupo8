@@ -10,7 +10,6 @@ formularioDeHeladera.addEventListener('submit', function (e) {
     const nombreModelo = document.getElementById('modeloHeladera');
     const calle = document.getElementById('direccionHeladera');
     const altura = document.getElementById('altura');
-    const codPostal = document.getElementById('codPostal');
     const ciudad = document.getElementById('ciudadHeladera');
     const nombreDelPunto = document.getElementById('nombrePuntoHeladera');
     const puestaEnFuncionamiento = document.getElementById('fechaFuncionamientoHeladera');
@@ -55,15 +54,6 @@ formularioDeHeladera.addEventListener('submit', function (e) {
         altura.classList.remove('error');
     }
 
-    if (!codPostal.value) {
-        hasError = true;
-        document.getElementById('codPostalError').innerText = 'El código postal es requerido';
-        codPostal.classList.add('error');
-    } else {
-        document.getElementById('codPostalError').innerText = '';
-        codPostal.classList.remove('error');
-    }
-
     if (!ciudad.value) {
         hasError = true;
         document.getElementById('ciudadHeladeraError').innerText = 'La ciudad es requerida';
@@ -98,12 +88,10 @@ formularioDeHeladera.addEventListener('submit', function (e) {
     // ---------------- Generacion del objeto Json ---------------- //
 
     const heladeraData = {
-        //colaboradorACargo: colaboradorACargo.value,
         capacidadViandas: capacidadViandas.value,
         nombreModelo: nombreModelo.value,
         calle: calle.value,
         altura: altura.value,
-        codPostal: codPostal.value,
         ciudad: ciudad.value,
         nombreDelPunto: nombreDelPunto.value,
         puestaEnFuncionamiento: puestaEnFuncionamiento.value

@@ -96,12 +96,12 @@
                         <h2>Heladeras Asociadas</h2>
                         <div id="box-alertas">
                             <h3 id="alertas">Alertas</h3>
-                            <p class="fs-5" id="non-warning-message" >¡Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.</p>
-                            <div id="warnings">
+                            <p class="fs-5" id="non-warning-message" th:if="${#lists.isEmpty(warnings)}" th:text="'Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.'"></p>
+                            <div id="warnings" th:if="${!#lists.isEmpty(warnings)}">
                                 <p class="fs-5">Elija el punto al que quiere consultar entre las heladeras que presentaron alertas:</p>
                                 <select id="elegir-heladera" name="elegir-heladera" onchange="mostrarAlertasDeHeladera(this.value)">
-                                    <option value="">Seleccione Heladera</option>
-                                    <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ' - ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
+                                    <option selected disabled value="">Seleccione Heladera</option>
+                                    <option th:each="heladera : ${heladeras}" th:value="${heladera.id_heladera}" th:text="${heladera.nombreDelPunto} + ' - ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
                                 </select>
                                 <p class="fs-5" id="heladera-elegida"></p> 
                                 <div class="scroll-permitido">
@@ -114,7 +114,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="heladeras-warnings">
-                                            <tr th:each="warning : ${warnings}" th:class="'heladera' + ${warning.idHeladera} + ' alerta'" hidden>
+                                            <tr th:each="warning : ${warnings}" th:class="'heladera' + ${warning.heladeraDTO.idHeladera} + ' alerta'" hidden>
                                                 <td th:text="${warning.momentoDelSuceso}"></td>
                                                 <td th:text="${warning.tipoAlerta}"></td>
                                                 <td th:text="${warning.estado}"></td>
@@ -125,7 +125,8 @@
                             </div>
                         </div>
                         <h3 id="listado">Listado</h3>
-                        <div class="scroll-permitido">
+                    <p class="fs-5" th:if="${#lists.isEmpty(heladeras)}" th:text="'¡No posee heladeras asociadas.'"></p>
+                    <div class="scroll-permitido" th:if="${!#lists.isEmpty(heladeras)}">
                             <table>
                                 <thead>
                                     <tr>
@@ -148,14 +149,14 @@
                                         <td th:text="${heladera.capacidadViandas}"></td>
                                         <td th:text="${heladera.puestaEnFuncionamiento}"></td>
                                         <td class="row-button">
-                                            <button class="listado-button modificar" th:attr="onclick='modificarHeladera(' + ${heladera.idHeladera} + ')'">
+                                            <button class="listado-button modificar" th:attr="onclick='modificarHeladera(' + ${heladera.id_heladera} + ')'">
                                                 <svg height="20px" width="20px">
                                                     <image height="20px" width="20px" href="img/edit-icon.svg"/>
                                                 </svg>
                                             </button>
                                         </td>
                                         <form action="/EliminarHeladera" method="post">
-                                            <input type="hidden" id="heladera-por-eliminar" name="heladera-por-eliminar" th:value="${heladera.idHeladera}"></input>
+                                            <input type="hidden" id="heladera-por-eliminar" name="heladera-por-eliminar" th:value="${heladera.id_heladera}"></input>
                                             <td class="row-button"><button class="listado-button eliminar">X</button></td>
                                         </form>
                                     </tr>

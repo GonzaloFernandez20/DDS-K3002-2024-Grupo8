@@ -17,10 +17,14 @@ public class NotificadorDeSuscriptos {
     @Transient
     private final Map<String, List<Colaborador>> suscriptos;
     @OneToOne(mappedBy = "notificadorDeSuscriptos")
-    private final Heladera heladera;
+    private Heladera heladera;
 
     public NotificadorDeSuscriptos(Heladera heladera) {
         this.heladera = heladera;
+        this.suscriptos = new HashMap<>();
+    }
+
+    public NotificadorDeSuscriptos() {
         this.suscriptos = new HashMap<>();
     }
 
