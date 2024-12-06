@@ -42,13 +42,17 @@ public class CtrlDonacionViandas {
     private final AperturaConPermisoRepository aperturaConPermisoRepository;
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
 
     @Autowired
-    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion) {
+    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion,
+                               AccesoDeColaboradorRepository accesoDeColaboradorRepository,
+                               AperturaConPermisoRepository aperturaConPermisoRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
         this.aperturaConPermisoRepository = aperturaConPermisoRepository;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
+        this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
     }
 
 
@@ -98,7 +102,7 @@ public class CtrlDonacionViandas {
 
         try {
             DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
-            GestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+            gestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
             return ResponseEntity.ok("Donacion realizada con éxito!");
         }catch (Exception e) {
             e.printStackTrace();
@@ -109,7 +113,7 @@ public class CtrlDonacionViandas {
         GestorDePermisosDeApertura gestorDePermisosDeApertura = new GestorDePermisosDeApertura(accesoDeColaboradorRepository, aperturaConPermisoRepository);
 
         gestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
-        model.addAttribute("mensaje", "Donacion realizada con éxito!");
+        //model.addAttribute("mensaje", "Donacion realizada con éxito!");
         return "Home";
 
     }

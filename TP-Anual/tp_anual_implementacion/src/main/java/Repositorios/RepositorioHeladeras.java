@@ -15,7 +15,7 @@ import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Persona.TipoOrganizacion;
-import Modelo.Mappers.BuilderColabHumano;
+import Modelo.Mappers.ColabHumanoMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class RepositorioHeladeras {
 
         Mail mail = new Mail();
         mail.setCorreo("alfred200@gmail.com");
-        Colaborador colaborador = BuilderColabHumano.crearColaboradorHumanoAPartirDe(
+        Colaborador colaborador = ColabHumanoMapper.crearColaboradorHumanoAPartirDe(
                 new ColaboradorHumanoDTO(
                         "alfredo123",
                         "alref000",
@@ -62,10 +62,12 @@ public class RepositorioHeladeras {
                         Sexo.MASCULINO,
                         "Carlos Calvo",
                         "400",
-                        "1020",
-                        List.of(mail)
+                        "alfredo@gmail.com",
+                        "1132567897",
+                        true,
+                        true
                         )
-        );
+        ).getColaborador();
         heladera1.recibirVianda(new Vianda("Fideos", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
         heladera1.recibirVianda(new Vianda("Arroz con Pollo", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
         heladera1.recibirVianda(new Vianda("Milanesa napolitana", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
