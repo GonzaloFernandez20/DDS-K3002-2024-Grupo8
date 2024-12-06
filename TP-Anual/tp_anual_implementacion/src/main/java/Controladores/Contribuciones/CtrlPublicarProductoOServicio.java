@@ -2,6 +2,7 @@ package Controladores.Contribuciones;
 
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
+import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.OfertaDeUnProductoRepository;
 import Modelo.Dominio.Repositories.contribucion.ProductoRepository;
 import Modelo.Dominio.colaborador.Colaborador;
@@ -11,7 +12,6 @@ import Modelo.Dominio.contribucion.Rubro;
 import Modelo.Mappers.OfertaMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +26,14 @@ public class CtrlPublicarProductoOServicio {
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final OfertaDeUnProductoRepository ofertaRepository;
     private final ProductoRepository productoRepository;
+    private final ColaboradorRepository colaboradorRepository;
 
     @Autowired
-    public CtrlPublicarProductoOServicio(GestorInicioDeSesion gestorInicioDeSesion, OfertaDeUnProductoRepository ofertaRepository, ProductoRepository productoRepository) {
+    public CtrlPublicarProductoOServicio(GestorInicioDeSesion gestorInicioDeSesion, OfertaDeUnProductoRepository ofertaRepository, ProductoRepository productoRepository, ColaboradorRepository colaboradorRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.ofertaRepository = ofertaRepository;
         this.productoRepository = productoRepository;
+        this.colaboradorRepository = colaboradorRepository;
     }
 
     private List<Rubro> obtenerTodosLosRubros() {
@@ -68,10 +70,9 @@ public class CtrlPublicarProductoOServicio {
     public String publicarProductoOServicio(@ModelAttribute OfertaDeUnProductoDTO ofertaDTO, @RequestParam("imagen") MultipartFile imagen,
                                             Model model) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
-        ofertaDTO.setPathImagenAPartirDeArchivo(imagen);
+        ofertaDTO.setLinkDeImagenAPartirDeArchivo(imagen);
 
         OfertaDeUnProducto ofertaDeUnProducto = OfertaMapper.crearOfertaAPartirDe(colaborador, ofertaDTO);
-        Hibernate.initialize(colaborador.getHistorialDeContribuciones());
         GestorDeOfertaDeProductos.crearContribucion(colaborador, ofertaDeUnProducto);
 
         System.out.println("Rubro: " + ofertaDeUnProducto.getRubro());
@@ -82,6 +83,7 @@ public class CtrlPublicarProductoOServicio {
 
         ofertaRepository.save(ofertaDeUnProducto);
         productoRepository.save(ofertaDeUnProducto.getProducto());
+        colaboradorRepository.save(colaborador);
         model.addAttribute("mensaje", "¡Felicitaciones! La oferta de " + ofertaDeUnProducto.getProducto().getNombreProducto() + " se realizó exitosamente.");
 
         return mostrarRubros(model);

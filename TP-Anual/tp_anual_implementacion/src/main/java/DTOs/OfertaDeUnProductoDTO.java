@@ -8,7 +8,7 @@ public class OfertaDeUnProductoDTO {
     private int idOferta;
     private String nombreOferta;
     private double puntosNecesarios;
-    private String pathImagen;
+    private String linkDeImagen;
     private String rubro;
     private String nombreProducto;
     private int stock;
@@ -16,7 +16,7 @@ public class OfertaDeUnProductoDTO {
     public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, String path, Rubro rubro, String nombreProducto, int stock) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
-        this.pathImagen = path;
+        this.linkDeImagen = path;
         this.rubro = rubro.toString();
         this.nombreProducto = nombreProducto;
         this.stock = stock;
@@ -32,11 +32,11 @@ public class OfertaDeUnProductoDTO {
 
     public double getPuntosNecesarios() { return puntosNecesarios; }
 
-    public void setPathImagenAPartirDeArchivo(MultipartFile imagen) { this.pathImagen = DescargaDeArchivo.guardarArchivo("/fotosProductosOServicios/", imagen); }
+    public void setLinkDeImagenAPartirDeArchivo(MultipartFile imagen) { this.linkDeImagen = DescargaDeArchivo.guardarArchivo("/fotosProductosOServicios/", imagen); }
 
-    public void setPathImagenAPartirDePath(String path) { this.pathImagen = path; }
+    public void setLinkDeImagenAPartirDePath(String path) { this.linkDeImagen = path; }
 
-    public String getPathImagen() { return pathImagen; }
+    public String getLinkDeImagen() { return linkDeImagen; }
 
     public void setRubro(Rubro rubro) { this.rubro = rubro.toString(); }
 

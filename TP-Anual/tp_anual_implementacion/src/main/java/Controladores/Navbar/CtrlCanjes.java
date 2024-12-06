@@ -2,6 +2,9 @@ package Controladores.Navbar;
 
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
+import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Modelo.Dominio.Repositories.contribucion.OfertaDeUnProductoRepository;
+import Modelo.Dominio.Repositories.contribucion.ProductoRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.seguridad.GestorInicioDeSesion;
@@ -13,9 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,20 +24,27 @@ import java.util.stream.Collectors;
 public class CtrlCanjes {
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final ColaboradorRepository colaboradorRepository;
+    private final OfertaDeUnProductoRepository ofertaDeUnProductoRepository;
+    private final ProductoRepository productoRepository;
 
     @Autowired
-    public CtrlCanjes(GestorInicioDeSesion gestorInicioDeSesion) {
+    public CtrlCanjes(GestorInicioDeSesion gestorInicioDeSesion, ColaboradorRepository colaboradorRepository, OfertaDeUnProductoRepository ofertaDeUnProductoRepository, ProductoRepository productoRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
+        this.colaboradorRepository = colaboradorRepository;
+        this.ofertaDeUnProductoRepository = ofertaDeUnProductoRepository;
+        this.productoRepository = productoRepository;
     }
-
-    private final List<OfertaDeUnProductoDTO> ofertas = RepositorioOfertas.getInstancia().getOfertas().stream().map(oferta -> convertirOfertaADTO(oferta)).collect(Collectors.toList());
 
     @GetMapping("/CanjearPuntos")
     public String mostrarProductosYServicios(Model model) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
         System.out.println("Muestra los productos y servicios");
-        model.addAttribute("ofertas", ofertas);
+
+        List<OfertaDeUnProducto> ofertas = ofertaDeUnProductoRepository.findAll();
+        model.addAttribute("ofertas", ofertas.stream().map(this::convertirOfertaADTO).collect(Collectors.toList()));
+
         model.addAttribute("puntosDelColaborador", colaborador.getPuntosAcumulados());
         return "CanjearPuntos";
     }
@@ -51,6 +59,8 @@ public class CtrlCanjes {
         String mensaje;
         try {
             GestorDeOfertaDeProductos.canjearProducto(colaborador, oferta);
+            colaboradorRepository.save(colaborador);
+            productoRepository.save(oferta.getProducto());
             mensaje = "¡Felicidades! Logró realizar el canje de " + oferta.getNombreOferta() + " por " + oferta.getPuntosNecesarios() + " puntos.";
         } catch (Exception e) {
             System.out.println(e.getMessage());

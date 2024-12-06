@@ -1,6 +1,7 @@
 package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
+import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;

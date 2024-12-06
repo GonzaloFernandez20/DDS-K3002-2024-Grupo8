@@ -24,6 +24,9 @@ public class OfertaDeUnProducto extends Contribucion {
     @JoinColumn(name = "producto", referencedColumnName = "id_producto")
     private Producto producto;
 
+    public OfertaDeUnProducto(){
+    }
+
     public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String pathImagen, Rubro rubro, Producto producto) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;

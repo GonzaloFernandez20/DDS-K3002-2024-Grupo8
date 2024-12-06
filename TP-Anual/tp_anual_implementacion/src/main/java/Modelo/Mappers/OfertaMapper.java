@@ -16,7 +16,7 @@ public class OfertaMapper {
                 colaborador,
                 ofertaDTO.getNombreOferta(),
                 ofertaDTO.getPuntosNecesarios(),
-                ofertaDTO.getPathImagen(),
+                ofertaDTO.getLinkDeImagen(),
                 Rubro.valueOf(ofertaDTO.getRubro()),
                 producto
         );
