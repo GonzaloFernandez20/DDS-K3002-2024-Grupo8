@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Heladera")
@@ -30,7 +31,7 @@ public class Heladera {
     private int capacidadDeViandas;
     @Column(name = "fecha_de_puesta_en_funcionamiento")
     private LocalDate puestaEnFuncionamiento;
-    @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Vianda> viandasEnStock;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "modelo", referencedColumnName = "id_modelo")
@@ -122,6 +123,11 @@ public class Heladera {
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
     public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
     public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
+
+    public Integer getid_heladera() {
+        if(Objects.isNull(id_heladera)) { return 0; } // No compila sino
+        return id_heladera;
+    }
 
     public void setColaboradorACargo(Colaborador colaboradorACargo) {
         this.colaboradorACargo = colaboradorACargo;

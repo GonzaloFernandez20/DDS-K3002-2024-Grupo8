@@ -12,6 +12,8 @@ public class Direccion {
     private String calle;
     @Column(name ="altura")
     private String altura;
+    @Column(name ="codPostal")
+    private String codPostal;
 
     //Constructores -----------------------------------------------------------
     public Direccion(String calle, String altura) {
@@ -40,4 +42,5 @@ public class Direccion {
         this.altura = altura;
     }
 
+    public void setCodPostal(String codPostal) { this.codPostal = codPostal; }
 }

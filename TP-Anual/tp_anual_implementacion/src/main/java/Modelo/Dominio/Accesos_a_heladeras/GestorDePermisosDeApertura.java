@@ -1,23 +1,39 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.ContribucionConApertura;
 import Modelo.Dominio.contribucion.DistribucionDeViandas;
 import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.heladera.Heladera;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
+@Service
 public class GestorDePermisosDeApertura {
 
-    public static void generarPermisoDeDonación(DonacionDeViandas nuevaDonacion) {
+    AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    AperturaConPermisoRepository aperturaConPermisoRepository;
+
+    @Autowired
+    public GestorDePermisosDeApertura(AccesoDeColaboradorRepository accesoDeColaboradorRepository, AperturaConPermisoRepository aperturaConPermisoRepository) {
+        this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
+        this.aperturaConPermisoRepository = aperturaConPermisoRepository;
+    }
+
+    public void generarPermisoDeDonación(DonacionDeViandas nuevaDonacion) {
         registrarMovimientoSolicitado(nuevaDonacion.getColaborador(),
                 MotivoApertura.INGRESAR_VIANDAS_DONADAS,
                 nuevaDonacion, nuevaDonacion.getHeladeraDestino());
 
         // TODO 3: hacer la tarea 5 del CU - Declarar Donacion De Viandas del trello
-        //AccesoDeColaboradorRepository.save(colaborador.getTarjeta());
+        //accesoDeColaboradorRepository.save(colaborador.getTarjeta());
     }
 
-    public static void generarPermisosDeDistribucion(DistribucionDeViandas nuevaDistribucion) {
+    public void generarPermisosDeDistribucion(DistribucionDeViandas nuevaDistribucion) {
         nuevaDistribucion.validarSiEsRealizable();
         registrarMovimientoSolicitado(nuevaDistribucion.getColaborador(),
                 MotivoApertura.TRASLADAR_VIANDAS,
@@ -29,15 +45,22 @@ public class GestorDePermisosDeApertura {
                 nuevaDistribucion,
                 nuevaDistribucion.getHeladeraDestino());
 
-        // TODO 4: hacer la tarea 5 del CU - Declarar Distribucion De Viandas del trello
-        //AccesoDeColaboradorRepository.save(colaborador.getTarjeta());
+        accesoDeColaboradorRepository.save(nuevaDistribucion.getColaborador().getTarjeta());
     }
 
-    public static void registrarMovimientoSolicitado(Colaborador colaborador,
+    public void registrarMovimientoSolicitado(Colaborador colaborador,
                                                      MotivoApertura motivo,
                                                      ContribucionConApertura contribucionAsociada,
                                                      Heladera heladeraAabrir) {
-        AperturaConPermiso nuevoPermiso = new AperturaConPermiso(heladeraAabrir, motivo, contribucionAsociada);
+        AperturaConPermiso nuevoPermiso = new AperturaConPermiso();
+        nuevoPermiso.setContribucion(contribucionAsociada);
+        nuevoPermiso.setFueConcretadaLaApertura(false);
+        nuevoPermiso.setHoraEnQueVence(LocalDateTime.now().plusHours(3));
+        nuevoPermiso.setMotivo(motivo);
+        nuevoPermiso.setHeladera(heladeraAabrir);
+        nuevoPermiso.setCantidadViandasInvolucradas(contribucionAsociada.cantidadDeViandasInvolucradas());
+
+        aperturaConPermisoRepository.save(nuevoPermiso);
         colaborador.getTarjeta().addPermisoDeApertura(nuevoPermiso);
     }
 }

@@ -15,6 +15,8 @@ public class Modelo {
     @Column(name = "temp_min")
     float temperaturaMinima;
 
+    public Modelo() {}
+
     public Modelo(float temperaturaMaxima, float temperaturaMinima) {
         // Si del front solo se ingresa el nombre del modelo, de alguna forma habria que obtener a partir de ese
         // nombre cual es la temperatura max y min. Una solucion seria una MockApi que dado un modelo devuelva su

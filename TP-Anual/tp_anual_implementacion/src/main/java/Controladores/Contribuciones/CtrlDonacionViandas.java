@@ -3,6 +3,8 @@ package Controladores.Contribuciones;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
@@ -36,11 +38,16 @@ import java.util.stream.Collectors;
 public class CtrlDonacionViandas {
 
     private final HeladeraRepository repositorioHeladeras;
+    private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    private final AperturaConPermisoRepository aperturaConPermisoRepository;
+
     private final GestorInicioDeSesion gestorInicioDeSesion;
 
     @Autowired
     public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion) {
         this.repositorioHeladeras = repositorioHeladeras;
+        this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
+        this.aperturaConPermisoRepository = aperturaConPermisoRepository;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
     }
 
@@ -48,7 +55,6 @@ public class CtrlDonacionViandas {
     //TODO 1: traerse las heladeras de la bd y mapearlas en HeladeraSeleccionDTO usando el mapper
     private final List<HeladeraSeleccionDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().
             map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
-    /*heladeraRepository.findAll().stream().map(heladera->newHeladeraDTO(heladera.getId(),heladera.getNombre())).collect(Collectors.toList());*/
 
     private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200")), List.of(new WhatsApp("15 2350-2350")));
     List<EstadoVianda> estados = new ArrayList<>();
@@ -98,6 +104,20 @@ public class CtrlDonacionViandas {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
         }
+        DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
+
+        GestorDePermisosDeApertura gestorDePermisosDeApertura = new GestorDePermisosDeApertura(accesoDeColaboradorRepository, aperturaConPermisoRepository);
+
+        gestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+        model.addAttribute("mensaje", "Donacion realizada con éxito!");
+        return "Home";
+
     }
+
+//    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
+//        Optional <Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
+//        DonacionDeViandas nuevaDonacion = DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(),colaborador);
+//        return nuevaDonacion;
+//    }
 
 }

@@ -6,6 +6,7 @@ import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,15 +14,17 @@ import java.util.Optional;
 @Table(name = "AccesoDeColaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
     @OneToOne
+    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private Colaborador colaborador;
-    @OneToMany
-    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "id_acceso_a_heladeras")
     private List <AperturaConPermiso> aperturasDeHeladera;
 
     //Constructores-------------------------------------------------------------
     public AccesoDeColaborador(String codigoTarjeta, Colaborador colaborador) {
         this.codigoTarjeta = codigoTarjeta;
         this.colaborador = colaborador;
+        aperturasDeHeladera = new ArrayList<>();
     }
 
     public AccesoDeColaborador() {
