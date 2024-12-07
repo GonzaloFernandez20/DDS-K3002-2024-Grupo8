@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TpAnualImplementacionApplication<tp_anual_implementacion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "tp_anual.tp_anual_implementacion.TpAnualImplementacionApplication",
+            "projectName": "tp_anual_implementacion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

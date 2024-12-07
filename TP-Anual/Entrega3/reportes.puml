@@ -1,0 +1,73 @@
+@startuml reportes
+class Sistema {
+    - reportesHistoricos : [ReporteSemanal]
+    - reportesDeEstaSemana : [ReporteSemanal]
+    + pasarReportesDeEstaSemanaAHistoricos(): void 
+    ' este es el metodo que hay que calendarizar
+}
+
+class ReporteSemanal {
+    - fecha : LocalTimeDate 
+    ' reporta una vez por semana 
+    + setFechaActual(): void
+    + reportar(): void 
+}
+
+class ReporteSemanalPorHeladera extends ReporteSemanal {
+    - heladera : Heladera
+    + reportar()
+}
+
+class ReporteSemanalPorColaborador extends ReporteSemanal {
+    - colaborador : Colaborador 
+    - cantViandas : Int 
+    + reportar() : void 
+}
+
+class ReporteDeRetiroDeViandas extends ReporteSemanalPorHeladera {
+    - retiros : Int
+    - override reportar() : void
+}
+
+class ReporteDeColocacionDeViandas extends ReporteSemanalPorHeladera {
+    - colocaciones : Int
+    - reportar() : void
+}
+
+class ReporteDeFallas extends ReporteSemanalPorHeladera {
+    -cantidadDeFallas : Int
+    + override reportar(){cantidadDeFallas++} : void
+}
+
+class ReportesDeTodasLasHeladeras{
+    -reportes : [ReporteXHeladera]
+    +iniciarReportePorInicioDeSemanaNueva() : void
+    'terminó la semana'
+    'se le dice a todos los reportes renovarReporteActual'
+}
+
+class ReporteDeViandasPorColaborador{
+    -colaboradoresXviandas : [ColaboradorXVianda]
+    'Cantidad de Viandas por colaborador'
+'Enunciado poco claro, viandas por colab en heladera ahora o retiradas?'
+'Esa cantidad aumenta o disminuye de acuerdo a los movimientos?'
+'Se podría suponer que cuando se colabora donando viandas se suma el colaborador'
+'con su vianda a el reporte, que quede un menjunje de clasecitas colabXvianda no es problema'
+'xq como DECISIÖN DE DISEÑO podemos plantear que no va a haber 10.000 colaboraciones por semana'
+'como para justificar un mayor ordenamiento de los datos'
+}
+
+class ReportesColaboradoresYViandas{
+    -reporteActual : ReportesDeViandasDeTodosLosColaboradores
+    -reportes : [ReportesDeViandasDeTodosLosColaboradores]
+    +renovarReporteActual():void
+}
+
+Sistema -- ReporteSemanal
+ReporteSemanalPorHeladera -- Heladera
+ReporteSemanalPorHeladera -- ReporteDeViandasPorColaborador
+ReporteSemanalPorHeladera -- ReportesDeTodasLasHeladeras
+ColaboradorXVianda "*"-- ReporteDeViandasPorColaborador
+ReportesDeViandasDeTodosLosColaboradores *-- ReportesColaboradoresYViandas
+ReportesDeViandasDeTodosLosColaboradores -- ColaboradorXViandas
+@enduml

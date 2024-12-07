@@ -1,0 +1,39 @@
+package Modelo.Dominio.Accesos_a_heladeras;
+
+import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.Persona.PersonaHumana;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class GestorDeAperturasAHeladeras {
+    private static GestorDeAperturasAHeladeras instancia;
+    private final List<AccesoAHeladeras> tarjetasRegistradas;
+
+
+    // ------------------------------------------------
+    private GestorDeAperturasAHeladeras() {
+        this.tarjetasRegistradas = new ArrayList<>();
+
+    }
+
+    public static GestorDeAperturasAHeladeras getInstancia() {
+        if (instancia == null) {
+            instancia = new GestorDeAperturasAHeladeras();
+        }
+        return instancia;
+    }
+    // ------------------------------------------------
+    public boolean autorizarApertura(String codigoDeTarjeta, Heladera heladera){
+        Optional <AccesoAHeladeras> acceso = tarjetasRegistradas.stream()
+                                                                .filter(unAcceso -> codigoDeTarjeta.equals(unAcceso.getCodigoTarjeta()))
+                                                                .findFirst();
+        if (acceso.isPresent()){
+            return acceso.get().estaAutorizadaLaApertura(heladera); // Chequea si tiene un permiso hecho
+        }else return false; // Si devuelve false es porque la tarjeta no esta registrada en el sistema, no autorizo que abra la heladera
+    }
+
+
+}
+

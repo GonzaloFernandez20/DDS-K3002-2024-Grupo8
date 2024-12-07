@@ -1,0 +1,19 @@
+package Modelo.Dominio.contribucion;
+
+public enum Rubro {
+    GASTRONOMIA,
+    ELECTRONICA,
+    ARTICULOS_PARA_EL_HOGAR,
+    INDUMENTARIA,
+    DEPORTES,
+    JUGUETERIA,
+    LIBRERIA,
+    SALUD_Y_BELLEZA,
+    AUTOMOTRIZ,
+    MUEBLES,
+    TECNOLOGIA,
+    FERRETERIA,
+    ALIMENTOS_Y_BEBIDAS,
+    VIAJES_Y_TURISMO,
+    JOYERIA
+}
