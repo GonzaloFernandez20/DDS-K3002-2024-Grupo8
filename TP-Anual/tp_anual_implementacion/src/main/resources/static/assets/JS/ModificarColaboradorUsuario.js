@@ -45,15 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
-function habilitarInputIdentificacion(tipo) {
-    if(tipo=="humano") {
-        document.getElementById('nuevoMedioDeContactoHumano').removeAttribute("disabled");
-    } else {
-        document.getElementById('nuevoMedioDeContacto').removeAttribute("disabled");
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.mod-cuenta').forEach(form => {
         form.addEventListener('submit', function (event) {
@@ -91,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const contrasenia = document.getElementById("nuevaContraseniaHumana");
         const calle = document.getElementById("nuevaCalleHumana");
         const altura = document.getElementById("nuevaAlturaHumana");
-        const tipoMedioNuevo = document.getElementById('.mod-cuenta-tipo-medio');
-        const medioNuevo = document.getElementById('.mod-cuenta-medio');
+        const tipoMedioNuevo = document.getElementById("tipoNuevoMedioDeContactoHumano");
+        const medioNuevo = document.getElementById("nuevoMedioDeContactoHumano");
 
         const datosDeUsuario = {
             usuario: usuario.value,
@@ -138,3 +129,15 @@ document.addEventListener('DOMContentLoaded', function () {
 function ocultarReporteFalla() {
     document.getElementById('container-reporte-falla').style.display = 'none';
 }
+
+document.getElementById('tipoNuevoMedioDeContactoHumano').addEventListener('change', function () {
+    const inputContainer = document.getElementById('inputContainer');
+    const input = document.getElementById('nuevoMedioDeContactoHumano');
+
+    if (this.value) {
+        inputContainer.style.display = 'block'; // Mostrar el input si hay selección
+        input.placeholder = this.value === 'mail' ? 'Ingrese su correo electrónico' : 'Ingrese su número';
+    } else {
+        inputContainer.style.display = 'none'; // Ocultar el input si no hay selección
+    }
+});

@@ -176,20 +176,21 @@
                                     </span>
                                 </div>
 
-                                <label>Agregar medio de contacto:</label>
-                                <label for="tipoNuevoMedioDeContactoHumano"></label>
-                                <select id="tipoNuevoMedioDeContactoHumano" class="mod-cuenta-tipo-medio" onclick="habilitarInputIdentificacion('humano')">
-                                    <option value="">--Seleccione--</option>
+                                <label for="tipoNuevoMedioDeContactoHumano">Agregar medio de contacto:</label>
+                                <select id="tipoNuevoMedioDeContactoHumano" class="mod-cuenta-tipo-medio">
+                                    <option value="" selected disabled >--Seleccione--</option>
                                     <option value="telegram">Telegram</option>
                                     <option value="mail">Mail</option>
                                     <option value="whatsapp">WhatsApp</option>
-                                </select><br>
-                                <label for="nuevoMedioDeContactoHumano"></label>
-                                <input disabled type="text" id="nuevoMedioDeContactoHumano" class="mod-cuenta-medio" placeholder="Ingrese su número/mail"><br>
+                                </select>
+                                <br>
+                                <div id="inputContainer" style="display: none;">
+                                    <label for="nuevoMedioDeContactoHumano"></label>
+                                    <input type="text" id="nuevoMedioDeContactoHumano" class="mod-cuenta-medio" placeholder="Ingrese su número/mail">
+                                </div>
 
                                 <!-- Datos de Usuario -->
                                 <h3 id="usuario">Usuario</h3>
-
                                 <div class="usuario-container">
                                     <label for="nuevaCalleHumana"></label>
                                     <div class="inputs-usuario">

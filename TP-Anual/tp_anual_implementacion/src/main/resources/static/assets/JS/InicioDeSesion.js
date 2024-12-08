@@ -42,14 +42,14 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
             if (!respuesta.ok) {
                 throw new Error("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
             }
-            alert("Usuario y contraseña validados exitosamente.");
-            if (redirect) {window.location.href = redirect;}
-            else {
-            window.location.href = "/Home";
-            }
+            alertaSimple("Usuario y contrasenia validados exitosamente!", "success");
+            setTimeout(function() {
+                if (redirect) { window.location.href = redirect; }
+                else { window.location.href = "/Home"; }
+            }, 1300);
         } catch (error) {
             console.error('Error:', error);
-            alert(error.message);
+            alertaSimple(error.message, "error");
         }
     }
 
