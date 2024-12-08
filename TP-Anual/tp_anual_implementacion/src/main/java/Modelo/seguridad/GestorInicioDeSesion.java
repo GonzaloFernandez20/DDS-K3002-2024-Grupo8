@@ -39,4 +39,16 @@ public class GestorInicioDeSesion {
         return null;
     }
 
+    public Usuario obtenerUsuarioDeSesion(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            String nombreDeUsuario = authentication.getName();
+            Optional<Usuario> usuario = usuariosRepository.findByNombreDeUsuario(nombreDeUsuario);
+            if (usuario.isPresent()) {
+                return usuario.get();
+            }
+        }
+        return null;
+    }
+
 }
