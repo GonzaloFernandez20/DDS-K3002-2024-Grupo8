@@ -6,7 +6,8 @@ import Modelo.Dominio.heladera.Heladera;
 
 public class HeladeraMapper {
     public static HeladeraDTO convertirEnHeladeraDTO(Heladera heladera) {
-        return new HeladeraDTO(heladera.getColaboradorACargo(),
+        return new HeladeraDTO(heladera.getid_heladera(),
+                heladera.getColaboradorACargo(),
                 heladera.getCapacidadDeViandas(),
                 heladera.getModelo().getNombreModelo(),
                 heladera.getModelo().getTemperaturaMaxima(),

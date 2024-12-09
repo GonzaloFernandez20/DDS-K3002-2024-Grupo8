@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "DistribucionDeVianda")
 public class DistribucionDeViandas extends ContribucionConApertura {
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.PERSIST )
     @JoinColumn(name = "heladera_origen", referencedColumnName = "id_heladera")
     private  Heladera heladeraDeOrigen;
     @Enumerated(EnumType.STRING)

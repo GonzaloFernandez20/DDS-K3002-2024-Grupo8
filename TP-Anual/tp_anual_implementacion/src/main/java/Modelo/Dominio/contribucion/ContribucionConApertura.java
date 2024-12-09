@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ContribucionConApertura extends Contribucion{
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.PERSIST )
     @JoinColumn(name = "heladera_destino", referencedColumnName = "id_heladera")
     protected Heladera heladeraDestino;
 

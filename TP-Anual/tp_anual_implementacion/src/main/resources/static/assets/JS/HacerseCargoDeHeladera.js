@@ -108,9 +108,9 @@ formularioDeHeladera.addEventListener('submit', function (e) {
     })
         .then(response => {
             if (response.ok) {
-                alert('Heladera creada exitosamente');
+                alert('Heladera dada alta exitosamente');
             } else {
-                throw new Error(`Error al crear la heladera. Código de estado: ${response.status}`);
+                throw new Error(`Error al dar de alta la heladera. Código de estado: ${response.status}`);
             }
         })
         .catch(error => {

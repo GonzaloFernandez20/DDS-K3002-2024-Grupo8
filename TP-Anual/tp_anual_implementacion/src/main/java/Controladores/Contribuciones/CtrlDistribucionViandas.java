@@ -2,7 +2,6 @@ package Controladores.Contribuciones;
 
 import DTOs.DistribucionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
-import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
 import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
 import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
@@ -17,7 +16,7 @@ import Modelo.Excepciones.ExcepcionViandasInsuficientesEnOrigen;
 import Modelo.Mappers.DistribucionDeViandasMapper;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
-import Repositorios.RepositorioHeladeras;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,6 +75,7 @@ public class CtrlDistribucionViandas {
         return "DistribuirVianda";
     }
 
+    @Transactional
     @PostMapping("/DistribuirVianda")
     public ResponseEntity<String> procesarSolicitudDistribucion(@RequestBody DistribucionDeViandaDTO distribucionDTO) {
         System.out.println(distribucionDTO.getMotivoDeDistribucion() + ' ' + distribucionDTO.getCantidadDeViandas() + ' ' + distribucionDTO.getHeladeraDeOrigenID() + ' ' + distribucionDTO.getHeladeraDestinoID());
