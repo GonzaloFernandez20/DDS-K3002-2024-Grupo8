@@ -48,14 +48,14 @@ public class TestCargaMasiva {
 
         documentoPrueba = new Documento(DNI, "12345678", null);
 
-        cargaMasiva = new CargaMasiva(getClass().getResource("/CSVCorrecto.csv").getPath());
+        // cargaMasiva = new CargaMasiva(getClass().getResource("/CSVCorrecto.csv").getPath());
     }
 
     @Disabled
     @Test
     void ValidacionesPresenciaEnElSistema() {
         // setUp();
-        cargaMasiva.migrar();
+        // cargaMasiva.migrar();
         // assertTrue(sistema.existeColaborador(new Colaborador(new PersonaHumana("Ana", "Días", null, new Documento(DNI, "40555555", null), null))), "El colaborador de la primera linea del CSV existe.");
 
         assertTrue(sistema.existeColaborador(colaborador2), "El colaborador de la segunda linea del CSV existe");
