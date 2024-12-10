@@ -405,6 +405,11 @@ input, select{
     display: none;
 }
 
+.contenido-mi-cuenta{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 .reportes-container {
     padding-bottom: 20px;
 }
