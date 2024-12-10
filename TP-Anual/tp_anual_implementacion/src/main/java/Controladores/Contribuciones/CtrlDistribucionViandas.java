@@ -65,7 +65,7 @@ public class CtrlDistribucionViandas {
             return "PedirTarjetaColaborador";
         }
 
-        heladeras = repositorioHeladeras.findAll().stream().
+        heladeras = repositorioHeladeras.traerHeladerasActivasEnElSistema().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
 
         model.addAttribute("heladeras", heladeras);
@@ -85,6 +85,7 @@ public class CtrlDistribucionViandas {
 
             System.out.println(nuevaDistribucion.getMotivoDeDistribucion().toString() + ' ' + nuevaDistribucion.getCantidadDeViandasAMover() + ' ' + nuevaDistribucion.getHeladeraDeOrigen().getUbicacion().getNombreCompletoDeUbicacion() + ' ' + nuevaDistribucion.getHeladeraDestino().getUbicacion().getNombreCompletoDeUbicacion());
 
+            // NO CAMBIAN DE HELADERA HASTA QUE SE EFECTÚE LA DISTRIBUCIÓN
             distribucionDeViandaRepository.save(nuevaDistribucion);
 
             GestorDePermisosDeApertura gestorDePermisosDeApertura = new GestorDePermisosDeApertura(accesoDeColaboradorRepository, aperturaConPermisoRepository);

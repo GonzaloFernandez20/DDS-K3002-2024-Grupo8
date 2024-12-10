@@ -67,7 +67,7 @@ public class CtrlDonacionViandas {
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
             return "PedirTarjetaColaborador";
         }
-        heladeras = heladeraRepository.findAll().stream().
+        heladeras = heladeraRepository.traerHeladerasActivasEnElSistema().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
         setEstados();
         model.addAttribute("heladeras", heladeras);

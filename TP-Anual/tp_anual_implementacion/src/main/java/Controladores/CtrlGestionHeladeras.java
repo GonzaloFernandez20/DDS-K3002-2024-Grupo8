@@ -5,6 +5,7 @@ import DTOs.AlertaDTO;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.Repositories.incidentes.AlertaRepository;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.heladera.EstadoHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Mappers.AlertaMapper;
 import Modelo.Mappers.BuilderHeladera;
@@ -24,10 +25,6 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CtrlGestionHeladeras {
-
-    private List<HeladeraDTO> heladeras;
-    private List<AlertaDTO> alertas;
-
     private final HeladeraRepository heladeraRepository;
     private final AlertaRepository alertaRepository;
     private final GestorInicioDeSesion gestorInicioDeSesion;
@@ -43,16 +40,17 @@ public class CtrlGestionHeladeras {
     public String mostrarHeladerasYAlertas(Model model) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
-        heladeras = heladeraRepository.traerHeladerasDeUnColaborador(colaborador.getId_colaborador()).stream().
-                map(heladera -> HeladeraMapper.convertirEnHeladeraDTO(heladera)).collect(Collectors.toList());
-        alertas = alertaRepository.traerAlertasDeUnColaborador(colaborador.getId_colaborador()).stream().
+        List<HeladeraDTO> heladeras = HeladeraMapper.convertirListaDeHeladerasEnDTO(heladeraRepository.traerHeladerasDeUnColaborador(colaborador.getId_colaborador()));
+        List<HeladeraDTO> heladerasConAlertas = HeladeraMapper.convertirListaDeHeladerasEnDTO(heladeraRepository.traerHeladerasDeUnColaboradorConAlertas(colaborador.getId_colaborador()));
+        List<HeladeraDTO> heladerasDadasDeBaja = HeladeraMapper.convertirListaDeHeladerasEnDTO(heladeraRepository.traerHeladerasDadasDeBajaDeUnColaborador(colaborador.getId_colaborador()));
+
+        List<AlertaDTO> alertas = alertaRepository.traerAlertasDeUnColaborador(colaborador.getId_colaborador()).stream().
                 map(alerta -> AlertaMapper.convertirEnAlertaDTO(alerta)).collect(Collectors.toList());
-        List<HeladeraDTO> heladerasConAlertas = heladeraRepository.traerHeladerasDeUnColaboradorConAlertas(colaborador.getId_colaborador()).stream().
-                map(heladera -> HeladeraMapper.convertirEnHeladeraDTO(heladera)).collect(Collectors.toList());
 
         model.addAttribute("warnings", alertas);
         model.addAttribute("heladeras", heladeras);
         model.addAttribute("heladerasConAlertas", heladerasConAlertas);
+        model.addAttribute("heladerasDadasDeBaja", heladerasDadasDeBaja);
 
         return "ModificarColaboradorJuridicoHeladeras";
     }
@@ -70,9 +68,15 @@ public class CtrlGestionHeladeras {
 
     @PostMapping("/EliminarHeladera")
     public ResponseEntity<String> eliminarHeladera(@RequestBody Integer idHeladera) {
-        heladeraRepository.eliminarDependenciasDeLaHeladera(idHeladera);
-        heladeraRepository.eliminarHeladeraPorId(idHeladera);
+        try {
+            Heladera heladera = heladeraRepository.findById(idHeladera).get();
 
-        return ResponseEntity.ok("La heladera fue dada de baja exitosamente.");
+            heladera.setEstado(EstadoHeladera.DADA_DE_BAJA);
+            heladeraRepository.save(heladera);
+
+            return ResponseEntity.ok("La heladera fue dada de baja exitosamente.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
