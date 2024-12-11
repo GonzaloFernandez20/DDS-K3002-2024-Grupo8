@@ -4,6 +4,7 @@ import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Repositories.carga_masiva.ColaboracionesCSVRepository;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,9 @@ public class GestorCargaMasiva {
 
             ColaboracionesCSV colaboracionesCSV = new ColaboracionesCSV(path);
             List<Colaborador> colaboradores = colaboracionesCSV.obtenerColaboradores();
-            colaboradores.stream().forEach(colaborador -> persistirSegunPresencia(colaborador));
+            colaboradores.forEach(colaborador -> persistirSegunPresencia(colaborador));
 
+            System.out.println("Voy a guardar este path: " + colaboracionesCSV.getArchivo());
             colaboracionesCSVRepository.save(colaboracionesCSV);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -45,23 +47,37 @@ public class GestorCargaMasiva {
     private static void persistirSegunPresencia(Colaborador colaborador) {
         PersonaHumana persona = (PersonaHumana) colaborador.getPersona();
         Documento documento = persona.getDocumento();
-        Colaborador colaboradorPersistido = colaboradorRepository.buscarColaborador(persona.getNombre(), persona.getApellido(), documento.getTipo(), documento.getNumero());
+        Colaborador colaboradorPersistido = colaboradorRepository.buscarColaboradorHumano(persona.getNombre(), persona.getApellido(), documento.getTipo(), documento.getNumero());
 
         if (!Objects.isNull(colaboradorPersistido)) { // Si está en la BD...
             actualizarColaborador(colaboradorPersistido, colaborador);
         } else { // Si no está en la BD...
             colaborador.notificar("¡Gracias por su aporte! Puede entrar al sistema con su mail.");
+
             // Al no existir el colaborador previo a la carga, SÍ O SÍ va a ser un mail, cumpliendo con la consigna
             colaboradorRepository.save(colaborador);
         }
     }
 
     private static void actualizarColaborador(Colaborador colaboradorActualmente, Colaborador colaboradorDelCSV) {
-        colaboradorDelCSV.getHistorialDeContribuciones().forEach(colaboradorActualmente::registrarContribucion);
+        colaboradorDelCSV.getHistorialDeContribuciones().forEach(contribucion -> {
+            colaboradorActualmente.registrarContribucion(contribucion);
+            contribucion.setColaborador(colaboradorActualmente);
+
+            if(contribucion instanceof DonacionDeViandas) {
+                DonacionDeViandas donacionDeViandas = (DonacionDeViandas) contribucion;
+                donacionDeViandas.getViandas().forEach(vianda -> vianda.setColaborador(colaboradorActualmente));
+            }
+            });
+
         Mail mailDelCSV = (Mail) colaboradorDelCSV.getMediosDeContacto().getFirst();
-        if(!colaboradorActualmente.tieneMedioDeContacto(mailDelCSV)) {
+        if(colaboradorActualmente.getMediosDeContacto().stream()
+                .filter(medio -> medio instanceof Mail)
+                .map(mail -> (Mail) mail)
+                .noneMatch(mail -> mail.getCorreo().equals(mailDelCSV.getCorreo()))) {
             colaboradorActualmente.agregarMedioDeContacto(mailDelCSV);
         }
+
         colaboradorRepository.save(colaboradorActualmente);
     }
 }

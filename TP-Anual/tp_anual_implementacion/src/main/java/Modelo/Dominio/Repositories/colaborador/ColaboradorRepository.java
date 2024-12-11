@@ -19,5 +19,5 @@ public interface ColaboradorRepository extends JpaRepository<Colaborador, Intege
                     "   AND ph.documento.tipo = ?3 " +
                     "   AND ph.documento.numero = ?4"
     )
-    Colaborador buscarColaborador(String nombre, String apellido, TipoDeDocumento tipoDeDocumento, String documento);
+    Colaborador buscarColaboradorHumano(String nombre, String apellido, TipoDeDocumento tipoDeDocumento, String documento);
 }

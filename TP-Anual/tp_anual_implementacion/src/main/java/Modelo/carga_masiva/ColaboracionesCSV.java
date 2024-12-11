@@ -99,7 +99,10 @@ public class ColaboracionesCSV {
             case "DONACION_VIANDAS":
                 List<Vianda> viandasNulas = new ArrayList<>();
                 for(int i = 0; i<cantidad; i++) {
-                    viandasNulas.add(new Vianda());
+                    Vianda vianda = new Vianda();
+                    vianda.setColaborador(colaborador);
+                    vianda.setFechaDeDonacion(fechaContribucion);
+                    viandasNulas.add(vianda);
                 }
                 DonacionDeViandas contribucionDonarVianda = new DonacionDeViandas(colaborador, null, viandasNulas, fechaContribucion);
                 colaborador.registrarContribucion(contribucionDonarVianda);
@@ -150,4 +153,6 @@ public class ColaboracionesCSV {
             return false;
         }
     }
+
+    public String getArchivo() { return archivo; }
 }

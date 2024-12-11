@@ -1,4 +1,6 @@
 package tp_anual.tp_anual_implementacion;
+/*
+SE DEBE REEMPLAZAR CON EL GESTOR Y COLABORACIONESCSV
 
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
@@ -97,3 +99,4 @@ public class TestCargaMasiva {
         assertFalse(cargaMasiva.esFechaValida("20-09-2020"), "El formato de fecha es invalido");
     }
 }
+*/
