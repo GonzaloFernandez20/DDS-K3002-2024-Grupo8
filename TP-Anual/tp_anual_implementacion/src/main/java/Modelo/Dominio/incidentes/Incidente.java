@@ -7,19 +7,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "Incidente")
+@Table(name = "incidente")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Incidente {
     @Id
-    @GeneratedValue
-    private  Integer id_incidente;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_incidente;
+
     @Column(name = "momento_del_suceso")
     protected LocalDateTime momentoDelSuceso;
-    @OneToOne
+
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "heladera_donde_ocurrio", referencedColumnName = "id_heladera")
     protected Heladera heladeraDondeOcurrio;
+
     @OneToMany(mappedBy = "incidenteAtendido", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     protected List <VisitaTecnica> visitas;
+
     @Enumerated(EnumType.STRING)
     protected EstadoDelIncidente estado;
 

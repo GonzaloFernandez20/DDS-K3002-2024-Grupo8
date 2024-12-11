@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "contribucion_con_apertura")
 public abstract class ContribucionConApertura extends Contribucion{
     @ManyToOne( cascade = CascadeType.PERSIST )
     @JoinColumn(name = "heladera_destino", referencedColumnName = "id_heladera")

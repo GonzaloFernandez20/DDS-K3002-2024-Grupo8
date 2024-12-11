@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="dds_persistencia@localhost" uuid="b4abf98e-67e0-4850-a559-029658f6d8bf">
+    <data-source source="LOCAL" name="dds_persistencia@localhost" uuid="0d8816d4-b9b0-4ea9-b896-5ffe35f07deb">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

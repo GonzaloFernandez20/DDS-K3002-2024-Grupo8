@@ -28,6 +28,8 @@ public class FallaTecnica extends Incidente{
         this.linkFoto = linkFoto;
     }
 
+    public FallaTecnica() {}
+
     @Override
     public String obtenerInformacion() {
         return "se produjo una Falla Tecnica: \n" + "Descripcion: " + descripcion + "\n" + "Link Foto: " + linkFoto;

@@ -94,7 +94,7 @@ public class Heladera {
     public int espacioDisponible(){return capacidadDeViandas - cantViandasEnStock();}
 
     public void huboIncidente(){
-        estado = EstadoHeladera.INACTIVA;
+        this.estado = EstadoHeladera.INACTIVA;
         notificadorDeSuscriptos.notificar("Se produjo una falla.");
     }
 

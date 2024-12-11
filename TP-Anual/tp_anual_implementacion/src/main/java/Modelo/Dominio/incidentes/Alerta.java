@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 @Entity
-@Table(name = "Alerta")
+@Table(name = "alerta")
 public class Alerta extends Incidente{
     @Enumerated(EnumType.STRING)
     private TipoAlerta tipoAlerta;

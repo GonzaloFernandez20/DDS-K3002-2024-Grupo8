@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 @Entity
-@Table(name = "AperturaConPermiso")
+@Table(name = "apertura_con_permiso")
 public class AperturaConPermiso extends Apertura {
     @ManyToOne // una colaboracion para distribuir viandas tiene asociadas dos aperturas (una para sacar y otra para ingresar)
     @JoinColumn(name = "contribucion", referencedColumnName = "id_contribucion")

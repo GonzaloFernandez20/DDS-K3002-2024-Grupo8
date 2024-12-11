@@ -112,7 +112,7 @@ public class TestGenerarReportesSemanales {
         DonacionDeViandas contribucionDeVianda = new DonacionDeViandas(colaboradorHumano, heladera, List.of(vianda), LocalDate.now());
 
         // Solicita abrir la heladera
-        GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
+        //GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaboradorHumano, INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
         // Abre la heladera porque está autorizado
         accesoDeColaborador.estaAutorizadaLaApertura(heladera);
 

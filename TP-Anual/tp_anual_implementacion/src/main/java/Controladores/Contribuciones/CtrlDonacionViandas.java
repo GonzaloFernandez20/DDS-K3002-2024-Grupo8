@@ -94,7 +94,7 @@ public class CtrlDonacionViandas {
         try {
             DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
             donacionDeViandasRepository.save(nuevaDonacion);
-            gestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+            gestorDePermisosDeApertura.generarPermisoDeDonacion(nuevaDonacion);
             return ResponseEntity.ok("Donacion realizada con éxito!");
         }catch (Exception e) {
             e.printStackTrace();

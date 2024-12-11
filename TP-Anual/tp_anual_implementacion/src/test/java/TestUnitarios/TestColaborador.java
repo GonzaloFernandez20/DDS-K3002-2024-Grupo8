@@ -61,7 +61,7 @@ public class TestColaborador {
 
         DonacionDeViandas contribucionDeVianda = new DonacionDeViandas(colaborador, heladera, List.of(vianda), LocalDate.now());
 
-        GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaborador, MotivoApertura.INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
+        //GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaborador, MotivoApertura.INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
         accesoDeColaborador.estaAutorizadaLaApertura(heladera);
 
         assertEquals(1, (int) colaborador.cantidadDeDonacionesDeViandaEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));

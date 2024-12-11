@@ -2,21 +2,41 @@ package Modelo.Dominio.heladera;
 
 import Modelo.Dominio.incidentes.GestorDeIncidentes;
 import Modelo.Dominio.incidentes.TipoAlerta;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "sensores_de_temperatura")
 public class SensoreoDeTemperatura {
+
+    @Id
+    @GeneratedValue
+    private Long id_Sensor;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "heladera_asociada", referencedColumnName = "id_heladera")
     private Heladera heladera;
+
+    @Transient
     private Timer timerDeConexion;
+
+    @Transient
     private TimerTask tareaActual;
+
+    @Transient
     private float ultimaTemperaturaRegistrada;
 
-    public Integer getId() {
-        return ID;
+    public SensoreoDeTemperatura() {
+        timerDeConexion = new Timer();
+        tareaActual = null;
     }
-
-    Integer ID;
 
     public SensoreoDeTemperatura(Heladera heladera) {
         this.heladera = heladera;
@@ -26,8 +46,10 @@ public class SensoreoDeTemperatura {
 
     public void actualizarTemperatura(float temperatura) {
         this.ultimaTemperaturaRegistrada = temperatura;
+        System.out.println("Sensor registro nueva temperatura: " + temperatura);
         if (!heladera.getModelo().controlarTemperatura(temperatura)){
             GestorDeIncidentes.reportarAlerta(heladera, TipoAlerta.TEMPERATURA);
+            System.out.println("Sensor registro nueva temperatura: " + temperatura);
         }else{
             iniciarTimer();
         }
@@ -46,6 +68,7 @@ public class SensoreoDeTemperatura {
 
         timerDeConexion.scheduleAtFixedRate(tareaActual, 0, 300000); // Que se ejecute cada 5 minutos
     }
+
 }
 
 

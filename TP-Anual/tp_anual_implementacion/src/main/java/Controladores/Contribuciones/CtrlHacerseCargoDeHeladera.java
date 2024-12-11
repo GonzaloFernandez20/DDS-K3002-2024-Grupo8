@@ -1,15 +1,17 @@
 package Controladores.Contribuciones;
 
 import DTOs.HeladeraDTO;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Modelo.Dominio.Repositories.heladera.SensoreoDeMovimientoRepository;
+import Modelo.Dominio.Repositories.heladera.SensoreoDeTemperaturaRepository;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.heladera.SensoreoDeMovimiento;
+import Modelo.Dominio.heladera.SensoreoDeTemperatura;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Mappers.BuilderHeladera;
+import Modelo.Mappers.BuilderSensores;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
@@ -32,16 +34,17 @@ import java.util.List;
 public class CtrlHacerseCargoDeHeladera {
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
-    private final HeladeraRepository heladeraRepository;
+
     private final HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository;
-    private final ColaboradorRepository colaboradorRepository;
+    private final SensoreoDeTemperaturaRepository sensoreoDeTemperaturaRepository;
+    private final SensoreoDeMovimientoRepository sensoreoDeMovimientoRepository;
 
     @Autowired
-    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion, HeladeraRepository heladeraRepository, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository, ColaboradorRepository colaboradorRepository) {
+    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository, SensoreoDeTemperaturaRepository sensoreoDeTemperaturaRepository, SensoreoDeMovimientoRepository sensoreoDeMovimientoRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
-        this.heladeraRepository = heladeraRepository;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
-        this.colaboradorRepository = colaboradorRepository;
+        this.sensoreoDeTemperaturaRepository = sensoreoDeTemperaturaRepository;
+        this.sensoreoDeMovimientoRepository = sensoreoDeMovimientoRepository;
     }
 
     @GetMapping("/HacerseCargoDeUnaHeladera")
@@ -77,8 +80,12 @@ public class CtrlHacerseCargoDeHeladera {
         Hibernate.initialize(colaborador.getHistorialDeContribuciones());
         nuevaContribucion.procesarLaContribucion();
 
-        hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
-        // Usando cascade = CascadeType.PERSIST estoy guardando la heladera también
+        HacerseCargoDeHeladera contribucionGuardada = hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
+        SensoreoDeMovimiento nuevoSensoreoMov = BuilderSensores.crearSensoreoDeMovimiento(contribucionGuardada.getHeladeraACargo());
+        SensoreoDeTemperatura nuevoSensoreoTemp = BuilderSensores.crearSensoreoDeTemperatura(contribucionGuardada.getHeladeraACargo());
+
+        sensoreoDeTemperaturaRepository.save(nuevoSensoreoTemp);
+        sensoreoDeMovimientoRepository.save(nuevoSensoreoMov);
 
         return ResponseEntity.ok("Registro realizado con éxito!");
     }

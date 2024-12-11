@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Entity
-@Table(name = "AccesoDeColaborador")
+@Table(name = "acceso_de_colaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
     @OneToOne
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
@@ -42,8 +42,8 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
                                                                 .filter(permisoDeApertura -> permisoDeApertura.esValidaEn(heladera))
                                                                 .findFirst();
         if (permiso.isPresent()){
-            Apertura permisoEncontrado = permiso.get();
-            registrarAperturaRealizada((AperturaConPermiso) permisoEncontrado);
+            AperturaConPermiso permisoEncontrado = permiso.get();
+            registrarAperturaRealizada(permisoEncontrado);
             return true;
         } else return false;
     }
@@ -54,8 +54,8 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
         apertura.cantidadViandasInvolucradas = apertura.getContribucion().cantidadDeViandasInvolucradas();
         apertura.getContribucion().procesarLaContribucion();
 
-        //TODO: actualizar en el repo la apertura
-        //RepositorioAperturas.getInstancia().agregarApertura(apertura);
+        //TODO: Registrar movimiento en BD
+        GestorDeAperturasAHeladeras.getInstancia().registrarAccesoDeColaborador(this);
     }
 
     // TODO: Hecho de forma provisoria para reportes

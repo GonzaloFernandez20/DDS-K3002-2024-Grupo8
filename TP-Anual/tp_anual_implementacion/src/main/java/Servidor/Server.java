@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = {
         SecurityAutoConfiguration.class,
@@ -15,6 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages={"Controladores", "Modelo"})
 @EntityScan(basePackages={"Modelo"})
 @EnableJpaRepositories(basePackages={"Modelo.Dominio.Repositories", "Repositorios"})
+@EnableScheduling
 public class Server {
     public static void main(String[] args) {
         SpringApplication.run(Server.class, args);

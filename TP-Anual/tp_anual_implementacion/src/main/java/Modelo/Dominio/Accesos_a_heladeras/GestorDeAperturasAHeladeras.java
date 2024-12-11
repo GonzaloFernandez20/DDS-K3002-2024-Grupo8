@@ -1,21 +1,34 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
+import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.Persona.PersonaHumana;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class GestorDeAperturasAHeladeras {
     private static GestorDeAperturasAHeladeras instancia;
     private final List<AccesoAHeladeras> tarjetasRegistradas;
-
+    private AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    private VinculacionRepository vinculacionRepository;
 
     // ------------------------------------------------
-    private GestorDeAperturasAHeladeras() {
+    @Autowired
+    private GestorDeAperturasAHeladeras(AccesoDeColaboradorRepository accesoDeColaboradorRepository, VinculacionRepository vinculacionRepository) {
+        this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
+        this.vinculacionRepository = vinculacionRepository;
         this.tarjetasRegistradas = new ArrayList<>();
 
+    }
+
+    private GestorDeAperturasAHeladeras() {
+        this.tarjetasRegistradas = new ArrayList<>();
     }
 
     public static GestorDeAperturasAHeladeras getInstancia() {
@@ -35,5 +48,12 @@ public class GestorDeAperturasAHeladeras {
     }
 
 
+    public void registrarAccesoDeColaborador(AccesoDeColaborador accesoDeColaborador) {
+        accesoDeColaboradorRepository.save(accesoDeColaborador);
+    }
+
+    public void registrarAccesoDeVulnerable(Vinculacion vinculacion){
+        vinculacionRepository.save(vinculacion);
+    }
 }
 

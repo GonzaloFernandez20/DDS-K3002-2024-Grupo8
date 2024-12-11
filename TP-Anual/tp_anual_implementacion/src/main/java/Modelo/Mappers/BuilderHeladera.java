@@ -50,13 +50,4 @@ public class BuilderHeladera {
         NotificadorDeSuscriptos notificador = new NotificadorDeSuscriptos(nuevaHeladera);
         nuevaHeladera.setNotificadorDeSuscriptos(notificador);
     }
-
-    private static SensoreoDeMovimiento crearSensoreoDeMovimiento(Heladera nuevaHeladera) {
-        return new SensoreoDeMovimiento(nuevaHeladera);
-    }
-
-    private static SensoreoDeTemperatura crearSensoreoDeTemperatura(Heladera nuevaHeladera) {
-        return new SensoreoDeTemperatura(nuevaHeladera);
-    }
-
 }

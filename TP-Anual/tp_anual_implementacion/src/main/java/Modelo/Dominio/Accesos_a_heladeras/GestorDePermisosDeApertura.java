@@ -24,7 +24,7 @@ public class GestorDePermisosDeApertura {
         this.aperturaConPermisoRepository = aperturaConPermisoRepository;
     }
 
-    public void generarPermisoDeDonación(DonacionDeViandas nuevaDonacion) {
+    public void generarPermisoDeDonacion(DonacionDeViandas nuevaDonacion) {
         registrarMovimientoSolicitado(nuevaDonacion.getColaborador(),
                 MotivoApertura.INGRESAR_VIANDAS_DONADAS,
                 nuevaDonacion, nuevaDonacion.getHeladeraDestino());
