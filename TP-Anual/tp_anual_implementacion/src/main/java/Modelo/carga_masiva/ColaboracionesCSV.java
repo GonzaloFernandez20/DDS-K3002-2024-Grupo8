@@ -97,16 +97,22 @@ public class ColaboracionesCSV {
                 colaborador.registrarContribucion(contribucionDinero);
                 break;
             case "DONACION_VIANDAS":
-                DonacionDeViandas contribucionDonarVianda = new DonacionDeViandas(colaborador, null, null, fechaContribucion);
+                List<Vianda> viandasNulas = new ArrayList<>();
+                for(int i = 0; i<cantidad; i++) {
+                    viandasNulas.add(new Vianda());
+                }
+                DonacionDeViandas contribucionDonarVianda = new DonacionDeViandas(colaborador, null, viandasNulas, fechaContribucion);
                 colaborador.registrarContribucion(contribucionDonarVianda);
                 break;
             case "REDISTRIBUCION_VIANDAS":
-                DistribucionDeViandas contribucionDistribuirVianda = new DistribucionDeViandas(colaborador, null, null, null, null, fechaContribucion);
+                DistribucionDeViandas contribucionDistribuirVianda = new DistribucionDeViandas(colaborador, null, null, null, cantidad, fechaContribucion);
                 colaborador.registrarContribucion(contribucionDistribuirVianda);
                 break;
             case "ENTREGA_TARJETAS":
-                RegistroDePersonaVulnerable contribucionRegistro = new RegistroDePersonaVulnerable(colaborador, null, fechaContribucion);
-                colaborador.registrarContribucion(contribucionRegistro);
+                for(int i=0; i<cantidad; i++) {
+                    RegistroDePersonaVulnerable contribucionRegistro = new RegistroDePersonaVulnerable(colaborador, null, fechaContribucion);
+                    colaborador.registrarContribucion(contribucionRegistro);
+                }
                 break;
         }
     }

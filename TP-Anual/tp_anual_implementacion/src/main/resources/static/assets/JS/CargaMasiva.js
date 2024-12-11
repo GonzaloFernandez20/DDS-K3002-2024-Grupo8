@@ -5,21 +5,28 @@ document.addEventListener("DOMContentLoaded", () => {
     formularioCargaCSV.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // Envio del JSON -----------------------------------------------------------------------------
         try {
-            const response = await fetch('/ModificarHeladera', {
+            console.log("Intento enviar el archivo");
+
+            const formData = new FormData();
+            formData.append("archivoCSVCarga", archivoCSVCarga.files[0]);
+
+            console.log("FormData armado");
+
+            const response = await fetch('/CargaMasiva', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(archivoCSVCarga),
+                body: formData,
             });
+
+            console.log("Hice el fetch");
 
             const msjDeRespuesta = await response.text();
 
             if (!response.ok) {
                 throw new Error(msjDeRespuesta);
             }
+
+            console.log("Sobreviví la respuesta");
 
             // Éxito
             Swal.fire({
@@ -28,8 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 icon: "success"
             });
 
+            console.log("Tuve éxito");
+
         } catch (error) {
             // Error
+            console.log("Hubo un error");
             Swal.fire({
                 title: "Carga Masiva de Colaboradores",
                 text: error.message,

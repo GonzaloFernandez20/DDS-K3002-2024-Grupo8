@@ -4,10 +4,9 @@ import Modelo.carga_masiva.GestorCargaMasiva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
@@ -23,18 +22,32 @@ public class CtrlAdministrador {
     }
 
     @GetMapping("/Administrador")
-    public String mostrarPagina(Model model) { return "Administrador"; }
+    public String mostrarPagina() { return "Administrador"; }
 
-    @PostMapping("/Administrador")
-    public ResponseEntity<String> recibirCSV(@RequestBody MultipartFile archivo) {
-        String pathCSV = null;
-        if (!Objects.isNull(archivo) && !archivo.isEmpty()) {
-            pathCSV = DescargaDeArchivo.guardarArchivo("/CSV/", archivo);
+    @PostMapping("/CargaMasiva")
+    public ResponseEntity<String> recibirCSV(@RequestParam("archivoCSVCarga") MultipartFile archivo) {
+        System.out.println("Recibe CSV");
+        System.out.println("Archivo recibido: " + archivo.getOriginalFilename());
+        try {
+            String pathCSV = null;
+            if (!Objects.isNull(archivo) && !archivo.isEmpty()) {
+                pathCSV = DescargaDeArchivo.guardarArchivo("/CSV/", archivo);
+            }
+            System.out.println("Path pathCSV: " + pathCSV);
+
+            GestorCargaMasiva.migrar(pathCSV);
+
+            System.out.println("Sobrevive la migración");
+
+            /*
+            * ERROR:
+            * org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: Modelo.Dominio.colaborador.Colaborador.mediosDeContacto: could not initialize proxy - no Session
+            * */
+
+            return ResponseEntity.ok("El archivo CSV fue cargado de manera exitosa.");
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        System.out.println("Path pathCSV: " + pathCSV);
-
-        GestorCargaMasiva.migrar(pathCSV);
-
-        return ResponseEntity.ok("El archivo CSV fue cargado de manera exitosa.");
     }
 }

@@ -57,13 +57,17 @@ public class CtrlGestionHeladeras {
 
     @PostMapping("/ModificarHeladera")
     public ResponseEntity<String> modificarHeladera(@RequestBody HeladeraDTO heladeraAModificarDTO) {
-        Heladera heladeraAnterior = heladeraRepository.findById(heladeraAModificarDTO.getIdHeladera()).get();
+        try{
+            Heladera heladeraAnterior = heladeraRepository.findById(heladeraAModificarDTO.getIdHeladera()).get();
 
-        Heladera heladeraAModificar = BuilderHeladera.actualizarHeladeraAPartirDe(heladeraAnterior, heladeraAModificarDTO);
+            Heladera heladeraAModificar = BuilderHeladera.actualizarHeladeraAPartirDe(heladeraAnterior, heladeraAModificarDTO);
 
-        heladeraRepository.save(heladeraAModificar);
+            heladeraRepository.save(heladeraAModificar);
 
-        return ResponseEntity.ok("La heladera ha sido modificada satisfactoriamente.");
+            return ResponseEntity.ok("La heladera ha sido modificada satisfactoriamente.");
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/EliminarHeladera")
