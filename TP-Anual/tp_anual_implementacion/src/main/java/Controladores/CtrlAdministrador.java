@@ -1,6 +1,7 @@
 package Controladores;
 
 import Modelo.carga_masiva.GestorCargaMasiva;
+import Utils.DescargaDeArchivo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -34,4 +34,5 @@ public class Usuario {
         this.colaborador = colaborador;
     }
 
+    public Colaborador getColaborador() { return colaborador; }
 }

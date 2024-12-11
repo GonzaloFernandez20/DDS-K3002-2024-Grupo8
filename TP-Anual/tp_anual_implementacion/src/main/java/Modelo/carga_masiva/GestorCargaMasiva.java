@@ -1,15 +1,21 @@
 package Modelo.carga_masiva;
 
 import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Repositories.UsuariosRepository;
 import Modelo.Dominio.Repositories.carga_masiva.ColaboracionesCSVRepository;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.DonacionDeViandas;
 import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.documentacion.TipoDeDocumento;
+import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
+import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
+import Utils.GeneradorDeCadenas;
+import Modelo.seguridad.SesionActiva.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,11 +24,13 @@ public class GestorCargaMasiva {
 
     static ColaboradorRepository colaboradorRepository;
     static ColaboracionesCSVRepository colaboracionesCSVRepository;
+    static UsuariosRepository usuariosRepository;
 
     @Autowired
-    public GestorCargaMasiva(ColaboradorRepository colaboradorRepository, ColaboracionesCSVRepository colaboracionesCSVRepository) {
+    public GestorCargaMasiva(ColaboradorRepository colaboradorRepository, ColaboracionesCSVRepository colaboracionesCSVRepository, UsuariosRepository usuariosRepository) {
         GestorCargaMasiva.colaboradorRepository = colaboradorRepository;
         GestorCargaMasiva.colaboracionesCSVRepository = colaboracionesCSVRepository;
+        GestorCargaMasiva.usuariosRepository = usuariosRepository;
     }
 
     public GestorCargaMasiva() {}
@@ -35,7 +43,7 @@ public class GestorCargaMasiva {
 
             ColaboracionesCSV colaboracionesCSV = new ColaboracionesCSV(path);
             List<Colaborador> colaboradores = colaboracionesCSV.obtenerColaboradores();
-            colaboradores.forEach(colaborador -> persistirSegunPresencia(colaborador));
+            colaboradorRepository.saveAll(colaboradores);
 
             System.out.println("Voy a guardar este path: " + colaboracionesCSV.getArchivo());
             colaboracionesCSVRepository.save(colaboracionesCSV);
@@ -44,40 +52,44 @@ public class GestorCargaMasiva {
         }
     }
 
-    private static void persistirSegunPresencia(Colaborador colaborador) {
-        PersonaHumana persona = (PersonaHumana) colaborador.getPersona();
-        Documento documento = persona.getDocumento();
-        Colaborador colaboradorPersistido = colaboradorRepository.buscarColaboradorHumano(persona.getNombre(), persona.getApellido(), documento.getTipo(), documento.getNumero());
+    public static Colaborador obtenerColaboradorSegunPresencia(String nombre, String apellido, TipoDeDocumento tipoDeDocumento, String nroDocumento, String mail) {
+        Colaborador colaborador = colaboradorRepository.buscarColaboradorHumano(nombre, apellido, tipoDeDocumento, nroDocumento);
 
-        if (!Objects.isNull(colaboradorPersistido)) { // Si está en la BD...
-            actualizarColaborador(colaboradorPersistido, colaborador);
-        } else { // Si no está en la BD...
-            colaborador.notificar("¡Gracias por su aporte! Puede entrar al sistema con su mail.");
+        if(Objects.isNull(colaborador)) {
+            List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
+            Documento documento = new Documento(tipoDeDocumento, nroDocumento, null);
+            PersonaHumana persona = new PersonaHumana(nombre, apellido, null,documento,new Direccion());
+            colaborador = new Colaborador(persona, mediosDeContacto);
 
-            // Al no existir el colaborador previo a la carga, SÍ O SÍ va a ser un mail, cumpliendo con la consigna
-            colaboradorRepository.save(colaborador);
+            agregarNuevoUsuario(colaborador);
         }
+
+        if(colaborador.getMediosDeContacto().stream().filter(medio -> medio instanceof Mail).map(medio -> (Mail) medio).noneMatch(unMail -> unMail.equals(mail))) {
+            Mail mailMedio = new Mail(mail);
+            colaborador.agregarMedioDeContacto(mailMedio);
+        }
+
+        colaboradorRepository.save(colaborador);
+
+        return colaborador;
     }
 
-    private static void actualizarColaborador(Colaborador colaboradorActualmente, Colaborador colaboradorDelCSV) {
-        colaboradorDelCSV.getHistorialDeContribuciones().forEach(contribucion -> {
-            colaboradorActualmente.registrarContribucion(contribucion);
-            contribucion.setColaborador(colaboradorActualmente);
+    private static void agregarNuevoUsuario(Colaborador colaborador) {
+        PersonaHumana persona = (PersonaHumana) colaborador.getPersona();
 
-            if(contribucion instanceof DonacionDeViandas) {
-                DonacionDeViandas donacionDeViandas = (DonacionDeViandas) contribucion;
-                donacionDeViandas.getViandas().forEach(vianda -> vianda.setColaborador(colaboradorActualmente));
-            }
-            });
+        String nombreUsuario = persona.getNombre() + persona.getApellido() + persona.getDocumento().getNumero();
+        String contrasenia = GeneradorDeCadenas.generarContraseniaSegura();
 
-        Mail mailDelCSV = (Mail) colaboradorDelCSV.getMediosDeContacto().getFirst();
-        if(colaboradorActualmente.getMediosDeContacto().stream()
-                .filter(medio -> medio instanceof Mail)
-                .map(mail -> (Mail) mail)
-                .noneMatch(mail -> mail.getCorreo().equals(mailDelCSV.getCorreo()))) {
-            colaboradorActualmente.agregarMedioDeContacto(mailDelCSV);
-        }
+        System.out.println("Nombre usuario: " + nombreUsuario);
+        System.out.println("Contraseña: " + contrasenia);
 
-        colaboradorRepository.save(colaboradorActualmente);
+        Usuario usuario = new Usuario(nombreUsuario, contrasenia, colaborador);
+
+        colaborador.notificar("¡Gracias por su aporte! Puede entrar al sistema con:" +
+                "Nombre de usuario: " + nombreUsuario +
+                "Contraseña: " + contrasenia +
+                "Una vez que entre deberá corregir y completar sus datos como corresponda en la sección Mi Cuenta.");
+
+        usuariosRepository.save(usuario);
     }
 }

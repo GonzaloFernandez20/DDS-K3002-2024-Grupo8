@@ -39,14 +39,24 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
                 },
                 body: JSON.stringify(datosDeUsuario),
             });
+
             if (!respuesta.ok) {
                 throw new Error("Usuario y contrasenia incorrectos. Vuelva a intentarlo");
             }
-            alertaSimple("Usuario y contrasenia validados exitosamente!", "success");
-            setTimeout(function() {
-                if (redirect) { window.location.href = redirect; }
-                else { window.location.href = "/Home"; }
-            }, 1300);
+
+            const mensaje = await respuesta.text();
+
+            if (mensaje.includes("Vamos a necesitar que complete y corrija sus datos")) {
+                alertaSimple(mensaje, "warning");
+                setTimeout(() => {
+                    window.location.href = "/ModificarColaborador";
+                }, 1300);
+            } else {
+                alertaSimple(mensaje, "success");
+                setTimeout(() => {
+                    window.location.href = redirect || "/Home";
+                }, 1300);
+            }
         } catch (error) {
             console.error('Error:', error);
             alertaSimple(error.message, "error");
