@@ -1,12 +1,8 @@
 package Modelo.carga_masiva;
 
-import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
-import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import jakarta.persistence.*;
@@ -68,12 +64,8 @@ public class ColaboracionesCSV {
                     System.out.println("Procesando colaborador: " + nombre + " " + apellido + " con documento: " + tipoDocString + " " + doc + " y mail: " + mail);
 
                     TipoDeDocumento tipoDoc = this.castearTipoDocumento(tipoDocString);
-                    List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-                    Mail mailMedio = new Mail(mail);
-                    mediosDeContacto.add(mailMedio);
-                    Documento documento = new Documento(tipoDoc, doc, null);
-                    PersonaHumana persona = new PersonaHumana(nombre, apellido, null,documento,null);
-                    Colaborador colaborador = new Colaborador(persona,mediosDeContacto);
+
+                    Colaborador colaborador = GestorCargaMasiva.obtenerColaboradorSegunPresencia(nombre, apellido, tipoDoc, doc, mail);
 
                     this.agregarContribucionPorTipo(tipoDonacion, colaborador, fechaContribucion, Integer.parseInt(cantidad));
                     colaboradores.add(colaborador);
