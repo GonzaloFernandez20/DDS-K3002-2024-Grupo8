@@ -1,6 +1,6 @@
 package Modelo.Mappers;
 
-import Controladores.DescargaDeArchivo;
+import Utils.DescargaDeArchivo;
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;

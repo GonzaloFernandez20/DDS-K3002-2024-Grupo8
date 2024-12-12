@@ -1,6 +1,6 @@
 package DTOs;
 
-import Controladores.DescargaDeArchivo;
+import Utils.DescargaDeArchivo;
 import Modelo.Dominio.contribucion.Rubro;
 import org.springframework.web.multipart.MultipartFile;
 
