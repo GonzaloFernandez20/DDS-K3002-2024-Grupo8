@@ -9,9 +9,6 @@ import java.time.LocalDate;
 @Table(name = "OfertaDeUnProducto")
 @DiscriminatorValue("ofrecer_producto")
 public class OfertaDeUnProducto extends Contribucion {
-    //POR QUÉ ESTÁ ÉSTE ATRIBUTO???
-    @Column(name = "idOferta")
-    private int idOferta;
     @Column(name = "nombre_de_oferta")
     private String nombreOferta;
     @Column(name = "puntos_necesarios")
@@ -61,5 +58,4 @@ public class OfertaDeUnProducto extends Contribucion {
     public void setRubro(Rubro rubro) { this.rubro = rubro; }
     public Producto getProducto() { return producto; }
     public void setProducto(Producto producto) { this.producto = producto; }
-    public int getIdOferta(){return this.idOferta;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
 }

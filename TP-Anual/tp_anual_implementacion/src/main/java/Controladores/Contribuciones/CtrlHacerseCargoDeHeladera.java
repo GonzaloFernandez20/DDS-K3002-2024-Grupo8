@@ -5,7 +5,6 @@ import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
@@ -14,7 +13,6 @@ import Modelo.seguridad.GestorInicioDeSesion;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,8 +53,8 @@ public class CtrlHacerseCargoDeHeladera {
     }
 
 
-    @Transactional
     @PostMapping("/FormularioDeHeladera")
+    @Transactional
     public ResponseEntity<String> formularioDeHeladera(@RequestBody HeladeraDTO heladeraDTO) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
@@ -74,10 +72,13 @@ public class CtrlHacerseCargoDeHeladera {
 
         System.out.println(colaborador.getId_colaborador() + " " + nuevaHeladera.getIdHeladera());
 
-        Hibernate.initialize(colaborador.getHistorialDeContribuciones());
         nuevaContribucion.procesarLaContribucion();
 
-        hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
+        try {
+            hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
+        } catch (Exception e) {
+            e.printStackTrace(); //
+        }
         // Usando cascade = CascadeType.PERSIST estoy guardando la heladera también
 
         return ResponseEntity.ok("Registro realizado con éxito!");

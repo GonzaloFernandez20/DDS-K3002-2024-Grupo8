@@ -27,6 +27,10 @@ public abstract class Contribucion {
     public Contribucion() {
     }
 
+    public Integer getId_contribucion(){
+        return id_contribucion;
+    }
+
     public Colaborador getColaborador() {
         return colaborador;
     }

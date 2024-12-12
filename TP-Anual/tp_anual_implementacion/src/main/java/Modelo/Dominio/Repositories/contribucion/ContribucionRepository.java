@@ -1,8 +1,8 @@
-package Modelo.Dominio.Repositories.contribucion;
+/*package Modelo.Dominio.Repositories.contribucion;
 
 import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.localizacion.Direccion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface ContribucionRepository extends JpaRepository<Contribucion, Integer> {}
+public interface ContribucionRepository extends JpaRepository<Contribucion, Integer> {}*/

@@ -8,7 +8,6 @@ import Modelo.Dominio.Repositories.contribucion.ProductoRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.seguridad.GestorInicioDeSesion;
-import Repositorios.RepositorioOfertas;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,7 +53,8 @@ public class CtrlCanjes {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
         System.out.println("Pide canjear el producto con id " + idOferta);
-        OfertaDeUnProducto oferta = RepositorioOfertas.getInstancia().buscarOfertaPorId(Integer.parseInt(idOferta));
+        OfertaDeUnProducto oferta = ofertaDeUnProductoRepository.findById(Integer.parseInt(idOferta))
+                .orElseThrow(() -> new IllegalArgumentException("La oferta con ID " + idOferta + " no existe."));
 
         String mensaje;
         try {
@@ -73,6 +73,8 @@ public class CtrlCanjes {
     }
 
     private OfertaDeUnProductoDTO convertirOfertaADTO(OfertaDeUnProducto oferta) {
-        return new OfertaDeUnProductoDTO(oferta.getNombreOferta(), oferta.getPuntosNecesarios(), oferta.getPathImagen(), oferta.getRubro(), oferta.getProducto().getNombreProducto(), oferta.getProducto().getStock());
+        OfertaDeUnProductoDTO ofertaDeUnProductoDTO =  new OfertaDeUnProductoDTO(oferta.getNombreOferta(), oferta.getPuntosNecesarios(), oferta.getPathImagen(), oferta.getRubro(), oferta.getProducto().getNombreProducto(), oferta.getProducto().getStock());
+        ofertaDeUnProductoDTO.setIdOferta(oferta.getId_contribucion());
+        return ofertaDeUnProductoDTO;
     }
 }

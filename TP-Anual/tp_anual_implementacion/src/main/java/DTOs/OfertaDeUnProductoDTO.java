@@ -24,6 +24,8 @@ public class OfertaDeUnProductoDTO {
 
     public int getIdOferta() { return idOferta; }
 
+    public void setIdOferta(Integer idOferta){ this.idOferta = idOferta; }
+
     public void setNombreOferta(String nombreOferta) { this.nombreOferta = nombreOferta; }
 
     public String getNombreOferta() { return nombreOferta; }
