@@ -22,6 +22,8 @@ public class Alerta extends Incidente{
         this.estado = EstadoDelIncidente.PENDIENTE;
     }
 
+    public Alerta() {}
+
     @Override
     public String obtenerInformacion() {
         return "una Alerta de tipo: " + tipoAlerta.name();

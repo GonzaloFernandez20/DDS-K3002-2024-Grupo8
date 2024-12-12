@@ -1,18 +1,11 @@
 package Modelo.carga_masiva;
 
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.DistribucionDeViandas;
-import Modelo.Dominio.contribucion.DonacionDeDinero;
-import Modelo.Dominio.contribucion.DonacionDeViandas;
-import Modelo.Dominio.contribucion.RegistroDePersonaVulnerable;
-import Modelo.Dominio.documentacion.Documento;
+import Modelo.Dominio.contribucion.*;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.Persona.PersonaHumana;
-import Modelo.Dominio.sistema.Sistema;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import jakarta.persistence.*;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.io.FileNotFoundException;
@@ -25,16 +18,26 @@ import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
-public class CargaMasiva {
-    private final String archivo;
+@Entity
+@Table(name ="carga_masiva")
+public class ColaboracionesCSV {
+    @Id
+    @GeneratedValue
+    private Integer id_colaboracionesCSV;
+    @Column
+    private String archivo;
 
-    public CargaMasiva(String archivo) {
-        if(archivo.endsWith(".csv")) {
-            this.archivo = archivo;
-        } else throw new RuntimeException("El archivo ingresado no es del tipo correcto.");
+    public ColaboracionesCSV(String pathArchivo) {
+        this.archivo = pathArchivo;
     }
 
-    public void migrar() {
+    public ColaboracionesCSV() {
+
+    }
+
+    public List<Colaborador> obtenerColaboradores() {
+        List<Colaborador> colaboradores = new ArrayList<>();
+
         try (CSVReader reader = new CSVReader(new FileReader(archivo))) {
             String[] linea;
             while ((linea = reader.readNext()) != null) {
@@ -61,21 +64,11 @@ public class CargaMasiva {
                     System.out.println("Procesando colaborador: " + nombre + " " + apellido + " con documento: " + tipoDocString + " " + doc + " y mail: " + mail);
 
                     TipoDeDocumento tipoDoc = this.castearTipoDocumento(tipoDocString);
-                    List<MedioDeContacto> mediosDeContacto = new ArrayList<>();
-                    Mail mailMedio = new Mail(mail);
-                    mediosDeContacto.add(mailMedio);
-                    Documento documento = new Documento(tipoDoc, doc, null);
-                    PersonaHumana persona = new PersonaHumana(nombre, apellido, null,documento,null);
-                    Colaborador colaborador = new Colaborador(persona,mediosDeContacto);
+
+                    Colaborador colaborador = GestorCargaMasiva.obtenerColaboradorSegunPresencia(nombre, apellido, tipoDoc, doc, mail);
 
                     this.agregarContribucionPorTipo(tipoDonacion, colaborador, fechaContribucion, Integer.parseInt(cantidad));
-                    Sistema.getInstancia().actualizarPorCargaMasiva(colaborador);
-
-                    if (Sistema.getInstancia().existeColaborador(colaborador)) {
-                        System.out.println("Colaborador agregado exitosamente: " + nombre + " " + apellido);
-                    } else {
-                        System.out.println("Error al agregar colaborador: " + nombre + " " + apellido);
-                    }
+                    colaboradores.add(colaborador);
                 }
             }
         } catch(FileNotFoundException e) {
@@ -85,6 +78,8 @@ public class CargaMasiva {
         } catch (CsvValidationException e) {
             System.err.println("Error de validación CSV: " + e.getMessage());
         }
+
+        return colaboradores;
     }
 
     public void agregarContribucionPorTipo(String tipoDonacion, Colaborador colaborador, LocalDate fechaContribucion, int cantidad) {
@@ -94,16 +89,25 @@ public class CargaMasiva {
                 colaborador.registrarContribucion(contribucionDinero);
                 break;
             case "DONACION_VIANDAS":
-                DonacionDeViandas contribucionDonarVianda = new DonacionDeViandas(colaborador, null, null, fechaContribucion);
+                List<Vianda> viandasNulas = new ArrayList<>();
+                for(int i = 0; i<cantidad; i++) {
+                    Vianda vianda = new Vianda();
+                    vianda.setColaborador(colaborador);
+                    vianda.setFechaDeDonacion(fechaContribucion);
+                    viandasNulas.add(vianda);
+                }
+                DonacionDeViandas contribucionDonarVianda = new DonacionDeViandas(colaborador, null, viandasNulas, fechaContribucion);
                 colaborador.registrarContribucion(contribucionDonarVianda);
                 break;
             case "REDISTRIBUCION_VIANDAS":
-                DistribucionDeViandas contribucionDistribuirVianda = new DistribucionDeViandas(colaborador, null, null, null, null, fechaContribucion);
+                DistribucionDeViandas contribucionDistribuirVianda = new DistribucionDeViandas(colaborador, null, null, null, cantidad, fechaContribucion);
                 colaborador.registrarContribucion(contribucionDistribuirVianda);
                 break;
             case "ENTREGA_TARJETAS":
-                RegistroDePersonaVulnerable contribucionRegistro = new RegistroDePersonaVulnerable(colaborador, null, fechaContribucion);
-                colaborador.registrarContribucion(contribucionRegistro);
+                for(int i=0; i<cantidad; i++) {
+                    RegistroDePersonaVulnerable contribucionRegistro = new RegistroDePersonaVulnerable(colaborador, null, fechaContribucion);
+                    colaborador.registrarContribucion(contribucionRegistro);
+                }
                 break;
         }
     }
@@ -141,5 +145,6 @@ public class CargaMasiva {
             return false;
         }
     }
-}
 
+    public String getArchivo() { return archivo; }
+}

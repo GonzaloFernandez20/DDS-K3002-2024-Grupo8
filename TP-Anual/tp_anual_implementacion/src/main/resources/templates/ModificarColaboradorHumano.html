@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-bs-theme="auto">
+<html lang="es" data-bs-theme="auto" xmlns:th=http://www.thymeleaf.org>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,11 +9,17 @@
         <title>Mi Cuenta - Usuario</title>
 
         <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-        
-        <!-- Custom styles for this template -->
+
         <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
         <link href="/assets/CSS/MiCuenta.css" rel="stylesheet">
         <script src="/assets/JS/load-header-footer.js" defer></script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
+        <script src="/assets/JS/ModificarColaboradorHumano.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body>
@@ -36,35 +42,36 @@
         
         <main class="container">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="sidenav flex-column flex-shrink-0 p-3">
-                        <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
+                        <span class="titulo-mi-cuenta">Mi Cuenta</span>
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto nav-chosen">
-                            <span class="fs-5">Usuario</span>
+                            <span class="fs-5 nav-title">Usuario</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/home-icon.svg"/>
-                                <a href="#info-personal" class="nav-link">
-                                    Información Personal
-                                </a>
+                                <image height="20px" width="20px" src="img/home-icon.svg" class="icon"></image>
+                                <a href="#info-personal" class="nav-link nowrap-text">Información Personal</a>
                             </li>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/contact-icon.svg"/>
-                                <a href="#contacto" class="nav-link">
-                                Contacto
-                                </a>
+                                <image height="20px" width="20px" src="img/contact-icon.svg" class="icon"></image>
+                                <a href="#contacto" class="nav-link nowrap-text">Contacto</a>
+                            </li>
+                            <li class="nav-item">
+                                <image height="20px" width="20px" src="img/contact-icon.svg" class="icon"></image>
+                                <a href="#usuario" class="nav-link nowrap-text">Usuario</a>
                             </li>
                         </ul>
+
                         <ul class="nav nav-pills flex-column mb-auto">
                             <span class="fs-5">Suscripciones</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/list-icon.svg"/>
+                                <image height="20px" width="20px" src="img/list-icon.svg"></image>
                                 <a th:href="@{ModificarColaboradorHumanoSuscripciones#listado-suscripciones}" class="nav-link">
                                     Listado de suscripciones
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/notifications-icon.svg"/>
+                                <image height="20px" width="20px" src="img/notifications-icon.svg"></image>
                                 <a th:href="@{ModificarColaboradorHumanoSuscripciones#suscripciones}" class="nav-link">
                                 Suscribirme
                                 </a>
@@ -73,13 +80,13 @@
                         <ul class="nav nav-pills flex-column mb-auto">
                             <span class="fs-5">Mis puntos</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/puntos.png"/>
+                                <image height="20px" width="20px" src="img/puntos.png"></image>
                                 <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                                     Puntos actuales
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/premios.png"/>
+                                <image height="20px" width="20px" src="img/premios.png"></image>
                                 <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                                     Premios
                                 </a>
@@ -88,31 +95,71 @@
                         <ul class="nav nav-pills flex-column mb-auto colaboracion">
                             <span class="fs-5">Colaboraciones</span>
                             <li class="nav-item">
-                                <image height="20px" width="20px" src="img/tarjeta-icon.png"/>
+                                <image height="20px" width="20px" src="img/tarjeta-icon.png"></image>
                                 <a th:href="@{DarDeAltaPersonaEnSitVulnerable}" class="nav-link">
                                     Dar de alta a una persona
                                 </a>
                             </li>
                         </ul>
+                        <button id="btn-dar-de-baja" class="btn-mod baja">Eliminar mi cuenta</button>
                     </div>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <div class="main">
-                        <h1>Mi Cuenta</h1>
-                        <h2>Usuario</h2>
 
                         <form id="mod-cuenta-humano" class="mod-cuenta">
                             <div class="form-cuenta">
                                 <h3 id="info-personal">Información Personal</h3>
-                                <label for="nuevoNombreHumano">Cambiar nombre de usuario:</label>
-                                <input type="text" id="nuevoNombreHumano" class="mod-cuenta-nombre" placeholder="Ingrese un nuevo nombre de usuario"><br>
-                                <label for="nuevaContraseniaHumana">Cambiar contraseña:</label>
-                                <input type="password" id="nuevaContraseniaHumana" class="mod-cuenta-contrasenia" placeholder="Ingrese una nueva contraseña"><br>
 
-                                <h3 id="contacto">Contacto</h3>
-                                <label for="nuevaDireccionHumana">Cambiar dirección:</label>
-                                <input type="text" id="nuevaDireccionHumana" class="mod-cuenta-direccion" placeholder="Ingrese una nueva dirección"><br>
+                                <!-- Nombre y Apellido -->
+                                <div class="nombre-apellido-container">
+                                    <div class="nombre-container">
+                                        <label for="nuevoNombre">Nombre:</label>
+                                        <input type="text" id="nuevoNombre" class="mod-cuenta-nombre" placeholder="Ingrese su nombre" th:value="${colaborador.nombre}">
+                                    </div>
+                                    <div class="apellido-container">
+                                        <label for="nuevoApellido">Apellido:</label>
+                                        <input type="text" id="nuevoApellido" class="mod-cuenta-apellido" placeholder="Ingrese su apellido" th:value="${colaborador.apellido}">
+                                    </div>
+                                </div>
+
+
+                                <!-- Fecha de nacimiento -->
+                                <div class="fecha-nacimiento-container">
+                                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                                    <input type="date" id="fechaNacimiento" class="mod-cuenta-fecha-nacimiento"
+                                           th:value="${#temporals.format(colaborador.fechaDeNacimiento, 'yyyy-MM-dd')}"><br>
+                                </div>
+
+                                <!-- Tipo y número de documento -->
+                                <div class="documento-container">
+                                    <div>
+                                        <label for="tipoDocumento">Tipo de Documento:</label>
+                                        <select id="tipoDocumento" class="mod-cuenta-tipo-documento">
+                                            <option value="" selected disabled>--Seleccione una opcion--</option>
+                                            <option th:each="tipo : ${tiposDeDocumento}" th:value="${tipo}" th:text="${tipo.toString()}"></option>
+                                        </select><br>
+                                    </div>
+                                    <div>
+                                        <label for="nroDocumento">Número de Documento:</label>
+                                        <input type="text" id="nroDocumento" class="mod-cuenta-nro-documento" placeholder="Ingrese su número de documento" th:value="${colaborador.numero}"><br>
+                                    </div>
+                                </div>
+
+                                <!-- Dirección -->
+                                <div class="direccion-container">
+                                    <label for="nuevaCalleHumana">Dirección:</label>
+                                    <div class="inputs-direccion">
+                                        <input type="text" id="nuevaCalleHumana" class="mod-cuenta-direccion" placeholder="Ingrese una nueva Calle" th:value="${colaborador.calle}">
+                                        <label for="nuevaAlturaHumana"></label>
+                                        <input type="text" id="nuevaAlturaHumana" class="mod-cuenta-direccion" placeholder="Ingrese una nueva Altura" th:value="${colaborador.altura}">
+                                    </div>
+                                </div>
+
+                                <h3 id="contacto">Datos de contacto</h3>
+
+                                <!-- Medios de Contacto -->
                                 <label>Medios de Contacto:</label>
                                 <div class="tags-medios-de-contacto scroll-permitido">
                                     <span class="badge d-flex p-2 rounded-pill">
@@ -128,19 +175,36 @@
                                         <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
                                     </span>
                                 </div>
-                                <label>Agregar medio de contacto:</label>
-                                <select id="tipoNuevoMedioDeContactoHumano" class="mod-cuenta-tipo-medio" onclick="habilitarInputIdentificacion('humano')">
-                                    <option value="">--Seleccione--</option>
+
+                                <label for="tipoNuevoMedioDeContactoHumano">Agregar medio de contacto:</label>
+                                <select id="tipoNuevoMedioDeContactoHumano" class="mod-cuenta-tipo-medio">
+                                    <option value="" selected disabled >--Seleccione--</option>
                                     <option value="telegram">Telegram</option>
                                     <option value="mail">Mail</option>
                                     <option value="whatsapp">WhatsApp</option>
-                                </select><br>
-                                <input disabled type="text" id="nuevoMedioDeContactoHumano" class="mod-cuenta-medio" placeholder="Ingrese su número/mail"><br>
+                                </select>
+                                <br>
+                                <div id="inputContainer" style="display: none;">
+                                    <label for="nuevoMedioDeContactoHumano"></label>
+                                    <input type="text" id="nuevoMedioDeContactoHumano" class="mod-cuenta-medio" placeholder="Ingrese su número/mail">
+                                </div>
+
+                                <!-- Datos de Usuario -->
+                                <h3 id="usuario">Usuario</h3>
+                                <div class="usuario-container">
+                                    <label for="nuevaCalleHumana"></label>
+                                    <div class="inputs-usuario">
+                                        <label for="nuevoNombreHumano"></label>
+                                        <input type="text" id="nuevoNombreHumano" class="mod-cuenta-usuario" placeholder="Ingrese un nuevo nombre de usuario" th:value="${colaborador.usuario}"><br>
+                                        <label for="nuevaContraseniaHumana"></label>
+                                        <input type="password" id="nuevaContraseniaHumana" class="mod-cuenta-usuario" placeholder="Ingrese una nueva contraseña" th:value="${colaborador.constrasenia}"><br>
+                                    </div>
+                                </div>
+
                             </div>
                             <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
                             <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
                         </form>
-                        <button id="btn-dar-de-baja" class="btn-mod baja">Dar de baja</button>
                     </div>
                     <div class="reportar-falla referirAColaboracion" id="container-reporte-falla">
                         <button class="btn-close" onclick="ocultarReporteFalla()"></button>
@@ -153,8 +217,5 @@
         </main>
 
         <div id="footer"></div>
-        <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
-        <script src="/assets/JS/ModificarColaboradorHumano.js"></script>
-        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

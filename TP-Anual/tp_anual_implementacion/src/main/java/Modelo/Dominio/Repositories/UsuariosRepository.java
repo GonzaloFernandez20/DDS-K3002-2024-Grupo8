@@ -3,9 +3,11 @@ package Modelo.Dominio.Repositories;
 import Modelo.seguridad.SesionActiva.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
 
     // Ejecutamos la Query usando SQL NATIVO

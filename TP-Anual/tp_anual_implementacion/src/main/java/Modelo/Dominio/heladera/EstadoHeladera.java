@@ -2,5 +2,6 @@ package Modelo.Dominio.heladera;
 
 public enum EstadoHeladera {
     ACTIVA,
-    INACTIVA
+    INACTIVA,
+    DADA_DE_BAJA
 }

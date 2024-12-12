@@ -18,7 +18,7 @@ public abstract class Incidente {
     @OneToOne
     @JoinColumn(name = "heladera_donde_ocurrio", referencedColumnName = "id_heladera")
     protected Heladera heladeraDondeOcurrio;
-    @OneToMany(mappedBy = "incidenteAtendido", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "incidenteAtendido", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     protected List <VisitaTecnica> visitas;
     @Enumerated(EnumType.STRING)
     protected EstadoDelIncidente estado;

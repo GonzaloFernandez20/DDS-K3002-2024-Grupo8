@@ -21,7 +21,7 @@ public class Vianda {
     @ManyToOne
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private Colaborador colaborador;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "heladera", referencedColumnName = "id_heladera")
     private Heladera heladera;
     @Column(name = "calorias")

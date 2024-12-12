@@ -8,12 +8,16 @@ import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Colaborador")
 public class Colaborador {
@@ -92,30 +96,4 @@ public class Colaborador {
         if(tarjeta == null){return 0;}
         else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
     }
-
-
-    // ---- Getters y Setters
-
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public Direccion getDireccion() { return persona.getDireccion(); }
-    public double getPuntosAcumulados() { return puntosAcumulados; }
-    public List<Contribucion> getHistorialDeContribuciones() { return historialDeContribuciones; }
-    public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
-    public Persona getPersona() { return persona; }
-    public AccesoDeColaborador getTarjeta() { return tarjeta; }
-    public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
-    public void setTarjeta(AccesoDeColaborador tarjeta) {
-        this.tarjeta = tarjeta;
-    }
-
-    public void setHistorialDeContribuciones(List<Contribucion> historialDeContribuciones) {
-        this.historialDeContribuciones = historialDeContribuciones;
-    }
-
-    public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
-    public Integer getId_colaborador() { return id_colaborador; }
 }

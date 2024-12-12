@@ -23,6 +23,18 @@ public class BuilderHeladera {
         return nuevaHeladera;
     }
 
+    public static Heladera actualizarHeladeraAPartirDe(Heladera heladera, HeladeraDTO dto) {
+        heladera.getModelo().setNombreModelo(dto.getNombreModelo());
+        heladera.getModelo().setTemperaturaMinima(dto.getTempMINmodelo());
+        heladera.getModelo().setTemperaturaMaxima(dto.getTempMAXmodelo());
+        heladera.getUbicacion().getDireccion().setAltura(dto.getAltura());
+        heladera.getUbicacion().getDireccion().setCalle(dto.getCalle());
+        heladera.getUbicacion().setCiudad(dto.getCiudad());
+        heladera.setCapacidadDeViandas(dto.getCapacidadViandas());
+
+        return heladera;
+    }
+
     private static Modelo crearModelo(HeladeraDTO dto) {
         Modelo modelo = new Modelo(dto.getTempMAXmodelo(), dto.getTempMINmodelo());
         modelo.setNombreModelo(dto.getNombreModelo());

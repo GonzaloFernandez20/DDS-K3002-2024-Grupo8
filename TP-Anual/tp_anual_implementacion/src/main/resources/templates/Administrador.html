@@ -14,6 +14,8 @@
     <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
     <link href="/assets/CSS/MiCuenta.css" rel="stylesheet">
     <script src="/assets/JS/load-header-footer.js" defer></script>
+    <script src="/assets/JS/CargaMasiva.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -63,15 +65,12 @@
                 <h1>Administrar</h1>
 
                 <h3 id="carga-masiva">Carga Masiva</h3>
-                <form id="form-carga-masiva" action="/Administrador" method="post" enctype="multipart/form-data">
+                <form id="form-carga-masiva" action="/CargaMasiva" method="post" enctype="multipart/form-data">
                     <div class="form-cuenta">
                         <label for="archivoCSVCarga">Archivo CSV de carga masiva</label>
                         <input type="file" id="archivoCSVCarga" name="archivoCSVCarga" accept=".csv">
                     </div>
                     <button type="submit" id="btn-carga-masiva" class="btn-mod confirm">Confirmar Carga de Colaboraciones</button>
-                    <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
-                        <p th:text="${mensaje}"></p>
-                    </div>
                 </form>
 
                 <h3 id="reportes">Reportes</h3>

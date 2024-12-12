@@ -64,7 +64,7 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         });
     })
     .then(msjDeRespuesta => {
-        alert(msjDeRespuesta);
+        //alert(msjDeRespuesta);
         if (msjDeRespuesta.includes("Usuario y contraseña validados exitosamente.")) {
 
             const mainContainer = document.querySelector('.main-container');
@@ -75,7 +75,8 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert(error.message);
+        alertaSimple(error.message, "error")
+        //alert(error.message);
     });
 
     // Función para desplegar el formulario correspondiente según el tipo de colaborador
@@ -136,11 +137,14 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
             if (!response.ok) {
                 throw new Error("No se pudo registrar el usuario.");
             }
-            alert("Usuario registrado exitosamente.");
-            window.location.href = "/Home";    })
+            alertaSimple("Usuario registrado con exito!", "success");
+            setTimeout(function() {
+                window.location.href = "/Home";
+            }, 1300);
+        })
         .catch(error => {
             console.error('Error:', error);
-            alert('Hubo un error al registrar el usuario');
+            alertaSimple('Hubo un error al registrar el usuario', "error");
         });
 });
 
@@ -193,11 +197,14 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
         if (!response.ok) {
             throw new Error("No se pudo registrar el usuario.");
         }
-        alert("Usuario registrado exitosamente.");
-        window.location.href = "/Home";    })
+        alertaSimple("Usuario registrado con exito!", "success");
+        setTimeout(function() {
+            window.location.href = "/Home";
+        }, 1300);
+    })
     .catch(error => {
         console.error('Error:', error);
-        alert('Hubo un error al registrar el usuario');
+        alertaSimple('Hubo un error al registrar el usuario', "error");
     });
 });
 
