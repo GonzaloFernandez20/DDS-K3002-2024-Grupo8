@@ -1,6 +1,8 @@
 package Controladores.Contribuciones;
 
 import DTOs.HeladeraDTO;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
@@ -44,6 +46,11 @@ public class CtrlHacerseCargoDeHeladera {
 
     @GetMapping("/HacerseCargoDeUnaHeladera")
     public String HacerseCargoDeUnaHeladera() {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaHumana) {
+            return "PedirRegistroJuridico";
+        }
+
         return "HacerseCargoDeUnaHeladera";
     }
 

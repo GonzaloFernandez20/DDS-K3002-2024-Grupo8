@@ -3,6 +3,7 @@ package Controladores.Contribuciones;
 import DTOs.VinculacionPersonaVulnerableDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
+import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
@@ -74,6 +75,11 @@ public class CtrlRegistrarPersonaVulnerable {
 
     @GetMapping("/DarDeAltaPersonaEnSitVulnerable")
     public String mostrarDatos(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
+            return "PedirRegistroHumano";
+        }
+
         estadoDeViviendas();
         tipoDeDocumentos();
         sexo();

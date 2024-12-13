@@ -2,6 +2,7 @@ package Controladores.Contribuciones;
 
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.OfertaDeUnProductoRepository;
 import Modelo.Dominio.Repositories.contribucion.ProductoRepository;
@@ -60,6 +61,11 @@ public class CtrlPublicarProductoOServicio {
 
     @GetMapping("/PublicarProductoOServicio")
     public String mostrarRubros(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaHumana) {
+            return "PedirRegistroJuridico";
+        }
+
         model.addAttribute("rubros", obtenerTodosLosRubros());
 
         return "PublicarProductoOServicio";

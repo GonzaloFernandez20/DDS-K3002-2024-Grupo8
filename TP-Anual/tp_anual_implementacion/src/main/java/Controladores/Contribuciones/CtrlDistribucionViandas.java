@@ -3,6 +3,8 @@ package Controladores.Contribuciones;
 import DTOs.DistribucionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Persona.PersonaHumana;
+import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
 import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
 import Modelo.Dominio.Repositories.contribucion.DistribucionDeViandaRepository;
@@ -61,6 +63,11 @@ public class CtrlDistribucionViandas {
 
     @GetMapping("/DistribuirVianda")
     public String mostrarFormulario(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
+            return "PedirRegistroHumano";
+        }
+
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
             return "PedirTarjetaColaborador";
         }

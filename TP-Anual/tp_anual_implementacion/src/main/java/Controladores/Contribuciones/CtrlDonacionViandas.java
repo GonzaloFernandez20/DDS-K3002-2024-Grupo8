@@ -3,9 +3,11 @@ package Controladores.Contribuciones;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.DonacionDeViandasRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Mappers.HeladeraSeleccionMapper;
@@ -64,6 +66,11 @@ public class CtrlDonacionViandas {
 
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
+            return "PedirRegistroHumano";
+        }
+
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
             return "PedirTarjetaColaborador";
         }
