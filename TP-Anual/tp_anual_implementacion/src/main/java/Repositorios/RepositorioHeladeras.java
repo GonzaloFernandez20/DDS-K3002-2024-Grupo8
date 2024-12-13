@@ -1,16 +1,15 @@
 package Repositorios;
 
 import DTOs.ColaboradorHumanoDTO;
-import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.Vianda;
-import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.heladera.EstadoHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.Direccion;
+import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.Persona.PersonaJuridica;
@@ -38,11 +37,11 @@ public class RepositorioHeladeras {
 
         System.out.println("1.Cantidad de heladeras: " + heladeras.size());
 
-        Heladera heladera1 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 1"), 15, new Modelo(15, -2), LocalDate.now());
+        Heladera heladera1 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 1", new PuntoEnElMapa(1,1)), 15, new Modelo(15, -2), LocalDate.now());
         heladera1.setIdHeladera(9999);
-        Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2"), 2, new Modelo(15, -2), LocalDate.now());
+        Heladera heladera2 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 2", new PuntoEnElMapa(1,1)), 2, new Modelo(15, -2), LocalDate.now());
         heladera2.setIdHeladera(1111);
-        Heladera heladera3 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 3"), 20, new Modelo(10, -2), LocalDate.now());
+        Heladera heladera3 = new Heladera(new Colaborador(new PersonaJuridica("Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Perú", "50")), List.of(new Mail("gastronomosargentinos@gmail.com"))), new Ubicacion(new Direccion("Perú", "50"), "CABA", "Gastronomos Argentinos 3", new PuntoEnElMapa(1,1)), 20, new Modelo(10, -2), LocalDate.now());
         heladera3.setIdHeladera(3030);
         heladera3.setEstado(EstadoHeladera.INACTIVA);
 
@@ -66,7 +65,7 @@ public class RepositorioHeladeras {
                         "1132567897",
                         true,
                         true
-                        )
+                )
         ).getColaborador();
         heladera1.recibirVianda(new Vianda("Fideos", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));
         heladera1.recibirVianda(new Vianda("Arroz con Pollo", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));

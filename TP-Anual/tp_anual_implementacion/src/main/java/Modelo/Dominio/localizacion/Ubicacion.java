@@ -20,14 +20,13 @@ public class Ubicacion {
     private String nombreDelPunto;
 
     public Ubicacion(){}
-    public Ubicacion(Direccion direccion, String ciudad, String nombre){
+    public Ubicacion(Direccion direccion, String ciudad, String nombre, PuntoEnElMapa puntoEnElMapa){
         if(direccion == null ){throw new IllegalArgumentException("La direccion es obligatoria");}
         if(nombre == null ){throw new IllegalArgumentException("El nombre del punto es obligatorio");}
         this.nombreDelPunto = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
-        // Necesario consultar una API para que dada una direccion se obtengan latitud y longitud y
-        // con eso instanciar el punto en el mapa
+        this.punto = puntoEnElMapa;
     }
 
     // ----------> Getters y Setters
@@ -46,4 +45,3 @@ public class Ubicacion {
 
     public String getNombreCompletoDeUbicacion() { return nombreDelPunto + " - " + direccion.getCalle() + " " + direccion.getAltura() + ", " + ciudad; }
 }
-

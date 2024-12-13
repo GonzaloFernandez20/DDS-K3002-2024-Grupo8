@@ -1,3 +1,19 @@
+function encontrarUbicacion(calle, altura, ciudad) {
+    return new Promise((resolve, reject) => {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: `${calle} ${altura}, ${ciudad}` })
+            .then(result => {
+                const { results } = result;
+                const latitud = parseFloat(results[0].geometry.location.lat());
+                const longitud = parseFloat(results[0].geometry.location.lng());
+
+                resolve({ latitud, longitud });
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+}
 
 formularioDeHeladera = document.getElementById('form-hacerse-cargo-heladera');
 formularioDeHeladera.addEventListener('submit', function (e) {
@@ -14,7 +30,7 @@ formularioDeHeladera.addEventListener('submit', function (e) {
     const nombreDelPunto = document.getElementById('nombrePuntoHeladera');
     const puestaEnFuncionamiento = document.getElementById('fechaFuncionamientoHeladera');
 
-    // ---------------- Validacion de campos obligatorios ---------------- //
+    // ---------------- Validación de campos obligatorios ---------------- //
 
     let hasError = false;
 
@@ -85,27 +101,35 @@ formularioDeHeladera.addEventListener('submit', function (e) {
         return;
     }
 
-    // ---------------- Generacion del objeto Json ---------------- //
+    // ---------------- Generación del objeto Json ---------------- //
 
-    const heladeraData = {
-        capacidadViandas: capacidadViandas.value,
-        nombreModelo: nombreModelo.value,
-        calle: calle.value,
-        altura: altura.value,
-        ciudad: ciudad.value,
-        nombreDelPunto: nombreDelPunto.value,
-        puestaEnFuncionamiento: puestaEnFuncionamiento.value
-    };
+    encontrarUbicacion(calle.value, altura.value, ciudad.value)
+        .then(data => {
+            const latitud = data.latitud;
+            const longitud = data.longitud;
 
-    // ---------------- Envio del Json al back ---------------- //
+            // Generación del objeto JSON
+            const heladeraData = {
+                capacidadViandas: capacidadViandas.value,
+                nombreModelo: nombreModelo.value,
+                calle: calle.value,
+                altura: altura.value,
+                ciudad: ciudad.value,
+                nombreDelPunto: nombreDelPunto.value,
+                puestaEnFuncionamiento: puestaEnFuncionamiento.value,
+                latitud: latitud,
+                longitud: longitud
+            };
 
-    fetch('/FormularioDeHeladera', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(heladeraData),
-    })
+            // Envío del JSON al back
+            return fetch('/FormularioDeHeladera', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(heladeraData),
+            });
+        })
         .then(response => {
             if (response.ok) {
                 alert('Heladera dada alta exitosamente');
