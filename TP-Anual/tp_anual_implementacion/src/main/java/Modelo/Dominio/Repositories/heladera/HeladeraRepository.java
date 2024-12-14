@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-
+@Deprecated
 public interface HeladeraRepository extends JpaRepository<Heladera, Integer> {
     @Query(
             value = "select h " +

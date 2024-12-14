@@ -2,13 +2,13 @@ package Controladores.Navbar;
 
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.contribucion.OfertaDeUnProductoRepository;
-import Modelo.Dominio.Repositories.contribucion.ProductoRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.seguridad.GestorInicioDeSesion;
 
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.contribucion.OfertaDeUnProductoRepository;
+import Repositories.contribucion.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

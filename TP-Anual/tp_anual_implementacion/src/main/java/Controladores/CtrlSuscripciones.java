@@ -18,8 +18,6 @@ import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Persona.TipoOrganizacion;
 import Modelo.Dominio.suscripcion.GestorDeSuscripciones;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
-import Repositorios.RepositorioHeladeras;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,14 +37,16 @@ public class CtrlSuscripciones {
     private final Colaborador colaborador = new Colaborador(new PersonaHumana("Luis", "Gómez", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "43.444.444", Sexo.MASCULINO), new Direccion("Saraza", "1200")), List.of(new WhatsApp("15 2350-2350")));
     //
 
-    private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());
+
+    // TODO: Reemplazar por el repositorio real
+    //private final List<HeladeraDTO> heladeras = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(heladera -> convertirHeladeraADTO(heladera)).collect(Collectors.toList());
     List<SuscripcionDTO> suscripciones = conseguirSuscripcionesDTO();
 
     @GetMapping("/ModificarColaboradorHumanoSuscripciones")
     public String mostrarHeladeras(Model model) {
         model.addAttribute("suscripciones", suscripciones);
         System.out.println("Muestra las heladeras");
-        model.addAttribute("heladeras", heladeras);
+        //model.addAttribute("heladeras", heladeras); // TODO: Reemplazar por el repositorio real
         return "ModificarColaboradorHumanoSuscripciones";
     }
 
@@ -59,7 +59,9 @@ public class CtrlSuscripciones {
                                    @RequestParam(required = false, value = "check-suscripcion-desperfecto") boolean checkSuscripcionDesperfecto,
                                    Model model) {
 
-        Heladera heladeraElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraElegida));
+        // TODO: Reemplazar por el repositorio real
+        //Heladera heladeraElegida = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraElegida));
+        Heladera heladeraElegida = null;
 
         String suscripcionesValidas = "";
 

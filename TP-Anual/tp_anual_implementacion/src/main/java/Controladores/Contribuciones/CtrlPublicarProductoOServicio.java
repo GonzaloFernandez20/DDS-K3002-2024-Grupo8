@@ -4,14 +4,14 @@ import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.contribucion.OfertaDeUnProductoRepository;
-import Modelo.Dominio.Repositories.contribucion.ProductoRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.contribucion.Rubro;
 
 import Modelo.Mappers.OfertaMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+import Repositories.contribucion.OfertaDeUnProductoRepository;
+import Repositories.contribucion.ProductoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

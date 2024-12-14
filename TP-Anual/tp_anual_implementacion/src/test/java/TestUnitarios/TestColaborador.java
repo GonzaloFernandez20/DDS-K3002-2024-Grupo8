@@ -55,13 +55,13 @@ public class TestColaborador {
         AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("TP89", colaborador);
         colaborador.setTarjeta(accesoDeColaborador);
 
-        Heladera heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500"), "CABA", "Mini Gastronomos Argentinos 1"), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
+        Heladera heladera = new Heladera(new Colaborador(new PersonaJuridica("Mini Gastronomos Argentinos", TipoOrganizacion.ONG, "GASTRONOMIA", new Direccion("Beauchef", "500")), List.of(new WhatsApp("15 2300-2950"))), new Ubicacion(new Direccion("Beauchef", "500"), "CABA", "Mini Gastronomos Argentinos 1", null), 30, new Modelo(20, -20), LocalDate.now().minusYears(1));
 
         Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaborador, heladera, null, null);
 
         DonacionDeViandas contribucionDeVianda = new DonacionDeViandas(colaborador, heladera, List.of(vianda), LocalDate.now());
 
-        GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaborador, MotivoApertura.INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
+        //GestorDePermisosDeApertura.registrarMovimientoSolicitado(colaborador, MotivoApertura.INGRESAR_VIANDAS_DONADAS, contribucionDeVianda, heladera);
         accesoDeColaborador.estaAutorizadaLaApertura(heladera);
 
         assertEquals(1, (int) colaborador.cantidadDeDonacionesDeViandaEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));

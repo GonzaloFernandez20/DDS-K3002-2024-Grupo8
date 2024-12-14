@@ -6,6 +6,7 @@ import Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.*;
 import Modelo.Dominio.heladera.Heladera;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

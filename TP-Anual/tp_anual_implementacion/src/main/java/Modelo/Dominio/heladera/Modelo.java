@@ -31,9 +31,6 @@ public class Modelo {
         return temperatura >= temperaturaMinima && temperatura <= temperaturaMinima;
     }
 
-    public Modelo() {
-    }
-
     // ---- Getters y Setters
     public float getTemperaturaMaxima() {
         return temperaturaMaxima;

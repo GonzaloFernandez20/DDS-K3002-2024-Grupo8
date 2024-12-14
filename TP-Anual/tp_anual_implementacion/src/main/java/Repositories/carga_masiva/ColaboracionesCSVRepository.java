@@ -1,7 +1,8 @@
-package Modelo.Dominio.Repositories.carga_masiva;
+package Repositories.carga_masiva;
 
 import Modelo.carga_masiva.ColaboracionesCSV;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 public interface ColaboracionesCSVRepository extends JpaRepository<ColaboracionesCSV, Integer> {}
 

@@ -25,7 +25,7 @@ import java.util.List;
 public class FactoryInstanciasParaTests {
     public static Heladera instanciarUnaHeladera(){
         Heladera heladera = new Heladera(instanciarColaboradorJuridico(),
-                                         new Ubicacion(new Direccion("Mozart", "2300"), "CABA", "Heladera Campus UTN"),
+                                         new Ubicacion(new Direccion("Mozart", "2300"), "CABA", "Heladera Campus UTN", null),
                                         3,
                                         new Modelo(5f,1f),
                                         null);
@@ -36,7 +36,7 @@ public class FactoryInstanciasParaTests {
     }
     public static Heladera instanciarOtraHeladera(){
         Heladera heladera = new Heladera(instanciarColaboradorJuridico(),
-                                         new Ubicacion(new Direccion("Medrano", "981"), "CABA", "Heladera Medrano UTN"),
+                                        new Ubicacion(new Direccion("Medrano", "981"), "CABA", "Heladera Medrano UTN", null),
                                         10,
                                         new Modelo(5f,1f),
                                         null);

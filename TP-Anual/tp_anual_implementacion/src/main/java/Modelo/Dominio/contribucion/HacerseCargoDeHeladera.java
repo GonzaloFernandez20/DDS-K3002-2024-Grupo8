@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import Modelo.Dominio.sistema.RegistroDeHeladeras;
-import Repositorios.RepositorioHeladeras;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import Modelo.Dominio.colaborador.Colaborador;

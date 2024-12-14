@@ -1,7 +1,5 @@
 package Modelo.Dominio.reportes;
 
-import Config.AppConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +12,7 @@ public class GestorDeReportes {
     private List<ReporteSemanal> reportes = new ArrayList<ReporteSemanal>();
     private static GestorDeReportes instancia  = null;
 
-    @Autowired
-    AppConfig config;
+    public GestorDeReportes(){}
 
     public static GestorDeReportes getInstancia() {
         if (instancia == null) {
@@ -24,18 +21,16 @@ public class GestorDeReportes {
         return instancia;
     }
 
-
-
     public void generarReportesSemanales(){
-        ReporteDeFallas reporteDeFallas = config.reporteDeFallas();
+        ReporteDeFallas reporteDeFallas = new ReporteDeFallas();
         reporteDeFallas.setFechaDeCreacion(LocalDate.now());
         reporteDeFallas.completarReporte();
 
-        ReporteDeViandasPorColaborador reporteDeViandasPorColaborador = config.reporteDeViandasPorColaborador();
+        ReporteDeViandasPorColaborador reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador();
         reporteDeViandasPorColaborador.setFechaDeCreacion(LocalDate.now());
         reporteDeViandasPorColaborador.completarReporte();
 
-        ReporteDeViandasPorHeladera reporteDeViandasPorHeladera = config.reporteDeViandasPorHeladera();
+        ReporteDeViandasPorHeladera reporteDeViandasPorHeladera = new ReporteDeViandasPorHeladera();
         reporteDeViandasPorHeladera.setFechaDeCreacion(LocalDate.now());
         reporteDeViandasPorHeladera.completarReporte();
 

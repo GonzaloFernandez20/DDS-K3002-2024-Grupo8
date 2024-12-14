@@ -2,8 +2,6 @@ package Controladores;
 
 import DTOs.HeladeraDTO;
 import DTOs.AlertaDTO;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
-import Modelo.Dominio.Repositories.incidentes.AlertaRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.EstadoHeladera;
 import Modelo.Dominio.heladera.Heladera;
@@ -12,6 +10,8 @@ import Modelo.Mappers.BuilderHeladera;
 import Modelo.Mappers.HeladeraMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 
+import Repositories.heladera.HeladeraRepository;
+import Repositories.incidentes.AlertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

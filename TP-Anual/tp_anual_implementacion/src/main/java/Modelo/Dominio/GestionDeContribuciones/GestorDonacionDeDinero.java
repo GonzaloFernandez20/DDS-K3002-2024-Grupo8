@@ -1,9 +1,8 @@
 package Modelo.Dominio.GestionDeContribuciones;
 
-
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.contribucion.DonacionDeDineroRepository;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
+import Repositories.contribucion.DonacionDeDineroRepository;
+import Repositories.colaborador.ColaboradorRepository;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +10,7 @@ public class GestorDonacionDeDinero {
 
     private static ColaboradorRepository colaboradorRepository;
     private static DonacionDeDineroRepository donacionDeDineroRepository;
+
 
     public GestorDonacionDeDinero(ColaboradorRepository colaboradorRepository, DonacionDeDineroRepository donacionDeDineroRepository) {
         GestorDonacionDeDinero.colaboradorRepository = colaboradorRepository;

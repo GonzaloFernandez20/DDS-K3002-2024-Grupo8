@@ -1,16 +1,8 @@
 package Controladores;
 
 import DTOs.ColaboradorHumanoDTO;
-import Modelo.Dominio.Repositories.UsuariosRepository;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.MotivoDeDistribucion;
-import Modelo.Dominio.documentacion.Documento;
-import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona.PersonaJuridica;
 
@@ -19,6 +11,7 @@ import Modelo.Mappers.ColabHumanoMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
 import Modelo.seguridad.SesionActiva.Usuario;
+import Repositories.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -30,11 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.aspectj.apache.bcel.Repository.instanceOf;
 
 @Controller
 public class CtrlModificarColaborador {

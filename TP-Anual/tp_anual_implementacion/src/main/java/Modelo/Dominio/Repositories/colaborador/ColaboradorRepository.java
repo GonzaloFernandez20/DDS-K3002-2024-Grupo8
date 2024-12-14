@@ -5,6 +5,7 @@ import Modelo.Dominio.documentacion.TipoDeDocumento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+@Deprecated
 public interface ColaboradorRepository extends JpaRepository<Colaborador, Integer> {
 
     @Query(value = "SELECT * FROM colaborador WHERE id_colaborador = ?1", nativeQuery = true)

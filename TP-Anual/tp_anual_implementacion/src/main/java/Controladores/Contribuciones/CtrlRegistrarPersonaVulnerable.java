@@ -4,15 +4,10 @@ import DTOs.VinculacionPersonaVulnerableDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
 import Modelo.Dominio.Persona.PersonaJuridica;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona_vulnerable.EstadoDeVivienda;
-import Modelo.Dominio.Persona_vulnerable.PersonaSituacionVulnerable;
 
 import Modelo.Mappers.VinculacionPersonaVulnerableMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
@@ -23,13 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Controller
 public class CtrlRegistrarPersonaVulnerable {

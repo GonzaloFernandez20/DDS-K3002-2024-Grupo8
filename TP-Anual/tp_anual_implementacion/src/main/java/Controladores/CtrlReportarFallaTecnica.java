@@ -27,8 +27,9 @@ import java.util.stream.Collectors;
 public class CtrlReportarFallaTecnica {
     //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
     private final Colaborador colaborador = new Colaborador(new PersonaHumana("Fabian", "Bielinski", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "40.303.456", Sexo.MASCULINO), new Direccion("Montes Carballo", "1689")), List.of(new WhatsApp("15 1610-6160")));
-    //
-    private final List<HeladeraDTO> heladerasAReportar = RepositorioHeladeras.getInstancia().getHeladeras().stream().map(this::convertirHeladeraADTO).collect(Collectors.toList());
+
+    // TODO: Reemplazar por el repositorio real
+    private final List<HeladeraDTO> heladerasAReportar = null/*RepositorioHeladeras.getInstancia().getHeladeras().stream().map(this::convertirHeladeraADTO).collect(Collectors.toList())*/;
 
     @GetMapping("/ReportarFallaTecnica")
     public String mostrarFormulario(Model model) {
@@ -43,7 +44,9 @@ public class CtrlReportarFallaTecnica {
                                      @RequestParam(value = "fotoFalla") MultipartFile fotoFalla,
                                      Model model) {
 
-        Heladera heladeraReportada = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraReportada));
+        // TODO: Reemplazar por el repositorio real
+        //Heladera heladeraReportada = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraReportada));
+        Heladera heladeraReportada = null;
 
         String pathFotoFalla = null;
         if (!fotoFalla.isEmpty()) {
