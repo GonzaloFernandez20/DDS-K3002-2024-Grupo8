@@ -1,18 +1,23 @@
 package Controladores.Contribuciones;
 
 import DTOs.OfertaDeUnProductoDTO;
+
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.contribucion.Rubro;
-
 import Modelo.Mappers.OfertaMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+
 import Repositories.contribucion.OfertaDeUnProductoRepository;
 import Repositories.contribucion.ProductoRepository;
+
+import Servicios_Externos_APIs.NotificacionService;
+
 import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,13 +33,16 @@ public class CtrlPublicarProductoOServicio {
     private final OfertaDeUnProductoRepository ofertaRepository;
     private final ProductoRepository productoRepository;
     private final ColaboradorRepository colaboradorRepository;
+    private final NotificacionService notificacionService;
 
     @Autowired
-    public CtrlPublicarProductoOServicio(GestorInicioDeSesion gestorInicioDeSesion, OfertaDeUnProductoRepository ofertaRepository, ProductoRepository productoRepository, ColaboradorRepository colaboradorRepository) {
+    public CtrlPublicarProductoOServicio(NotificacionService notificacionService, GestorInicioDeSesion gestorInicioDeSesion, OfertaDeUnProductoRepository ofertaRepository, ProductoRepository productoRepository, ColaboradorRepository colaboradorRepository) {
+        this.notificacionService = notificacionService;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.ofertaRepository = ofertaRepository;
         this.productoRepository = productoRepository;
         this.colaboradorRepository = colaboradorRepository;
+        
     }
 
     private List<Rubro> obtenerTodosLosRubros() {
@@ -91,6 +99,10 @@ public class CtrlPublicarProductoOServicio {
         productoRepository.save(ofertaDeUnProducto.getProducto());
         colaboradorRepository.save(colaborador);
         model.addAttribute("mensaje", "¡Felicitaciones! La oferta de " + ofertaDeUnProducto.getProducto().getNombreProducto() + " se realizó exitosamente.");
+
+        // Enviar una notificación
+        String mensajeNotificacion =  "¡Felicitaciones! La oferta de " + ofertaDeUnProducto.getProducto().getNombreProducto() + " se realizó exitosamente.";
+        notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID() ,mensajeNotificacion); 
 
         return mostrarRubros(model);
     }

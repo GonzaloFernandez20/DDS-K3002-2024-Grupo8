@@ -1,6 +1,7 @@
 package Controladores.Contribuciones;
 
 import DTOs.HeladeraDTO;
+
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
@@ -8,12 +9,18 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Mappers.BuilderHeladera;
 import Modelo.seguridad.GestorInicioDeSesion;
+
 import Repositories.colaborador.ColaboradorRepository;
 import Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Repositories.heladera.HeladeraRepository;
+
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
+
 import jakarta.transaction.Transactional;
+
+import Servicios_Externos_APIs.NotificacionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +39,11 @@ public class CtrlHacerseCargoDeHeladera {
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository;
+    private final NotificacionService notificacionService;
 
     @Autowired
-    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository) {
+    public CtrlHacerseCargoDeHeladera( NotificacionService notificacionService, GestorInicioDeSesion gestorInicioDeSesion, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository) {
+        this.notificacionService = notificacionService;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
     }
@@ -65,7 +74,7 @@ public class CtrlHacerseCargoDeHeladera {
 
         System.out.println("Nueva Heladera: " + nuevaHeladera.getUbicacion().getNombreCompletoDeUbicacion());
 
-        //Esto creo no lo deberia hacer el controlador pero de momento queda aca
+        // Esto creo no lo deberia hacer el controlador pero de momento queda aca
         // Contribucion nuevaContribucion
         HacerseCargoDeHeladera nuevaContribucion = new HacerseCargoDeHeladera();
         nuevaContribucion.setColaborador(colaborador);
@@ -82,6 +91,10 @@ public class CtrlHacerseCargoDeHeladera {
             e.printStackTrace(); //
         }
         // Usando cascade = CascadeType.PERSIST estoy guardando la heladera también
+
+        // Enviar una notificación
+        String mensajeNotificacion = "Gracias por hacerse cargo de una heladera";
+        notificacionService.sendNotificacionToColaborador(colaborador, mensajeNotificacion);
 
         return ResponseEntity.ok("Registro realizado con éxito!");
     }

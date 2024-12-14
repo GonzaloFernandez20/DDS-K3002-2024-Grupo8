@@ -1,5 +1,5 @@
 let usuario, contrasena;
-// Capturar los valores de WhatsApp y Telegram
+// Capturar los valores de WhatsApp
 
 document.getElementById('registroForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -108,8 +108,7 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     const telefonoCaja = document.getElementById('telefonoIngresadoJ');
 
     const whatsappChecked = document.getElementById('checkbox-wp-j').checked;
-    const telegramChecked = document.getElementById('checkbox-tl-j').checked;
-
+  
     const datosDeUsuario = {
         usuario: usuario.value,
         contrasenia: contrasena.value,
@@ -120,8 +119,7 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
         altura: altura.value,
         email: emailCaja.value,
         telefono: telefonoCaja.value,
-        tieneWp: whatsappChecked || false,
-        tieneTg: telegramChecked || false
+        tieneWp: whatsappChecked || false
     };
 
 
@@ -163,7 +161,6 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     const emailCaja = document.getElementById('emailIngresadoH');
     const telefonoCaja = document.getElementById('telefonoIngresadoH');
     const whatsappChecked = document.getElementById('checkbox-wp-h').checked;
-    const telegramChecked = document.getElementById('checkbox-tl-h').checked;
 
     // Generamos los datos a enviar
     const colaboradorHumano = {
@@ -183,7 +180,6 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
         email: emailCaja.value,
         telefono: telefonoCaja.value,
         whatsapp: whatsappChecked,
-        telegram: telegramChecked,
     };
 
     fetch('/RegistrarColaboradorHumano', {

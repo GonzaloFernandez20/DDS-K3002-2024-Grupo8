@@ -18,6 +18,7 @@ public class WhatsApp extends MedioDeContacto{
 
     @Override
     public void notificar(String mensaje) {
-        WhatsAppService.sendTextMessage(nroDeTelefono, mensaje);
+        String numero = this.nroDeTelefono;
+        WhatsAppService.sendTextMessage(numero, mensaje);
     }
 }

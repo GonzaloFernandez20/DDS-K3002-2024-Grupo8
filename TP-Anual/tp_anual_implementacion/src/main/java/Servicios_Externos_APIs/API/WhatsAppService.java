@@ -9,18 +9,17 @@ import java.io.IOException;
 
 public class WhatsAppService {
 
-    private static final String BASE_URL = "https://api.ultramsg.com/100015/messages/chat";
-    private static final String API_TOKEN = "kj35lw02kue0fdtr"; // Token de autenticación
+    private static final String BASE_URL = "https://api.ultramsg.com/instance100015/messages/chat";
+    private static final String API_TOKEN = "f7pf24ynlfysrxpi"; 
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
     public static void sendTextMessage(String numero, String mensaje) {
         RequestBody body = new FormBody.Builder()
                 .add("token", API_TOKEN)
-                .add("to", numero) // numero del receptor
-                .add("body", "Hola, soy el NOTIBOT de Diseño de Sistemas") 
+                .add("to", "+549"+ numero) // numero del receptor
+                .add("body", mensaje) 
                 .build();
 
-        // Crear la solicitud HTTP
         Request request = new Request.Builder()
                 .url(BASE_URL)
                 .post(body)

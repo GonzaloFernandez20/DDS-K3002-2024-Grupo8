@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // email: emailCaja.value, TODO: AGREGAR CAMPOS
             // telefono: telefonoCaja.value,
             // whatsapp: whatsappChecked,
-            // telegram: telegramChecked,
         };
 
         try {

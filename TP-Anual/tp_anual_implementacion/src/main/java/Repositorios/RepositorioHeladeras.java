@@ -49,8 +49,7 @@ public class RepositorioHeladeras {
 
         System.out.println("2.Cantidad de heladeras: " + heladeras.size());
 
-        Mail mail = new Mail();
-        mail.setCorreo("alfred200@gmail.com");
+        Mail mail = new Mail("alfred200@gmail.com");
         Colaborador colaborador = ColabHumanoMapper.crearColaboradorHumanoAPartirDe(
                 new ColaboradorHumanoDTO(
                         "alfredo123",
@@ -64,7 +63,7 @@ public class RepositorioHeladeras {
                         "Carlos Calvo",
                         "400",
                         "alfredo@gmail.com",
-                        "1132567897",
+                        "1144196172",
                         true,
                         true,
                         false

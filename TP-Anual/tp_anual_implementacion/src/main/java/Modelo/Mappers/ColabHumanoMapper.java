@@ -5,7 +5,6 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.Telegram;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.seguridad.GestorInicioDeSesion;
@@ -53,9 +52,6 @@ public class ColabHumanoMapper {
         // Creacion de medios de contacto
         if (colaboradorDTO.isTieneWp()){
             nuevoColaborador.agregarMedioDeContacto(new WhatsApp(colaboradorDTO.getTelefono()));
-        }
-        if (colaboradorDTO.isTieneTg()){
-            nuevoColaborador.agregarMedioDeContacto(new Telegram(colaboradorDTO.getTelefono()));
         }
         nuevoColaborador.agregarMedioDeContacto(new Mail(colaboradorDTO.getEmail()));
 

@@ -24,7 +24,7 @@ public class Colaborador {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "persona" ,referencedColumnName = "id_persona")
     private Persona persona;
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection

@@ -2,6 +2,7 @@ package Controladores.Contribuciones;
 
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
+
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
 import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.colaborador.Colaborador;
@@ -10,10 +11,15 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.Mappers.DonacionDeViandasMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+
+import Servicios_Externos_APIs.NotificacionService;
+
 import Repositories.colaborador.ColaboradorRepository;
 import Repositories.contribucion.DonacionDeViandasRepository;
 import Repositories.heladera.HeladeraRepository;
+
 import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,16 +43,17 @@ public class CtrlDonacionViandas {
     private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
     private final DonacionDeViandasRepository donacionDeViandasRepository;
     private final HeladeraRepository heladeraRepository;
+    private final NotificacionService notificacionService;  
 
     @Autowired
-    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion,
-                              ColaboradorRepository colaboradorRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura, DonacionDeViandasRepository donacionDeViandasRepository, HeladeraRepository heladeraRepository) {
+    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion, ColaboradorRepository colaboradorRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura, DonacionDeViandasRepository donacionDeViandasRepository, HeladeraRepository heladeraRepository,  NotificacionService notificacionService) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.colaboradorRepository = colaboradorRepository;
         this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
         this.donacionDeViandasRepository = donacionDeViandasRepository;
         this.heladeraRepository = heladeraRepository;
+        this.notificacionService = notificacionService;
     }
 
     private List<HeladeraSeleccionDTO> heladeras;
@@ -102,6 +109,11 @@ public class CtrlDonacionViandas {
             DonacionDeViandas nuevaDonacion = procesarDTO(donacionDTO);
             donacionDeViandasRepository.save(nuevaDonacion);
             gestorDePermisosDeApertura.generarPermisoDeDonación(nuevaDonacion);
+
+             // Enviar una notificación
+            String mensajeNotificacion = "Gracias por la donacion de viandas";
+            notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID(), mensajeNotificacion); 
+
             return ResponseEntity.ok("Donacion realizada con éxito!");
         }catch (Exception e) {
             e.printStackTrace();

@@ -9,6 +9,9 @@ import Modelo.seguridad.GestorInicioDeSesion;
 import Repositories.colaborador.ColaboradorRepository;
 import Repositories.contribucion.OfertaDeUnProductoRepository;
 import Repositories.contribucion.ProductoRepository;
+
+import Servicios_Externos_APIs.NotificacionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +29,15 @@ public class CtrlCanjes {
     private final ColaboradorRepository colaboradorRepository;
     private final OfertaDeUnProductoRepository ofertaDeUnProductoRepository;
     private final ProductoRepository productoRepository;
+    private NotificacionService notificacionService;
 
     @Autowired
-    public CtrlCanjes(GestorInicioDeSesion gestorInicioDeSesion, ColaboradorRepository colaboradorRepository, OfertaDeUnProductoRepository ofertaDeUnProductoRepository, ProductoRepository productoRepository) {
+    public CtrlCanjes(GestorInicioDeSesion gestorInicioDeSesion, ColaboradorRepository colaboradorRepository, OfertaDeUnProductoRepository ofertaDeUnProductoRepository, ProductoRepository productoRepository, NotificacionService notificacionService) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.colaboradorRepository = colaboradorRepository;
         this.ofertaDeUnProductoRepository = ofertaDeUnProductoRepository;
         this.productoRepository = productoRepository;
+        this.notificacionService = notificacionService;
     }
 
     @GetMapping("/CanjearPuntos")
@@ -69,6 +74,9 @@ public class CtrlCanjes {
 
         model.addAttribute("mensaje", mensaje);
 
+        // Enviar una notificación
+        notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID(), mensaje);
+           
         return mostrarProductosYServicios(model);
     }
 

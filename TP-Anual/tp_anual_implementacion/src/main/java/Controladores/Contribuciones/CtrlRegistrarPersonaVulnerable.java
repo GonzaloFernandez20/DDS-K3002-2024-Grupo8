@@ -1,6 +1,7 @@
 package Controladores.Contribuciones;
 
 import DTOs.VinculacionPersonaVulnerableDTO;
+
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
 import Modelo.Dominio.Persona.PersonaJuridica;
@@ -8,9 +9,11 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.Persona_vulnerable.EstadoDeVivienda;
-
 import Modelo.Mappers.VinculacionPersonaVulnerableMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+
+import Servicios_Externos_APIs.NotificacionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,11 +36,13 @@ public class CtrlRegistrarPersonaVulnerable {
     private List<TipoDeDocumento> tipoDeDocumentos = new ArrayList<>();
     private List<Sexo> sexo = new ArrayList<>();
 
+    private NotificacionService notificacionService;
+
     @Autowired
-    public CtrlRegistrarPersonaVulnerable(GestorInicioDeSesion gestorInicioDeSesion,
-                                          GestorTarjetas gestorTarjetas) {
+    public CtrlRegistrarPersonaVulnerable(GestorInicioDeSesion gestorInicioDeSesion, GestorTarjetas gestorTarjetas, NotificacionService notificacionService) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.gestorTarjetas = gestorTarjetas;
+        this.notificacionService = notificacionService;
     }
 
     public void estadoDeViviendas() {
@@ -87,6 +92,11 @@ public class CtrlRegistrarPersonaVulnerable {
         Vinculacion nuevoVulnerablevinculado = procesarDTO(personaVulnerableDTO);
         try {
             gestorTarjetas.registrarVinculacion(nuevoVulnerablevinculado);
+            
+            // Enviar una notificación
+            String mensajeNotificacion = "Gracias por registrar una persona vulnerable";
+            notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID(), mensajeNotificacion);
+           
             return ResponseEntity.ok().body("\"Registro realizado con éxito!\"");
         }catch(RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         SecurityAutoConfiguration.class,
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
 })
-@ComponentScan(basePackages={"Controladores", "Modelo", "ServiceImpl"})
+@ComponentScan(basePackages={"Controladores", "Modelo", "ServiceImpl", "Servicios_Externos_APIs" })
 @EntityScan(basePackages={"Modelo"})
 @EnableJpaRepositories(basePackages={"Repositories"})
 public class Server {
