@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class WhatsAppService {
 
-    private static final String BASE_URL = "https://api.ultramsg.com/instance100015/messages/chat";
-    private static final String API_TOKEN = "f7pf24ynlfysrxpi"; 
+    private static final String BASE_URL = "https://api.ultramsg.com/instance101715/messages/chat";
+    private static final String API_TOKEN = "sfg839fvjc0a2ov3"; 
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
     public static void sendTextMessage(String numero, String mensaje) {
