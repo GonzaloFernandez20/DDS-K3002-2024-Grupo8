@@ -24,7 +24,7 @@ public class ConfiguracionDeSeguridad {
                 .authorizeHttpRequests(authRequest -> authRequest
                         //.anyRequest().permitAll())
                         .requestMatchers("/", "/Home", "/InicioDeSesion", "/RegistroPersona", "/Mapa", "/Nosotros",
-                                         "/Header", "/Footer", "/CierreDeSesion", "/ValidarUsuario",
+                                        "/Header", "/Footer", "/CierreDeSesion", "/ValidarUsuario",
                                          "/RegistrarColaboradorJuridico", "/RegistrarColaboradorHumano").permitAll()
                         .requestMatchers("/assets/**", "/img/**", "/reportes/**").permitAll()
                         .anyRequest().authenticated())

@@ -102,9 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
             viandasAgregadas++;
 
             if (viandasAgregadas < maxViandas) {
+                printf("quedan por agregar " + viandasAgregadas + " viandas");
                 limpiarCamposModal();
-                /*closeModal();
-                setTimeout(openModal, 200);*/ // Abre el modal después de un breve retraso
+                closeModal();
+                setTimeout(openModal, 200); // Abre el modal después de un breve retraso
             } else {
                 alert('Has agregado todas las viandas necesarias.');
                 closeModal();
