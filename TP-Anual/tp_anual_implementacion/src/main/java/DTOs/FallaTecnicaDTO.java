@@ -2,18 +2,19 @@ package DTOs;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import org.springframework.web.multipart.MultipartFile;
 
 public class FallaTecnicaDTO {
     private Colaborador colaboradorInformante;
     private String descripcion;
     private Heladera heladera;
-    private String linkFoto;
+    private MultipartFile foto;
 
-    public FallaTecnicaDTO(Colaborador colaboradorInformante, Heladera heladera, String descripcion, String linkFoto) {
+    public FallaTecnicaDTO(Colaborador colaboradorInformante, Heladera heladera, String descripcion, MultipartFile foto) {
         this.colaboradorInformante = colaboradorInformante;
         this.heladera = heladera;
         this.descripcion = descripcion;
-        this.linkFoto = linkFoto;
+        this.foto = foto;
     }
 
 
@@ -23,6 +24,6 @@ public class FallaTecnicaDTO {
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
     public Heladera getHeladera() { return heladera; }
     public void setHeladera(Heladera heladera) { this.heladera = heladera; }
-    public String getLinkFoto() { return linkFoto; }
-    public void setLinkFoto(String linkFoto) { this.linkFoto = linkFoto; }
+    public MultipartFile getFoto() { return foto; }
+    public void setFoto(MultipartFile foto) { this.foto = foto; }
 }

@@ -58,16 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para abrir el modal
     const openModal = () => {
         limpiarCamposModal();  // Limpia los campos
-        modal.style.display = 'block';
+        modal.classList.add('visible');
     };
 
     // Función para cerrar el modal
     const closeModal = () => {
-        modal.style.display = 'none';
+        modal.classList.remove('visible');
     };
 
     // Manejar clic en "Agregar vianda"
-    btnAgregarVianda.addEventListener('click', () => {
+    btnAgregarVianda.addEventListener('click', (event) => {
         event.preventDefault();
         maxViandas = parseInt(document.getElementById("cantViandas").value); // Captura la cantidad deseada
         console.log("Cantidad máxima de viandas:", maxViandas); // Verificar el valor
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             viandasAgregadas++;
 
             if (viandasAgregadas < maxViandas) {
-                printf("quedan por agregar " + viandasAgregadas + " viandas");
+                console.log("hay viandas por cargar");
                 limpiarCamposModal();
                 closeModal();
                 setTimeout(openModal, 200); // Abre el modal después de un breve retraso

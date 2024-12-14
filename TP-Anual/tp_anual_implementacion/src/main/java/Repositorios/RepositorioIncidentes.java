@@ -4,6 +4,8 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.Alerta;
 import Modelo.Dominio.incidentes.FallaTecnica;
 import Modelo.Dominio.incidentes.Incidente;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

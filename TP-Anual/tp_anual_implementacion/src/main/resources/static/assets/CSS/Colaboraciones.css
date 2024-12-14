@@ -179,7 +179,7 @@ h2 {
 
 /* Modal: Fondo borroso y centrado */
 #modal-vianda.modal {
-    display: flex !important; /* Asegura que Flexbox se active */
+    display: none;
     justify-content: center; /* Centrado horizontal */
     align-items: center; /* Centrado vertical */
     background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
@@ -187,6 +187,11 @@ h2 {
     z-index: 1050; /* Nivel sobre otros elementos (como Bootstrap modals) */
     overflow: hidden; /* Evita barras de desplazamiento */
 }
+
+#modal-vianda.visible {
+    display: flex; /* Se muestra solo con la clase "visible" */
+}
+
 
 /* Estilo del contenido del modal */
 #modal-vianda .modal-content {
@@ -249,7 +254,7 @@ h2 {
     outline: none;
 }
 
-/* Mostrar el modal */
-.modal.visible {
-    display: flex;
+.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

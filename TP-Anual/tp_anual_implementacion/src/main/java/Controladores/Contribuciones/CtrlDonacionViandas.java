@@ -34,17 +34,16 @@ public class CtrlDonacionViandas {
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
     private final DonacionDeViandasRepository donacionDeViandasRepository;
-    private final HeladeraRepository heladeraRepository;
 
     @Autowired
     public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion,
-                              ColaboradorRepository colaboradorRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura, DonacionDeViandasRepository donacionDeViandasRepository, HeladeraRepository heladeraRepository) {
+                              ColaboradorRepository colaboradorRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura,
+                               DonacionDeViandasRepository donacionDeViandasRepository) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.colaboradorRepository = colaboradorRepository;
         this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
         this.donacionDeViandasRepository = donacionDeViandasRepository;
-        this.heladeraRepository = heladeraRepository;
     }
 
     private List<HeladeraSeleccionDTO> heladeras;
@@ -67,7 +66,7 @@ public class CtrlDonacionViandas {
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
             return "PedirTarjetaColaborador";
         }
-        heladeras = heladeraRepository.traerHeladerasActivasEnElSistema().stream().
+        heladeras = repositorioHeladeras.traerHeladerasActivasEnElSistema().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
         setEstados();
         model.addAttribute("heladeras", heladeras);
@@ -101,11 +100,5 @@ public class CtrlDonacionViandas {
             return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
         }
     }
-
-//    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
-//        Optional <Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
-//        DonacionDeViandas nuevaDonacion = DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(),colaborador);
-//        return nuevaDonacion;
-//    }
 
 }
