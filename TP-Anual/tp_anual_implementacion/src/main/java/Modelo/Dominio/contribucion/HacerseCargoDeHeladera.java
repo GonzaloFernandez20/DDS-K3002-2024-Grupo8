@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "HacerseCargoDeHeladera")
 public class HacerseCargoDeHeladera extends Contribucion{
-    @OneToOne( cascade = CascadeType.PERSIST )
+    @OneToOne(cascade = CascadeType.PERSIST )
     @JoinColumn(name = "heladera_a_cargo", referencedColumnName = "id_heladera")
     private Heladera heladeraACargo;
 

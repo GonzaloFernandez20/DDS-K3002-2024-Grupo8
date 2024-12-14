@@ -70,8 +70,10 @@ public class TestGenerarReportesSemanales {
 
         fallaTecnica = new FallaTecnica(colaboradorHumano, "Se le quemó un foquito.", heladera, null);
 
-        reporteDeFallas = new ReporteDeFallas(LocalDate.now());
-        reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador(LocalDate.now());
+        reporteDeFallas = new ReporteDeFallas();
+        reporteDeFallas.setFechaDeCreacion(LocalDate.now());
+        reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador();
+        reporteDeViandasPorColaborador.setFechaDeCreacion(LocalDate.now());
         reporteDeViandasPorHeladera = new ReporteDeViandasPorHeladera(LocalDate.now());
     }
 

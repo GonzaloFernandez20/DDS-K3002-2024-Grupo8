@@ -1,6 +1,6 @@
 package Modelo.seguridad;
 
-import Modelo.Dominio.Repositories.UsuariosRepository;
+import Repositories.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

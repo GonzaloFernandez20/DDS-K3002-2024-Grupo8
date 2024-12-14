@@ -1,7 +1,7 @@
 package Modelo.Dominio.GestionDeContribuciones;
 
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.contribucion.RegistroDePersonaVulnerable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
