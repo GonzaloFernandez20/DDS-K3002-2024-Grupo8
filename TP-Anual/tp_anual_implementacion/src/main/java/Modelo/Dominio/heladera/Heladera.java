@@ -121,7 +121,9 @@ public class Heladera {
     public void setNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { this.notificadorDeSuscriptos = notificadorDeSuscriptos; }
     public int getCapacidadDeViandas() { return capacidadDeViandas; }
     public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
-    public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
+    public int getIdHeladera(){return this.idHeladera;}
+    // NO USAR GET ID HELADERA. ESTE ES EL GET DEL ID TRUCHO. SÓLO ESTÁ PARA LOS CASOS HARDCODEADOS.
+    // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
     public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
 
     public Integer getid_heladera() {

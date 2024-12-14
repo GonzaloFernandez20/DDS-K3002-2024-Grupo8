@@ -29,12 +29,14 @@ public class ColaboradorHumanoDTO {
     private final boolean tieneWp;
     private final boolean tieneTg;
 
+    private final boolean tieneTarjeta;
+
 
     public ColaboradorHumanoDTO(String usuario, String contrasenia,
                                 String nombre, String apellido,
                                 LocalDate fechaDeNacimiento,
                                 TipoDeDocumento tipo, String numero,
-                                Sexo sexo, String calle, String altura, String email, String telefono, boolean tieneWp, boolean tieneTg) {
+                                Sexo sexo, String calle, String altura, String email, String telefono, boolean tieneWp, boolean tieneTg, boolean tieneTarjeta) {
         this.usuario = usuario;
         this.constrasenia = contrasenia;
         this.nombre = nombre;
@@ -49,5 +51,6 @@ public class ColaboradorHumanoDTO {
         this.telefono = telefono;
         this.tieneWp = tieneWp;
         this.tieneTg = tieneTg;
+        this.tieneTarjeta = tieneTarjeta;
     }
 }

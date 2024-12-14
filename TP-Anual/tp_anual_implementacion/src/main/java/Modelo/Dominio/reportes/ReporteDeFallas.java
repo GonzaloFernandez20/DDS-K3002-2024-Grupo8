@@ -1,6 +1,5 @@
 package Modelo.Dominio.reportes;
 
-import Repositories.heladera.HeladeraRepository;
 import ServiceImpl.ReportesServiceImpl;
 import com.itextpdf.text.pdf.PdfPTable;
 

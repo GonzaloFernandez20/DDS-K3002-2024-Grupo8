@@ -1,17 +1,14 @@
 package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.documentacion.Documento;
-import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

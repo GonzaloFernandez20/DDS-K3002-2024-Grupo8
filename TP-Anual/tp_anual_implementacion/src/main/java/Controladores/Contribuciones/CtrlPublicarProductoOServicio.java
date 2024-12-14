@@ -3,7 +3,7 @@ package Controladores.Contribuciones;
 import DTOs.OfertaDeUnProductoDTO;
 import Modelo.Dominio.GestionDeContribuciones.GestorDeOfertaDeProductos;
 import Modelo.Dominio.Persona.PersonaHumana;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.OfertaDeUnProducto;
 import Modelo.Dominio.contribucion.Rubro;

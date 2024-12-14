@@ -42,7 +42,7 @@ public class ReportesServiceImpl implements ReportesService {
         List<Heladera> heladeras_con_fallas = heladeraRepository.findAllById(ids_de_heladeras);
 
         System.out.println(Arrays.toString(ids_de_heladeras.toArray()));
-        System.out.println(Arrays.toString(heladeras_con_fallas.stream().map(heladera -> heladera.getIdHeladera()).toArray()));
+        System.out.println(Arrays.toString(heladeras_con_fallas.stream().map(heladera -> heladera.getid_heladera()).toArray()));
 
         for (int i = 0; i < fallasPorHeladeraDAOs.size(); i++){
             FallasPorHeladera fallasPorHeladera = new FallasPorHeladera();
@@ -56,7 +56,7 @@ public class ReportesServiceImpl implements ReportesService {
             fallasPorHeladerasLista.add(fallasPorHeladera);
         }
         System.out.println("Lista de FallasPorHeladera: ");
-        System.out.println(Arrays.toString(fallasPorHeladerasLista.stream().map(fallasPorHeladera -> fallasPorHeladera.getHeladera().getIdHeladera()).toArray()));
+        System.out.println(Arrays.toString(fallasPorHeladerasLista.stream().map(fallasPorHeladera -> fallasPorHeladera.getHeladera().getid_heladera()).toArray()));
         System.out.println(Arrays.toString(fallasPorHeladerasLista.stream().map(fallasPorHeladera -> fallasPorHeladera.getCantidadDeFallas()).toArray()));
         return fallasPorHeladerasLista;
     }
@@ -94,8 +94,8 @@ public class ReportesServiceImpl implements ReportesService {
         heladeras_BD.forEach( heladera -> {
             ViandasPorHeladera viandasPorHeladera = new ViandasPorHeladera();
             viandasPorHeladera.setHeladera(heladera);
-            viandasPorHeladera.setViandasRetiradas(aperturaRepository.traerViandasRetiradasEntreFechasDeUnaHeladera(heladera.getIdHeladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
-            viandasPorHeladera.setViandasColocadas(aperturaRepository.traerViandasIngresadasEntreFechasDeUnaHeladera(heladera.getIdHeladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
+            viandasPorHeladera.setViandasRetiradas(aperturaRepository.traerViandasRetiradasEntreFechasDeUnaHeladera(heladera.getid_heladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
+            viandasPorHeladera.setViandasColocadas(aperturaRepository.traerViandasIngresadasEntreFechasDeUnaHeladera(heladera.getid_heladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
             viandasPorHeladeraList.add(viandasPorHeladera);
         });
 
@@ -123,7 +123,7 @@ public class ReportesServiceImpl implements ReportesService {
         }*/
 
         System.out.println("Lista de ViandasPorHeladera:");
-        System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getHeladera().getIdHeladera()).toArray()));
+        System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getHeladera().getid_heladera()).toArray()));
         System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getViandasColocadas()).toArray()));
         System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getViandasRetiradas()).toArray()));
         return viandasPorHeladeraList;

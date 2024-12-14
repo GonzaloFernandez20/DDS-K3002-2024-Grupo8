@@ -130,6 +130,9 @@ function ocultarReporteFalla() {
     document.getElementById('container-reporte-falla').style.display = 'none';
 }
 
+/*
+NO EXISTE EN NUESTRO HTML
+
 document.getElementById('tipoNuevoMedioDeContactoHumano').addEventListener('change', function () {
     const inputContainer = document.getElementById('inputContainer');
     const input = document.getElementById('nuevoMedioDeContactoHumano');
@@ -141,3 +144,4 @@ document.getElementById('tipoNuevoMedioDeContactoHumano').addEventListener('chan
         inputContainer.style.display = 'none'; // Ocultar el input si no hay selección
     }
 });
+*/

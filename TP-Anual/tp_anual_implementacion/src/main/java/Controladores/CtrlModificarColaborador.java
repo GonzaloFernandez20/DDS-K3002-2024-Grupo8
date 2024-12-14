@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class CtrlModificarColaborador {
@@ -67,6 +68,7 @@ public class CtrlModificarColaborador {
     public String mostrarPremios(Model model) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
+        model.addAttribute("tieneTarjeta", !Objects.isNull(colaborador.getTarjeta()));
         model.addAttribute("tipoColaborador", tipoPersonaDelColaborador());
         model.addAttribute("puntos", colaborador.getPuntosAcumulados());
 
@@ -122,7 +124,8 @@ public class CtrlModificarColaborador {
                 personaHumana.getDocumento().getSexo(),
                 personaHumana.getDireccion().getCalle(),
                 personaHumana.getDireccion().getAltura(),
-                null, null, false, false
+                null, null, false, false,
+                !Objects.isNull(colaboradorDeSesion.getTarjeta())
         );
         return colaborador;
     }

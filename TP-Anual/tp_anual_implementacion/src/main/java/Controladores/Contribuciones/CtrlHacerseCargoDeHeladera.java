@@ -31,16 +31,12 @@ import java.util.List;
 public class CtrlHacerseCargoDeHeladera {
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
-    private final HeladeraRepository heladeraRepository;
     private final HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository;
-    private final ColaboradorRepository colaboradorRepository;
 
     @Autowired
-    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion, HeladeraRepository heladeraRepository, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository, ColaboradorRepository colaboradorRepository) {
+    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
-        this.heladeraRepository = heladeraRepository;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
-        this.colaboradorRepository = colaboradorRepository;
     }
 
     @GetMapping("/HacerseCargoDeUnaHeladera")

@@ -66,7 +66,8 @@ public class RepositorioHeladeras {
                         "alfredo@gmail.com",
                         "1132567897",
                         true,
-                        true
+                        true,
+                        false
                 )
         ).getColaborador();
         heladera1.recibirVianda(new Vianda("Fideos", LocalDate.now().plusDays(5), colaborador, heladera1, null, null));

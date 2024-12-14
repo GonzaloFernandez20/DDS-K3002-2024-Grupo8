@@ -2,7 +2,7 @@ package Controladores.Navbar;
 
 
 import DTOs.HeladeraEnMapaDTO;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Repositories.heladera.HeladeraRepository;
 import Modelo.Mappers.HeladeraEnMapaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

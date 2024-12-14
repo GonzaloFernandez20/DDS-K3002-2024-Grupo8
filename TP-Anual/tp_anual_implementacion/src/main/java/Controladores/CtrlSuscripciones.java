@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -44,6 +45,7 @@ public class CtrlSuscripciones {
 
     @GetMapping("/ModificarColaboradorHumanoSuscripciones")
     public String mostrarHeladeras(Model model) {
+        model.addAttribute("tieneTarjeta", !Objects.isNull(colaborador.getTarjeta()));
         model.addAttribute("suscripciones", suscripciones);
         System.out.println("Muestra las heladeras");
         //model.addAttribute("heladeras", heladeras); // TODO: Reemplazar por el repositorio real
