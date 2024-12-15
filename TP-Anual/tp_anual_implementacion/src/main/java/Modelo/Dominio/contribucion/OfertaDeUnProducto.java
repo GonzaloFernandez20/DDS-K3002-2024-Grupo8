@@ -9,25 +9,25 @@ import java.time.LocalDate;
 @Table(name = "OfertaDeUnProducto")
 @DiscriminatorValue("ofrecer_producto")
 public class OfertaDeUnProducto extends Contribucion {
-    //POR QUÉ ESTÁ ÉSTE ATRIBUTO???
-    @Column(name = "idOferta")
-    private int idOferta;
     @Column(name = "nombre_de_oferta")
     private String nombreOferta;
     @Column(name = "puntos_necesarios")
     private double puntosNecesarios;
-    @Column(name = "link_a_imagen")
-    private String linkDeImagen;
+    @Column(name = "pathImagen")
+    private String pathImagen;
     @Enumerated(EnumType.STRING)
     private Rubro rubro;
     @OneToOne
     @JoinColumn(name = "producto", referencedColumnName = "id_producto")
     private Producto producto;
 
-    public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String linkDeImagen, Rubro rubro, Producto producto) {
+    public OfertaDeUnProducto(){
+    }
+
+    public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String pathImagen, Rubro rubro, Producto producto) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
-        this.linkDeImagen = linkDeImagen;
+        this.pathImagen = pathImagen;
         this.rubro = rubro;
         this.producto = producto;
         this.colaborador = colaborador;
@@ -46,16 +46,16 @@ public class OfertaDeUnProducto extends Contribucion {
     public void serCanjeada() { producto.disminuirStock(); }
     public boolean hayStock() { return producto.tengoStock(); }
 
+
     // ---- Getters y Setters
     public double getPuntosNecesarios() { return puntosNecesarios; }
     public String getNombreOferta() { return nombreOferta; }
     public void setNombreOferta(String nombreOferta) { this.nombreOferta = nombreOferta; }
     public void setPuntosNecesarios(double puntosNecesarios) { this.puntosNecesarios = puntosNecesarios; }
-    public String getLinkDeImagen() { return linkDeImagen; }
-    public void setLinkDeImagen(String linkDeImagen) { this.linkDeImagen = linkDeImagen; }
+    public String getPathImagen() { return pathImagen; }
+    public void setPathImagen(String pathImagen) { this.pathImagen = pathImagen; }
     public Rubro getRubro() { return rubro; }
     public void setRubro(Rubro rubro) { this.rubro = rubro; }
     public Producto getProducto() { return producto; }
     public void setProducto(Producto producto) { this.producto = producto; }
-    public int getIdOferta(){return this.idOferta;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
 }

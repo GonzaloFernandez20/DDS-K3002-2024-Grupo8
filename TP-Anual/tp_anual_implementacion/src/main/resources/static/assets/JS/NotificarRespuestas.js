@@ -17,3 +17,13 @@ function showAlert(message, type) {
         alertElement.remove();
     }, 10000);
 }
+
+function alertaSimple(mensaje, tipo){
+    Swal.fire({
+        position: "top",
+        icon: tipo,
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 2500
+    });
+}

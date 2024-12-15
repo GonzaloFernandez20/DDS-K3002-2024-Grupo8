@@ -1,30 +1,51 @@
 package Servicios_Externos_APIs;
 
-import java.util.HashMap;
-import java.util.Map;
-import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.Telegram;
-import Modelo.Dominio.medios_de_contacto.WhatsApp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
+import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Modelo.Dominio.colaborador.Colaborador;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+
+@Service
 public class NotificacionService {
 
-    private final Map<String, MedioDeContacto> mediosDeContacto;
+    // Para comunicacion masiva
+    /*@Autowired
+    ColaboradorRepository colaboradorRepository;
 
-    public NotificacionService() {
-        mediosDeContacto = new HashMap<>();
-        // Registrar los medios de contacto disponibles
-        mediosDeContacto.put("email", new Mail());
-        mediosDeContacto.put("whatsapp", new WhatsApp());
-        mediosDeContacto.put("telegram", new Telegram());
-    }
-    public void sendNotification(String medio,String userId ,String message) {
-        MedioDeContacto medioDeContacto = mediosDeContacto.get(medio);
-
-        if (medioDeContacto != null) {
-            medioDeContacto.notificar(message);
-        } else {
-            System.out.println("Medio de contacto no soportado: " + medioDeContacto);
+    public void sendNotification(String message) {
+        // Obtener todas las personas
+        List<Colaborador> colaboradores = colaboradorRepository.findAll();
+        if (colaboradores.isEmpty()) {
+            System.out.println("No hay colaboradores para notificar.");
+            return;
+        }
+        for (Colaborador colaborador : colaboradores) {
+            // Iterar sobre los medios de contacto de la persona
+            for (MedioDeContacto medio : colaborador.getMediosDeContacto()) {
+                try {
+                    medio.notificar(message);
+                } catch (Exception e) {
+                    System.err.println("Error al notificar a través de " + medio.getClass().getSimpleName() + ": " + e.getMessage());
+                }
+            }
+        }
+    }*/
+    
+    // Para comunicacion puntual
+    @Transactional
+    public void sendNotificacionToColaborador(Colaborador colaborador, String message) {
+        // Iterar sobre los medios de contacto de la persona
+        for (MedioDeContacto medio : colaborador.getMediosDeContacto()) {
+            try {
+                System.out.println("Notificando a través de " + medio.getClass().getSimpleName() + ": " + message);
+                medio.notificar(message);
+            } catch (Exception e) {
+                System.err.println("Error al notificar a través de " + medio.getClass().getSimpleName() + ": " + e.getMessage());
+            }
         }
     }
 }

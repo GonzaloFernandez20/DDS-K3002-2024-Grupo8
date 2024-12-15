@@ -25,16 +25,16 @@ public class Heladera {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador_a_cargo", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorACargo;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ubicacion", referencedColumnName = "id_ubicacion")
     private Ubicacion ubicacion;
     @Column(name = "cantidad_de_viandas")
     private int capacidadDeViandas;
     @Column(name = "fecha_de_puesta_en_funcionamiento")
     private LocalDate puestaEnFuncionamiento;
-    @OneToMany(mappedBy = "heladera", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "heladera", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Vianda> viandasEnStock;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "modelo", referencedColumnName = "id_modelo")
     private Modelo modelo;
     @Enumerated(EnumType.STRING)

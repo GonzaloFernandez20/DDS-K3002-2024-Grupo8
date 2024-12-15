@@ -42,15 +42,18 @@
                             <select id="heladera" name="heladera" required>
                                 <option value="" selected disabled>--Seleccione una opcion--</option>
                                 <option th:each="heladera : ${heladeras}"
-                                        th:value="${heladera.idHeladera}"
-                                        th:text="${heladera.nombreDelPunto + ' (' + heladera.calle + ' ' + heladera.altura + ', ' + heladera.ciudad + ') (faltan ' + heladera.capacidadRestante + ' viandas para llenar la heladera)'}"
-                                        th:data-stock="${heladera.capacidadRestante}"
-                                        th:class="${heladera.estado.name() == 'INACTIVA' || heladera.capacidadRestante == 0 ? 'inactiva' : ''}"
-                                        th:disabled="${heladera.estado.name() == 'INACTIVA' || heladera.capacidadRestante == 0}">
-                                </option>
+                                        th:value="${heladera.getIdHeladera()}"
+                                        th:text="${heladera.getNombreDelPunto()} + ' - ' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} + ' (entran ' + ${heladera.capacidadRestante} + ' viandas)'" th:data-stock="${heladera.getStockDeViandas()}"
+                                        th:class="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0 ? 'inactiva' : ''}" th:disabled="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0}"/>
                             </select>
 
                             <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="fechaDonacion">Fecha de donación (*)</label>
+                            <input type="date" id="fechaDonacion" name="fechaDonacion" required>
+                            <div class="error-message" id="fechaDonacionError"></div>
                         </div>
 
                         <div class="input-group">
@@ -82,13 +85,21 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="peso">Peso de la vianda</label>
-                                    <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" >
+                                    <label for="peso">Peso de la vianda (*)</label>
+                                    <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" required>
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="calorias">Calorías de la vianda</label>
-                                    <input type="text" id="calorias" placeholder="Ingrese las calorías" >
+                                    <label for="calorias">Calorías de la vianda (*)</label>
+                                    <input type="text" id="calorias" placeholder="Ingrese las calorías" required>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="estado">Estado de la vianda (*)</label>
+                                    <select id="estado" required>
+                                        <option value="" selected disabled>--Seleccione una opción--</option>
+                                        <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}"></option>
+                                    </select>
                                 </div>
 
                                 <button id="guardar-vianda">Guardar Vianda</button>

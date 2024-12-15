@@ -26,14 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const motivoDistribucion = document.getElementById('motivoDistribucion');
 
     heladeraDestino.addEventListener('change', function(e) {
-        console.log("Toqué la heladeraDestino");
         if(heladeraOrigen.value) {
             agregarMaximoDeViandasADistribuir();
         }
     });
 
     heladeraOrigen.addEventListener('change', function(e) {
-        console.log("Toqué la heladeraOrigen");
         if(heladeraDestino.value) {
             agregarMaximoDeViandasADistribuir();
         }
@@ -42,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const formularioDistribucion = document.getElementById('distribucionViandaForm');
     formularioDistribucion.addEventListener('submit', async function(e) {
         e.preventDefault();
-        console.log("Un submit");
 
         // Marcar errores --------------------------------------------------------------
         let hasError = false;

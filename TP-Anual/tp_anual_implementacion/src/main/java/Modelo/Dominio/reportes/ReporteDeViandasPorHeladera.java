@@ -5,13 +5,15 @@ package Modelo.Dominio.reportes;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.sistema.RegistroDeHeladeras;
 import Repositorios.RepositorioAperturas;
-import Repositorios.RepositorioHeladeras;
+import ServiceImpl.ReportesServiceImpl;
 import com.itextpdf.text.pdf.PdfPTable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,12 +21,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
-@Table(name = "ReporteViandasPorHeladera")
+@Component
 public class ReporteDeViandasPorHeladera extends ReporteSemanal{
-    @OneToMany
-    @JoinColumn(name = "id_reporte", referencedColumnName = "id_reporte")
-    private List<ViandasPorHeladera> viandasPorHeladeras;
+    private List<ViandasPorHeladera> viandasPorHeladeras = new ArrayList<ViandasPorHeladera>();
+
+    @Autowired
+    ReportesServiceImpl reportesServiceImlp;
 
     public ReporteDeViandasPorHeladera(LocalDate fechaDeCreacion) {
         super(fechaDeCreacion);
@@ -37,14 +39,8 @@ public class ReporteDeViandasPorHeladera extends ReporteSemanal{
 
     @Override
     public void completarReporte(){
-        List<Heladera> heladerasConocidas = RepositorioHeladeras.getInstancia().getHeladeras();
-        heladerasConocidas.forEach(heladera -> {
-            ViandasPorHeladera viandasPorHeladera =
-                    new ViandasPorHeladera(heladera,
-                            RepositorioAperturas.getInstancia().cantidadDeRetirosDeHeladeraEntreFechas(heladera, LocalDateTime.now().minusWeeks(1),LocalDateTime.now()),
-                            RepositorioAperturas.getInstancia().cantidadDeDepositosDeHeladeraEntreFechas(heladera,LocalDateTime.now().minusWeeks(1),LocalDateTime.now()));
-            this.sumarViandasPorHeladera(viandasPorHeladera);
-        });
+        List<ViandasPorHeladera> viandasPorHeladeraBD = reportesServiceImlp.traerViandasPorHeladera();
+        this.viandasPorHeladeras.addAll(viandasPorHeladeraBD);
         super.completarReporte();
     }
 

@@ -10,44 +10,218 @@ h2{
 }
 
 h3{
-    padding-top: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 2px solid #d0d0d0;
+    padding-bottom: 5px;
 }
 
-.main{
-    /*margin-left: 15%;*/
-    padding-bottom: 10px;
-    box-sizing: border-box;
+/* Contenedor principal del formulario */
+.main {
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.nav{
-    padding-bottom: 10px;
+.titulo-mi-cuenta {
+    color: #50bfa0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
 }
 
-.nav-chosen{
-    background-color: #e6e6e6bb;
-    border-radius: 10px;
-    padding-left: 5%;
+.titulo-mi-cuenta:hover {
+    text-decoration: underline; /* Subraya al pasar el mouse */
+}
+
+/* ------------------------------------------- */
+.nav {
+    margin-bottom: 10px; /* Espaciado entre listas */
+}
+
+.nav-chosen {
+    background-color: #e6f5f1; /* Fondo verde claro */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    margin-bottom: 20px; /* Separación entre secciones */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Sombra ligera */
 }
 
 .nav-item {
+    display: flex; /* Alinea íconos y texto horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 8px; /* Espaciado entre ítems */
+    padding: 8px; /* Espaciado interno */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.nav-item image {
+    width: 20px; /* Tamaño fijo del ícono */
+    height: 20px;
+    margin-right: 10px; /* Espaciado entre el ícono y el texto */
+}
+
+.nav-item:hover {
+    background-color: #d9ede7; /* Fondo verde suave al pasar el cursor */
+}
+
+.nav-link {
+    color: #333; /* Color inicial de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.4s ease; /* Transición del color */
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #50bfa0; /* Verde claro al pasar el cursor */
+}
+
+
+/* Espaciado para el título "Usuario" */
+.nav-chosen .nav-title {
+    padding-left: 10px; /* Margen izquierdo */
+    margin-bottom: 10px; /* Separación del primer elemento */
+    padding-top: 2%;
+    padding-bottom: 1%;
+}
+
+/* Forzar el texto en una línea */
+.nav-link.nowrap-text {
+    white-space: nowrap; /* Prevenir quiebres de línea */
+    overflow: hidden; /* Prevenir desbordes */
+    text-overflow: ellipsis; /* Opcional: agregar "..." si el texto excede */
+}
+
+/* Ajustes generales para íconos */
+.nav-item .icon {
+    margin-right: 8px; /* Espaciado entre ícono y texto */
+}
+
+.sidenav {
+    background-color: #ffffff; /* Fondo claro */
+    color: #333; /* Texto oscuro */
+    margin-top: 10px;
+
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+}
+
+.sidenav .nav-link {
+    color: #333; /* Color del texto de los enlaces */
+}
+
+.sidenav .nav-link:hover {
+    color: #50bfa0; /* Resaltado en verde claro */
+}
+/* -------------------------------------------- */
+/* Contenedor de Nombre y Apellido */
+.nombre-apellido-container {
+    display: flex; /* Pone los divs en línea horizontal */
+    gap: 20px; /* Espacio entre el campo Nombre y Apellido */
+    align-items: flex-start; /* Asegura que los labels e inputs estén alineados */
+    margin-bottom: 20px; /* Espaciado inferior del bloque */
+}
+
+/* Contenedores individuales para Nombre y Apellido */
+.nombre-container, .apellido-container {
     display: flex;
-    align-items: center;
-    border-radius: 10px;
+    flex-direction: column; /* Coloca el label arriba del input */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    gap: 5px; /* Espacio entre el label y el input */
 }
 
-.nav-link{
-    color:#000000;
-    transition: color 0.4s ease;
+/* Inputs de Nombre y Apellido */
+.mod-cuenta-nombre, .mod-cuenta-apellido {
+    padding: 5px; /* Espaciado interno */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
 }
 
-.nav-link:hover{
-    color: #50bfa0;
+/* Contenedor para Fecha de Nacimiento */
+.fecha-nacimiento-container {
+    display: flex;
+    flex-direction: column; /* Coloca el label arriba del input */
+    gap: 5px; /* Espacio entre el label y el input */
+    margin-top: 10px; /* Espacio superior */
 }
 
-.sidenav{
-    /*float: left;
-    width: 15%;*/
-    height: 100vh;
+/* Input de Fecha de Nacimiento */
+.mod-cuenta-fecha-nacimiento {
+    width: 300px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Contenedor para Tipo y Número de Documento */
+.documento-container {
+    display: flex;
+    flex-direction: row; /* Coloca los elementos en fila (horizontalmente) */
+    gap: 20px; /* Espacio entre los campos */
+    margin-top: 10px; /* Espacio superior */
+}
+
+/* Select de Tipo de Documento */
+.mod-cuenta-tipo-documento {
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Fondo claro */
+}
+
+/* Input de Número de Documento */
+.mod-cuenta-nro-documento {
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* -------------------------------------------- */
+
+/* Placeholder en inputs */
+input::placeholder {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* Inputs de texto y contraseñas */
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.direccion-container, .usuario-container {
+    display: flex;
+    flex-direction: column; /* Coloca el label arriba de los inputs */
+    gap: 5px; /* Espacio entre el label y los inputs */
+}
+
+.inputs-direccion, .inputs-usuario {
+    display: flex;
+    gap: 10px; /* Espacio entre los dos inputs */
+    justify-content: center; /* Alinea los inputs horizontalmente */
+}
+
+.mod-cuenta-direccion, .mod-cuenta-usuario {
+    padding: 5px; /* Espaciado interno */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
 }
 
 .colaboracion{
@@ -154,35 +328,40 @@ table{
     padding-right: 20px;
 }
 
-.btn-mod{
-    width: 280px;
+/* Botones del formulario */
+.btn-mod {
     display: inline-block;
-    border-radius: 10px;
-    padding: 10px 25px;
-    transition-duration: 0.4s;
-    text-align: center;
-    margin: 20px 25px 5px 0px;
+    padding: 10px 20px;
+    margin: 10px 5px 0; /* Espaciado entre botones */
+    font-size: 1rem;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .btn-mod:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    opacity: 0.9;
 }
 
 .confirm{
     color: #ffffff;
-    background-color: #000000;
+    background-color: #3bb625;
     border: none;
 }
 
 .reset{
-    color:#50bfa0;
-    background-color: #ffffff;
+    color: #ffffff;
+    background-color: #000000;
     border-color: #50bfa0;
 }
 
 .baja{
+    align-content: center;
     color: #ffffff;
-    background-color: #ff0000;
+    background-color: #7a7a7a;
     border: none;
 }
 
@@ -227,6 +406,11 @@ input, select{
     display: none;
 }
 
+.contenido-mi-cuenta{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 .reportes-container {
     padding-bottom: 20px;
 }
@@ -248,4 +432,24 @@ input, select{
     bottom: 0px;
     background-color: #ffffffff;
     display: block;
+}
+
+/* Espaciado entre etiquetas e inputs */
+.form-cuenta > label + input,
+.form-cuenta > label + select {
+    margin-top: 5px;
+}
+
+/* Espaciado entre secciones */
+.form-cuenta > h3 + label {
+    margin-top: 20px;
+}
+
+.custom-swal-popup {
+    max-width: 100%;
+}
+
+.swal2-input {
+    width: 90% !important;
+    box-sizing: border-box;
 }

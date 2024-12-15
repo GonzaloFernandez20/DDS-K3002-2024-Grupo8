@@ -2,9 +2,8 @@ package Controladores.Sesiones;
 
 import DTOs.ColaboradorHumanoDTO;
 import DTOs.ColaboradorJuridicoDTO;
-import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
-import Modelo.Dominio.Repositories.UsuariosRepository;
+import Repositories.UsuariosRepository;
 import Modelo.Mappers.ColabHumanoMapper;
 import Modelo.Mappers.ColabJuridicoMapper;
 import Modelo.seguridad.SesionActiva.GeneradorDeCookie;

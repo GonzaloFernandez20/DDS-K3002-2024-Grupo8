@@ -18,7 +18,7 @@ public abstract class Incidente {
     @OneToOne
     @JoinColumn(name = "heladera_donde_ocurrio", referencedColumnName = "id_heladera")
     protected Heladera heladeraDondeOcurrio;
-    @OneToMany(mappedBy = "incidenteAtendido", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "incidenteAtendido", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     protected List <VisitaTecnica> visitas;
     @Enumerated(EnumType.STRING)
     protected EstadoDelIncidente estado;
@@ -33,4 +33,20 @@ public abstract class Incidente {
     public Heladera getHeladeraDondeOcurrio() { return heladeraDondeOcurrio; }
     public EstadoDelIncidente getEstado() { return estado; }
     public List<VisitaTecnica> getVisitas() { return visitas; }
+
+    public void setMomentoDelSuceso(LocalDateTime momentoDelSuceso) {
+        this.momentoDelSuceso = momentoDelSuceso;
+    }
+
+    public void setHeladeraDondeOcurrio(Heladera heladeraDondeOcurrio) {
+        this.heladeraDondeOcurrio = heladeraDondeOcurrio;
+    }
+
+    public void setVisitas(List<VisitaTecnica> visitas) {
+        this.visitas = visitas;
+    }
+
+    public void setEstado(EstadoDelIncidente estado) {
+        this.estado = estado;
+    }
 }

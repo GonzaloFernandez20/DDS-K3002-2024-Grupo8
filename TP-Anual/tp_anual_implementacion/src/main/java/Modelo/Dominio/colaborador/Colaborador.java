@@ -3,16 +3,18 @@ package Modelo.Dominio.colaborador;
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.documentacion.Documento;
-import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Colaborador")
 public class Colaborador {
@@ -22,7 +24,7 @@ public class Colaborador {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "persona" ,referencedColumnName = "id_persona")
     private Persona persona;
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
@@ -90,30 +92,4 @@ public class Colaborador {
         if(tarjeta == null){return 0;}
         else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
     }
-
-
-    // ---- Getters y Setters
-
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public Direccion getDireccion() { return persona.getDireccion(); }
-    public double getPuntosAcumulados() { return puntosAcumulados; }
-    public List<Contribucion> getHistorialDeContribuciones() { return historialDeContribuciones; }
-    public List<MedioDeContacto> getMediosDeContacto() { return mediosDeContacto; }
-    public Persona getPersona() { return persona; }
-    public AccesoDeColaborador getTarjeta() { return tarjeta; }
-    public List<String> getMensajesRecibidos() { return mensajesRecibidos; }
-    public void setTarjeta(AccesoDeColaborador tarjeta) {
-        this.tarjeta = tarjeta;
-    }
-
-    public void setHistorialDeContribuciones(List<Contribucion> historialDeContribuciones) {
-        this.historialDeContribuciones = historialDeContribuciones;
-    }
-
-    public void setId_colaborador(Integer id_colaborador) { this.id_colaborador = id_colaborador; }
-    public Integer getId_colaborador() { return id_colaborador; }
 }

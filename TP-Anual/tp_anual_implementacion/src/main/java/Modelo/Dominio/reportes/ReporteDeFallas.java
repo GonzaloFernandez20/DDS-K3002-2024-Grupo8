@@ -1,48 +1,31 @@
 package Modelo.Dominio.reportes;
 
-import Modelo.Dominio.heladera.Heladera;
-import Repositorios.RepositorioHeladeras;
-import Repositorios.RepositorioIncidentes;
+import ServiceImpl.ReportesServiceImpl;
 import com.itextpdf.text.pdf.PdfPTable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
-@Table(name = "ReporteFallas")
+@Component
 public class ReporteDeFallas extends ReporteSemanal{
-    @OneToMany
-    @JoinColumn(name = "reporte", referencedColumnName = "id_reporte")
-    private List<FallasPorHeladera> fallasPorHeladera;
+    private List<FallasPorHeladera> fallasPorHeladera = new ArrayList<FallasPorHeladera>();
 
-    public ReporteDeFallas(LocalDate fechaDeCreacion) {
-        super(fechaDeCreacion);
-        fallasPorHeladera = new ArrayList<>();
-    }
+    @Autowired
+    ReportesServiceImpl reportesServiceImlp;
 
     @Override
     public void completarReporte(){
-        List<Heladera> heladerasConocidas = RepositorioHeladeras.getInstancia().getHeladeras();
-        heladerasConocidas.forEach(heladera -> {
-            FallasPorHeladera fallasPorHeladera = new FallasPorHeladera(heladera, RepositorioIncidentes.getInstancia()
-                    .getFallasTecnicasDeHeladeraEntreFechas(heladera, LocalDate.now().minusWeeks(1), LocalDate.now()).size());
-            this.sumarFallasPorheladera(fallasPorHeladera);
-            System.out.println(fallasPorHeladera.getHeladera().getUbicacion().getNombreCompletoDeUbicacion());
-            System.out.println(fallasPorHeladera.getCantidadDeFallas());
-        });
-
+        List<FallasPorHeladera> fallasPorHeladerasBD = reportesServiceImlp.traerFallasPorHeladeras();
+        this.fallasPorHeladera.addAll(fallasPorHeladerasBD);
         super.completarReporte();
     }
 
     public void sumarFallasPorheladera(FallasPorHeladera unaFallaPorHeladera){
-        fallasPorHeladera.add(unaFallaPorHeladera);
+        this.fallasPorHeladera.add(unaFallaPorHeladera);
     }
 
     @Override

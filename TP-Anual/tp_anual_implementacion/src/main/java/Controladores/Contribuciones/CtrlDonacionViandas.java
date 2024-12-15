@@ -3,17 +3,20 @@ package Controladores.Contribuciones;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.contribucion.DonacionDeViandasRepository;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
-import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.Mappers.DonacionDeViandasMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+
+import Servicios_Externos_APIs.NotificacionService;
+
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.contribucion.DonacionDeViandasRepository;
+import Repositories.heladera.HeladeraRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,23 +33,15 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CtrlDonacionViandas {
-
-    private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
-    private final AperturaConPermisoRepository aperturaConPermisoRepository;
     private final HeladeraRepository heladeraRepository;
     private final DonacionDeViandasRepository donacionDeViandasRepository;
-
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
-
     private List<EstadoVianda> estados;
 
+
     @Autowired
-    public CtrlDonacionViandas(GestorInicioDeSesion gestorInicioDeSesion,
-                               AccesoDeColaboradorRepository accesoDeColaboradorRepository,
-                               AperturaConPermisoRepository aperturaConPermisoRepository, HeladeraRepository heladeraRepository, DonacionDeViandasRepository donacionDeViandasRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura) {
-        this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
-        this.aperturaConPermisoRepository = aperturaConPermisoRepository;
+    public CtrlDonacionViandas(GestorInicioDeSesion gestorInicioDeSesion, HeladeraRepository heladeraRepository, DonacionDeViandasRepository donacionDeViandasRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.heladeraRepository = heladeraRepository;
         this.donacionDeViandasRepository = donacionDeViandasRepository;
@@ -66,19 +61,23 @@ public class CtrlDonacionViandas {
 
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
-
-        List<HeladeraSeleccionDTO> heladeras = heladeraRepository.findAll().stream().
-                map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
+            return "PedirRegistroHumano";
+        }
 
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
             return "PedirTarjetaColaborador";
         }
+        heladeras = heladeraRepository.traerHeladerasActivasEnElSistema().stream().
+                map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
         setEstados();
         model.addAttribute("heladeras", heladeras);
         model.addAttribute("estados", estados);
         return "DonarViandas";
     }
 
+    @Transactional
     @PostMapping("/DonarViandas")
     public  ResponseEntity<String> donarVianda(@RequestBody DonacionDeViandaDTO donacionDTO){
         if (donacionDTO == null || donacionDTO.getViandasDTO() == null || donacionDTO.getViandasDTO().isEmpty()) {

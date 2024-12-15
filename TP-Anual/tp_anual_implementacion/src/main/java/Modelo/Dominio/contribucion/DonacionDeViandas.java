@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "DonacionDeVianda")
 public class DonacionDeViandas extends ContribucionConApertura {
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany( cascade = CascadeType.ALL )
     @JoinColumn(name = "donacion", referencedColumnName = "id_contribucion")
     private List<Vianda> viandasDonadas;
     //Constructores------------------------------------------------------------------------------------------------------------

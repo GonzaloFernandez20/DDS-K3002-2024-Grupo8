@@ -1,5 +1,5 @@
 let usuario, contrasena;
-// Capturar los valores de WhatsApp y Telegram
+// Capturar los valores de WhatsApp
 
 document.getElementById('registroForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -64,7 +64,7 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
         });
     })
     .then(msjDeRespuesta => {
-        alert(msjDeRespuesta);
+        //alert(msjDeRespuesta);
         if (msjDeRespuesta.includes("Usuario y contraseña validados exitosamente.")) {
 
             const mainContainer = document.querySelector('.main-container');
@@ -75,7 +75,8 @@ document.getElementById('registroForm').addEventListener('submit', function(e) {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert(error.message);
+        alertaSimple(error.message, "error")
+        //alert(error.message);
     });
 
     // Función para desplegar el formulario correspondiente según el tipo de colaborador
@@ -107,8 +108,7 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     const telefonoCaja = document.getElementById('telefonoIngresadoJ');
 
     const whatsappChecked = document.getElementById('checkbox-wp-j').checked;
-    const telegramChecked = document.getElementById('checkbox-tl-j').checked;
-
+  
     const datosDeUsuario = {
         usuario: usuario.value,
         contrasenia: contrasena.value,
@@ -119,8 +119,7 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
         altura: altura.value,
         email: emailCaja.value,
         telefono: telefonoCaja.value,
-        tieneWp: whatsappChecked || false,
-        tieneTg: telegramChecked || false
+        tieneWp: whatsappChecked || false
     };
 
 
@@ -136,11 +135,14 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
             if (!response.ok) {
                 throw new Error("No se pudo registrar el usuario.");
             }
-            alert("Usuario registrado exitosamente.");
-            window.location.href = "/Home";    })
+            alertaSimple("Usuario registrado con exito!", "success");
+            setTimeout(function() {
+                window.location.href = "/Home";
+            }, 1300);
+        })
         .catch(error => {
             console.error('Error:', error);
-            alert('Hubo un error al registrar el usuario');
+            alertaSimple('Hubo un error al registrar el usuario', "error");
         });
 });
 
@@ -159,7 +161,6 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     const emailCaja = document.getElementById('emailIngresadoH');
     const telefonoCaja = document.getElementById('telefonoIngresadoH');
     const whatsappChecked = document.getElementById('checkbox-wp-h').checked;
-    const telegramChecked = document.getElementById('checkbox-tl-h').checked;
 
     // Generamos los datos a enviar
     const colaboradorHumano = {
@@ -179,7 +180,6 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
         email: emailCaja.value,
         telefono: telefonoCaja.value,
         whatsapp: whatsappChecked,
-        telegram: telegramChecked,
     };
 
     fetch('/RegistrarColaboradorHumano', {
@@ -193,11 +193,14 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
         if (!response.ok) {
             throw new Error("No se pudo registrar el usuario.");
         }
-        alert("Usuario registrado exitosamente.");
-        window.location.href = "/Home";    })
+        alertaSimple("Usuario registrado con exito!", "success");
+        setTimeout(function() {
+            window.location.href = "/Home";
+        }, 1300);
+    })
     .catch(error => {
         console.error('Error:', error);
-        alert('Hubo un error al registrar el usuario');
+        alertaSimple('Hubo un error al registrar el usuario', "error");
     });
 });
 

@@ -8,10 +8,10 @@ public class Ubicacion {
     @Id
     @GeneratedValue
     private Integer id_ubicacion;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "id_punto_en_el_mapa", referencedColumnName = "id_punto_en_el_mapa")
     private PuntoEnElMapa punto;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion")
     private Direccion direccion;
     @Column(name = "ciudad")
@@ -20,12 +20,11 @@ public class Ubicacion {
     private String nombreDelPunto;
 
     public Ubicacion(){}
-    public Ubicacion(Direccion direccion, String ciudad, String nombre){
+    public Ubicacion(Direccion direccion, String ciudad, String nombre, PuntoEnElMapa puntoEnElMapa){
         this.nombreDelPunto = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
-        // Necesario consultar una API para que dada una direccion se obtengan latitud y longitud y
-        // con eso instanciar el punto en el mapa
+        this.punto = puntoEnElMapa;
     }
 
     // ----------> Getters y Setters
@@ -44,4 +43,3 @@ public class Ubicacion {
 
     public String getNombreCompletoDeUbicacion() { return nombreDelPunto + " - " + direccion.getCalle() + " " + direccion.getAltura() + ", " + ciudad; }
 }
-

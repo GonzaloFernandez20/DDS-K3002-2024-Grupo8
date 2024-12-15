@@ -1,7 +1,7 @@
 package Modelo.seguridad;
 
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.UsuariosRepository;
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.UsuariosRepository;
 import Modelo.seguridad.SesionActiva.Usuario;
 import Modelo.Dominio.colaborador.Colaborador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,18 @@ public class GestorInicioDeSesion {
                 return usuario.get().getColaborador();
             }
         } // De momento sirve dejarlo de esta manera. En un futuro podriamos directamente traer el id_colaborador
+        return null;
+    }
+
+    public Usuario obtenerUsuarioDeSesion(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            String nombreDeUsuario = authentication.getName();
+            Optional<Usuario> usuario = usuariosRepository.findByNombreDeUsuario(nombreDeUsuario);
+            if (usuario.isPresent()) {
+                return usuario.get();
+            }
+        }
         return null;
     }
 

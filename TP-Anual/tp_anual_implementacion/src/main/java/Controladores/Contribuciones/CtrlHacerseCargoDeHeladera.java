@@ -1,20 +1,24 @@
 package Controladores.Contribuciones;
 
 import DTOs.HeladeraDTO;
+
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Mappers.BuilderHeladera;
 import Modelo.seguridad.GestorInicioDeSesion;
+
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.contribucion.HacerseCargoDeHeladeraRepository;
+import Repositories.heladera.HeladeraRepository;
+
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
+
 import jakarta.transaction.Transactional;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +58,11 @@ public class CtrlHacerseCargoDeHeladera {
 
     @GetMapping("/HacerseCargoDeUnaHeladera")
     public String HacerseCargoDeUnaHeladera() {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaHumana) {
+            return "PedirRegistroJuridico";
+        }
+
         return "HacerseCargoDeUnaHeladera";
     }
 
@@ -63,8 +72,8 @@ public class CtrlHacerseCargoDeHeladera {
     }
 
 
-    @Transactional
     @PostMapping("/FormularioDeHeladera")
+    @Transactional
     public ResponseEntity<String> formularioDeHeladera(@RequestBody HeladeraDTO heladeraDTO) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
@@ -77,7 +86,7 @@ public class CtrlHacerseCargoDeHeladera {
 
         System.out.println("Nueva Heladera: " + nuevaHeladera.getUbicacion().getNombreCompletoDeUbicacion());
 
-        //Esto creo no lo deberia hacer el controlador pero de momento queda aca
+        // Esto creo no lo deberia hacer el controlador pero de momento queda aca
         // Contribucion nuevaContribucion
         HacerseCargoDeHeladera nuevaContribucion = new HacerseCargoDeHeladera();
         nuevaContribucion.setColaborador(colaborador);
@@ -86,12 +95,13 @@ public class CtrlHacerseCargoDeHeladera {
 
 
 
-        Hibernate.initialize(colaborador.getHistorialDeContribuciones());
         nuevaContribucion.procesarLaContribucion();
 
-
-
-        hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
+        try {
+            hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
+        } catch (Exception e) {
+            e.printStackTrace(); //
+        }
         // Usando cascade = CascadeType.PERSIST estoy guardando la heladera también
 
         return ResponseEntity.ok("Registro realizado con éxito!");

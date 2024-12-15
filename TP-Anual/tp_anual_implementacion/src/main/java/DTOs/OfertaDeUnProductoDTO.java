@@ -1,6 +1,8 @@
 package DTOs;
 
+import Utils.DescargaDeArchivo;
 import Modelo.Dominio.contribucion.Rubro;
+import org.springframework.web.multipart.MultipartFile;
 
 public class OfertaDeUnProductoDTO {
     private int idOferta;
@@ -11,16 +13,18 @@ public class OfertaDeUnProductoDTO {
     private String nombreProducto;
     private int stock;
 
-    public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, String linkDeImagen, Rubro rubro, String nombreProducto, int stock) {
+    public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, String path, Rubro rubro, String nombreProducto, int stock) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
-        this.linkDeImagen = linkDeImagen;
+        this.linkDeImagen = path;
         this.rubro = rubro.toString();
         this.nombreProducto = nombreProducto;
         this.stock = stock;
     }
 
     public int getIdOferta() { return idOferta; }
+
+    public void setIdOferta(Integer idOferta){ this.idOferta = idOferta; }
 
     public void setNombreOferta(String nombreOferta) { this.nombreOferta = nombreOferta; }
 
@@ -30,7 +34,9 @@ public class OfertaDeUnProductoDTO {
 
     public double getPuntosNecesarios() { return puntosNecesarios; }
 
-    public void setLinkDeImagen(String linkDeImagen) { this.linkDeImagen = linkDeImagen; }
+    public void setLinkDeImagenAPartirDeArchivo(MultipartFile imagen) { this.linkDeImagen = DescargaDeArchivo.guardarArchivo("img/fotosProductosOServicios", imagen); }
+
+    public void setLinkDeImagenAPartirDePath(String path) { this.linkDeImagen = path; }
 
     public String getLinkDeImagen() { return linkDeImagen; }
 

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Entity
-@Table(name = "AccesoDeColaborador")
+@Table(name = "acceso_de_colaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
     @OneToOne
     @JoinColumn(name = "colaborador"/*, referencedColumnName = "id_colaborador"*/)
