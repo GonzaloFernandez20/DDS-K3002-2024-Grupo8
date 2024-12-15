@@ -1,4 +1,4 @@
-package Modelo.Dominio.Repositories.Suscripciones;
+package Repositories.Suscripciones;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.suscripcion.Suscripcion;

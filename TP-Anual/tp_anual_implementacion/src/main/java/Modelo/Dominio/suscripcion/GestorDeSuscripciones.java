@@ -1,6 +1,6 @@
 package Modelo.Dominio.suscripcion;
 
-import Modelo.Dominio.Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
+import Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import org.springframework.beans.factory.annotation.Autowired;

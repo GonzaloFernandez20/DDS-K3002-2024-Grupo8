@@ -1,4 +1,4 @@
-package Modelo.Dominio.Repositories.Suscripciones;
+package Repositories.Suscripciones;
 
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import org.springframework.data.jpa.repository.JpaRepository;

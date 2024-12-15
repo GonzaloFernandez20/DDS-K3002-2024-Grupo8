@@ -3,6 +3,8 @@ package Controladores.Contribuciones;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
+import Modelo.Dominio.Persona.PersonaJuridica;
+import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Mappers.HeladeraSeleccionMapper;
@@ -69,7 +71,7 @@ public class CtrlDonacionViandas {
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
             return "PedirTarjetaColaborador";
         }
-        heladeras = heladeraRepository.traerHeladerasActivasEnElSistema().stream().
+        List<HeladeraSeleccionDTO> heladeras = heladeraRepository.traerHeladerasActivasEnElSistema().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
         setEstados();
         model.addAttribute("heladeras", heladeras);

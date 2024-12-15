@@ -55,7 +55,7 @@ public class TestRepositorioIncidentes {
         //List<FallaTecnica> fallasTecnicas = RepositorioIncidentes.getInstancia().getFallasTecnicasDeHeladeraEntreFechas(heladera, LocalDate.now().minusWeeks(1), LocalDate.now());
         List<FallaTecnica> fallasTecnicas = null;
 
-        assertTrue(fallasTecnicas.stream().anyMatch(falla -> falla.getHeladeraDondeOcurrio().getIdHeladera() == heladera.getIdHeladera()
+        assertTrue(fallasTecnicas.stream().anyMatch(falla -> falla.getHeladeraDondeOcurrio().getid_heladera() == heladera.getid_heladera()
             && falla.getEstado() == EstadoDelIncidente.PENDIENTE
             && falla.getVisitas().isEmpty()
             && falla.getDescripcion().equals("Se le desconectaron las neuronas.")

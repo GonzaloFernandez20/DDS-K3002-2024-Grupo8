@@ -3,7 +3,6 @@ package Controladores.Contribuciones;
 import DTOs.HeladeraDTO;
 
 import Modelo.Dominio.Persona.PersonaHumana;
-import Modelo.Dominio.Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
@@ -15,12 +14,12 @@ import Modelo.seguridad.GestorInicioDeSesion;
 import Repositories.colaborador.ColaboradorRepository;
 import Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Repositories.heladera.HeladeraRepository;
+import Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
 
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 
 import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
