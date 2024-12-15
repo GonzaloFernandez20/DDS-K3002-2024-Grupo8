@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+
 public interface SuscripcionesRepository extends JpaRepository<Suscripcion, Integer> {
 
     @Query("SELECT s FROM Suscripcion s WHERE s.suscripto = :colaborador")
