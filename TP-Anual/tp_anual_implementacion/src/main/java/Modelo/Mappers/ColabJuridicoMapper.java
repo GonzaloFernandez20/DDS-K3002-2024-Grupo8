@@ -7,14 +7,26 @@ import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.Persona.TipoOrganizacion;
+import Modelo.seguridad.GestorInicioDeSesion;
 import Modelo.seguridad.SesionActiva.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
+@Component
 public class ColabJuridicoMapper {
+
+    private static GestorInicioDeSesion gestorInicioDeSesion;
+
+    @Autowired
+    public ColabJuridicoMapper(GestorInicioDeSesion gestorInicioDeSesion) {
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
+    }
+
     public static Usuario crearColaboradorJuridicoAPartirDe(ColaboradorJuridicoDTO colaboradorDTO){
 
-        TipoOrganizacion tipoOrganizacion = TipoOrganizacion.valueOf(colaboradorDTO.getTipoDeOrganizacion().toUpperCase());
+        TipoOrganizacion tipoOrganizacion = colaboradorDTO.getTipoDeOrganizacion();
 
         Usuario usuario = new Usuario(
                 colaboradorDTO.getUsuario(),
@@ -40,8 +52,25 @@ public class ColabJuridicoMapper {
 
         nuevoColaborador.agregarMedioDeContacto(new Mail(colaboradorDTO.getEmail()));
 
-
         usuario.setColaborador(nuevoColaborador);
         return usuario;
+    }
+
+    public static Usuario actualizarDatosDeColaboradorJuridicoAPartirDe(ColaboradorJuridicoDTO colaboradorDTO){
+        Usuario usuarioDeSesion = gestorInicioDeSesion.obtenerUsuarioDeSesion();
+        Colaborador colaboradorDeSesion = usuarioDeSesion.getColaborador();
+
+        usuarioDeSesion.setUsuario(colaboradorDTO.getUsuario());
+        usuarioDeSesion.setContrasenia(colaboradorDTO.getConstrasenia());
+
+        PersonaJuridica personaJuridica = (PersonaJuridica) colaboradorDeSesion.getPersona();
+
+        personaJuridica.setTipoDeOrganizacion(colaboradorDTO.getTipoDeOrganizacion());
+        personaJuridica.setRazonSocial(colaboradorDTO.getRazonSocial());
+        personaJuridica.setRubro(colaboradorDTO.getRubro());
+        personaJuridica.getDireccion().setCalle(colaboradorDTO.getCalle());
+        personaJuridica.getDireccion().setAltura(colaboradorDTO.getAltura());
+
+        return usuarioDeSesion;
     }
 }

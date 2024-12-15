@@ -18,8 +18,8 @@
 
     <script src="/assets/JS/NotificarRespuestas.js"></script>
     <script src="/assets/JS/AccesoAHeladeras.js"></script>
-    <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
     <script src="/assets/JS/ModificarColaboradorHumano.js"></script>
+    <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -50,15 +50,15 @@
                 <ul class="nav nav-pills flex-column mb-auto nav-chosen">
                     <span class="fs-5 nav-title">Usuario</span>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/home-icon.svg" class="icon"></image>
+                        <image height="20px" width="20px" src="img/home-icon.svg" class="icon" alt="Casa"></image>
                         <a href="#info-personal" class="nav-link nowrap-text">Información Personal</a>
                     </li>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/contact-icon.svg" class="icon"></image>
+                        <image height="20px" width="20px" src="img/contact-icon.svg" class="icon" alt="Sobre"></image>
                         <a href="#contacto" class="nav-link nowrap-text">Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/contact-icon.svg" class="icon"></image>
+                        <image alt="Usuario" height="20px" width="20px" src="img/user-icon.svg" class="icon"></image>
                         <a href="#usuario" class="nav-link nowrap-text">Usuario</a>
                     </li>
                 </ul>
@@ -66,13 +66,13 @@
                 <ul class="nav nav-pills flex-column mb-auto">
                     <span class="fs-5">Suscripciones</span>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/list-icon.svg"></image>
+                        <image height="20px" width="20px" src="img/list-icon.svg" alt="Listado"></image>
                         <a th:href="@{ModificarColaboradorHumanoSuscripciones#listado-suscripciones}" class="nav-link">
                             Listado de suscripciones
                         </a>
                     </li>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/notifications-icon.svg"></image>
+                        <image height="20px" width="20px" src="img/notifications-icon.svg" alt="Campana"></image>
                         <a th:href="@{ModificarColaboradorHumanoSuscripciones#suscripciones}" class="nav-link">
                             Suscribirme
                         </a>
@@ -81,13 +81,13 @@
                 <ul class="nav nav-pills flex-column mb-auto">
                     <span class="fs-5">Mis puntos</span>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/puntos.png"></image>
+                        <image height="20px" width="20px" src="img/puntos.png" alt="Puntos"></image>
                         <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                             Puntos actuales
                         </a>
                     </li>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/premios.png"></image>
+                        <image height="20px" width="20px" src="img/premios.png" alt="Regalo"></image>
                         <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                             Premios
                         </a>
@@ -96,7 +96,7 @@
                 <ul class="nav nav-pills flex-column mb-auto colaboracion">
                     <span class="fs-5">Tarjeta de ingreso a heladeras</span>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/tarjeta-icon.png"></image>
+                        <image height="20px" width="20px" src="img/tarjeta-icon.png" alt="Tarjeta"></image>
                         <a id="nav-codigo-tarjeta" class="nav-link" th:data-tarjeta="${colaborador.tieneTarjeta}">
                             Ingresar código
                         </a>
@@ -136,9 +136,9 @@
                         <!-- Tipo y número de documento -->
                         <div class="documento-container">
                             <div>
-                                <label for="tipoDocumento">Tipo de Documento:</label>
+                                <label for="tipoDocumento" th:text="'Tipo de Documento: ' + ${colaborador.tipo}"></label>
                                 <select id="tipoDocumento" class="mod-cuenta-tipo-documento">
-                                    <option value="" selected disabled>--Seleccione una opcion--</option>
+                                    <option th:value="${colaborador.tipo}" th:text="'--Seleccione una opcion--'" selected disabled></option>
                                     <option th:each="tipo : ${tiposDeDocumento}" th:value="${tipo}" th:text="${tipo.toString()}"></option>
                                 </select><br>
                             </div>
@@ -146,14 +146,21 @@
                                 <label for="nroDocumento">Número de Documento:</label>
                                 <input type="text" id="nroDocumento" class="mod-cuenta-nro-documento" placeholder="Ingrese su número de documento" th:value="${colaborador.numero}"><br>
                             </div>
+                            <div>
+                                <label for="sexo" th:text="'Sexo: ' + ${colaborador.sexo}"></label>
+                                <select id="sexo" class="mod-cuenta-tipo-documento">
+                                    <option th:value="${colaborador.sexo}" th:text="'--Seleccione una opcion--'" selected disabled></option>
+                                    <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo.toString()}"></option>
+                                </select><br>
+                            </div>
                         </div>
 
                         <!-- Dirección -->
                         <div class="direccion-container">
-                            <label for="nuevaCalleHumana">Dirección:</label>
                             <div class="inputs-direccion">
+                                <label for="nuevaCalleHumana">Calle:</label>
                                 <input type="text" id="nuevaCalleHumana" class="mod-cuenta-direccion" placeholder="Ingrese una nueva Calle" th:value="${colaborador.calle}">
-                                <label for="nuevaAlturaHumana"></label>
+                                <label for="nuevaAlturaHumana">Altura:</label>
                                 <input type="text" id="nuevaAlturaHumana" class="mod-cuenta-direccion" placeholder="Ingrese una nueva Altura" th:value="${colaborador.altura}">
                             </div>
                         </div>
@@ -185,14 +192,14 @@
                             <input type="text" id="nuevoMedioDeContactoHumano" class="mod-cuenta-medio" placeholder="Ingrese su número/mail">
                         </div>
 
+                        <br>
                         <!-- Datos de Usuario -->
                         <h3 id="usuario">Usuario</h3>
                         <div class="usuario-container">
-                            <label for="nuevaCalleHumana"></label>
                             <div class="inputs-usuario">
-                                <label for="nuevoNombreHumano"></label>
+                                <label for="nuevoNombreHumano">Nombre:</label>
                                 <input type="text" id="nuevoNombreHumano" class="mod-cuenta-usuario" placeholder="Ingrese un nuevo nombre de usuario" th:value="${colaborador.usuario}"><br>
-                                <label for="nuevaContraseniaHumana"></label>
+                                <label for="nuevaContraseniaHumana">Contraseña:</label>
                                 <input type="password" id="nuevaContraseniaHumana" class="mod-cuenta-usuario" placeholder="Ingrese una nueva contraseña" th:value="${colaborador.constrasenia}"><br>
                             </div>
                         </div>

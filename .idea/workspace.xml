@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="arreglos del merge para que compile parte 2" />
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="arreglos del merge para que compile parte 2">
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/img/user-icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorUsuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorUsuario.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorPremios.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorPremios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/RegistroPersona.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/RegistroPersona.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,45 +55,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.TestApertura.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestColaborador.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestCreadorDeMensajes.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDeIncidentes.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDeReporteDeUnIncidente.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDonacionDeDinero.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestDonacionDeViandas.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestGenerarReportesSemanales.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestHeladera.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestRepositorioIncidentes.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TestRetiroDeViandas.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.tp_anual_implementacion [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.App.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.Server.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;MergeoGlobal&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.TestApertura.executor": "Run",
+    "JUnit.TestColaborador.executor": "Run",
+    "JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor": "Run",
+    "JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor": "Run",
+    "JUnit.TestCreadorDeMensajes.executor": "Run",
+    "JUnit.TestDeIncidentes.executor": "Run",
+    "JUnit.TestDeReporteDeUnIncidente.executor": "Run",
+    "JUnit.TestDonacionDeDinero.executor": "Run",
+    "JUnit.TestDonacionDeViandas.executor": "Run",
+    "JUnit.TestGenerarReportesSemanales.executor": "Run",
+    "JUnit.TestHeladera.executor": "Run",
+    "JUnit.TestRepositorioIncidentes.executor": "Run",
+    "JUnit.TestRetiroDeViandas.executor": "Run",
+    "Maven.tp_anual_implementacion [clean,install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.App.executor": "Run",
+    "Spring Boot.Server.executor": "Run",
+    "git-widget-placeholder": "Merging MergeoGlobal",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Modelo.Dominio.Repositories.Suscripciones" />
@@ -202,7 +218,7 @@
       <workItem from="1734266103119" duration="602000" />
       <workItem from="1734266720568" duration="6917000" />
       <workItem from="1734281942258" duration="319000" />
-      <workItem from="1734282270868" duration="200000" />
+      <workItem from="1734282270868" duration="910000" />
     </task>
     <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
       <option name="closed" value="true" />
@@ -324,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734282176505</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="arreglos del merge para que compile parte 2">
+      <option name="closed" value="true" />
+      <created>1734300707270</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1734300707270</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
