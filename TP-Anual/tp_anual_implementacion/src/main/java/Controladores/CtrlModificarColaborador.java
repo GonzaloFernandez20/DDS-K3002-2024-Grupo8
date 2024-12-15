@@ -4,15 +4,17 @@ import DTOs.ColaboradorHumanoDTO;
 import DTOs.ColaboradorJuridicoDTO;
 import Modelo.Dominio.Persona.TipoOrganizacion;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona.PersonaJuridica;
 
-
 import Modelo.Mappers.ColabHumanoMapper;
+import Modelo.Mappers.ColabJuridicoMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
 import Modelo.seguridad.SesionActiva.Usuario;
+import Modelo.seguridad.SesionActiva.UtilsJWT;
 import Repositories.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -45,6 +47,7 @@ public class CtrlModificarColaborador {
     public String mostrarColaborador(Model model) {
         switch (tipoPersonaDelColaborador()) {
             case "PersonaHumana":
+                model.addAttribute("sexos", sexos());
                 model.addAttribute("tiposDeDocumento", tiposDeDNI());
                 model.addAttribute("colaborador", datosColaboradorHumano());
                 return "ModificarColaboradorHumano";
@@ -62,7 +65,29 @@ public class CtrlModificarColaborador {
         try {
             Usuario usuario = ColabHumanoMapper.actualizarDatosDeColaboradorHumanoAPartirDe(colaboradorHumanoDTO);
             usuariosRepository.save(usuario);
-            return ResponseEntity.noContent().build();
+            ResponseCookie cookie = generarCookieParaLaModificacionDeUsuario(usuario);
+
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/ModificarColaborador/Juridico")
+    public ResponseEntity<Void> actualizarDatosDeColaboradorJ(@RequestBody ColaboradorJuridicoDTO colaboradorJuridicoDTO){
+        try {
+            Usuario usuario = ColabJuridicoMapper.actualizarDatosDeColaboradorJuridicoAPartirDe(colaboradorJuridicoDTO);
+            usuariosRepository.save(usuario);
+
+            ResponseCookie cookie = generarCookieParaLaModificacionDeUsuario(usuario);
+
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -143,13 +168,23 @@ public class CtrlModificarColaborador {
                 usuarioDeSesion.getUsuario(),
                 usuarioDeSesion.getContrasenia(),
                 personaJuridica.getRazonSocial(),
-                personaJuridica.getTipoDeOrganizacion().toString(),
+                personaJuridica.getTipoDeOrganizacion(),
                 personaJuridica.getRubro(),
                 personaJuridica.getDireccion().getCalle(),
                 personaJuridica.getDireccion().getAltura(),
                 null, null, false, false
                 );
         return colaborador;
+    }
+
+    public List<Sexo> sexos() {
+        List<Sexo> sexos = new ArrayList<>();
+
+        sexos.add(Sexo.FEMENINO);
+        sexos.add(Sexo.MASCULINO);
+        sexos.add(Sexo.OTRO);
+
+        return sexos;
     }
 
     public List<TipoDeDocumento> tiposDeDNI() {
@@ -173,5 +208,12 @@ public class CtrlModificarColaborador {
         tiposOrganizacion.add(TipoOrganizacion.INSTITUCION);
 
         return tiposOrganizacion;
+    }
+    
+    private ResponseCookie generarCookieParaLaModificacionDeUsuario(Usuario usuario) {
+        String token = UtilsJWT.generarToken(usuario.getUsuario());
+        ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
+
+        return cookie;
     }
 }

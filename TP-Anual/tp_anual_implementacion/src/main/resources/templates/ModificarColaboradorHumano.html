@@ -18,8 +18,8 @@
 
     <script src="/assets/JS/NotificarRespuestas.js"></script>
     <script src="/assets/JS/AccesoAHeladeras.js"></script>
-    <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
     <script src="/assets/JS/ModificarColaboradorHumano.js"></script>
+    <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -136,15 +136,22 @@
                         <!-- Tipo y número de documento -->
                         <div class="documento-container">
                             <div>
-                                <label for="tipoDocumento">Tipo de Documento:</label>
+                                <label for="tipoDocumento" th:text="'Tipo de Documento: ' + ${colaborador.tipo}"></label>
                                 <select id="tipoDocumento" class="mod-cuenta-tipo-documento">
-                                    <option value="" selected disabled>--Seleccione una opcion--</option>
+                                    <option th:value="${colaborador.tipo}" th:text="'--Seleccione una opcion--'" selected disabled></option>
                                     <option th:each="tipo : ${tiposDeDocumento}" th:value="${tipo}" th:text="${tipo.toString()}"></option>
                                 </select><br>
                             </div>
                             <div>
                                 <label for="nroDocumento">Número de Documento:</label>
                                 <input type="text" id="nroDocumento" class="mod-cuenta-nro-documento" placeholder="Ingrese su número de documento" th:value="${colaborador.numero}"><br>
+                            </div>
+                            <div>
+                                <label for="sexo" th:text="'Sexo: ' + ${colaborador.sexo}"></label>
+                                <select id="sexo" class="mod-cuenta-tipo-documento">
+                                    <option th:value="${colaborador.sexo}" th:text="'--Seleccione una opcion--'" selected disabled></option>
+                                    <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo.toString()}"></option>
+                                </select><br>
                             </div>
                         </div>
 

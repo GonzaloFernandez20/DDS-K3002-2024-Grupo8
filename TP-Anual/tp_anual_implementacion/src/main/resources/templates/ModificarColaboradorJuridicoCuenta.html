@@ -10,10 +10,15 @@
 
         <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
         
-        <!-- Custom styles for this template -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
         <link href="/assets/CSS/MiCuenta.css" rel="stylesheet">
         <script src="/assets/JS/load-header-footer.js" defer></script>
+
+        <script src="/assets/JS/ModificarColaboradorJuridicoCuenta.js"></script>
+        <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body>
@@ -107,8 +112,8 @@
                                 <div class="mod-info-juridico">
                                     <label for="nuevoTipoOrg" th:text="'Tipo de organización: ' + ${colaborador.tipoDeOrganizacion}"></label>
                                     <select id="nuevoTipoOrg">
-                                        <option value="" selected disabled>--Seleccione--</option>
-                                        <option th:each="tipo : ${tiposDeOrganizacion}" th:value="${tipo}" th:text="${tipo.toString()}"></option>
+                                        <option th:value="${colaborador.tipoDeOrganizacion}" selected disabled>--Seleccione--</option>
+                                        <option th:each="tipo : ${tiposDeOrganizacion}" th:value="${tipo}" th:text="${tipo}"></option>
                                     </select>
                                 </div>
                                 <div class="mod-info-juridico">
@@ -175,8 +180,5 @@
         </main>
 
         <div id="footer"></div>
-        <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
-        <script src="/assets/JS/ModificarColaboradorJuridicoCuenta.js"></script>
-        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

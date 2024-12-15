@@ -69,6 +69,7 @@ public class ColabHumanoMapper {
         ((PersonaHumana) colaboradorDeSesion.getPersona()).setApellido(colaboradorDTO.getApellido());
         ((PersonaHumana) colaboradorDeSesion.getPersona()).getDocumento().setNumero(colaboradorDTO.getNumero());
         ((PersonaHumana) colaboradorDeSesion.getPersona()).getDocumento().setTipo(colaboradorDTO.getTipo());
+        ((PersonaHumana) colaboradorDeSesion.getPersona()).getDocumento().setSexo(colaboradorDTO.getSexo());
         colaboradorDeSesion.getPersona().getDireccion().setCalle(colaboradorDTO.getCalle());
         colaboradorDeSesion.getPersona().getDireccion().setAltura(colaboradorDTO.getAltura());
         ((PersonaHumana) colaboradorDeSesion.getPersona()).setFechaDeNacimiento(colaboradorDTO.getFechaDeNacimiento());
