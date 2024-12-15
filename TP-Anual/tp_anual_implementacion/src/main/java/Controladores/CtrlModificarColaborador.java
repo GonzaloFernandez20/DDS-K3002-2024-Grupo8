@@ -1,6 +1,8 @@
 package Controladores;
 
 import DTOs.ColaboradorHumanoDTO;
+import DTOs.ColaboradorJuridicoDTO;
+import Modelo.Dominio.Persona.TipoOrganizacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.Persona.PersonaHumana;
@@ -47,6 +49,8 @@ public class CtrlModificarColaborador {
                 model.addAttribute("colaborador", datosColaboradorHumano());
                 return "ModificarColaboradorHumano";
             case "PersonaJuridica":
+                model.addAttribute("tiposDeOrganizacion",tiposDeOrganizacion());
+                model.addAttribute("colaborador", datosColaboradorJuridico());
                 return "ModificarColaboradorJuridicoCuenta";
             default:
                 return "Home";
@@ -130,6 +134,24 @@ public class CtrlModificarColaborador {
         return colaborador;
     }
 
+    private Object datosColaboradorJuridico() {
+        Usuario usuarioDeSesion = gestorInicioDeSesion.obtenerUsuarioDeSesion();
+        Colaborador colaboradorDeSesion = gestorInicioDeSesion.obtenerColaboradorPorID();
+        PersonaJuridica personaJuridica = (PersonaJuridica) colaboradorDeSesion.getPersona();
+
+        ColaboradorJuridicoDTO colaborador = new ColaboradorJuridicoDTO(
+                usuarioDeSesion.getUsuario(),
+                usuarioDeSesion.getContrasenia(),
+                personaJuridica.getRazonSocial(),
+                personaJuridica.getTipoDeOrganizacion().toString(),
+                personaJuridica.getRubro(),
+                personaJuridica.getDireccion().getCalle(),
+                personaJuridica.getDireccion().getAltura(),
+                null, null, false, false
+                );
+        return colaborador;
+    }
+
     public List<TipoDeDocumento> tiposDeDNI() {
         List<TipoDeDocumento> tiposDeDocumento = new ArrayList<>();
 
@@ -140,5 +162,16 @@ public class CtrlModificarColaborador {
         tiposDeDocumento.add(TipoDeDocumento.PASAPORTE);
 
         return tiposDeDocumento;
+    }
+
+    public List<TipoOrganizacion> tiposDeOrganizacion() {
+        List<TipoOrganizacion> tiposOrganizacion = new ArrayList<>();
+
+        tiposOrganizacion.add(TipoOrganizacion.GUBERNAMENTAL);
+        tiposOrganizacion.add(TipoOrganizacion.EMPRESA);
+        tiposOrganizacion.add(TipoOrganizacion.ONG);
+        tiposOrganizacion.add(TipoOrganizacion.INSTITUCION);
+
+        return tiposOrganizacion;
     }
 }

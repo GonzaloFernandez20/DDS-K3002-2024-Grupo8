@@ -219,9 +219,15 @@ select {
     justify-content: center; /* Alinea los inputs horizontalmente */
 }
 
-.mod-cuenta-direccion, .mod-cuenta-usuario {
-    padding: 5px; /* Espaciado interno */
-    box-sizing: border-box; /* Incluye padding en el ancho total */
+.juridico input {
+    max-width: 40%;
+}
+
+.mod-info-juridico {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
 }
 
 .colaboracion{

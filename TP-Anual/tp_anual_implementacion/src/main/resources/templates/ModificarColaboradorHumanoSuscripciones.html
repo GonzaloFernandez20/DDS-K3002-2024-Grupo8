@@ -40,23 +40,27 @@
 
 <main class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="sidenav flex-column flex-shrink-0 p-3">
-                <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
+                <span class="titulo-mi-cuenta">Mi Cuenta</span>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <span class="fs-5">Usuario</span>
                     <li class="nav-item">
                         <img alt="Casa" height="20px" width="20px" src="img/home-icon.svg"/>
-                        <a th:href="@{ModificarColaboradorHumano#info-personal}" class="nav-link">Información Personal</a>
+                        <a th:href="@{ModificarColaborador#info-personal}" class="nav-link">Información Personal</a>
                     </li>
                     <li class="nav-item">
                         <img alt="Sobre" height="20px" width="20px" src="img/contact-icon.svg"/>
-                        <a th:href="@{ModificarColaboradorHumano#contacto}" class="nav-link"> Contacto </a>
+                        <a th:href="@{ModificarColaborador#contacto}" class="nav-link"> Contacto </a>
+                    </li>
+                    <li class="nav-item">
+                        <image alt="Usuario" height="20px" width="20px" src="img/user-icon.svg" class="icon"></image>
+                        <a th:href="@{ModificarColaborador#usuario}" class="nav-link nowrap-text">Usuario</a>
                     </li>
                 </ul>
                 <ul class="nav nav-pills flex-column mb-auto nav-chosen">
-                    <span class="fs-5">Suscripciones</span>
+                    <span class="fs-5 nav-title">Suscripciones</span>
                     <li class="nav-item">
                         <img alt="Listado" height="20px" width="20px" src="img/list-icon.svg"/>
                         <a href="#listado-suscripciones" class="nav-link">
@@ -83,20 +87,21 @@
                         </a>
                     </li>
                 </ul>
-                <span class="fs-5">Tarjeta de ingreso a heladeras</span>
-                <li class="nav-item">
-                    <image height="20px" width="20px" src="img/tarjeta-icon.png"></image>
-                    <a id="nav-codigo-tarjeta" class="nav-link" th:data-tarjeta="${tieneTarjeta}">
-                        Ingresar código
-                    </a>
-                </li>
+                <ul class="nav nav-pills flex-column mb-auto colaboracion">
+                    <span class="fs-5">Tarjeta de ingreso a heladeras</span>
+                    <li class="nav-item">
+                        <image height="20px" width="20px" src="img/tarjeta-icon.png" alt="Tarjeta"></image>
+                        <a id="nav-codigo-tarjeta" class="nav-link" th:data-tarjeta="${tieneTarjeta}">
+                            Ingresar código
+                        </a>
+                    </li>
+                </ul>
+                <button id="btn-dar-de-baja" class="btn-mod baja">Eliminar mi cuenta</button>
             </div>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="main">
-                <h1>Mi Cuenta</h1>
-                <h2>Suscripciones</h2>
                 <h3 id="listado-suscripciones">Listado de suscripciones</h3>
                 <table class="table-subscriptions">
                     <thead>
@@ -112,6 +117,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <br>
                 <h3 id="suscribir">Suscribirme</h3>
                 <button id="btn-suscribir" class="btn-mod subscribe" data-bs-toggle="modal" data-bs-target="#modalSuscripcion">Quiero suscribirme a una heladera</button>
                 <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
