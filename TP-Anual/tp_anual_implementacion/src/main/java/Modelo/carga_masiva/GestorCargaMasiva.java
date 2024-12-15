@@ -64,7 +64,7 @@ public class GestorCargaMasiva {
             agregarNuevoUsuario(colaborador);
         }
 
-        if(colaborador.getMediosDeContacto().stream().filter(medio -> medio instanceof Mail).map(medio -> (Mail) medio).noneMatch(unMail -> unMail.equals(mail))) {
+        if(colaborador.getMediosDeContacto().stream().filter(medio -> medio instanceof Mail).map(medio -> (Mail) medio).noneMatch(unMail -> unMail.getCorreo().equals(mail))) {
             Mail mailMedio = new Mail(mail);
             colaborador.agregarMedioDeContacto(mailMedio);
         }
