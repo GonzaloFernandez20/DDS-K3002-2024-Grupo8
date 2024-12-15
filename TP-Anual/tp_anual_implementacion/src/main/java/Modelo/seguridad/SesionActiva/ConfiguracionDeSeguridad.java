@@ -20,12 +20,13 @@ public class ConfiguracionDeSeguridad {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
                 .authorizeHttpRequests(authRequest -> authRequest
                         //.anyRequest().permitAll())
                         .requestMatchers("/", "/Home", "/InicioDeSesion", "/RegistroPersona", "/Mapa", "/Nosotros",
-                                         "/Header", "/Footer", "/CierreDeSesion", "/ValidarUsuario",
+                                         "/Header", "/Footer", "/CierreDeSesion", "/ValidarUsuario","/Administrador",
                                          "/RegistrarColaboradorJuridico", "/RegistrarColaboradorHumano").permitAll()
-                        .requestMatchers("/assets/**", "/img/**").permitAll()
+                        .requestMatchers("/assets/**", "/img/**", "/reportes/**").permitAll()
                         .anyRequest().authenticated())
                 //.formLogin(formularioLogin -> formularioLogin.loginPage("/InicioDeSesion").permitAll()) // Permitimos el acceso público a la página de login
                 .exceptionHandling(excepcionNoLoggueado ->

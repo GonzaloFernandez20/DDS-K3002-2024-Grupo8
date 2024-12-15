@@ -1,31 +1,38 @@
 package Modelo.Dominio.suscripcion;
 
+import Modelo.Dominio.Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GestorDeSuscripciones {
-        private static GestorDeSuscripciones instancia;
+       private NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository;
 
-        private GestorDeSuscripciones() {
+       @Autowired
+        public GestorDeSuscripciones(NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository) {
+                this.notificadorDeSuscriptosRepository = notificadorDeSuscriptosRepository;
         }
 
-        public static GestorDeSuscripciones getInstancia() {
-            if (instancia == null) {
-                instancia = new GestorDeSuscripciones();
-            }
-            return instancia;
-        }
-
+        //Metodos -----------------------------------------------------------------------------------------------
         public void registrarSuscripcion(Heladera heladera,
                                          Colaborador colaborador,
                                          String evento) {
-        heladera.getNotificadorDeSuscriptos().suscribir(evento,colaborador);
+        NotificadorDeSuscriptos notificador = heladera.getNotificadorDeSuscriptos();
+        notificador.suscribir(evento,colaborador);
         }
 
-        public void efectuarDesuscripcion(Heladera heladera,
+        public  void efectuarDesuscripcion(Heladera heladera,
                                          Colaborador colaborador,
                                          String evento) {
-            heladera.getNotificadorDeSuscriptos().desuscribir(evento,colaborador);
+            NotificadorDeSuscriptos notificador = heladera.getNotificadorDeSuscriptos();
+            notificador.desuscribir(evento,colaborador);
+            notificadorDeSuscriptosRepository.save(notificador);
         }
 
+        public void guardarSuscripciones(Heladera heladera){
+            NotificadorDeSuscriptos notificador = heladera.getNotificadorDeSuscriptos();
+            notificadorDeSuscriptosRepository.save(notificador);
+        }
 }

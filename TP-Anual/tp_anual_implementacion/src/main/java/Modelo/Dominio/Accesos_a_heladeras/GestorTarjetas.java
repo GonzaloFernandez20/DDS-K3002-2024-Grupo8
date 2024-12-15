@@ -44,6 +44,7 @@ public class GestorTarjetas {
 
     public void registrarAccesoDeColaborador(AccesoDeColaborador accesoDeColaborador){
         try {
+
             colaboradorRepository.save(accesoDeColaborador.getColaborador());
         }catch (DataIntegrityViolationException e){
             throw new RuntimeException("La tarjeta que intenta registrar pertenece a otra persona.");

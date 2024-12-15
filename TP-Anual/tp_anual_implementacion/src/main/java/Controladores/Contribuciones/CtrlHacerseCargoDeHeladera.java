@@ -1,6 +1,7 @@
 package Controladores.Contribuciones;
 
 import DTOs.HeladeraDTO;
+import Modelo.Dominio.Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
@@ -9,6 +10,7 @@ import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
+import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Mappers.BuilderHeladera;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Servicios_Externos_APIs.API.APIRequester;
@@ -35,13 +37,19 @@ public class CtrlHacerseCargoDeHeladera {
     private final HeladeraRepository heladeraRepository;
     private final HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository;
     private final ColaboradorRepository colaboradorRepository;
+    private final NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository;
 
     @Autowired
-    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion, HeladeraRepository heladeraRepository, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository, ColaboradorRepository colaboradorRepository) {
+    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion,
+                                      HeladeraRepository heladeraRepository,
+                                      HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository,
+                                      ColaboradorRepository colaboradorRepository,
+                                      NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.heladeraRepository = heladeraRepository;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
         this.colaboradorRepository = colaboradorRepository;
+        this.notificadorDeSuscriptosRepository = notificadorDeSuscriptosRepository;
     }
 
     @GetMapping("/HacerseCargoDeUnaHeladera")
@@ -62,6 +70,10 @@ public class CtrlHacerseCargoDeHeladera {
 
         heladeraDTO.setColaboradorACargo(colaborador);
         Heladera nuevaHeladera = BuilderHeladera.crearHeladeraAPartirDe(heladeraDTO);
+        NotificadorDeSuscriptos notificador = new NotificadorDeSuscriptos(nuevaHeladera);
+        nuevaHeladera.setNotificadorDeSuscriptos(notificador);
+        NotificadorDeSuscriptos notificadorGuardado = notificadorDeSuscriptosRepository.save(notificador);
+
 
         System.out.println("Nueva Heladera: " + nuevaHeladera.getUbicacion().getNombreCompletoDeUbicacion());
 
@@ -69,13 +81,15 @@ public class CtrlHacerseCargoDeHeladera {
         // Contribucion nuevaContribucion
         HacerseCargoDeHeladera nuevaContribucion = new HacerseCargoDeHeladera();
         nuevaContribucion.setColaborador(colaborador);
-        nuevaContribucion.setHeladeraACargo(nuevaHeladera);
+        nuevaContribucion.setHeladeraACargo(notificadorGuardado.getHeladera());
         nuevaContribucion.setFechaDeContribucion(LocalDate.now());
 
 
 
         Hibernate.initialize(colaborador.getHistorialDeContribuciones());
         nuevaContribucion.procesarLaContribucion();
+
+
 
         hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
         // Usando cascade = CascadeType.PERSIST estoy guardando la heladera también

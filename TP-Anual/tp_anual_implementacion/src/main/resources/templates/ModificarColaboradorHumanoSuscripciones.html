@@ -108,6 +108,7 @@
                                 <tr th:each="suscripcion : ${suscripciones}">
                                     <td th:text="${suscripcion.nombreDelPunto}"></td>
                                     <td th:text="${suscripcion.evento}"></td>
+                                    <td> <button class="delete-btn" th:attr="data-id=${suscripcion.idHeladera}, data-evento=${suscripcion.evento}"> X </button> </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -127,7 +128,13 @@
                                         <p>Seleccionar Heladera</p>
                                         <form id="modal-form" action="/ModificarColaboradorHumanoSuscripciones" method="post">
                                             <select id="optionsHeladera" name="optionsHeladera">
-                                                <option th:each="heladera : ${heladeras}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" ></option>
+                                                <option value="" selected disabled>--Seleccione una opcion--</option>
+                                                <option th:each="heladera : ${heladeras}"
+                                                        th:value="${heladera.idHeladera}"
+                                                        th:attr="data-suscrito-fallas=${heladera.suscritoAFallas},
+                                                                 data-cantidad-quedan=${heladera.cantidadQuedanNViandas},
+                                                                 data-cantidad-faltan=${heladera.cantidadFaltanNViandas}"
+                                                        th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}" ></option>
                                             </select>
                                             <div style="display: flex; flex-direction: column; margin-top: 20px;">
                                                 <div class="modal-option">
@@ -160,7 +167,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn subscribe" id="btn-crear-suscripcion">Crear suscripciones</button>
+                                            <button type="submit" class="btn subscribe" id="btn-crear-suscripcion">Confirmar</button>
                                         </form>
                                     </div>
                                 </div>
