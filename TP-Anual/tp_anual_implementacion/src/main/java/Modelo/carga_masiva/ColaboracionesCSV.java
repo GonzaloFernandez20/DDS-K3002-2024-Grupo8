@@ -9,9 +9,6 @@ import jakarta.persistence.*;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,67 +82,6 @@ public class ColaboracionesCSV {
 
         return colaboradores;
     }
-
-    /*
-    public List<Colaborador> obtenerColaboradores() {
-        List<Colaborador> colaboradores = new ArrayList<>();
-
-        try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            URL resource = classLoader.getResource("static/CSV/" + archivo);
-
-            if (resource == null) {
-                throw new FileNotFoundException("No se encontró el archivo: " + archivo);
-            }
-
-            File archivo = Paths.get(resource.toURI()).toFile();
-            CSVReader reader = new CSVReader(new FileReader(archivo));
-
-            String[] linea;
-            while ((linea = reader.readNext()) != null) {
-                for (int i = 0; i < linea.length; i++) {
-                    String campo = linea[i];
-
-                    String[] partes = campo.split(";");
-
-                    if(!this.sonCeldasValidas(partes)) {
-                        throw new RuntimeException("El CSV contiene celdas que no cumplen con lo estipulado.");
-                    }
-
-                    String tipoDocString = partes[0];
-                    String doc = partes[1];
-                    String nombre = partes[2];
-                    String apellido = partes[3];
-                    String mail = partes[4];
-                    String fecha = partes[5];
-                    String[] fechaPorPartes = fecha.split("/");
-                    LocalDate fechaContribucion = LocalDate.of(Integer.parseInt(fechaPorPartes[2]), Integer.parseInt(fechaPorPartes[1]), Integer.parseInt(fechaPorPartes[0]));
-                    String tipoDonacion = partes[6];
-                    String cantidad = partes[7];
-
-                    System.out.println("Procesando colaborador: " + nombre + " " + apellido + " con documento: " + tipoDocString + " " + doc + " y mail: " + mail);
-
-                    TipoDeDocumento tipoDoc = this.castearTipoDocumento(tipoDocString);
-
-                    Colaborador colaborador = GestorCargaMasiva.obtenerColaboradorSegunPresencia(nombre, apellido, tipoDoc, doc, mail);
-
-                    this.agregarContribucionPorTipo(tipoDonacion, colaborador, fechaContribucion, Integer.parseInt(cantidad));
-                    colaboradores.add(colaborador);
-                }
-            }
-        } catch(FileNotFoundException e) {
-            System.err.println("Error al no encontrar el archivo: " + e.getMessage());
-        } catch (IOException e) {
-            System.err.println("Error al abrir el archivo: " + e.getMessage());
-        } catch (CsvValidationException e) {
-            System.err.println("Error de validación CSV: " + e.getMessage());
-        } catch (URISyntaxException e) {
-            System.err.println("Error en la URI: " + e.getMessage());
-        }
-
-        return colaboradores;
-    }
-    */
 
     public void agregarContribucionPorTipo(String tipoDonacion, Colaborador colaborador, LocalDate fechaContribucion, int cantidad) {
         switch (tipoDonacion) {
