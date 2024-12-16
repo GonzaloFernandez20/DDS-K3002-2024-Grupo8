@@ -23,8 +23,8 @@ import java.util.List;
 public class ReporteDeViandasPorColaborador extends ReporteSemanal{
     private List<ViandasPorColaborador> viandasPorColaborador = new ArrayList<>();;
 
-    @Autowired
-    ReportesServiceImpl reportesServiceImlp;
+//    @Autowired
+//    ReportesServiceImpl reportesServiceImlp;
 
     public void sumarViandasPorColaborador(ViandasPorColaborador unaViandaPorColaborador){
         viandasPorColaborador.add(unaViandaPorColaborador);

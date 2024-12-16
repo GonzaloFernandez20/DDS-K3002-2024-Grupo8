@@ -25,8 +25,8 @@ import java.util.List;
 public class ReporteDeViandasPorHeladera extends ReporteSemanal{
     private List<ViandasPorHeladera> viandasPorHeladeras = new ArrayList<ViandasPorHeladera>();
 
-    @Autowired
-    ReportesServiceImpl reportesServiceImlp;
+//    @Autowired
+//    ReportesServiceImpl reportesServiceImlp;
 
     public ReporteDeViandasPorHeladera(LocalDate fechaDeCreacion) {
         super(fechaDeCreacion);

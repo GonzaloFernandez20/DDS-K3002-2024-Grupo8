@@ -2,6 +2,7 @@ package ServiceImpl;
 
 import DAOs.FallasPorHeladeraDAO;
 import DAOs.ViandasPorColaboradorDAO;
+import DAOs.ViandasPorHeladeraDAO;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.reportes.ViandasPorColaborador;
 import Modelo.Dominio.reportes.ViandasPorHeladera;
@@ -91,36 +92,13 @@ public class ReportesServiceImpl implements ReportesService {
 
         List<Heladera> heladeras_BD = heladeraRepository.findAll();
 
-        heladeras_BD.forEach( heladera -> {
+            heladeras_BD.forEach( heladera -> {
             ViandasPorHeladera viandasPorHeladera = new ViandasPorHeladera();
             viandasPorHeladera.setHeladera(heladera);
             viandasPorHeladera.setViandasRetiradas(aperturaRepository.traerViandasRetiradasEntreFechasDeUnaHeladera(heladera.getid_heladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
             viandasPorHeladera.setViandasColocadas(aperturaRepository.traerViandasIngresadasEntreFechasDeUnaHeladera(heladera.getid_heladera(), LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
             viandasPorHeladeraList.add(viandasPorHeladera);
         });
-
-        /*List<ViandasPorHeladeraDAO> viandasPorHeladeraDAOS = aperturaRepository.traerViandasIngresadasYRetiradasEntreFechas(LocalDateTime.now().minusWeeks(1), LocalDateTime.now());
-
-        List<Integer> viandas_colocadas_lista = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getViandasColocadas()).toList();
-        List<Integer> viandas_retiradas_lista = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getViandasRetiradas()).toList();
-        List<Integer> ids_de_heladeras        = viandasPorHeladeraDAOS.stream().map(viandasPorHeladeraDAO -> viandasPorHeladeraDAO.getId_heladera()     ).toList();
-
-        List<Heladera> heladeras_BD = heladeraRepository.findAllById(ids_de_heladeras);
-
-        for (int i = 0; i < viandasPorHeladeraDAOS.size(); i++){
-            ViandasPorHeladera viandasPorHeladera = new ViandasPorHeladera();
-
-            Integer cantidad_de_viandas_colocadas = viandas_colocadas_lista.get(i);
-            viandasPorHeladera.setViandasColocadas(cantidad_de_viandas_colocadas);
-
-            Integer cantidad_de_viandas_retiradas = viandas_retiradas_lista.get(i);
-            viandasPorHeladera.setViandasRetiradas(cantidad_de_viandas_retiradas);
-
-            Heladera heladera = heladeras_BD.get(i);
-            viandasPorHeladera.setHeladera(heladera);
-
-            viandasPorHeladeraList.add(viandasPorHeladera);
-        }*/
 
         System.out.println("Lista de ViandasPorHeladera:");
         System.out.println(Arrays.toString(viandasPorHeladeraList.stream().map(viandasPorHeladera -> viandasPorHeladera.getHeladera().getid_heladera()).toArray()));
