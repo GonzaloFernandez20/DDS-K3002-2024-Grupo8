@@ -15,4 +15,10 @@ public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
 
     @Query(value = "SELECT * FROM usuario WHERE usuario = ?1", nativeQuery = true)
     Optional<Usuario> findByNombreDeUsuario(String nombreDeUsuario);
+
+    @Query(value =
+            "SELECT u.* FROM usuario u " +
+                    "JOIN dds_persistencia.mail m ON u.colaborador = m.colaborador " +
+                    "WHERE m.correo = ?1", nativeQuery = true)
+    Optional<Usuario> findByEmail(String email);
 }

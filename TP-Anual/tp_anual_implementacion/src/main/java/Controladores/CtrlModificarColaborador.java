@@ -43,7 +43,7 @@ public class CtrlModificarColaborador {
     private final ColaboradorRepository colaboradorRepository;
 
     @Autowired
-    public CtrlModificarColaborador(GestorInicioDeSesion gestorInicioDeSesion, UsuariosRepository usuariosRepository, ColaboradorRepository colaboradorRepository, MedioDeContactoRepository medioDeContactoRepository) {
+    public CtrlModificarColaborador(GestorInicioDeSesion gestorInicioDeSesion, UsuariosRepository usuariosRepository, MedioDeContactoRepository medioDeContactoRepository, ColaboradorRepository colaboradorRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.usuariosRepository = usuariosRepository;
         this.medioDeContactoRepository = medioDeContactoRepository;
@@ -128,6 +128,30 @@ public class CtrlModificarColaborador {
         }
     }
 
+    @PostMapping("/ModificarColaborador/TipoPersona")
+    public ResponseEntity<Void> setearTipoDePersona(@RequestParam String tipoPersona){
+        try {
+            Usuario usuario = gestorInicioDeSesion.obtenerUsuarioDeSesion();
+
+            Colaborador colaborador = usuario.getColaborador();
+            if(tipoPersona.equals("humana")){
+                colaborador.setPersona(new PersonaHumana());
+            } else{
+                colaborador.setPersona(new PersonaJuridica());
+            }
+
+            usuariosRepository.save(usuario);
+
+            ResponseCookie cookie = generarCookieParaLaModificacionDeUsuario(usuario);
+
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     /* ---------------------------------------------------------------------------------- */
 
     private String tipoPersonaDelColaborador() {
@@ -165,9 +189,6 @@ public class CtrlModificarColaborador {
                 personaHumana.getDireccion().getCalle(),
                 personaHumana.getDireccion().getAltura(),
                 mediosDeContactoDTO,
-                //mediosDeContactoDTO.stream().filter(medio -> Objects.equals(medio.getTipo(), "Mail")).toString(),
-                //mediosDeContactoDTO.stream().filter(medio -> Objects.equals(medio.getTipo(), "WhatsApp")).toString(),
-                //false, false,
                 !Objects.isNull(colaboradorDeSesion.getTarjeta())
         );
         return colaborador;
