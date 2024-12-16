@@ -1,20 +1,19 @@
 package Controladores.Contribuciones;
 
 import DTOs.VinculacionPersonaVulnerableDTO;
+
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
+import Modelo.Dominio.Persona.PersonaJuridica;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona_vulnerable.EstadoDeVivienda;
-import Modelo.Dominio.Persona_vulnerable.PersonaSituacionVulnerable;
-
 import Modelo.Mappers.VinculacionPersonaVulnerableMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+
+import Servicios_Externos_APIs.NotificacionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,13 +21,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 @Controller
 public class CtrlRegistrarPersonaVulnerable {
@@ -40,11 +36,13 @@ public class CtrlRegistrarPersonaVulnerable {
     private List<TipoDeDocumento> tipoDeDocumentos = new ArrayList<>();
     private List<Sexo> sexo = new ArrayList<>();
 
+    private NotificacionService notificacionService;
+
     @Autowired
-    public CtrlRegistrarPersonaVulnerable(GestorInicioDeSesion gestorInicioDeSesion,
-                                          GestorTarjetas gestorTarjetas) {
+    public CtrlRegistrarPersonaVulnerable(GestorInicioDeSesion gestorInicioDeSesion, GestorTarjetas gestorTarjetas, NotificacionService notificacionService) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.gestorTarjetas = gestorTarjetas;
+        this.notificacionService = notificacionService;
     }
 
     public void estadoDeViviendas() {
@@ -74,6 +72,11 @@ public class CtrlRegistrarPersonaVulnerable {
 
     @GetMapping("/DarDeAltaPersonaEnSitVulnerable")
     public String mostrarDatos(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
+            return "PedirRegistroHumano";
+        }
+
         estadoDeViviendas();
         tipoDeDocumentos();
         sexo();
@@ -89,6 +92,11 @@ public class CtrlRegistrarPersonaVulnerable {
         Vinculacion nuevoVulnerablevinculado = procesarDTO(personaVulnerableDTO);
         try {
             gestorTarjetas.registrarVinculacion(nuevoVulnerablevinculado);
+            
+            // Enviar una notificación
+            String mensajeNotificacion = "Gracias por registrar una persona vulnerable";
+            notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID(), mensajeNotificacion);
+           
             return ResponseEntity.ok().body("\"Registro realizado con éxito!\"");
         }catch(RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

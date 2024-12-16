@@ -1,17 +1,14 @@
 package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.contribucion.Contribucion;
 import Modelo.Dominio.documentacion.Documento;
-import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.nio.MappedByteBuffer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +24,13 @@ public class Colaborador {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "persona" ,referencedColumnName = "id_persona")
     private Persona persona;
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private List<MedioDeContacto> mediosDeContacto;
     @ElementCollection
     private List<String> mensajesRecibidos;
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "colaborador" ,referencedColumnName = "id_colaborador")
     private List<Contribucion> historialDeContribuciones;
 
     @OneToOne(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE})

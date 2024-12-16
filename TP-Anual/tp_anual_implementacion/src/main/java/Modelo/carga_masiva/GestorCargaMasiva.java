@@ -1,15 +1,15 @@
 package Modelo.carga_masiva;
 
 import Modelo.Dominio.Persona.PersonaHumana;
-import Modelo.Dominio.Repositories.UsuariosRepository;
-import Modelo.Dominio.Repositories.carga_masiva.ColaboracionesCSVRepository;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Repositories.UsuariosRepository;
+import Repositories.carga_masiva.ColaboracionesCSVRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
+import Repositories.colaborador.ColaboradorRepository;
 import Utils.GeneradorDeCadenas;
 import Modelo.seguridad.SesionActiva.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +64,7 @@ public class GestorCargaMasiva {
             agregarNuevoUsuario(colaborador);
         }
 
-        if(colaborador.getMediosDeContacto().stream().filter(medio -> medio instanceof Mail).map(medio -> (Mail) medio).noneMatch(unMail -> unMail.equals(mail))) {
+        if(colaborador.getMediosDeContacto().stream().filter(medio -> medio instanceof Mail).map(medio -> (Mail) medio).noneMatch(unMail -> unMail.getCorreo().equals(mail))) {
             Mail mailMedio = new Mail(mail);
             colaborador.agregarMedioDeContacto(mailMedio);
         }

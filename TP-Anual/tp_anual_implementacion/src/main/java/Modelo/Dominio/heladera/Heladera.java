@@ -6,21 +6,22 @@ import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Excepciones.ExcepcionHeladeraLlena;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Heladera")
 public class Heladera {
     @Id
     @GeneratedValue
     private Integer id_heladera;
-    //POR QUÉ ESTÁ ESTE ATRIBUTO???
-    @Column(name = "id_heladera_trucho")
-    private int idHeladera;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "colaborador_a_cargo", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorACargo;
@@ -38,8 +39,7 @@ public class Heladera {
     private Modelo modelo;
     @Enumerated(EnumType.STRING)
     private EstadoHeladera estado;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "notificador_de_suscriptos", referencedColumnName = "id_notificador_de_suscriptos")
+    @OneToOne(mappedBy = "heladera")
     private NotificadorDeSuscriptos notificadorDeSuscriptos;
 
     //Constructores ------------------------------------------------------
@@ -56,7 +56,6 @@ public class Heladera {
         this.modelo = modelo;
         this.estado = EstadoHeladera.ACTIVA;
         this.puestaEnFuncionamiento = puestaEnFuncionamiento;
-        notificadorDeSuscriptos = new NotificadorDeSuscriptos(this);
     }
 
     public Heladera() {
@@ -95,58 +94,29 @@ public class Heladera {
 
     public void huboIncidente(){
         estado = EstadoHeladera.INACTIVA;
-        notificadorDeSuscriptos.notificar("Se produjo una falla.");
+        notificadorDeSuscriptos.notificar("Se produjo una falla");
     }
 
     public void movimientoDeViandasFinalizado(){
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
 
-        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas.");
-        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas.");
+        notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas");
+        notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas");
     }
 
 
     // ---- Getters y Setters
-    public Colaborador getColaboradorACargo() { return colaboradorACargo; }
-    public Ubicacion getUbicacion() { return ubicacion; }
-    public List<Vianda> getViandasEnStock() {return viandasEnStock;}
-    public Modelo getModelo() { return modelo; }
-    public void setModelo(Modelo modelo) { this.modelo = modelo; }
-    public EstadoHeladera getEstado() { return estado; }
-    public void setEstado(EstadoHeladera estado) { this.estado = estado; }
-    public NotificadorDeSuscriptos getNotificadorDeSuscriptos() { return notificadorDeSuscriptos; }
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }
-    public void setNotificadorDeSuscriptos(NotificadorDeSuscriptos notificadorDeSuscriptos) { this.notificadorDeSuscriptos = notificadorDeSuscriptos; }
-    public int getCapacidadDeViandas() { return capacidadDeViandas; }
-    public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
-    public int getIdHeladera(){return this.idHeladera;} // TODO: GENERAR UN CODIGO QUE SE ASIGNE LA PRIMERA VEZ QUE SE EJECUTE EL METODO (STRING)
-    public void setIdHeladera(int idHeladera) { this.idHeladera = idHeladera; }
+    public String getNombreDelPunto(){return ubicacion.getNombreDelPunto(); }
+
+    public int getCantViandasEnStock() {return viandasEnStock.size();}
+
 
     public Integer getid_heladera() {
         if(Objects.isNull(id_heladera)) { return 0; } // No compila sino
         return id_heladera;
-    }
-
-    public void setColaboradorACargo(Colaborador colaboradorACargo) {
-        this.colaboradorACargo = colaboradorACargo;
-    }
-
-    public void setUbicacion(Ubicacion ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public void setCapacidadDeViandas(int capacidadDeViandas) {
-        this.capacidadDeViandas = capacidadDeViandas;
-    }
-
-    public void setPuestaEnFuncionamiento(LocalDate puestaEnFuncionamiento) {
-        this.puestaEnFuncionamiento = puestaEnFuncionamiento;
-    }
-
-    public int getCantViandasEnStock() {
-        return viandasEnStock.size();
     }
 }
 

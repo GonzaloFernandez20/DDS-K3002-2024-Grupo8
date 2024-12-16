@@ -2,7 +2,8 @@ package Controladores.Sesiones;
 
 import DTOs.ColaboradorHumanoDTO;
 import DTOs.ColaboradorJuridicoDTO;
-import Modelo.Dominio.Repositories.UsuariosRepository;
+import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
+import Repositories.UsuariosRepository;
 import Modelo.Mappers.ColabHumanoMapper;
 import Modelo.Mappers.ColabJuridicoMapper;
 import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
@@ -23,10 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CtrlRegistroDePersona {
 
     private final UsuariosRepository usuariosRepository;
+    private final GestorTarjetas gestorTarjetas;
 
     @Autowired
-    public CtrlRegistroDePersona(UsuariosRepository usuariosRepository) {
+    public CtrlRegistroDePersona(UsuariosRepository usuariosRepository, GestorTarjetas gestorTarjetas) {
         this.usuariosRepository = usuariosRepository;
+        this.gestorTarjetas = gestorTarjetas;
     }
 
     @PostMapping("/ValidarUsuario")

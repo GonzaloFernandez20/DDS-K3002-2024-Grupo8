@@ -7,14 +7,13 @@ import java.io.IOException;
 
 public final class DescargaDeArchivo {
     public static String guardarArchivo(String pathDondeDebeGuardarse, MultipartFile archivo) {
-        // Cambiar al path dentro de src/main/resources/uploads
-        String folderPath = new File("src/main/resources/" + pathDondeDebeGuardarse).getAbsolutePath();
+        String folderPath = new File("src/main/resources/static/" + pathDondeDebeGuardarse).getAbsolutePath();
         String filePath = folderPath + "/" + archivo.getOriginalFilename();
 
         try {
             File directorio = new File(folderPath);
             if (!directorio.exists()) {
-                directorio.mkdirs(); // Crear el directorio si no existe
+                directorio.mkdirs();
             }
             archivo.transferTo(new File(filePath));
         } catch (IOException e) {
@@ -22,7 +21,7 @@ public final class DescargaDeArchivo {
             return null;
         }
 
-        return filePath;
+        return "/" + pathDondeDebeGuardarse + "/" + archivo.getOriginalFilename();
     }
 }
 

@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Entity
-@Table(name = "AccesoDeColaborador")
+@Table(name = "acceso_de_colaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
     @OneToOne
-    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
+    @JoinColumn(name = "colaborador"/*, referencedColumnName = "id_colaborador"*/)
     private Colaborador colaborador;
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta") // Había un error en el JOIN
+    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
     private List <AperturaConPermiso> aperturasDeHeladera;
 
     //Constructores-------------------------------------------------------------

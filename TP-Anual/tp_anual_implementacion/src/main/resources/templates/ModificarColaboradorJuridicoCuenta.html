@@ -10,10 +10,15 @@
 
         <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
         
-        <!-- Custom styles for this template -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
         <link href="/assets/CSS/MiCuenta.css" rel="stylesheet">
         <script src="/assets/JS/load-header-footer.js" defer></script>
+
+        <script src="/assets/JS/ModificarColaboradorJuridicoCuenta.js"></script>
+        <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
+        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body>
@@ -36,12 +41,12 @@
         
         <main class="container">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="sidenav flex-column flex-shrink-0 p-3">
-                        <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
+                        <span class="titulo-mi-cuenta">Mi Cuenta</span>
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto nav-chosen">
-                            <span class="fs-5">Usuario</span>
+                            <span class="fs-5 nav-title">Usuario</span>
                             <li class="nav-item">
                                 <image height="20px" width="20px" src="img/home-icon.svg"/>
                                 <a href="#info-personal" class="nav-link">
@@ -53,6 +58,10 @@
                                 <a href="#contacto" class="nav-link">
                                 Contacto
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <image alt="Usuario" height="20px" width="20px" src="img/user-icon.svg" class="icon"></image>
+                                <a href="#usuario" class="nav-link nowrap-text">Usuario</a>
                             </li>
                         </ul>
                         <ul class="nav nav-pills flex-column mb-auto">
@@ -87,45 +96,44 @@
                                 </a>
                             </li>
                         </ul>
+                        <button id="btn-dar-de-baja" class="btn-mod baja">Eliminar mi cuenta</button>
                     </div>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-9">
                     <div class="main">
-                        <h1>Mi Cuenta</h1>
-                        <h2>Usuario</h2>
-
                         <form id="mod-cuenta-juridico" class="mod-cuenta">
-                            <div class="form-cuenta">
+                            <div class="form-cuenta juridico">
                                 <h3 id="info-personal">Información Personal</h3>
-                                <label for="nuevoNombre">Cambiar nombre de usuario:</label>
-                                <input type="text" id="nuevoNombre" class="mod-cuenta-nombre" placeholder="Ingrese un nuevo nombre de usuario"><br>
-                                <label for="nuevaContrasenia">Cambiar contraseña:</label>
-                                <input type="password" id="nuevaContrasenia" class="mod-cuenta-contrasenia" placeholder="Ingrese una nueva contraseña"><br>
-                                <label for="nuevaRazonSocial">Cambiar razón social:</label>
-                                <input type="text" id="nuevaRazonSocial" placeholder="Ingrese su nueva razón social"><br>
-                                <label for="nuevoTipoOrg">Cambiar tipo de organización: </label>
-                                <select id="nuevoTipoOrg">
-                                    <option value="">--Seleccione--</option>
-                                    <option value="gubernamental">Gubernamental</option>
-                                    <option value="ong">ONG</option>
-                                    <option value="empresa">Empresa</option>
-                                    <option value="institucion">Institución</option>
-                                </select>
-                                <label for="nuevoRubro">Rubro:</label>
-                                <input type="text" id="nuevoRubro" placeholder="Ingrese su nuevo rubro"><br>
+                                <div class="mod-info-juridico">
+                                    <label for="nuevaRazonSocial">Razón social:</label>
+                                    <input type="text" id="nuevaRazonSocial" class="mod-cuenta-nombre" placeholder="Ingrese su nueva razón social" th:value="${colaborador.razonSocial}">
+                                </div>
+                                <div class="mod-info-juridico">
+                                    <label for="nuevoTipoOrg" th:text="'Tipo de organización: ' + ${colaborador.tipoDeOrganizacion}"></label>
+                                    <select id="nuevoTipoOrg">
+                                        <option th:value="${colaborador.tipoDeOrganizacion}" selected disabled>--Seleccione--</option>
+                                        <option th:each="tipo : ${tiposDeOrganizacion}" th:value="${tipo}" th:text="${tipo}"></option>
+                                    </select>
+                                </div>
+                                <div class="mod-info-juridico">
+                                    <label for="nuevoRubro">Rubro:</label>
+                                    <input type="text" id="nuevoRubro" placeholder="Ingrese su nuevo rubro" th:value="${colaborador.rubro}"><br>
+                                </div>
+                                <div class="direccion-container">
+                                    <div class="inputs-direccion">
+                                        <label for="nuevaCalleJuridico">Calle:</label>
+                                        <input type="text" id="nuevaCalleJuridico" class="mod-cuenta-direccion" placeholder="Ingrese una nueva Calle" th:value="${colaborador.calle}">
+                                        <label for="nuevaAlturaJuridico">Altura:</label>
+                                        <input type="text" id="nuevaAlturaJuridico" class="mod-cuenta-direccion" placeholder="Ingrese una nueva Altura" th:value="${colaborador.altura}">
+                                    </div>
+                                </div>
 
-                                <h3 id="contacto">Contacto</h3>
-                                <label for="nuevaDireccion">Cambiar dirección:</label>
-                                <input type="text" id="nuevaDireccion" class="mod-cuenta-direccion" placeholder="Ingrese una nueva dirección"><br>
+                                <h3 id="contacto">Datos de contacto</h3>
                                 <label>Medios de Contacto:</label>
-                                <div class="tags-medios-de-contacto">
+                                <div class="tags-medios-de-contacto scroll-permitido">
                                     <span class="badge d-flex p-2 rounded-pill">
                                         <span class="px-1">WhatsApp: 9 11 2323-4444</span>
-                                        <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
-                                    </span>
-                                    <span class="badge d-flex p-2 rounded-pill">
-                                        <span class="px-1">Telegram: 9 54 2020-9999</span>
                                         <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
                                     </span>
                                     <span class="badge d-flex p-2 rounded-pill">
@@ -133,19 +141,33 @@
                                         <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
                                     </span>
                                 </div>
-                                <label>Agregar medio de contacto:</label>
-                                <select id="tipoNuevoMedioDeContacto" class="mod-cuenta-tipo-medio" onclick="habilitarInputIdentificacion('juridico')">
-                                    <option value="">--Seleccione--</option>
-                                    <option value="telegram">Telegram</option>
+
+                                <label for="tipoNuevoMedioDeContacto">Agregar medio de contacto:</label>
+                                <select id="tipoNuevoMedioDeContacto" class="mod-cuenta-tipo-medio">
+                                    <option value="" selected disabled>--Seleccione--</option>
                                     <option value="mail">Mail</option>
                                     <option value="whatsapp">WhatsApp</option>
-                                </select><br>
-                                <input disabled type="text" id="nuevoMedioDeContacto" class="mod-cuenta-medio" placeholder="Ingrese su número/mail"><br>
+                                </select>
+                                <br>
+                                <div id="inputContainer" style="display: none;">
+                                    <label for="nuevoMedioDeContactoJuridico"></label>
+                                    <input type="text" id="nuevoMedioDeContactoJuridico" class="mod-cuenta-medio" placeholder="Ingrese su número/mail">
+                                </div>
+
+                                <br>
+                                <h3 id="usuario">Usuario</h3>
+                                <div class="usuario-container">
+                                    <div class="inputs-usuario">
+                                        <label for="nuevoNombreJuridico">Nombre:</label>
+                                        <input type="text" id="nuevoNombreJuridico" class="mod-cuenta-usuario" placeholder="Ingrese un nuevo nombre de usuario" th:value="${colaborador.usuario}"><br>
+                                        <label for="nuevaContraseniaJuridico">Contraseña:</label>
+                                        <input type="password" id="nuevaContraseniaJuridico" class="mod-cuenta-usuario" placeholder="Ingrese una nueva contraseña" th:value="${colaborador.constrasenia}"><br>
+                                    </div>
+                                </div>
                             </div>
                             <input class="btn-mod confirm" type="submit" value="Confirmar cambios">
                             <input class="btn-mod reset" type="reset" value="Volver al estado inicial">
                         </form>
-                        <button id="btn-dar-de-baja" class="btn-mod baja">Dar de baja</button>
                     </div>
                     <div class="reportar-falla referirAColaboracion" id="container-reporte-falla">
                         <button class="btn-close" onclick="ocultarReporteFalla()"></button>
@@ -157,9 +179,6 @@
             </div>
         </main>
 
-        <div id="header"></div>
-        <script src="/assets/JS/ModificarColaboradorUsuario.js"></script>
-        <script src="/assets/JS/ModificarColaboradorJuridicoCuenta.js"></script>
-        <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
+        <div id="footer"></div>
     </body>
 </html>

@@ -5,6 +5,7 @@ import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import java.time.LocalDate;
 import java.util.List;
 
+@Deprecated
 public class RepositorioSuscripciones {
 
     private static RepositorioSuscripciones instancia;

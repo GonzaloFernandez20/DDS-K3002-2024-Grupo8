@@ -18,7 +18,10 @@ public class HeladeraMapper {
                 heladera.getUbicacion().getDireccion().getAltura(),
                 heladera.getUbicacion().getCiudad(),
                 heladera.getUbicacion().getNombreDelPunto(),
-                heladera.getPuestaEnFuncionamiento());
+                heladera.getPuestaEnFuncionamiento(),
+                heladera.getLatitud(),
+                heladera.getLongitud()
+        );
     }
 
     public static List<HeladeraDTO> convertirListaDeHeladerasEnDTO(List<Heladera> heladeras) {

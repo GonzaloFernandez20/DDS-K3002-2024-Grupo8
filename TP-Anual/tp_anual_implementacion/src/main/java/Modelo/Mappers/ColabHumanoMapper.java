@@ -5,7 +5,6 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.Mail;
-import Modelo.Dominio.medios_de_contacto.Telegram;
 import Modelo.Dominio.medios_de_contacto.WhatsApp;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.seguridad.GestorInicioDeSesion;
@@ -54,9 +53,6 @@ public class ColabHumanoMapper {
         if (colaboradorDTO.isTieneWp()){
             nuevoColaborador.agregarMedioDeContacto(new WhatsApp(colaboradorDTO.getTelefono()));
         }
-        if (colaboradorDTO.isTieneTg()){
-            nuevoColaborador.agregarMedioDeContacto(new Telegram(colaboradorDTO.getTelefono()));
-        }
         nuevoColaborador.agregarMedioDeContacto(new Mail(colaboradorDTO.getEmail()));
 
         usuario.setColaborador(nuevoColaborador);
@@ -73,6 +69,7 @@ public class ColabHumanoMapper {
         ((PersonaHumana) colaboradorDeSesion.getPersona()).setApellido(colaboradorDTO.getApellido());
         ((PersonaHumana) colaboradorDeSesion.getPersona()).getDocumento().setNumero(colaboradorDTO.getNumero());
         ((PersonaHumana) colaboradorDeSesion.getPersona()).getDocumento().setTipo(colaboradorDTO.getTipo());
+        ((PersonaHumana) colaboradorDeSesion.getPersona()).getDocumento().setSexo(colaboradorDTO.getSexo());
         colaboradorDeSesion.getPersona().getDireccion().setCalle(colaboradorDTO.getCalle());
         colaboradorDeSesion.getPersona().getDireccion().setAltura(colaboradorDTO.getAltura());
         ((PersonaHumana) colaboradorDeSesion.getPersona()).setFechaDeNacimiento(colaboradorDTO.getFechaDeNacimiento());

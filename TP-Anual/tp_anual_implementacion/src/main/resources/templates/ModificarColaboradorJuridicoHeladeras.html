@@ -33,9 +33,9 @@
 
 <main class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="sidenav flex-column flex-shrink-0 p-3">
-                <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none fs-4">Mi Cuenta</span>
+                <span class="titulo-mi-cuenta">Mi Cuenta</span>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <span class="fs-5">Usuario</span>
@@ -51,19 +51,23 @@
                             Contacto
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <image alt="Usuario" height="20px" width="20px" src="img/user-icon.svg" class="icon"></image>
+                        <a th:href="@{ModificarColaborador#usuario}" class="nav-link nowrap-text">Usuario</a>
+                    </li>
                 </ul>
                 <ul class="nav nav-pills flex-column mb-auto nav-chosen">
-                    <span class="fs-5">Heladeras</span>
+                    <span class="fs-5 nav-title">Heladeras</span>
                     <li class="nav-item">
                         <svg height="20px" width="20px">
-                            <image height="20px" width="5px" x="7.5px" y="0" href="img/alert-icon.svg"/>
+                            <image height="20px" width="5px" x="7.5px" y="0" href="img/alert-icon.svg" alt="Signo de exclamación"/>
                         </svg>
                         <a href="#alertas" class="nav-link">
                             Alertas
                         </a>
                     </li>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/list-icon.svg"/>
+                        <image height="20px" width="20px" src="img/list-icon.svg" alt="Listado"/>
                         <a href="#listado" class="nav-link">
                             Listado de Heladeras
                         </a>
@@ -72,28 +76,27 @@
                 <ul class="nav nav-pills flex-column mb-auto">
                     <span class="fs-5">Mis puntos</span>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/puntos.png"/>
+                        <image height="20px" width="20px" src="img/puntos.png" alt="Puntos"/>
                         <a th:href="@{ModificarColaboradorPremios#puntos-actuales}" class="nav-link">
                             Puntos actuales
                         </a>
                     </li>
                     <li class="nav-item">
-                        <image height="20px" width="20px" src="img/premios.png"/>
+                        <image height="20px" width="20px" src="img/premios.png" alt="Regalo"/>
                         <a th:href="@{ModificarColaboradorPremios#premios}" class="nav-link">
                             Premios
                         </a>
                     </li>
                 </ul>
+                <button id="btn-dar-de-baja" class="btn-mod baja">Eliminar mi cuenta</button>
             </div>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="container main">
                 <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
                     <p th:text="${mensaje}"></p>
                 </div>
-                <h1>Mi Cuenta</h1>
-                <h2>Heladeras Asociadas</h2>
                 <div id="box-alertas" class="contenido-mi-cuenta">
                     <h3 id="alertas">Alertas</h3>
                     <p class="fs-5" id="non-warning-message" th:if="${#lists.isEmpty(warnings)}" th:text="'Enhorabuena! Ninguna de sus heladeras asociadas presentó una alerta.'"></p>

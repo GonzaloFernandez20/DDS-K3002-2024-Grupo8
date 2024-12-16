@@ -6,7 +6,6 @@ import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.tecnico.LocalizadorDeTecnicos;
 import Modelo.Dominio.tecnico.Tecnico;
 import Modelo.Mappers.FactoryFallaTecnica;
-import Repositorios.RepositorioIncidentes;
 
 public class GestorDeIncidentes {
 
@@ -24,7 +23,8 @@ public class GestorDeIncidentes {
     public static void reportar(Incidente nuevoIncidente) {
         nuevoIncidente.getHeladeraDondeOcurrio().huboIncidente();
         darAvisoATecnico(nuevoIncidente);
-        RepositorioIncidentes.getInstancia().sumarIncidente(nuevoIncidente);
+        // TODO: Reemplazar por el repositorio real
+        //RepositorioIncidentes.getInstancia().sumarIncidente(nuevoIncidente);
     }
 
     private static void darAvisoATecnico(Incidente nuevoIncidente) {

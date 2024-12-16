@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class RepositorioIncidentes {
     private static RepositorioIncidentes instancia;
     private List<Incidente> incidentes;

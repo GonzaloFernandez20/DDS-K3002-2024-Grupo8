@@ -166,6 +166,12 @@ h2 {
     height: 500px;*/
 }
 
+#imagenDonarDinero{
+  margin-top: 0px;
+  width: 500px;
+  height: 500px;
+}
+
 .hipervinculo{
     font-size: 15px;
 }

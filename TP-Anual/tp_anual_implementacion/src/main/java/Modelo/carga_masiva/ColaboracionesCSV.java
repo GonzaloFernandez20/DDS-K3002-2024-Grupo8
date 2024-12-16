@@ -8,9 +8,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import jakarta.persistence.*;
 import org.apache.commons.validator.routines.EmailValidator;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,7 +36,10 @@ public class ColaboracionesCSV {
     public List<Colaborador> obtenerColaboradores() {
         List<Colaborador> colaboradores = new ArrayList<>();
 
-        try (CSVReader reader = new CSVReader(new FileReader(archivo))) {
+        String folderPath = new File("src/main/resources/static").getAbsolutePath();
+        String filePath = folderPath + "/" + archivo;
+
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
             String[] linea;
             while ((linea = reader.readNext()) != null) {
                 for (int i = 0; i < linea.length; i++) {

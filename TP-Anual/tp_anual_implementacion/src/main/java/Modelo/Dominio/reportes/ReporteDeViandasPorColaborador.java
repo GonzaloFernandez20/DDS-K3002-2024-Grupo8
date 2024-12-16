@@ -3,12 +3,15 @@ package Modelo.Dominio.reportes;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.sistema.Sistema;
 
+import ServiceImpl.ReportesServiceImpl;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import com.itextpdf.text.pdf.PdfPTable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,29 +19,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
-@Table(name = "ReporteDeViandasPorColaborador")
+@Component
 public class ReporteDeViandasPorColaborador extends ReporteSemanal{
-    @OneToMany
-    @JoinColumn(name = "reporte", referencedColumnName = "id_reporte")
     private List<ViandasPorColaborador> viandasPorColaborador = new ArrayList<>();;
 
-    public ReporteDeViandasPorColaborador(LocalDate fechaDeCreacion) {
-        super(fechaDeCreacion);
-    }
-
+//    @Autowired
+//    ReportesServiceImpl reportesServiceImlp;
 
     public void sumarViandasPorColaborador(ViandasPorColaborador unaViandaPorColaborador){
         viandasPorColaborador.add(unaViandaPorColaborador);
     }
     @Override
     public void completarReporte(){
-        List<Colaborador> colaboradoresConocidos = Sistema.getInstancia().getColaboradores();
-        colaboradoresConocidos.forEach(colaborador -> {
-            Integer cantidadDeDonacionesDeViandas = colaborador.cantidadDeDonacionesDeViandaEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now());
-            ViandasPorColaborador viandasPorColaborador = new ViandasPorColaborador(colaborador, cantidadDeDonacionesDeViandas);
-            sumarViandasPorColaborador(viandasPorColaborador);
-        });
+        List<ViandasPorColaborador> viandasPorColaboradorsBD = reportesServiceImlp.traerViandasPorColaborador();
+        this.viandasPorColaborador.addAll(viandasPorColaboradorsBD);
         super.completarReporte();
     }
 

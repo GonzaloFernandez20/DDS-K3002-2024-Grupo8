@@ -11,7 +11,7 @@ import java.util.List;
 import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.INGRESAR_VIANDAS_DONADAS;
 import static Modelo.Dominio.Accesos_a_heladeras.MotivoApertura.RETIRAR_VIANDA;
 
-
+@Deprecated
 public class RepositorioAperturas {
     private List<AperturaConPermiso> aperturas;
     private static RepositorioAperturas instancia;

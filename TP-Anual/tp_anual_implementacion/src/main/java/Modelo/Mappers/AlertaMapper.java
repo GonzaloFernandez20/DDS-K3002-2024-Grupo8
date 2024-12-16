@@ -1,11 +1,8 @@
 package Modelo.Mappers;
 
-import Controladores.Sesiones.VisitaTecnicaMapper;
 import DTOs.AlertaDTO;
 import DTOs.HeladeraDTO;
-import DTOs.HeladeraSeleccionDTO;
 import DTOs.VisitaTecnicaDTO;
-import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.Alerta;
 
 import java.util.List;

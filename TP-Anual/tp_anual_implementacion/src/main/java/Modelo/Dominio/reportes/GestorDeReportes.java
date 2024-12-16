@@ -1,14 +1,19 @@
 package Modelo.Dominio.reportes;
 
-import Modelo.Dominio.reportes.*;
+import ServiceImpl.ReportesServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GestorDeReportes {
-    private List<ReporteSemanal> reportes;
+    private List<ReporteSemanal> reportes = new ArrayList<ReporteSemanal>();
     private static GestorDeReportes instancia  = null;
+
+    public GestorDeReportes(){}
 
     public static GestorDeReportes getInstancia() {
         if (instancia == null) {
@@ -17,21 +22,31 @@ public class GestorDeReportes {
         return instancia;
     }
 
-    public void generarReportesSemanales(){
-        /*Proceso calendarizado que hace todos los cálculos necesarios*/
-        ReporteDeFallas reporteDeFallas = new ReporteDeFallas(LocalDate.now());
-        ReporteDeViandasPorColaborador reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador(LocalDate.now());
-        ReporteDeViandasPorHeladera reporteDeViandasPorHeladera = new ReporteDeViandasPorHeladera(LocalDate.now());
-
+/*    public void generarReportesSemanales(){
+//        ReporteDeFallas reporteDeFallas = new ReporteDeFallas();
+        ReporteDeFallas reporteDeFallas = this.generarReporteDeFallasPorHeladera();
+        reporteDeFallas.setFechaDeCreacion(LocalDate.now());
         reporteDeFallas.completarReporte();
+
+        ReporteDeViandasPorColaborador reporteDeViandasPorColaborador = new ReporteDeViandasPorColaborador();
+        reporteDeViandasPorColaborador.setFechaDeCreacion(LocalDate.now());
         reporteDeViandasPorColaborador.completarReporte();
+
+        ReporteDeViandasPorHeladera reporteDeViandasPorHeladera = new ReporteDeViandasPorHeladera();
+        reporteDeViandasPorHeladera.setFechaDeCreacion(LocalDate.now());
         reporteDeViandasPorHeladera.completarReporte();
 
-        verificarExistenciaDeReportes();
-
         reportes.add(reporteDeFallas);
-        reportes.add(reporteDeViandasPorHeladera);
-        reportes.add(reporteDeViandasPorColaborador);
+//        reportes.add(reporteDeViandasPorHeladera);
+//        reportes.add(reporteDeViandasPorColaborador);
+    }
+    */
+    public void generarReportesSemanales(List<ReporteSemanal> reportesSemanales){
+        reportesSemanales.forEach(reporteSemanal -> {
+            reporteSemanal.setFechaDeCreacion(LocalDate.now());
+            reporteSemanal.completarReporte();
+            reportes.add(reporteSemanal);
+        });
     }
 
     private void verificarExistenciaDeReportes() {
@@ -39,13 +54,19 @@ public class GestorDeReportes {
             reportes = new ArrayList<>();
         }
     }
+    //generar reportes que sean administrados por SpringBoot
+    @Bean
+    public ReporteDeFallas generarReporteDeFallasPorHeladera(){
+        return new ReporteDeFallas();
+//        ReporteDeFallas reporteDeFallas = new ReporteDeFallas();
+//        reporteDeFallas.setHeladeraRepository(heladeraRepository);
+    }
 
     public void limpiarInstancia() {
         instancia = null;
     }
 
     public List<ReporteSemanal> getReportes() { return reportes; }
-
     public List<ReporteDeFallas> getReportesDeFallas() { return reportes.stream().filter(reporte -> reporte instanceof ReporteDeFallas).map(reporte -> (ReporteDeFallas) reporte).toList(); }
     public List<ReporteDeViandasPorColaborador> getReportesDeViandasPorColaborador() { return reportes.stream().filter(reporte -> reporte instanceof ReporteDeViandasPorColaborador).map(reporte -> (ReporteDeViandasPorColaborador) reporte).toList(); }
     public List<ReporteDeViandasPorHeladera> getReportesDeViandasPorHeladera() { return reportes.stream().filter(reporte -> reporte instanceof ReporteDeViandasPorHeladera).map(reporte -> (ReporteDeViandasPorHeladera) reporte).toList(); }

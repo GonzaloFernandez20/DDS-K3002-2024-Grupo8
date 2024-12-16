@@ -10,7 +10,7 @@ public class ColaboradorJuridicoDTO {
     private final String constrasenia;
 
     private final String razonSocial;
-    private final String tipoDeOrganizacion;
+    private final TipoOrganizacion tipoDeOrganizacion;
     private final String rubro;
     private final String calle;
     private final String altura;
@@ -23,7 +23,7 @@ public class ColaboradorJuridicoDTO {
 
     // Constructor
     public ColaboradorJuridicoDTO(String usuario, String contrasenia, String razonSocial,
-                                  String tipoDeOrganizacion, String rubro, String calle,
+                                  TipoOrganizacion tipoDeOrganizacion, String rubro, String calle,
                                   String altura, String telefono, String email, boolean tieneWp, boolean tieneTg) {
         this.usuario = usuario;
         this.constrasenia = contrasenia;

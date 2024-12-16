@@ -14,18 +14,15 @@ public class Mail extends MedioDeContacto{
     public Mail() {}
 
     public Mail(String correo) {
+        if (correo == null) {throw new IllegalArgumentException("El correo no puede ser nulo");}
         this.correo = correo;
     }
-
 
     @Override
     public void notificar(String mensaje) {
         String subject = "Notificacion Heladera";
-       // MailService.sendEmail(subject,mensaje);
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
+        String correo = this.correo;
+        MailService.sendEmail(subject,mensaje,correo);
     }
 
     public String getCorreo() { return correo; }

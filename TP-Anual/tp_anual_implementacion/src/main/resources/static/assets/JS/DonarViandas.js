@@ -10,7 +10,6 @@ function establecerFechaHoy() {
 
     // Establecer el valor mínimo en el input de fecha
     document.getElementById("fechaCaducidad").setAttribute("min", hoy);
-    document.getElementById("fechaDonacion").setAttribute("min", hoy);
 }
 
 // Mostrar viandas en la interfaz
@@ -29,7 +28,6 @@ const limpiarCamposModal = () => {
     document.getElementById('fechaCaducidad').value = '';
     document.getElementById('peso').value = '';
     document.getElementById('calorias').value = '';
-    document.getElementById('estado').selectedIndex = 0; // Reinicia el select
 };
 
 function showAlert(message, type) {
@@ -88,10 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const fechaCaducidad = document.getElementById('fechaCaducidad').value;
         const peso = document.getElementById('peso').value;
         const calorias = document.getElementById('calorias').value;
-        const estado = document.getElementById('estado').value;
 
-        if (tipoDeComida && fechaCaducidad && peso && calorias && estado) {
-            const vianda = { tipoDeComida, fechaCaducidad, peso, calorias, estado };
+        if (tipoDeComida && fechaCaducidad && peso && calorias) {
+            const vianda = { tipoDeComida, fechaCaducidad, peso, calorias };
             viandasDTO.push(vianda);
 
             // Mostrar vianda en la lista HTML
@@ -133,11 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }*/
         const heladeraID = document.getElementById("heladera").value;
-        const fechaDonacion = document.getElementById("fechaDonacion").value;
 
         const datosDonacion = {
             heladeraID,
-            fechaDonacion,
             viandasDTO: viandasDTO // Enviar la lista completa de viandas
         };
         console.log(JSON.stringify(datosDonacion, null, 2));

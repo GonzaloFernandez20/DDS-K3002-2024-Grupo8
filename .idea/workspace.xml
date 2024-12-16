@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="arreglos del merge para que compile parte 2">
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/img/user-icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorUsuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorUsuario.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorPremios.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorPremios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/RegistroPersona.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/RegistroPersona.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="MxF_Persistencia" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2pi6462wiQdcpzcdeCfyXxX631K" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.TestApertura.executor": "Run",
+    "JUnit.TestColaborador.executor": "Run",
+    "JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor": "Run",
+    "JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor": "Run",
+    "JUnit.TestCreadorDeMensajes.executor": "Run",
+    "JUnit.TestDeIncidentes.executor": "Run",
+    "JUnit.TestDeReporteDeUnIncidente.executor": "Run",
+    "JUnit.TestDonacionDeDinero.executor": "Run",
+    "JUnit.TestDonacionDeViandas.executor": "Run",
+    "JUnit.TestGenerarReportesSemanales.executor": "Run",
+    "JUnit.TestHeladera.executor": "Run",
+    "JUnit.TestRepositorioIncidentes.executor": "Run",
+    "JUnit.TestRetiroDeViandas.executor": "Run",
+    "Maven.tp_anual_implementacion [clean,install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.App.executor": "Run",
+    "Spring Boot.Server.executor": "Run",
+    "git-widget-placeholder": "Merging MergeoGlobal",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Modelo.Dominio.Repositories.Suscripciones" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Server">
+    <configuration name="TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TestUnitarios.PaqueteSuscripciones.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes" />
+      <option name="MAIN_CLASS_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera" />
+      <option name="METHOD_NAME" value="testQuedanNViandas" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TestUnitarios.PaqueteSuscripciones.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes" />
+      <option name="MAIN_CLASS_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes$TestsEventosDeViandas" />
+      <option name="METHOD_NAME" value="testQuedanNViandas" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCreadorDeMensajes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TestUnitarios.PaqueteSuscripciones.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TestUnitarios.PaqueteSuscripciones" />
+      <option name="MAIN_CLASS_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDeIncidentes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TestUnitarios.PaqueteIncidentes.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TestUnitarios.PaqueteIncidentes" />
+      <option name="MAIN_CLASS_NAME" value="TestUnitarios.PaqueteIncidentes.TestDeIncidentes" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="Servidor.Server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Servidor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.Server" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" />
+        <item itemvalue="JUnit.TestDeIncidentes" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="" />
+      <created>1733236357542</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733236357542</updated>
+      <workItem from="1733236358665" duration="108556000" />
+      <workItem from="1734122808671" duration="8634000" />
+      <workItem from="1734266103119" duration="602000" />
+      <workItem from="1734266720568" duration="6917000" />
+      <workItem from="1734281942258" duration="319000" />
+      <workItem from="1734282270868" duration="910000" />
+    </task>
+    <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
+      <option name="closed" value="true" />
+      <created>1733427818141</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733427818141</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Mergeo a MergeoGlobal">
+      <option name="closed" value="true" />
+      <created>1733427952807</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733427952807</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Proceso completo: Registrar PersonaEnSituacionVulnerable">
+      <option name="closed" value="true" />
+      <created>1733439421953</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733439421953</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Arreglo de un import erroneo">
+      <option name="closed" value="true" />
+      <created>1733440949631</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733440949631</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Mergeo con rama CambiosDonacionViandas">
+      <option name="closed" value="true" />
+      <created>1733442428224</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733442428224</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Mergeo con rama CambiosDistribucionDeViandas">
+      <option name="closed" value="true" />
+      <created>1733443930050</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733443930050</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Mergeo con rama ModificarColaborador">
+      <option name="closed" value="true" />
+      <created>1733443991046</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733443991046</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Mergeo con rama ModificarColaborador">
+      <option name="closed" value="true" />
+      <created>1733444449451</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733444449451</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Reparaciones globales">
+      <option name="closed" value="true" />
+      <created>1733456525045</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733456525045</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Reparacion de rama">
+      <option name="closed" value="true" />
+      <created>1733457062545</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733457062545</updated>
+    </task>
+    <task id="LOCAL-00011" summary="pequeñas reparaciones para solucionar errores">
+      <option name="closed" value="true" />
+      <created>1733479643223</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733479643223</updated>
+    </task>
+    <task id="LOCAL-00012" summary="suscripciones listo, faltan retoques pero funciona">
+      <option name="closed" value="true" />
+      <created>1734265985522</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1734265985522</updated>
+    </task>
+    <task id="LOCAL-00013" summary="mergeo">
+      <option name="closed" value="true" />
+      <created>1734276011520</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1734276011520</updated>
+    </task>
+    <task id="LOCAL-00014" summary="arreglos del merge para que compile">
+      <option name="closed" value="true" />
+      <created>1734281901383</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1734281901383</updated>
+    </task>
+    <task id="LOCAL-00015" summary="arreglos del merge para que compile parte 2">
+      <option name="closed" value="true" />
+      <created>1734282176505</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1734282176505</updated>
+    </task>
+    <task id="LOCAL-00016" summary="arreglos del merge para que compile parte 2">
+      <option name="closed" value="true" />
+      <created>1734300707270</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1734300707270</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/CambiosDonacionViandas" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/CambiosDonacionViandas" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Correccion a formulario de Registro de Vulnerables" />
+    <MESSAGE value="Mergeo a MergeoGlobal" />
+    <MESSAGE value="Proceso completo: Registrar PersonaEnSituacionVulnerable" />
+    <MESSAGE value="Arreglo de un import erroneo" />
+    <MESSAGE value="Mergeo con rama CambiosDonacionViandas" />
+    <MESSAGE value="Mergeo con rama CambiosDistribucionDeViandas" />
+    <MESSAGE value="Mergeo con rama ModificarColaborador" />
+    <MESSAGE value="Reparaciones globales" />
+    <MESSAGE value="Reparacion de rama" />
+    <MESSAGE value="pequeñas reparaciones para solucionar errores" />
+    <MESSAGE value="suscripciones listo, faltan retoques pero funciona" />
+    <MESSAGE value="mergeo" />
+    <MESSAGE value="arreglos del merge para que compile" />
+    <MESSAGE value="arreglos del merge para que compile parte 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="arreglos del merge para que compile parte 2" />
+  </component>
+</project>
