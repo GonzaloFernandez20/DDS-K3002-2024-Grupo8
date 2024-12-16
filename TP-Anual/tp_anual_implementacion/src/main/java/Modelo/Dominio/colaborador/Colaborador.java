@@ -2,14 +2,13 @@ package Modelo.Dominio.colaborador;
 
 import Modelo.Dominio.Accesos_a_heladeras.AccesoDeColaborador;
 import Modelo.Dominio.contribucion.Contribucion;
-import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,22 +26,17 @@ public class Colaborador {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
     private List<MedioDeContacto> mediosDeContacto;
-    @ElementCollection
-    private List<String> mensajesRecibidos;
-
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Contribucion> historialDeContribuciones;
-
     @OneToOne(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private AccesoDeColaborador tarjeta;
     @Column(name = "puntos_acumulados")
     private double puntosAcumulados;
 
-
+    //Constructores -------------------------------------------------------------------------------------------------
     public Colaborador(Persona persona, List<MedioDeContacto> mediosDeContacto) {
         this.persona = persona;
         this.mediosDeContacto = mediosDeContacto;
-        this.mensajesRecibidos = new ArrayList<>();
         this.historialDeContribuciones = new ArrayList<>();
         this.tarjeta = null;
         this.puntosAcumulados = 0;
@@ -50,19 +44,24 @@ public class Colaborador {
 
     public Colaborador() {
         this.historialDeContribuciones = new ArrayList<>();
-        this.mensajesRecibidos = new ArrayList<>();
     }
 
+    // Metodos -------------------------------------------------------------------------------------------------------
     public void registrarContribucion(Contribucion contribucion){
         historialDeContribuciones.add(contribucion);
-        puntosAcumulados += contribucion.puntosQueSumaColaborador();
+        double nuevosPuntos = contribucion.puntosQueSumaColaborador();
+        puntosAcumulados += nuevosPuntos;
+        logger.debug("Se sumaron {} puntos por la nueva cotribución, el colaborador queda con {} puntos acumulados", nuevosPuntos, puntosAcumulados);
     }
 
     public void notificar(String mensaje) {
-        mensajesRecibidos.add(mensaje);
-
         for (MedioDeContacto medio : mediosDeContacto){
-            medio.notificar(mensaje);
+            try {
+                medio.notificar(mensaje);
+                logger.info("Se notificó al colaborador a través de {}: {}", medio.getClass().getSimpleName(), mensaje);
+            } catch (Exception e) {
+                logger.error("Error al notificar a través de {}: {}", medio.getClass().getSimpleName(), e.getMessage());
+            }
         }
     }
 
@@ -70,26 +69,14 @@ public class Colaborador {
         puntosAcumulados -= puntosCanjeados;
     }
 
-    public Boolean tieneMedioDeContacto(MedioDeContacto medioDeContacto) {
-        return mediosDeContacto.stream().anyMatch(medio -> medio.equals(medioDeContacto));
+    public void sacarMedioDeContacto(MedioDeContacto medioDeContacto) {
+        mediosDeContacto.remove(medioDeContacto);
     }
 
-    public Boolean tieneDocumentoSegunNumeroYTipo(Documento documento) {
-        //TODO: Revisar
-/*      if(this.persona.getDocumento() == null){
-            return false;
-        } else {
-            return this.persona.getDocumento().esDocumentoSegunNumeroYTipo(documento);
-        }*/
-        return true;
+    public void agregarMedioDeContacto(MedioDeContacto nuevoMedio) {
+        mediosDeContacto.add(nuevoMedio);
     }
 
-    public void sacarMedioDeContacto(MedioDeContacto medioDeContacto) { mediosDeContacto.remove(medioDeContacto); }
-    public void agregarMedioDeContacto(MedioDeContacto nuevoMedio) { mediosDeContacto.add(nuevoMedio);}
-
-    // Hecho de forma provisoria para reportes
-    public Integer cantidadDeDonacionesDeViandaEntre(LocalDateTime fechaInicio, LocalDateTime fechaFin){
-        if(tarjeta == null){return 0;}
-        else{return tarjeta.cantidadDeAperturasPorDonacionesEntre(fechaInicio, fechaFin);}
-    }
+    //Logger ----------------------------------------------------------------------------------------------------------
+    private static final Logger logger = LoggerFactory.getLogger(Colaborador.class);
 }

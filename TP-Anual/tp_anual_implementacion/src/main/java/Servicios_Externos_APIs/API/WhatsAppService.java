@@ -5,6 +5,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 
 public class WhatsAppService {
@@ -27,14 +30,17 @@ public class WhatsAppService {
                 .build();
 
         try (Response response = CLIENT.newCall(request).execute()) {
+            assert response.body() != null;
             if (response.isSuccessful()) {
-                System.out.println("Mensaje enviado exitosamente: " + response.body().string());
+                logger.debug("Mensaje enviado exitosamente: {}", response.body().string());
             } else {
-                System.err.println("Error al enviar mensaje: " + response.code() + " - " + response.body().string());
+                logger.error("Error al enviar mensaje: {} - {}", response.code(), response.body().string());
             }
         } catch (IOException e) {
-            System.err.println("Excepción al enviar el mensaje:");
+            logger.error("Excepción al enviar el mensaje:");
             e.printStackTrace();
         }
     }
+    //Logger ----------------------------------------------------------------------------------------------------------
+    private static final Logger logger = LoggerFactory.getLogger(WhatsAppService.class);
 }

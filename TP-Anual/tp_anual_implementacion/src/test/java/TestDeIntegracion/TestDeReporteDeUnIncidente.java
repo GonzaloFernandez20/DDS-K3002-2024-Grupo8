@@ -75,7 +75,7 @@ public class TestDeReporteDeUnIncidente {
             configuracionInicial();
             assertEquals(INACTIVA, heladera.getEstado());
         }
-        @Disabled
+       /* @Disabled
         @Test
         @DisplayName("Todos los notificadores suscriptos a la heladera recibieron la notificacion sobre la falla")
         public void TestNotificadoresSuscriptos(){
@@ -84,7 +84,7 @@ public class TestDeReporteDeUnIncidente {
             for (Colaborador colaborador : colaboradoresSuscriptores){
                 assertTrue(colaborador.getMensajesRecibidos().contains(mensajeEsperado));
             }
-        }
+        }*/
     }
 
     @Nested

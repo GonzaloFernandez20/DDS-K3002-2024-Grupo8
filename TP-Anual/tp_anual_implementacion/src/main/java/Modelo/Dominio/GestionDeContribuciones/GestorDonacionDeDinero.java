@@ -24,7 +24,7 @@ public class GestorDonacionDeDinero {
         this.notificacionService = notificacionService;
     }
 
-    public static void crearContribucion(DonacionDeDinero donacionDeDinero){
+    public static void procesarDineroDonado(DonacionDeDinero donacionDeDinero){
         donacionDeDinero.procesarLaContribucion();
         colaboradorRepository.save(donacionDeDinero.getColaborador());
 

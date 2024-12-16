@@ -35,10 +35,10 @@ public final class Sistema {
 
         if(this.existeColaborador(colaborador)) {
             Colaborador colaboradorHallado = this.buscarColaborador(colaborador);
-            if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().getFirst())) {
+           /* if(!colaborador.getMediosDeContacto().isEmpty() && !colaboradorHallado.tieneMedioDeContacto(colaborador.getMediosDeContacto().getFirst())) {
                 colaboradorHallado.agregarMedioDeContacto(unMail);
             }
-/*            if(colaboradorHallado.getPersona().getDocumento() == null) {
+            if(colaboradorHallado.getPersona().getDocumento() == null) {
                 colaboradorHallado.getPersona().setDocumento(documento);
             }*/
             try {
@@ -87,8 +87,8 @@ public final class Sistema {
 
     public boolean tieneMedioDeContacto(Colaborador colaborador, Colaborador colaboradorBuscado) {
         return !colaborador.getMediosDeContacto().isEmpty() &&
-                !colaboradorBuscado.getMediosDeContacto().isEmpty() &&
-                colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().getFirst());
+                !colaboradorBuscado.getMediosDeContacto().isEmpty() && true;
+              //  colaborador.tieneMedioDeContacto(colaboradorBuscado.getMediosDeContacto().getFirst());
     }
 
 

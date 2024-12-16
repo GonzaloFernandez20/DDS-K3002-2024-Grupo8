@@ -49,7 +49,7 @@ public class TestColaborador {
         Sistema.getInstancia().darDeAltaColaborador(colaborador);
     }
 
-    @Disabled
+  /*  @Disabled
     @Test
     void ValidarQueTengaLasDonacionesDeViandaDeHoy() {
         AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("TP89", colaborador);
@@ -65,5 +65,5 @@ public class TestColaborador {
         accesoDeColaborador.estaAutorizadaLaApertura(heladera);
 
         assertEquals(1, (int) colaborador.cantidadDeDonacionesDeViandaEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
-    }
+    }*/
 }

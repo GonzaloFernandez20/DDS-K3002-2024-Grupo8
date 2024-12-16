@@ -3,24 +3,21 @@ package Servicios_Externos_APIs.API;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-import org.springframework.web.bind.annotation.RequestParam;
+import Modelo.Dominio.colaborador.Colaborador;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 public class MailService {
 
-   public static String sendEmail(String subject, String message, String correo) {
+   public static void sendEmail(String subject, String message, String correo) {
         String host = "smtp.gmail.com";
         
         // Obtener las credenciales del correo desde variables de entorno
         final String user ="diseno.de.sistemas.24@gmail.com";
         final String password = "zeqi qrjx ivnw aovw";
-
-        // Verificar que las credenciales no estén vacías
-        if (user == null || user.isEmpty() || password == null || password.isEmpty()) {
-            return "Error: Las credenciales no están configuradas correctamente en las variables de entorno.";
-        }
 
         // Configurar propiedades del servidor SMTP
         Properties props = new Properties();
@@ -48,17 +45,15 @@ public class MailService {
 
             // Enviar el correo
             Transport.send(msg);
-            return "Correo enviado con éxito a " + correo;
 
         } catch (AuthenticationFailedException e) {
-            System.err.println("Error de autenticación: " + e.getMessage());
-            return "Error de autenticación al enviar el correo. Por favor, verifica las credenciales.";
+            logger.error("Error de autenticación: {}", e.getMessage());
         } catch (MessagingException e) {
-            System.err.println("Error al enviar el correo: " + e.getMessage());
-            return "Error al enviar el correo: " + e.getMessage();
+            logger.error("Error al enviar el correo: {}", e.getMessage());
         } catch (UnsupportedEncodingException e) {
-            System.err.println("Error de codificación: " + e.getMessage());
-            return "Error de codificación al enviar el correo.";
+            logger.error("Error de codificación: {}", e.getMessage());
         }
     }
+    //Logger ----------------------------------------------------------------------------------------------------------
+    private static final Logger logger = LoggerFactory.getLogger(Colaborador.class);
 }
