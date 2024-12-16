@@ -23,6 +23,7 @@ import Modelo.Mappers.DonacionDeViandasMapper;
 import Modelo.Mappers.FactoryFallaTecnica;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+import Modelo.seguridad.SesionActiva.UtilsJWT;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 import Utils.DescargaDeArchivo;
@@ -33,6 +34,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -67,26 +70,110 @@ public class CtrlReportarFallaTecnica {
     }
 
     @PostMapping("/ReportarFallaTecnica")
-    public ResponseEntity<String> donarVianda(@RequestBody FallaTecnicaDTO fallaTecnicaDTO){
-        if (fallaTecnicaDTO == null || fallaTecnicaDTO.getHeladera() == null) {
-            throw new RuntimeException("Debes completar todo el reporte!");
-        }
+    public ResponseEntity<String> reportarFallaTecnica(
+            @RequestParam("heladera") String heladera, @RequestParam("descripcionFalla") String descripcionFalla, @RequestParam("fotoFalla") MultipartFile fotoFalla,
+            @CookieValue("token") String token) {
+
+        System.out.println("Token recibido: " + token);
 
         try {
-            DescargaDeArchivo.guardarArchivo("/fotosHeladerasReportadas/", fallaTecnicaDTO.getFoto());
-            Optional<Heladera> heladeraElegida = heladeraRepository.findById(fallaTecnicaDTO.getHeladera().getIdHeladera());
+            // Decodificar el token para obtener la información del colaborador
+            String id_colaborador = UtilsJWT.obtenerSujetoDelToken(token);
+
+            // Asignar colaborador al DTO
+            System.out.println("ID del colaborador decodificado: " + id_colaborador);
+            Colaborador colaborador = colaboradorRepository.obtenerColaboradorSegunID(id_colaborador);
+
+            // Verificar la heladera
+            Optional<Heladera> heladeraElegida = heladeraRepository.findById(Integer.parseInt(heladera));
+            System.out.println("Heladera encontrada: " + heladeraElegida.isPresent());
             if (heladeraElegida.isPresent()) {
+                FallaTecnicaDTO fallaTecnicaDTO = new FallaTecnicaDTO(colaborador, descripcionFalla, heladeraElegida.get(), fotoFalla);
+                System.out.println("Llamando a GestorDeIncidentes.reportarFallaTecnica");
                 FallaTecnica fallaTecnica = GestorDeIncidentes.reportarFallaTecnica(fallaTecnicaDTO);
+                System.out.println("Falla técnica reportada: " + fallaTecnica);
+                System.out.println("Guardando en fallaTecnicaRepository");
                 fallaTecnicaRepository.save(fallaTecnica);
+                System.out.println("Guardado exitosamente en fallaTecnicaRepository");
+
+                System.out.println("Se realizó el reporte completo");
             } else {
-                throw new RuntimeException("Heladera no encontrada con ID: " + fallaTecnicaDTO.getHeladera().getIdHeladera());
+                throw new RuntimeException("Heladera no encontrada con ID: " + heladera);
             }
             return ResponseEntity.ok("Reporte realizado con éxito!");
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
         }
     }
+    /*
+    @PostMapping(value = "/ReportarFallaTecnica", consumes = "multipart/form-data")
+    public ResponseEntity<String> reportarFallaTecnica(
+            @RequestParam("heladera") String heladeraId,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("fotoFalla") MultipartFile fotoFalla,
+            @CookieValue("token") String token) {
+        System.out.println("Inicio del método reportarFallaTecnica");
+        System.out.println("Token recibido: " + token);
+
+        try {
+            if (fotoFalla.isEmpty()) {
+                return ResponseEntity.badRequest().body("El archivo de foto está vacío.");
+            }
+
+            // Guardar la foto en una ubicación persistente
+            String rutaDirectorio = "C:/fotosHeladerasReportadas/";
+            String nombreArchivo = fotoFalla.getOriginalFilename();
+            String rutaCompleta = rutaDirectorio + nombreArchivo;
+
+            // Crear directorio si no existe
+            Files.createDirectories(Paths.get(rutaDirectorio));
+
+            // Guardar archivo en disco
+            fotoFalla.transferTo(Paths.get(rutaCompleta));
+
+            // Proseguir con el procesamiento
+            System.out.println("Archivo guardado en: " + rutaCompleta);
+
+            if (rutaCompleta.length() > 255) {
+                throw new RuntimeException("La ruta del archivo supera el límite permitido de 255 caracteres.");
+            }
+
+            // Decodificar el token para obtener la información del colaborador
+            String id_colaborador = UtilsJWT.obtenerSujetoDelToken(token);
+
+            // Buscar colaborador
+            Colaborador colaborador = colaboradorRepository.obtenerColaboradorSegunID(id_colaborador);
+
+            // Verificar heladera
+            Optional<Heladera> heladeraElegida = heladeraRepository.findById(Integer.parseInt(heladeraId));
+            if (!heladeraElegida.isPresent()) {
+                throw new RuntimeException("Heladera no encontrada con ID: " + heladeraId);
+            }
+
+            // Crear el DTO manualmente (porque no usamos @RequestBody aquí)
+            FallaTecnicaDTO fallaTecnicaDTO = new FallaTecnicaDTO(colaborador, descripcion, heladeraElegida.get(), fotoFalla);
+            //fallaTecnicaDTO.setDescripcion(descripcion);
+            //fallaTecnicaDTO.setColaboradorInformante(colaborador);
+            //fallaTecnicaDTO.setFoto(fotoFalla);
+            //fallaTecnicaDTO.setHeladera(heladeraElegida.get().getIdHeladera());
+
+            // Guardar la foto
+            //DescargaDeArchivo.guardarArchivo("/fotosHeladerasReportadas/", fotoFalla);
+
+            // Reportar falla
+            FallaTecnica fallaTecnica = GestorDeIncidentes.reportarFallaTecnica(fallaTecnicaDTO);
+            fallaTecnicaRepository.save(fallaTecnica);
+
+            System.out.println("Se realizó el reporte completo");
+            return ResponseEntity.ok("Reporte realizado con éxito!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
+        }
+    }*/
+
+
     /*private String guardarFoto(MultipartFile fotoFalla) {
 
         String filePath = "/fotosHeladerasReportadas/" + fotoFalla.getOriginalFilename();

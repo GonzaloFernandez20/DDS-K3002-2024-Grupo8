@@ -36,12 +36,18 @@
         <main class="container col-md-6" id="container-reportar">
             <h1 id="title-reportar">Reportar Falla Técnica</h1>
 
-            <form id="form-reportar-falla" method="post" th:action="@{/ReportarFallaTecnica}" enctype="multipart/form-data">
+            <form id="form-reportar-falla" action="/ReportarFallaTecnica" method="post" enctype="multipart/form-data">
                 <div class="input-group">
-                    <label for="heladeraReportada">Heladera en la que ocurrió la falla (*)</label>
-                    <select id="heladeraReportada" name="heladeraReportada">
-                        <option th:each="heladera : ${heladerasAReportar}" th:value="${heladera.idHeladera}" th:text="${heladera.nombreDelPunto} + ', ' + ${heladera.calle} + ' ' + ${heladera.altura} + ', ' + ${heladera.ciudad}"></option>
+                    <label for="heladera">Heladera en la que ocurrió la falla (*)</label>
+                    <select id="heladera" name="heladera" required>
+                        <option value="" selected disabled>--Seleccione una opcion--</option>
+                        <option th:each="heladera : ${heladeras}"
+                                th:value="${heladera.getIdHeladera()}"
+                                th:text="${heladera.getNombreDelPunto()} + ' - ' + ${heladera.getCalle()} + ' ' + ${heladera.getAltura()} + ', ' + ${heladera.getCiudad()} "
+                                th:class="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0 ? 'inactiva' : ''}" th:disabled="${heladera.estado.name() == 'INACTIVA' or heladera.capacidadRestante == 0}"></option>
                     </select>
+
+                    <a th:href="@{/Mapa}" title="Abrir Mapa" class="hipervinculo"> Consultá las Heladeras Disponibles en este Mapa. </a>
                 </div>
 
                 <div class="input-group">
@@ -55,6 +61,7 @@
                 </div>
 
                 <button type="submit" id="btn-reportar">Reportar falla</button>
+                <div id="alert-box" style="display:none;"></div>
                 <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
                     <p th:text="${mensaje}"></p>
                 </div>

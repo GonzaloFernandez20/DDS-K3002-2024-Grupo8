@@ -10,10 +10,10 @@ public class FallaTecnicaDTO {
     private Heladera heladera;
     private MultipartFile foto;
 
-    public FallaTecnicaDTO(Colaborador colaboradorInformante, Heladera heladera, String descripcion, MultipartFile foto) {
+    public FallaTecnicaDTO(Colaborador colaboradorInformante, String descripcion, Heladera heladera, MultipartFile foto) {
         this.colaboradorInformante = colaboradorInformante;
-        this.heladera = heladera;
         this.descripcion = descripcion;
+        this.heladera = heladera;
         this.foto = foto;
     }
 
@@ -23,7 +23,7 @@ public class FallaTecnicaDTO {
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
     public Heladera getHeladera() { return heladera; }
-    public void setHeladera(Heladera heladera) { this.heladera = heladera; }
+    public void setHeladera(Heladera heladeraID) { this.heladera = heladeraID; }
     public MultipartFile getFoto() { return foto; }
     public void setFoto(MultipartFile foto) { this.foto = foto; }
 }
