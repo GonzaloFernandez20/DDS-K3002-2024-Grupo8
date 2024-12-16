@@ -3,63 +3,67 @@ package Modelo.Dominio.suscripcion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "NotificadorDeSuscriptos")
 public class NotificadorDeSuscriptos {
     @Id
     @GeneratedValue
     private Integer id_notificador_de_suscriptos;
-    @Transient
-    private final Map<String, List<Colaborador>> suscriptos;
-    @OneToOne(mappedBy = "notificadorDeSuscriptos")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_notificador")
+    private List<Suscripcion> suscriptos;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_heladera")
     private Heladera heladera;
 
+    //Constructores ---------------------------------------------------------------------------------------
     public NotificadorDeSuscriptos(Heladera heladera) {
         this.heladera = heladera;
-        this.suscriptos = new HashMap<>();
+        this.suscriptos = new ArrayList<>();
     }
-
     public NotificadorDeSuscriptos() {
-        this.suscriptos = new HashMap<>();
     }
 
+    //Metodos ---------------------------------------------------------------------------------------------
     public void suscribir(String evento, Colaborador colaborador){
-        suscriptos.computeIfAbsent(evento, key -> new ArrayList<>());
-        suscriptos.get(evento).add(colaborador);
-    }
-
-    public void desuscribir(String evento, Colaborador colaborador){
-        suscriptos.get(evento).remove(colaborador);
-        if (suscriptos.get(evento).isEmpty()) suscriptos.remove(evento);
-    }
-
-    public void notificar(String evento){ // A cada colaborador suscripto a ese evento, se le envia un mensaje
-        String mensaje = CreadorDeMensajes.crearMensaje(evento, heladera);
-        if(suscriptos.containsKey(evento)){
-            for (Colaborador suscripto : suscriptos.get(evento)){
-                suscripto.notificar(mensaje);
-            }
+        Optional<Suscripcion> suscripcion = buscarSuscripcion(evento, colaborador);
+        if(suscripcion.isPresent()){
+            suscripcion.get().setEvento(evento);
+        }
+        else{
+            suscriptos.add(new Suscripcion(evento, colaborador,heladera));
         }
     }
 
-    public List<String> eventosALosQueEstaSuscritoUnColaborador(Colaborador colaborador) {
-        List<String> eventos = new ArrayList<>();
-
-        suscriptos.forEach( (evento, suscriptores) -> {
-            if(suscriptores.contains(colaborador)){
-                eventos.add(evento);
-            }
-        });
-
-        return eventos;
+    public void desuscribir(String evento, Colaborador colaborador){
+        Optional<Suscripcion> suscripcion = buscarSuscripcion(evento, colaborador);
+        if (suscripcion.isPresent()){
+            suscriptos.remove(suscripcion.get());
+        }
     }
 
-    // ---- Getters y Setters
-    public Map<String, List<Colaborador>> getSuscriptos() { return suscriptos; }
-    public Heladera getHeladera() { return heladera; }
+    public Optional<Suscripcion> buscarSuscripcion(String evento, Colaborador colaborador){
+        return suscriptos.stream().
+                filter(suscripcion -> suscripcion.correspondaConLaReferencia(evento, colaborador.getId_colaborador())).
+                findFirst();
+    }
+
+    public void notificar(String evento){
+        List<Suscripcion> suscriptosANotificar = suscriptos.stream()
+                                                           .filter(suscripto ->suscripto.estaSuscritoAl(evento))
+                                                           .toList();
+        if(!suscriptosANotificar.isEmpty()){
+        String mensaje = CreadorDeMensajes.crearMensaje(evento, heladera);
+            for (Suscripcion suscripto : suscriptosANotificar){
+                suscripto.getSuscripto().notificar(mensaje);
+            }
+        }
+    }
 }

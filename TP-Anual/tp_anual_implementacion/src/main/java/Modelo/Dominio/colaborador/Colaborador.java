@@ -31,7 +31,6 @@ public class Colaborador {
     private List<String> mensajesRecibidos;
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "colaborador" ,referencedColumnName = "id_colaborador")
     private List<Contribucion> historialDeContribuciones;
 
     @OneToOne(mappedBy = "colaborador", cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -1,19 +1,21 @@
 package DTOs;
 
-import java.util.List;
+import Modelo.Dominio.heladera.Heladera;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class SuscripcionDTO {
-    private Integer id_colaborador;
-    private String nombreDelPunto;
-    private String evento;
+    private final String nombreDelPunto;
+    private final String evento;
+    private final Heladera heladera;
+    private final int idHeladera;
 
-    public SuscripcionDTO(Integer id_colaborador, String nombreDelPunto, String evento) {
-        this.id_colaborador = id_colaborador;
+    public SuscripcionDTO(String nombreDelPunto, String evento, Heladera heladera, int idHeladera) {
         this.nombreDelPunto = nombreDelPunto;
         this.evento = evento;
+        this.heladera = heladera;
+        this.idHeladera = idHeladera;
     }
-
-    public Integer getId_colaborador() { return id_colaborador; }
-    public String getNombreDelPunto() { return nombreDelPunto; }
-    public String getEvento() { return evento; }
 }

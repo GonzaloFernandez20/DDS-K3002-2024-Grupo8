@@ -7,20 +7,19 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
+import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Mappers.BuilderHeladera;
 import Modelo.seguridad.GestorInicioDeSesion;
 
 import Repositories.colaborador.ColaboradorRepository;
 import Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Repositories.heladera.HeladeraRepository;
+import Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
 
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 
 import jakarta.transaction.Transactional;
-
-import Servicios_Externos_APIs.NotificacionService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,14 +37,22 @@ import java.util.List;
 public class CtrlHacerseCargoDeHeladera {
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final HeladeraRepository heladeraRepository;
     private final HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository;
-    private final NotificacionService notificacionService;
+    private final ColaboradorRepository colaboradorRepository;
+    private final NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository;
 
     @Autowired
-    public CtrlHacerseCargoDeHeladera( NotificacionService notificacionService, GestorInicioDeSesion gestorInicioDeSesion, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository) {
-        this.notificacionService = notificacionService;
+    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion,
+                                      HeladeraRepository heladeraRepository,
+                                      HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository,
+                                      ColaboradorRepository colaboradorRepository,
+                                      NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
+        this.heladeraRepository = heladeraRepository;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
+        this.colaboradorRepository = colaboradorRepository;
+        this.notificadorDeSuscriptosRepository = notificadorDeSuscriptosRepository;
     }
 
     @GetMapping("/HacerseCargoDeUnaHeladera")
@@ -71,6 +78,10 @@ public class CtrlHacerseCargoDeHeladera {
 
         heladeraDTO.setColaboradorACargo(colaborador);
         Heladera nuevaHeladera = BuilderHeladera.crearHeladeraAPartirDe(heladeraDTO);
+        NotificadorDeSuscriptos notificador = new NotificadorDeSuscriptos(nuevaHeladera);
+        nuevaHeladera.setNotificadorDeSuscriptos(notificador);
+        NotificadorDeSuscriptos notificadorGuardado = notificadorDeSuscriptosRepository.save(notificador);
+
 
         System.out.println("Nueva Heladera: " + nuevaHeladera.getUbicacion().getNombreCompletoDeUbicacion());
 
@@ -78,10 +89,10 @@ public class CtrlHacerseCargoDeHeladera {
         // Contribucion nuevaContribucion
         HacerseCargoDeHeladera nuevaContribucion = new HacerseCargoDeHeladera();
         nuevaContribucion.setColaborador(colaborador);
-        nuevaContribucion.setHeladeraACargo(nuevaHeladera);
+        nuevaContribucion.setHeladeraACargo(notificadorGuardado.getHeladera());
         nuevaContribucion.setFechaDeContribucion(LocalDate.now());
 
-        System.out.println(colaborador.getId_colaborador() + " " + nuevaHeladera.getIdHeladera());
+
 
         nuevaContribucion.procesarLaContribucion();
 
@@ -91,10 +102,6 @@ public class CtrlHacerseCargoDeHeladera {
             e.printStackTrace(); //
         }
         // Usando cascade = CascadeType.PERSIST estoy guardando la heladera también
-
-        // Enviar una notificación
-        String mensajeNotificacion = "Gracias por hacerse cargo de una heladera";
-        notificacionService.sendNotificacionToColaborador(colaborador, mensajeNotificacion);
 
         return ResponseEntity.ok("Registro realizado con éxito!");
     }

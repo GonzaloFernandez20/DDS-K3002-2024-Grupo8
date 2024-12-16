@@ -111,7 +111,7 @@ public class TestGenerarReportesSemanales {
         AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador("TP89", colaboradorHumano);
         colaboradorHumano.setTarjeta(accesoDeColaborador);
 
-        heladera.setIdHeladera(8888);
+
 
         Vianda vianda = new Vianda("Tortilla de Papa", LocalDate.now().plusDays(5), colaboradorHumano, heladera, null, null);
         DonacionDeViandas contribucionDeVianda = new DonacionDeViandas(colaboradorHumano, heladera, List.of(vianda), LocalDate.now());
@@ -138,7 +138,7 @@ public class TestGenerarReportesSemanales {
 
     private boolean laListaDeFallasPorHeladeraContieneLaFalla(List<FallasPorHeladera> fallas, FallasPorHeladera falla) {
         for(int i=0; i<fallas.size(); i++) {
-            if(fallas.get(i).getHeladera().getIdHeladera() == falla.getHeladera().getIdHeladera() && Objects.equals(fallas.get(i).getCantidadDeFallas(), falla.getCantidadDeFallas())) {
+            if(fallas.get(i).getHeladera().getid_heladera() == falla.getHeladera().getid_heladera() && Objects.equals(fallas.get(i).getCantidadDeFallas(), falla.getCantidadDeFallas())) {
                 return true;
             }
         }
@@ -158,7 +158,7 @@ public class TestGenerarReportesSemanales {
 
     private boolean laListaDeViandasPorHeladerasContieneLasViandasPorHeladera(List<ViandasPorHeladera> viandas, ViandasPorHeladera vianda) {
         for(int i=0; i<viandas.size(); i++) {
-            if(Objects.equals(viandas.get(i).getHeladera().getIdHeladera(), vianda.getHeladera().getIdHeladera()) && viandas.get(i).getViandasColocadas() == vianda.getViandasColocadas() && viandas.get(i).getViandasRetiradas() == vianda.getViandasRetiradas()) {
+            if(Objects.equals(viandas.get(i).getHeladera().getid_heladera(), vianda.getHeladera().getid_heladera()) && viandas.get(i).getViandasColocadas() == vianda.getViandasColocadas() && viandas.get(i).getViandasRetiradas() == vianda.getViandasRetiradas()) {
                 return true;
             }
         }
