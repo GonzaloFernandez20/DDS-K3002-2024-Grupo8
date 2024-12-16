@@ -66,7 +66,4 @@ public interface HeladeraRepository extends JpaRepository<Heladera, Integer> {
         desvincularHeladeraDistribucionViandas(idHeladera);
         eliminarViandasPorHeladera(idHeladera);
     }
-
-    @Query(value = "SELECT  * FROM heladera WHERE id_heladera = ?1", nativeQuery = true)
-    Optional<Heladera> obtenerHeladeraSegunID(String id_heladera);
 }

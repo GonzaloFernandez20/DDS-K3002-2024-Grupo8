@@ -55,7 +55,7 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
         apertura.getContribucion().procesarLaContribucion();
 
         //TODO: Registrar movimiento en BD
-        GestorDeAperturasAHeladeras.getInstancia().registrarAccesoDeColaborador(this);
+        GestorDeAperturasAHeladeras.registrarAccesoDeColaborador(this);
     }
 
     // TODO: Hecho de forma provisoria para reportes

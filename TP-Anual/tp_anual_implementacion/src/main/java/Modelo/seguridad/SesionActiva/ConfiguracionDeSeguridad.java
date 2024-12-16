@@ -24,7 +24,7 @@ public class ConfiguracionDeSeguridad {
                         //.anyRequest().permitAll())
                         .requestMatchers("/", "/Home", "/InicioDeSesion", "/RegistroPersona", "/Mapa", "/Nosotros",
                                          "/Header", "/Footer", "/CierreDeSesion", "/ValidarUsuario",
-                                         "/RegistrarColaboradorJuridico", "/RegistrarColaboradorHumano", "/DetectarMovimiento").permitAll()
+                                         "/RegistrarColaboradorJuridico", "/RegistrarColaboradorHumano", "/DetectarMovimiento", "/AutorizarApertura").permitAll()
                         .requestMatchers("/assets/**", "/img/**").permitAll()
                         .anyRequest().authenticated())
                 //.formLogin(formularioLogin -> formularioLogin.loginPage("/InicioDeSesion").permitAll()) // Permitimos el acceso público a la página de login

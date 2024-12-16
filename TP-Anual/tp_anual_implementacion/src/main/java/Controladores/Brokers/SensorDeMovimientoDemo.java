@@ -23,7 +23,7 @@ public class SensorDeMovimientoDemo {
     @PostMapping("/DetectarMovimiento")
     public ResponseEntity<String> detectarMovimiento(@RequestParam String id_sensor) throws Exception {
         servicioBroker.enviarMensaje("movimientos", id_sensor);
-        return ResponseEntity.ok().body("Alerta registrada con exito");
+        return ResponseEntity.ok().body("Alerta de intento de robo reportada con exito");
     }
 
     @PreDestroy
@@ -38,6 +38,4 @@ public class SensorDeMovimientoDemo {
         }
     }
 }
-/*
--> Este Broker simula ser el lector de tarjetas
-*/
+

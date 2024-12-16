@@ -35,9 +35,7 @@ public class BrokerMovimientoListener {
         try {
             // Obtener el canal y conectar al broker
             Channel canal = servicioBroker.getCanal();
-
-            // Declarar la cola en caso de que no exista
-            canal.queueDeclare("movimientos", true, false, false, null);
+            //TODO loggear
             System.out.println("Escuchando mensajes en la cola 'movimientos'...");
 
             // Crear el callback para manejar los mensajes recibidos
@@ -59,8 +57,8 @@ public class BrokerMovimientoListener {
     }
 
     private void procesarMensaje(String id_sensor) {
-
-        System.out.println("Alerta de movimiento recibida: Sensor ID = " + id_sensor);
+        //TODO loogear
+        System.out.println("Alerta de intento de robo recibida: Sensor ID = " + id_sensor);
 
         Optional<SensoreoDeMovimiento> sensoreoAvisoRobo = sensoreoDeMovimientoRepository.obtenerSensorDeHeladera(id_sensor);
 
