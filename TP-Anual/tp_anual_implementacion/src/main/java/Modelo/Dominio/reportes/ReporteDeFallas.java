@@ -14,8 +14,9 @@ import java.util.List;
 public class ReporteDeFallas extends ReporteSemanal{
     private List<FallasPorHeladera> fallasPorHeladera = new ArrayList<FallasPorHeladera>();
 
-    @Autowired
-    ReportesServiceImpl reportesServiceImlp;
+//    @Autowired
+//    ReportesServiceImpl reportesServiceImlp;
+
 
     @Override
     public void completarReporte(){

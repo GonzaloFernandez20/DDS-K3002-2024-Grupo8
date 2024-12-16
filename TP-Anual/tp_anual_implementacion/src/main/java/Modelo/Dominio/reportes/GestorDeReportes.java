@@ -1,5 +1,6 @@
 package Modelo.Dominio.reportes;
 
+import ServiceImpl.ReportesServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,9 @@ public class GestorDeReportes {
         return instancia;
     }
 
-    public void generarReportesSemanales(){
-        ReporteDeFallas reporteDeFallas = new ReporteDeFallas();
+/*    public void generarReportesSemanales(){
+//        ReporteDeFallas reporteDeFallas = new ReporteDeFallas();
+        ReporteDeFallas reporteDeFallas = this.generarReporteDeFallasPorHeladera();
         reporteDeFallas.setFechaDeCreacion(LocalDate.now());
         reporteDeFallas.completarReporte();
 
@@ -35,8 +37,16 @@ public class GestorDeReportes {
         reporteDeViandasPorHeladera.completarReporte();
 
         reportes.add(reporteDeFallas);
-        reportes.add(reporteDeViandasPorHeladera);
-        reportes.add(reporteDeViandasPorColaborador);
+//        reportes.add(reporteDeViandasPorHeladera);
+//        reportes.add(reporteDeViandasPorColaborador);
+    }
+    */
+    public void generarReportesSemanales(List<ReporteSemanal> reportesSemanales){
+        reportesSemanales.forEach(reporteSemanal -> {
+            reporteSemanal.setFechaDeCreacion(LocalDate.now());
+            reporteSemanal.completarReporte();
+            reportes.add(reporteSemanal);
+        });
     }
 
     private void verificarExistenciaDeReportes() {

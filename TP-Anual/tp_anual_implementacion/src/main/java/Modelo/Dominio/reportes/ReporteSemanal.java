@@ -1,20 +1,29 @@
 package Modelo.Dominio.reportes;
 
+import ServiceImpl.ReportesServiceImpl;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 import com.itextpdf.text.pdf.PdfPTable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.time.LocalDate;
 
-@Service
+@Component
 public class ReporteSemanal {
+//    @Autowired
+    ReportesServiceImpl reportesServiceImlp;
+
     protected LocalDate fechaDeCreacion;
+
+    public void setReportesServiceImlp(ReportesServiceImpl reportesServiceImlp) {
+        this.reportesServiceImlp = reportesServiceImlp;
+    }
 
     public ReporteSemanal(LocalDate fechaDeCreacion) {
         this.fechaDeCreacion = LocalDate.now();
