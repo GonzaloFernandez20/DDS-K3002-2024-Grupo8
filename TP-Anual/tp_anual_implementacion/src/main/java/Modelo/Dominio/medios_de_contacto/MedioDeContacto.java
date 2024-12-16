@@ -9,4 +9,9 @@ public abstract class MedioDeContacto {
     @GeneratedValue
     private  Integer id_medio_de_contacto;
     public void notificar(String mensaje) {}
+
+    public abstract String getValor();
+    public String getTipo() {
+        return this.getClass().getSimpleName();
+    }
 }

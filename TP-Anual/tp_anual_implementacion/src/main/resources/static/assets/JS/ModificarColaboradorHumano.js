@@ -69,7 +69,21 @@ document.getElementById("mod-cuenta-humano").addEventListener("submit", function
     medioNuevo.parentElement.style.display = "none"; // Ocultar el input tras el envío (opcional)
 });
 */
+document.getElementById("tipoNuevoMedioDeContactoHumano").addEventListener("change", function () {
+    const inputContainer = document.getElementById("inputContainer");
+    const label = document.querySelector("#inputContainer label");
+    const tipo = this.value;
 
+    if (tipo === "Mail") {
+        label.textContent = "Correo:";
+        inputContainer.style.display = "block";
+    } else if (tipo === "WhatsApp") {
+        label.textContent = "Número de WhatsApp:";
+        inputContainer.style.display = "block";
+    } else {
+        inputContainer.style.display = "none";
+    }
+});
 
 
 

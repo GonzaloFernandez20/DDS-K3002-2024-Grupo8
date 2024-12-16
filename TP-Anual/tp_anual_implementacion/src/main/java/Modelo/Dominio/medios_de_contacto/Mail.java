@@ -24,6 +24,7 @@ public class Mail extends MedioDeContacto{
         String correo = this.correo;
         MailService.sendEmail(subject,mensaje,correo);
     }
-
-    public String getCorreo() { return correo; }
+    @Override
+    public String getValor() { return this.correo; }
+    public String getCorreo() { return this.correo; }
 }

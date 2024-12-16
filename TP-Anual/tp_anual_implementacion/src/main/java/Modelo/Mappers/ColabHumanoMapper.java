@@ -49,11 +49,14 @@ public class ColabHumanoMapper {
             new ArrayList<>()
         );
 
-        // Creacion de medios de contacto
-        if (colaboradorDTO.isTieneWp()){
-            nuevoColaborador.agregarMedioDeContacto(new WhatsApp(colaboradorDTO.getTelefono()));
-        }
-        nuevoColaborador.agregarMedioDeContacto(new Mail(colaboradorDTO.getEmail()));
+        colaboradorDTO.getMedioDeContactos().forEach(medio -> {
+            if(medio.getTipo().equals("WhatsApp")) {
+                nuevoColaborador.agregarMedioDeContacto(new WhatsApp(medio.getValor()));
+            }
+            if(medio.getTipo().equals("Mail")) {
+                nuevoColaborador.agregarMedioDeContacto(new Mail(medio.getValor()));
+            }
+        });
 
         usuario.setColaborador(nuevoColaborador);
         return usuario;

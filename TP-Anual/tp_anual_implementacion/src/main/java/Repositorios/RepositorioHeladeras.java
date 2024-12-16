@@ -62,10 +62,7 @@ public class RepositorioHeladeras {
                         Sexo.MASCULINO,
                         "Carlos Calvo",
                         "400",
-                        "alfredo@gmail.com",
-                        "1144196172",
-                        true,
-                        true,
+                        null,
                         false
                 )
         ).getColaborador();

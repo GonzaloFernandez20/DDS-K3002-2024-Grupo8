@@ -3,6 +3,8 @@ package DTOs;
 import Modelo.Dominio.Persona.TipoOrganizacion;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class ColaboradorJuridicoDTO {
 
@@ -14,17 +16,13 @@ public class ColaboradorJuridicoDTO {
     private final String rubro;
     private final String calle;
     private final String altura;
-    private final String email;
-    private final String telefono;
-
-    private final boolean tieneWp;
-    private final boolean tieneTg;
+    List<MedioDeContactoDTO> medioDeContactos;
 
 
     // Constructor
     public ColaboradorJuridicoDTO(String usuario, String contrasenia, String razonSocial,
                                   TipoOrganizacion tipoDeOrganizacion, String rubro, String calle,
-                                  String altura, String telefono, String email, boolean tieneWp, boolean tieneTg) {
+                                  String altura, List<MedioDeContactoDTO> medioDeContactos) {
         this.usuario = usuario;
         this.constrasenia = contrasenia;
         this.razonSocial = razonSocial;
@@ -32,11 +30,43 @@ public class ColaboradorJuridicoDTO {
         this.rubro = rubro;
         this.calle = calle;
         this.altura = altura;
-        this.telefono = telefono;
-        this.email = email;
-        this.tieneWp = tieneWp;
-        this.tieneTg = tieneTg;
+        this.medioDeContactos = medioDeContactos;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getConstrasenia() {
+        return constrasenia;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public TipoOrganizacion getTipoDeOrganizacion() {
+        return tipoDeOrganizacion;
+    }
+
+    public String getRubro() {
+        return rubro;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public String getAltura() {
+        return altura;
+    }
+
+    public List<MedioDeContactoDTO> getMedioDeContactos() {
+        return medioDeContactos;
+    }
+
+    public void setMedioDeContactos(List<MedioDeContactoDTO> medioDeContactos) {
+        this.medioDeContactos = medioDeContactos;
+    }
 }
 

@@ -4,7 +4,6 @@ import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
 import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.contribucion.DonacionDeViandasRepository;
 import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.contribucion.*;
 import Modelo.Dominio.heladera.Heladera;
@@ -29,19 +28,17 @@ import java.util.stream.Collectors;
 @Controller
 public class CtrlDonacionViandas {
 
-    private final HeladeraRepository repositorioHeladeras;
-    private final ColaboradorRepository colaboradorRepository;
+    private final Repositories.heladera.HeladeraRepository repositorioHeladeras;
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
-    private final DonacionDeViandasRepository donacionDeViandasRepository;
+    private final Repositories.contribucion.DonacionDeViandasRepository donacionDeViandasRepository;
 
     @Autowired
-    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion,
-                              ColaboradorRepository colaboradorRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura,
-                               DonacionDeViandasRepository donacionDeViandasRepository) {
+    public CtrlDonacionViandas(Repositories.heladera.HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion,
+                              GestorDePermisosDeApertura gestorDePermisosDeApertura,
+                               Repositories.contribucion.DonacionDeViandasRepository donacionDeViandasRepository) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
-        this.colaboradorRepository = colaboradorRepository;
         this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
         this.donacionDeViandasRepository = donacionDeViandasRepository;
     }
