@@ -62,18 +62,4 @@ public class HacerseCargoDeHeladera extends Contribucion{
     public void setHeladeraACargo(Heladera heladeraACargo) {
         this.heladeraACargo = heladeraACargo;
     }
-
-    public void consultarRecomendaciones(double latitud, double longitud, int radio) throws IOException{
-        ResponseRecomendacion puntos = APIRequester.getInstancia().obtenerPuntosRecomendados(latitud, longitud, radio);
-        
-        // TE DEVUELVE LOS PUNTOS RECOMENDADOS PARA QUE VOS ELIJAS...
-        if (puntos != null && puntos.getPosiblesPuntosDeColocacion() != null) {
-			for (PuntoEnElMapa punto : puntos.getPosiblesPuntosDeColocacion()) {
-				System.out.println(" " + punto.getLatitud());
-				System.out.println(punto.getLongitud());
-			}
-		} else {
-			System.out.println("La lista de puntos recomendados es nula o vacía.");
-		}
-    }
 }
