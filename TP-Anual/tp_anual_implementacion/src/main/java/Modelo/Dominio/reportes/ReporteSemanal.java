@@ -6,24 +6,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 import com.itextpdf.text.pdf.PdfPTable;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.time.LocalDate;
 
-@MappedSuperclass
+@Service
 public class ReporteSemanal {
-    @Id
-    @GeneratedValue
-    private Integer id_reporte;
-    @Column(name = "fecha_de_creacion")
     protected LocalDate fechaDeCreacion;
 
     public ReporteSemanal(LocalDate fechaDeCreacion) {
         this.fechaDeCreacion = LocalDate.now();
     }
 
-    public ReporteSemanal() {
-    }
+    public ReporteSemanal() {}
 
     public LocalDate getFechaDeCreacion() {
         return fechaDeCreacion;
@@ -37,5 +34,9 @@ public class ReporteSemanal {
         return null;
     }
 
-    public void completarTablaConAtributos(PdfPTable tabla) { }
+    public void setFechaDeCreacion(LocalDate fechaDeCreacion) {
+        this.fechaDeCreacion = fechaDeCreacion;
+    }
+
+    public void completarTablaConAtributos(PdfPTable tabla) {}
 }

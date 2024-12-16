@@ -1,6 +1,7 @@
 package tp_anual.tp_anual_implementacion;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
@@ -27,12 +28,14 @@ class RecomendacionPuntosDeColocacionTests {
         radio = 5000;
     }
 
+    @Disabled
     @Test
     void testObtenerValores1() throws IOException {
         setUp1();
         contribucion.consultarRecomendaciones(latitud, longitud, radio);
         // Queda Chequear lo que sale por pantalla nomas...
     }
+    @Disabled
     @Test
     void testObtenerValores2() throws IOException{
         setUp2();

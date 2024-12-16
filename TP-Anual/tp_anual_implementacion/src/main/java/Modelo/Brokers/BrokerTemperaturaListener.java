@@ -1,5 +1,5 @@
 package Modelo.Brokers;
-import Modelo.Dominio.Repositories.heladera.SensoreoDeTemperaturaRepository;
+import Repositories.heladera.SensoreoDeTemperaturaRepository;
 import Modelo.Dominio.heladera.SensoreoDeTemperatura;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;

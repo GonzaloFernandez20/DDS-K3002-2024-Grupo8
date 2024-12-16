@@ -37,4 +37,20 @@ public abstract class Incidente {
     public Heladera getHeladeraDondeOcurrio() { return heladeraDondeOcurrio; }
     public EstadoDelIncidente getEstado() { return estado; }
     public List<VisitaTecnica> getVisitas() { return visitas; }
+
+    public void setMomentoDelSuceso(LocalDateTime momentoDelSuceso) {
+        this.momentoDelSuceso = momentoDelSuceso;
+    }
+
+    public void setHeladeraDondeOcurrio(Heladera heladeraDondeOcurrio) {
+        this.heladeraDondeOcurrio = heladeraDondeOcurrio;
+    }
+
+    public void setVisitas(List<VisitaTecnica> visitas) {
+        this.visitas = visitas;
+    }
+
+    public void setEstado(EstadoDelIncidente estado) {
+        this.estado = estado;
+    }
 }

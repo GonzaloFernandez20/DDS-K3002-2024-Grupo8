@@ -2,8 +2,8 @@ package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.GestionDeContribuciones.GestorRegistroPersonaVulnerable;
 import Modelo.Dominio.Persona.PersonaHumana;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
+import Repositories.Accesos_a_heladeras.VinculacionRepository;
+import Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -42,8 +42,11 @@ public class GestorTarjetas {
         }
     }
 
-    public void registrarAccesoDeColaborador(AccesoDeColaborador accesoDeColaborador){
+    public void registrarAccesoDeColaborador(String codigo, Colaborador colaborador){
         try {
+            AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador(codigo, colaborador);
+            colaborador.setTarjeta(accesoDeColaborador);
+
             colaboradorRepository.save(accesoDeColaborador.getColaborador());
         }catch (DataIntegrityViolationException e){
             throw new RuntimeException("La tarjeta que intenta registrar pertenece a otra persona.");
@@ -52,6 +55,6 @@ public class GestorTarjetas {
 
     public void generarSolicitud(Colaborador destinatario, int cantidadDeTarjetas){
         SolicitudTarjeta solicitudTarjeta = new SolicitudTarjeta(destinatario, cantidadDeTarjetas);
-        tarjetasPendientesDeEntrega.add(solicitudTarjeta); }
-
+        tarjetasPendientesDeEntrega.add(solicitudTarjeta);
+    }
 }

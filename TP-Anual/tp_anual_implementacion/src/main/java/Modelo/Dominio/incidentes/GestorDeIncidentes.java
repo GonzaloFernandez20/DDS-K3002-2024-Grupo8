@@ -1,9 +1,9 @@
 package Modelo.Dominio.incidentes;
 
 import DTOs.FallaTecnicaDTO;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
-import Modelo.Dominio.Repositories.incidentes.AlertaRepository;
-import Modelo.Dominio.Repositories.incidentes.FallaTecnicaRepository;
+import Repositories.heladera.HeladeraRepository;
+import Repositories.incidentes.AlertaRepository;
+import Repositories.incidentes.FallaTecnicaRepository;
 import Modelo.Dominio.heladera.EstadoHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
@@ -48,6 +48,8 @@ public class GestorDeIncidentes {
     public static void reportar(Incidente nuevoIncidente) {
         nuevoIncidente.getHeladeraDondeOcurrio().huboIncidente();
         darAvisoATecnico(nuevoIncidente);
+        // TODO: Reemplazar por el repositorio real
+        //RepositorioIncidentes.getInstancia().sumarIncidente(nuevoIncidente);
     }
 
     private static void darAvisoATecnico(Incidente nuevoIncidente) {

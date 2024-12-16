@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import Modelo.Dominio.sistema.RegistroDeHeladeras;
-import Repositorios.RepositorioHeladeras;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 import Modelo.Dominio.colaborador.Colaborador;
@@ -24,7 +23,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "HacerseCargoDeHeladera")
 public class HacerseCargoDeHeladera extends Contribucion{
-    @OneToOne( cascade = CascadeType.PERSIST )
+    @OneToOne(cascade = CascadeType.PERSIST )
     @JoinColumn(name = "heladera_a_cargo", referencedColumnName = "id_heladera")
     private Heladera heladeraACargo;
 

@@ -1,22 +1,30 @@
 package Controladores.Contribuciones;
 
 import DTOs.HeladeraDTO;
-import Modelo.Dominio.Repositories.contribucion.HacerseCargoDeHeladeraRepository;
-import Modelo.Dominio.Repositories.heladera.SensoreoDeMovimientoRepository;
-import Modelo.Dominio.Repositories.heladera.SensoreoDeTemperaturaRepository;
+
+import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.heladera.SensoreoDeMovimiento;
 import Modelo.Dominio.heladera.SensoreoDeTemperatura;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
+import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Mappers.BuilderHeladera;
 import Modelo.Mappers.BuilderSensores;
 import Modelo.seguridad.GestorInicioDeSesion;
+
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.contribucion.HacerseCargoDeHeladeraRepository;
+import Repositories.heladera.HeladeraRepository;
+import Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
+
+import Repositories.heladera.SensoreoDeMovimientoRepository;
+import Repositories.heladera.SensoreoDeTemperaturaRepository;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
+
 import jakarta.transaction.Transactional;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,21 +42,37 @@ import java.util.List;
 public class CtrlHacerseCargoDeHeladera {
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
-
+    private final HeladeraRepository heladeraRepository;
     private final HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository;
+    private final ColaboradorRepository colaboradorRepository;
+    private final NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository;
     private final SensoreoDeTemperaturaRepository sensoreoDeTemperaturaRepository;
     private final SensoreoDeMovimientoRepository sensoreoDeMovimientoRepository;
 
     @Autowired
-    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion, HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository, SensoreoDeTemperaturaRepository sensoreoDeTemperaturaRepository, SensoreoDeMovimientoRepository sensoreoDeMovimientoRepository) {
+    public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion,
+                                      HeladeraRepository heladeraRepository,
+                                      HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository,
+                                      ColaboradorRepository colaboradorRepository,
+                                      NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository,
+                                      SensoreoDeTemperaturaRepository sensoreoDeTemperaturaRepository,
+                                      SensoreoDeMovimientoRepository sensoreoDeMovimientoRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
+        this.heladeraRepository = heladeraRepository;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
+        this.colaboradorRepository = colaboradorRepository;
+        this.notificadorDeSuscriptosRepository = notificadorDeSuscriptosRepository;
         this.sensoreoDeTemperaturaRepository = sensoreoDeTemperaturaRepository;
         this.sensoreoDeMovimientoRepository = sensoreoDeMovimientoRepository;
     }
 
     @GetMapping("/HacerseCargoDeUnaHeladera")
     public String HacerseCargoDeUnaHeladera() {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaHumana) {
+            return "PedirRegistroJuridico";
+        }
+
         return "HacerseCargoDeUnaHeladera";
     }
 
@@ -58,28 +82,37 @@ public class CtrlHacerseCargoDeHeladera {
     }
 
 
-    @Transactional
     @PostMapping("/FormularioDeHeladera")
+    @Transactional
     public ResponseEntity<String> formularioDeHeladera(@RequestBody HeladeraDTO heladeraDTO) {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
         heladeraDTO.setColaboradorACargo(colaborador);
         Heladera nuevaHeladera = BuilderHeladera.crearHeladeraAPartirDe(heladeraDTO);
+        NotificadorDeSuscriptos notificador = new NotificadorDeSuscriptos(nuevaHeladera);
+        nuevaHeladera.setNotificadorDeSuscriptos(notificador);
+        NotificadorDeSuscriptos notificadorGuardado = notificadorDeSuscriptosRepository.save(notificador);
+
 
         System.out.println("Nueva Heladera: " + nuevaHeladera.getUbicacion().getNombreCompletoDeUbicacion());
 
-        //Esto creo no lo deberia hacer el controlador pero de momento queda aca
+        // Esto creo no lo deberia hacer el controlador pero de momento queda aca
         // Contribucion nuevaContribucion
         HacerseCargoDeHeladera nuevaContribucion = new HacerseCargoDeHeladera();
         nuevaContribucion.setColaborador(colaborador);
-        nuevaContribucion.setHeladeraACargo(nuevaHeladera);
+        nuevaContribucion.setHeladeraACargo(notificadorGuardado.getHeladera());
         nuevaContribucion.setFechaDeContribucion(LocalDate.now());
 
-        System.out.println(colaborador.getId_colaborador() + " " + nuevaHeladera.getIdHeladera());
 
-        Hibernate.initialize(colaborador.getHistorialDeContribuciones());
+
         nuevaContribucion.procesarLaContribucion();
 
+        try {
+            hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
+        } catch (Exception e) {
+            e.printStackTrace(); //
+        }
+        // Usando cascade = CascadeType.PERSIST estoy guardando la heladera también
         HacerseCargoDeHeladera contribucionGuardada = hacerseCargoDeHeladeraRepository.save(nuevaContribucion);
         SensoreoDeMovimiento nuevoSensoreoMov = BuilderSensores.crearSensoreoDeMovimiento(contribucionGuardada.getHeladeraACargo());
         SensoreoDeTemperatura nuevoSensoreoTemp = BuilderSensores.crearSensoreoDeTemperatura(contribucionGuardada.getHeladeraACargo());

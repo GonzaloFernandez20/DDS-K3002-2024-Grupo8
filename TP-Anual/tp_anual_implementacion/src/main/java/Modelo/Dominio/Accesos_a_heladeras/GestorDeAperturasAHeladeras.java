@@ -1,9 +1,9 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
-import Modelo.Dominio.Repositories.Accesos_a_heladeras.VinculacionRepository;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
+import Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
+import Repositories.Accesos_a_heladeras.VinculacionRepository;
+import Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.heladera.Heladera;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,8 +15,8 @@ import java.util.Optional;
 @Component
 public class GestorDeAperturasAHeladeras {
     private final List<AccesoAHeladeras> tarjetasRegistradas;
-    private AccesoDeColaboradorRepository accesoDeColaboradorRepository;
-    private VinculacionRepository vinculacionRepository;
+    private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
+    private final VinculacionRepository vinculacionRepository;
     private final HeladeraRepository heladeraRepository;
 
     // ------------------------------------------------

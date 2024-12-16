@@ -1,8 +1,10 @@
 package Modelo.Mappers;
 
 import DTOs.HeladeraDTO;
-import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.heladera.Heladera;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class HeladeraMapper {
     public static HeladeraDTO convertirEnHeladeraDTO(Heladera heladera) {
@@ -16,6 +18,13 @@ public class HeladeraMapper {
                 heladera.getUbicacion().getDireccion().getAltura(),
                 heladera.getUbicacion().getCiudad(),
                 heladera.getUbicacion().getNombreDelPunto(),
-                heladera.getPuestaEnFuncionamiento());
+                heladera.getPuestaEnFuncionamiento(),
+                heladera.getLatitud(),
+                heladera.getLongitud()
+        );
+    }
+
+    public static List<HeladeraDTO> convertirListaDeHeladerasEnDTO(List<Heladera> heladeras) {
+        return heladeras.stream().map(heladera -> convertirEnHeladeraDTO(heladera)).collect(Collectors.toList());
     }
 }

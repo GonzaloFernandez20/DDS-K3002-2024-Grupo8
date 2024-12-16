@@ -5,22 +5,24 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 
 public class WhatsAppService {
 
-    private static final String BASE_URL = "https://api.ultramsg.com/100015/messages/chat";
-    private static final String API_TOKEN = "kj35lw02kue0fdtr"; // Token de autenticación
+    private static final String BASE_URL = "https://api.ultramsg.com/instance101715/messages/chat";
+    private static final String API_TOKEN = "sfg839fvjc0a2ov3"; 
     private static final OkHttpClient CLIENT = new OkHttpClient();
 
     public static void sendTextMessage(String numero, String mensaje) {
         RequestBody body = new FormBody.Builder()
                 .add("token", API_TOKEN)
-                .add("to", numero) // numero del receptor
-                .add("body", "Hola, soy el NOTIBOT de Diseño de Sistemas") 
+                .add("to", "+549"+ numero) // numero del receptor
+                .add("body", mensaje) 
                 .build();
 
-        // Crear la solicitud HTTP
         Request request = new Request.Builder()
                 .url(BASE_URL)
                 .post(body)
@@ -28,14 +30,17 @@ public class WhatsAppService {
                 .build();
 
         try (Response response = CLIENT.newCall(request).execute()) {
+            assert response.body() != null;
             if (response.isSuccessful()) {
-                System.out.println("Mensaje enviado exitosamente: " + response.body().string());
+                logger.debug("Mensaje enviado exitosamente: {}", response.body().string());
             } else {
-                System.err.println("Error al enviar mensaje: " + response.code() + " - " + response.body().string());
+                logger.error("Error al enviar mensaje: {} - {}", response.code(), response.body().string());
             }
         } catch (IOException e) {
-            System.err.println("Excepción al enviar el mensaje:");
+            logger.error("Excepción al enviar el mensaje:");
             e.printStackTrace();
         }
     }
+    //Logger ----------------------------------------------------------------------------------------------------------
+    private static final Logger logger = LoggerFactory.getLogger(WhatsAppService.class);
 }

@@ -52,20 +52,20 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="nombre-oferta">Nombre de la oferta (*)</label>
-                            <input type="text" id="nombre-oferta" name="nombre-oferta" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre de la oferta" />
+                            <label for="nombreOferta">Nombre de la oferta (*)</label>
+                            <input type="text" id="nombreOferta" name="nombreOferta" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre de la oferta" />
                             <div class="error-message" id="error-nombre"></div>
                         </div>
 
                         <div class="input-group">
-                            <label for="nombre-producto">Nombre del producto (*)</label>
-                            <input type="text" id="nombre-producto" name="nombre-producto" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
+                            <label for="nombreProducto">Nombre del producto (*)</label>
+                            <input type="text" id="nombreProducto" name="nombreProducto" class="border border-border rounded p-2 w-full" placeholder="Ingrese nombre del producto" />
                             <div class="error-message" id="error-producto"></div>
                         </div>
 
                         <div class="input-group">
-                            <label for="cant-puntos">Cantidad de puntos necesarios (*)</label>
-                            <input type="number" min="1" step="any" id="cant-puntos" name="cant-puntos" placeholder="Ingrese cantidad de puntos necesarios" >
+                            <label for="puntosNecesarios">Cantidad de puntos necesarios (*)</label>
+                            <input type="number" min="1" step="any" id="puntosNecesarios" name="puntosNecesarios" placeholder="Ingrese cantidad de puntos necesarios" >
                             <div class="error-message" id="error-puntos"></div>
                         </div>
             
@@ -87,7 +87,7 @@
                             <div class="error-message" id="error-stock"></div>
                         </div>
 
-                        <button type="submit" onclick="return validarFormulario()">Realizar Colaboracion</button>
+                        <button type="submit">Realizar Colaboracion</button>
                         <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
                             <p th:text="${mensaje}"></p>
                         </div>

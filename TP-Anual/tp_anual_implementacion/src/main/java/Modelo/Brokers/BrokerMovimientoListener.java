@@ -1,6 +1,6 @@
 package Modelo.Brokers;
 
-import Modelo.Dominio.Repositories.heladera.SensoreoDeMovimientoRepository;
+import Repositories.heladera.SensoreoDeMovimientoRepository;
 import Modelo.Dominio.heladera.SensoreoDeMovimiento;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;

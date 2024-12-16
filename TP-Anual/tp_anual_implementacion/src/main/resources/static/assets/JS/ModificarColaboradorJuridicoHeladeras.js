@@ -140,3 +140,7 @@ async function darDeBajaUnaHeladera(idHeladera) {
         return false;
     }
 }
+
+function ocultarReporteFalla() {
+    document.getElementById('container-reporte-falla').style.display = 'none';
+}

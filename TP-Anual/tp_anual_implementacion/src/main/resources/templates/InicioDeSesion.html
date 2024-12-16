@@ -11,31 +11,31 @@
 </head>
 
 <body>
-    <div class="container">
-        <h2>Inicio De Sesión</h2>
-        
-        <form id="registrationForm">
+<div class="container">
+    <h2>Inicio De Sesión</h2>
 
-            <div class="input-group">
-                <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" placeholder="Ingrese su usuario">
-                <div class="error-message" id="usuarioError"></div>
-            </div>
+    <form id="registrationForm">
 
-            <div class="input-group">
-                <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="Ingrese su contraseña">
-                <div class="error-message" id="contrasenaError"></div>
-            </div>
+        <div class="input-group">
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario" placeholder="Ingrese su usuario">
+            <div class="error-message" id="usuarioError"></div>
+        </div>
 
-            <button type="submit">Ingresar</button>
-            
-        </form>
-        
-        <a th:href="@{/RegistroPersona}" title="Registrarse" class="hipervinculo"> ¿No tenes cuenta? Hace click para registrarte. </a>
-    </div>
+        <div class="input-group">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" placeholder="Ingrese su contraseña">
+            <div class="error-message" id="contrasenaError"></div>
+        </div>
 
-    <script src="/assets/JS/InicioDeSesion.js"></script>
+        <button type="submit">Ingresar</button>
+
+    </form>
+
+    <a th:href="@{/RegistroPersona}" title="Registrarse" class="hipervinculo"> ¿No tenes cuenta? Hace click para registrarte. </a>
+</div>
+
+<script src="/assets/JS/InicioDeSesion.js"></script>
 
 </body>
 

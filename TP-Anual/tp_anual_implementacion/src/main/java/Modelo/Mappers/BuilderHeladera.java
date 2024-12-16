@@ -6,6 +6,7 @@ import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.heladera.SensoreoDeMovimiento;
 import Modelo.Dominio.heladera.SensoreoDeTemperatura;
 import Modelo.Dominio.localizacion.Direccion;
+import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 
@@ -43,7 +44,8 @@ public class BuilderHeladera {
 
     private static Ubicacion crearUbicacion(HeladeraDTO dto) {
         Direccion nuevaDireccion = new Direccion( dto.getCalle(), dto.getAltura());
-        return new Ubicacion(nuevaDireccion, dto.getCiudad(), dto.getNombreDelPunto());
+        PuntoEnElMapa punto = new PuntoEnElMapa(dto.getLatitud(), dto.getLongitud());
+        return new Ubicacion(nuevaDireccion, dto.getCiudad(), dto.getNombreDelPunto(), punto);
     }
 
     private static void crearNotificadorDeSuscriptos(Heladera nuevaHeladera) {

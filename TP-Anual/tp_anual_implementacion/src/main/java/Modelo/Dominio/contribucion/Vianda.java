@@ -86,13 +86,25 @@ public class Vianda {
     public String getPeso() {
         return peso;
     }
-    public void setTipoDeComida(String tipoDeComida) { this.tipoDeComida = tipoDeComida; };
-    public void setFechaDeCaducidad(LocalDate fechaDeCaducidad) { this.fechaDeCaducidad = fechaDeCaducidad; }
-    public void setColaborador(Colaborador colaborador) { this.colaborador = colaborador; }
-    public void setHeladera(Heladera heladera) { this.heladera = heladera; }
+
+    public void setTipoDeComida(String tipoDeComida) {
+        this.tipoDeComida = tipoDeComida;
+    }
+
+    public void setFechaDeCaducidad(LocalDate fechaDeCaducidad) {
+        this.fechaDeCaducidad = fechaDeCaducidad;
+    }
 
     public void setFechaDeDonacion(LocalDate fechaDeDonacion) {
         this.fechaDeDonacion = fechaDeDonacion;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
+
+    public void setHeladera(Heladera heladera) {
+        this.heladera = heladera;
     }
 
     public void setCalorias(String calorias) {
@@ -101,6 +113,10 @@ public class Vianda {
 
     public void setPeso(String peso) {
         this.peso = peso;
+    }
+
+    public void setEstado(EstadoVianda estado) {
+        this.estado = estado;
     }
 }
 

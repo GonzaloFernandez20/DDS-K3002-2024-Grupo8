@@ -9,12 +9,19 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-
+@Deprecated
 public interface HeladeraRepository extends JpaRepository<Heladera, Integer> {
     @Query(
             value = "select h " +
                     "from Heladera h " +
-                    "where h.colaboradorACargo.id_colaborador = ?1"
+                    "where h.estado != 'DADA_DE_BAJA'"
+    )
+    List<Heladera> traerHeladerasActivasEnElSistema();
+
+    @Query(
+            value = "select h " +
+                    "from Heladera h " +
+                    "where h.colaboradorACargo.id_colaborador = ?1 and h.estado != 'DADA_DE_BAJA'"
     )
     List<Heladera> traerHeladerasDeUnColaborador(Integer id_colaborador);
 
@@ -22,48 +29,14 @@ public interface HeladeraRepository extends JpaRepository<Heladera, Integer> {
             value = "select h " +
                     "from Heladera h " +
                     "   join Alerta a on h.id_heladera=a.heladeraDondeOcurrio.id_heladera " +
-                    "where h.colaboradorACargo.id_colaborador = ?1"
+                    "where h.colaboradorACargo.id_colaborador = ?1 and h.estado != 'DADA_DE_BAJA'"
     )
     List<Heladera> traerHeladerasDeUnColaboradorConAlertas(Integer id_colaborador);
 
-    @Modifying
-    @Query("DELETE FROM Vianda v WHERE v.heladera.id_heladera = ?1")
-    void eliminarViandasPorHeladera(Integer idHeladera);
-
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM Heladera h WHERE h.id_heladera = ?1")
-    void eliminarHeladeraPorId(Integer idHeladera);
-
-    @Modifying
     @Query(
-            "UPDATE HacerseCargoDeHeladera h " +
-                    "SET h.heladeraACargo = NULL " +
-                    "WHERE h.heladeraACargo.id_heladera = ?1"
+            value = "select h " +
+                    "from Heladera h " +
+                    "where h.colaboradorACargo.id_colaborador = ?1 and h.estado = 'DADA_DE_BAJA'"
     )
-    void desvincularHeladeraDeHacerseCargo(Integer idHeladera);
-
-    @Modifying
-    @Query(
-            "UPDATE ContribucionConApertura c " +
-                    "SET c.heladeraDestino = NULL " +
-                    "WHERE c.heladeraDestino.id_heladera = ?1"
-    )
-    void desvincularHeladeraDeContribucionConApertura(Integer idHeladera);
-
-    @Modifying
-    @Query(
-            "UPDATE DistribucionDeViandas d " +
-                    "SET d.heladeraDeOrigen = NULL " +
-                    "WHERE d.heladeraDeOrigen.id_heladera = ?1"
-    )
-    void desvincularHeladeraDistribucionViandas(Integer idHeladera);
-
-    @Transactional
-    default void eliminarDependenciasDeLaHeladera(Integer idHeladera) {
-        desvincularHeladeraDeHacerseCargo(idHeladera);
-        desvincularHeladeraDeContribucionConApertura(idHeladera);
-        desvincularHeladeraDistribucionViandas(idHeladera);
-        eliminarViandasPorHeladera(idHeladera);
-    }
+    List<Heladera> traerHeladerasDadasDeBajaDeUnColaborador(Integer id_colaborador);
 }

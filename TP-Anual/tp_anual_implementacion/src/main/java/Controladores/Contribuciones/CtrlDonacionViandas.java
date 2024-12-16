@@ -3,15 +3,22 @@ package Controladores.Contribuciones;
 import DTOs.DonacionDeViandaDTO;
 import DTOs.HeladeraSeleccionDTO;
 import Modelo.Dominio.Accesos_a_heladeras.GestorDePermisosDeApertura;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
-import Modelo.Dominio.Repositories.contribucion.DonacionDeViandasRepository;
-import Modelo.Dominio.Repositories.heladera.HeladeraRepository;
+import Modelo.Dominio.Persona.PersonaJuridica;
+import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.*;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.Mappers.DonacionDeViandasMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
+
+import Servicios_Externos_APIs.NotificacionService;
+
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.contribucion.DonacionDeViandasRepository;
+import Repositories.heladera.HeladeraRepository;
+
 import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,29 +35,21 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CtrlDonacionViandas {
-
-    private final HeladeraRepository repositorioHeladeras;
-    private final ColaboradorRepository colaboradorRepository;
+    private final HeladeraRepository heladeraRepository;
+    private final DonacionDeViandasRepository donacionDeViandasRepository;
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
-    private final DonacionDeViandasRepository donacionDeViandasRepository;
-    private final HeladeraRepository heladeraRepository;
+    private List<EstadoVianda> estados;
+
 
     @Autowired
-    public CtrlDonacionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion,
-                              ColaboradorRepository colaboradorRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura, DonacionDeViandasRepository donacionDeViandasRepository, HeladeraRepository heladeraRepository) {
-        this.repositorioHeladeras = repositorioHeladeras;
+    public CtrlDonacionViandas(GestorInicioDeSesion gestorInicioDeSesion, HeladeraRepository heladeraRepository, DonacionDeViandasRepository donacionDeViandasRepository, GestorDePermisosDeApertura gestorDePermisosDeApertura) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
-        this.colaboradorRepository = colaboradorRepository;
-        this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
-        this.donacionDeViandasRepository = donacionDeViandasRepository;
         this.heladeraRepository = heladeraRepository;
+        this.donacionDeViandasRepository = donacionDeViandasRepository;
+        this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
+        this.estados = new ArrayList<>();
     }
-
-    private List<HeladeraSeleccionDTO> heladeras;
-
-    List<EstadoVianda> estados = new ArrayList<>();
-
 
     public void setEstados() {
         if(estados.isEmpty()) {
@@ -64,24 +63,20 @@ public class CtrlDonacionViandas {
 
     @GetMapping("/DonarViandas")
     public String mostrarHeladeras(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
+            return "PedirRegistroHumano";
+        }
+
         if(Objects.isNull(gestorInicioDeSesion.obtenerColaboradorPorID().getTarjeta())) {
             return "PedirTarjetaColaborador";
         }
-        heladeras = heladeraRepository.findAll().stream().
+        List<HeladeraSeleccionDTO> heladeras = heladeraRepository.traerHeladerasActivasEnElSistema().stream().
                 map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
         setEstados();
         model.addAttribute("heladeras", heladeras);
         model.addAttribute("estados", estados);
         return "DonarViandas";
-    }
-
-    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
-        Optional<Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
-        if (heladeraElegida.isPresent()) {
-            return DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(), gestorInicioDeSesion.obtenerColaboradorPorID());
-        } else {
-            throw new RuntimeException("Heladera no encontrada con ID: " + dto.getHeladeraID());
-        }
     }
 
     @Transactional
@@ -102,10 +97,14 @@ public class CtrlDonacionViandas {
         }
     }
 
-//    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
-//        Optional <Heladera> heladeraElegida = repositorioHeladeras.findById(dto.getHeladeraID());
-//        DonacionDeViandas nuevaDonacion = DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(),colaborador);
-//        return nuevaDonacion;
-//    }
+    private DonacionDeViandas procesarDTO(DonacionDeViandaDTO dto){
+        Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
+        Optional<Heladera> heladeraElegida = heladeraRepository.findById(dto.getHeladeraID());
+        if (heladeraElegida.isPresent()) {
+            return DonacionDeViandasMapper.crearDonacionDeViandasAPartirDe(dto, heladeraElegida.get(), colaborador);
+        } else {
+            throw new RuntimeException("Heladera no encontrada con ID: " + dto.getHeladeraID());
+        }
+    }
 }

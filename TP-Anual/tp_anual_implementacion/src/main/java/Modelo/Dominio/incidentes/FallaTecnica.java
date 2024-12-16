@@ -43,4 +43,17 @@ public class FallaTecnica extends Incidente{
     public String getDescripcion() { return descripcion; }
     public String getLinkFoto() { return linkFoto; }
     public Colaborador getColaboradorInformante() { return colaboradorInformante; }
+
+
+    public void setColaboradorInformante(Colaborador colaboradorInformante) {
+        this.colaboradorInformante = colaboradorInformante;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setLinkFoto(String linkFoto) {
+        this.linkFoto = linkFoto;
+    }
 }

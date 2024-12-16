@@ -14,10 +14,10 @@ import java.util.Optional;
 @Table(name = "acceso_de_colaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
     @OneToOne
-    @JoinColumn(name = "colaborador", referencedColumnName = "id_colaborador")
+    @JoinColumn(name = "colaborador"/*, referencedColumnName = "id_colaborador"*/)
     private Colaborador colaborador;
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta") // Había un error en el JOIN
+    @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
     private List <AperturaConPermiso> aperturasDeHeladera;
 
     //Constructores-------------------------------------------------------------
@@ -55,17 +55,9 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
         apertura.getContribucion().procesarLaContribucion();
 
         //TODO: Registrar movimiento en BD
-        GestorDeAperturasAHeladeras.registrarAccesoDeColaborador(this);
+       // GestorDeAperturasAHeladeras.registrarAccesoDeColaborador(this);
     }
 
-    // TODO: Hecho de forma provisoria para reportes
-    public Integer cantidadDeAperturasPorDonacionesEntre(LocalDateTime fechaInicio,LocalDateTime fechaFin){
-        //return 10;//CUANDO ESTE LISTA LA BD LO CORRIJO
-
-        return aperturasDeHeladera.stream().filter(acceso -> acceso instanceof AperturaConPermiso)
-                .map(apertura -> (AperturaConPermiso) apertura)
-                .filter(apertura -> apertura.aperturaParaEntregaDeDonacionEntre(fechaInicio, fechaFin)).toList().size();
-    }
 
     //Getters y Setters ------------------------------------------------------------------------------------------------
     public Persona getPersonaHumana() {

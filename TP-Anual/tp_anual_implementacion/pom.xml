@@ -141,14 +141,14 @@
 
 		<!-- BASE DE DATOS -->
 
-		<!-- SQL SERVER
+		<!-- SQL SERVER -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 			<version>12.2.0.jre11</version>
 		</dependency>
-        -->
-		<!-- MY SQL-->
+
+		<!-- MY SQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -211,6 +211,21 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+
+		<!-- - - - - - - - - - -LOGS- - - - - - - - - - - - -->
+		<!-- SLF4J API -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.11</version>
+		</dependency>
+
+		<!-- Logback Implementation -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.4.11</version>
 		</dependency>
 
 	</dependencies>

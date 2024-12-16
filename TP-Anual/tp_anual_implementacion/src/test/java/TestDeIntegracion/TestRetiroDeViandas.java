@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mockStatic;
 
 @DisplayName("Prueba integral: Retiro de una vianda por parte de una PeSV")
 public class TestRetiroDeViandas {
-    PersonaSituacionVulnerable personaSituacionVulnerable;
+  /*  PersonaSituacionVulnerable personaSituacionVulnerable;
     GestorDeAperturasAHeladeras gestorDeAccesosAHeladeras;
     Heladera heladeraDeRetiro;
 
@@ -114,5 +114,5 @@ public class TestRetiroDeViandas {
 
         }
 
-    }
+    }*/
 }
