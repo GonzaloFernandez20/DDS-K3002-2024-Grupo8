@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,10 +122,37 @@ public class CtrlModificarColaborador {
         }
     }
 
+    @PostMapping("/ModificarColaborador/TipoPersona")
+    public ResponseEntity<Void> setearTipoDePersona(@RequestParam String tipoPersona){
+        try {
+            Usuario usuario = gestorInicioDeSesion.obtenerUsuarioDeSesion();
+
+            Colaborador colaborador = usuario.getColaborador();
+            if(tipoPersona.equals("humana")){
+                colaborador.setPersona(new PersonaHumana());
+            } else{
+                colaborador.setPersona(new PersonaJuridica());
+            }
+
+            usuariosRepository.save(usuario);
+
+            ResponseCookie cookie = generarCookieParaLaModificacionDeUsuario(usuario);
+
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     /* ---------------------------------------------------------------------------------- */
 
     private String tipoPersonaDelColaborador() {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
+
+
 
         if(colaborador.getPersona() instanceof PersonaHumana) {
             return "PersonaHumana";

@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="arreglos del merge para que compile parte 2">
-      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/img/user-icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorUsuario.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorUsuario.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorPremios.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorPremios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/RegistroPersona.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/RegistroPersona.html" afterDir="false" />
-    </list>
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Ocultamos los secretos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,11 +21,24 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MxF_Persistencia" />
+        <entry key="$PROJECT_DIR$" value="MergeoGlobal" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;GonzaloFernandez20&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/GonzaloFernandez20/DDS-K3002-2024-Grupo8.git&quot;,
+    &quot;accountId&quot;: &quot;f45c1c53-b7e0-4345-ae28-5d56c5ca0c54&quot;
+  }
+}</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -55,46 +52,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.TestApertura.executor": "Run",
-    "JUnit.TestColaborador.executor": "Run",
-    "JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor": "Run",
-    "JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor": "Run",
-    "JUnit.TestCreadorDeMensajes.executor": "Run",
-    "JUnit.TestDeIncidentes.executor": "Run",
-    "JUnit.TestDeReporteDeUnIncidente.executor": "Run",
-    "JUnit.TestDonacionDeDinero.executor": "Run",
-    "JUnit.TestDonacionDeViandas.executor": "Run",
-    "JUnit.TestGenerarReportesSemanales.executor": "Run",
-    "JUnit.TestHeladera.executor": "Run",
-    "JUnit.TestRepositorioIncidentes.executor": "Run",
-    "JUnit.TestRetiroDeViandas.executor": "Run",
-    "Maven.tp_anual_implementacion [clean,install].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.App.executor": "Run",
-    "Spring Boot.Server.executor": "Run",
-    "git-widget-placeholder": "Merging MergeoGlobal",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.TestApertura.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestColaborador.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDeIncidentes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDeReporteDeUnIncidente.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDonacionDeDinero.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDonacionDeViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestGenerarReportesSemanales.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestHeladera.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRepositorioIncidentes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRetiroDeViandas.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tp_anual_implementacion [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.App.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.Server.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Feature-SSO&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion/src/main/resources/static/img&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Modelo.seguridad.SesionActiva" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/img" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Modelo.Dominio.Repositories.Suscripciones" />
     </key>
@@ -102,6 +107,11 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />
+    </option>
+  </component>
+  <component name="RunAnythingContextRecentDirectoryCache">
+    <option name="paths">
+      <recentPaths value="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion" />
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Server">
@@ -200,8 +210,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
       </set>
     </attachedChunks>
   </component>
@@ -219,6 +229,10 @@
       <workItem from="1734266720568" duration="6917000" />
       <workItem from="1734281942258" duration="319000" />
       <workItem from="1734282270868" duration="910000" />
+      <workItem from="1734307480330" duration="2577000" />
+      <workItem from="1734310703196" duration="34885000" />
+      <workItem from="1734383437930" duration="620000" />
+      <workItem from="1734387634532" duration="636000" />
     </task>
     <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
       <option name="closed" value="true" />
@@ -348,7 +362,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734300707270</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Ocultamos los secretos">
+      <option name="closed" value="true" />
+      <created>1734388845218</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1734388845218</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,6 +382,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="Feature-SSO" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/CambiosDonacionViandas" />
@@ -380,7 +407,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/CambiosDonacionViandas" />
+                        <option value="Feature-SSO" />
                       </list>
                     </value>
                   </entry>
@@ -407,6 +434,33 @@
     <MESSAGE value="mergeo" />
     <MESSAGE value="arreglos del merge para que compile" />
     <MESSAGE value="arreglos del merge para que compile parte 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="arreglos del merge para que compile parte 2" />
+    <MESSAGE value="Ocultamos los secretos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ocultamos los secretos" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/OAuth2SuccessHandler.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Navbar/CtrlHeader.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/GestorInicioDeSesion.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="authentication" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
