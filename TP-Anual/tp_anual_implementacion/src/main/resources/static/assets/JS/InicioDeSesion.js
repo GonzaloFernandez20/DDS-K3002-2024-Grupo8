@@ -46,6 +46,14 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
             const mensaje = await respuesta.text();
 
+            if (mensaje === "Redirigir Administrador") {
+                        alertaSimple("Redirigiendo a Administrador", "info");
+                        setTimeout(() => {
+                            window.location.href = "/Administrador";
+                        }, 1300);
+                        return;
+                    }
+
             if (mensaje.includes("Vamos a necesitar que complete y corrija sus datos")) {
                 alertaSimple(mensaje, "warning");
                 setTimeout(() => {

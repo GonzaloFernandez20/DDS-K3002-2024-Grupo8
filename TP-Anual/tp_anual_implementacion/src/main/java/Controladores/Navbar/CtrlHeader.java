@@ -21,8 +21,12 @@ public class CtrlHeader {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
         if (colaborador == null) {
-            model.addAttribute("sesion", "NoIniciada");
-        } else {
+            if (gestorInicioDeSesion.obtenerUsuarioDeSesion() != null){
+                model.addAttribute("sesion", "Admin");
+            }
+            else model.addAttribute("sesion", "NoIniciada");
+        }
+        else {
             model.addAttribute("sesion", "Iniciada");
         }
         return "Header";
