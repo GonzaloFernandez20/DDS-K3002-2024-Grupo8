@@ -24,6 +24,7 @@ import Modelo.Mappers.FactoryFallaTecnica;
 import Modelo.Mappers.HeladeraSeleccionMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 import Modelo.seguridad.SesionActiva.UtilsJWT;
+import Repositories.incidentes.FallaTecnicaRepository;
 import Repositorios.RepositorioHeladeras;
 import Repositorios.RepositorioIncidentes;
 import Utils.DescargaDeArchivo;
@@ -48,11 +49,11 @@ public class CtrlReportarFallaTecnica {
     private final ColaboradorRepository colaboradorRepository;
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final HeladeraRepository heladeraRepository;
-    private final FallaTecnicaRepository fallaTecnicaRepository;
+    private final Repositories.incidentes.FallaTecnicaRepository fallaTecnicaRepository;
 
     @Autowired
     public CtrlReportarFallaTecnica(ColaboradorRepository colaboradorRepository, GestorInicioDeSesion gestorInicioDeSesion,
-                                    HeladeraRepository heladeraRepository, FallaTecnicaRepository fallaTecnicaRepository) {
+                                    HeladeraRepository heladeraRepository, Repositories.incidentes.FallaTecnicaRepository fallaTecnicaRepository) {
         this.colaboradorRepository = colaboradorRepository;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.heladeraRepository = heladeraRepository;

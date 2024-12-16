@@ -56,8 +56,8 @@ public class CtrlDonacionViandas {
             estados.add(EstadoVianda.NO_ENTREGADA);
             estados.add(EstadoVianda.ENTREGADA);
             estados.add(EstadoVianda.EN_TRASLADO);
-            estados.add(EstadoVianda.VENCIDA);
-            estados.add(EstadoVianda.RETIRADA);
+            //estados.add(EstadoVianda.VENCIDA);
+            //estados.add(EstadoVianda.RETIRADA);
         }
     }
 
