@@ -1,58 +1,53 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
+import Repositories.Accesos_a_heladeras.AccesoAHeladerasRepository;
 import Repositories.Accesos_a_heladeras.AccesoDeColaboradorRepository;
-import Repositories.Accesos_a_heladeras.AperturaConPermisoRepository;
 import Repositories.Accesos_a_heladeras.VinculacionRepository;
 import Repositories.heladera.HeladeraRepository;
 import Modelo.Dominio.heladera.Heladera;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Component
 public class GestorDeAperturasAHeladeras {
-    private final List<AccesoAHeladeras> tarjetasRegistradas;
+   // Dependencias ---------------------------------------------------------------------------
     private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
     private final VinculacionRepository vinculacionRepository;
     private final HeladeraRepository heladeraRepository;
+    private final AccesoAHeladerasRepository accesoAHeladerasRepository;
 
-    // ------------------------------------------------
     @Autowired
     private GestorDeAperturasAHeladeras(AccesoDeColaboradorRepository accesoDeColaboradorRepository,
                                         VinculacionRepository vinculacionRepository,
-                                        HeladeraRepository heladeraRepository) {
+                                        HeladeraRepository heladeraRepository, AccesoAHeladerasRepository accesoAHeladerasRepository) {
         this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
         this.vinculacionRepository = vinculacionRepository;
         this.heladeraRepository = heladeraRepository;
-        this.tarjetasRegistradas = new ArrayList<>();
+        this.accesoAHeladerasRepository = accesoAHeladerasRepository;
     }
 
-    // ------------------------------------------------
+    // Metodos ---------------------------------------------------------------------------------------------------
     public boolean autorizarApertura(String codigoDeTarjeta, int idHeladera) {
         Optional<Heladera> heladera = heladeraRepository.findById(idHeladera);
-        if (heladera.isPresent()) {
-            Optional<AccesoAHeladeras> acceso = tarjetasRegistradas.stream()
-                    .filter(unAcceso -> codigoDeTarjeta.equals(unAcceso.getCodigoTarjeta()))
-                    .findFirst();
-            if (acceso.isPresent()) {
-                return acceso.get().estaAutorizadaLaApertura(heladera.get()); // Chequea si tiene un permiso hecho
-            } else
-                return false; // Si devuelve false es porque la tarjeta no esta registrada en el sistema, no autorizo que abra la heladera
+        Optional<AccesoAHeladeras> acceso = accesoAHeladerasRepository.findByCodigoTarjeta(codigoDeTarjeta);
+
+        if (heladera.isPresent() && acceso.isPresent()) {
+            boolean estaAutorizada = acceso.get().estaAutorizadaLaApertura(heladera.get());
+            if (estaAutorizada) {registrarApertura(acceso.get());}
+            return estaAutorizada;
+        } else return false;
+    }
+
+    private void registrarApertura(AccesoAHeladeras acceso) {
+        if(acceso instanceof Vinculacion vinculacionActualizada){
+            vinculacionRepository.save(vinculacionActualizada);
         }
-        else return false;
-    }
-
-
-    //se va al mergear
-    public void registrarAccesoDeColaborador(AccesoDeColaborador accesoDeColaborador) {
-        accesoDeColaboradorRepository.save(accesoDeColaborador);
-    }
-
-    public void registrarAccesoDeVulnerable(Vinculacion vinculacion){
-        vinculacionRepository.save(vinculacion);
+        else{
+            AccesoDeColaborador accesoActualizada = (AccesoDeColaborador) acceso;
+            accesoDeColaboradorRepository.save(accesoActualizada);
+        }
     }
 }
 

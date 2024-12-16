@@ -46,15 +46,17 @@ public class CtrlDistribucionViandas {
     private final AperturaConPermisoRepository aperturaConPermisoRepository;
     private final DistribucionDeViandaRepository distribucionDeViandaRepository;
     private final NotificacionService notificacionService;
+    private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
 
     @Autowired
-    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion, AccesoDeColaboradorRepository accesoDeColaboradorRepository, AperturaConPermisoRepository aperturaConPermisoRepository, DistribucionDeViandaRepository distribucionDeViandaRepository, NotificacionService notificacionService) {
+    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion, AccesoDeColaboradorRepository accesoDeColaboradorRepository, AperturaConPermisoRepository aperturaConPermisoRepository, DistribucionDeViandaRepository distribucionDeViandaRepository, NotificacionService notificacionService, GestorDePermisosDeApertura gestorDePermisosDeApertura) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
         this.aperturaConPermisoRepository = aperturaConPermisoRepository;
         this.distribucionDeViandaRepository = distribucionDeViandaRepository;
         this.notificacionService = notificacionService;
+        this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
     }
 
     private List<HeladeraSeleccionDTO> heladeras;
@@ -102,7 +104,6 @@ public class CtrlDistribucionViandas {
             // NO CAMBIAN DE HELADERA HASTA QUE SE EFECTÚE LA DISTRIBUCIÓN
             distribucionDeViandaRepository.save(nuevaDistribucion);
 
-            GestorDePermisosDeApertura gestorDePermisosDeApertura = new GestorDePermisosDeApertura(accesoDeColaboradorRepository, aperturaConPermisoRepository);
             gestorDePermisosDeApertura.generarPermisosDeDistribucion(nuevaDistribucion);
 
             // Enviar una notificación

@@ -2,7 +2,6 @@ package Modelo.Brokers;
 
 
 import Modelo.Dominio.Accesos_a_heladeras.GestorDeAperturasAHeladeras;
-import Modelo.Dominio.heladera.Heladera;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import jakarta.annotation.PostConstruct;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
 
 @Component
 public class BrokerAccesosListener {

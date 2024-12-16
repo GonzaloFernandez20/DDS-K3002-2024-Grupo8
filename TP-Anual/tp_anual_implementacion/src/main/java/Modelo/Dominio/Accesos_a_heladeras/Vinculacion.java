@@ -7,6 +7,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.Persona.Persona;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona_vulnerable.PersonaSituacionVulnerable;
+import Repositories.Accesos_a_heladeras.VinculacionRepository;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -62,8 +63,6 @@ public class Vinculacion extends AccesoAHeladeras{
     }
 
     private void registrarAcceso(Heladera heladera) {
-
-        // TODO revisar si conviene que este en otro lado el retirar la vianda y cambiarles el estado
         Vianda viandaRetirada = heladera.retirarViandas(1).getFirst();
         viandaRetirada.setEstadoVianda(EstadoVianda.RETIRADA);
 

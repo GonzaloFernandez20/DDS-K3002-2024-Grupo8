@@ -4,12 +4,16 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "acceso_de_colaborador")
 public class AccesoDeColaborador extends AccesoAHeladeras{
@@ -53,9 +57,6 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
         apertura.setFechaApertura(LocalDateTime.now());
         apertura.cantidadViandasInvolucradas = apertura.getContribucion().cantidadDeViandasInvolucradas();
         apertura.getContribucion().procesarLaContribucion();
-
-        //TODO: Registrar movimiento en BD
-       // GestorDeAperturasAHeladeras.registrarAccesoDeColaborador(this);
     }
 
 
@@ -63,10 +64,4 @@ public class AccesoDeColaborador extends AccesoAHeladeras{
     public Persona getPersonaHumana() {
         return colaborador.getPersona();
     }
-
-    public Colaborador getColaborador() {return colaborador;}
-    public void setColaborador(Colaborador colaborador) {this.colaborador = colaborador;}
-
-    public List<AperturaConPermiso> getAperturasDeHeladera() {return aperturasDeHeladera;}
-    public void setAperturasDeHeladera(List<AperturaConPermiso> aperturasDeHeladera) {this.aperturasDeHeladera = aperturasDeHeladera;}
 }

@@ -1,9 +1,6 @@
 package Controladores;
 
-import Modelo.Dominio.Accesos_a_heladeras.GestorDeAperturasAHeladeras;
-
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
-import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.seguridad.GestorInicioDeSesion;
 import org.springframework.beans.factory.annotation.Autowired;
