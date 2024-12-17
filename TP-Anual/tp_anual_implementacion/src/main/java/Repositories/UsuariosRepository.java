@@ -18,7 +18,7 @@ public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
 
     @Query(value =
             "SELECT u.* FROM usuario u " +
-                    "JOIN dds_persistencia.mail m ON u.colaborador = m.colaborador " +
+                    "JOIN mail m ON u.colaborador = m.colaborador " +
                     "WHERE m.correo = ?1", nativeQuery = true)
     Optional<Usuario> findByEmail(String email);
 }
