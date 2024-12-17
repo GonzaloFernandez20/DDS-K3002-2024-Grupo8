@@ -6,6 +6,7 @@ import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.incidentes.FallaTecnica;
 import Modelo.Dominio.incidentes.GestorDeIncidentes;
 import Modelo.Mappers.HeladeraSeleccionMapper;
+import Modelo.seguridad.GestorInicioDeSesion;
 import Modelo.seguridad.SesionActiva.UtilsJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +25,19 @@ public class CtrlReportarFallaTecnica {
     private final Repositories.colaborador.ColaboradorRepository colaboradorRepository;
     private final Repositories.heladera.HeladeraRepository heladeraRepository;
     private final Repositories.incidentes.FallaTecnicaRepository fallaTecnicaRepository;
+    private final GestorInicioDeSesion gestorInicioDeSesion;
 
     @Autowired
     public CtrlReportarFallaTecnica(Repositories.colaborador.ColaboradorRepository colaboradorRepository,
-                                    Repositories.heladera.HeladeraRepository heladeraRepository, Repositories.incidentes.FallaTecnicaRepository fallaTecnicaRepository) {
+                                    Repositories.heladera.HeladeraRepository heladeraRepository, Repositories.incidentes.FallaTecnicaRepository fallaTecnicaRepository, GestorInicioDeSesion gestorInicioDeSesion) {
         this.colaboradorRepository = colaboradorRepository;
         this.heladeraRepository = heladeraRepository;
         this.fallaTecnicaRepository = fallaTecnicaRepository;
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
     }
 
     private List<HeladeraSeleccionDTO> heladeras;
+
 
     @GetMapping("/ReportarFallaTecnica")
     public String mostrarHeladeras(Model model) {
@@ -44,20 +48,19 @@ public class CtrlReportarFallaTecnica {
     }
 
     @PostMapping("/ReportarFallaTecnica")
-    public ResponseEntity<String> reportarFallaTecnica(
-            @RequestParam("heladera") String heladera, @RequestParam("descripcionFalla") String descripcionFalla, @RequestParam("fotoFalla") MultipartFile fotoFalla,
-            @CookieValue("token") String token) {
-
-        System.out.println("Token recibido: " + token);
+    public ResponseEntity<String> reportarFallaTecnica(@RequestParam("heladera") String heladera,
+                                                       @RequestParam("descripcionFalla") String descripcionFalla,
+                                                       @RequestParam("fotoFalla") MultipartFile fotoFalla) {
 
         try {
             // Decodificar el token para obtener la información del colaborador
-            String id_colaborador = UtilsJWT.obtenerSujetoDelToken(token);
+            //String id_colaborador = UtilsJWT.obtenerSujetoDelToken(token);
 
             // Asignar colaborador al DTO
-            System.out.println("ID del colaborador decodificado: " + id_colaborador);
-            Colaborador colaborador = colaboradorRepository.obtenerColaboradorSegunID(id_colaborador);
+            //System.out.println("ID del colaborador decodificado: " + id_colaborador);
+            //Colaborador colaborador = colaboradorRepository.obtenerColaboradorSegunID(id_colaborador);
 
+            Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
             // Verificar la heladera
             Optional<Heladera> heladeraElegida = heladeraRepository.findById(Integer.parseInt(heladera));
             System.out.println("Heladera encontrada: " + heladeraElegida.isPresent());

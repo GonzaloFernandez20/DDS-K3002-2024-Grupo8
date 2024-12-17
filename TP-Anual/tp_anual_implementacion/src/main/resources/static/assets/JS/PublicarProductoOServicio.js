@@ -74,7 +74,7 @@ form_productos.addEventListener('submit', async function(event) {
         });
 
         const result = await response.json();
-        alert(result.mensaje);
+        showAlert(result.mensaje, "success");
     } catch (error) {
         console.error('Error al enviar los datos:', error);
     }

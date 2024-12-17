@@ -10,22 +10,22 @@ import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 
+import java.time.LocalDate;
+
 public class BuilderHeladera {
-    public static Heladera crearHeladeraAPartirDe(HeladeraDTO dto) {
-        Modelo modelo = crearModelo(dto);
+    public static Heladera crearHeladeraAPartirDe(HeladeraDTO dto, Modelo modelo) {
         Ubicacion ubicacion = crearUbicacion(dto);
         Heladera nuevaHeladera = new Heladera(
                 dto.getColaboradorACargo(),
                 ubicacion,
                 dto.getCapacidadViandas(),
                 modelo,
-                dto.getPuestaEnFuncionamiento() );
+                LocalDate.now());
         crearNotificadorDeSuscriptos(nuevaHeladera);
         return nuevaHeladera;
     }
 
     public static Heladera actualizarHeladeraAPartirDe(Heladera heladera, HeladeraDTO dto) {
-        heladera.getModelo().setNombreModelo(dto.getNombreModelo());
         heladera.getModelo().setTemperaturaMinima(dto.getTempMINmodelo());
         heladera.getModelo().setTemperaturaMaxima(dto.getTempMAXmodelo());
         heladera.getUbicacion().getDireccion().setAltura(dto.getAltura());

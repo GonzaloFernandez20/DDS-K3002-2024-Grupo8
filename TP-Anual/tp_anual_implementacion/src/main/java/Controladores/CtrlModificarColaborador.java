@@ -5,11 +5,13 @@ import DTOs.ColaboradorJuridicoDTO;
 import DTOs.MedioDeContactoDTO;
 import Modelo.Dominio.Persona.TipoOrganizacion;
 import Modelo.Dominio.colaborador.Colaborador;
+import Modelo.Dominio.documentacion.Documento;
 import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona.PersonaJuridica;
 
+import Modelo.Dominio.localizacion.Direccion;
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Mappers.ColabHumanoMapper;
 import Modelo.Mappers.ColabJuridicoMapper;
@@ -28,6 +30,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +46,7 @@ public class CtrlModificarColaborador {
     private final ColaboradorRepository colaboradorRepository;
 
     @Autowired
-    public CtrlModificarColaborador(GestorInicioDeSesion gestorInicioDeSesion, UsuariosRepository usuariosRepository, ColaboradorRepository colaboradorRepository, MedioDeContactoRepository medioDeContactoRepository) {
+    public CtrlModificarColaborador(GestorInicioDeSesion gestorInicioDeSesion, UsuariosRepository usuariosRepository, MedioDeContactoRepository medioDeContactoRepository, ColaboradorRepository colaboradorRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.usuariosRepository = usuariosRepository;
         this.medioDeContactoRepository = medioDeContactoRepository;
@@ -51,8 +54,13 @@ public class CtrlModificarColaborador {
     }
 
     @GetMapping("/ModificarColaborador")
-    public String mostrarColaborador(Model model, @CookieValue("token") String token) {
-        switch (tipoPersonaDelColaborador()) {
+    public String mostrarColaborador(Model model, @CookieValue(name = "token", required = false) String token) {
+
+        if (tipoPersonaDelColaborador().isEmpty()){
+            return "PedirElegirColaborador";
+        }
+
+        else switch (tipoPersonaDelColaborador()) {
             case "PersonaHumana":
                 model.addAttribute("sexos", sexos());
                 model.addAttribute("tiposDeDocumento", tiposDeDNI());
@@ -130,6 +138,30 @@ public class CtrlModificarColaborador {
         }
     }
 
+    @PostMapping("/ModificarColaborador/TipoPersona")
+    public ResponseEntity<Void> setearTipoDePersona(@RequestParam String tipoPersona){
+        try {
+            Usuario usuario = gestorInicioDeSesion.obtenerUsuarioDeSesion();
+
+            Colaborador colaborador = usuario.getColaborador();
+            if(tipoPersona.equals("humana")){
+                colaborador.setPersona(new PersonaHumana());
+            } else{
+                colaborador.setPersona(new PersonaJuridica());
+            }
+
+            usuariosRepository.save(usuario);
+
+            ResponseCookie cookie = generarCookieParaLaModificacionDeUsuario(usuario);
+
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                    .build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     /* ---------------------------------------------------------------------------------- */
 
     private String tipoPersonaDelColaborador() {
@@ -245,5 +277,27 @@ public class CtrlModificarColaborador {
     private List<MedioDeContacto> mediosContacto(Colaborador colaborador) {
         Integer id = colaborador.getId_colaborador();
         return medioDeContactoRepository.traerMediosSegunId(id);
+    }
+
+    @PostMapping("/DefinirColaborador")
+    public String solicitarTarjeta(@RequestParam("tipoDeColaborador") String tipoColaborador,
+                                   RedirectAttributes redirectAttributes) {
+        if(tipoColaborador.equals("colaboradorHumano")) {
+            Documento nuevoDocumento = new Documento(null, null, null);
+            Direccion nuevaDireccion = new Direccion(null, null);
+            PersonaHumana nuevaPersona = new PersonaHumana(null, null, null, nuevoDocumento, nuevaDireccion);
+            Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+            colaboradorActual.setPersona(nuevaPersona);
+            colaboradorRepository.save(colaboradorActual);
+        }
+        else if(tipoColaborador.equals("colaboradorJuridico")) {
+            Direccion nuevaDireccion = new Direccion(null, null);
+            PersonaJuridica nuevaPersona = new PersonaJuridica(null, null, null, nuevaDireccion);
+            Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+            colaboradorActual.setPersona(nuevaPersona);
+            colaboradorRepository.save(colaboradorActual);
+        }
+
+        return "redirect:/ModificarColaborador";
     }
 }

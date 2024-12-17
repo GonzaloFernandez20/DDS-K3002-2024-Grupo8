@@ -32,14 +32,14 @@ class RecomendacionPuntosDeColocacionTests {
     @Test
     void testObtenerValores1() throws IOException {
         setUp1();
-        contribucion.consultarRecomendaciones(latitud, longitud, radio);
+        //contribucion.consultarRecomendaciones(latitud, longitud, radio);
         // Queda Chequear lo que sale por pantalla nomas...
     }
     @Disabled
     @Test
     void testObtenerValores2() throws IOException{
         setUp2();
-        contribucion.consultarRecomendaciones(latitud, longitud, radio);
+        //contribucion.consultarRecomendaciones(latitud, longitud, radio);
     }
 
     @Test

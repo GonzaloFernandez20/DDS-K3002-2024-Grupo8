@@ -11,12 +11,10 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Incidente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_incidente;
-
+    @GeneratedValue
+    private  Integer id_incidente;
     @Column(name = "momento_del_suceso")
     protected LocalDateTime momentoDelSuceso;
-
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "heladera_donde_ocurrio", referencedColumnName = "id_heladera")
     protected Heladera heladeraDondeOcurrio;

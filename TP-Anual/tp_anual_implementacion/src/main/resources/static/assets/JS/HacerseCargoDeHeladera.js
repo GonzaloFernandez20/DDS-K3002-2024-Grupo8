@@ -28,7 +28,6 @@ formularioDeHeladera.addEventListener('submit', function (e) {
     const altura = document.getElementById('altura');
     const ciudad = document.getElementById('ciudadHeladera');
     const nombreDelPunto = document.getElementById('nombrePuntoHeladera');
-    const puestaEnFuncionamiento = document.getElementById('fechaFuncionamientoHeladera');
 
     // ---------------- Validación de campos obligatorios ---------------- //
 
@@ -88,15 +87,6 @@ formularioDeHeladera.addEventListener('submit', function (e) {
         nombreDelPunto.classList.remove('error');
     }
 
-    if (!puestaEnFuncionamiento.value) {
-        hasError = true;
-        document.getElementById('fechaFuncionamientoHeladeraError').innerText = 'La fecha de puesta en funcionamiento es requerida';
-        puestaEnFuncionamiento.classList.add('error');
-    } else {
-        document.getElementById('fechaFuncionamientoHeladeraError').innerText = '';
-        puestaEnFuncionamiento.classList.remove('error');
-    }
-
     if (hasError) {
         return;
     }
@@ -116,7 +106,6 @@ formularioDeHeladera.addEventListener('submit', function (e) {
                 altura: altura.value,
                 ciudad: ciudad.value,
                 nombreDelPunto: nombreDelPunto.value,
-                puestaEnFuncionamiento: puestaEnFuncionamiento.value,
                 latitud: latitud,
                 longitud: longitud
             };
@@ -132,7 +121,7 @@ formularioDeHeladera.addEventListener('submit', function (e) {
         })
         .then(response => {
             if (response.ok) {
-                alert('Heladera dada alta exitosamente');
+                showAlert('Heladera dada alta exitosamente', 'success')
             } else {
                 throw new Error(`Error al dar de alta la heladera. Código de estado: ${response.status}`);
             }
