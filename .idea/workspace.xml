@@ -5,19 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="mergeo mergeo global en el broker">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositories/Accesos_a_heladeras/AccesoAHeladerasRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDistribucionViandas.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDistribucionViandas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlSolicitudTarjeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlSolicitudTarjeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Brokers/LectorDeTarjetasDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Brokers/LectorDeTarjetasDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionDeDinero.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionDeDinero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionViandas.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionViandas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraSeleccionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraSeleccionDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/BrokerAccesosListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/BrokerAccesosListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/AccesoDeColaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/AccesoDeColaborador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorDeAperturasAHeladeras.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorDeAperturasAHeladeras.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorDePermisosDeApertura.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorDePermisosDeApertura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/Vinculacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/Vinculacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestDeIntegracion/TestRetiroDeViandas.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestDeIntegracion/TestRetiroDeViandas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/GestionDeContribuciones/GestorDonacionDeDinero.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/GestionDeContribuciones/GestorDonacionDeDinero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/colaborador/Colaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/colaborador/Colaborador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/DonacionDeDinero.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/DonacionDeDinero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/sistema/RegistroDeRecaudacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/sistema/RegistroDeRecaudacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarDinero.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarDinero.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DonarDinero.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DonarDinero.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +74,7 @@
     "JUnit.TestRepositorioIncidentes.executor": "Run",
     "JUnit.TestRetiroDeViandas.executor": "Run",
     "Maven.tp_anual_implementacion [clean,install].executor": "Run",
+    "Maven.tp_anual_implementacion [compile].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -86,6 +91,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "Errors",
     "vue.rearranger.settings.migration": "true"
   },
@@ -103,11 +111,13 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="mvn compile" />
       <command value="mvn clean install" />
     </option>
   </component>
   <component name="RunAnythingContextRecentDirectoryCache">
     <option name="paths">
+      <recentPaths value="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion" />
       <recentPaths value="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion" />
       <recentPaths value="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion" />
     </option>

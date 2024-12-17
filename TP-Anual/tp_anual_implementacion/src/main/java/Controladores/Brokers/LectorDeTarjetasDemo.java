@@ -29,34 +29,41 @@ public class LectorDeTarjetasDemo {
     @PostMapping("/AutorizarApertura")
     public ResponseEntity<String> solicitarAutorizacionApertura(@RequestParam String codigoDeTarjeta,
                                                                 @RequestParam String id_heladera) throws IOException {
+        Channel canal = null;
         try {
             String mensaje = codigoDeTarjeta + ": " + id_heladera;
             servicioBroker.enviarMensaje("autorizacion_aperturas", mensaje);
-        } catch (Exception e) {
+
+            canal = servicioBroker.getCanal();
+            canal.queueDeclare("cola_respuestas", true, false, false, null);
+            long startTime = System.currentTimeMillis();
+            long timeout = 10000; // 10 segundos de espera máximo
+
+            while ((System.currentTimeMillis() - startTime) < timeout) {
+                GetResponse response = canal.basicGet("cola_respuestas", true); // Obtener mensaje de la cola
+                if (response != null) {
+                    String respuesta = new String(response.getBody(), StandardCharsets.UTF_8);
+                    if (respuesta.equals("true")){
+                        //TODO loggear
+                        return ResponseEntity.ok().body("Apertura autorizada");
+                    }else {
+                        //TODO loggear
+                        return ResponseEntity.badRequest().body("Apertura denegada");
+                    }
+                }
+            //TODO loggear: se acabo el tiempo de espera de la respuesta del broker
+            }
+            return ResponseEntity.status(408).body("No se recibió respuesta del broker a tiempo");
+        }
+        catch (IOException  e) {
             //TODO loggear
             System.err.println("Error al solicitar la autorización de apertura: " + e.getMessage());
         }
-
-        Channel canal = servicioBroker.getCanal();
-        long startTime = System.currentTimeMillis();
-        long timeout = 10000; // 10 segundos de espera máximo
-
-        while ((System.currentTimeMillis() - startTime) < timeout) {
-            GetResponse response = canal.basicGet("cola_respuestas", true); // Obtener mensaje de la cola
-            if (response != null) {
-                String respuesta = new String(response.getBody(), StandardCharsets.UTF_8);
-                if (respuesta.equals("true")){
-                    //TODO loggear
-                    return ResponseEntity.ok().body("Apertura autorizada");
-                }else {
-                    //TODO loggear
-                    return ResponseEntity.badRequest().body("Apertura denegada");
-                }
-            }
+        catch (Exception e) {
+            //TODO loggear
+            System.err.println("Error al solicitar la autorización de apertura: " + e.getMessage());
         }
-        // Si no se recibe una respuesta en el tiempo límite
-        //TODO loggear: se acabo el tiempo de espera de la respuesta del broker
-        return ResponseEntity.badRequest().body("No se recibió respuesta del broker a tiempo");
+        return ResponseEntity.status(500).body("Error interno del servidor");
     }
 
     @PreDestroy

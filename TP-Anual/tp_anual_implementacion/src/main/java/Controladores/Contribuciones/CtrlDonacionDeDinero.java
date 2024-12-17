@@ -14,25 +14,29 @@ import DTOs.DonacionDeDineroDTO;
 
 @Controller
 public class CtrlDonacionDeDinero {
-    //DEPENDENCIAS: repositorios y gestores --------------------------------------
+    //DEPENDENCIAS: repositorios y gestores ----------------------------------------------------------------------------------
     private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final GestorDonacionDeDinero gestorDonacionDeDinero;
+
     @Autowired
-    public CtrlDonacionDeDinero(GestorInicioDeSesion gestorInicioDeSesion) {
+    public CtrlDonacionDeDinero(GestorInicioDeSesion gestorInicioDeSesion,
+                                GestorDonacionDeDinero gestorDonacionDeDinero) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
+        this.gestorDonacionDeDinero = gestorDonacionDeDinero;
     }
 
+    //GET MAPPING -------------------------------------------------------------------------------------------------------------
     @GetMapping("/DonarDinero")
     public String donarDineroHome() {
         return "DonarDinero";
     }
 
+    //POST MAPPING -------------------------------------------------------------------------------------------------------------
     @PostMapping("/ProcesarDonacionDeDinero")
     public ResponseEntity<String> recibirDonacionDinero(@RequestBody DonacionDeDineroDTO donacionDTO) {
         DonacionDeDinero nuevaDonacion = procesarDTO(donacionDTO);
-        GestorDonacionDeDinero.procesarDineroDonado(nuevaDonacion);
-        return ResponseEntity.ok()
-                .header("Content-Type", "text/plain; charset=UTF-8")
-                .body("Usuario y contraseña validados exitosamente.");
+        gestorDonacionDeDinero.procesarDineroDonado(nuevaDonacion);
+        return ResponseEntity.ok().body("Donación de dinero realizada con éxito");
     }
 
     private DonacionDeDinero procesarDTO(DonacionDeDineroDTO donacionDTO) {

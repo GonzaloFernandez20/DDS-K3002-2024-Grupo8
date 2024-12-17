@@ -89,8 +89,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
-
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 		<dependency>
@@ -195,20 +193,20 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- - - - - - - - - - -LOGS- - - - - - - - - - - - -->
-		<!-- SLF4J API -->
+<!--		&lt;!&ndash; - - - - - - - - - -LOGS- - - - - - - - - - - - &ndash;&gt;
+		&lt;!&ndash; SLF4J API &ndash;&gt;
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>2.0.11</version>
 		</dependency>
 
-		<!-- Logback Implementation -->
+		&lt;!&ndash; Logback Implementation &ndash;&gt;
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.4.11</version>
-		</dependency>
+		</dependency>-->
 
 	</dependencies>
 
@@ -233,5 +231,4 @@
 			</plugin>
         </plugins>
 	</build>
-
 </project>

@@ -57,6 +57,7 @@ public class BrokerAccesosListener {
     }
 
     private void procesarMensaje(String mensaje) {
+        Channel canal = null;
         try {
             String[] partes = mensaje.split(": ");
             String tarjeta = partes[0];
@@ -67,7 +68,8 @@ public class BrokerAccesosListener {
             boolean estaAutorizadaLaApertura = gestorDeAperturasAHeladeras.autorizarApertura(tarjeta, idHeladera);
 
             String respuesta = String.valueOf(estaAutorizadaLaApertura);
-            Channel canal = servicioBroker.getCanal();
+            canal = servicioBroker.getCanal();
+            canal.queueDeclare("cola_respuestas", true, false, false, null);
             canal.basicPublish("", "cola_respuestas", null, respuesta.getBytes(StandardCharsets.UTF_8));
 
         } catch (Exception e) {

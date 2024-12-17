@@ -1,11 +1,19 @@
 package Modelo.Dominio.sistema;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Table(name = "registro_de_recaudacion")
 public class RegistroDeRecaudacion {
     private static RegistroDeRecaudacion instancia;
+    @Column(name = "monto")
     private float fondoRecaudado = 0;
 
     private RegistroDeRecaudacion() {
-        fondoRecaudado = 0;
     }
 
     public static RegistroDeRecaudacion getInstancia() {
@@ -18,6 +26,4 @@ public class RegistroDeRecaudacion {
     public void recibirDinero(float dinero) {
         fondoRecaudado += dinero;
     }
-    public float getFondoRecaudado() { return fondoRecaudado; }
-    //public void setFondoRecaudado(float valor){this.fondoRecaudado = valor;}
 }

@@ -52,12 +52,16 @@ formularioDonacion.addEventListener('submit', function(e) {
             body: JSON.stringify(donacionData),
         })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la red');
-                }
-                alert('Donación enviada exitosamente');
-                formularioDonacion.reset();
+                return response.text().then(msjDeRespuesta => {
+                    if (!response.ok) {
+                        showAlert(msjDeRespuesta, "error");
+                    }else{
+                        showAlert(msjDeRespuesta, "success");
+                        formularioDonacion.reset();
+                    }
+                });
             })
+
             .catch(error => {
                 console.error('Error:', error);
                 alert('Hubo un error al enviar la donación');

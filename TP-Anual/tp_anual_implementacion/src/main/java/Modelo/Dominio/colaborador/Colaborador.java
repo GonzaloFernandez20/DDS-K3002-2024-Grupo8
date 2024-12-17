@@ -7,15 +7,15 @@ import Modelo.Dominio.Persona.Persona;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 @Setter
 @Entity
-@Table(name = "Colaborador")
+@Table(name = "colaborador")
 public class Colaborador {
     @Id
     @GeneratedValue
@@ -51,16 +51,16 @@ public class Colaborador {
         historialDeContribuciones.add(contribucion);
         double nuevosPuntos = contribucion.puntosQueSumaColaborador();
         puntosAcumulados += nuevosPuntos;
-        logger.debug("Se sumaron {} puntos por la nueva cotribución, el colaborador queda con {} puntos acumulados", nuevosPuntos, puntosAcumulados);
+        log.debug("El colaborador ID:{} sumó {} puntos por la nueva cotribución, queda con {} puntos acumulados", id_colaborador, nuevosPuntos, puntosAcumulados);
     }
 
     public void notificar(String mensaje) {
         for (MedioDeContacto medio : mediosDeContacto){
             try {
                 medio.notificar(mensaje);
-                logger.info("Se notificó al colaborador a través de {}: {}", medio.getClass().getSimpleName(), mensaje);
+                log.info("Se notificó al colaborador a través de {}: {}", medio.getClass().getSimpleName(), mensaje);
             } catch (Exception e) {
-                logger.error("Error al notificar a través de {}: {}", medio.getClass().getSimpleName(), e.getMessage());
+                log.error("Error al notificar a través de {}: {}", medio.getClass().getSimpleName(), e.getMessage());
             }
         }
     }
@@ -76,7 +76,4 @@ public class Colaborador {
     public void agregarMedioDeContacto(MedioDeContacto nuevoMedio) {
         mediosDeContacto.add(nuevoMedio);
     }
-
-    //Logger ----------------------------------------------------------------------------------------------------------
-    private static final Logger logger = LoggerFactory.getLogger(Colaborador.class);
 }
