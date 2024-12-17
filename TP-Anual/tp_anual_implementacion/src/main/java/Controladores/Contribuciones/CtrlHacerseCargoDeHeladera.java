@@ -6,6 +6,7 @@ import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.HacerseCargoDeHeladera;
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.heladera.Modelo;
 import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Mappers.BuilderHeladera;
@@ -16,6 +17,7 @@ import Repositories.contribucion.HacerseCargoDeHeladeraRepository;
 import Repositories.heladera.HeladeraRepository;
 import Repositories.Suscripciones.NotificadorDeSuscriptosRepository;
 
+import Repositories.heladera.ModeloRepository;
 import Servicios_Externos_APIs.API.APIRequester;
 import Servicios_Externos_APIs.API.ResponseRecomendacion;
 
@@ -24,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,34 +44,36 @@ public class CtrlHacerseCargoDeHeladera {
     private final HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository;
     private final ColaboradorRepository colaboradorRepository;
     private final NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository;
+    private final ModeloRepository modeloRepository;
 
     @Autowired
     public CtrlHacerseCargoDeHeladera(GestorInicioDeSesion gestorInicioDeSesion,
                                       HeladeraRepository heladeraRepository,
                                       HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository,
                                       ColaboradorRepository colaboradorRepository,
-                                      NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository) {
+                                      NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository, ModeloRepository modeloRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.heladeraRepository = heladeraRepository;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
         this.colaboradorRepository = colaboradorRepository;
         this.notificadorDeSuscriptosRepository = notificadorDeSuscriptosRepository;
+        this.modeloRepository = modeloRepository;
     }
 
     @GetMapping("/HacerseCargoDeUnaHeladera")
-    public String HacerseCargoDeUnaHeladera() {
+    public String HacerseCargoDeUnaHeladera(Model model) {
         Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
         if (colaboradorActual.getPersona() instanceof PersonaHumana) {
             return "PedirRegistroJuridico";
         }
 
+        List<Modelo> modelosDisponibles = modeloRepository.findAll();
+        model.addAttribute("modelos", modelosDisponibles);
         return "HacerseCargoDeUnaHeladera";
     }
 
     @GetMapping("/RecomendacionColocacion")
-    public String RecomedacionColocacion() {
-        return "RecomendacionColocacion";
-    }
+    public String RecomedacionColocacion() { return "RecomendacionColocacion"; }
 
 
     @PostMapping("/FormularioDeHeladera")
@@ -77,7 +82,8 @@ public class CtrlHacerseCargoDeHeladera {
         Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
 
         heladeraDTO.setColaboradorACargo(colaborador);
-        Heladera nuevaHeladera = BuilderHeladera.crearHeladeraAPartirDe(heladeraDTO);
+        Modelo modelo = modeloRepository.obtenerModeloSegunNombre(heladeraDTO.getNombreModelo());
+        Heladera nuevaHeladera = BuilderHeladera.crearHeladeraAPartirDe(heladeraDTO, modelo);
         NotificadorDeSuscriptos notificador = new NotificadorDeSuscriptos(nuevaHeladera);
         nuevaHeladera.setNotificadorDeSuscriptos(notificador);
         NotificadorDeSuscriptos notificadorGuardado = notificadorDeSuscriptosRepository.save(notificador);

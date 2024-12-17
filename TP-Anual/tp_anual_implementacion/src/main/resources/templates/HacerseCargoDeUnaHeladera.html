@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" xmlns:th=http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,9 +58,13 @@
 
                     <div class="input-group">
                         <label for="modeloHeladera">Modelo de heladera</label>
-                        <input type="text" id="modeloHeladera" placeholder="Ingrese el modelo de la heladera" required>
+                        <select id="modeloHeladera" name="modeloHeladera" required>
+                            <option value="" selected disabled>--Seleccione una opción--</option>
+                            <option th:each="modelo : ${modelos}" th:value="${modelo.nombreModelo}" th:text="${modelo.nombreModelo}"></option>
+                        </select>
                         <div class="error-message" id="modeloHeladeraError"></div>
                     </div>
+
 
                     <div class="input-group">
                         <label for="capacidadHeladera">Capacidad de la heladera en viandas</label>

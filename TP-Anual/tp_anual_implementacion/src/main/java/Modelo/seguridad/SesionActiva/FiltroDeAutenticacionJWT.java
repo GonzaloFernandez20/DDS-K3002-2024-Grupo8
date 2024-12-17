@@ -42,9 +42,9 @@ public class FiltroDeAutenticacionJWT extends OncePerRequestFilter {
         if (sessionId != null) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication != null && authentication.isAuthenticated()) {
-                logger.info("Usuario autenticado con JSESSIONID: " + authentication.getName());
+                //logger.info("Usuario autenticado con JSESSIONID: " + authentication.getName());
             } else {
-                logger.warn("JSESSIONID presente pero usuario no autenticado en el contexto.");
+                //logger.warn("JSESSIONID presente pero usuario no autenticado en el contexto.");
             }
         }
 
@@ -55,10 +55,10 @@ public class FiltroDeAutenticacionJWT extends OncePerRequestFilter {
                     Authentication authentication = new UsernamePasswordAuthenticationToken(
                             UtilsJWT.obtenerSujetoDelToken(tokenDecodificado), null, Collections.emptyList());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    logger.info("Usuario autenticado con JWT: " + authentication.getName());
+                    //logger.info("Usuario autenticado con JWT: " + authentication.getName());
                 }
             } catch (IllegalArgumentException e) {
-                logger.error("Error al decodificar el token: " + e.getMessage());
+                //logger.error("Error al decodificar el token: " + e.getMessage());
             }
         }
 

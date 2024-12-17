@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Ocultamos los secretos" />
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlHacerseCargoDeHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlHacerseCargoDeHeladera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/BuilderHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/BuilderHeladera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/FiltroDeAutenticacionJWT.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/FiltroDeAutenticacionJWT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositories/heladera/ModeloRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositories/heladera/ModeloRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/HacerseCargoDeUnaHeladera.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/HacerseCargoDeUnaHeladera.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/utils/keystore.p12" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,8 +85,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.App.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.Server.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Feature-SSO&quot;,
+    &quot;Spring Boot.Server.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MergeoGlobal&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion/src/main/resources/static/img&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -233,6 +243,7 @@
       <workItem from="1734310703196" duration="34885000" />
       <workItem from="1734383437930" duration="620000" />
       <workItem from="1734387634532" duration="636000" />
+      <workItem from="1734440109394" duration="5139000" />
     </task>
     <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
       <option name="closed" value="true" />
@@ -370,7 +381,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734388845218</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Merge con SSO">
+      <option name="closed" value="true" />
+      <created>1734437144762</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1734437144762</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +454,8 @@
     <MESSAGE value="arreglos del merge para que compile" />
     <MESSAGE value="arreglos del merge para que compile parte 2" />
     <MESSAGE value="Ocultamos los secretos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ocultamos los secretos" />
+    <MESSAGE value="Merge con SSO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge con SSO" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
