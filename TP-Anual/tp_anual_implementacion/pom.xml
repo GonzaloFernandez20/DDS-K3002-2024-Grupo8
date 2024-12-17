@@ -208,7 +208,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>
-						src/main/java/Servidor/Server.java
+						Servidor.Server
 					</mainClass>
 				</configuration>
 			</plugin>
