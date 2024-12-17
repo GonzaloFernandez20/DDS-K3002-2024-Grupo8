@@ -107,8 +107,26 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
     const emailCaja = document.getElementById('emailIngresadoJ');
     const telefonoCaja = document.getElementById('telefonoIngresadoJ');
 
-    const whatsappChecked = document.getElementById('checkbox-wp-j').checked;
-  
+    const medioDTO = [];
+    let emailIngresado;
+    let telefonoIngresado;
+
+    if(emailCaja.value != null) {
+        emailIngresado = {
+            tipo: "Mail",
+            valor: emailCaja.value
+        }
+        medioDTO.push(emailIngresado);
+    }
+
+    if(telefonoCaja.value != null) {
+        telefonoIngresado = {
+            tipo: "WhatsApp",
+            valor: telefonoCaja.value
+        }
+        medioDTO.push(telefonoIngresado);
+    }
+
     const datosDeUsuario = {
         usuario: usuario.value,
         contrasenia: contrasena.value,
@@ -117,9 +135,7 @@ document.getElementById('extraFormContainerJuridico').addEventListener('submit',
         rubro: rubro.value,
         calle: calle.value,
         altura: altura.value,
-        email: emailCaja.value,
-        telefono: telefonoCaja.value,
-        tieneWp: whatsappChecked || false
+        medioDeContactos: medioDTO
     };
 
 
@@ -160,7 +176,26 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
     const altura = document.getElementById('alturaH');
     const emailCaja = document.getElementById('emailIngresadoH');
     const telefonoCaja = document.getElementById('telefonoIngresadoH');
-    const whatsappChecked = document.getElementById('checkbox-wp-h').checked;
+
+    const medioDTO = [];
+    let emailIngresado;
+    let telefonoIngresado;
+
+    if(emailCaja.value != null) {
+        emailIngresado = {
+            tipo: "Mail",
+            valor: emailCaja.value
+        }
+        medioDTO.push(emailIngresado);
+    }
+
+    if(telefonoCaja.value != null) {
+        telefonoIngresado = {
+            tipo: "WhatsApp",
+            valor: telefonoCaja.value
+        }
+        medioDTO.push(telefonoIngresado);
+    }
 
     // Generamos los datos a enviar
     const colaboradorHumano = {
@@ -176,10 +211,7 @@ document.getElementById('extraFormContainerHumano').addEventListener('submit', f
         sexo: sexo.value,
         calle: calle.value,
         altura: altura.value,
-
-        email: emailCaja.value,
-        telefono: telefonoCaja.value,
-        whatsapp: whatsappChecked,
+        medioDeContactos: medioDTO
     };
 
     fetch('/RegistrarColaboradorHumano', {

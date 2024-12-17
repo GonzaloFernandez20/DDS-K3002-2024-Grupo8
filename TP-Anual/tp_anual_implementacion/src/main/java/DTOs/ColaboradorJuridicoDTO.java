@@ -18,7 +18,6 @@ public class ColaboradorJuridicoDTO {
     private final String altura;
     List<MedioDeContactoDTO> medioDeContactos;
 
-
     // Constructor
     public ColaboradorJuridicoDTO(String usuario, String contrasenia, String razonSocial,
                                   TipoOrganizacion tipoDeOrganizacion, String rubro, String calle,

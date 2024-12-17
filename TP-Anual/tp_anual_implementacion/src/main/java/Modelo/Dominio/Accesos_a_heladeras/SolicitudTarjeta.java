@@ -34,7 +34,7 @@ public class SolicitudTarjeta {
 
     public List<String> generarCodigos() {
         for(int i = 0; i < this.cantidadDeTarjetas; i++) {
-            String codigo = GeneradorDeCadenas.generarCadena(8, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
+            String codigo = GeneradorDeCadenas.generarCadena(11, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
             System.out.println(codigo);
             codigos.add(codigo);
         }

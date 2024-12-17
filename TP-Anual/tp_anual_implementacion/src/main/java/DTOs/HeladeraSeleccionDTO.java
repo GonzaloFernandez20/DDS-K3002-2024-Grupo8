@@ -8,7 +8,7 @@ public class HeladeraSeleccionDTO {
     private String calle;
     private String altura;
     private String ciudad;
-    //private int stockDeViandas;
+    private int stockDeViandas;
     private int capacidadRestante;
     private EstadoHeladera estado;
 
@@ -25,7 +25,7 @@ public class HeladeraSeleccionDTO {
         this.calle = calle;
         this.altura = altura;
         this.ciudad = ciudad;
-        /*this.stockDeViandas = stockDeViandas;*/
+        this.stockDeViandas = stockDeViandas;
         this.capacidadRestante = capacidadRestante;
         this.estado = estado;
     }
@@ -35,7 +35,7 @@ public class HeladeraSeleccionDTO {
     public String getCalle() { return calle; }
     public String getAltura() { return altura; }
     public String getCiudad() { return ciudad; }
-    //public int getStockDeViandas() { return stockDeViandas; }
+    public int getStockDeViandas() { return stockDeViandas; }
     public int getCapacidadRestante() { return capacidadRestante; }
     public EstadoHeladera getEstado() { return estado; }
 }

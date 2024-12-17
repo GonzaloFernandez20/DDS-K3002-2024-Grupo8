@@ -51,7 +51,7 @@ public class CtrlSuscripciones {
                                                                                     stream().
                                                                                     map(suscripcion -> SuscripcionMapper.convertirEnSuscripcionDTO(suscripcion)).
                                                                                     collect(Collectors.toList());
-        List<HeladeraSuscripcionDTO> heladeras = repositorioHeladeras.findAll().
+        List<HeladeraSuscripcionDTO> heladeras = repositorioHeladeras.traerHeladerasActivasEnElSistema().
                                                                     stream().
                                                                     map(heladera -> HeladeraSuscripcionMapper.convertirEnHeladeraSuscripcionDTO(heladera, suscripcionesDelColaborador)).
                                                                     collect(Collectors.toList());

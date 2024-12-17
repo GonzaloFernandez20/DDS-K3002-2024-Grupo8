@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Component
 public class ColabJuridicoMapper {
@@ -47,10 +48,10 @@ public class ColabJuridicoMapper {
 
         // Creacion de medios de contacto
         colaboradorDTO.getMedioDeContactos().forEach(medio -> {
-            if(medio.getTipo().equals("WhatsApp")) {
+            if(medio.getTipo().equals("WhatsApp") && !Objects.equals(medio.getValor(), "")) {
                 nuevoColaborador.agregarMedioDeContacto(new WhatsApp(medio.getValor()));
             }
-            if(medio.getTipo().equals("Mail")) {
+            if(medio.getTipo().equals("Mail") && !Objects.equals(medio.getValor(), "")) {
                 nuevoColaborador.agregarMedioDeContacto(new Mail(medio.getValor()));
             }
         });
@@ -73,6 +74,9 @@ public class ColabJuridicoMapper {
         personaJuridica.setRubro(colaboradorDTO.getRubro());
         personaJuridica.getDireccion().setCalle(colaboradorDTO.getCalle());
         personaJuridica.getDireccion().setAltura(colaboradorDTO.getAltura());
+
+        //colaboradorDeSesion.setPersona(personaJuridica);
+        //colaboradorDeSesion.setMediosDeContacto(colaboradorDTO.getMedioDeContactos());
 
         return usuarioDeSesion;
     }

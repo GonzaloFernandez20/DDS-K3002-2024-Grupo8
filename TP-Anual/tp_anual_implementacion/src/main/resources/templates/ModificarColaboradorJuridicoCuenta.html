@@ -143,12 +143,11 @@
                                 </div>
 
 
-                                <label for="tipoNuevoMedioDeContacto">Agregar medio de contacto:</label>
+                                <label>Agregar medio de contacto:</label>
                                 <div class="mod-cuenta-tipo-medio">
-                                    <label for="tipoNuevoMedioDeContacto" th:text="'Medios de Contacto: ' + ${colaborador.medioDeContactos}"></label>
                                     <select id="tipoNuevoMedioDeContacto">
-                                        <option th:value="${colaborador.medioDeContactos}" selected disabled>--Seleccione--</option>
-                                        <option th:each="medio : ${colaborador.medioDeContactos}" th:value="${medio}" th:text="${medio}"></option>
+                                        <option th:value="${medios}" selected disabled>--Seleccione--</option>
+                                        <option th:each="medio : ${medios}" th:value="${medio}" th:text="${medio}"></option>
                                     </select>
                                 </div>
                                 <br>
