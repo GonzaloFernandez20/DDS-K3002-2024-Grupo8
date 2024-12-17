@@ -33,16 +33,20 @@ public class CtrlSolicitudTarjeta {
         return "PedirTarjetaColaborador";
     }
 
-    @PostMapping("/SolicitarTarjetas")
-    public String solicitarTarjeta(@RequestParam("respuestaFormAcceso") String rtaAcceso,
-                                    @RequestParam(name = "cantidad", defaultValue = "1") int cantidadDeTarjetas,
-                                    RedirectAttributes redirectAttributes) {
-        if(rtaAcceso.equals("pedirTarjeta")) {
-            gestorTarjetas.generarSolicitud(gestorInicioDeSesion.obtenerColaboradorPorID(), cantidadDeTarjetas);
-            redirectAttributes.addFlashAttribute("mensaje", "Vas a recibir la tarjeta en los próximos días.");
-        }
+    @GetMapping("/EntregarTarjetasDeAcceso")
+    public String entregarAcceso() { return "EntregarTarjetasDeAcceso"; }
 
-        return "redirect:/Home";
+    @PostMapping("/SolicitarTarjetas")
+    public ResponseEntity<String> solicitarTarjetas(@RequestBody Integer cantidadTarjetas,
+                                                    RedirectAttributes redirectAttributes) {
+        gestorTarjetas.generarSolicitud(gestorInicioDeSesion.obtenerColaboradorPorID(), cantidadTarjetas);
+        String mensaje = "Vas a recibir las tarjetas en los próximos días.";
+        if(cantidadTarjetas == 1) {
+            mensaje = "Vas a recibir la tarjeta en los próximos días.";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", mensaje);
+
+        return ResponseEntity.ok().body(mensaje);
     }
 
     @PostMapping("/IngresarTarjetaColaborador")

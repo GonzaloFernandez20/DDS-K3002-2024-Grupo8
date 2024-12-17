@@ -1,7 +1,7 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
 import Modelo.Dominio.GestionDeContribuciones.GestorRegistroPersonaVulnerable;
-import Modelo.Dominio.Persona.PersonaHumana;
+import Repositories.Accesos_a_heladeras.SolicitudTarjetaRepository;
 import Repositories.Accesos_a_heladeras.VinculacionRepository;
 import Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
@@ -18,23 +18,30 @@ public class GestorTarjetas {
     private GestorRegistroPersonaVulnerable gestorRegistroPersonaVulnerable;
     private ColaboradorRepository colaboradorRepository;
     private VinculacionRepository vinculacionRepository;
+    private SolicitudTarjetaRepository solicitudTarjetaRepository;
+
     private List<SolicitudTarjeta> tarjetasPendientesDeEntrega;
     private List<AccesoAHeladeras> tarjetasRegistradas;
 
     @Autowired
     public GestorTarjetas(GestorRegistroPersonaVulnerable gestorRegistroPersonaVulnerable,
                           ColaboradorRepository colaboradorRepository,
-                          VinculacionRepository vinculacionRepository) {
+                          VinculacionRepository vinculacionRepository,
+                          SolicitudTarjetaRepository solicitudTarjetaRepository) {
         this.gestorRegistroPersonaVulnerable = gestorRegistroPersonaVulnerable;
         this.colaboradorRepository = colaboradorRepository;
         this.vinculacionRepository = vinculacionRepository;
         this.tarjetasPendientesDeEntrega = new ArrayList<>();
+        this.solicitudTarjetaRepository = solicitudTarjetaRepository;
     }
+
 
     //Metodos ----------------------------------------------------------------------------------------------------
     public void registrarVinculacion(Vinculacion vinculacion) {
         Optional<Vinculacion> codTarjeta = vinculacionRepository.findByCodigoTarjeta(vinculacion.getCodigoTarjeta());
         if (codTarjeta.isEmpty()){
+            cumpleConRequisitosDeUnCodigoDeTarjeta(vinculacion.getCodigoTarjeta());
+
             Vinculacion vinculacionGuardada = vinculacionRepository.save(vinculacion);
             gestorRegistroPersonaVulnerable.procesarVinculacionPersonaVulnerable(vinculacionGuardada);
         }else {
@@ -44,6 +51,8 @@ public class GestorTarjetas {
 
     public void registrarAccesoDeColaborador(String codigo, Colaborador colaborador){
         try {
+            cumpleConRequisitosDeUnCodigoDeTarjeta(codigo);
+
             AccesoDeColaborador accesoDeColaborador = new AccesoDeColaborador(codigo, colaborador);
             colaborador.setTarjeta(accesoDeColaborador);
 
@@ -53,8 +62,15 @@ public class GestorTarjetas {
         }
     }
 
+    private void cumpleConRequisitosDeUnCodigoDeTarjeta(String codigo) {
+        if(codigo.length() != 11 || !codigo.matches("^[a-zA-Z0-9]+$")) {
+            throw new RuntimeException("Código inválido");
+        }
+    }
+
     public void generarSolicitud(Colaborador destinatario, int cantidadDeTarjetas){
         SolicitudTarjeta solicitudTarjeta = new SolicitudTarjeta(destinatario, cantidadDeTarjetas);
         tarjetasPendientesDeEntrega.add(solicitudTarjeta);
+        solicitudTarjetaRepository.save(solicitudTarjeta);
     }
 }
