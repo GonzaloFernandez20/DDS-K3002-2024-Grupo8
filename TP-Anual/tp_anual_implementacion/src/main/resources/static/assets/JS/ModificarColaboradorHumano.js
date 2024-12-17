@@ -69,7 +69,7 @@ document.getElementById("mod-cuenta-humano").addEventListener("submit", function
     medioNuevo.parentElement.style.display = "none"; // Ocultar el input tras el envío (opcional)
 });
 */
-document.getElementById("tipoNuevoMedioDeContactoHumano").addEventListener("change", function () {
+document.getElementById("tipoNuevoMedioDeContacto").addEventListener("change", function () {
     const inputContainer = document.getElementById("inputContainer");
     const label = document.querySelector("#inputContainer label");
     const tipo = this.value;

@@ -179,12 +179,13 @@
                             </span>
                         </div>
 
-                        <label for="tipoNuevoMedioDeContactoHumano">Agregar medio de contacto:</label>
-                        <select id="tipoNuevoMedioDeContactoHumano" class="mod-cuenta-tipo-medio">
-                            <option value="" selected disabled >--Seleccione--</option>
-                            <option value="mail">Mail</option>
-                            <option value="whatsapp">WhatsApp</option>
-                        </select>
+                        <label>Agregar medio de contacto:</label>
+                        <div class="mod-cuenta-tipo-medio">
+                            <select id="tipoNuevoMedioDeContacto">
+                                <option th:value="${medios}" selected disabled>--Seleccione--</option>
+                                <option th:each="medio : ${medios}" th:value="${medio}" th:text="${medio}"></option>
+                            </select>
+                        </div>
                         <br>
                         <div id="inputContainer" style="display: none;">
                             <label for="nuevoMedioDeContactoHumano"></label>

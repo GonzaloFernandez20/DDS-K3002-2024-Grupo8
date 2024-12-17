@@ -74,6 +74,9 @@ public class ColabJuridicoMapper {
         personaJuridica.getDireccion().setCalle(colaboradorDTO.getCalle());
         personaJuridica.getDireccion().setAltura(colaboradorDTO.getAltura());
 
+        //colaboradorDeSesion.setPersona(personaJuridica);
+        //colaboradorDeSesion.setMediosDeContacto(colaboradorDTO.getMedioDeContactos());
+
         return usuarioDeSesion;
     }
 }

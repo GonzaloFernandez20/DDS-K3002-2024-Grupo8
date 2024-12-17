@@ -57,10 +57,12 @@ public class CtrlModificarColaborador {
                 model.addAttribute("sexos", sexos());
                 model.addAttribute("tiposDeDocumento", tiposDeDNI());
                 model.addAttribute("colaborador", datosColaboradorHumano());
+                model.addAttribute("medios", medios());
                 return "ModificarColaboradorHumano";
             case "PersonaJuridica":
                 model.addAttribute("tiposDeOrganizacion",tiposDeOrganizacion());
                 model.addAttribute("colaborador", datosColaboradorJuridico());
+                model.addAttribute("medios", medios());
                 return "ModificarColaboradorJuridicoCuenta";
             default:
                 return "Home";
@@ -165,9 +167,6 @@ public class CtrlModificarColaborador {
                 personaHumana.getDireccion().getCalle(),
                 personaHumana.getDireccion().getAltura(),
                 mediosDeContactoDTO,
-                //mediosDeContactoDTO.stream().filter(medio -> Objects.equals(medio.getTipo(), "Mail")).toString(),
-                //mediosDeContactoDTO.stream().filter(medio -> Objects.equals(medio.getTipo(), "WhatsApp")).toString(),
-                //false, false,
                 !Objects.isNull(colaboradorDeSesion.getTarjeta())
         );
         return colaborador;
@@ -214,6 +213,15 @@ public class CtrlModificarColaborador {
         tiposDeDocumento.add(TipoDeDocumento.PASAPORTE);
 
         return tiposDeDocumento;
+    }
+
+    public List<String> medios() {
+        List<String> medios = new ArrayList<>();
+
+        medios.add("WhatsApp");
+        medios.add("Mail");
+
+        return medios;
     }
 
     public List<TipoOrganizacion> tiposDeOrganizacion() {
