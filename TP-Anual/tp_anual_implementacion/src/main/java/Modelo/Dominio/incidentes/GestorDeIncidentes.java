@@ -10,7 +10,6 @@ import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.tecnico.LocalizadorDeTecnicos;
 import Modelo.Dominio.tecnico.Tecnico;
 import Modelo.Mappers.FactoryFallaTecnica;
-import Repositorios.RepositorioIncidentes;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,18 +37,17 @@ public class GestorDeIncidentes {
         }
     }
 
-    public static void reportarFallaTecnica(FallaTecnicaDTO fallaTecnicaDTO){
+    public static FallaTecnica reportarFallaTecnica(FallaTecnicaDTO fallaTecnicaDTO){
         FallaTecnica nuevoIncidente = FactoryFallaTecnica.CrearFallaTecnicaAPartirDe(fallaTecnicaDTO);
         reportar(nuevoIncidente);
         heladeraRepository.save((nuevoIncidente.getHeladeraDondeOcurrio()));
         fallaTecnicaRepository.save(nuevoIncidente);
+        return nuevoIncidente;
     }
 
     public static void reportar(Incidente nuevoIncidente) {
         nuevoIncidente.getHeladeraDondeOcurrio().huboIncidente();
         darAvisoATecnico(nuevoIncidente);
-        // TODO: Reemplazar por el repositorio real
-        //RepositorioIncidentes.getInstancia().sumarIncidente(nuevoIncidente);
     }
 
     private static void darAvisoATecnico(Incidente nuevoIncidente) {

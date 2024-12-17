@@ -1,80 +1,83 @@
 package Controladores;
 
-import DTOs.FallaTecnicaDTO;
-import DTOs.HeladeraDTO;
+import DTOs.*;
 import Modelo.Dominio.colaborador.Colaborador;
-import Modelo.Dominio.documentacion.Documento;
-import Modelo.Dominio.documentacion.Sexo;
-import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.heladera.Heladera;
+import Modelo.Dominio.incidentes.FallaTecnica;
 import Modelo.Dominio.incidentes.GestorDeIncidentes;
-import Modelo.Dominio.localizacion.Direccion;
-import Modelo.Dominio.medios_de_contacto.WhatsApp;
-import Modelo.Dominio.Persona.PersonaHumana;
-import Repositorios.RepositorioHeladeras;
-import Utils.DescargaDeArchivo;
+import Modelo.Mappers.HeladeraSeleccionMapper;
+import Modelo.seguridad.SesionActiva.UtilsJWT;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
 @Controller
 public class CtrlReportarFallaTecnica {
-    //COLABORADOR HARDCODEADO HASTA PODER ARMAR LA SESIÓN
-    private final Colaborador colaborador = new Colaborador(new PersonaHumana("Fabian", "Bielinski", LocalDate.now(), new Documento(TipoDeDocumento.DNI, "40.303.456", Sexo.MASCULINO), new Direccion("Montes Carballo", "1689")), List.of(new WhatsApp("15 1610-6160")));
+    private final Repositories.colaborador.ColaboradorRepository colaboradorRepository;
+    private final Repositories.heladera.HeladeraRepository heladeraRepository;
+    private final Repositories.incidentes.FallaTecnicaRepository fallaTecnicaRepository;
 
-    // TODO: Reemplazar por el repositorio real
-    private final List<HeladeraDTO> heladerasAReportar = null/*RepositorioHeladeras.getInstancia().getHeladeras().stream().map(this::convertirHeladeraADTO).collect(Collectors.toList())*/;
+    @Autowired
+    public CtrlReportarFallaTecnica(Repositories.colaborador.ColaboradorRepository colaboradorRepository,
+                                    Repositories.heladera.HeladeraRepository heladeraRepository, Repositories.incidentes.FallaTecnicaRepository fallaTecnicaRepository) {
+        this.colaboradorRepository = colaboradorRepository;
+        this.heladeraRepository = heladeraRepository;
+        this.fallaTecnicaRepository = fallaTecnicaRepository;
+    }
+
+    private List<HeladeraSeleccionDTO> heladeras;
 
     @GetMapping("/ReportarFallaTecnica")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("heladerasAReportar", heladerasAReportar);
-
+    public String mostrarHeladeras(Model model) {
+        heladeras = heladeraRepository.traerHeladerasActivasEnElSistema().stream().
+                map(heladera -> HeladeraSeleccionMapper.convertirEnHeladeraSeleccionDTO(heladera)).collect(Collectors.toList());
+        model.addAttribute("heladeras", heladeras);
         return "ReportarFallaTecnica";
     }
 
     @PostMapping("/ReportarFallaTecnica")
-    public String procesarFormulario(@RequestParam(value = "heladeraReportada", defaultValue = "0") String idHeladeraReportada,
-                                     @RequestParam(value = "descripcionFalla", defaultValue = "0") String descripcionFalla,
-                                     @RequestParam(value = "fotoFalla") MultipartFile fotoFalla,
-                                     Model model) {
+    public ResponseEntity<String> reportarFallaTecnica(
+            @RequestParam("heladera") String heladera, @RequestParam("descripcionFalla") String descripcionFalla, @RequestParam("fotoFalla") MultipartFile fotoFalla,
+            @CookieValue("token") String token) {
 
-        // TODO: Reemplazar por el repositorio real
-        //Heladera heladeraReportada = RepositorioHeladeras.getInstancia().buscarHeladeraPorId(Integer.parseInt(idHeladeraReportada));
-        Heladera heladeraReportada = null;
+        System.out.println("Token recibido: " + token);
 
-        String pathFotoFalla = null;
-        if (!fotoFalla.isEmpty()) {
-            pathFotoFalla = DescargaDeArchivo.guardarArchivo("/static/img/fotosHeladerasReportadas/", fotoFalla);
-        }
-
-
-
-        FallaTecnicaDTO fallaTecnicaDTO = new FallaTecnicaDTO(colaborador, heladeraReportada, descripcionFalla, pathFotoFalla);
-        GestorDeIncidentes.reportarFallaTecnica(fallaTecnicaDTO);
-
-        model.addAttribute("mensaje", "Falla reportada exitosamente!");
-
-        return mostrarFormulario(model);
-    }
-
-    private HeladeraDTO convertirHeladeraADTO(Heladera heladera) {
-        return new HeladeraDTO(heladera.getid_heladera(), heladera.getColaboradorACargo(), heladera.getCapacidadDeViandas(), heladera.getModelo().getNombreModelo(), heladera.getModelo().getTemperaturaMaxima(), heladera.getModelo().getTemperaturaMinima(), heladera.getUbicacion().getDireccion().getCalle(), heladera.getUbicacion().getDireccion().getAltura(), heladera.getUbicacion().getCiudad(), heladera.getUbicacion().getNombreDelPunto(), heladera.getPuestaEnFuncionamiento(), heladera.getLatitud(), heladera.getLongitud());
-    }
-
-    /*private String guardarFoto(MultipartFile fotoFalla) {
-
-        String filePath = "/fotosHeladerasReportadas/" + fotoFalla.getOriginalFilename();
         try {
-            fotoFalla.transferTo(new File(filePath));
-        } catch (IOException e) {
+            // Decodificar el token para obtener la información del colaborador
+            String id_colaborador = UtilsJWT.obtenerSujetoDelToken(token);
+
+            // Asignar colaborador al DTO
+            System.out.println("ID del colaborador decodificado: " + id_colaborador);
+            Colaborador colaborador = colaboradorRepository.obtenerColaboradorSegunID(id_colaborador);
+
+            // Verificar la heladera
+            Optional<Heladera> heladeraElegida = heladeraRepository.findById(Integer.parseInt(heladera));
+            System.out.println("Heladera encontrada: " + heladeraElegida.isPresent());
+            if (heladeraElegida.isPresent()) {
+                FallaTecnicaDTO fallaTecnicaDTO = new FallaTecnicaDTO(colaborador, descripcionFalla, heladeraElegida.get(), fotoFalla);
+                System.out.println("Llamando a GestorDeIncidentes.reportarFallaTecnica");
+                FallaTecnica fallaTecnica = GestorDeIncidentes.reportarFallaTecnica(fallaTecnicaDTO);
+                System.out.println("Falla técnica reportada: " + fallaTecnica);
+                System.out.println("Guardando en fallaTecnicaRepository");
+                fallaTecnicaRepository.save(fallaTecnica);
+                System.out.println("Guardado exitosamente en fallaTecnicaRepository");
+
+                System.out.println("Se realizó el reporte completo");
+            } else {
+                throw new RuntimeException("Heladera no encontrada con ID: " + heladera);
+            }
+            return ResponseEntity.ok("Reporte realizado con éxito!");
+        } catch (Exception e) {
             e.printStackTrace();
+            return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
         }
-        return filePath;
-    }*/
+    }
 }

@@ -246,16 +246,16 @@ select {
 
 .rounded-pill{
     --bs-border-radius-pill: 10px;
-    color: #50bfa0;
+    color: #50bfa0 !important;
     background-color: #ffffff;
     border: 1px solid #50bfa0;
     width: fit-content;
 }
 
 .rounded-pill:hover{
-    color: hsl(163, 34%, 33%);
+    color: hsl(163, 34%, 33%) !important;
     background-color: #ffffff;
-    border-color: hsl(163, 34%, 33%);
+    border-color: hsl(163, 34%, 33%) !important;
 }
 
 #box-alertas{

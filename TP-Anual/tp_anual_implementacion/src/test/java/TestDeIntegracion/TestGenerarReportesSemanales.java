@@ -102,7 +102,7 @@ public class TestGenerarReportesSemanales {
         }
     }
 
-    @Disabled
+/*    @Disabled
     @Test
     void ValidacionCompletarReportesSemanales() {
         //RepositorioIncidentes.getInstancia().sumarIncidente(fallaTecnica);
@@ -165,4 +165,6 @@ public class TestGenerarReportesSemanales {
 
         return false;
     }
+
+ */
 }

@@ -37,6 +37,12 @@
                         <form id="form-dar-de-alta-persona-en-sit-vulnerable">
 
                             <div class="input-group">
+                                <label for="tarjetaPersonaVul">Código de tarjeta entregada (*)</label>
+                                <input type="text" id="tarjetaPersonaVul" name="tarjetaPersonaVul" placeholder="Ingrese el código" required>
+                                <a th:href="@{EntregarTarjetasDeAcceso}">Quiero recibir tarjetas para entregar</a>
+                            </div>
+
+                            <div class="input-group">
                                 <label for="nombrePersonaVul">Nombre (*)</label>
                                 <input type="text" id="nombrePersonaVul" name="nombrePersonaVul" placeholder="Ingrese el nombre de la persona a registrar" required>
                             </div>
@@ -102,11 +108,6 @@
                             <div class="input-group hidden">
                                 <label for="cantidadMenoresPersonaVul">Cantidad de menores a cargo (*)</label>
                                 <input type="number" min="0" id="cantidadMenoresPersonaVul" name="cantidadMenoresPersonaVul" placeholder="Ingrese la cantidad de menores" >
-                            </div>
-
-                            <div class="input-group">
-                                <label for="tarjetaPersonaVul">Código de tarjeta entregada (*)</label>
-                                <input type="text" id="tarjetaPersonaVul" name="tarjetaPersonaVul" placeholder="Ingrese el código" required>
                             </div>
 
                             <button type="submit">Dar de alta</button>

@@ -46,7 +46,7 @@ async function aceptarCodigoDeTarjeta(codigo) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(codigo),
+            body: codigo,
         });
 
         if (!respuesta.ok) {

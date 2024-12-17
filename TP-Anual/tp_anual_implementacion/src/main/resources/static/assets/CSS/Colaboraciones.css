@@ -182,3 +182,85 @@ h2 {
     pointer-events: none;
     cursor: not-allowed;
 }
+
+/* Modal: Fondo borroso y centrado */
+#modal-vianda.modal {
+    display: none;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    backdrop-filter: blur(5px); /* Fondo borroso */
+    z-index: 1050; /* Nivel sobre otros elementos (como Bootstrap modals) */
+    overflow: hidden; /* Evita barras de desplazamiento */
+}
+
+#modal-vianda.visible {
+    display: flex; /* Se muestra solo con la clase "visible" */
+}
+
+
+/* Estilo del contenido del modal */
+#modal-vianda .modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: left;
+}
+
+/* Botón de cierre */
+.modal-content .close {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    float: right;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-content .close:hover {
+    color: #50bfa0;
+}
+
+/* Botón guardar */
+.modal-content button {
+    background-color: #50bfa0;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #45a890;
+}
+
+/* Ajustar los inputs y selects */
+.modal-content .input-group input,
+.modal-content .input-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.modal-content .input-group input:focus,
+.modal-content .input-group select:focus {
+    border-color: #50bfa0;
+    outline: none;
+}
+
+.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

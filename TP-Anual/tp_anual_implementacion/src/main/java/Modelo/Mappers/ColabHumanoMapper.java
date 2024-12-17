@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Component
 public class ColabHumanoMapper {
@@ -50,10 +51,14 @@ public class ColabHumanoMapper {
         );
 
         // Creacion de medios de contacto
-        if (colaboradorDTO.isTieneWp()){
-            nuevoColaborador.agregarMedioDeContacto(new WhatsApp(colaboradorDTO.getTelefono()));
-        }
-        nuevoColaborador.agregarMedioDeContacto(new Mail(colaboradorDTO.getEmail()));
+        colaboradorDTO.getMedioDeContactos().forEach(medio -> {
+            if(medio.getTipo().equals("WhatsApp") && !Objects.equals(medio.getValor(), "")) {
+                nuevoColaborador.agregarMedioDeContacto(new WhatsApp(medio.getValor()));
+            }
+            if(medio.getTipo().equals("Mail") && !Objects.equals(medio.getValor(), "")) {
+                nuevoColaborador.agregarMedioDeContacto(new Mail(medio.getValor()));
+            }
+        });
 
         usuario.setColaborador(nuevoColaborador);
         return usuario;

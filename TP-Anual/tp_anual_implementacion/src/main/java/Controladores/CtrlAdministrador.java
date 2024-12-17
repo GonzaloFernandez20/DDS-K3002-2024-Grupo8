@@ -1,6 +1,8 @@
 package Controladores;
 
+import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.carga_masiva.GestorCargaMasiva;
+import Modelo.seguridad.GestorInicioDeSesion;
 import Utils.DescargaDeArchivo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +19,23 @@ import java.util.Objects;
 public class CtrlAdministrador {
 
     GestorCargaMasiva gestorCargaMasiva;
+    private final GestorInicioDeSesion gestorInicioDeSesion;
 
     @Autowired
-    public CtrlAdministrador(GestorCargaMasiva gestorCargaMasiva) {
+    public CtrlAdministrador(GestorCargaMasiva gestorCargaMasiva, GestorInicioDeSesion gestorInicioDeSesion) {
         this.gestorCargaMasiva = gestorCargaMasiva;
+        this.gestorInicioDeSesion = gestorInicioDeSesion;
     }
 
     @GetMapping("/Administrador")
-    public String mostrarPagina() { return "Administrador"; }
+    public String mostrarPagina() {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+
+        if (colaboradorActual != null) {
+            return "AccesoNoPermitido";
+        }
+        else return "Administrador";
+    }
 
     @Transactional
     @PostMapping("/CargaMasiva")

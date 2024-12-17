@@ -25,4 +25,7 @@ public class Mail extends MedioDeContacto{
         String subject = "Notificacion Heladera";
         MailService.sendEmail(subject,mensaje,correo);
     }
+    @Override
+    public String getValor() { return this.correo; }
+    public String getCorreo() { return this.correo; }
 }

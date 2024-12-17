@@ -41,6 +41,14 @@ public class CtrlInicioDeSesion {
             ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
 
             String response = "Inicio de sesión exitoso!";
+
+            if (usuarioObtenido.get().getColaborador() == null) {
+                return ResponseEntity
+                        .ok()
+                        .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                        .body("Redirigir Administrador");
+            }
+
             if(usuarioObtenido.get().getColaborador().getPersona() instanceof PersonaHumana) {
                 PersonaHumana persona = (PersonaHumana) usuarioObtenido.get().getColaborador().getPersona();
 

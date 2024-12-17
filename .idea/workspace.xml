@@ -4,24 +4,76 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="mergeo mergeo global en el broker">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="mergeo">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/MedioDeContactoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/fotosProductosOServicios/foto.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/fotosHeladerasReportadas/Captura de pantalla 2024-10-28 152856.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/fotosHeladerasReportadas/foto.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/img/fotosHeladerasReportadas/foto.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/AccesoNoPermitido.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Brokers/LectorDeTarjetasDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Brokers/LectorDeTarjetasDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionDeDinero.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionDeDinero.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionViandas.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlDonacionViandas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraSeleccionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraSeleccionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/BrokerAccesosListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/BrokerAccesosListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/GestionDeContribuciones/GestorDonacionDeDinero.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/GestionDeContribuciones/GestorDonacionDeDinero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/colaborador/Colaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/colaborador/Colaborador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/DonacionDeDinero.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/DonacionDeDinero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/sistema/RegistroDeRecaudacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/sistema/RegistroDeRecaudacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/logback.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarDinero.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarDinero.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DonarDinero.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DonarDinero.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlAdministrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlAdministrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlModificarColaborador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlSolicitudTarjeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlSolicitudTarjeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlSuscripciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlSuscripciones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Navbar/CtrlHeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Navbar/CtrlHeader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Sesiones/CtrlInicioDeSesion.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Sesiones/CtrlInicioDeSesion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorHumanoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorHumanoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/ColaboradorJuridicoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/FallaTecnicaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/FallaTecnicaDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorTarjetas.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorTarjetas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/SolicitudTarjeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/SolicitudTarjeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/HacerseCargoDeHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/HacerseCargoDeHeladera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/GestorDeIncidentes.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/GestorDeIncidentes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/medios_de_contacto/Mail.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/medios_de_contacto/Mail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/medios_de_contacto/MedioDeContacto.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/medios_de_contacto/MedioDeContacto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/medios_de_contacto/WhatsApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/medios_de_contacto/WhatsApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/GestorDeReportes.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/GestorDeReportes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteDeFallas.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteDeFallas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteDeViandasPorColaborador.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteDeViandasPorColaborador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteDeViandasPorHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteDeViandasPorHeladera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteSemanal.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/reportes/ReporteSemanal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabHumanoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/ColabJuridicoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/FactoryFallaTecnica.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/FactoryFallaTecnica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/ProcesosCalendarizados/ScheduledTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/ProcesosCalendarizados/ScheduledTasks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositories/Accesos_a_heladeras/AperturaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositories/Accesos_a_heladeras/AperturaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositories/medios_de_contacto/MedioDeContactoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositories/medios_de_contacto/MedioDeContactoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositorios/RepositorioAperturas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositorios/RepositorioHeladeras.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositorios/RepositorioIncidentes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Repositorios/RepositorioSuscripciones.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/ServiceImpl/ReportesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/ServiceImpl/ReportesServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Servidor/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Servidor/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/Colaboraciones.css" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/Colaboraciones.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/HeaderFooter.css" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/HeaderFooter.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/CSS/MiCuenta.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/AccesoAHeladeras.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/AccesoAHeladeras.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarViandas.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarViandas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/EntregarTarjetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/EntregarTarjetas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/InicioDeSesion.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/InicioDeSesion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorHumano.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ModificarColaboradorJuridicoCuenta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/RegistroPersona.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/RegistroPersona.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ReportarFallaTecnica.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ReportarFallaTecnica.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/reportes/ReporteDeFallas.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/reportes/ReporteDeFallas.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/reportes/ReporteDeViandasPorColaborador.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/reportes/ReporteDeViandasPorColaborador.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/reportes/ReporteDeViandasPorHeladera.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/reportes/ReporteDeViandasPorHeladera.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/CanjearPuntos.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/CanjearPuntos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DarDeAltaPersonaEnSitVulnerable.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DarDeAltaPersonaEnSitVulnerable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DonarViandas.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/DonarViandas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/EntregarTarjetasDeAcceso.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/EntregarTarjetasDeAcceso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/Header.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/Header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumano.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorHumanoSuscripciones.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoCuenta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PedirTarjetaColaborador.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PedirTarjetaColaborador.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ReportarFallaTecnica.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ReportarFallaTecnica.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestDeIntegracion/TestGenerarReportesSemanales.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestDeIntegracion/TestGenerarReportesSemanales.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +92,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MxF_Persistencia" />
+        <entry key="$PROJECT_DIR$" value="Broker-RabbitMQ" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,7 +126,6 @@
     "JUnit.TestRepositorioIncidentes.executor": "Run",
     "JUnit.TestRetiroDeViandas.executor": "Run",
     "Maven.tp_anual_implementacion [clean,install].executor": "Run",
-    "Maven.tp_anual_implementacion [compile].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -83,17 +134,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.App.executor": "Run",
     "Spring Boot.Server.executor": "Run",
-    "git-widget-placeholder": "Broker-RabbitMQ",
+    "git-widget-placeholder": "Merging Broker-RabbitMQ",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/melin/Documents/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "Errors",
     "vue.rearranger.settings.migration": "true"
   },
@@ -105,21 +152,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="Repositories.Accesos_a_heladeras" />
       <recent name="Modelo.Dominio.Repositories.Suscripciones" />
     </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
-      <command value="mvn compile" />
       <command value="mvn clean install" />
-    </option>
-  </component>
-  <component name="RunAnythingContextRecentDirectoryCache">
-    <option name="paths">
-      <recentPaths value="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion" />
-      <recentPaths value="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion" />
-      <recentPaths value="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion" />
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Server">
@@ -208,10 +246,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.Server" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" />
         <item itemvalue="JUnit.TestDeIncidentes" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes" />
       </list>
     </recent_temporary>
   </component>
@@ -375,7 +413,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734301501751</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="logs funcionan y finalizado todo lo de donar dinero">
+      <option name="closed" value="true" />
+      <created>1734410219606</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1734410219611</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,11 +477,10 @@
     <MESSAGE value="Reparacion de rama" />
     <MESSAGE value="pequeñas reparaciones para solucionar errores" />
     <MESSAGE value="suscripciones listo, faltan retoques pero funciona" />
-    <MESSAGE value="mergeo" />
     <MESSAGE value="arreglos del merge para que compile" />
     <MESSAGE value="arreglos del merge para que compile parte 2" />
     <MESSAGE value="mergeo con la version actual" />
-    <MESSAGE value="mergeo mergeo global en el broker" />
-    <option name="LAST_COMMIT_MESSAGE" value="mergeo mergeo global en el broker" />
+    <MESSAGE value="mergeo" />
+    <option name="LAST_COMMIT_MESSAGE" value="mergeo" />
   </component>
 </project>
