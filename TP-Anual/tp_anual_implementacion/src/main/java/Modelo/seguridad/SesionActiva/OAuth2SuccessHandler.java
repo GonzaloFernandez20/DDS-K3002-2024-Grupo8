@@ -64,8 +64,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             // Actualizar el contexto de seguridad
             SecurityContextHolder.getContext().setAuthentication(nuevaAutenticacion);
 
+            response.sendRedirect("/ModificarColaborador");
         }
         // Redirigir a la página principal después del registro
-        response.sendRedirect("/Home");
+        else response.sendRedirect("/Home");
     }
 }

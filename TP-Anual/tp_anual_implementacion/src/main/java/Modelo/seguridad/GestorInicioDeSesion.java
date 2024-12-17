@@ -1,6 +1,5 @@
 package Modelo.seguridad;
 
-import Repositories.colaborador.ColaboradorRepository;
 import Repositories.UsuariosRepository;
 import Modelo.seguridad.SesionActiva.Usuario;
 import Modelo.Dominio.colaborador.Colaborador;
