@@ -1,11 +1,3 @@
-function showAlert(message, type) {
-    // Verifica si alertElement está definido
-    const alertElement = document.getElementById('alert-box');
-    alertElement.innerText = message;
-    alertElement.className = type;  // 'success' o 'error'
-    alertElement.style.display = 'block';
-}
-
 /*
 document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
@@ -79,13 +71,9 @@ document.getElementById("form-reportar-falla").addEventListener("submit", async 
         });
 
         const msjDeRespuesta = await response.text();
-        console.log('Estado de la respuesta:', response.status);
-        console.log('Texto de la respuesta:', msjDeRespuesta);
-
         if (!response.ok) {
             throw new Error(msjDeRespuesta);
         }
-
         showAlert(msjDeRespuesta, "success");
         setTimeout(function() {
             window.location.href = "/Home";

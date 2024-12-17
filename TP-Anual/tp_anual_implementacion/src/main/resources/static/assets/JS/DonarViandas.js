@@ -30,15 +30,6 @@ const limpiarCamposModal = () => {
     document.getElementById('calorias').value = '';
 };
 
-function showAlert(message, type) {
-    // Verifica si alertElement está definido
-    const alertElement = document.getElementById('alert-box');
-    alertElement.innerText = message;
-    alertElement.className = type;  // 'success' o 'error'
-    alertElement.style.display = 'block';
-}
-
-
 document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
 

@@ -10,6 +10,8 @@ import Modelo.Dominio.localizacion.PuntoEnElMapa;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 
+import java.time.LocalDate;
+
 public class BuilderHeladera {
     public static Heladera crearHeladeraAPartirDe(HeladeraDTO dto, Modelo modelo) {
         Ubicacion ubicacion = crearUbicacion(dto);
@@ -18,7 +20,7 @@ public class BuilderHeladera {
                 ubicacion,
                 dto.getCapacidadViandas(),
                 modelo,
-                dto.getPuestaEnFuncionamiento() );
+                LocalDate.now());
         crearNotificadorDeSuscriptos(nuevaHeladera);
         return nuevaHeladera;
     }

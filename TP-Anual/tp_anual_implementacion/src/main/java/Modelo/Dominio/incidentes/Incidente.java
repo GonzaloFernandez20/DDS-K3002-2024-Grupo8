@@ -15,7 +15,7 @@ public abstract class Incidente {
     private  Integer id_incidente;
     @Column(name = "momento_del_suceso")
     protected LocalDateTime momentoDelSuceso;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "heladera_donde_ocurrio", referencedColumnName = "id_heladera")
     protected Heladera heladeraDondeOcurrio;
     @OneToMany(mappedBy = "incidenteAtendido", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
