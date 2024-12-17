@@ -146,4 +146,38 @@ button:hover {
     align-items: center;
     margin-right: 10px;
 }
+.oauth-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
 
+.btn-oauth {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.google-btn {
+    background-color: #4285F4;
+}
+
+.github-btn {
+    background-color: #333;
+}
+
+.btn-oauth img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.botonSeparado{
+    margin-top: 10px;
+}

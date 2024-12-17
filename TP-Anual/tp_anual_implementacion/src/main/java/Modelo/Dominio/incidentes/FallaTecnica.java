@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 @Entity
-@Table(name = "FallaTecnica")
+@Table(name = "falla_tecnica")
 public class FallaTecnica extends Incidente{
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "colaborador_informante", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorInformante;
     @Column(name = "descripcion")

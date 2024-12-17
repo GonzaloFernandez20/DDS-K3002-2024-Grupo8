@@ -24,7 +24,7 @@ public class GeneradorDeCookie {
     public static ResponseCookie eliminarCookie(){
         ResponseCookie cookie = ResponseCookie.from("token", "")
                 .httpOnly(true)
-                .secure(true)
+                //.secure(true)
                 .path("/")
                 .maxAge(0) // 1 hora
                 .sameSite("Strict")
