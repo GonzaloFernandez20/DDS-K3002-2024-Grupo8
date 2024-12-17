@@ -8,12 +8,13 @@
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/assets/CSS/Notificaciones.css">
     <link rel="stylesheet" href="/assets/CSS/Colaboraciones.css">
-    <script src="/assets/JS/NotificarRespuestas.js"></script>
     <script src="/assets/JS/load-header-footer.js" defer></script>
 </head>
 
 <body>
+    <div id="alert-container" class="alert-container"></div>
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="facebook" viewBox="0 0 16 16">
@@ -33,7 +34,7 @@
         <div class="container-colab">
             <div class="row">
                 <h2>Entregar tarjetas de acceso</h2>
-                <text>Para poder registrar a personas en situación vulnerable, primero debes pedir tarjetas, que recibirás por correo en los próximos días. Le debes entregar una tarjeta a cada persona y luego de registrar sus datos en el formulario de "Dar de Alta Persona en Situación Vulnerable". De esta manera, la persona puede acceder a las viandas que hay en las heladeras. Gracias por colaborar!</text>
+                <text>Para poder contribuir registrando a personas en situación vulnerable, primero debés pedir tarjetas para repartir que recibirás por correo en los próximos días. Estas tarjetas las tendrás que entregar a cada persona y luego registrar sus datos en el formulario de "Dar de Alta Persona en Situación Vulnerable". De esta manera, la persona puede acceder a las viandas que hay en las heladeras. Gracias por colaborar!</text>
                 <div class="col-md-6">
                     <form id="solicitarTarjetas">
                         <div class="input-group">
@@ -42,7 +43,7 @@
                             <div class="error-message" id="tarjetas-error"></div>
                         </div>
 
-                        <button type="submit" name="respuestaFormAcceso" >Realizar Colaboracion</button>
+                        <button type="submit" name="respuestaFormAcceso" >Solicitar tarjetas</button>
                     </form>
                     <div class="referirAColaboracion">
                         <p>¿Ya entregaste las tarjetas?</p>
@@ -63,6 +64,7 @@
 
     <div id="footer"></div>
 
+    <script src="/assets/JS/NotificarRespuestas.js"></script>
     <script src="/assets/JS/EntregarTarjetas.js"></script>
     <script src="/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>

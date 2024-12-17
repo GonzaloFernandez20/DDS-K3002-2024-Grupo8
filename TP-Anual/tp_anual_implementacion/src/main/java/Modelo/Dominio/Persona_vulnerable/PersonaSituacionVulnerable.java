@@ -1,9 +1,12 @@
 package Modelo.Dominio.Persona_vulnerable;
 
-import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
 import Modelo.Dominio.Persona.PersonaHumana;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Persona_Situacion_Vulnerable")
 public class PersonaSituacionVulnerable {
@@ -29,14 +32,4 @@ public class PersonaSituacionVulnerable {
     public PersonaSituacionVulnerable() {
 
     }
-
-    // Getters y Setters -----------------------------------------------------------------------------------------------
-    public int getCantMenores() {return cantMenores;}
-    public void setCantMenores(int cantMenores) {this.cantMenores = cantMenores;}
-
-    public EstadoDeVivienda getEstadoDeVivienda() {return estadoDeVivienda;}
-    public void setEstadoDeVivienda(EstadoDeVivienda estadoDeVivienda) {this.estadoDeVivienda = estadoDeVivienda;}
-
-    public PersonaHumana getPersona() {return persona;}
-    public void setPersona(PersonaHumana persona) {this.persona = persona;}
 }

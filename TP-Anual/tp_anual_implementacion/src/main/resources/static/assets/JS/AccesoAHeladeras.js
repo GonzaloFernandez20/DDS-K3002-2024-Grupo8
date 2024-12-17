@@ -23,11 +23,6 @@ async function mostrarFormularioDeTarjeta(tieneTarjeta) {
         customClass: {
             popup: 'custom-swal-popup',
         },
-        inputValidator: (value) => {
-            if (!value) {
-                return "El código no puede estar vacío";
-            }
-        },
     });
 
     if (codigo) {
@@ -47,18 +42,19 @@ async function aceptarCodigoDeTarjeta(codigo) {
                 'Content-Type': 'application/json',
             },
             body: codigo,
-        });
-
-        if (!respuesta.ok) {
-            throw new Error("El código es incorrecto.");
-        }
-
-        const mensaje = await respuesta.text();
-
-        alertaSimple(mensaje, "success");
-        setTimeout(() => {
-            window.location.href = "/Home";
-        }, 3000);
+        })
+        .then(response => {
+                return response.text().then(msjDeRespuesta => {
+                    if (!response.ok) {
+                        showAlert(msjDeRespuesta, "error");
+                    }else{
+                        showAlert(msjDeRespuesta, "success");
+                        //setTimeout(() => {
+                          //  window.location.href = "/Home";
+                        //}, 3000);
+                    }
+                });
+            })
     } catch (error) {
         console.error('Error:', error);
         alertaSimple(error.message, "error");

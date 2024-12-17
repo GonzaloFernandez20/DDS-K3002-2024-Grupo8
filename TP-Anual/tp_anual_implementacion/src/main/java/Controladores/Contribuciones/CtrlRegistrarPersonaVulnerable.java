@@ -12,8 +12,6 @@ import Modelo.Dominio.Persona_vulnerable.EstadoDeVivienda;
 import Modelo.Mappers.VinculacionPersonaVulnerableMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
 
-import Servicios_Externos_APIs.NotificacionService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,21 +27,37 @@ import java.util.List;
 @Controller
 public class CtrlRegistrarPersonaVulnerable {
 
-    private GestorInicioDeSesion gestorInicioDeSesion;
-    private GestorTarjetas gestorTarjetas;
-
-    private List<EstadoDeVivienda> estadoDeViviendas = new ArrayList<>();
-    private List<TipoDeDocumento> tipoDeDocumentos = new ArrayList<>();
-    private List<Sexo> sexo = new ArrayList<>();
-
-    private NotificacionService notificacionService;
+    //DEPENDENCIAS -----------------------------------------------------------------------------------------------------
+    private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final GestorTarjetas gestorTarjetas;
 
     @Autowired
-    public CtrlRegistrarPersonaVulnerable(GestorInicioDeSesion gestorInicioDeSesion, GestorTarjetas gestorTarjetas, NotificacionService notificacionService) {
+    public CtrlRegistrarPersonaVulnerable(GestorInicioDeSesion gestorInicioDeSesion, GestorTarjetas gestorTarjetas) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.gestorTarjetas = gestorTarjetas;
-        this.notificacionService = notificacionService;
+
     }
+
+    // GET MAPPING ----------------------------------------------------------------------------------------------------
+    @GetMapping("/DarDeAltaPersonaEnSitVulnerable")
+    public String mostrarDatos(Model model) {
+        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
+        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
+            return "PedirRegistroHumano";
+        }
+
+        estadoDeViviendas();
+        tipoDeDocumentos();
+        sexo();
+        model.addAttribute("estados", estadoDeViviendas);
+        model.addAttribute("tiposDocumento", tipoDeDocumentos);
+        model.addAttribute("sexo", sexo);
+
+        return "DarDeAltaPersonaEnSitVulnerable";
+    }
+    private final List<EstadoDeVivienda> estadoDeViviendas = new ArrayList<>();
+    private final List<TipoDeDocumento> tipoDeDocumentos = new ArrayList<>();
+    private final List<Sexo> sexo = new ArrayList<>();
 
     public void estadoDeViviendas() {
         if(estadoDeViviendas.isEmpty()) {
@@ -51,7 +65,6 @@ public class CtrlRegistrarPersonaVulnerable {
             estadoDeViviendas.add(EstadoDeVivienda.POSEE_DOMICILIO);
         }
     }
-
     public void tipoDeDocumentos() {
         if (tipoDeDocumentos.isEmpty()) {
             tipoDeDocumentos.add(TipoDeDocumento.CI);
@@ -70,34 +83,13 @@ public class CtrlRegistrarPersonaVulnerable {
         }
     }
 
-    @GetMapping("/DarDeAltaPersonaEnSitVulnerable")
-    public String mostrarDatos(Model model) {
-        Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
-        if (colaboradorActual.getPersona() instanceof PersonaJuridica) {
-            return "PedirRegistroHumano";
-        }
-
-        estadoDeViviendas();
-        tipoDeDocumentos();
-        sexo();
-        model.addAttribute("estados", estadoDeViviendas);
-        model.addAttribute("tiposDocumento", tipoDeDocumentos);
-        model.addAttribute("sexo", sexo);
-
-        return "DarDeAltaPersonaEnSitVulnerable";
-    }
-
+    // POST MAPPING --------------------------------------------------------------------------------------------------------------
     @PostMapping("/DarDeAltaPersonaEnSitVulnerable")
     public ResponseEntity<String> registrarPersonaVulnerable (@RequestBody VinculacionPersonaVulnerableDTO personaVulnerableDTO) {
         Vinculacion nuevoVulnerablevinculado = procesarDTO(personaVulnerableDTO);
         try {
             gestorTarjetas.registrarVinculacion(nuevoVulnerablevinculado);
-            
-            // Enviar una notificación
-            String mensajeNotificacion = "Gracias por registrar una persona vulnerable";
-            notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID(), mensajeNotificacion);
-           
-            return ResponseEntity.ok().body("\"Registro realizado con éxito!\"");
+            return ResponseEntity.ok().body("Registro realizado con éxito!");
         }catch(RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

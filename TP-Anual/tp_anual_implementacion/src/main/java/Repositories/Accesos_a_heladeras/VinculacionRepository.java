@@ -9,9 +9,4 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface VinculacionRepository extends JpaRepository<Vinculacion, Integer> {
-
-    @Query("SELECT v FROM Vinculacion v WHERE v.codigoTarjeta = :codigoTarjeta")
-    Optional<Vinculacion> findByCodigoTarjeta(@Param("codigoTarjeta") String codigoTarjeta);
-
-}
+public interface VinculacionRepository extends JpaRepository<Vinculacion, Integer> {}

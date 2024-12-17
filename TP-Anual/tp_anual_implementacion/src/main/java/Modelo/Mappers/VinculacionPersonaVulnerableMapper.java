@@ -11,8 +11,6 @@ import Modelo.Dominio.documentacion.Sexo;
 import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.localizacion.Direccion;
 
-import java.util.Objects;
-
 public class VinculacionPersonaVulnerableMapper {
     public static Vinculacion crearVinculacionAPartirDeDTO(VinculacionPersonaVulnerableDTO dto, Colaborador colaborador){
         Documento documento;
@@ -35,7 +33,7 @@ public class VinculacionPersonaVulnerableMapper {
                     );
         } else direccion = null;
 
-        Vinculacion nuevaVinculacion = new Vinculacion(
+        return new Vinculacion(
                 dto.getCodigoTarjeta(),
                 colaborador,
                 new PersonaSituacionVulnerable(
@@ -48,6 +46,5 @@ public class VinculacionPersonaVulnerableMapper {
                                 documento,
                                direccion
                         )));
-        return nuevaVinculacion;
     }
 }

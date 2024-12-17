@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 })
                 .then(msjDeRespuesta => {
-                    alertaSimple(msjDeRespuesta);
+                    showAlert(msjDeRespuesta, "success");
                     setTimeout(function() {
                         window.location.href = "/Home";
                     }, 4000);

@@ -3,8 +3,13 @@ package Modelo.Dominio.contribucion;
 import Modelo.Dominio.Accesos_a_heladeras.Vinculacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "RegistroDePersonasEnSituacionVulnerable")
 public class RegistroDePersonaVulnerable extends Contribucion {
@@ -27,11 +32,11 @@ public class RegistroDePersonaVulnerable extends Contribucion {
     @Override
     public void procesarLaContribucion() {
         colaborador.registrarContribucion(this);
+
     }
 
     @Override
     public double puntosQueSumaColaborador() {
-        double coeficiente = 2;
-        return coeficiente;
+        return 2;
     }
 }

@@ -1,21 +1,22 @@
-package Controladores;
+package Controladores.Contribuciones;
 
 import Modelo.Dominio.Accesos_a_heladeras.GestorTarjetas;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.seguridad.GestorInicioDeSesion;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@Slf4j
 @Controller
 public class CtrlSolicitudTarjeta {
-    GestorInicioDeSesion gestorInicioDeSesion;
-    GestorTarjetas gestorTarjetas;
+    //Dependencias ----------------------------------------------------------------------------------------------------
+    private final GestorInicioDeSesion gestorInicioDeSesion;
+    private final GestorTarjetas gestorTarjetas;
 
     @Autowired
     public CtrlSolicitudTarjeta(GestorInicioDeSesion gestorInicioDeSesion,
@@ -24,7 +25,7 @@ public class CtrlSolicitudTarjeta {
         this.gestorTarjetas = gestorTarjetas;
     }
 
-
+    //GET MAPPING --------------------------------------------------------------------------------------------------
     @GetMapping("/PedirTarjetaColaborador")
     public String pedirAcceso() {
         return "PedirTarjetaColaborador";
@@ -33,16 +34,22 @@ public class CtrlSolicitudTarjeta {
     @GetMapping("/EntregarTarjetasDeAcceso")
     public String entregarAcceso() { return "EntregarTarjetasDeAcceso"; }
 
+    //POST MAPPING ---------------------------------------------------------------------------------------------------
     @PostMapping("/SolicitarTarjetas")
-    public ResponseEntity<String> solicitarTarjetas(@RequestBody Integer cantidadTarjetas,
-                                                    RedirectAttributes redirectAttributes) {
-        gestorTarjetas.generarSolicitud(gestorInicioDeSesion.obtenerColaboradorPorID(), cantidadTarjetas);
-        String mensaje = "Vas a recibir las tarjetas en los próximos días.";
-        if(cantidadTarjetas == 1) {
-            mensaje = "Vas a recibir la tarjeta en los próximos días.";
-        }
-        redirectAttributes.addFlashAttribute("mensaje", mensaje);
+    public ResponseEntity<String> solicitarTarjetas(@RequestBody Integer cantidadTarjetas) {
+        Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
+        gestorTarjetas.generarSolicitud(colaborador, cantidadTarjetas);
 
+        String mensaje;
+        if(cantidadTarjetas == 1) {
+            mensaje = "Recibirás la tarjeta en los próximos días.";
+            log.info("El colaborador ID:{} solicitó una tarjeta para acceder a las heladeras", colaborador.getId_colaborador());
+        }
+        else
+        {
+            mensaje = "Recibirás las tarjetas en los próximos días.";
+            log.info("El colaborador ID:{} solicitó {} tarjetas para repartir a personas en situación vulnerable", colaborador.getId_colaborador(), cantidadTarjetas);
+        }
         return ResponseEntity.ok().body(mensaje);
     }
 
@@ -51,7 +58,7 @@ public class CtrlSolicitudTarjeta {
         try {
             Colaborador colaborador = gestorInicioDeSesion.obtenerColaboradorPorID();
             gestorTarjetas.registrarAccesoDeColaborador(codigoTarjeta, colaborador);
-            return ResponseEntity.ok("El código de tarjeta fue ingresado correctamente");
+            return ResponseEntity.ok("Tu tarjeta fue registrada con éxito! Ya tenés acceso a las heladeras");
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

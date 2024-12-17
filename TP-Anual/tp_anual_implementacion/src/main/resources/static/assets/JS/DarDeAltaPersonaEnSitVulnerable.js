@@ -1,3 +1,4 @@
+formularioDonacion = document.getElementById('form-dar-de-alta-persona-en-sit-vulnerable');
 document.addEventListener("DOMContentLoaded", () => {
     const nombrePersonaVul = document.getElementById("nombrePersonaVul");
     const apellidoPersonaVul = document.getElementById("apellidoPersonaVul");
@@ -81,9 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         showAlert(msjDeRespuesta, "error");
                     }else{
                         showAlert(msjDeRespuesta, "success");
-                        setTimeout(function() {
-                            window.location.href = "/Home";
-                        }, 4000);
+                        formularioDonacion.reset();
                     }
                 });
             })
