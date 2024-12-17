@@ -1,3 +1,5 @@
+formularioDonacion = document.getElementById('form-donar-viandas');
+
 // Función para establecer la fecha mínima al día de hoy
 function establecerFechaHoy() {
     var hoy = new Date();
@@ -9,7 +11,7 @@ function establecerFechaHoy() {
     hoy = yyyy + '-' + mm + '-' + dd;
 
     // Establecer el valor mínimo en el input de fecha
-    document.getElementById("fechaCaducidad").setAttribute("min", hoy);
+    document.getElementById("fechaDeCaducidad").setAttribute("min", hoy);
 }
 
 // Mostrar viandas en la interfaz
@@ -25,19 +27,10 @@ function actualizarListaDeViandas() {
 // Función para limpiar los campos del modal
 const limpiarCamposModal = () => {
     document.getElementById('tipoDeVianda').value = '';
-    document.getElementById('fechaCaducidad').value = '';
+    document.getElementById('fechaDeCaducidad').value = '';
     document.getElementById('peso').value = '';
     document.getElementById('calorias').value = '';
 };
-
-function showAlert(message, type) {
-    // Verifica si alertElement está definido
-    const alertElement = document.getElementById('alert-box');
-    alertElement.innerText = message;
-    alertElement.className = type;  // 'success' o 'error'
-    alertElement.style.display = 'block';
-}
-
 
 document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
@@ -68,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnAgregarVianda.addEventListener('click', (event) => {
         event.preventDefault();
         maxViandas = parseInt(document.getElementById("cantViandas").value); // Captura la cantidad deseada
-        console.log("Cantidad máxima de viandas:", maxViandas); // Verificar el valor
         if (isNaN(maxViandas) || maxViandas <= 0) {
             alert("Por favor, ingrese una cantidad válida de viandas.");
             return;
@@ -83,12 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
     btnGuardarVianda.addEventListener('click', () => {
         event.preventDefault();
         const tipoDeComida = document.getElementById('tipoDeVianda').value;
-        const fechaCaducidad = document.getElementById('fechaCaducidad').value;
+        const fechaCaducidad = document.getElementById('fechaDeCaducidad').value;
         const peso = document.getElementById('peso').value;
         const calorias = document.getElementById('calorias').value;
 
-        if (tipoDeComida && fechaCaducidad && peso && calorias) {
-            const vianda = { tipoDeComida, fechaCaducidad, peso, calorias };
+        if (tipoDeComida && fechaDeCaducidad) {
+            const fechaFormateada = new Date(fechaCaducidad).toISOString().split('T')[0];
+            const vianda = {  tipoDeComida, fechaDeCaducidad: fechaFormateada, peso, calorias };
             viandasDTO.push(vianda);
 
             // Mostrar vianda en la lista HTML
@@ -99,12 +92,11 @@ document.addEventListener('DOMContentLoaded', () => {
             viandasAgregadas++;
 
             if (viandasAgregadas < maxViandas) {
-                console.log("hay viandas por cargar");
                 limpiarCamposModal();
                 closeModal();
                 setTimeout(openModal, 200); // Abre el modal después de un breve retraso
             } else {
-                alert('Has agregado todas las viandas necesarias.');
+                ('Has agregado todas las viandas necesarias.');
                 closeModal();
             }
         } else {
@@ -120,48 +112,37 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Previene la recarga de la página
         establecerFechaHoy();
 
-        if (viandasDTO.length !== maxViandas) {
-            alert(`Debe agregar exactamente ${maxViandas} viandas antes de enviar.`);
+        if (viandasDTO.length !== maxViandas  ) {
+            showAlert("Debe agregar información de cada una de las viandas a donar","error" );
             return;
         }
 
-        /*if (!heladeraID || !fechaDonacion) {
-            alert("Por favor, complete los datos del formulario.");
-            return;
-        }*/
         const heladeraID = document.getElementById("heladera").value;
 
         const datosDonacion = {
             heladeraID,
             viandasDTO: viandasDTO // Enviar la lista completa de viandas
         };
-        console.log(JSON.stringify(datosDonacion, null, 2));
-
-        // Enviar datos al servidor
-        try {
-            const response = await fetch('/DonarViandas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(datosDonacion),
+        fetch('/DonarViandas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datosDonacion),
+        })
+            .then(response => {
+                return response.text().then(msjDeRespuesta => {
+                    if (!response.ok) {
+                        showAlert(msjDeRespuesta, "error");
+                    }else{
+                        showAlert(msjDeRespuesta, "success");
+                        formularioDonacion.reset();
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
             });
-
-            const msjDeRespuesta = await response.text();
-            console.log('Estado de la respuesta:', response.status);
-            console.log('Texto de la respuesta:', msjDeRespuesta);
-
-            if (!response.ok) {
-                throw new Error(msjDeRespuesta);
-            }
-
-            showAlert(msjDeRespuesta, "success");
-            setTimeout(function() {
-                window.location.href = "/Home";
-            }, 4000);
-        } catch (error) {
-            console.error('Error:', error);
-            showAlert("Error en el envío de la donación: " + error.message, "error");
-        }
     });
 });

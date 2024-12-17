@@ -4,7 +4,6 @@ import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.localizacion.Ubicacion;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
-import Modelo.Excepciones.ExcepcionHeladeraLlena;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,17 +62,8 @@ public class Heladera {
     }
 
     // Metodos --------------------------------------------------------------------------------
-    public int capacidadRestante(){
-        return capacidadDeViandas - viandasEnStock.size();
-    }
-
     public void recibirVianda(Vianda vianda){
-       if(espacioDisponible()>0){
-            this.viandasEnStock.add(vianda);
-        }
-        else{
-            throw new ExcepcionHeladeraLlena("La heladera esta llena, no entran más viandas");
-        }
+        this.viandasEnStock.add(vianda);
     }
 
     public List<Vianda> retirarViandas(int cantidadARetirar) {
@@ -81,20 +71,12 @@ public class Heladera {
         List<Vianda> viandasARetirar = new ArrayList<>();
 
         for (int i = 0; i < cantidadARetirar && !viandasEnStock.isEmpty(); i++) {
-            viandaActual = viandasEnStock.getFirst();
+            viandaActual = viandasEnStock.remove(0); // Usa remove(0) para eliminar directamente
+            viandaActual.setHeladera(null); // Desasocia la heladera
             viandasARetirar.add(viandaActual);
-            viandasEnStock.remove(viandaActual);
         }
         movimientoDeViandasFinalizado();
         return viandasARetirar;
-    }
-
-    public int cantViandasEnStock(){ return viandasEnStock.size(); }
-    public int espacioDisponible(){return capacidadDeViandas - cantViandasEnStock();}
-
-    public void huboIncidente(){
-        this.estado = EstadoHeladera.INACTIVA;
-        notificadorDeSuscriptos.notificar("Se produjo una falla.");
     }
 
     public void movimientoDeViandasFinalizado(){
@@ -104,18 +86,22 @@ public class Heladera {
         notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas");
         notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas");
     }
+    public int cantViandasEnStock(){ return viandasEnStock.size(); }
+    public int espacioDisponible(){return capacidadDeViandas - cantViandasEnStock();}
+
+    public void huboIncidente(){
+        this.estado = EstadoHeladera.INACTIVA;
+        notificadorDeSuscriptos.notificar("Se produjo una falla.");
+    }
 
 
-    // ---- Getters y Setters
+    //Getters y Setters ------------------------------------------------------------------------------------------------
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }
     public String getNombreDelPunto(){return ubicacion.getNombreDelPunto(); }
 
-    public int getCantViandasEnStock() {return viandasEnStock.size();}
-
-
     public Integer getid_heladera() {
-        if(Objects.isNull(id_heladera)) { return 0; } // No compila sino
+        if(Objects.isNull(id_heladera)) { return 0; }
         return id_heladera;
     }
 }

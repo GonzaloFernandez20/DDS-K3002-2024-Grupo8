@@ -5,11 +5,12 @@ import Modelo.Dominio.Accesos_a_heladeras.GestorDeAperturasAHeladeras;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-
+@Slf4j
 @Component
 public class BrokerAccesosListener {
     private final ServicioBroker servicioBroker;
@@ -33,15 +34,13 @@ public class BrokerAccesosListener {
         try {
             // Obtener el canal y conectar al broker
             Channel canal = servicioBroker.getCanal();
-            //TODO loggear
-            System.out.println("Escuchando mensajes en la cola 'autorizacion_aperturas'...");
+            log.info("Escuchando mensajes en la cola 'autorizacion_aperturas'...");
 
             // Crear el callback para manejar los mensajes recibidos
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 // Extraemos el mensaje recibido
                 String mensaje = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                //TODO loggear
-                System.out.println("Mensaje recibido: " + mensaje);
+                log.info("Mensaje recibido: {}", mensaje);
 
                 // Procesamos el mensaje
                 procesarMensaje(mensaje);
@@ -51,19 +50,17 @@ public class BrokerAccesosListener {
 
         } catch (Exception e) {
             e.printStackTrace();
-            //TODO loggear
-            System.err.println("Error al escuchar mensajes: " + e.getMessage());
+            log.error("Error al escuchar mensajes: {}", e.getMessage());
         }
     }
 
     private void procesarMensaje(String mensaje) {
-        Channel canal = null;
+        Channel canal;
         try {
             String[] partes = mensaje.split(": ");
             String tarjeta = partes[0];
             int idHeladera = Integer.parseInt(partes[1]);
-            //TODO loggear
-            System.out.println("En la heladera { " + idHeladera + " } se solicitó una autorización de apertura con la tarjeta " + tarjeta);
+            log.info("En la heladera {} se solicitó una autorización de apertura con la tarjeta {}", idHeladera, tarjeta);
 
             boolean estaAutorizadaLaApertura = gestorDeAperturasAHeladeras.autorizarApertura(tarjeta, idHeladera);
 

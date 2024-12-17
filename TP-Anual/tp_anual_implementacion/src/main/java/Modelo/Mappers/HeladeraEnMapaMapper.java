@@ -13,7 +13,7 @@ public class HeladeraEnMapaMapper {
                 heladera.getUbicacion().getNombreDelPunto(),
                 heladera.getLatitud(),
                 heladera.getLongitud(),
-                heladera.getCantViandasEnStock(),
+                heladera.cantViandasEnStock(),
                 heladera.getCapacidadDeViandas(),
                 heladera.getEstado()
         );

@@ -43,14 +43,9 @@ public class CtrlSeleccionDeContribucion {
 
     @PostMapping("/Colaborar")
     public String redireccionarColaboracion(@RequestParam("value") String tipoDeContribucion, RedirectAttributes redirectAttributes) {
-
-        System.out.println("Tipo de contribución recibido: " + tipoDeContribucion);
-
         try {
-            redirectAttributes.addFlashAttribute("mensaje", "Puede colaborar en " + tipoDeContribucion);
             return "redirect:/" + tipoDeContribucion;
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("mensaje", "No puede colaborar en " + tipoDeContribucion);
             return "redirect:/error";
         }
     }

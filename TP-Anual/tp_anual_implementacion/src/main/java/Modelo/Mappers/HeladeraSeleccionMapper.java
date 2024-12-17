@@ -12,7 +12,7 @@ public class HeladeraSeleccionMapper {
                 heladera.getUbicacion().getDireccion().getAltura(),
                 heladera.getUbicacion().getCiudad(),
                 heladera.getViandasEnStock().size(),
-                heladera.capacidadRestante(),
+                heladera.espacioDisponible(),
                 heladera.getEstado());
     }
 }

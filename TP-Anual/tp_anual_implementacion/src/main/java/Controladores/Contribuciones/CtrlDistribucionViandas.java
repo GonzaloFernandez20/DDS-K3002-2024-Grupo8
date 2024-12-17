@@ -40,36 +40,31 @@ import java.util.stream.Collectors;
 @Controller
 public class CtrlDistribucionViandas {
 
+    //Dependencias ------------------------------------------------------------------------------------------------------
     private final HeladeraRepository repositorioHeladeras;
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final AccesoDeColaboradorRepository accesoDeColaboradorRepository;
     private final AperturaConPermisoRepository aperturaConPermisoRepository;
     private final DistribucionDeViandaRepository distribucionDeViandaRepository;
-    private final NotificacionService notificacionService;
     private final GestorDePermisosDeApertura gestorDePermisosDeApertura;
 
     @Autowired
-    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras, GestorInicioDeSesion gestorInicioDeSesion, AccesoDeColaboradorRepository accesoDeColaboradorRepository, AperturaConPermisoRepository aperturaConPermisoRepository, DistribucionDeViandaRepository distribucionDeViandaRepository, NotificacionService notificacionService, GestorDePermisosDeApertura gestorDePermisosDeApertura) {
+    public CtrlDistribucionViandas(HeladeraRepository repositorioHeladeras,
+                                   GestorInicioDeSesion gestorInicioDeSesion,
+                                   AccesoDeColaboradorRepository accesoDeColaboradorRepository,
+                                   AperturaConPermisoRepository aperturaConPermisoRepository,
+                                   DistribucionDeViandaRepository distribucionDeViandaRepository,
+                                   GestorDePermisosDeApertura gestorDePermisosDeApertura) {
         this.repositorioHeladeras = repositorioHeladeras;
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.accesoDeColaboradorRepository = accesoDeColaboradorRepository;
         this.aperturaConPermisoRepository = aperturaConPermisoRepository;
         this.distribucionDeViandaRepository = distribucionDeViandaRepository;
-        this.notificacionService = notificacionService;
         this.gestorDePermisosDeApertura = gestorDePermisosDeApertura;
     }
 
-    private List<HeladeraSeleccionDTO> heladeras;
 
-    List<MotivoDeDistribucion> motivos = new ArrayList<>();
-
-    public void setMotivos() {
-        if(motivos.isEmpty()) {
-            motivos.add(MotivoDeDistribucion.FALTA_DE_VIANDAS);
-            motivos.add(MotivoDeDistribucion.DESPERFECTO_HELADERA);
-        }
-    }
-
+    //GET MAPPING -----------------------------------------------------------------------------------------------------
     @GetMapping("/DistribuirVianda")
     public String mostrarFormulario(Model model) {
         Colaborador colaboradorActual = gestorInicioDeSesion.obtenerColaboradorPorID();
@@ -90,27 +85,25 @@ public class CtrlDistribucionViandas {
 
         return "DistribuirVianda";
     }
+    private List<HeladeraSeleccionDTO> heladeras;
 
+    List<MotivoDeDistribucion> motivos = new ArrayList<>();
+
+    public void setMotivos() {
+        if(motivos.isEmpty()) {
+            motivos.add(MotivoDeDistribucion.FALTA_DE_VIANDAS);
+            motivos.add(MotivoDeDistribucion.DESPERFECTO_HELADERA);
+        }
+    }
+
+    //POST MAPPING
     @Transactional
     @PostMapping("/DistribuirVianda")
     public ResponseEntity<String> procesarSolicitudDistribucion(@RequestBody DistribucionDeViandaDTO distribucionDTO) {
-        System.out.println(distribucionDTO.getMotivoDeDistribucion() + ' ' + distribucionDTO.getCantidadDeViandas() + ' ' + distribucionDTO.getHeladeraDeOrigenID() + ' ' + distribucionDTO.getHeladeraDestinoID());
-
         try{
             DistribucionDeViandas nuevaDistribucion = procesarDTO(distribucionDTO);
-
-            System.out.println(nuevaDistribucion.getMotivoDeDistribucion().toString() + ' ' + nuevaDistribucion.getCantidadDeViandasAMover() + ' ' + nuevaDistribucion.getHeladeraDeOrigen().getUbicacion().getNombreCompletoDeUbicacion() + ' ' + nuevaDistribucion.getHeladeraDestino().getUbicacion().getNombreCompletoDeUbicacion());
-
-            // NO CAMBIAN DE HELADERA HASTA QUE SE EFECTÚE LA DISTRIBUCIÓN
-            distribucionDeViandaRepository.save(nuevaDistribucion);
-
             gestorDePermisosDeApertura.generarPermisosDeDistribucion(nuevaDistribucion);
-
-            // Enviar una notificación
-            String mensajeNotificacion = "Gracias por la distribucion de viandas";
-            notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID(),mensajeNotificacion); 
-
-            return ResponseEntity.ok("La declaración de la distribución se ha realizado con éxito!");
+            return ResponseEntity.ok("Permiso de distribución de viandas generado con éxito, tiene 3 horas para trasladar las viandas antes de que venza el permiso de apertura!");
         } catch (ExcepcionViandasInsuficientesEnOrigen e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cantidad de viandas en la heladera origen es insuficiente.");
         } catch (ExcepcionNoHayEspacioEnDestino e){

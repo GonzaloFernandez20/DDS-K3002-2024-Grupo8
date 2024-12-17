@@ -1,12 +1,14 @@
 package Modelo.Dominio.Accesos_a_heladeras;
 
-import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Apertura")
@@ -27,29 +29,12 @@ public class Apertura {
 
     //Constructores ------------------------------------------------------------------
 
-    /*usar cuando se instancia la apertura de una persona vulnerable*/
     public Apertura(Heladera heladera, MotivoApertura motivo){
         this.heladera = heladera;
         this.motivo = motivo;
-        this.fechaApertura = LocalDateTime.now();
-        this.cantidadViandasInvolucradas = 1;
     }
 
     public Apertura() {
 
     }
-
-    //  Getters y Setters ----------------------------------------------------------------------------------------------
-    public Heladera getHeladera() {return heladera;}
-    public void setHeladera(Heladera heladera) {this.heladera = heladera;}
-
-    public MotivoApertura getMotivo() {return motivo;}
-    public void setMotivo(MotivoApertura motivo) {this.motivo = motivo;}
-
-    public LocalDateTime getFechaApertura() {return fechaApertura;}
-    public void setFechaApertura(LocalDateTime fechaApertura) {this.fechaApertura = fechaApertura;}
-
-    public int getCantidadViandasInvolucradas() {return cantidadViandasInvolucradas;}
-    public void setCantidadViandasInvolucradas(int cantidadViandasInvolucradas) {this.cantidadViandasInvolucradas = cantidadViandasInvolucradas;}
-
 }

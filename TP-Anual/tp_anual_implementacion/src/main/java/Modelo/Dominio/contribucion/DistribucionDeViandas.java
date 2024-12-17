@@ -2,15 +2,21 @@ package Modelo.Dominio.contribucion;
 
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.heladera.Heladera;
-import Modelo.Excepciones.ExcepcionHeladeraLlena;
 import Modelo.Excepciones.ExcepcionNoHayEspacioEnDestino;
 import Modelo.Excepciones.ExcepcionViandasInsuficientesEnOrigen;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Slf4j
+@Getter
+@Setter
 @Entity
 @Table(name = "DistribucionDeVianda")
 public class DistribucionDeViandas extends ContribucionConApertura {
@@ -22,7 +28,7 @@ public class DistribucionDeViandas extends ContribucionConApertura {
     private  MotivoDeDistribucion motivoDeDistribucion;
     @Column(name = "cantidad_de_viandas")
     private  Integer cantidadDeViandasAMover;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "vianda_distribuida",
             joinColumns = @JoinColumn(name = "distribucion", referencedColumnName = "id_contribucion"),
@@ -55,10 +61,16 @@ public class DistribucionDeViandas extends ContribucionConApertura {
     public void procesarLaContribucion() {
         if (viandasMovidas.isEmpty()){
             this.viandasMovidas = heladeraDeOrigen.retirarViandas(cantidadDeViandasAMover);
-
             for (Vianda vianda : viandasMovidas){
-                vianda.trasladar(heladeraDestino);
+                vianda.trasladar();
             }
+            log.info("Se retiraron para traslado {} viandas de la {} ID:{}.",
+                    cantidadDeViandasAMover, heladeraDeOrigen.getNombreDelPunto(), heladeraDeOrigen.getid_heladera());
+
+            String viandas = viandasMovidas.stream()
+                    .map(Vianda::getTipoDeComida)
+                    .collect(Collectors.joining(", "));
+            log.info("Viandas retiradas: {}", viandas);
         }else{
             super.procesarLaContribucion();
         }
@@ -76,22 +88,24 @@ public class DistribucionDeViandas extends ContribucionConApertura {
             throw new ExcepcionViandasInsuficientesEnOrigen("De la heladera origen solo se pueden mover " + viandasQueHayEnOrigen + " viandas");
         }
 
-        int viandasQueEntranEnDestino =heladeraDestino.capacidadRestante();
+        int viandasQueEntranEnDestino =heladeraDestino.espacioDisponible();
         if(viandasQueEntranEnDestino<cantidadDeViandasAMover){
             throw new ExcepcionNoHayEspacioEnDestino("A la heladera destino solo puede mover " + viandasQueEntranEnDestino + " viandas");
         }
     }
+    @Override
+    public void loggear(){
+        log.info("La {} ID:{} recibió {} viandas trasladadas desde la {} ID:{}.",
+                heladeraDestino.getNombreDelPunto(), heladeraDestino.getid_heladera(),
+                cantidadDeViandasAMover, heladeraDeOrigen.getNombreDelPunto(), heladeraDeOrigen.getid_heladera());
+
+        String viandas = viandasMovidas.stream()
+                .map(Vianda::getTipoDeComida) // Obtener el tipo de comida
+                .collect(Collectors.joining(", "));
+        log.info("Viandas ingresadas: {}", viandas);
+    }
 
     // Getters y Setters -------------------------------------------------------------------------------------------------------------
-    public Heladera getHeladeraDeOrigen() {return heladeraDeOrigen;}
-    public void setHeladeraDeOrigen(Heladera heladeraDeOrigen) {this.heladeraDeOrigen = heladeraDeOrigen;}
-
-    public MotivoDeDistribucion getMotivoDeDistribucion() {return motivoDeDistribucion;}
-    public void setMotivoDeDistribucion(MotivoDeDistribucion motivoDeDistribucion) {this.motivoDeDistribucion = motivoDeDistribucion;}
-
-    public Integer getCantidadDeViandasAMover() {return cantidadDeViandasAMover;}
-    public void setCantidadDeViandasAMover(Integer cantidadDeViandasAMover) {this.cantidadDeViandasAMover = cantidadDeViandasAMover;}
-
     @Override
     public List<Vianda> getViandas() {return viandasMovidas;}
     public void setViandas(List<Vianda> viandasMovidas) {this.viandasMovidas = viandasMovidas;}

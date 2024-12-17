@@ -9,7 +9,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "contribucion_con_apertura")
 public abstract class ContribucionConApertura extends Contribucion{
-    @ManyToOne( cascade = CascadeType.PERSIST )
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE } )
     @JoinColumn(name = "heladera_destino", referencedColumnName = "id_heladera")
     protected Heladera heladeraDestino;
 
@@ -19,8 +19,9 @@ public abstract class ContribucionConApertura extends Contribucion{
 
             for (Vianda vianda : getViandas()){
                 heladeraDestino.recibirVianda(vianda);
-                vianda.setEstadoVianda(EstadoVianda.ENTREGADA);
+                vianda.ingresarEn(heladeraDestino);
             }
+            this.loggear();
             heladeraDestino.movimientoDeViandasFinalizado();
             colaborador.registrarContribucion(this);
         }
@@ -29,6 +30,7 @@ public abstract class ContribucionConApertura extends Contribucion{
         return getViandas().size();
     };
 
+    public abstract void loggear();
 
     // Getters y Setters ------------------------------------------------------------------------------
     public Heladera getHeladeraDestino() {return heladeraDestino;}

@@ -51,12 +51,6 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="fechaDonacion">Fecha de donación (*)</label>
-                            <input type="date" id="fechaDonacion" name="fechaDonacion" required>
-                            <div class="error-message" id="fechaDonacionError"></div>
-                        </div>
-
-                        <div class="input-group">
                             <label for="cantViandas"> ¿Cuántas viandas querés donar? (*)</label>
                             <input type="number" id="cantViandas" min="1" placeholder="Ingrese la cantidad de viandas que quiere donar" required>
                         </div>
@@ -80,26 +74,18 @@
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="fechaCaducidad">Fecha de caducidad (*)</label>
-                                    <input type="date" id="fechaCaducidad" required>
+                                    <label for="fechaDeCaducidad">Fecha de caducidad (*)</label>
+                                    <input type="date" id="fechaDeCaducidad" name="fechaDeCaducidad" required>
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="peso">Peso de la vianda (*)</label>
-                                    <input type="text" id="peso" placeholder="Ingrese el peso de la vianda" required>
+                                    <label for="peso">Peso de la vianda</label>
+                                    <input type="text" id="peso" placeholder="Ingrese el peso de la vianda">
                                 </div>
 
                                 <div class="input-group">
-                                    <label for="calorias">Calorías de la vianda (*)</label>
-                                    <input type="text" id="calorias" placeholder="Ingrese las calorías" required>
-                                </div>
-
-                                <div class="input-group">
-                                    <label for="estado">Estado de la vianda (*)</label>
-                                    <select id="estado" required>
-                                        <option value="" selected disabled>--Seleccione una opción--</option>
-                                        <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}"></option>
-                                    </select>
+                                    <label for="calorias">Calorías de la vianda</label>
+                                    <input type="text" id="calorias" placeholder="Ingrese las calorías" >
                                 </div>
 
                                 <button id="guardar-vianda">Guardar Vianda</button>
@@ -107,6 +93,7 @@
                         </div>
 
                         <button type="submit">Realizar donación</button>
+
                         <div id="alert-box" style="display:none;"></div>
                         <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
                             <p th:text="${mensaje}"></p>

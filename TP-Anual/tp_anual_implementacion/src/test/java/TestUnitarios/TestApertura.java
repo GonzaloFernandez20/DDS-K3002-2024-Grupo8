@@ -52,9 +52,4 @@ public class TestApertura {
         apertura = new AperturaConPermiso(heladera, INGRESAR_VIANDAS_DONADAS, contribucion);
     }
 
-    @Disabled
-    @Test
-    void ValidarQueEstaEnFechaSiEsUnaAperturaDeHoy() {
-        assertTrue(apertura.aperturaParaEntregaDeDonacionEntre(LocalDateTime.now().minusWeeks(1), LocalDateTime.now()));
-    }
 }

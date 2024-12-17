@@ -32,7 +32,7 @@ public class TestVianda {
         @DisplayName("Al trasladar una vianda se actualiza la heladera en la que se encuentra")
         void cambioDeHeladera() {
             setUp();
-            vianda.trasladar(heladeraNueva);
+            vianda.trasladar();
             assertEquals(heladeraNueva,vianda.getHeladera());
         }
 
@@ -40,7 +40,7 @@ public class TestVianda {
         @DisplayName("Al trasladar una vianda cambia su estado a EN_TRASLADO")
         void cambioDeEstadoVianda() {
             setUp();
-            vianda.trasladar(heladeraNueva);
+            vianda.trasladar();
             assertEquals(EN_TRASLADO,vianda.getEstado());
         }
 
@@ -48,7 +48,7 @@ public class TestVianda {
         @DisplayName("Trasladar una vianda a la misma heladera no cambia su estado")
         void trasladarALaMismaHeladeraNoCambiaNada() {
             setUp();
-            vianda.trasladar(vianda.getHeladera());
+            vianda.trasladar();
             assertNotEquals(EN_TRASLADO,vianda.getEstado());
         }
     }

@@ -3,6 +3,7 @@ package Controladores.Brokers;
 import Modelo.Brokers.ServicioBroker;
 import com.rabbitmq.client.GetResponse;
 import jakarta.annotation.PreDestroy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.rabbitmq.client.Channel;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+@Slf4j
 @RestController
 public class LectorDeTarjetasDemo {
 
@@ -28,8 +30,8 @@ public class LectorDeTarjetasDemo {
 
     @PostMapping("/AutorizarApertura")
     public ResponseEntity<String> solicitarAutorizacionApertura(@RequestParam String codigoDeTarjeta,
-                                                                @RequestParam String id_heladera) throws IOException {
-        Channel canal = null;
+                                                                @RequestParam String id_heladera) {
+        Channel canal;
         try {
             String mensaje = codigoDeTarjeta + ": " + id_heladera;
             servicioBroker.enviarMensaje("autorizacion_aperturas", mensaje);
@@ -44,24 +46,19 @@ public class LectorDeTarjetasDemo {
                 if (response != null) {
                     String respuesta = new String(response.getBody(), StandardCharsets.UTF_8);
                     if (respuesta.equals("true")){
-                        //TODO loggear
                         return ResponseEntity.ok().body("Apertura autorizada");
                     }else {
-                        //TODO loggear
                         return ResponseEntity.badRequest().body("Apertura denegada");
                     }
                 }
-            //TODO loggear: se acabo el tiempo de espera de la respuesta del broker
             }
             return ResponseEntity.status(408).body("No se recibió respuesta del broker a tiempo");
         }
         catch (IOException  e) {
-            //TODO loggear
-            System.err.println("Error al solicitar la autorización de apertura: " + e.getMessage());
+            log.error("Error al solicitar la autorización de apertura: {}", e.getMessage());
         }
         catch (Exception e) {
-            //TODO loggear
-            System.err.println("Error al solicitar la autorización de apertura: " + e.getMessage());
+            log.error("Error al solicitar la autorización de apertura: {}", e.getMessage());
         }
         return ResponseEntity.status(500).body("Error interno del servidor");
     }

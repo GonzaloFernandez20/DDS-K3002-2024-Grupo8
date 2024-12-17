@@ -16,11 +16,11 @@ public class DonacionDeViandasMapper {
     public static DonacionDeViandas crearDonacionDeViandasAPartirDe(DonacionDeViandaDTO dto, Heladera destino, Colaborador colaborador){
         DonacionDeViandas nuevaDonacion = new DonacionDeViandas(colaborador,
                                                               destino,
-                                                              crearListaViandas(dto.getViandasDTO(), destino, colaborador),
+                                                              crearListaViandas(dto.getViandasDTO(), colaborador),
                                                               LocalDate.now());
         return nuevaDonacion;
     }
-    private static List<Vianda> crearListaViandas(List<ViandaDTO> viandas, Heladera destino, Colaborador colaborador){
+    private static List<Vianda> crearListaViandas(List<ViandaDTO> viandas, Colaborador colaborador){
         List<Vianda> viandasDonadas = new ArrayList<>();
 
         for(ViandaDTO vianda : viandas){
@@ -28,7 +28,6 @@ public class DonacionDeViandasMapper {
                     vianda.getTipoDeComida(),
                     vianda.getFechaDeCaducidad(),
                     colaborador,
-                    destino,
                     vianda.getCalorias(),
                     vianda.getPeso() );
             viandasDonadas.add(nuevaVianda);
