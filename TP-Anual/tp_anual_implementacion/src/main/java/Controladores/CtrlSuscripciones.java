@@ -13,6 +13,7 @@ import Modelo.seguridad.GestorInicioDeSesion;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +51,7 @@ public class CtrlSuscripciones {
                                                                                     stream().
                                                                                     map(suscripcion -> SuscripcionMapper.convertirEnSuscripcionDTO(suscripcion)).
                                                                                     collect(Collectors.toList());
-        List<HeladeraSuscripcionDTO> heladeras = repositorioHeladeras.findAll().
+        List<HeladeraSuscripcionDTO> heladeras = repositorioHeladeras.traerHeladerasActivasEnElSistema().
                                                                     stream().
                                                                     map(heladera -> HeladeraSuscripcionMapper.convertirEnHeladeraSuscripcionDTO(heladera, suscripcionesDelColaborador)).
                                                                     collect(Collectors.toList());
@@ -94,6 +95,9 @@ public class CtrlSuscripciones {
         Colaborador colaborador  = gestorInicioDeSesion.obtenerColaboradorPorID();
 
         gestorDeSuscripciones.efectuarDesuscripcion(heladera.get(), colaborador, evento);
-        return ResponseEntity.ok().body("Desuscribir suscripcion exitosamente.");
+        return ResponseEntity
+                .status(302)
+                .header(HttpHeaders.LOCATION, "/ModificarColaboradorHumanoSuscripciones")
+                .build();
     }
 }

@@ -1,22 +1,9 @@
 package Modelo.Dominio.reportes;
 
-
-
-import Modelo.Dominio.heladera.Heladera;
-import Modelo.Dominio.sistema.RegistroDeHeladeras;
-import Repositorios.RepositorioAperturas;
-import ServiceImpl.ReportesServiceImpl;
 import com.itextpdf.text.pdf.PdfPTable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +12,8 @@ import java.util.List;
 public class ReporteDeViandasPorHeladera extends ReporteSemanal{
     private List<ViandasPorHeladera> viandasPorHeladeras = new ArrayList<ViandasPorHeladera>();
 
-    @Autowired
-    ReportesServiceImpl reportesServiceImlp;
+//    @Autowired
+//    ReportesServiceImpl reportesServiceImlp;
 
     public ReporteDeViandasPorHeladera(LocalDate fechaDeCreacion) {
         super(fechaDeCreacion);

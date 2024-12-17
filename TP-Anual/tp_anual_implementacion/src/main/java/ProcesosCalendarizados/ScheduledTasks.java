@@ -1,6 +1,7 @@
 package ProcesosCalendarizados;
 
-import Modelo.Dominio.reportes.GestorDeReportes;
+import Modelo.Dominio.reportes.*;
+import ServiceImpl.ReportesServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +10,32 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ScheduledTasks {
     private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
 
     private final GestorDeReportes gestorDeReportes;
+    private final ReportesServiceImpl reportesServiceImpl;
 
     @Autowired
-    public ScheduledTasks(GestorDeReportes gestorDeReportes) {
+    public ScheduledTasks(GestorDeReportes gestorDeReportes, ReportesServiceImpl reportesServiceImpl) {
         this.gestorDeReportes = gestorDeReportes;
+        this.reportesServiceImpl = reportesServiceImpl;
     }
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-    @Scheduled(fixedRate = 100000)
+    @Scheduled(fixedRate = 604800000)
     public void genererReportesSemanales(){
         logger.info("Fixed Rate Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
 
-        gestorDeReportes.generarReportesSemanales();
+        List<ReporteSemanal> reportesSemanales = new ArrayList<ReporteSemanal>();
+        reportesSemanales.add(new ReporteDeViandasPorHeladera());
+        reportesSemanales.add(new ReporteDeViandasPorColaborador());
+        reportesSemanales.add(new ReporteDeFallas());
+        reportesSemanales.forEach(reporteSemanal -> reporteSemanal.setReportesServiceImlp(reportesServiceImpl));
+        gestorDeReportes.generarReportesSemanales(reportesSemanales);
     }
 }

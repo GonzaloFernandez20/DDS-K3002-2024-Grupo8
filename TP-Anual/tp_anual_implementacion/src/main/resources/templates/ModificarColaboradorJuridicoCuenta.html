@@ -132,22 +132,24 @@
                                 <h3 id="contacto">Datos de contacto</h3>
                                 <label>Medios de Contacto:</label>
                                 <div class="tags-medios-de-contacto scroll-permitido">
-                                    <span class="badge d-flex p-2 rounded-pill">
-                                        <span class="px-1">WhatsApp: 9 11 2323-4444</span>
-                                        <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
-                                    </span>
-                                    <span class="badge d-flex p-2 rounded-pill">
-                                        <span class="px-1">Mail: pepito@gmail.com</span>
-                                        <a href="#"><svg class="bi ms-1" width="16" height="16"><use xlink:href="#delete-circle"></use></svg></a>
+                                    <span class="badge d-flex p-2 rounded-pill" th:each="medio : ${colaborador.medioDeContactos}">
+                                        <span class="px-1" th:text="${medio.tipo} + ': ' + ${medio.valor}"></span>
+                                        <a href="#" th:attr="data-id=${medio.id}">
+                                            <svg class="bi ms-1" width="16" height="16">
+                                                <use xlink:href="#delete-circle"></use>
+                                            </svg>
+                                        </a>
                                     </span>
                                 </div>
 
-                                <label for="tipoNuevoMedioDeContacto">Agregar medio de contacto:</label>
-                                <select id="tipoNuevoMedioDeContacto" class="mod-cuenta-tipo-medio">
-                                    <option value="" selected disabled>--Seleccione--</option>
-                                    <option value="mail">Mail</option>
-                                    <option value="whatsapp">WhatsApp</option>
-                                </select>
+
+                                <label>Agregar medio de contacto:</label>
+                                <div class="mod-cuenta-tipo-medio">
+                                    <select id="tipoNuevoMedioDeContacto">
+                                        <option th:value="${medios}" selected disabled>--Seleccione--</option>
+                                        <option th:each="medio : ${medios}" th:value="${medio}" th:text="${medio}"></option>
+                                    </select>
+                                </div>
                                 <br>
                                 <div id="inputContainer" style="display: none;">
                                     <label for="nuevoMedioDeContactoJuridico"></label>

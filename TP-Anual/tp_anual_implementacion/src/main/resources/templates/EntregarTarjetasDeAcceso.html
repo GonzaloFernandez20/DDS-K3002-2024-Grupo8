@@ -7,7 +7,9 @@
     <title>Pedir tarjetas para entregar</title>
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/assets/CSS/Colaboraciones.css">
+    <script src="/assets/JS/NotificarRespuestas.js"></script>
     <script src="/assets/JS/load-header-footer.js" defer></script>
 </head>
 
@@ -31,25 +33,25 @@
         <div class="container-colab">
             <div class="row">
                 <h2>Entregar tarjetas de acceso</h2>
-                <text>Para poder registrar a personas en situación vulnerable, primero debes pedir tarjetas, que recibirás por correo en los próximos días. Le debes entregar una tarjeta a cada persona, luego de registrar sus datos. De esta manera, la persona puede acceder a las viandas que hay en las heladeras. Los datos de las personas que quieras registrar deberás ingresarlos en (ver como hacer para que le aparezca la pagina donde puede ingresar los datos). Gracias por colaborar!</text>
+                <text>Para poder registrar a personas en situación vulnerable, primero debes pedir tarjetas, que recibirás por correo en los próximos días. Le debes entregar una tarjeta a cada persona y luego de registrar sus datos en el formulario de "Dar de Alta Persona en Situación Vulnerable". De esta manera, la persona puede acceder a las viandas que hay en las heladeras. Gracias por colaborar!</text>
                 <div class="col-md-6">
-                    <form id="entregarTarjetasForm">
+                    <form id="solicitarTarjetas">
                         <div class="input-group">
                             <label for="cant-tarjetas">Cantidad de tarjetas a solicitar</label>
                             <input type="number" min="1" step="1" id="cant-tarjetas" placeholder="Ingrese Cantidad de Tarjetas a solicitar" >
                             <div class="error-message" id="tarjetas-error"></div>
                         </div>
 
-                        <button type="submit">Realizar Colaboracion</button>
+                        <button type="submit" name="respuestaFormAcceso" >Realizar Colaboracion</button>
                     </form>
                     <div class="referirAColaboracion">
                         <p>¿Ya entregaste las tarjetas?</p>
-                        <a href="DarDeAltaPersonaEnSitVulnerable.html">Registra a las personas a quienes se las entregaste.</a>
+                        <a th:href="@{/DarDeAltaPersonaEnSitVulnerable}">Registra a las personas a quienes se las entregaste.</a>
                     </div>
                 </div>
-            
+
                 <div class="col-md-6 scroll-permitido">
-                    <img 
+                    <img
                         src = "/img/darDeAltaImagen.jpg"
                         alt = "Imagen de viandas siendo envueltas por flechas circulares";
                         class="imagenContribucion"

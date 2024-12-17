@@ -85,7 +85,7 @@ main{
   background-color: hsl(163, 34%, 33%);
 }
 
-.header-buttons button.rojo{
+button.rojo{
   margin-left: 10px;
   padding: 8px 12px;
   border: none;
@@ -95,7 +95,7 @@ main{
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.header-buttons button.rojo:hover {
+button.rojo:hover {
   background-color: hsl(359, 55%, 30%);
 }
 /* Footer styles */

@@ -2,6 +2,7 @@ package Controladores;
 
 import DTOs.ColaboradorHumanoDTO;
 import DTOs.ColaboradorJuridicoDTO;
+import DTOs.MedioDeContactoDTO;
 import Modelo.Dominio.Persona.TipoOrganizacion;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.documentacion.Sexo;
@@ -9,6 +10,7 @@ import Modelo.Dominio.documentacion.TipoDeDocumento;
 import Modelo.Dominio.Persona.PersonaHumana;
 import Modelo.Dominio.Persona.PersonaJuridica;
 
+import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
 import Modelo.Mappers.ColabHumanoMapper;
 import Modelo.Mappers.ColabJuridicoMapper;
 import Modelo.seguridad.GestorInicioDeSesion;
@@ -16,6 +18,8 @@ import Modelo.seguridad.SesionActiva.GeneradorDeCookie;
 import Modelo.seguridad.SesionActiva.Usuario;
 import Modelo.seguridad.SesionActiva.UtilsJWT;
 import Repositories.UsuariosRepository;
+import Repositories.colaborador.ColaboradorRepository;
+import Repositories.medios_de_contacto.MedioDeContactoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,37 +27,42 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 public class CtrlModificarColaborador {
 
     private final GestorInicioDeSesion gestorInicioDeSesion;
     private final UsuariosRepository usuariosRepository;
+    private final MedioDeContactoRepository medioDeContactoRepository;
+    private final ColaboradorRepository colaboradorRepository;
 
     @Autowired
-    public CtrlModificarColaborador(GestorInicioDeSesion gestorInicioDeSesion, UsuariosRepository usuariosRepository) {
+    public CtrlModificarColaborador(GestorInicioDeSesion gestorInicioDeSesion, UsuariosRepository usuariosRepository, ColaboradorRepository colaboradorRepository, MedioDeContactoRepository medioDeContactoRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.usuariosRepository = usuariosRepository;
+        this.medioDeContactoRepository = medioDeContactoRepository;
+        this.colaboradorRepository = colaboradorRepository;
     }
 
     @GetMapping("/ModificarColaborador")
-    public String mostrarColaborador(Model model) {
+    public String mostrarColaborador(Model model, @CookieValue("token") String token) {
         switch (tipoPersonaDelColaborador()) {
             case "PersonaHumana":
                 model.addAttribute("sexos", sexos());
                 model.addAttribute("tiposDeDocumento", tiposDeDNI());
                 model.addAttribute("colaborador", datosColaboradorHumano());
+                model.addAttribute("medios", medios());
                 return "ModificarColaboradorHumano";
             case "PersonaJuridica":
                 model.addAttribute("tiposDeOrganizacion",tiposDeOrganizacion());
                 model.addAttribute("colaborador", datosColaboradorJuridico());
+                model.addAttribute("medios", medios());
                 return "ModificarColaboradorJuridicoCuenta";
             default:
                 return "Home";
@@ -141,6 +150,10 @@ public class CtrlModificarColaborador {
         Usuario usuarioDeSesion = gestorInicioDeSesion.obtenerUsuarioDeSesion();
         Colaborador colaboradorDeSesion = gestorInicioDeSesion.obtenerColaboradorPorID();
         PersonaHumana personaHumana = (PersonaHumana) colaboradorDeSesion.getPersona();
+        List<MedioDeContacto> mediosDeContactos = colaboradorDeSesion.getMediosDeContacto();
+        List<MedioDeContactoDTO> mediosDeContactoDTO = mediosDeContactos.stream()
+                .map(medio -> new MedioDeContactoDTO(medio.getTipo(), medio.getValor()))
+                .toList();
 
         ColaboradorHumanoDTO colaborador = new ColaboradorHumanoDTO(
                 usuarioDeSesion.getUsuario(),
@@ -153,7 +166,7 @@ public class CtrlModificarColaborador {
                 personaHumana.getDocumento().getSexo(),
                 personaHumana.getDireccion().getCalle(),
                 personaHumana.getDireccion().getAltura(),
-                null, null, false, false,
+                mediosDeContactoDTO,
                 !Objects.isNull(colaboradorDeSesion.getTarjeta())
         );
         return colaborador;
@@ -163,6 +176,10 @@ public class CtrlModificarColaborador {
         Usuario usuarioDeSesion = gestorInicioDeSesion.obtenerUsuarioDeSesion();
         Colaborador colaboradorDeSesion = gestorInicioDeSesion.obtenerColaboradorPorID();
         PersonaJuridica personaJuridica = (PersonaJuridica) colaboradorDeSesion.getPersona();
+        List<MedioDeContacto> mediosDeContactos = colaboradorDeSesion.getMediosDeContacto();
+        List<MedioDeContactoDTO> mediosDeContactoDTO = mediosDeContactos.stream()
+                .map(medio -> new MedioDeContactoDTO(medio.getTipo(), medio.getValor()))
+                .toList();
 
         ColaboradorJuridicoDTO colaborador = new ColaboradorJuridicoDTO(
                 usuarioDeSesion.getUsuario(),
@@ -172,8 +189,7 @@ public class CtrlModificarColaborador {
                 personaJuridica.getRubro(),
                 personaJuridica.getDireccion().getCalle(),
                 personaJuridica.getDireccion().getAltura(),
-                null, null, false, false
-                );
+                mediosDeContactoDTO);
         return colaborador;
     }
 
@@ -199,6 +215,15 @@ public class CtrlModificarColaborador {
         return tiposDeDocumento;
     }
 
+    public List<String> medios() {
+        List<String> medios = new ArrayList<>();
+
+        medios.add("WhatsApp");
+        medios.add("Mail");
+
+        return medios;
+    }
+
     public List<TipoOrganizacion> tiposDeOrganizacion() {
         List<TipoOrganizacion> tiposOrganizacion = new ArrayList<>();
 
@@ -215,5 +240,10 @@ public class CtrlModificarColaborador {
         ResponseCookie cookie = GeneradorDeCookie.generarCookie(token);
 
         return cookie;
+    }
+
+    private List<MedioDeContacto> mediosContacto(Colaborador colaborador) {
+        Integer id = colaborador.getId_colaborador();
+        return medioDeContactoRepository.traerMediosSegunId(id);
     }
 }

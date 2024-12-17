@@ -14,9 +14,10 @@ public class GestorDeIncidentes {
         reportar(nuevoIncidente);
     }
 
-    public static void reportarFallaTecnica(FallaTecnicaDTO fallaTecnicaDTO){
+    public static FallaTecnica reportarFallaTecnica(FallaTecnicaDTO fallaTecnicaDTO){
         FallaTecnica nuevoIncidente = FactoryFallaTecnica.CrearFallaTecnicaAPartirDe(fallaTecnicaDTO);
         reportar(nuevoIncidente);
+        return nuevoIncidente;
     }
 
     public static void reportar(Incidente nuevoIncidente) {
