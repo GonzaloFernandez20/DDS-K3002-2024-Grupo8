@@ -11,7 +11,9 @@ import retrofit2.http.Query;
 
 public class APIRequester {
     private static APIRequester instancia = null;
-    private static final String URL = "https://9dc74674-32b4-4a0c-9a42-b49f62b65aef.mock.pstmn.io/";
+    private static final String URL = "https://82258e2f-5189-49e7-a712-4d8e0f33e3ff.mock.pstmn.io/";
+
+
 
     public static String getUrlApi() {
         return URL;
