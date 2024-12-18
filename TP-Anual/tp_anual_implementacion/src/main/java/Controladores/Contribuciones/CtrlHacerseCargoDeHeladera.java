@@ -51,7 +51,8 @@ public class CtrlHacerseCargoDeHeladera {
                                       HeladeraRepository heladeraRepository,
                                       HacerseCargoDeHeladeraRepository hacerseCargoDeHeladeraRepository,
                                       ColaboradorRepository colaboradorRepository,
-                                      NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository, ModeloRepository modeloRepository) {
+                                      NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository,
+                                      ModeloRepository modeloRepository) {
         this.gestorInicioDeSesion = gestorInicioDeSesion;
         this.heladeraRepository = heladeraRepository;
         this.hacerseCargoDeHeladeraRepository = hacerseCargoDeHeladeraRepository;
@@ -67,13 +68,13 @@ public class CtrlHacerseCargoDeHeladera {
             return "PedirRegistroJuridico";
         }
 
-        List<Modelo> modelosDisponibles = modeloRepository.findAll();
-        model.addAttribute("modelos", modelosDisponibles);
         return "HacerseCargoDeUnaHeladera";
     }
 
     @GetMapping("/RecomendacionColocacion")
-    public String RecomedacionColocacion() { return "RecomendacionColocacion"; }
+    public String RecomendacionColocacion() {
+        return "RecomendacionColocacion";
+    }
 
 
     @PostMapping("/FormularioDeHeladera")
@@ -112,7 +113,7 @@ public class CtrlHacerseCargoDeHeladera {
         return ResponseEntity.ok("Registro realizado con éxito!");
     }
 
-    @PostMapping("/ObtenerPuntosRecomendados")
+    @GetMapping("/ObtenerPuntosRecomendados")
     public ResponseEntity<List<PuntoEnElMapa>> recomendarPuntos(@RequestParam double latitud,
                                                  @RequestParam double longitud,
                                                  @RequestParam int radio) throws IOException {
