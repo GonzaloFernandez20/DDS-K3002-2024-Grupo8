@@ -39,7 +39,7 @@ public class LectorDeTarjetasDemo {
             canal = servicioBroker.getCanal();
             canal.queueDeclare("cola_respuestas", true, false, false, null);
             long startTime = System.currentTimeMillis();
-            long timeout = 10000; // 10 segundos de espera máximo
+            long timeout = 100000; // 10 segundos de espera máximo --> Sacar un 0
 
             while ((System.currentTimeMillis() - startTime) < timeout) {
                 GetResponse response = canal.basicGet("cola_respuestas", true); // Obtener mensaje de la cola

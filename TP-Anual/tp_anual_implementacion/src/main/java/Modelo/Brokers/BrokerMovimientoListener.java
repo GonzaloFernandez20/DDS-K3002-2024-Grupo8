@@ -21,8 +21,8 @@ public class BrokerMovimientoListener {
     public BrokerMovimientoListener(ServicioBroker servicioBroker, SensoreoDeMovimientoRepository sensoreoDeMovimientoRepository) throws Exception {
         this.servicioBroker = servicioBroker;
         this.sensoreoDeMovimientoRepository = sensoreoDeMovimientoRepository;
-        this.servicioBroker.conectar();  // Conectamos al broker
-        this.servicioBroker.crearNuevaCola("temperaturas");  // Aseguramos que la cola exista
+        this.servicioBroker.conectar();
+        this.servicioBroker.crearNuevaCola("temperaturas");
     }
 
     @PostConstruct
@@ -35,17 +35,13 @@ public class BrokerMovimientoListener {
         try {
             // Obtener el canal y conectar al broker
             Channel canal = servicioBroker.getCanal();
-            //TODO loggear
             System.out.println("Escuchando mensajes en la cola 'movimientos'...");
-
             // Crear el callback para manejar los mensajes recibidos
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-                // Extraemos el mensaje recibido
-                String mensaje = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                System.out.println("Mensaje recibido: " + mensaje);
-
-                // Procesamos el mensaje
-                procesarMensaje(mensaje);
+            // Extraemos el mensaje recibido
+            String mensaje = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            // Procesamos el mensaje
+            procesarMensaje(mensaje);
             };
 
             // Comenzamos a consumir mensajes de la cola "temperaturas"
@@ -57,7 +53,6 @@ public class BrokerMovimientoListener {
     }
 
     private void procesarMensaje(String id_sensor) {
-        //TODO loogear
         System.out.println("Alerta de intento de robo recibida: Sensor ID = " + id_sensor);
 
         Optional<SensoreoDeMovimiento> sensoreoAvisoRobo = sensoreoDeMovimientoRepository.obtenerSensorDeHeladera(id_sensor);

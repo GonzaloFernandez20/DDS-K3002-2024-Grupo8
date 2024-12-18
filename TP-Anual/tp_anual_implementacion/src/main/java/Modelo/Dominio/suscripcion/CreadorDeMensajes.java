@@ -11,10 +11,10 @@ public class CreadorDeMensajes { // Como es una clase solo de comportamiento, no
         String mensaje = String.format( evento + " en la heladera: %s (%s).", heladera.getUbicacion().getNombreDelPunto(),
                                                                            heladera.getUbicacion().getDireccion() );
 
-        if (evento.equalsIgnoreCase("Se produjo una falla\n")){
-            String heladerasSugeridas = sugerirHeladeras(heladera, heladera.cantViandasEnStock());
-            mensaje += heladerasSugeridas;
-        }
+        //if (evento.equalsIgnoreCase("Se produjo una falla\n")){
+          //  String heladerasSugeridas = sugerirHeladeras(heladera, heladera.cantViandasEnStock());
+            //mensaje += heladerasSugeridas;
+        //}
         return mensaje;
     }
     // Ejemplo: "Se produjo una falla en la heladera Medrano (Medrano 981)." // -> "Se produjo una falla" es el evento.

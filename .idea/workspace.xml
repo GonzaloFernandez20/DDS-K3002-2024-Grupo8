@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Arreglo en una query">
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="al dia con mergeoGlobal">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/FallaTecnica.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/FallaTecnica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/Incidente.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/Incidente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/BuilderHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/BuilderHeladera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/HeladeraMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/HeladeraMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarViandas.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarViandas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/HacerseCargoDeHeladera.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/HacerseCargoDeHeladera.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ReportarFallaTecnica.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ReportarFallaTecnica.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/HacerseCargoDeUnaHeladera.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/HacerseCargoDeUnaHeladera.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PublicarProductoOServicio.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PublicarProductoOServicio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ReportarFallaTecnica.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ReportarFallaTecnica.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Brokers/LectorDeTarjetasDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Brokers/LectorDeTarjetasDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/BrokerMovimientoListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/BrokerMovimientoListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorDeAperturasAHeladeras.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/GestorDeAperturasAHeladeras.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/Vinculacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/Accesos_a_heladeras/Vinculacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/Vianda.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/Vianda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/suscripcion/CreadorDeMensajes.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/suscripcion/CreadorDeMensajes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PedirTarjetaColaborador.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PedirTarjetaColaborador.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,47 +61,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.TestApertura.executor": "Run",
-    "JUnit.TestColaborador.executor": "Run",
-    "JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor": "Run",
-    "JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor": "Run",
-    "JUnit.TestCreadorDeMensajes.executor": "Run",
-    "JUnit.TestDeIncidentes.executor": "Run",
-    "JUnit.TestDeReporteDeUnIncidente.executor": "Run",
-    "JUnit.TestDonacionDeDinero.executor": "Run",
-    "JUnit.TestDonacionDeViandas.executor": "Run",
-    "JUnit.TestGenerarReportesSemanales.executor": "Run",
-    "JUnit.TestHeladera.executor": "Run",
-    "JUnit.TestRepositorioIncidentes.executor": "Run",
-    "JUnit.TestRetiroDeViandas.executor": "Run",
-    "Maven.tp_anual_implementacion [clean,install].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.App.executor": "Run",
-    "Spring Boot.Server.executor": "Run",
-    "git-widget-placeholder": "MergeoGlobal",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion/src/main/resources/utils",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Errors",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.TestApertura.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestColaborador.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDeIncidentes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDeReporteDeUnIncidente.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDonacionDeDinero.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDonacionDeViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestGenerarReportesSemanales.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestHeladera.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRepositorioIncidentes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRetiroDeViandas.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tp_anual_implementacion [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.App.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.Server.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Broker-RabbitMQ&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion/src/main/resources/utils&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Modelo.seguridad.SesionActiva" />
@@ -226,8 +220,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -250,6 +244,8 @@
       <workItem from="1734383437930" duration="620000" />
       <workItem from="1734387634532" duration="636000" />
       <workItem from="1734440109394" duration="23059000" />
+      <workItem from="1734508145855" duration="757000" />
+      <workItem from="1734550191731" duration="1911000" />
     </task>
     <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
       <option name="closed" value="true" />
@@ -510,10 +506,5 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="SpringBootApplicationConfigurationType">
-        <watch expression="authentication" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>
