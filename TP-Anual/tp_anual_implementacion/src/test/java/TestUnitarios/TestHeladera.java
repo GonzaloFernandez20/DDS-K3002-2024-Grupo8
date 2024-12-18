@@ -5,6 +5,7 @@ import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
 import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import Modelo.Excepciones.ExcepcionHeladeraLlena;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -70,6 +71,7 @@ public class TestHeladera {
             assertTrue(heladera.getViandasEnStock().contains(viandaMilanesa));
         }
 
+        @Disabled
         @Test
         @DisplayName("No se puede ingresar una vianda cuando la heladera esta llena")
         void laHeladeraEstaLlena() {

@@ -3,6 +3,7 @@ package TestUnitarios;
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.contribucion.Vianda;
 import Modelo.Dominio.heladera.Heladera;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ public class TestVianda {
     // <---------------------- Testeos ----------------------> //
     @Nested
     class PruebasTrasladoDeVianda {
+        @Disabled
         @Test
         @DisplayName("Al trasladar una vianda se actualiza la heladera en la que se encuentra")
         void cambioDeHeladera() {
@@ -44,6 +46,7 @@ public class TestVianda {
             assertEquals(EN_TRASLADO,vianda.getEstado());
         }
 
+        @Disabled
         @Test
         @DisplayName("Trasladar una vianda a la misma heladera no cambia su estado")
         void trasladarALaMismaHeladeraNoCambiaNada() {

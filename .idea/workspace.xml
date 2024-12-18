@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Modificacion de alertas y reportar falla tecnica funcionando">
-      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/utils/keystore.p12" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Credenciales Despliegue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/FactoryInstanciasParaTests/FactoryInstanciasParaTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/FactoryInstanciasParaTests/FactoryInstanciasParaTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestApertura.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestApertura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestHeladera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestVianda.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestVianda.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,18 +35,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "GonzaloFernandez20"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;GonzaloFernandez20&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/GonzaloFernandez20/DDS-K3002-2024-Grupo8.git",
-    "accountId": "f45c1c53-b7e0-4345-ae28-5d56c5ca0c54"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/GonzaloFernandez20/DDS-K3002-2024-Grupo8.git&quot;,
+    &quot;accountId&quot;: &quot;f45c1c53-b7e0-4345-ae28-5d56c5ca0c54&quot;
   }
-}]]></component>
+}</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -73,8 +75,10 @@
     "JUnit.TestHeladera.executor": "Run",
     "JUnit.TestRepositorioIncidentes.executor": "Run",
     "JUnit.TestRetiroDeViandas.executor": "Run",
+    "JUnit.TestVianda.executor": "Run",
     "Maven.tp_anual_implementacion [clean,install].executor": "Run",
     "Maven.tp_anual_implementacion [clean].executor": "Run",
+    "Maven.tp_anual_implementacion [package].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -113,6 +117,7 @@
     <option name="myCommands">
       <command value="mvn clean install" />
       <command value="mvn clean" />
+      <command value="mvn package" />
     </option>
   </component>
   <component name="RunAnythingContextRecentDirectoryCache">
@@ -121,22 +126,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.Server">
-    <configuration name="TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="tp_anual_implementacion" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="TestUnitarios.PaqueteSuscripciones.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes" />
-      <option name="MAIN_CLASS_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera" />
-      <option name="METHOD_NAME" value="testQuedanNViandas" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tp_anual_implementacion" />
       <extension name="coverage">
@@ -153,21 +142,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestCreadorDeMensajes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="tp_anual_implementacion" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="TestUnitarios.PaqueteSuscripciones.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="TestUnitarios.PaqueteSuscripciones" />
-      <option name="MAIN_CLASS_NAME" value="TestUnitarios.PaqueteSuscripciones.TestCreadorDeMensajes" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestDeIncidentes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tp_anual_implementacion" />
       <extension name="coverage">
@@ -178,6 +152,36 @@
       </extension>
       <option name="PACKAGE_NAME" value="TestUnitarios.PaqueteIncidentes" />
       <option name="MAIN_CLASS_NAME" value="TestUnitarios.PaqueteIncidentes.TestDeIncidentes" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestHeladera" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TestUnitarios.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TestUnitarios" />
+      <option name="MAIN_CLASS_NAME" value="TestUnitarios.TestHeladera" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestVianda" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp_anual_implementacion" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TestUnitarios.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="TestUnitarios" />
+      <option name="MAIN_CLASS_NAME" value="TestUnitarios.TestVianda" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -206,10 +210,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.Server" />
+        <item itemvalue="JUnit.TestVianda" />
+        <item itemvalue="JUnit.TestHeladera" />
         <item itemvalue="JUnit.TestDeIncidentes" />
         <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes" />
       </list>
     </recent_temporary>
   </component>
@@ -442,6 +446,7 @@
     <MESSAGE value="arreglos del merge para que compile parte 2" />
     <MESSAGE value="mergeo con la version actual" />
     <MESSAGE value="mergeo" />
-    <option name="LAST_COMMIT_MESSAGE" value="mergeo" />
+    <MESSAGE value="Credenciales Despliegue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Credenciales Despliegue" />
   </component>
 </project>

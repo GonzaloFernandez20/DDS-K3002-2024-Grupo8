@@ -73,7 +73,6 @@ public class FactoryInstanciasParaTests {
         return new Vianda(tipo,
                             fechaCaducidad,
                             instanciarColaboradorHumano(),
-                            instanciarUnaHeladera(),
                             null,
                             null);
     }

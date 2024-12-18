@@ -45,7 +45,7 @@ public class TestApertura {
         mediosDeContacto.add(unMedio);
         Colaborador colaborador = new Colaborador(personaHumana, mediosDeContacto);
 
-        Vianda vianda = new Vianda("Fideos", LocalDate.now().plusWeeks(1), colaborador, heladera, null, null);
+        Vianda vianda = new Vianda("Fideos", LocalDate.now().plusWeeks(1), colaborador, null, null);
 
         DonacionDeViandas contribucion = new DonacionDeViandas(colaborador, heladera, List.of(vianda), LocalDate.now());
 

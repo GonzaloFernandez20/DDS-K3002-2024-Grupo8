@@ -11,7 +11,7 @@ public class GeneradorDeCookie {
 
         ResponseCookie cookie = ResponseCookie.from("token", tokenCodificado)
                 .httpOnly(true)
-                .secure(true)
+                //.secure(true)
                 .path("/")
                 .maxAge(60 * 60) // 1 hora
                 .sameSite("Strict")
