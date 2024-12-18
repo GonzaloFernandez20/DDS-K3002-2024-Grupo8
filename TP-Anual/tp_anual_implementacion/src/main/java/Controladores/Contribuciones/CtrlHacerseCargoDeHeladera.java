@@ -84,7 +84,7 @@ public class CtrlHacerseCargoDeHeladera {
     }
 
     @GetMapping("/RecomendacionColocacion")
-    public String RecomedacionColocacion() { return "RecomendacionColocacion"; }
+    public String RecomendacionColocacion() { return "RecomendacionColocacion"; }
 
 
     @PostMapping("/FormularioDeHeladera")
@@ -129,7 +129,7 @@ public class CtrlHacerseCargoDeHeladera {
         return ResponseEntity.ok("Registro realizado con éxito!");
     }
 
-    @PostMapping("/ObtenerPuntosRecomendados")
+    @GetMapping("/ObtenerPuntosRecomendados")
     public ResponseEntity<List<PuntoEnElMapa>> recomendarPuntos(@RequestParam double latitud,
                                                  @RequestParam double longitud,
                                                  @RequestParam int radio) throws IOException {
