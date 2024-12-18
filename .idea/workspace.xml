@@ -4,21 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Arreglo en una query">
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Modificacion de alertas y reportar falla tecnica funcionando">
+      <change afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/utils/keystore.p12" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/HeladeraDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/FallaTecnica.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/FallaTecnica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/Incidente.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/incidentes/Incidente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/BuilderHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/BuilderHeladera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/HeladeraMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/HeladeraMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarViandas.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/DonarViandas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/HacerseCargoDeHeladera.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/HacerseCargoDeHeladera.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ReportarFallaTecnica.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/ReportarFallaTecnica.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/HacerseCargoDeUnaHeladera.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/HacerseCargoDeUnaHeladera.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PublicarProductoOServicio.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PublicarProductoOServicio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ReportarFallaTecnica.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ReportarFallaTecnica.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +21,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="spring-beans.schema" />
       </list>
     </option>
   </component>
@@ -40,20 +32,19 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="MIXED" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;GonzaloFernandez20&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GonzaloFernandez20"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/GonzaloFernandez20/DDS-K3002-2024-Grupo8.git&quot;,
-    &quot;accountId&quot;: &quot;f45c1c53-b7e0-4345-ae28-5d56c5ca0c54&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/GonzaloFernandez20/DDS-K3002-2024-Grupo8.git",
+    "accountId": "f45c1c53-b7e0-4345-ae28-5d56c5ca0c54"
   }
-}</component>
+}]]></component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -83,17 +74,19 @@
     "JUnit.TestRepositorioIncidentes.executor": "Run",
     "JUnit.TestRetiroDeViandas.executor": "Run",
     "Maven.tp_anual_implementacion [clean,install].executor": "Run",
+    "Maven.tp_anual_implementacion [clean].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.App.executor": "Run",
     "Spring Boot.Server.executor": "Run",
-    "git-widget-placeholder": "MergeoGlobal",
+    "git-widget-placeholder": "Broker-RabbitMQ",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion/src/main/resources/utils",
+    "last_opened_file_path": "/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -109,12 +102,8 @@
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="Modelo.seguridad.SesionActiva" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/utils" />
-      <recent name="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/img" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Modelo.Dominio.Repositories.Suscripciones" />
@@ -123,6 +112,7 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />
+      <command value="mvn clean" />
     </option>
   </component>
   <component name="RunAnythingContextRecentDirectoryCache">
@@ -216,10 +206,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.Server" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" />
-        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" />
         <item itemvalue="JUnit.TestDeIncidentes" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas" />
+        <item itemvalue="JUnit.TestCreadorDeMensajes" />
       </list>
     </recent_temporary>
   </component>
@@ -245,11 +235,8 @@
       <workItem from="1734266720568" duration="6917000" />
       <workItem from="1734281942258" duration="319000" />
       <workItem from="1734282270868" duration="910000" />
-      <workItem from="1734307480330" duration="2577000" />
-      <workItem from="1734310703196" duration="34885000" />
-      <workItem from="1734383437930" duration="620000" />
-      <workItem from="1734387634532" duration="636000" />
-      <workItem from="1734440109394" duration="23059000" />
+      <workItem from="1734301162619" duration="10765000" />
+      <workItem from="1734513967601" duration="1738000" />
     </task>
     <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
       <option name="closed" value="true" />
@@ -379,47 +366,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734300707270</updated>
     </task>
-    <task id="LOCAL-00017" summary="Ocultamos los secretos">
+    <task id="LOCAL-00017" summary="mergeo con la version actual">
       <option name="closed" value="true" />
-      <created>1734388845218</created>
+      <created>1734301501751</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1734388845218</updated>
+      <updated>1734301501751</updated>
     </task>
-    <task id="LOCAL-00018" summary="Merge con SSO">
+    <task id="LOCAL-00018" summary="logs funcionan y finalizado todo lo de donar dinero">
       <option name="closed" value="true" />
-      <created>1734437144762</created>
+      <created>1734410219606</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1734437144762</updated>
+      <updated>1734410219611</updated>
     </task>
-    <task id="LOCAL-00019" summary="Implementacion de modelos predeterminados de heladera y cambio de base de datos">
-      <option name="closed" value="true" />
-      <created>1734445579906</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1734445579906</updated>
-    </task>
-    <task id="LOCAL-00020" summary="SSL">
-      <option name="closed" value="true" />
-      <created>1734449245960</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1734449245960</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Arreglo en una query">
-      <option name="closed" value="true" />
-      <created>1734451006395</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1734451006395</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,11 +394,6 @@
         <entry key="Branch">
           <value>
             <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="Feature-SSO" />
-                </option>
-              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/CambiosDonacionViandas" />
@@ -456,7 +414,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Feature-SSO" />
+                        <option value="origin/CambiosDonacionViandas" />
                       </list>
                     </value>
                   </entry>
@@ -480,40 +438,10 @@
     <MESSAGE value="Reparacion de rama" />
     <MESSAGE value="pequeñas reparaciones para solucionar errores" />
     <MESSAGE value="suscripciones listo, faltan retoques pero funciona" />
-    <MESSAGE value="mergeo" />
     <MESSAGE value="arreglos del merge para que compile" />
     <MESSAGE value="arreglos del merge para que compile parte 2" />
-    <MESSAGE value="Ocultamos los secretos" />
-    <MESSAGE value="Merge con SSO" />
-    <MESSAGE value="Implementacion de modelos predeterminados de heladera y cambio de base de datos" />
-    <MESSAGE value="SSL" />
-    <MESSAGE value="Arreglo en una query" />
-    <option name="LAST_COMMIT_MESSAGE" value="Arreglo en una query" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/OAuth2SuccessHandler.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/CtrlReportarFallaTecnica.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-    <watches-manager>
-      <configuration name="SpringBootApplicationConfigurationType">
-        <watch expression="authentication" />
-      </configuration>
-    </watches-manager>
+    <MESSAGE value="mergeo con la version actual" />
+    <MESSAGE value="mergeo" />
+    <option name="LAST_COMMIT_MESSAGE" value="mergeo" />
   </component>
 </project>
