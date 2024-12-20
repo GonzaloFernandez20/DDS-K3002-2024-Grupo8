@@ -17,9 +17,8 @@ public class HeladeraDTO {
     private String nombreDelPunto;
     private double latitud;
     private double longitud;
-    private LocalDate puestaEnFuncionamiento;
 
-    public HeladeraDTO(int idHeladera, Colaborador colaboradorACargo, int capacidadViandas, String nombreModelo, float tempMAXmodelo, float tempMINmodelo, String calle, String altura, String ciudad, String nombreDelPunto, double latitud, double longitud, LocalDate puestaEnFuncionamiento) {
+    public HeladeraDTO(int idHeladera, Colaborador colaboradorACargo, int capacidadViandas, String nombreModelo, float tempMAXmodelo, float tempMINmodelo, String calle, String altura, String ciudad, String nombreDelPunto, double latitud, double longitud) {
         this.idHeladera = idHeladera;
         this.colaboradorACargo = colaboradorACargo;
         this.capacidadViandas = capacidadViandas;
@@ -32,7 +31,6 @@ public class HeladeraDTO {
         this.nombreDelPunto = nombreDelPunto;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.puestaEnFuncionamiento = puestaEnFuncionamiento;
     }
 
     public int getIdHeladera() { return idHeladera; }
@@ -120,6 +118,4 @@ public class HeladeraDTO {
     public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
-
-    public LocalDate getPuestaEnFuncionamiento() { return puestaEnFuncionamiento; }
 }

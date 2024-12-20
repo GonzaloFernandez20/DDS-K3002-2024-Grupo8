@@ -19,8 +19,7 @@ public class HeladeraMapper {
                 heladera.getUbicacion().getCiudad(),
                 heladera.getUbicacion().getNombreDelPunto(),
                 heladera.getLatitud(),
-                heladera.getLongitud(),
-                heladera.getPuestaEnFuncionamiento()
+                heladera.getLongitud()
         );
     }
 
