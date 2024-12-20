@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: TestUnitarios.TestVianda$PruebasTrasladoDeVianda
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.011 s -- in TestUnitarios.TestVianda$PruebasTrasladoDeVianda

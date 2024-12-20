@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: tp_anual.tp_anual_implementacion.RecomendacionPuntosDeColocacionTests
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.013 s -- in tp_anual.tp_anual_implementacion.RecomendacionPuntosDeColocacionTests
