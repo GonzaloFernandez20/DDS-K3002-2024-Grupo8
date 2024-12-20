@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio De Sesión</title>
+    <link rel="stylesheet" href="/assets/CSS/Sesion.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/assets/JS/NotificarRespuestas.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Inicio De Sesión</h2>
+
+        <form id="registrationForm">
+
+            <div class="input-group">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" placeholder="Ingrese su usuario">
+                <div class="error-message" id="usuarioError"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" placeholder="Ingrese su contraseña">
+                <div class="error-message" id="contrasenaError"></div>
+            </div>
+
+            <button type="submit">Ingresar</button>
+
+        </form>
+
+        <a th:href="@{/RegistroPersona}" title="Registrarse" class="hipervinculo"> ¿No tenes cuenta? Hace click para registrarte. </a>
+
+        <!-- Botones para iniciar sesión con Google y GitHub -->
+        <div class="oauth-buttons">
+            <p>O inicia sesión con:</p>
+<!--            <a href="/oauth2/authorization/google" class="btn-oauth google-btn">-->
+<!--                <img src="/img/google-icon.svg" alt="Google Icon"> Google-->
+<!--            </a>-->
+            <a href="/oauth2/authorization/github" class="btn-oauth github-btn">
+                <img src="/img/github-icon.svg" alt="GitHub Icon"> GitHub
+            </a>
+        </div>
+    </div>
+
+<script src="/assets/JS/InicioDeSesion.js"></script>
+
+</body>
+
+</html>

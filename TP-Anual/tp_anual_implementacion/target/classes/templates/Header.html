@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/CSS/HeaderFooter.css" rel="stylesheet">
+
+</head>
+
+<header>
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="logo col-md-3 justify-content-center text-md-left">
+                <img src="/img/logo.png">
+            </div>
+
+            <nav class="col-md-6 text-center">
+                <ul class="nav-links justify-content-center">
+                    <li><a th:href="@{/}">Home</a></li>
+                    <li><a th:href="@{/Colaborar}">Colaborar</a></li>
+                    <li><a th:href="@{/CanjearPuntos}">Canjear Puntos</a></li>
+                    <li><a th:href="@{/Nosotros}">Nosotros</a></li>
+                    <li><a th:href="@{/Mapa}">Mapa</a></li>
+                    <li><a th:href="@{/ReportarFallaTecnica}">Reportar Falla</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-buttons col-md-3 justify-content-center text-md-right" th:if="${sesion == 'NoIniciada'}">
+                <a th:href="@{/InicioDeSesion}"><button type="button">Inicio de Sesión</button></a>
+                <a th:href="@{/RegistroPersona}"><button type="button">Registrarse</button></a>
+            </div>
+
+            <div class="header-buttons col-md-3 justify-content-center text-md-right" th:if="${sesion == 'Iniciada'}">
+                <a th:href="@{/ModificarColaborador}"><button type="button">Mi Cuenta</button></a>
+                <a th:href="@{/CierreDeSesion}"><button type="button" class="rojo">Cerrar Sesion</button></a>
+            </div>
+
+            <div class="header-buttons col-md-3 justify-content-center text-md-right" th:if="${sesion == 'Admin'}">
+                <a th:href="@{/CierreDeSesion}"><button type="button" class="rojo">Cerrar Sesion</button></a>
+            </div>
+        </div>
+    </div>
+</header>
+</html>

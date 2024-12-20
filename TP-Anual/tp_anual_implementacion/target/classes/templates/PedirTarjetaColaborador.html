@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedir tarjeta para acceder a una heladera</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/assets/CSS/Sesion.css">
+    <link rel="stylesheet" href="/assets/CSS/Notificaciones.css">
+    <script src="/assets/JS/NotificarRespuestas.js"></script>
+    <script src="/assets/JS/EntregarTarjetas.js"></script></head>
+<body>
+    <div id="alert-container" class="alert-container"></div>
+
+    <div class="container">
+        <h2>Colaboracion con acceso a heladera</h2>
+
+        <form id="solicitarTarjetas">
+
+            <p>Para poder contribuir con acceso a las heladeras, necesitás tener una tarjeta con la que abrirlas.</p>
+            <p>Una vez que la tengas, deberás ir a mi cuenta e ingresar el código en la sección 'Tarjeta de ingreso a heladeras'</p>
+            <br>
+            <a th:href="@{/ModificarColaborador#codigo-tarjeta-colaborador}">Ingresar código de tarjeta</a>
+
+            <input id="cant-tarjetas" value="1" hidden="hidden">
+            <div class="error-message" id="tarjetas-error"></div>
+
+            <button type="submit">¡Pedir Tarjeta!</button>
+            <button type="submit" style="background-color: #ff000085; margin-top: 15px;" th:href="@{/Home}">Volver a Home</button>
+
+        </form>
+        
+    </div>
+
+</body>
+
+</html>
