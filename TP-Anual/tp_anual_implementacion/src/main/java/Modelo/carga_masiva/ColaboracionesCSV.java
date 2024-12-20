@@ -36,7 +36,7 @@ public class ColaboracionesCSV {
     public List<Colaborador> obtenerColaboradores() {
         List<Colaborador> colaboradores = new ArrayList<>();
 
-        String folderPath = new File("src/main/resources/static").getAbsolutePath();
+        String folderPath = new File("").getAbsolutePath();
         String filePath = folderPath + "/" + archivo;
 
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {

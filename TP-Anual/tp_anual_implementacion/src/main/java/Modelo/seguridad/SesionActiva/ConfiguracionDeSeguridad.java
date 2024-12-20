@@ -28,7 +28,7 @@ public class ConfiguracionDeSeguridad {
                                          "/Header", "/Footer", "/CierreDeSesion", "/ValidarUsuario",
                                          "/RegistrarColaboradorJuridico", "/RegistrarColaboradorHumano",
                                             "/heladerasEnElMapa", "/DetectarMovimiento", "/AutorizarApertura").permitAll()
-                        .requestMatchers("/assets/**", "/img/**", "/reportes/**").permitAll()
+                        .requestMatchers("/assets/**", "/img/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(excepcionNoLoggueado ->
                         excepcionNoLoggueado.authenticationEntryPoint((request, response, authException) -> {

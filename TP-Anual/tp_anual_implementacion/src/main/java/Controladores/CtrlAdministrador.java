@@ -44,7 +44,7 @@ public class CtrlAdministrador {
         try {
             String pathCSV = null;
             if (!Objects.isNull(archivo) && !archivo.isEmpty()) {
-                pathCSV = DescargaDeArchivo.guardarArchivo("CSV", archivo);
+                pathCSV = DescargaDeArchivo.guardarArchivo("CSV/", archivo);
             }
 
             GestorCargaMasiva.migrar(pathCSV);

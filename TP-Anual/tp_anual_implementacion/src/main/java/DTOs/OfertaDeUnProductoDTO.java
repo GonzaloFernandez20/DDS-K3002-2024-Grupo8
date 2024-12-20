@@ -34,7 +34,7 @@ public class OfertaDeUnProductoDTO {
 
     public double getPuntosNecesarios() { return puntosNecesarios; }
 
-    public void setLinkDeImagenAPartirDeArchivo(MultipartFile imagen) { this.linkDeImagen = DescargaDeArchivo.guardarArchivo("img/fotosProductosOServicios", imagen); }
+    public void setLinkDeImagenAPartirDeArchivo(MultipartFile imagen) { this.linkDeImagen = DescargaDeArchivo.guardarArchivo("img/fotosProductosOServicios/", imagen); }
 
     public void setLinkDeImagenAPartirDePath(String path) { this.linkDeImagen = path; }
 

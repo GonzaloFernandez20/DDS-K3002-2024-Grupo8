@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public final class DescargaDeArchivo {
     public static String guardarArchivo(String pathDondeDebeGuardarse, MultipartFile archivo) {
-        String folderPath = new File("src/main/resources/static/" + pathDondeDebeGuardarse).getAbsolutePath();
+        String folderPath = new File("uploads/" + pathDondeDebeGuardarse).getAbsolutePath();
         String filePath = folderPath + "/" + archivo.getOriginalFilename();
 
         try {
@@ -21,7 +21,7 @@ public final class DescargaDeArchivo {
             return null;
         }
 
-        return "/" + pathDondeDebeGuardarse + "/" + archivo.getOriginalFilename();
+        return "/uploads/" + pathDondeDebeGuardarse + archivo.getOriginalFilename();
     }
 }
 

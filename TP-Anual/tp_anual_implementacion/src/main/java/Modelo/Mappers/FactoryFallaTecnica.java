@@ -16,12 +16,12 @@ import java.util.Optional;
 public class FactoryFallaTecnica {
     public static FallaTecnica CrearFallaTecnicaAPartirDe(FallaTecnicaDTO dto) {
         // Guardar la foto
-        DescargaDeArchivo.guardarArchivo("/fotosHeladerasReportadas/", dto.getFoto());
+        DescargaDeArchivo.guardarArchivo("img/fotosHeladerasReportadas/", dto.getFoto());
         FallaTecnica nuevaFallaTecnica = new FallaTecnica(
           dto.getColaboradorInformante(),
           dto.getDescripcion(),
           dto.getHeladera(),
-          "/fotosHeladerasReportadas/" + dto.getFoto()
+          "img/fotosHeladerasReportadas/" + dto.getFoto()
         );
         return nuevaFallaTecnica;
     }
