@@ -140,7 +140,6 @@
                                 <th>Dirección</th>
                                 <th>Modelo</th>
                                 <th>Capacidad (en viandas)</th>
-                                <th>Fecha de Puesta en Funcionamiento</th>
                                 <th>Modificar</th>
                                 <th>Dar de baja</th>
                             </tr>
@@ -152,7 +151,6 @@
                                 <td th:id="'direccion' + ${heladera.idHeladera}" th:text="${heladera.calle} + ' ' + ${heladera.altura}" th:data-calle="${heladera.calle}" th:data-altura="${heladera.altura}"></td>
                                 <td th:id="'modelo' + ${heladera.idHeladera}" th:text="${heladera.nombreModelo}" th:data-temp-min="${heladera.tempMINmodelo}" th:data-temp-max="${heladera.tempMAXmodelo}"></td>
                                 <td th:id="'capacidad' + ${heladera.idHeladera}" th:text="${heladera.capacidadViandas}"></td>
-                                <td th:id="'puestaEnFuncionamiento' + ${heladera.idHeladera}" th:text="${heladera.puestaEnFuncionamiento}"></td>
                                 <td class="row-button">
                                     <button class="listado-button modificar" th:attr="onclick='modificarHeladera(' + ${heladera.idHeladera} + ')'">
                                         <svg height="20px" width="20px">

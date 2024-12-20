@@ -19,7 +19,7 @@ public class SensorTemperaturaDemo {
         this.servicioBroker.crearNuevaCola("temperaturas");
     }
 
-    @Scheduled(fixedRate = 60000) // Cada 5 minutos (300,000 ms)
+    @Scheduled(fixedRate = 300000) // Cada 5 minutos (300,000 ms)
     public void enviarTemperaturas() {
         try {
             Random random = new Random();

@@ -67,7 +67,7 @@
 
                         <div class="input-group">
                             <label for="puntosNecesarios">Cantidad de puntos necesarios (*)</label>
-                            <input type="number" min="1" step="any" id="puntosNecesarios" name="puntosNecesarios" placeholder="Ingrese cantidad de puntos necesarios" >
+                            <input type="number" min="1" step="any" id="puntosNecesarios" name="puntosNecesarios" placeholder="Ingrese cantidad de puntos necesarios" required>
                             <div class="error-message" id="error-puntos"></div>
                         </div>
             
@@ -85,13 +85,15 @@
 
 						<div class="input-group">
                             <label for="stock">Stock del producto (*)</label>
-                            <input type="number" min="1" step="1" id="stock" name="stock" placeholder="Ingrese stock">
+                            <input type="number" min="1" step="1" id="stock" name="stock" placeholder="Ingrese stock" required>
                             <div class="error-message" id="error-stock"></div>
                         </div>
 
                         <button type="submit">Realizar Colaboracion</button>
-                        <div th:if="${mensaje}" class="alert" th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}">
-                            <p th:text="${mensaje}"></p>
+                        <div th:if="${mensaje}" class="alert"
+                             th:classappend="${mensaje.contains('Error') ? 'alert-danger' : 'alert-success'}"
+                             th:attr="data-tipo=${mensaje.contains('Error') ? 'error' : 'exito'}">
+                            <p id="alert-message" th:text="${mensaje}" style="display: none;"></p>
                         </div>
                     </form>
                 </div>

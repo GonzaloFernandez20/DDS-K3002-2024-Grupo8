@@ -12,7 +12,7 @@ public class OfertaDeUnProducto extends Contribucion {
     @Column(name = "nombre_de_oferta")
     private String nombreOferta;
     @Column(name = "puntos_necesarios")
-    private double puntosNecesarios;
+    private int puntosNecesarios;
     @Column(name = "pathImagen")
     private String pathImagen;
     @Enumerated(EnumType.STRING)
@@ -24,7 +24,7 @@ public class OfertaDeUnProducto extends Contribucion {
     public OfertaDeUnProducto(){
     }
 
-    public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, double puntosNecesarios, String pathImagen, Rubro rubro, Producto producto) {
+    public OfertaDeUnProducto(Colaborador colaborador, String nombreOferta, int puntosNecesarios, String pathImagen, Rubro rubro, Producto producto) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
         this.pathImagen = pathImagen;
@@ -48,10 +48,10 @@ public class OfertaDeUnProducto extends Contribucion {
 
 
     // ---- Getters y Setters
-    public double getPuntosNecesarios() { return puntosNecesarios; }
+    public int getPuntosNecesarios() { return puntosNecesarios; }
     public String getNombreOferta() { return nombreOferta; }
     public void setNombreOferta(String nombreOferta) { this.nombreOferta = nombreOferta; }
-    public void setPuntosNecesarios(double puntosNecesarios) { this.puntosNecesarios = puntosNecesarios; }
+    public void setPuntosNecesarios(int puntosNecesarios) { this.puntosNecesarios = puntosNecesarios; }
     public String getPathImagen() { return pathImagen; }
     public void setPathImagen(String pathImagen) { this.pathImagen = pathImagen; }
     public Rubro getRubro() { return rubro; }

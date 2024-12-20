@@ -54,16 +54,29 @@ function validarFormulario() {
     }
 }
 */
-
+//form_productos = document.getElementById('publicarServicioForm');
 form_productos.addEventListener('submit', async function(event) {
     event.preventDefault();
+
+    let puntosNecesarios= +document.getElementById('puntosNecesarios').value;
+    let stock = document.getElementById('stock').value;
+
+    if (!puntosNecesarios || puntosNecesarios <= 0) {
+        //document.getElementById('error-puntos').innerText = 'Por favor ingrese una cantidad válida de puntos necesarios.';
+        puntosNecesarios = 1000;
+    }
+
+    if (!stock || stock <= 0) {
+        //document.getElementById('error-puntos').innerText = 'Por favor ingrese una cantidad válida de puntos necesarios.';
+        stock = 10;
+    }
 
     const formData = {
         rubro: document.getElementById('rubro').value,
         nombreOferta: document.getElementById('nombreOferta').value,
         nombreProducto: document.getElementById('nombreProducto').value,
-        puntosNecesarios: document.getElementById('puntosNecesarios').value,
-        stock: document.getElementById('stock').value,
+        puntosNecesarios: puntosNecesarios,
+        stock: stock
     };
 
     try {
@@ -73,9 +86,20 @@ form_productos.addEventListener('submit', async function(event) {
             body: JSON.stringify(formData),
         });
 
-        const result = await response.json();
-        showAlert(result.mensaje, "success");
+        const result = await response.text();
+        showAlert(result, "success");
     } catch (error) {
         console.error('Error al enviar los datos:', error);
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const alerta = document.querySelector('.alert');
+    if (alerta && alerta.dataset.tipo === 'exito') {
+        const mensaje = document.getElementById('alert-message').textContent;
+        showAlert(mensaje, "success");
+    }
+});
+
+

@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Credenciales Despliegue">
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Boton de google -&gt; Off (Temporal)">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/OfertaDeUnProductoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/DTOs/OfertaDeUnProductoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/DemoSensores/SensorTemperaturaDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Brokers/DemoSensores/SensorTemperaturaDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/OfertaDeUnProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Dominio/contribucion/OfertaDeUnProducto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/OfertaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/Mappers/OfertaMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/FactoryInstanciasParaTests/FactoryInstanciasParaTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/FactoryInstanciasParaTests/FactoryInstanciasParaTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestApertura.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestApertura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestHeladera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestVianda.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestVianda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/ModificarColaboradorJuridicoHeladeras.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PublicarProductoOServicio.html" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/templates/PublicarProductoOServicio.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MergeoGlobal" />
+        <entry key="$PROJECT_DIR$" value="Broker-RabbitMQ" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,7 +91,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.App.executor": "Run",
     "Spring Boot.Server.executor": "Run",
-    "git-widget-placeholder": "Broker-RabbitMQ",
+    "git-widget-placeholder": "Despliegue",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion",
     "node.js.detected.package.eslint": "true",
@@ -220,8 +223,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
       </set>
     </attachedChunks>
   </component>
@@ -241,6 +244,8 @@
       <workItem from="1734282270868" duration="910000" />
       <workItem from="1734301162619" duration="10765000" />
       <workItem from="1734513967601" duration="1738000" />
+      <workItem from="1734625016473" duration="3219000" />
+      <workItem from="1734655309599" duration="4481000" />
     </task>
     <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
       <option name="closed" value="true" />
@@ -386,7 +391,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734410219611</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="properties para despliegue">
+      <option name="closed" value="true" />
+      <created>1734558281962</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1734558281963</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Boton de google -&gt; Off (Temporal)">
+      <option name="closed" value="true" />
+      <created>1734561207125</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1734561207126</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,6 +468,25 @@
     <MESSAGE value="mergeo con la version actual" />
     <MESSAGE value="mergeo" />
     <MESSAGE value="Credenciales Despliegue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Credenciales Despliegue" />
+    <MESSAGE value="properties para despliegue" />
+    <MESSAGE value="Boton de google -&gt; Off (Temporal)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Boton de google -&gt; Off (Temporal)" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlPublicarProductoOServicio.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js</url>
+          <line>60</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
