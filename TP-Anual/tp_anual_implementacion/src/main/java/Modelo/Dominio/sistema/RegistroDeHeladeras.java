@@ -1,6 +1,7 @@
 package Modelo.Dominio.sistema;
 
 import Modelo.Dominio.heladera.Heladera;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +9,13 @@ import java.util.List;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
+@Getter
 public class RegistroDeHeladeras {
     private static RegistroDeHeladeras instancia;
     private final List<Heladera> heladeras;
 
     private RegistroDeHeladeras() {
         heladeras = new ArrayList<>();
-    }
-
-    public List<Heladera> getHeladeras() {
-        return heladeras;
     }
 
     public static RegistroDeHeladeras getInstancia() {
@@ -47,10 +45,9 @@ public class RegistroDeHeladeras {
         Heladera heladeraMasCercana = null;
         double menorDistancia = Double.MAX_VALUE;
 
-        for (int i = 0; i < heladeras.size(); i++) {
-            Heladera heladeraActual = heladeras.get(i);
+        for (Heladera heladeraActual : heladeras) {
             double distancia = calcularDistanciaEuclediana(heladera, heladeraActual);
-            if (distancia < menorDistancia){
+            if (distancia < menorDistancia) {
                 menorDistancia = distancia;
                 heladeraMasCercana = heladeraActual;
             }
@@ -64,6 +61,4 @@ public class RegistroDeHeladeras {
         return sqrt( pow(diferenciaX, 2) + pow(diferenciaY, 2) );
     }
 
-    public void darDeAltaHeladera(Heladera heladera){ heladeras.add(heladera); }
-    public void darDeBajaHeladera(Heladera heladera){ heladeras.remove(heladera); }
 }

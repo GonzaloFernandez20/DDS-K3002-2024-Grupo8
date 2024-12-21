@@ -5,9 +5,11 @@ import Modelo.Dominio.heladera.Heladera;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
+@Slf4j
 @Getter
 @Setter
 @Entity
@@ -35,10 +37,14 @@ public class NotificadorDeSuscriptos {
     public void suscribir(String evento, Colaborador colaborador){
         Optional<Suscripcion> suscripcion = buscarSuscripcion(evento, colaborador);
         if(suscripcion.isPresent()){
+            log.info("Se actualizó la suscripción del colaborador ID:{} del evento: {} al evento: {} de la {} ID:{}",
+                    colaborador.getId_colaborador(), suscripcion.get().getEvento(), evento, heladera.getNombreDelPunto(),heladera.getid_heladera());
             suscripcion.get().setEvento(evento);
         }
         else{
             suscriptos.add(new Suscripcion(evento, colaborador,heladera));
+            log.info("Se suscribió al colaborador ID:{} al evento: {} de la {} ID: {}",
+                    colaborador.getId_colaborador(), evento, heladera.getNombreDelPunto(), heladera.getid_heladera());
         }
     }
 
@@ -46,6 +52,8 @@ public class NotificadorDeSuscriptos {
         Optional<Suscripcion> suscripcion = buscarSuscripcion(evento, colaborador);
         if (suscripcion.isPresent()){
             suscriptos.remove(suscripcion.get());
+            log.info("Se desuscribió al colaborador ID:{} del evento: {} de la {} ID: {}",
+                    colaborador.getId_colaborador(), evento, heladera.getNombreDelPunto(), heladera.getid_heladera());
         }
     }
 
@@ -64,6 +72,9 @@ public class NotificadorDeSuscriptos {
             for (Suscripcion suscripto : suscriptosANotificar){
                 suscripto.getSuscripto().notificar(mensaje);
             }
+            log.info("Se notificó a todos los suscriptos al evento: {} de la {} ID: {}", evento, heladera.getNombreDelPunto(), heladera.getid_heladera());
+        }else{
+            log.info("No hay ningún colaborador suscripto al evento: {} de la {} ID: {}", evento, heladera.getNombreDelPunto(), heladera.getid_heladera());
         }
     }
 }

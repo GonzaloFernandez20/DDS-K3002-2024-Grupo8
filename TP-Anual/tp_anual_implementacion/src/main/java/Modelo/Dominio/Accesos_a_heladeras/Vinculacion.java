@@ -23,24 +23,18 @@ public class Vinculacion extends AccesoAHeladeras{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_en_situacion_vulnerabre", referencedColumnName = "id_persona_en_situacion_vulnerable")
     private PersonaSituacionVulnerable personaSituacionVulnerable;
-
     @ManyToOne
     @JoinColumn(name = "colaborador_registrante", referencedColumnName = "id_colaborador")
     private Colaborador colaboradorQueRegistro;
-
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
-
     @Column(name = "usos_restantes_por_dia")
     private int cantUsosRestantesPorDia;
-
     @Column(name = "fecha_ultimo_uso")
     private LocalDate fechaUltimoUso;
-
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER )
     @JoinColumn(name = "acceso_a_heladeras", referencedColumnName = "codigo_tarjeta")
     private List <Apertura> aperturasDeHeladera;
-
     @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER )
     @JoinColumn(name = "consumidor_final", referencedColumnName = "codigo_tarjeta")
     private List <Vianda> viandasRetiradas;
@@ -81,6 +75,7 @@ public class Vinculacion extends AccesoAHeladeras{
         Vianda viandaRetirada = heladera.retirarViandas(1).getFirst();
         viandaRetirada.consumir();
         viandasRetiradas.add(viandaRetirada);
+        log.info("Se retiró para consumo la vianda: {} de la {} ID:{}", viandaRetirada.getTipoDeComida(), heladera.getNombreDelPunto(), heladera.getid_heladera());
 
         Apertura nuevaApertura = new Apertura(heladera, RETIRAR_VIANDA);
         nuevaApertura.setFechaApertura(LocalDateTime.now());

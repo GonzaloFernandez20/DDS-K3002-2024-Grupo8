@@ -34,7 +34,7 @@ public class DonacionDeViandas extends ContribucionConApertura {
     }
     @Override
     public void loggear(){
-        log.info("La {} ID:{}recibió una donación de viandas.", heladeraDestino.getNombreDelPunto(), heladeraDestino.getid_heladera());
+        log.info("La {} ID:{} recibió una donación de viandas.", heladeraDestino.getNombreDelPunto(), heladeraDestino.getid_heladera());
 
         String viandas = viandasDonadas.stream()
                 .map(Vianda::getTipoDeComida) // Obtener el tipo de comida
