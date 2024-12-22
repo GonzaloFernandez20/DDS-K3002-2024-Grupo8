@@ -45,7 +45,6 @@ public class Vianda {
         this.fechaDeCaducidad = fechaDeCaducidad;
         this.fechaDeDonacion = LocalDate.now();
         this.colaborador = colaborador;
-        this.heladera = heladera;
         this.calorias = calorias;
         this.peso = peso;
         this.estado = EstadoVianda.NO_ENTREGADA;

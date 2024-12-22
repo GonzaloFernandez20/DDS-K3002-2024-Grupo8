@@ -1,13 +1,10 @@
 package Servicios_Externos_APIs;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Modelo.Dominio.medios_de_contacto.MedioDeContacto;
-import Modelo.Dominio.Repositories.colaborador.ColaboradorRepository;
 import Modelo.Dominio.colaborador.Colaborador;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 @Service
 public class NotificacionService {

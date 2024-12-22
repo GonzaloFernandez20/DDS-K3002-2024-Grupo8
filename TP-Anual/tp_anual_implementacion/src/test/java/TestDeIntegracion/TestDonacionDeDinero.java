@@ -3,7 +3,7 @@ package TestDeIntegracion;
 import FactoryInstanciasParaTests.FactoryInstanciasParaTests;
 import Modelo.Dominio.colaborador.Colaborador;
 import Modelo.Dominio.contribucion.DonacionDeDinero;
-import Modelo.Dominio.sistema.RegistroDeRecaudacion;
+import Modelo.Dominio.contribucion.RegistroDeRecaudacion;
 import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Field;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GestorDeSuscripciones {
-       private NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository;
+       private final NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository;
 
        @Autowired
         public GestorDeSuscripciones(NotificadorDeSuscriptosRepository notificadorDeSuscriptosRepository) {

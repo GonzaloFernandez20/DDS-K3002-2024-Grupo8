@@ -39,8 +39,6 @@ public class AperturaConPermiso extends Apertura {
     }
 
     public boolean vencioElPermiso() {
-
         return horaEnQueVence.isBefore(LocalDateTime.now());
     }
-
 }

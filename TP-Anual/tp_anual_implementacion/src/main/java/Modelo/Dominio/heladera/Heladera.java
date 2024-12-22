@@ -7,12 +7,15 @@ import Modelo.Dominio.suscripcion.NotificadorDeSuscriptos;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Getter
 @Setter
 @Entity
@@ -82,7 +85,7 @@ public class Heladera {
     public void movimientoDeViandasFinalizado(){
         int viandasQueQuedan = cantViandasEnStock();
         int viandasQueFaltan = espacioDisponible();
-
+        loggearViandasHeladera();
         notificadorDeSuscriptos.notificar("Quedan " + viandasQueQuedan + " viandas");
         notificadorDeSuscriptos.notificar("Faltan " + viandasQueFaltan + " viandas");
     }
@@ -91,18 +94,26 @@ public class Heladera {
 
     public void huboIncidente(){
         this.estado = EstadoHeladera.INACTIVA;
+        log.info("La {} ID:{} cambió su estado a INACTIVA", getNombreDelPunto(), id_heladera);
         notificadorDeSuscriptos.notificar("Se produjo una falla.");
     }
 
+    private void loggearViandasHeladera(){
+        if(viandasEnStock.isEmpty()){
+            log.info("La {} ID:{} quedó vacia, se han retirado todas las viandas", getNombreDelPunto(), id_heladera);
+        }
+        else{
+            String viandas = viandasEnStock.stream()
+                    .map(Vianda::getTipoDeComida) // Obtener el tipo de comida
+                    .collect(Collectors.joining(", "));
+            log.info("La {} ID:{} cuanta con las siguientes viandas en stock: {}", getNombreDelPunto(), id_heladera, viandas);
+        }
+    }
 
     //Getters y Setters ------------------------------------------------------------------------------------------------
     public double getLatitud(){ return ubicacion.getPunto().getLatitud(); }
     public double getLongitud(){ return ubicacion.getPunto().getLongitud(); }
     public String getNombreDelPunto(){return ubicacion.getNombreDelPunto(); }
-
-    public Integer getid_heladera() {
-        if(Objects.isNull(id_heladera)) { return 0; }
-        return id_heladera;
-    }
+    public Integer getid_heladera() {if(Objects.isNull(id_heladera)) { return 0; }return id_heladera;}
 }
 

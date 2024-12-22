@@ -1,4 +1,4 @@
-package Modelo.Dominio.sistema;
+package Modelo.Dominio.contribucion;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
