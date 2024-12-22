@@ -42,7 +42,7 @@ public class CtrlPublicarProductoOServicio {
         this.ofertaRepository = ofertaRepository;
         this.productoRepository = productoRepository;
         this.colaboradorRepository = colaboradorRepository;
-        
+
     }
 
     private List<Rubro> obtenerTodosLosRubros() {
@@ -102,7 +102,7 @@ public class CtrlPublicarProductoOServicio {
 
         // Enviar una notificación
         String mensajeNotificacion =  "¡Felicitaciones! La oferta de " + ofertaDeUnProducto.getProducto().getNombreProducto() + " se realizó exitosamente.";
-        notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID() ,mensajeNotificacion); 
+        notificacionService.sendNotificacionToColaborador(gestorInicioDeSesion.obtenerColaboradorPorID() ,mensajeNotificacion);
 
         return mostrarRubros(model);
     }

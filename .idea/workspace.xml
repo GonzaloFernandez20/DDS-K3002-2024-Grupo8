@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Credenciales Despliegue">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Modelo/seguridad/SesionActiva/GeneradorDeCookie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/FactoryInstanciasParaTests/FactoryInstanciasParaTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/FactoryInstanciasParaTests/FactoryInstanciasParaTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestApertura.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestApertura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestHeladera.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestHeladera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestVianda.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/test/java/TestUnitarios/TestVianda.java" afterDir="false" />
-    </list>
+    <list default="true" id="861b6d5a-9334-411e-a265-18c33c7448e6" name="Changes" comment="Comentado del broker" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,13 +16,14 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="spring-beans.schema" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MergeoGlobal" />
+        <entry key="$PROJECT_DIR$" value="Broker-RabbitMQ" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,51 +53,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.TestApertura.executor": "Run",
-    "JUnit.TestColaborador.executor": "Run",
-    "JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor": "Run",
-    "JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor": "Run",
-    "JUnit.TestCreadorDeMensajes.executor": "Run",
-    "JUnit.TestDeIncidentes.executor": "Run",
-    "JUnit.TestDeReporteDeUnIncidente.executor": "Run",
-    "JUnit.TestDonacionDeDinero.executor": "Run",
-    "JUnit.TestDonacionDeViandas.executor": "Run",
-    "JUnit.TestGenerarReportesSemanales.executor": "Run",
-    "JUnit.TestHeladera.executor": "Run",
-    "JUnit.TestRepositorioIncidentes.executor": "Run",
-    "JUnit.TestRetiroDeViandas.executor": "Run",
-    "JUnit.TestVianda.executor": "Run",
-    "Maven.tp_anual_implementacion [clean,install].executor": "Run",
-    "Maven.tp_anual_implementacion [clean].executor": "Run",
-    "Maven.tp_anual_implementacion [package].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.App.executor": "Run",
-    "Spring Boot.Server.executor": "Run",
-    "git-widget-placeholder": "Broker-RabbitMQ",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Errors",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.TestApertura.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestColaborador.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeFallasDeHeladera.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes$TestsEventosDeViandas.testQuedanNViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestCreadorDeMensajes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDeIncidentes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDeReporteDeUnIncidente.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDonacionDeDinero.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestDonacionDeViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestGenerarReportesSemanales.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestHeladera.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRepositorioIncidentes.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRetiroDeViandas.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestVianda.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tp_anual_implementacion [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tp_anual_implementacion [clean,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tp_anual_implementacion [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.tp_anual_implementacion [package].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.App.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.Server.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Despliegue&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/gonza/IdeaProjects/DDS-K3002-2024-Grupo8/TP-Anual/tp_anual_implementacion&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/utils" />
@@ -118,6 +112,7 @@
       <command value="mvn clean install" />
       <command value="mvn clean" />
       <command value="mvn package" />
+      <command value="mvn clean package" />
     </option>
   </component>
   <component name="RunAnythingContextRecentDirectoryCache">
@@ -220,8 +215,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
       </set>
     </attachedChunks>
   </component>
@@ -241,6 +236,9 @@
       <workItem from="1734282270868" duration="910000" />
       <workItem from="1734301162619" duration="10765000" />
       <workItem from="1734513967601" duration="1738000" />
+      <workItem from="1734625016473" duration="3219000" />
+      <workItem from="1734655309599" duration="6442000" />
+      <workItem from="1734702848620" duration="2306000" />
     </task>
     <task id="LOCAL-00001" summary="Correccion a formulario de Registro de Vulnerables">
       <option name="closed" value="true" />
@@ -386,7 +384,63 @@
       <option name="project" value="LOCAL" />
       <updated>1734410219611</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="properties para despliegue">
+      <option name="closed" value="true" />
+      <created>1734558281962</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1734558281963</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Boton de google -&gt; Off (Temporal)">
+      <option name="closed" value="true" />
+      <created>1734561207125</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1734561207126</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Modificaciones varias">
+      <option name="closed" value="true" />
+      <created>1734660287940</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1734660287941</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Arreglo de coincidencia">
+      <option name="closed" value="true" />
+      <created>1734660871753</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1734660871753</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Agregado de un Dockerfile">
+      <option name="closed" value="true" />
+      <created>1734703430336</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1734703430337</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Subo target?">
+      <option name="closed" value="true" />
+      <created>1734704930088</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1734704930088</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Comentado del broker">
+      <option name="closed" value="true" />
+      <created>1734734435526</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1734734435526</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,6 +452,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/Despliegue" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="origin/CambiosDonacionViandas" />
@@ -418,7 +477,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/CambiosDonacionViandas" />
+                        <option value="origin/Despliegue" />
                       </list>
                     </value>
                   </entry>
@@ -447,6 +506,30 @@
     <MESSAGE value="mergeo con la version actual" />
     <MESSAGE value="mergeo" />
     <MESSAGE value="Credenciales Despliegue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Credenciales Despliegue" />
+    <MESSAGE value="properties para despliegue" />
+    <MESSAGE value="Boton de google -&gt; Off (Temporal)" />
+    <MESSAGE value="Modificaciones varias" />
+    <MESSAGE value="Arreglo de coincidencia" />
+    <MESSAGE value="Agregado de un Dockerfile" />
+    <MESSAGE value="Subo target?" />
+    <MESSAGE value="Subo target, si" />
+    <MESSAGE value="Comentado del broker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comentado del broker" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/java/Controladores/Contribuciones/CtrlPublicarProductoOServicio.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/TP-Anual/tp_anual_implementacion/src/main/resources/static/assets/JS/PublicarProductoOServicio.js</url>
+          <line>60</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

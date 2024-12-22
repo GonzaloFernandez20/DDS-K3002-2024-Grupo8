@@ -7,13 +7,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class OfertaDeUnProductoDTO {
     private int idOferta;
     private String nombreOferta;
-    private double puntosNecesarios;
+    private Integer puntosNecesarios;
     private String linkDeImagen;
     private String rubro;
     private String nombreProducto;
-    private int stock;
+    private Integer stock;
 
-    public OfertaDeUnProductoDTO(String nombreOferta, double puntosNecesarios, String path, Rubro rubro, String nombreProducto, int stock) {
+    public OfertaDeUnProductoDTO(String nombreOferta, Integer puntosNecesarios, String path, Rubro rubro, String nombreProducto, Integer stock) {
         this.nombreOferta = nombreOferta;
         this.puntosNecesarios = puntosNecesarios;
         this.linkDeImagen = path;
@@ -30,9 +30,9 @@ public class OfertaDeUnProductoDTO {
 
     public String getNombreOferta() { return nombreOferta; }
 
-    public void setPuntosNecesarios(double puntosNecesarios) { this.puntosNecesarios = puntosNecesarios;}
+    public void setPuntosNecesarios(Integer puntosNecesarios) { this.puntosNecesarios = puntosNecesarios;}
 
-    public double getPuntosNecesarios() { return puntosNecesarios; }
+    public Integer getPuntosNecesarios() { return puntosNecesarios; }
 
     public void setLinkDeImagenAPartirDeArchivo(MultipartFile imagen) { this.linkDeImagen = DescargaDeArchivo.guardarArchivo("img/fotosProductosOServicios/", imagen); }
 
@@ -48,7 +48,7 @@ public class OfertaDeUnProductoDTO {
 
     public String getNombreProducto() { return nombreProducto; }
 
-    public void setStock(int stock) { this.stock = stock; }
+    public void setStock(Integer stock) { this.stock = stock; }
 
-    public int getStock() { return stock; }
+    public Integer getStock() { return stock; }
 }
